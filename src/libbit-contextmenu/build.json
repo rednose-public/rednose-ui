@@ -1,0 +1,10 @@
+{
+    "name": "libbit-contextmenu",
+    "builds": {
+        "libbit-contextmenu": {
+            "jsfiles": [
+                "contextmenu.js"
+            ]
+        }
+    }
+}

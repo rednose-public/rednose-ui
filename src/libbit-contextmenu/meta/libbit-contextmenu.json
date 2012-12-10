@@ -1,0 +1,10 @@
+{
+    "libbit-contextmenu" : {
+        "requires": [
+            "base",
+            "panel",
+            "plugin",
+            "widget"
+        ]
+    }
+}

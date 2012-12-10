@@ -1,0 +1,8 @@
+{
+    "libbit-treeview-dd" : {
+        "requires": [
+            "dd",
+            "event-custom"
+        ]
+    }
+}

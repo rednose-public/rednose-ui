@@ -1,0 +1,10 @@
+{
+    "name": "libbit-datatable-select",
+    "builds": {
+        "libbit-datatable-select": {
+            "jsfiles": [
+                "libbit-datatable-select.js"
+            ]
+        }
+    }
+}

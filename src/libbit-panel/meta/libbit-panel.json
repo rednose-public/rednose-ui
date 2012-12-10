@@ -1,0 +1,14 @@
+{
+    "libbit-panel" : {
+        "requires": [
+            "panel",
+            "widget",
+            "widget-autohide",
+            "widget-modality",
+            "widget-position",
+            "widget-position-align",
+            "widget-position-constrain",
+            "widget-stack"
+        ]
+    }
+}

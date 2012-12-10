@@ -1,0 +1,11 @@
+{
+    "libbit-grid" : {
+        "requires": [
+            "handlebars",
+            "libbit-grid-select",
+            "model-list",
+            "view"
+        ],
+        "skinnable": true
+    }
+}

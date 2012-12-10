@@ -1,0 +1,34 @@
+.libbit-treeview-content .ygtvchildren {
+    overflow: hidden;
+}
+
+.ygtvlabel,
+.ygtvlabel:link,
+.ygtvlabel:visited,
+.ygtvlabel:hover,
+.libbit-treeview-content a {
+    cursor: default !important;
+}
+
+.ygtvtp,
+.ygtvtph,
+.ygtvlp,
+.ygtvlph {
+    background: #fff !important;
+}
+
+.ygtvtm,
+.ygtvtmh,
+.ygtvlm,
+.ygtvlmh {
+    background: #fff !important;
+}
+
+.libbit-treeview-content .icon-toggle {
+    margin-left: 2px;
+    margin-top: 3px;
+}
+
+.libbit-treeview-content .label-container {
+    white-space: nowrap;
+}

@@ -1,0 +1,9 @@
+{
+    "libbit-view-nav" : {
+        "requires": [
+            "event-custom",
+            "libbit-nav-container",
+            "view"
+        ]
+    }
+}

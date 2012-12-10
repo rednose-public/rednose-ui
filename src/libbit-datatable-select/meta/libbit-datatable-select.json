@@ -1,0 +1,8 @@
+{
+    "libbit-datatable-select" : {
+        "requires": [
+            "libbit-datatable",
+            "plugin"
+        ]
+    }
+}

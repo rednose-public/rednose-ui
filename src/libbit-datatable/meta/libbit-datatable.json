@@ -1,0 +1,10 @@
+{
+    "libbit-datatable" : {
+        "requires": [
+            "datatable-base",
+            "datatable-scroll",
+            "datatable-sort"
+        ],
+        "skinnable": true
+    }
+}

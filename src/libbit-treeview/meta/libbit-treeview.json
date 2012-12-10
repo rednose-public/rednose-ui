@@ -1,0 +1,14 @@
+{
+    "libbit-treeview" : {
+        "requires": [
+            "anim",
+            "libbit-model-tree",
+            "libbit-treeview-anim",
+            "libbit-treeview-select",
+            "libbit-treeview-dd",
+            "widget",
+            "yui2-treeview"
+        ],
+        "skinnable": true
+    }
+}

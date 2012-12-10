@@ -1,0 +1,10 @@
+{
+    "name": "libbit-panel",
+    "builds": {
+        "libbit-panel": {
+            "jsfiles": [
+                "libbit-panel.js"
+            ]
+        }
+    }
+}

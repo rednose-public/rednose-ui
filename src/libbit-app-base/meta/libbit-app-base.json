@@ -1,0 +1,9 @@
+{
+    "libbit-app-base" : {
+        "requires": [
+            "app-base",
+            "handlebars-base",
+            "libbit-panel"
+        ]
+    }
+}

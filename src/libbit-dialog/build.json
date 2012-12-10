@@ -1,0 +1,10 @@
+{
+    "name": "libbit-dialog",
+    "builds": {
+        "libbit-dialog": {
+            "jsfiles": [
+                "libbit-dialog.js"
+            ]
+        }
+    }
+}

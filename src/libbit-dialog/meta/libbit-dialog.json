@@ -1,0 +1,14 @@
+{
+    "libbit-dialog" : {
+        "requires": [
+            "dd",
+            "dd-plugin",
+            "gallery-dispatcher",
+            "json-parse",
+            "node",
+            "panel",
+            "widget"
+        ],
+        "skinnable": true
+    }
+}

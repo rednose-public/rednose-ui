@@ -1,0 +1,10 @@
+{
+    "name": "libbit-controlform",
+    "builds": {
+        "libbit-controlform": {
+            "jsfiles": [
+                "libbit-controlform.js"
+            ]
+        }
+    }
+}

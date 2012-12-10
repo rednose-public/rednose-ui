@@ -1,0 +1,10 @@
+{
+    "name": "libbit-app-base",
+    "builds": {
+        "libbit-app-base": {
+            "jsfiles": [
+                "js/app-base.js"
+            ]
+        }
+    }
+}

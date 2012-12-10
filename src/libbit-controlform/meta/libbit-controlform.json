@@ -1,0 +1,10 @@
+{
+    "libbit-controlform" : {
+        "requires": [
+            "node",
+            "model-list",
+            "model",
+            "base"
+        ]
+    }
+}

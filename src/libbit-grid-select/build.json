@@ -1,0 +1,10 @@
+{
+    "name": "libbit-grid-select",
+    "builds": {
+        "libbit-grid-select": {
+            "jsfiles": [
+                "libbit-grid-select.js"
+            ]
+        }
+    }
+}

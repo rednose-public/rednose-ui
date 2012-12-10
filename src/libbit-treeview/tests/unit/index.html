@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Treeview Test Page</title>
+    </head>
+
+    <body class='yui3-skin-sam'>
+
+        <div id="log"></div>
+        <div id="container"></div>
+
+        <script src="../../../../../yui3/build/yui/yui.js"></script>
+        <script>
+            YUI({
+                coverage: ['libbit-treeview'],
+                filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
+                modules: {
+                    'libbit-treeview-test': {
+                        use: [
+                            'libbit-treeview-base-test',
+                            'libbit-model-tree-test'
+                        ]
+                    },
+
+                    'libbit-model-tree': {
+                        fullpath: '../../../../../yui3-libbit/build/libbit-model-tree/libbit-model-tree.js'
+                    },
+                    'libbit-treeview-anim': {
+                        fullpath: '../../../../../yui3-libbit/build/libbit-treeview-anim/libbit-treeview-anim.js'
+                    },
+                    'libbit-treeview-dd': {
+                        fullpath: '../../../../../yui3-libbit/build/libbit-treeview-dd/libbit-treeview-dd.js',
+                        requires: ['dd', 'event-custom']
+                    },
+                    'libbit-treeview-select': {
+                        fullpath: '../../../../../yui3-libbit/build/libbit-treeview-select/libbit-treeview-select.js',
+                        requires: ['base']
+                    },
+                    'libbit-treeview': {
+                        fullpath: '../../../../../yui3-libbit/build/libbit-treeview/libbit-treeview.js',
+                        requires: ['libbit-treeview', 'test', 'node-event-simulate']
+                    },
+                    'libbit-treeview-base-test': {
+                        fullpath: './assets/treeview-base-test.js',
+                        requires: ['libbit-treeview', 'test', 'node-event-simulate']
+                    },
+                    'libbit-model-tree-test': {
+                        fullpath: './assets/model-tree-test.js',
+                        requires: ['libbit-treeview', 'test', 'node-event-simulate']
+                    }
+                }
+            }).use('libbit-treeview-test', 'test-console', function (Y) {
+                new Y.Test.Console().render('#log');
+
+                Y.Test.Runner.setName('Treeview');
+                Y.Test.Runner.run();
+            });
+        </script>
+
+    </body>
+
+</html>

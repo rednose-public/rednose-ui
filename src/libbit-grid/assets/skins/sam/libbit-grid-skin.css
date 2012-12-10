@@ -1,0 +1,60 @@
+.template-grid-name {
+    width: 246px;
+    height: 19px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: bold;
+    text-align: center;
+    color: rgb(51, 51, 51);
+}
+
+.template-grid-date {
+    width: 246px;
+    height: 14px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    line-height: 14px;
+    font-weight: bold;
+    text-align: center;
+    color: #AAA;
+}
+
+div.template_list_item_selected > div {
+    border: 2px solid #4e81d3;
+}
+
+div.template_list_item_selected > span {
+    color: #4e81d3;
+}
+
+.template-grid-message-container {
+    color: #B3B3B3;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+    margin-top: 300px; /* Temporary */
+}
+
+.template-grid-message-title {
+    font-size: 42px;
+    line-height: 50px;
+}
+
+.template-grid-message-body {
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.template_thumb {
+  position: relative;
+  -moz-box-shadow: 4px 4px 8px #888888;
+  -webkit-box-shadow: 4px 4px 8px #888888;
+  -o-box-shadow: 4px 4px 8px #888888;
+  box-shadow: 4px 4px 8px #888888;
+}
