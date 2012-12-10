@@ -1,0 +1,22 @@
+{
+    "name": "yui3-libbbit",
+    "private": true,
+    "version": "1.0.0pre",
+    "description": "LiBBiT YUI framework",
+    "author": "Marc Bontje <marc@rednose.nl>",
+    "engines": {
+        "node" : ">=0.4.0"
+    },
+    "directories": {
+        "lib" : "."
+    },
+    "main": "./index.js",
+    "dependencies": {
+        "request": "2.9.202"
+    },
+    "repository": {
+        "type":"git",
+        "url": "git+ssh://git@gitorious.rednose.nl:yui/yui3-libbit.git"
+    }
+}
+
