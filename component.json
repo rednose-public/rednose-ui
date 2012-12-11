@@ -2,6 +2,8 @@
   "name": "yui3-libbit",
   "version": "1.0.0",
   "dependencies": {
-    "yui3": "https://github.com/yui/yui3.git#v3.7.3"
+    "yui3": "https://github.com/yui/yui3.git#v3.7.3",
+    "yui3-gallery": "https://github.com/yui/yui3-gallery.git#gallery-2012.06.20-20-07",
+    "2in3": "https://github.com/yui/2in3.git"
   }
 }
