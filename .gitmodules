@@ -1,0 +1,9 @@
+[submodule "web/components/yui3"]
+	path = web/components/yui3
+	url = git@gitorious.rednose.nl:yui/yui3.git
+[submodule "web/components/yui3-gallery"]
+	path = web/components/yui3-gallery
+	url = git@gitorious.rednose.nl:yui/yui3-gallery.git
+[submodule "web/components/2in3"]
+	path = web/components/2in3
+	url = git@gitorious.rednose.nl:yui/2in3.git
