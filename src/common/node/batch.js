@@ -1,4 +1,6 @@
-th = require('path');
+#!/usr/bin/env node
+
+var path = require('path');
 
 var base = path.join(__dirname, '../../');
 
