@@ -1,9 +1,0 @@
-{
-  "name": "yui3-libbit",
-  "version": "1.0.0",
-  "dependencies": {
-    "yui3": "git@gitorious.rednose.nl:yui/yui3.git",
-    "yui3-gallery": "git@gitorious.rednose.nl:yui/yui3-gallery.git",
-    "2in3": "git@gitorious.rednose.nl:yui/2in3.git"
-  }
-}
