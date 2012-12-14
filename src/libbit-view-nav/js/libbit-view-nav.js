@@ -47,6 +47,7 @@ Nav = Y.Base.create('nav', Y.View, [], {
             header    = this.title,
             body      = Y.Node.create('<div></div>'),
             footer    = this._footer,
+            config    = { bodyContent: body },
             panel;
 
         // Transfer the child nodes from the view container to the new body container.
@@ -54,11 +55,15 @@ Nav = Y.Base.create('nav', Y.View, [], {
             body.append(c);
         });
 
-        panel = new Y.Libbit.NavContainer({
-            headerContent: header,
-            bodyContent  : body,
-            footerContent: footer
-        });
+        if (header !== null) {
+            config.headerContent = header;
+        }
+
+        if (footer !== null) {
+            config.footerContent = footer;
+        }
+
+        panel = new Y.Libbit.NavContainer(config);
 
         // Render the panel within the view container.
         panel.render(container);
