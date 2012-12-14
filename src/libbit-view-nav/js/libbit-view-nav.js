@@ -147,7 +147,8 @@ Nav = Y.Base.create('nav', Y.View, [], {
         });
 
         // TODO: Update instead of rerendering.
-        footer.one('div').replace(self._buildFooter());
+        this._buildFooter();
+        footer.one('div').replace(this._footer);
     },
 
     /**
