@@ -26,11 +26,11 @@ _yuitest_coverage["build/libbit-app-base/libbit-app-base.js"] = {
     path: "build/libbit-app-base/libbit-app-base.js",
     code: []
 };
-_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].code=["YUI.add('libbit-app-base', function (Y, NAME) {","","var App;","","/**","Extension of the original Y.App, to provide support for modal views.","**/","App = Y.Base.create('libbit-app', Y.App, [], {","","    /**","     * Stores the Panel instances to manage the active modal views.","     */","    _modalViewInfoMap: {},","","    /**","     * Override the superclass method to check if this view needs to be lazyloaded first.","     */","    showView: function (view, config, options, callback) {","        var self     = this,","            args     = [ view, config, options, callback ],","            viewInfo = this.getViewInfo(view);","","        if (viewInfo.lazyload) {","            // Attach to the global Y object, this needs to be set (var Y = YUI();).","            Y.use(viewInfo.lazyload, function () {","                App.superclass.showView.apply(self, args);","            });","        } else {","            App.superclass.showView.apply(self, args);","        }","    }","","    /**","     * Hook into the view change, to handle modal views.","     */","    /*_afterActiveViewChange: function (e) {","        var newView      = e.newVal,","            oldView      = e.prevVal,","            // If oldView doesn't exist, always consider it to be a child","            isChild      = oldView ? this._isChildView(newView, oldView) : true,","            newViewModal = this.getViewInfo(newView).modal,","            oldViewModal = false;","","","        var options = e.options;","            options || (options = {});","","            // If there's no oldView, modal should be false","            if (oldView) {","                oldViewModal = this.getViewInfo(oldView).modal;","            }","","            // The new view is modal, and it's a child view, render a new panel","            if (newViewModal && isChild) {","            var callback = options.callback,","                isChild  = this._isChildView(newView, oldView),","                isParent = !isChild && this._isParentView(newView, oldView),","                prepend  = !!options.prepend || isParent;","","                  if (newView === oldView) {","                        return callback && callback.call(this, newView);","                    }","","                var viewInfo = this.getViewInfo(newView);","                newView.addTarget(this);","                viewInfo && (viewInfo.instance = newView);","","                this._modalViewInfoMap[this.getViewInfo(newView).type] = new Y.Libbit.Panel({","                    srcNode      : newView.get('container'),","                    centered     : true,","                    modal        : true,","                    render       : true,","                    width        : 1024,","                    height       : 576,","                    zIndex       : Y.all('*').size(),","                    // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.","                    hideOn       : []","                });","","                //detach","                if (oldView) {","                    var viewInfo = this.getViewInfo(oldView) || {};","                    //oldView.remove();","","                    //oldView.destroy({remove: true});","","                    // Remove from view to view-info map.","                    delete this._viewInfoMap[Y.stamp(oldView, true)];","","                    // Remove from view-info instance property.","                    //if (oldView === viewInfo.instance) {","                    //    delete viewInfo.instance;","                    //}","","                    oldView.removeTarget(this);","                }","","            callback && callback.call(this, newView);","","        // The old view was modal, and the new one is not a child, means we're going back into","        // the hierarchy. Destroy the modal view.","        } else if (oldViewModal && !isChild) {","            var callback = options.callback,","                isChild  = this._isChildView(newView, oldView),","                isParent = !isChild && this._isParentView(newView, oldView),","                prepend  = !!options.prepend || isParent;","","            if (newView === oldView) {","                return callback && callback.call(this, newView);","            }","","            var viewInfo = this.getViewInfo(newView);","            newView.addTarget(this);","            viewInfo && (viewInfo.instance = newView);","","            //  detach","            var viewInfo = this.getViewInfo(oldView) || {};","","            this._modalViewInfoMap[this.getViewInfo(oldView).type].destroy();","            oldView.destroy({remove: true});","","            // Remove from view to view-info map.","            delete this._viewInfoMap[Y.stamp(oldView, true)];","","            // Remove from view-info instance property.","            if (oldView === viewInfo.instance) {","                delete viewInfo.instance;","            }","","            oldView.removeTarget(this);","            callback && callback.call(this, newView);","        } else {","            // No modal views involved, process as usual","            this._uiSetActiveView(newView, oldView, e.options);","        }","    }*/","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').App = App;","","","}, '1.0.0', {\"requires\": [\"app-base\", \"handlebars-base\", \"libbit-panel\"]});"];
-_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].lines = {"1":0,"3":0,"8":0,"19":0,"23":0,"25":0,"26":0,"29":0,"140":0};
-_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].functions = {"(anonymous 2):25":0,"showView:18":0,"(anonymous 1):1":0};
-_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].coveredLines = 9;
-_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].coveredFunctions = 3;
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].code=["YUI.add('libbit-app-base', function (Y, NAME) {","","var App;","","/**","Extension of the original Y.App, to provide support for modal views.","**/","App = Y.Base.create('libbit-app', Y.App, [], {","","    /**","     * Stores the Panel instances to manage the active modal views.","     */","    _activePanel: null,","","    /**","     * Override the superclass method to check if this view needs to be lazyloaded first.","     */","    showView: function (view, config, options, callback) {","        var self     = this,","            viewInfo = this.getViewInfo(view);","","        if (viewInfo.modal || (this.get('activeView') && this.getViewInfo(this.get('activeView')).modal) ) {","            options = options || {};","            options.transition = false;","        }","","        if (viewInfo.lazyload) {","            Y.one('body').prepend(Y.Node.create('<div class=\"libbit-spinner\"></div>'));","","            // Attach to the global Y object, this needs to be set (var Y = YUI();).","            Y.use(viewInfo.lazyload, function () {","                Y.all('.libbit-spinner').remove();","                App.superclass.showView.apply(self, [ view, config, options, callback ]);","            });","        } else {","            App.superclass.showView.apply(self, [ view, config, options, callback ]);","        }","    },","","    /**","     * Hook into the view change, to handle modal views.","     */","    _detachView: function (view) {","        if (!view) {","            return;","        }","","        if (this.getViewInfo(this.get('activeView')).modal) {","            view.removeTarget(this);","","            return;","        }","","        var viewInfo = this.getViewInfo(view) || {};","","        if (viewInfo.preserve) {","            view.remove();","            // TODO: Detach events here for preserved Views? It is possible that","            // some event subscriptions are made on elements other than the","            // View's `container`.","        } else {","            view.destroy({remove: true});","","            // TODO: The following should probably happen automagically from","            // `destroy()` being called! Possibly `removeTarget()` as well.","","            // Remove from view to view-info map.","            delete this._viewInfoMap[Y.stamp(view, true)];","","            // Remove from view-info instance property.","            if (view === viewInfo.instance) {","                delete viewInfo.instance;","            }","        }","","        view.removeTarget(this);","    },","","    /**","     * Hook into the view change, to handle modal views.","     */","    _attachView: function (view, prepend) {","        if (!view) {","            return;","        }","","        var viewInfo      = this.getViewInfo(view),","            viewContainer = this.get('viewContainer');","","        // Bubble the view's events to this app.","        view.addTarget(this);","","        // Save the view instance in the `views` registry.","        if (viewInfo) {","            viewInfo.instance = view;","        }","","        // TODO: Attach events here for persevered Views?","        // See related TODO in `_detachView`.","","        // TODO: Actually render the view here so that it gets \"attached\" before","        // it gets rendered?","","        if (this._activePanel) {","            this._activePanel.destroy();","        }","","        if (viewInfo.modal) {","            this._activePanel = new Y.Libbit.Panel({","                srcNode      : view.get('container'),","                centered     : true,","                modal        : true,","                render       : true,","                width        : 1024,","                height       : 576,","                zIndex       : Y.all('*').size(),","                // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.","                hideOn       : []","            });","        } else {","            // Insert view into the DOM.","            viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));","        }","    }","","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').App = App;","","","}, '1.0.0', {\"requires\": [\"app-base\", \"handlebars-base\", \"libbit-panel\"], \"skinnable\": true});"];
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].lines = {"1":0,"3":0,"8":0,"19":0,"22":0,"23":0,"24":0,"27":0,"28":0,"31":0,"32":0,"33":0,"36":0,"44":0,"45":0,"48":0,"49":0,"51":0,"54":0,"56":0,"57":0,"62":0,"68":0,"71":0,"72":0,"76":0,"83":0,"84":0,"87":0,"91":0,"94":0,"95":0,"104":0,"105":0,"108":0,"109":0,"122":0,"129":0};
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].functions = {"(anonymous 2):31":0,"showView:18":0,"_detachView:43":0,"_attachView:82":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].coveredLines = 38;
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].coveredFunctions = 5;
 _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 1);
 YUI.add('libbit-app-base', function (Y, NAME) {
 
@@ -47,7 +47,7 @@ App = Y.Base.create('libbit-app', Y.App, [], {
     /**
      * Stores the Panel instances to manage the active modal views.
      */
-    _modalViewInfoMap: {},
+    _activePanel: null,
 
     /**
      * Override the superclass method to check if this view needs to be lazyloaded first.
@@ -56,133 +56,153 @@ App = Y.Base.create('libbit-app', Y.App, [], {
         _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "showView", 18);
 _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 19);
 var self     = this,
-            args     = [ view, config, options, callback ],
             viewInfo = this.getViewInfo(view);
 
-        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 23);
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 22);
+if (viewInfo.modal || (this.get('activeView') && this.getViewInfo(this.get('activeView')).modal) ) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 23);
+options = options || {};
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 24);
+options.transition = false;
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 27);
 if (viewInfo.lazyload) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 28);
+Y.one('body').prepend(Y.Node.create('<div class="libbit-spinner"></div>'));
+
             // Attach to the global Y object, this needs to be set (var Y = YUI();).
-            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 25);
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 31);
 Y.use(viewInfo.lazyload, function () {
-                _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "(anonymous 2)", 25);
-_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 26);
-App.superclass.showView.apply(self, args);
+                _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "(anonymous 2)", 31);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 32);
+Y.all('.libbit-spinner').remove();
+                _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 33);
+App.superclass.showView.apply(self, [ view, config, options, callback ]);
             });
         } else {
-            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 29);
-App.superclass.showView.apply(self, args);
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 36);
+App.superclass.showView.apply(self, [ view, config, options, callback ]);
         }
-    }
+    },
 
     /**
      * Hook into the view change, to handle modal views.
      */
-    /*_afterActiveViewChange: function (e) {
-        var newView      = e.newVal,
-            oldView      = e.prevVal,
-            // If oldView doesn't exist, always consider it to be a child
-            isChild      = oldView ? this._isChildView(newView, oldView) : true,
-            newViewModal = this.getViewInfo(newView).modal,
-            oldViewModal = false;
+    _detachView: function (view) {
+        _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "_detachView", 43);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 44);
+if (!view) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 45);
+return;
+        }
 
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 48);
+if (this.getViewInfo(this.get('activeView')).modal) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 49);
+view.removeTarget(this);
 
-        var options = e.options;
-            options || (options = {});
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 51);
+return;
+        }
 
-            // If there's no oldView, modal should be false
-            if (oldView) {
-                oldViewModal = this.getViewInfo(oldView).modal;
-            }
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 54);
+var viewInfo = this.getViewInfo(view) || {};
 
-            // The new view is modal, and it's a child view, render a new panel
-            if (newViewModal && isChild) {
-            var callback = options.callback,
-                isChild  = this._isChildView(newView, oldView),
-                isParent = !isChild && this._isParentView(newView, oldView),
-                prepend  = !!options.prepend || isParent;
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 56);
+if (viewInfo.preserve) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 57);
+view.remove();
+            // TODO: Detach events here for preserved Views? It is possible that
+            // some event subscriptions are made on elements other than the
+            // View's `container`.
+        } else {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 62);
+view.destroy({remove: true});
 
-                  if (newView === oldView) {
-                        return callback && callback.call(this, newView);
-                    }
-
-                var viewInfo = this.getViewInfo(newView);
-                newView.addTarget(this);
-                viewInfo && (viewInfo.instance = newView);
-
-                this._modalViewInfoMap[this.getViewInfo(newView).type] = new Y.Libbit.Panel({
-                    srcNode      : newView.get('container'),
-                    centered     : true,
-                    modal        : true,
-                    render       : true,
-                    width        : 1024,
-                    height       : 576,
-                    zIndex       : Y.all('*').size(),
-                    // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.
-                    hideOn       : []
-                });
-
-                //detach
-                if (oldView) {
-                    var viewInfo = this.getViewInfo(oldView) || {};
-                    //oldView.remove();
-
-                    //oldView.destroy({remove: true});
-
-                    // Remove from view to view-info map.
-                    delete this._viewInfoMap[Y.stamp(oldView, true)];
-
-                    // Remove from view-info instance property.
-                    //if (oldView === viewInfo.instance) {
-                    //    delete viewInfo.instance;
-                    //}
-
-                    oldView.removeTarget(this);
-                }
-
-            callback && callback.call(this, newView);
-
-        // The old view was modal, and the new one is not a child, means we're going back into
-        // the hierarchy. Destroy the modal view.
-        } else if (oldViewModal && !isChild) {
-            var callback = options.callback,
-                isChild  = this._isChildView(newView, oldView),
-                isParent = !isChild && this._isParentView(newView, oldView),
-                prepend  = !!options.prepend || isParent;
-
-            if (newView === oldView) {
-                return callback && callback.call(this, newView);
-            }
-
-            var viewInfo = this.getViewInfo(newView);
-            newView.addTarget(this);
-            viewInfo && (viewInfo.instance = newView);
-
-            //  detach
-            var viewInfo = this.getViewInfo(oldView) || {};
-
-            this._modalViewInfoMap[this.getViewInfo(oldView).type].destroy();
-            oldView.destroy({remove: true});
+            // TODO: The following should probably happen automagically from
+            // `destroy()` being called! Possibly `removeTarget()` as well.
 
             // Remove from view to view-info map.
-            delete this._viewInfoMap[Y.stamp(oldView, true)];
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 68);
+delete this._viewInfoMap[Y.stamp(view, true)];
 
             // Remove from view-info instance property.
-            if (oldView === viewInfo.instance) {
-                delete viewInfo.instance;
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 71);
+if (view === viewInfo.instance) {
+                _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 72);
+delete viewInfo.instance;
             }
-
-            oldView.removeTarget(this);
-            callback && callback.call(this, newView);
-        } else {
-            // No modal views involved, process as usual
-            this._uiSetActiveView(newView, oldView, e.options);
         }
-    }*/
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 76);
+view.removeTarget(this);
+    },
+
+    /**
+     * Hook into the view change, to handle modal views.
+     */
+    _attachView: function (view, prepend) {
+        _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "_attachView", 82);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 83);
+if (!view) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 84);
+return;
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 87);
+var viewInfo      = this.getViewInfo(view),
+            viewContainer = this.get('viewContainer');
+
+        // Bubble the view's events to this app.
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 91);
+view.addTarget(this);
+
+        // Save the view instance in the `views` registry.
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 94);
+if (viewInfo) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 95);
+viewInfo.instance = view;
+        }
+
+        // TODO: Attach events here for persevered Views?
+        // See related TODO in `_detachView`.
+
+        // TODO: Actually render the view here so that it gets "attached" before
+        // it gets rendered?
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 104);
+if (this._activePanel) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 105);
+this._activePanel.destroy();
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 108);
+if (viewInfo.modal) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 109);
+this._activePanel = new Y.Libbit.Panel({
+                srcNode      : view.get('container'),
+                centered     : true,
+                modal        : true,
+                render       : true,
+                width        : 1024,
+                height       : 576,
+                zIndex       : Y.all('*').size(),
+                // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.
+                hideOn       : []
+            });
+        } else {
+            // Insert view into the DOM.
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 122);
+viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
+        }
+    }
+
 });
 
 // -- Namespace ----------------------------------------------------------------
-_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 140);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 129);
 Y.namespace('Libbit').App = App;
 
 
-}, '1.0.0', {"requires": ["app-base", "handlebars-base", "libbit-panel"]});
+}, '1.0.0', {"requires": ["app-base", "handlebars-base", "libbit-panel"], "skinnable": true});

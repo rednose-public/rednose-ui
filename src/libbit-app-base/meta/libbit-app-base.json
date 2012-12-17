@@ -4,6 +4,7 @@
             "app-base",
             "handlebars-base",
             "libbit-panel"
-        ]
+        ],
+        "skinnable": true
     }
 }
