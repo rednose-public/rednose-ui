@@ -7,15 +7,16 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     {
         var self = this;
 
-        self.model = formsModel;
-
         formsModel.each(function(formItem) {
             self.renderForm(formItem);
         });
+
+        self.model = formsModel;
     },
 
     renderForm: function(formItem)
     {
+        var self = this;
         var container = this.get('formContainer');
         var form = formItem.get('controlForm');
         var fieldGroups = form.get('fieldGroups');
@@ -26,26 +27,10 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         legend.set('innerHTML', form.get('caption'));
 
         formElement.append(legend);
+        formElement.set('name', formItem.get('id'));
 
         Y.Array.each(fieldGroups, function(group) {
-            var list = Y.Node.create('<ol>');
-
-            Y.Array.each(group['fieldGroupItems'], function(control) {
-                var label = Y.Node.create('<label>');
-                var controlContainer = Y.Node.create('<li>');
-                var controlElement = null;
-
-                controlElement = Y.Node.create('<input />');
-
-                label.set('innerHTML', control.field.name);
-
-                controlContainer.append(label);
-                controlContainer.append(controlElement);
-
-                list.append(controlContainer);
-            });
-
-            formElement.append(list);
+            self.addFieldGroup(formElement, group);
         });
 
         var directionClassName = container.getAttribute('class') + '_' + formItem.get('direction');
@@ -55,6 +40,50 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         } else {
             container.append(formElement);
         }
+    },
+
+    addFieldGroup: function(formElement, fieldGroup)
+    {
+        var list = Y.Node.create('<ol>');
+        var fieldGroupItems;
+
+        if (typeof(fieldGroup['fieldGroupItems']) == 'undefined') {
+            fieldGroupItems = fieldGroup.get('fieldGroupItems');
+        } else {
+            fieldGroupItems = fieldGroup['fieldGroupItems'];
+        }
+
+        list.set('id', fieldGroup['id']);
+
+        Y.Array.each(fieldGroupItems, function(control) {
+            var label = Y.Node.create('<label>');
+            var controlContainer = Y.Node.create('<li>');
+            var controlElement = null;
+
+            controlElement = Y.Node.create('<input />');
+
+            label.set('innerHTML', control.field.name);
+
+            controlContainer.append(label);
+            controlContainer.append(controlElement);
+
+            list.append(controlContainer);
+        });
+
+        formElement.append(list);
+    },
+
+    addFieldGroupToModel: function(formId, fieldGroup)
+    {
+        this.model.each(function(formItem) {
+            if (formItem.get('id') == formId) {
+                var fieldGroups = formItem.get('controlForm').get('fieldGroups');
+
+                fieldGroups.push(fieldGroup);
+
+                formItem.save();
+            }
+        });
     },
 
     ddOver: function(e, referenceForm)
@@ -72,9 +101,26 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     ddDrop: function(e, referenceForm)
     {
+        var self = this;
+        var drag = Y.DD.DDM.activeDrag;
         var formNode = Y.one('#' + referenceForm.get('id'));
 
-        console.warn(e);
+        if (!Y.TB.FieldGroup) {
+            if (console.exception) {
+                console.exception('Dependancy error Y.TB.Field not found');
+            }
+        }
+
+        if (Y.instanceOf(drag.get('data'), Y.TB.FieldGroup)) {
+            fieldGroup = drag.get('data');
+
+            self.addFieldGroup(formNode, fieldGroup, true);
+            self.addFieldGroupToModel(formNode.get('name'), fieldGroup);
+        } else {
+            if (console.exception) {
+                console.exception('DD Error: Expected a Y.TB.FieldGroup');
+            }
+        }
 
         formNode.removeClass('ddOver');
     },
