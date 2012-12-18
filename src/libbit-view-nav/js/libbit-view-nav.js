@@ -64,6 +64,7 @@ Nav = Y.Base.create('nav', Y.View, [], {
         }
 
         panel = new Y.Libbit.NavContainer(config);
+        panel.get('contentBox').addClass('libbit-view-nav');
 
         // Render the panel within the view container.
         panel.render(container);

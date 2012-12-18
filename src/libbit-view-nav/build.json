@@ -5,6 +5,11 @@
             "jsfiles": [
                 "libbit-view-nav.js"
             ]
+        },
+        "libbit-view-nav-css": {
+            "cssfiles": [
+                "libbit-view-nav.css"
+            ]
         }
     }
 }
