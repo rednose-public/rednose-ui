@@ -50,6 +50,7 @@ Nav = Y.Base.create('nav', Y.View, [], {
             config    = { bodyContent: body },
             panel;
 
+        container.addClass('libbit-view-nav');
         // Transfer the child nodes from the view container to the new body container.
         container.get('children').each(function (c) {
             body.append(c);
@@ -67,11 +68,16 @@ Nav = Y.Base.create('nav', Y.View, [], {
 
         // Render the panel within the view container.
         panel.render(container);
+
+        // XXX: Quickfix
+        var cHeight = Number(container.getComputedStyle('height').replace('px', '')) - 56;
+        var bd = panel.get('boundingBox').one('.yui3-widget-bd')
+        bd.setStyle('height', String(cHeight) + 'px').setStyle('overflow', 'scroll');
     },
 
     /**
      * Build the footer buttons and bind them to fire events
-     */
+    */
     _buildFooter: function () {
         var self    = this,
             buttons = this.buttons;
