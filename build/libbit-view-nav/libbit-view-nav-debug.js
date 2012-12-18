@@ -66,7 +66,6 @@ Nav = Y.Base.create('nav', Y.View, [], {
         }
 
         panel = new Y.Libbit.NavContainer(config);
-        panel.get('contentBox').addClass('libbit-view-nav');
 
         // Render the panel within the view container.
         panel.render(container);
@@ -179,4 +178,4 @@ Nav = Y.Base.create('nav', Y.View, [], {
 Y.namespace('Libbit.View').Nav = Nav;
 
 
-}, '1.0.0', {"requires": ["event-custom", "libbit-nav-container", "libbit-view-nav-css", "view"]});
+}, '1.0.0', {"requires": ["event-custom", "libbit-nav-container", "view"]});

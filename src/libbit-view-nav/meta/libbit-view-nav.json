@@ -3,9 +3,7 @@
         "requires": [
             "event-custom",
             "libbit-nav-container",
-            "libbit-view-nav-css",
             "view"
         ]
-    },
-    "libbit-view-nav-css" : {}
+    }
 }
