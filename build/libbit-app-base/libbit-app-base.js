@@ -25,10 +25,10 @@ App = Y.Base.create('libbit-app', Y.App, [], {
         }
 
         if (viewInfo.lazyload) {
-            self.showSpinner();
+            App.showSpinner();
             // Attach to the global Y object, this needs to be set (var Y = YUI();).
             Y.use(viewInfo.lazyload, function () {
-                self.hideSpinner();
+                App.hideSpinner();
                 App.superclass.showView.apply(self, [ view, config, options, callback ]);
             });
         } else {
@@ -120,16 +120,16 @@ App = Y.Base.create('libbit-app', Y.App, [], {
             // Insert view into the DOM.
             viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
         }
-    },
-
-    showSpinner: function () {
-        Y.one('body').prepend(Y.Node.create('<div class="libbit-spinner"></div>'));
-    },
-
-    hideSpinner: function () {
-        Y.all('.libbit-spinner').remove();
     }
 });
+
+App.showSpinner = function () {
+    Y.one('body').prepend(Y.Node.create('<div class="libbit-spinner"></div>'));
+};
+
+App.hideSpinner = function () {
+    Y.all('.libbit-spinner').remove();
+};
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit').App = App;
