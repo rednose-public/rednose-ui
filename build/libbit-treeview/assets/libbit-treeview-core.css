@@ -32,8 +32,3 @@
 .libbit-treeview-content .label-container {
     white-space: nowrap;
 }
-
-.yui3-treeview {
-    /* Quickfix */
-    margin-bottom: 10px;
-}
