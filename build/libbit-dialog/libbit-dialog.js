@@ -332,6 +332,39 @@ Y.extend(Dialog, Y.Widget, {
     }
 });
 
+Dialog.error = function (title, message) {
+    var node,
+        panel;
+
+    node = Y.Node.create(
+        '<div class="icon dialog_error_icon"></div>' +
+        '<div><p class="text-error">' + message + '</p></div>'
+    );
+
+    panel = new Y.Panel({
+        bodyContent: node,
+        headerContent: title,
+        zIndex: Y.all('*').size(),
+        width: 500,
+        centered: true,
+        modal: true,
+        visible: true,
+        render: true,
+        buttons: [
+             {
+                value  : 'OK',
+                section: Y.WidgetStdMod.FOOTER,
+                isDefault: true,
+                action : function () {
+                    panel.destroy();
+                }
+             }
+        ]
+    });
+
+    panel.get('boundingBox').addClass('libbit-dialog');
+};
+
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit').Dialog = Dialog;
 
