@@ -196,7 +196,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
                 } else if (Y.instanceOf(model, Y.TB.FieldGroup)) {
                     icon = 'icon-align-left';
                 } else if (Y.instanceOf(model, Y.TB.Image)) {
-                    icon = 'icon-film';
+                    icon = 'icon-picture';
                 } else if (Y.instanceOf(model, Y.DocGen.Table)) {
                     icon = 'icon-th';
                 }
