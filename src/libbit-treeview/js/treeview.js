@@ -193,6 +193,10 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
                     icon = 'icon-folder-close';
                 } else if (Y.instanceOf(model, Y.TB.FieldGroup)) {
                     icon = 'icon-align-left';
+                } else if (Y.instanceOf(model, Y.TB.Image)) {
+                    icon = 'icon-film';
+                } else if (Y.instanceOf(model, Y.DocGen.Table)) {
+                    icon = 'icon-th';
                 }
             }
 
