@@ -36,13 +36,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
         // XXX
         contentBox.addClass('libbit-content');
 
-        // Setup a container drop target.
-        new Y.DD.Drop({
-             node         : contentBox,
-             groups       : ['libbit-treeview'],
-             bubbleTargets: this
-        });
-
         // Setup Tree DD.
         tree.expandAll();
 

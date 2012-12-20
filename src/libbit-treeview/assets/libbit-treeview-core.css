@@ -32,3 +32,15 @@
 .libbit-treeview-content .label-container {
     white-space: nowrap;
 }
+
+.ygtvtable {
+    /*table-layout: fixed;*/
+}
+
+.label-container span {
+/*    display: inline-block;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    text-overflow: ellipsis;
+*/}
