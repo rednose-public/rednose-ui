@@ -25,6 +25,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         var legend = Y.Node.create('<legend>');
 
         legend.set('innerHTML', form.get('caption'));
+        legend.on('dblclick', function() {
+            self.editLabel(legend);
+        });
 
         formElement.append(legend);
         formElement.set('name', formItem.get('id'));
@@ -80,8 +83,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 var fieldGroups = formItem.get('controlForm').get('fieldGroups');
 
                 fieldGroups.push(fieldGroup);
-
-                formItem.save();
             }
         });
     },
@@ -124,6 +125,30 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         formNode.removeClass('ddOver');
     },
+
+    editLabel: function(legend)
+    {
+        var self = this;
+        var formId = legend.get('parentNode').get('name');
+
+        Y.Libbit.Dialog.prompt(
+            'Form title',
+            'Value',
+            function(value) {
+                self.model.each(function(formItem) {
+                    if (formItem.get('id') == formId) {
+                        var form = formItem.get('controlForm');
+
+                        form.set('caption', value);
+                        legend.set('text', form.get('caption'));
+                    }
+                });
+
+                return true;
+            },
+            legend.get('text')
+        );
+    }
 }, {
     ATTRS: {
         formContainer: { value: '' }
