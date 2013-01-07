@@ -8,6 +8,7 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
      */
     initializer: function () {
         var node      = this._node,
+            menuNode  = null,
             content   = this.config.content ? this.config.content : '',
             direction = this.config.dropup ? 'dropup' : 'dropdown';
 
@@ -15,17 +16,22 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
         node.addClass('dropdown-toggle');
         node.setAttribute('data-toggle', 'dropdown');
 
-        node.get('parentNode').append(Y.Node.create(content));
+        menuNode = node.get('parentNode');
+        menuNode.append(Y.Node.create(content));
 
         // Close the dropdown on click.
-        node.get('parentNode').all('a').on('click', function (e) {
-             e.preventDefault();
-             node.dropdown.toggle();
-        });
+        menuNode.delegate('click', function(e) {
+            e.preventDefault();
+            node.dropdown.toggle();
+        }, 'a');
+
+        this.set('menuNode', menuNode);
     }
 }, {
     NS : 'dropdown',
-    ATTRS : {}
+    ATTRS : {
+        menuNode: null
+    }
 });
 
 // -- Namespace ----------------------------------------------------------------

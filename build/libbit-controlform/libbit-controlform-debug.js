@@ -9,6 +9,12 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     {
         var self = this;
 
+        if (formsModel == null) {
+            formsModel = this.get('formsModel');
+        } else {
+            this.set('formsModel', formsModel);
+        }
+
         formsModel.each(function(formItem) {
             self.renderForm(formItem);
         });
@@ -153,7 +159,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     }
 }, {
     ATTRS: {
-        formContainer: { value: '' }
+        formContainer: { value: null },
+        formsModel: { value: null }
     }
 });
 
