@@ -117,14 +117,21 @@ Dialog.prompt = function (title, question, callback, defaultVal) {
 
 };
 
-Dialog.error = function (title, message) {
+Dialog.error = function (title, message, warning) {
     var node,
         panel;
 
-    node = Y.Node.create(
-        '<div class="icon dialog_error_icon"></div>' +
-        '<div><p class="text-error">' + message + '</p></div>'
-    );
+    if (warning == null) {
+        node = Y.Node.create(
+            '<div class="icon dialog_error_icon"></div>' +
+            '<div><p class="text-error">' + message + '</p></div>'
+        );
+    } else {
+        node = Y.Node.create(
+            '<div class="icon dialog_warning_icon"></div>' +
+            '<div><p class="text-warning">' + message + '</p></div>'
+        );
+    }
 
     panel = new Y.Panel({
         bodyContent: node,

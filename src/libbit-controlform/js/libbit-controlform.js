@@ -13,6 +13,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             this.set('formsModel', formsModel);
         }
 
+        formsModel.sort();
         formsModel.each(function(formItem) {
             self.renderForm(formItem);
         });
