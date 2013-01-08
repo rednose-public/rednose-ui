@@ -1,10 +1,8 @@
 var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
-    model: null,
 
-    render: function(formsModel)
-    {
+    render: function(formsModel) {
         var self = this;
 
         if (formsModel == null) {
@@ -17,12 +15,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formsModel.each(function(formItem) {
             self.renderForm(formItem);
         });
-
-        self.model = formsModel;
     },
 
-    renderForm: function(formItem)
-    {
+    renderForm: function(formItem) {
         var self = this;
         var container = this.get('formContainer');
         var form = formItem.get('controlForm');
@@ -52,8 +47,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         }
     },
 
-    addFieldGroup: function(formElement, fieldGroup)
-    {
+    addFieldGroup: function(formElement, fieldGroup) {
         var list = Y.Node.create('<ol>');
         var fieldGroupItems;
 
@@ -83,9 +77,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formElement.append(list);
     },
 
-    addFieldGroupToModel: function(formId, fieldGroup)
-    {
-        this.model.each(function(formItem) {
+    addFieldGroupToModel: function(formId, fieldGroup) {
+        this.get('formsModel').each(function(formItem) {
             if (formItem.get('id') == formId) {
                 var fieldGroups = formItem.get('controlForm').get('fieldGroups');
 
@@ -94,8 +87,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
     },
 
-    ddOver: function(e, referenceForm)
-    {
+    ddOver: function(e, referenceForm) {
         var formNode = Y.one('#' + referenceForm.get('id'));
 
         if (e.type == 'drop:over') {
@@ -107,8 +99,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         }
     },
 
-    ddDrop: function(e, referenceForm)
-    {
+    ddDrop: function(e, referenceForm) {
         var self = this;
         var drag = Y.DD.DDM.activeDrag;
         var formNode = Y.one('#' + referenceForm.get('id'));
@@ -133,8 +124,13 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formNode.removeClass('ddOver');
     },
 
-    editLabel: function(legend)
-    {
+    toJSON: function() {
+        var formsModel = this.get('formsModel');
+
+        return Y.JSON.stringify(formsModel);
+    },
+
+    editLabel: function(legend) {
         var self = this;
         var formId = legend.get('parentNode').get('name');
 
@@ -142,7 +138,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             'Form title',
             'Value',
             function(value) {
-                self.model.each(function(formItem) {
+                self.get('formsModel').each(function(formItem) {
                     if (formItem.get('id') == formId) {
                         var form = formItem.get('controlForm');
 
