@@ -50,6 +50,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     },
 
     addFieldGroup: function(formElement, fieldGroup) {
+        var self = this;
         var list = Y.Node.create('<ol>');
         var fieldGroupItems;
 
@@ -59,7 +60,33 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             fieldGroupItems = fieldGroup['fieldGroupItems'];
         }
 
+        var fieldGroupDD = new Y.DD.Drag({
+            node: list,
+            group: ['fieldGroup']
+        }).plug(Y.Plugin.DDConstrained, {
+            constrain2node: formElement
+        }).plug(Y.Plugin.DDProxy, {
+            moveOnEnd: false
+        });
+
+        fieldGroupDD.on('drag:start', function(e) {
+            e.target.get('dragNode').setHTML('');
+        });
+        fieldGroupDD.on('drag:drag', function(e) {
+            self.reOrderFieldGroupDD(e, formElement, list);
+        });
+        fieldGroupDD.on('drag:end', function(e) {
+            self.reOrderFieldGroup(formElement);
+        });
+
         list.set('id', fieldGroup['id']);
+        list.on(['mouseover', 'mouseout'], function(e) {
+            if (e.type == 'mouseover') {
+                list.addClass('fieldGroupHighlight');
+            } else {
+                list.removeClass('fieldGroupHighlight');
+            }
+        });
 
         Y.Array.each(fieldGroupItems, function(control) {
             var label = Y.Node.create('<label>');
@@ -79,12 +106,50 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formElement.append(list);
     },
 
+    reOrderFieldGroupDD: function(e, formElement, sender) {
+        var y = e.currentTarget.mouseXY[1];
+        var hit = false;
+
+        // If your mousecursor hovers over a fieldGroup (ol element) while dragging, prepend
+        // the dragNode before that element.
+        formElement.all('ol').each(function(group) {
+            if (sender.get('id') !== group.get('id')) { // Is this myself?
+                var groupTop = group.getY();
+                var groupBottom = (groupTop + parseInt(group.getComputedStyle('height')));
+
+                if (y > groupTop && y < groupBottom) {
+                    sender.insertBefore(sender, group);
+
+                    hit = true;
+                }
+            }
+        });
+
+        // If you are dragging at the bottom of the form, append the dragNode to the bottom.
+        if (hit == false && y > (formElement.getY() + parseInt(formElement.getComputedStyle('height')))) {
+            formElement.append(sender);
+        }
+    },
+
+    reOrderFieldGroup: function(formElement) {
+        var formsModel = this.get('formsModel');
+
+        if (typeof(formElement.get) != 'undefined') {
+            formsModel.updateFieldGroupOrder(formElement.get('name'));
+        } else {
+            formsModel.updateFieldGroupOrder(formElement.getAttribute('name'));
+        }
+    },
+
     addFieldGroupToModel: function(formId, fieldGroup) {
-        this.get('formsModel').each(function(formItem) {
+        var formsModel = this.get('formsModel');
+
+        formsModel.each(function(formItem) {
             if (formItem.get('id') == formId) {
                 var fieldGroups = formItem.get('controlForm').get('fieldGroups');
 
                 fieldGroups.push(fieldGroup);
+                formsModel.updateFieldGroupOrder(formId);
             }
         });
     },
@@ -165,4 +230,4 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 Y.namespace('Libbit').ControlForm = ControlForm;
 
 
-}, '1.0.0', {"requires": ["node", "model-list", "model", "base", "libbit-dialog"]});
+}, '1.0.0', {"requires": ["dd-proxy", "dd-constrain", "node", "model-list", "model", "base", "libbit-dialog"]});

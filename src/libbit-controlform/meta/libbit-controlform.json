@@ -1,6 +1,8 @@
 {
     "libbit-controlform" : {
         "requires": [
+            "dd-proxy",
+            "dd-constrain",
             "node",
             "model-list",
             "model",
