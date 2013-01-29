@@ -40,14 +40,18 @@ DD = Y.Base.create('dd', Y.Base, [], {
         nodes = tree.getNodesBy(function () { return true; });
 
         Y.each(nodes, function (value) {
-            var node,
+            var data = self.get('data'),
+                clientId,
+                node,
                 model;
 
             // Bind the DD to the parent table, for a wider drop range.
             node = Y.one('#' + value.labelElId).ancestor('table');
 
-            // TODO: Query modellist to get fieldGroup model objects
-            model = value.data;
+            // FIXME: The model is also stored in the data property, this is not needed.
+            //model = value.data;
+            clientId = node.getAttribute('data-yui3-record');
+            model = data.getByClientId(clientId);
 
             if (Y.instanceOf(model, Y.TB.Category)) {
                 // This is a category model.
