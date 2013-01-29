@@ -20,6 +20,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     renderForm: function(formItem) {
         var self = this;
         var container = this.get('formContainer');
+        var fieldGroupOrder = formItem.get('fieldGroupOrder');
         var form = formItem.get('controlForm');
         var fieldGroups = form.get('fieldGroups');
 
@@ -34,8 +35,12 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formElement.append(legend);
         formElement.set('name', formItem.get('id'));
 
-        Y.Array.each(fieldGroups, function(group) {
-            self.addFieldGroup(formElement, group);
+        Y.Array.each(fieldGroupOrder, function(groupId) {
+            Y.Array.each(fieldGroups, function(group) {
+                if (groupId == group['id']) {
+                    self.addFieldGroup(formElement, group);
+                }
+            });
         });
 
         var directionClassName = container.getAttribute('class') + '_' + formItem.get('direction');
@@ -49,7 +54,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     addFieldGroup: function(formElement, fieldGroup) {
         var self = this;
-        var list = Y.Node.create('<ol>');
+        var list = Y.Node.create('<ol />');
         var fieldGroupItems;
 
         if (typeof(fieldGroup['fieldGroupItems']) == 'undefined') {
@@ -131,15 +136,18 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     reOrderFieldGroup: function(formElement) {
         var formsModel = this.get('formsModel');
+        var formId = formElement.get('name');
+        var fieldGroupOrder = [];
 
-        if (typeof(formElement.get) != 'undefined') {
-            formsModel.updateFieldGroupOrder(formElement.get('name'));
-        } else {
-            formsModel.updateFieldGroupOrder(formElement.getAttribute('name'));
-        }
+        formElement.all('ol').each(function() {
+            fieldGroupOrder.push(this.get('id'));
+        });
+
+        formsModel.updateProperty(formId, 'fieldGroupOrder', fieldGroupOrder);
     },
 
     addFieldGroupToModel: function(formId, fieldGroup) {
+        var self = this;
         var formsModel = this.get('formsModel');
 
         formsModel.each(function(formItem) {
@@ -147,7 +155,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 var fieldGroups = formItem.get('controlForm').get('fieldGroups');
 
                 fieldGroups.push(fieldGroup);
-                formsModel.updateFieldGroupOrder(formId);
             }
         });
     },
@@ -178,8 +185,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         if (Y.instanceOf(drag.get('data'), Y.TB.FieldGroup)) {
             fieldGroup = drag.get('data');
 
-            self.addFieldGroup(formNode, fieldGroup, true);
+            self.addFieldGroup(formNode, fieldGroup.getAttrs(), true);
             self.addFieldGroupToModel(formNode.get('name'), fieldGroup);
+            self.reOrderFieldGroup(formNode);
         } else {
             if (console.exception) {
                 console.exception('DD Error: Expected a Y.TB.FieldGroup');
