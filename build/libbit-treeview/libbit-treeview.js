@@ -12,7 +12,7 @@ var TreeView;
 // TODO: Document data input
 // TODO: Add scrollable
 // TODO: Disable text selection within treenodes
-TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Selectable, Y.Libbit.TreeView.DD ], {
+TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Selectable, Y.Libbit.TreeView.DD, Y.Libbit.TreeView.Filter ], {
 
     /**
      * Stores the state of expanded nodes.
@@ -321,6 +321,7 @@ Y.namespace('Libbit').TreeView = TreeView;
     "requires": [
         "anim",
         "libbit-model-tree",
+        "libbit-treeview-filter",
         "libbit-treeview-anim",
         "libbit-treeview-select",
         "libbit-treeview-dd",

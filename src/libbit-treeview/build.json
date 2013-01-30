@@ -6,6 +6,11 @@
                 "model-tree.js"
             ]
         },
+        "libbit-treeview-filter": {
+            "jsfiles": [
+                "treeview-extensions/treeview-filter.js"
+            ]
+        },
         "libbit-treeview-anim": {
             "jsfiles": [
                 "treeview-extensions/treeview-anim.js"

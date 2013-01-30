@@ -3,6 +3,7 @@
         "requires": [
             "anim",
             "libbit-model-tree",
+            "libbit-treeview-filter",
             "libbit-treeview-anim",
             "libbit-treeview-select",
             "libbit-treeview-dd",
