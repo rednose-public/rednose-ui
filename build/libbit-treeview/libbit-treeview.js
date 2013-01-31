@@ -1,8 +1,5 @@
 YUI.add('libbit-treeview', function (Y, NAME) {
 
-// Global YAHOO object, fixes multiple instances of YAHOO treeview
-YAHOO = Y.YUI2;
-
 var TreeView;
 
 // TODO: Bind model events
@@ -12,7 +9,7 @@ var TreeView;
 // TODO: Document data input
 // TODO: Add scrollable
 // TODO: Disable text selection within treenodes
-TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Selectable, Y.Libbit.TreeView.DD, Y.Libbit.TreeView.Filter ], {
+TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Filter ], {
 
     /**
      * Stores the state of expanded nodes.
@@ -20,9 +17,11 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
     _stateMap: [],
 
     /*
-    * Reference pointer to the after EventHandler
+    * Reference pointer to events
     */
     afterEvent: null,
+    openEvent: null,
+    closeEvent: null,
 
     initializer: function () {
         var contentBox = this.get('contentBox'),
@@ -53,32 +52,56 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
     },
 
     _renderTree: function () {
-        var model         = this.get('data'),
-            treeContainer = this.get('treeContainer'),
+        var model = this.get('data'),
+            self  = this,
             tree;
 
+        items = model.get('items');
+
         if (this.get('tree')) {
-            this.get('tree').destroy();
+            tree = this.get('tree');
+
+            while (tree.rootNode.children.length > 0) {
+                tree.removeNode(tree.rootNode.children[0]);
+            }
+
+            for (var i in items) {
+                tree.insertNode(tree.rootNode, items[i]);
+            }
+        } else {
+            tree = new Y.TreeView({
+                container: this.get('srcNode'),
+                nodes: items
+            });
+
+            this.set('tree', tree);
         }
 
-        // Clone the data object as the TreeView messes with it's internal structure.
-        items = this.get('renderLeaves') ? Y.clone(model.get('items')) : Y.clone(model.getBranches());
-
-        tree = new YAHOO.widget.TreeView(treeContainer.get('id'), items);
         tree.render();
 
-        this.set('tree', tree);
+        if (this.openEvent) {
+            this.openEvent.detach();
+            this.closeEvent.detach();
+        }
 
-        // XXX: Hide the tree while postprocessing?
-        this._attachData();
+        this._processTree(tree.rootNode);
 
-        // TODO: Persist selection
-        this._restoreState();
+        this.openEvent = tree.on('open', function(e) {
+            var li = tree.getHTMLNode(e.node);
 
-        this._enhanceCells();
+            self._stateMap.push(parseInt(li.getAttribute('data-yui3-modelId')));
+        });
+        this.closeEvent = tree.on('close', function(e) {
+            var li = tree.getHTMLNode(e.node);
+            var stateIndex = Y.Array.indexOf(self._stateMap, parseInt(li.getAttribute('data-yui3-modelId')));
+
+            delete self._stateMap[stateIndex];
+        });
+
+        //this._enhanceCells();
     },
 
-    bindUI: function () {
+    /*bindUI: function () {
         var self = this,
             tree = this.get('tree'),
             nodes;
@@ -137,46 +160,47 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
                 }
             });
         });
-    },
+    },*/
 
     _refresh: function () {
-        var self  = this,
-            tree  = this.get('tree'),
-            nodes = tree.getNodesBy(function (node) { return node.expanded; });
-
-        // Store the state. Store by label for now, clientID seems bugged.
-        Y.Array.each(nodes, function (node) {
-            self._stateMap.push(node.label);
-        });
-
         this._renderTree();
-        this.bindUI();
+        //this.bindUI();
 
         this.fire('refresh');
     },
 
     /**
-     * Store a reference to the model for each tree node.
+     * Store a reference to the model for each tree node and restore
+     * the state of the treeNodes.
      */
-    _attachData: function () {
+    _processTree: function (rootNode) {
         var self = this,
             tree = this.get('tree');
 
-        tree.expandAll();
+        rootNode.open();
 
-        nodes = tree.getNodesBy(function () { return true; });
-
-        Y.each(nodes, function (node) {
-            var table = self._getTableElement(node);
-                model = node.data;
+        for (var i in rootNode.children) {
+            var treeNode = rootNode.children[i],
+                li = tree.getHTMLNode(treeNode);
+                model = treeNode.data;
 
             if (Y.instanceOf(model, Y.Model)) {
-                table.setAttribute('data-yui3-record', model.get('clientId'));
-                table.setData({ model: model });
+                li.setAttribute('data-yui3-modelId', model.get('id'));
+                li.setAttribute('data-yui3-record', model.get('clientId'));
+                li.setData({ model: model });
             }
-        });
 
-        tree.collapseAll();
+            if (treeNode.children) {
+                self._processTree(treeNode);
+            }
+        }
+
+        if (rootNode !== tree.rootNode) {
+            console.log(self._stateMap);
+            if (Y.Array.indexOf(self._stateMap, rootNode.data.get('id')) === -1) {
+                rootNode.close();
+            }
+        }
     },
 
     /**
@@ -225,43 +249,6 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         });
     },
 
-    /**
-     * Restores the current tree state if it's set.
-     */
-     _restoreState: function () {
-        var self = this,
-            tree = this.get('tree'),
-            nodes;
-
-        if (this._stateMap.length > 0) {
-            nodes = tree.getNodesBy(function (node) {
-                return self._stateMap.indexOf(node.label) > -1;
-            });
-
-            Y.Array.each(nodes, function (node) {
-                node.expand();
-            });
-
-            this._stateMap = [];
-        }
-    },
-
-    /**
-     * Retrieves the model corresponding to a label DOM node.
-     */
-    _getModelFromLabelNode: function (node) {
-        return node.ancestor('table').getData().model;
-    },
-
-    /**
-     * Retrieve the DOM element containing the main table of a given TreeView node.
-     */
-    _getTableElement: function (node) {
-        var boundingBox = this.get('boundingBox'),
-            id          = node.labelElId;
-
-        return boundingBox.one('#' + id).ancestor('table');
-    },
 
     /**
      * Add an icon node or update an existing one.
@@ -331,7 +318,7 @@ Y.namespace('Libbit').TreeView = TreeView;
         "libbit-treeview-select",
         "libbit-treeview-dd",
         "widget",
-        "yui2-treeview"
+        "gallery-sm-treeview"
     ],
     "skinnable": true
 });

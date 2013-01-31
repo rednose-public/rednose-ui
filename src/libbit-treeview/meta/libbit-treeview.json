@@ -8,7 +8,7 @@
             "libbit-treeview-select",
             "libbit-treeview-dd",
             "widget",
-            "yui2-treeview"
+            "gallery-sm-treeview"
         ],
         "skinnable": true
     }

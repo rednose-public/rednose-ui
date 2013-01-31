@@ -6,6 +6,7 @@ var Filter;
 Filter = Y.Base.create('filter', Y.Base, [], {
 
     applyFilter: function() {
+        return; // Extension disabled
         var self = this;
         var model = this.get('data');
 
