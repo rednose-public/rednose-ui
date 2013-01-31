@@ -17,6 +17,11 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
      */
     _stateMap: [],
 
+    /*
+    * Reference pointer to the after EventHandler
+    */
+    afterEvent: null,
+
     initializer: function () {
         var contentBox = this.get('contentBox'),
             width      = this.get('width'),
@@ -28,7 +33,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         contentBox.setStyle('overflow', 'auto');
 
         if (model) {
-            model.after('load', this._refresh, this);
+            this.afterEvent = model.after('load', this._refresh, this);
         }
     },
 

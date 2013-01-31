@@ -9,7 +9,8 @@ Filter = Y.Base.create('filter', Y.Base, [], {
         var self = this;
         var model = this.get('data');
 
-        model.after('load', function() {
+        self.afterEvent.detach();
+        self.afterEvent = model.after('load', function() {
             model.set('items', self._applyFilterToModel(model.get('items')));
 
             self.set('data', model);

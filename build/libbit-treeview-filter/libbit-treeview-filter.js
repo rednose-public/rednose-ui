@@ -11,7 +11,8 @@ Filter = Y.Base.create('filter', Y.Base, [], {
         var self = this;
         var model = this.get('data');
 
-        model.after('load', function() {
+        self.afterEvent.detach();
+        self.afterEvent = model.after('load', function() {
             model.set('items', self._applyFilterToModel(model.get('items')));
 
             self.set('data', model);
@@ -32,7 +33,7 @@ Filter = Y.Base.create('filter', Y.Base, [], {
             if (modelItems[index].data.name === self.get('filterApplyTo')) {
                 var itemId = parseInt(modelItems[index].data.get('id'));
                 var inFilter = Y.Array.indexOf(filterIds, itemId);
-console.log(inFilter);
+
                 if (inFilter === -1) {
                     delete modelItems[index];
                 }
