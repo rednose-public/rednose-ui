@@ -20,6 +20,11 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
     selectedNode: null,
 
     /**
+    * Icon (className) mapping for diffrent types of models
+    **/
+    _iconMap: [],
+
+    /**
     * Reference pointer to events
     */
     afterEvent: null,
@@ -36,6 +41,8 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         contentBox.setStyle('width', width);
         contentBox.setStyle('height', height);
         contentBox.setStyle('overflow', 'auto');
+
+        this._iconMap = model.get('icons');
 
         if (model) {
             this.afterEvent = model.after('load', this._refresh, this);
@@ -86,7 +93,6 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
 
         tree.render();
 
-        this._updateIcons();
         this._processTree(tree.rootNode);
         this._bindEvents();
     },
@@ -165,6 +171,11 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             if (Y.instanceOf(model, Y.Model)) {
                 li.setAttribute('data-yui3-modelId', model.get('id'));
                 li.setAttribute('data-yui3-record', model.get('clientId'));
+
+                if (typeof(self._iconMap[model.name]) != 'undefined') {
+                    self._setIcon(li, self._iconMap[model.name]);
+                }
+
                 li.setData({ model: model });
             }
 
@@ -189,16 +200,15 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
     /**
      * Update the icon classes
      */
-    _updateIcons: function() {
-        Y.all('.yui3-treeview-icon').each(function() {
-            this.removeClass('yui3-treeview-icon');
+    _setIcon: function(node, className) {
+        if (node) {
+            iconNode = node.one('.yui3-treeview-icon');
 
-            if (this.ancestor("li").hasClass('yui3-treeview-can-have-children')) {
-                this.addClass('icon-folder-close');
-            } else {
-                // Custom icons...
+            if (iconNode) {
+                iconNode.removeClass('yui3-treeview-icon');
+                iconNode.addClass(className);
             }
-        });
+        }
     },
 
 }, {
