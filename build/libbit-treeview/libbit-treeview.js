@@ -44,7 +44,9 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         contentBox.setStyle('height', height);
         contentBox.setStyle('overflow', 'auto');
 
-        this._iconMap = model.get('icons');
+        if (model.get('icons')) {
+            this._iconMap = model.get('icons');
+        }
 
         if (model) {
             this.afterEvent = model.after('load', this._refresh, this);

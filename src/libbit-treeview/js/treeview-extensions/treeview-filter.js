@@ -6,7 +6,6 @@ var Filter;
 Filter = Y.Base.create('filter', Y.Base, [], {
 
     applyFilter: function() {
-        return; // Extension disabled
         var self = this;
         var model = this.get('data');
 
@@ -21,6 +20,7 @@ Filter = Y.Base.create('filter', Y.Base, [], {
 
     _applyFilterToModel: function(modelItems)
     {
+        var buffer = [];
         var filterIds = this.get('filterIds');
         var self = this;
 
@@ -33,13 +33,15 @@ Filter = Y.Base.create('filter', Y.Base, [], {
                 var itemId = parseInt(modelItems[index].data.get('id'));
                 var inFilter = Y.Array.indexOf(filterIds, itemId);
 
-                if (inFilter === -1) {
-                    delete modelItems[index];
+                if (inFilter !== -1) {
+                    buffer.push(modelItems[index]);
                 }
+            } else {
+                buffer.push(modelItems[index]);
             }
         }
 
-        return modelItems;
+        return buffer;
     },
 
 }, {
