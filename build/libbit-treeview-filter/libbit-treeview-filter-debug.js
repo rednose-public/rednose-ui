@@ -43,7 +43,6 @@ Filter = Y.Base.create('filter', Y.Base, [], {
             }
         }
 
-console.log(buffer);
         return buffer;
     },
 

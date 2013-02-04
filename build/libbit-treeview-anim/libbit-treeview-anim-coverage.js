@@ -26,11 +26,11 @@ _yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"] = {
     path: "build/libbit-treeview-anim/libbit-treeview-anim.js",
     code: []
 };
-_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].code=["YUI.add('libbit-treeview-anim', function (Y, NAME) {","","var Anim;","","/**"," * Y.Libbit.TreeView widget extension to provide animations."," */","Anim = function () {};","","// TODO: Prevent animation stacking.","Anim.prototype = {","","    /**","     * Initializer, gets called upon instance initiation.","     */","    initializer: function () {","        this.on('collapseComplete', this._afterCollapse, this);","        this.on('expandComplete', this._afterExpand, this);","    },","","    /**","     * Handles the collapse event.","     */","    _afterCollapse: function (e) {","        var treeNode = e.node,","            children = this._getChildrenElement(treeNode);","","        this._animateSlideIn(children);","    },","","    /**","     * Handles the expand event.","     */","    _afterExpand: function (e) {","        var treeNode = e.node,","            children = this._getChildrenElement(treeNode);","","        this._animateSlideOut(children);","    },","","    /**","     * Animates a slide in of an collapsed element as a post process.","     */","    _animateSlideIn: function (el) {","        var anim;","","        // The element has been hidden by the tree, show it by removing the 'display' style attribute.","        el.setStyle('display', null);","","        // Animate the object to a height of 0.","        anim = new Y.Anim({","            node    : el,","            to      : { height: 0 },","            duration: '.25',","            easing  : Y.Easing.easeOut","        });","","        // Restore the 'display' style attribute and reset the height to 100%.","        anim.on('end', function () {","            el.setStyle('display', 'none');","            el.setStyle('height', '100%');","        });","","        anim.run();","    },","","    /**","     * Animates a slide in of an expanded element as a post process.","     */","    _animateSlideOut: function (el) {","        var height = el.getComputedStyle('height'),","            anim;","","        // The element is visible, set the height to 0.","        el.setStyle('height', '0px');","","        // Animate the object back to it's original height.","        anim = new Y.Anim({","            node     : el,","            to       : { height: height },","            duration: '.25'","        });","","        // Remove the 'height' style attribute, so it doesn't constrain expanding child objects.","        anim.on('end', function () {","            el.setStyle('height', null);","        });","","        anim.run();","    },","","    /**","     * Retrieve the DOM element containing the children of a given TreeView node.","     */","    _getChildrenElement: function (node) {","        var boundingBox = this.get('boundingBox'),","            id          = node.contentElId.substring(13);","","        return boundingBox.one('#ygtvc' + id);","    }","};","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.TreeView').Anim = Anim;","","","}, '1.0.0');"];
-_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].lines = {"1":0,"3":0,"8":0,"11":0,"17":0,"18":0,"25":0,"28":0,"35":0,"38":0,"45":0,"48":0,"51":0,"59":0,"60":0,"61":0,"64":0,"71":0,"75":0,"78":0,"85":0,"86":0,"89":0,"96":0,"99":0,"104":0};
-_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].functions = {"initializer:16":0,"_afterCollapse:24":0,"_afterExpand:34":0,"(anonymous 2):59":0,"_animateSlideIn:44":0,"(anonymous 3):85":0,"_animateSlideOut:70":0,"_getChildrenElement:95":0,"(anonymous 1):1":0};
-_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].coveredLines = 26;
-_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].coveredFunctions = 9;
+_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].code=["YUI.add('libbit-treeview-anim', function (Y, NAME) {","","var Anim;","","/**"," * Y.Libbit.TreeView widget extension to provide animations."," */","Anim = Y.Base.create('anim', Y.Base, [], {","    /**","     * Initializer, gets called upon instance initiation.","     */","    initializer: function () {","        this.on('expend', this._afterExpand, this);","        this.on('collapse', this._afterCollapse, this);","    },","","    /**","     * Handles the collapse event.","     */","    _afterCollapse: function (e) {","        var treeNode = e.node,","            children = this._getChildrenElement(treeNode);","","        this._animateSlideIn(children);","    },","","    /**","     * Handles the expand event.","     */","    _afterExpand: function (e) {","        var treeNode = e.node,","            children = this._getChildrenElement(treeNode);","","        this._animateSlideOut(children);","    },","","    /**","     * Animates a slide in of an collapsed element as a post process.","     */","    _animateSlideIn: function (el) {","        // Animate the object to a height of 0.","        el.transition({","            duration: 0.3,","            easing: 'ease-in',","            height: '0px'","        }, function() {","            // Restore the 'display' style attribute and reset the height to 100%.","            el.setStyle('display', 'none');","            el.setStyle('height', '100%');","        });","    },","","    /**","     * Animates a slide in of an expanded element as a post process.","     */","    _animateSlideOut: function (el) {","        // Hide potential scrollbars","        el.ancestor('.yui3-treeview').setStyle('overflow', 'hidden');","","        // Make sure the chileElement is not hidden, otherwise height cannot be","        // calculated.","        el.setStyle('display', 'block');","","        var height = el.getComputedStyle('height');","","        el.setStyle('height', '15px');","        el.transition({","            duration: 0.3,","            easing: 'ease-out',","            height: height","        });","    },","","    /**","     * Retrieve the DOM element containing the children of a given TreeView node.","     */","    _getChildrenElement: function (node) {","        var domNode = this.get('tree').getHTMLNode(node);","        var ul = Y.Node('#' + domNode.getAttribute('id')).one('ul');","","        return ul;","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.TreeView').Anim = Anim;","","","}, '1.0.0');"];
+_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].lines = {"1":0,"3":0,"8":0,"13":0,"14":0,"21":0,"24":0,"31":0,"34":0,"42":0,"48":0,"49":0,"58":0,"62":0,"64":0,"66":0,"67":0,"78":0,"79":0,"81":0,"86":0};
+_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].functions = {"initializer:12":0,"_afterCollapse:20":0,"_afterExpand:30":0,"(anonymous 2):46":0,"_animateSlideIn:40":0,"_animateSlideOut:56":0,"_getChildrenElement:77":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].coveredLines = 21;
+_yuitest_coverage["build/libbit-treeview-anim/libbit-treeview-anim.js"].coveredFunctions = 8;
 _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 1);
 YUI.add('libbit-treeview-anim', function (Y, NAME) {
 
@@ -42,33 +42,28 @@ var Anim;
  * Y.Libbit.TreeView widget extension to provide animations.
  */
 _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 8);
-Anim = function () {};
-
-// TODO: Prevent animation stacking.
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 11);
-Anim.prototype = {
-
+Anim = Y.Base.create('anim', Y.Base, [], {
     /**
      * Initializer, gets called upon instance initiation.
      */
     initializer: function () {
-        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "initializer", 16);
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 17);
-this.on('collapseComplete', this._afterCollapse, this);
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 18);
-this.on('expandComplete', this._afterExpand, this);
+        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "initializer", 12);
+_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 13);
+this.on('expend', this._afterExpand, this);
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 14);
+this.on('collapse', this._afterCollapse, this);
     },
 
     /**
      * Handles the collapse event.
      */
     _afterCollapse: function (e) {
-        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_afterCollapse", 24);
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 25);
+        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_afterCollapse", 20);
+_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 21);
 var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 28);
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 24);
 this._animateSlideIn(children);
     },
 
@@ -76,12 +71,12 @@ this._animateSlideIn(children);
      * Handles the expand event.
      */
     _afterExpand: function (e) {
-        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_afterExpand", 34);
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 35);
+        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_afterExpand", 30);
+_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 31);
 var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 38);
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 34);
 this._animateSlideOut(children);
     },
 
@@ -89,86 +84,67 @@ this._animateSlideOut(children);
      * Animates a slide in of an collapsed element as a post process.
      */
     _animateSlideIn: function (el) {
-        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_animateSlideIn", 44);
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 45);
-var anim;
-
-        // The element has been hidden by the tree, show it by removing the 'display' style attribute.
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 48);
-el.setStyle('display', null);
-
         // Animate the object to a height of 0.
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 51);
-anim = new Y.Anim({
-            node    : el,
-            to      : { height: 0 },
-            duration: '.25',
-            easing  : Y.Easing.easeOut
-        });
-
-        // Restore the 'display' style attribute and reset the height to 100%.
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 59);
-anim.on('end', function () {
-            _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "(anonymous 2)", 59);
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 60);
+        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_animateSlideIn", 40);
+_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 42);
+el.transition({
+            duration: 0.3,
+            easing: 'ease-in',
+            height: '0px'
+        }, function() {
+            // Restore the 'display' style attribute and reset the height to 100%.
+            _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "(anonymous 2)", 46);
+_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 48);
 el.setStyle('display', 'none');
-            _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 61);
+            _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 49);
 el.setStyle('height', '100%');
         });
-
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 64);
-anim.run();
     },
 
     /**
      * Animates a slide in of an expanded element as a post process.
      */
     _animateSlideOut: function (el) {
-        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_animateSlideOut", 70);
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 71);
-var height = el.getComputedStyle('height'),
-            anim;
+        // Hide potential scrollbars
+        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_animateSlideOut", 56);
+_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 58);
+el.ancestor('.yui3-treeview').setStyle('overflow', 'hidden');
 
-        // The element is visible, set the height to 0.
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 75);
-el.setStyle('height', '0px');
+        // Make sure the chileElement is not hidden, otherwise height cannot be
+        // calculated.
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 62);
+el.setStyle('display', 'block');
 
-        // Animate the object back to it's original height.
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 78);
-anim = new Y.Anim({
-            node     : el,
-            to       : { height: height },
-            duration: '.25'
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 64);
+var height = el.getComputedStyle('height');
+
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 66);
+el.setStyle('height', '15px');
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 67);
+el.transition({
+            duration: 0.3,
+            easing: 'ease-out',
+            height: height
         });
-
-        // Remove the 'height' style attribute, so it doesn't constrain expanding child objects.
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 85);
-anim.on('end', function () {
-            _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "(anonymous 3)", 85);
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 86);
-el.setStyle('height', null);
-        });
-
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 89);
-anim.run();
     },
 
     /**
      * Retrieve the DOM element containing the children of a given TreeView node.
      */
     _getChildrenElement: function (node) {
-        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_getChildrenElement", 95);
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 96);
-var boundingBox = this.get('boundingBox'),
-            id          = node.contentElId.substring(13);
+        _yuitest_coverfunc("build/libbit-treeview-anim/libbit-treeview-anim.js", "_getChildrenElement", 77);
+_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 78);
+var domNode = this.get('tree').getHTMLNode(node);
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 79);
+var ul = Y.Node('#' + domNode.getAttribute('id')).one('ul');
 
-        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 99);
-return boundingBox.one('#ygtvc' + id);
+        _yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 81);
+return ul;
     }
-};
+});
 
 // -- Namespace ----------------------------------------------------------------
-_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 104);
+_yuitest_coverline("build/libbit-treeview-anim/libbit-treeview-anim.js", 86);
 Y.namespace('Libbit.TreeView').Anim = Anim;
 
 

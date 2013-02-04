@@ -1,7 +1,7 @@
 {
     "libbit-treeview" : {
         "requires": [
-            "anim",
+            "transition",
             "libbit-model-tree",
             "libbit-treeview-filter",
             "libbit-treeview-anim",

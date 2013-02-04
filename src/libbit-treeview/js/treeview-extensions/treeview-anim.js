@@ -3,17 +3,13 @@ var Anim;
 /**
  * Y.Libbit.TreeView widget extension to provide animations.
  */
-Anim = function () {};
-
-// TODO: Prevent animation stacking.
-Anim.prototype = {
-
+Anim = Y.Base.create('anim', Y.Base, [], {
     /**
      * Initializer, gets called upon instance initiation.
      */
     initializer: function () {
-        this.on('collapseComplete', this._afterCollapse, this);
-        this.on('expandComplete', this._afterExpand, this);
+        this.on('expend', this._afterExpand, this);
+        this.on('collapse', this._afterCollapse, this);
     },
 
     /**
@@ -40,63 +36,49 @@ Anim.prototype = {
      * Animates a slide in of an collapsed element as a post process.
      */
     _animateSlideIn: function (el) {
-        var anim;
-
-        // The element has been hidden by the tree, show it by removing the 'display' style attribute.
-        el.setStyle('display', null);
-
         // Animate the object to a height of 0.
-        anim = new Y.Anim({
-            node    : el,
-            to      : { height: 0 },
-            duration: '.25',
-            easing  : Y.Easing.easeOut
-        });
-
-        // Restore the 'display' style attribute and reset the height to 100%.
-        anim.on('end', function () {
+        el.transition({
+            duration: 0.3,
+            easing: 'ease-in',
+            height: '0px'
+        }, function() {
+            // Restore the 'display' style attribute and reset the height to 100%.
             el.setStyle('display', 'none');
             el.setStyle('height', '100%');
         });
-
-        anim.run();
     },
 
     /**
      * Animates a slide in of an expanded element as a post process.
      */
     _animateSlideOut: function (el) {
-        var height = el.getComputedStyle('height'),
-            anim;
+        // Hide potential scrollbars
+        el.ancestor('.yui3-treeview').setStyle('overflow', 'hidden');
 
-        // The element is visible, set the height to 0.
-        el.setStyle('height', '0px');
+        // Make sure the chileElement is not hidden, otherwise height cannot be
+        // calculated.
+        el.setStyle('display', 'block');
 
-        // Animate the object back to it's original height.
-        anim = new Y.Anim({
-            node     : el,
-            to       : { height: height },
-            duration: '.25'
+        var height = el.getComputedStyle('height');
+
+        el.setStyle('height', '15px');
+        el.transition({
+            duration: 0.3,
+            easing: 'ease-out',
+            height: height
         });
-
-        // Remove the 'height' style attribute, so it doesn't constrain expanding child objects.
-        anim.on('end', function () {
-            el.setStyle('height', null);
-        });
-
-        anim.run();
     },
 
     /**
      * Retrieve the DOM element containing the children of a given TreeView node.
      */
     _getChildrenElement: function (node) {
-        var boundingBox = this.get('boundingBox'),
-            id          = node.contentElId.substring(13);
+        var domNode = this.get('tree').getHTMLNode(node);
+        var ul = Y.Node('#' + domNode.getAttribute('id')).one('ul');
 
-        return boundingBox.one('#ygtvc' + id);
+        return ul;
     }
-};
+});
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit.TreeView').Anim = Anim;

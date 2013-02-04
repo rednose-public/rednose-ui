@@ -107,6 +107,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             var li = tree.getHTMLNode(e.node);
 
             self._stateMap.push(parseInt(li.getAttribute('data-yui3-modelId')));
+            self.fire('expend', e);
         });
 
         this.closeEvent = tree.on('close', function(e) {
@@ -114,12 +115,14 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             var stateIndex = Y.Array.indexOf(self._stateMap, parseInt(li.getAttribute('data-yui3-modelId')));
 
             delete self._stateMap[stateIndex];
+            self.fire('collapse', e);
         });
 
         this.selectEvent = tree.on('select', function(e) {
             var li = tree.getHTMLNode(e.node);
 
             self.selectedNode = parseInt(li.getAttribute('data-yui3-modelId'));
+            self.fire('nodeSelected', e);
         });
     },
 
@@ -162,7 +165,9 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         var self = this,
             tree = this.get('tree');
 
-        rootNode.open();
+        if (rootNode.children.length) {
+            rootNode.open();
+        }
 
         // Attach data to the nodes
         for (var i in rootNode.children) {
