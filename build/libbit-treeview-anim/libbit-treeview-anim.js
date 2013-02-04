@@ -63,11 +63,14 @@ Anim = Y.Base.create('anim', Y.Base, [], {
 
         var height = el.getComputedStyle('height');
 
-        el.setStyle('height', '15px');
+        el.setStyle('height', 0);
+
         el.transition({
             duration: 0.3,
             easing: 'ease-out',
             height: height
+        }, function() {
+            el.setStyle('height', null);
         });
     },
 

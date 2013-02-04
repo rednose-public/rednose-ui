@@ -6,19 +6,31 @@ var DD;
 DD = Y.Base.create('dd', Y.Base, [], {
 
     /**
+     * DD references store
+     */
+    _ddMap: [],
+
+    /**
      * Subscribe to the render event and set up DD listeners.
      */
     initializer: function () {
+        var self = this;
+        var model = this.get('data');
+
         if (this.get('dragdrop')) {
-            Y.Do.after(this._bindDD, this, 'bindUI', this);
+            Y.Do.after(this._bindDD, this, '_bindEvents', this);
+
+            model.before('load', function() {
+                self._destroyDD();
+            });
 
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
             this.on('drop:over', this._handleOver, this);
 
-            this.on('drop:enter', this._handleEnter, this);
-            this.on('drop:exit', this._handleExit, this);
-            this.on('drag:end', this._handleEnd, this);
+            this.on('drop:enter', this._setClass, this);
+            this.on('drop:exit', this._setClass, this);
+            this.on('drag:end', this._setClass, this);
         }
     },
 
@@ -27,17 +39,23 @@ DD = Y.Base.create('dd', Y.Base, [], {
      */
     _bindDD: function () {
         var self       = this,
-            contentBox = this.get('contentBox').get('parentNode').get('parentNode').get('parentNode'),
             tree       = this.get('tree'),
             nodes;
 
-        // XXX
-        contentBox.addClass('libbit-content');
+        if (this._treeNodes.length === 0) {
+            return;
+        } else {
+            nodes = this._treeNodes;
+        }
 
-        // Setup Tree DD.
-        tree.expandAll();
+        // Global dd
+        var globalDD = new Y.DD.Drop({
+            node         : this.get('contentBox').ancestor('.yui3-widget-bd'),
+            groups       : ['libbit-treeview'],
+            bubbleTargets: self
+        });
 
-        nodes = tree.getNodesBy(function () { return true; });
+        this._ddMap.push(globalDD);
 
         Y.each(nodes, function (value) {
             var data = self.get('data'),
@@ -45,31 +63,23 @@ DD = Y.Base.create('dd', Y.Base, [], {
                 node,
                 model;
 
-            // Bind the DD to the parent table, for a wider drop range.
-            node = Y.one('#' + value.labelElId).ancestor('table');
-
-            // FIXME: The model is also stored in the data property, this is not needed.
-            //model = value.data;
-            clientId = node.getAttribute('data-yui3-record');
-            model = data.getByClientId(clientId);
+            node = tree.getHTMLNode(value);
+            model = value.data;
 
             if (Y.instanceOf(model, Y.TB.Category)) {
                 // This is a category model.
-                self._createDD(node, model);
                 // Categories allow dropping
-                new Y.DD.Drop({
+                var catDD = new Y.DD.Drop({
                     node         : node,
                     groups       : ['libbit-treeview'],
                     bubbleTargets: self
                 });
-            } else {
-                // This is a fieldGroup.
-                self._createDD(node, model);
+
+                self._ddMap.push(catDD);
             }
 
+            self._createDD(node, model);
         });
-
-        tree.collapseAll();
     },
 
     /**
@@ -82,43 +92,29 @@ DD = Y.Base.create('dd', Y.Base, [], {
             nodeHeight  = dropNode.get('offsetHeight'),
             relativeY,
             node,
-            anim;
+            anim,
+            scrollFunc;
 
         if (dropNode.hasClass('yui3-widget-bd')) {
-            // Handle dropping on empty parts
-            if (dropNode.all('.yui3-dd-drop-over').isEmpty()) {
-                dropNode.addClass('libbit-content-drop-over');
-            } else {
-                if (dropNode.hasClass('libbit-content-drop-over')) {
-                    dropNode.removeClass('libbit-content-drop-over');
-                }
-            }
-
-            // Handle scrolling
+            // Determain scrolling direction (if needed)
             relativeY = dragY - nodeOffsetY - 20; /* Margin top */
             if (relativeY > nodeHeight) {
-                // Scroll down
-                node = Y.one('.libbit-tabview .yui3-widget-bd');
-                anim = new Y.Anim({
-                    node: node,
-                    to: {
-                        scroll: function(node) {
-                            return [0, node.get('scrollTop') + node.get('offsetHeight')];
-                        }
-                    },
-                    easing: Y.Easing.easeOut
-                });
-
-                anim.run();
+                scrollFunc = function() {
+                    return [0, node.get('scrollTop') + node.get('offsetHeight')]
+                };
             } else if (relativeY < 15) {
-                // Scroll up
-                node = Y.one('.libbit-tabview .yui3-widget-bd');
+                scrollFunc = function() {
+                    return [node.get('scrollTop') + node.get('offsetHeight'), 0]
+                };
+            }
+
+            // Scroll
+            if (scrollFunc) {
+                node = dropNode;
                 anim = new Y.Anim({
                     node: node,
                     to: {
-                        scroll: function(node) {
-                            return [node.get('scrollTop') + node.get('offsetHeight'), 0];
-                        }
+                        scroll: scrollFunc
                     },
                     easing: Y.Easing.easeOut
                 });
@@ -142,18 +138,34 @@ DD = Y.Base.create('dd', Y.Base, [], {
             borderStyle: 'none'
         });
 
+        this._ddMap.push(dd);
+
         return dd;
+    },
+
+    /**
+     * All DD references must be destoyed if the model is reloaded.
+     */
+    _destroyDD: function() {
+        for (var i in this._ddMap) {
+            this._ddMap[i].destroy();
+        }
+
+        this._ddMap = [];
     },
 
     _handleStart: function (e) {
         var drag = e.target,
-            fieldGroup,
+            model,
             container,
             origin,
             dd;
 
-        fieldGroup = drag.get('data');
-        drag.get('dragNode').setContent(drag.get('node').one('.ygtvlabel').get('outerHTML'));
+        model = drag.get('data');
+
+        drag.get('dragNode').setContent(
+            drag.get('node').one('div').get('outerHTML')
+        );
 
         origin = drag.get('node');
 
@@ -167,7 +179,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
         drag.set('target', true);
         drag._prep();
 
-        dd = this._createDD(origin, fieldGroup);
+        dd = this._createDD(origin, model);
     },
 
     _handleDrop: function (e) {
@@ -192,71 +204,27 @@ DD = Y.Base.create('dd', Y.Base, [], {
         }
     },
 
-    _handleExit: function (e) {
-        var dropNode = e.drop.get('node');
+    _setClass: function (e) {
+        var activeEl;
 
-        if (dropNode.hasClass('libbit-content-drop-over')) {
-            dropNode.removeClass('libbit-content-drop-over');
-        }
-    },
+        switch (e.type) {
+            case 'drop:enter':
+                if (activeEl = Y.one('.libbit-content-drop-over')) {
+                    activeEl.removeClass('libbit-content-drop-over');
+                }
+                e.drop.get('node').addClass('libbit-content-drop-over');
+                break;
 
-    _handleEnd: function (e) {
-        var contentBox = this.get('contentBox').get('parentNode').get('parentNode').get('parentNode');
+            case 'drop:exit':
+                e.drop.get('node').removeClass('libbit-content-drop-over');
+                break;
 
-        if (contentBox.hasClass('libbit-content-drop-over')) {
-            contentBox.removeClass('libbit-content-drop-over');
-        }
-    },
+            case 'drag:end':
+                if (activeEl = Y.one('.libbit-content-drop-over')) {
+                    activeEl.removeClass('libbit-content-drop-over');
+                }
+                break;
 
-    // TODO: Abstract
-    _handleEnter: function (e) {
-        if (Y.DD.DDM.activeDrag) {
-            var drag = Y.DD.DDM.activeDrag,
-                node = drag.get('dragNode'),
-                obj  = drag.get('data'),
-                n,
-                fieldGroup,
-                anim;
-
-            if (Y.instanceOf(obj, Y.TB.TemplateItem)) {
-                fieldGroup = obj.get('fieldGroup');
-                drag.set('data', fieldGroup);
-
-                // Clone the node, position it on top of the original for secondary animation.
-                n = node.cloneNode(true).set('id', null).setStyle('position', 'absolute');
-                Y.one('body').appendChild(n);
-                n.setXY(node.getXY());
-
-                node.setStyle('opacity', 0);
-                node.set('innerHTML',
-                    '<div class="libbit-fieldgroup-drag"><i class="icon-align-left"></i><span> </span>' + fieldGroup.get('name') + '</div>'
-                );
-
-                anim = new Y.Anim({
-                    node: n.one('.libbit-template-item-container'),
-                    to: {
-                        width: 0,
-                        height: 0
-                    },
-                    duration: '.25',
-                    easing: Y.Easing.easeOut
-                });
-
-                anim.on('end', function () {
-                    n.remove();
-                });
-
-                anim.run();
-
-                anim = new Y.Anim({
-                    node: node,
-                    to: { opacity: 1 },
-                    duration: '.25',
-                    easing: Y.Easing.easeOut
-                });
-
-                anim.run();
-           }
         }
     }
 }, {

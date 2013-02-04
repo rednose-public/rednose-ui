@@ -7,12 +7,17 @@ var TreeView;
 // TODO: Document data input
 // TODO: Add scrollable
 // TODO: Disable text selection within treenodes
-TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Filter ], {
+TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Filter, Y.Libbit.TreeView.DD ], {
 
     /**
      * Stores the state of expanded nodes.
      */
     _stateMap: [],
+
+    /**
+    * Reference to all nodes (for use in extensions)
+    **/
+    _treeNodes: [],
 
     /**
     * Selected node
@@ -73,6 +78,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         if (this.get('tree')) {
             tree = this.get('tree');
 
+            this._treeNodes = [];
             this.openEvent.detach();
             this.closeEvent.detach();
             this.selectEvent.detach();
@@ -174,6 +180,8 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             var treeNode = rootNode.children[i],
                 li = tree.getHTMLNode(treeNode);
                 model = treeNode.data;
+
+            self._treeNodes.push(treeNode);
 
             if (Y.instanceOf(model, Y.Model)) {
                 li.setAttribute('data-yui3-modelId', model.get('id'));
