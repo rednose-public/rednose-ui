@@ -15,10 +15,38 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             bubbleTarget = config.bubbleTarget;
 
         this._node = node;
-        this._content = content;
+        this._content = this._buildHTML(content);
         this.addTarget(bubbleTarget);
 
         node.on('contextmenu', this._handleContextMenu, this);
+    },
+
+    _buildHTML: function(content) {
+        var template = '<div class="dropdown open"><ul class="dropdown-menu"></ul></div>';
+        var node = Y.Node.create(template);
+        var ul = node.one('ul');
+
+        if (content == '') {
+            return content;
+        }
+
+        for (var i in content) {
+            var elLi = Y.Node.create('<li>');
+            var elA = Y.Node.create('<a href="#">');
+
+            if (content[i].label !== '-') {
+                elA.set('innerHTML', content[i].label);
+                elA.setAttribute('data-event', content[i].eventName);
+
+                elLi.append(elA);
+            } else {
+                elLi.addClass('divider');
+            }
+
+            ul.append(elLi);
+        }
+
+        return node.get('outerHTML');
     },
 
     _handleContextMenu: function (e) {

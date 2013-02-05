@@ -56,6 +56,10 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         }
     },
 
+    getNodes: function() {
+        return this._treeNodes;
+    },
+
     renderUI: function () {
         var src        = this.get('srcNode'),
             container  = Y.Node.create('<div class="libbit-treeview-content"></div>'),
@@ -131,6 +135,8 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             self.selectedNode = parseInt(li.getAttribute('data-yui3-modelId'));
             self.fire('nodeSelected', e);
         });
+
+        this.fire('Finished');
     },
 
     /**

@@ -4,7 +4,8 @@
             "base",
             "panel",
             "plugin",
-            "widget"
+            "widget",
+            "overlay"
         ]
     }
 }
