@@ -28,10 +28,8 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
-            this.on('drop:over', this._handleOver, this);
 
-            this.on('drop:enter', this._setClass, this);
-            this.on('drop:exit', this._setClass, this);
+            this.on('drop:over', this._setClass, this);
             this.on('drag:end', this._setClass, this);
         }
     },
@@ -50,15 +48,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
             nodes = this._treeNodes;
         }
 
-        // Global dd
-        var globalDD = new Y.DD.Drop({
-            node         : this.get('contentBox').ancestor('.yui3-widget-bd'),
-            groups       : ['libbit-treeview'],
-            bubbleTargets: self
-        });
-
-        this._ddMap.push(globalDD);
-
         Y.each(nodes, function (value) {
             var data = self.get('data'),
                 clientId,
@@ -73,7 +62,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
                 // Categories allow dropping
                 var catDD = new Y.DD.Drop({
                     node         : node,
-                    groups       : ['libbit-treeview'],
+                    groups       : self.get('groups'),
                     bubbleTargets: self
                 });
 
@@ -84,48 +73,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
         });
     },
 
-    /**
-     * Scroll the view up or down when a drag reaches the boundaries on the Y axis
-     */
-    _handleOver: function (e) {
-        var dropNode    = e.drop.get('node'),
-            dragY       = Y.DD.DDM.activeDrag.get('dragNode').getY(),
-            nodeOffsetY = dropNode.get('offsetTop'),
-            nodeHeight  = dropNode.get('offsetHeight'),
-            relativeY,
-            node,
-            anim,
-            scrollFunc;
-
-        if (dropNode.hasClass('yui3-widget-bd')) {
-            // Determain scrolling direction (if needed)
-            relativeY = dragY - nodeOffsetY - 20; /* Margin top */
-            if (relativeY > nodeHeight) {
-                scrollFunc = function() {
-                    return [0, node.get('scrollTop') + node.get('offsetHeight')]
-                };
-            } else if (relativeY < 15) {
-                scrollFunc = function() {
-                    return [node.get('scrollTop') + node.get('offsetHeight'), 0]
-                };
-            }
-
-            // Scroll
-            if (scrollFunc) {
-                node = dropNode;
-                anim = new Y.Anim({
-                    node: node,
-                    to: {
-                        scroll: scrollFunc
-                    },
-                    easing: Y.Easing.easeOut
-                });
-
-                anim.run();
-            }
-        }
-    },
-
     _createDD: function (node, data) {
         var self = this,
             dd;
@@ -133,7 +80,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
         dd = new Y.DD.Drag({
             node   : node,
             data   : data,
-            groups : ['libbit-treeview'],
+            groups : this.get('groups'),
             bubbleTargets: self
         }).plug(Y.Plugin.DDProxy, {
             moveOnEnd  : false,
@@ -210,29 +157,33 @@ DD = Y.Base.create('dd', Y.Base, [], {
         var activeEl;
 
         switch (e.type) {
-            case 'drop:enter':
-                if (activeEl = Y.one('.libbit-content-drop-over')) {
-                    activeEl.removeClass('libbit-content-drop-over');
-                }
-                e.drop.get('node').addClass('libbit-content-drop-over');
-                break;
+            case 'drop:over':
+                var node = e.drop.get('node');
 
-            case 'drop:exit':
-                e.drop.get('node').removeClass('libbit-content-drop-over');
+                if (node.hasClass('libbit-content-drop-over') === false) {
+                    if (activeEl = this.get('contentBox').one('.libbit-content-drop-over')) {
+                        activeEl.removeClass('libbit-content-drop-over');
+                    }
+
+                    node.addClass('libbit-content-drop-over');
+                }
                 break;
 
             case 'drag:end':
-                if (activeEl = Y.one('.libbit-content-drop-over')) {
+                if (activeEl = this.get('contentBox').one('.libbit-content-drop-over')) {
                     activeEl.removeClass('libbit-content-drop-over');
                 }
                 break;
-
         }
     }
 }, {
     ATTRS: {
         dragdrop: {
             value : false
+        },
+
+        groups: {
+            value : ['libbit-treeview']
         }
     }
 });
@@ -241,4 +192,4 @@ DD = Y.Base.create('dd', Y.Base, [], {
 Y.namespace('Libbit.TreeView').DD = DD;
 
 
-}, '1.0.0', {"requires": ["dd", "anim"]});
+}, '1.0.0', {"requires": ["dd"]});

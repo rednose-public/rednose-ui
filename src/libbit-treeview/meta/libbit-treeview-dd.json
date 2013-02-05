@@ -1,8 +1,7 @@
 {
     "libbit-treeview-dd" : {
         "requires": [
-            "dd",
-            "anim"
+            "dd"
         ]
     }
 }

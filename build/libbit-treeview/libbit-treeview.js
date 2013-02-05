@@ -77,10 +77,11 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
 
         items = model.get('items');
 
+        this._treeNodes = [];
+
         if (this.get('tree')) {
             tree = this.get('tree');
 
-            this._treeNodes = [];
             this.openEvent.detach();
             this.closeEvent.detach();
             this.selectEvent.detach();
@@ -176,7 +177,6 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         if (rootNode.children.length) {
             rootNode.open();
         }
-
         // Attach data to the nodes
         for (var i in rootNode.children) {
             var treeNode = rootNode.children[i],

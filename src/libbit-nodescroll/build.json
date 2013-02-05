@@ -1,0 +1,10 @@
+{
+    "name": "libbit-nodescroll",
+    "builds": {
+        "libbit-nodescroll": {
+            "jsfiles": [
+                "nodescroll.js"
+            ]
+        }
+    }
+}
