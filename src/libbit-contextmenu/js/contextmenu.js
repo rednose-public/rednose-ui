@@ -116,7 +116,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             }
         });
 
-        contextMenu.get('boundingBox').on('clickoutside', function () {
+        contextMenu.get('boundingBox').on('mousedownoutside', function () {
             contextMenu.destroy();
         });
     }
