@@ -78,10 +78,10 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         contextMenu.get('boundingBox').setStyle('left', e.pageX);
         contextMenu.get('boundingBox').setStyle('top', e.pageY);
 
-        contextMenu.show();
-
         this._contextMenu = contextMenu;
         this._bindContextMenu();
+
+        contextMenu.show();
     },
 
     _bindContextMenu: function () {
@@ -116,8 +116,13 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             }
         });
 
-        contextMenu.get('boundingBox').on('mousedownoutside', function () {
-            contextMenu.destroy();
+        contextMenu.get('boundingBox').on('clickoutside', function (e) {
+            // Dont allow the rightclick mousebutton to hide the contextMenu
+            // In some cases browsers (tested on FF17) it will fire false positives and
+            // immediately hide the contextmenu again.
+            if (e.button !== 3) {
+                contextMenu.destroy();
+            }
         });
     }
 
