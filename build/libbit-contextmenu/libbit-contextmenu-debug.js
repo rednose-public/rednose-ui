@@ -79,11 +79,10 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
         contextMenu.get('boundingBox').setStyle('left', e.pageX);
         contextMenu.get('boundingBox').setStyle('top', e.pageY);
+        contextMenu.show();
 
         this._contextMenu = contextMenu;
         this._bindContextMenu();
-
-        contextMenu.show();
     },
 
     _bindContextMenu: function () {
@@ -92,14 +91,16 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             contextMenu  = this._contextMenu;
 
         // Bind the menu events
-        contextMenu.get('boundingBox').all('a').on(['click', 'contextmenu'], function (e) {
-            var target = e.currentTarget;
+        contextMenu.get('boundingBox').all('a').each(function() {
+            this.on(['click', 'contextmenu'], function (e) {
+                var target = e.currentTarget;
 
-            e.preventDefault();
+                e.preventDefault();
 
-            self.fire(target.getAttribute('data-event'), { node : node });
+                self.fire(target.getAttribute('data-event'), { node : node });
 
-            contextMenu.destroy();
+                contextMenu.destroy();
+            });
         });
 
         contextMenu.get('boundingBox').all('li').on('mouseenter', function (e) {

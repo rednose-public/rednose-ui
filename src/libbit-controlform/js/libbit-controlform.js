@@ -2,6 +2,11 @@ var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
+    initializer: function() {
+        this.on('contextMenu:editLabel', this.editLabel);
+        this.on('contextMenu:deleteForm', this.deleteForm);
+    },
+
     render: function(formsModel) {
         var self = this;
 
@@ -28,8 +33,13 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         var legend = Y.Node.create('<legend>');
 
         legend.set('innerHTML', form.get('caption'));
-        legend.on('dblclick', function() {
-            self.editLabel(legend);
+        legend.plug(Y.Libbit.ContextMenu, {
+            content: [
+                { label: 'Rename', eventName: 'editLabel' },
+                { label: '-' },
+                { label: 'Remove', eventName: 'deleteForm' }
+            ],
+            bubbleTarget: self
         });
 
         formElement.append(legend);
@@ -45,9 +55,11 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         var directionClassName = container.getAttribute('class') + '_' + formItem.get('direction');
 
+        // If a direction container is found, append the form to it.
         if (container.one('.' + directionClassName) != null) {
             container.one('.' + directionClassName).append(formElement);
         } else {
+            // And if not ...
             container.append(formElement);
         }
     },
@@ -203,8 +215,23 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         return Y.JSON.stringify(formsModel);
     },
 
-    editLabel: function(legend) {
+    deleteForm: function(e) {
         var self = this;
+        var formsModel = this.get('formsModel');
+        var formId = e.node.get('parentNode').get('name');
+
+        Y.Libbit.Dialog.confirm(
+            'Delete', 'Delete the form "' + e.node.get('innerHTML') + '" and all its fieldgroups?',
+            function() {
+                formsModel.deleteForm(formId);
+                self.render();
+            }
+        );
+    },
+
+    editLabel: function(e) {
+        var self = this;
+        var legend = e.node;
         var formId = legend.get('parentNode').get('name');
 
         Y.Libbit.Dialog.prompt(

@@ -114,7 +114,46 @@ Dialog.prompt = function (title, question, callback, defaultVal) {
     });
 
     panel.get('boundingBox').addClass('libbit-dialog');
+};
 
+Dialog.confirm = function (title, message, callback) {
+    var node,
+        panel;
+
+    node = Y.Node.create(
+        '<div class="icon dialog_warning_icon"></div>' +
+        '<div><p class="text-warning">' + message + '</p></div>'
+    );
+
+    panel = new Y.Panel({
+        bodyContent: node,
+        headerContent: title,
+        zIndex: Y.all('*').size(),
+        width: 500,
+        buttons: [
+             {
+                value  : 'Yes',
+                section: Y.WidgetStdMod.FOOTER,
+                isDefault: false,
+                action : function () {
+                    if (callback) {
+                        callback();
+                    }
+                    panel.destroy();
+                }
+             }, {
+                value  : 'No',
+                section: Y.WidgetStdMod.FOOTER,
+                isDefault: true,
+                action : function () {
+                    panel.destroy();
+                }
+             }
+        ],
+        centered: true, modal: true, visible: true, render: true
+    });
+
+    panel.get('boundingBox').addClass('libbit-dialog');
 };
 
 Dialog.error = function (title, message, warning) {
