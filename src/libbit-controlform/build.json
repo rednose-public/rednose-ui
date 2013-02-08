@@ -3,6 +3,9 @@
     "builds": {
         "libbit-controlform": {
             "jsfiles": [
+                "models/form.js",
+                "models/form-item.js",
+                "models/form-items.js",
                 "libbit-controlform.js"
             ]
         }

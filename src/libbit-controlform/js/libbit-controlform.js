@@ -2,6 +2,16 @@ var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
+    viewTemplate:
+        '<div class="formContainer">' +
+        '   <div class="formContainer_left">&nbsp;</div>' +
+        '   <div class="formContainer_right">&nbsp;</div>' +
+        '   <div class="formContainer_proxy">' +
+        '       <div class="formContainer_proxy_arrow"></div>' +
+        '   </div>' +
+        '</div>',
+
+
     initializer: function() {
         this.on('contextMenu:editLabel', this.editLabel);
         this.on('contextMenu:deleteForm', this.deleteForm);
@@ -9,6 +19,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     render: function(formsModel) {
         var self = this;
+
+        this.get('srcNode').setHTML(this.viewTemplate);
 
         if (formsModel == null) {
             formsModel = this.get('formsModel');
@@ -20,11 +32,13 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formsModel.each(function(formItem) {
             self.renderForm(formItem);
         });
+
+        this.fire('rendered');
     },
 
     renderForm: function(formItem) {
         var self = this;
-        var container = this.get('formContainer');
+        var container = this.get('srcNode').one('div');
         var fieldGroupOrder = formItem.get('fieldGroupOrder');
         var form = formItem.get('controlForm');
         var fieldGroups = form.get('fieldGroups');
@@ -55,13 +69,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         var directionClassName = container.getAttribute('class') + '_' + formItem.get('direction');
 
-        // If a direction container is found, append the form to it.
-        if (container.one('.' + directionClassName) != null) {
-            container.one('.' + directionClassName).append(formElement);
-        } else {
-            // And if not ...
-            container.append(formElement);
-        }
+        container.one('.' + directionClassName).append(formElement);
     },
 
     addFieldGroup: function(formElement, fieldGroup) {
@@ -215,6 +223,14 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         return Y.JSON.stringify(formsModel);
     },
 
+    addForm: function(title) {
+        var formsModel = this.get('formsModel');
+
+        formsModel.addForm(title);
+
+        this.render();
+    },
+
     deleteForm: function(e) {
         var self = this;
         var formsModel = this.get('formsModel');
@@ -254,8 +270,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     }
 }, {
     ATTRS: {
-        formContainer: { value: null },
-        formsModel: { value: null }
+        srcNode: { value: null },
+        formsModel: { value: null },
+        editMode: { value: false }
     }
 });
 

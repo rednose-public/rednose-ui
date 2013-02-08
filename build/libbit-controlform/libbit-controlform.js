@@ -1,8 +1,134 @@
 YUI.add('libbit-controlform', function (Y, NAME) {
 
+var Form;
+
+Form = Y.Base.create('form', Y.Model, [], {
+
+}, {
+    ATTRS: {
+        caption: { value: '' },
+        fieldGroups: { value: [] }
+    }
+});
+
+Y.namespace('ControlForm').Form = Form;
+var FormItem;
+
+FormItem = Y.Base.create('formItem', Y.Model, [], {
+
+
+}, {
+    ATTRS: {
+        template: { value: null },
+        sortOrder: { value: 0 },
+        direction: { value: 'left' },
+        controlForm: { value: null },
+        fieldGroupOrder: { value: [] }
+    }
+});
+
+Y.namespace('ControlForm').FormItem = FormItem;
+var FormItem = Y.ControlForm.FormItem,
+    Form = Y.ControlForm.Form,
+    FormItems;
+
+FormItems = Y.Base.create('formItems', Y.ModelList, [], {
+    model: FormItem,
+
+    parse: function (response) {
+        return response.map(function (controlFormItem) {
+            if (controlFormItem.controlForm !== null) {
+                controlFormItem.controlForm = new Form(controlFormItem.controlForm);
+            }
+
+            return controlFormItem;
+        });
+    },
+
+    sync: function (action, options, callback) {
+        var self = this;
+
+        if (action === 'read') {
+            Y.io(Routing.generate('libbit_docgen_forms_list', options), {
+                method: 'GET',
+                on: {
+                    success: function (tx, r) {
+                        self.set('templateId', options['templateId']);
+
+                        callback(null, Y.JSON.parse(r.responseText));
+                    }
+                }
+            });
+        }
+    },
+
+    comparator: function (model) {
+        return model.get('sortOrder');
+    },
+
+    setPosition: function(formId, sortOrder, direction) {
+        this.updateProperty(formId, 'sortOrder', sortOrder);
+        this.updateProperty(formId, 'direction', direction);
+    },
+
+    updateProperty: function(formId, property, value) {
+        this.each(function(formItem) {
+            if (formItem.get('id') == formId) {
+                formItem.set(property, value);
+            }
+        });
+    },
+
+    isModified: function() {
+        // TODO...
+        return true;
+    },
+
+    addForm: function(title) {
+        var self = this;
+        var newForm = {
+            id: 'tmp_' + Math.round((new Date()).getTime() / 1000) + (Math.round(Math.random()) * 999999),
+            direction: 'left',
+            controlForm: new self.model({
+                caption: title,
+                fieldGroups: []
+            }),
+            sortOrder: self.size(),
+            template: self.get('templateId')
+        };
+
+        self.add(newForm);
+    },
+
+    deleteForm: function(formId) {
+        var self = this;
+
+        this.each(function(formItem) {
+            if (formItem.get('id') == formId) {
+                self.remove(formItem);
+            }
+        });
+    }
+}, {
+    ATTRS: {
+        templateId: { value: null }
+    }
+});
+
+Y.namespace('ControlForm').FormItems = FormItems;
 var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
+
+    viewTemplate:
+        '<div class="formContainer">' +
+        '   <div class="formContainer_left">&nbsp;</div>' +
+        '   <div class="formContainer_right">&nbsp;</div>' +
+        '   <div class="formContainer_proxy">' +
+        '       <div class="formContainer_proxy_arrow"></div>' +
+        '   </div>' +
+        '</div>',
+
 
     initializer: function() {
         this.on('contextMenu:editLabel', this.editLabel);
@@ -11,7 +137,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     render: function(formsModel) {
         var self = this;
-console.log('call');
+
+        this.get('srcNode').setHTML(this.viewTemplate);
+
         if (formsModel == null) {
             formsModel = this.get('formsModel');
         } else {
@@ -22,11 +150,13 @@ console.log('call');
         formsModel.each(function(formItem) {
             self.renderForm(formItem);
         });
+
+        this.fire('rendered');
     },
 
     renderForm: function(formItem) {
         var self = this;
-        var container = this.get('formContainer');
+        var container = this.get('srcNode').one('div');
         var fieldGroupOrder = formItem.get('fieldGroupOrder');
         var form = formItem.get('controlForm');
         var fieldGroups = form.get('fieldGroups');
@@ -57,13 +187,7 @@ console.log('call');
 
         var directionClassName = container.getAttribute('class') + '_' + formItem.get('direction');
 
-        // If a direction container is found, append the form to it.
-        if (container.one('.' + directionClassName) != null) {
-            container.one('.' + directionClassName).append(formElement);
-        } else {
-            // And if not ...
-            container.append(formElement);
-        }
+        container.one('.' + directionClassName).append(formElement);
     },
 
     addFieldGroup: function(formElement, fieldGroup) {
@@ -217,6 +341,14 @@ console.log('call');
         return Y.JSON.stringify(formsModel);
     },
 
+    addForm: function(title) {
+        var formsModel = this.get('formsModel');
+
+        formsModel.addForm(title);
+
+        this.render();
+    },
+
     deleteForm: function(e) {
         var self = this;
         var formsModel = this.get('formsModel');
@@ -256,8 +388,9 @@ console.log('call');
     }
 }, {
     ATTRS: {
-        formContainer: { value: null },
-        formsModel: { value: null }
+        srcNode: { value: null },
+        formsModel: { value: null },
+        editMode: { value: false }
     }
 });
 
