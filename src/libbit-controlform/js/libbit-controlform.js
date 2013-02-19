@@ -15,6 +15,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     initializer: function() {
         this.on('contextMenu:editLabel', this.editLabel);
         this.on('contextMenu:deleteForm', this.deleteForm);
+        this.on('contextMenu:deleteFieldGroup', this.deleteFieldGroup);
     },
 
     render: function(formsModel) {
@@ -103,6 +104,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         list.set('id', fieldGroup['id']);
+        list.setAttribute('name', fieldGroup['name']);
         list.on(['mouseover', 'mouseout'], function(e) {
             if (e.type == 'mouseover') {
                 list.addClass('fieldGroupHighlight');
@@ -124,6 +126,15 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             controlContainer.append(controlElement);
 
             list.append(controlContainer);
+        });
+
+        list.plug(Y.Libbit.ContextMenu, {
+            content: [
+                { label: 'Edit', eventName: 'editFieldGroup' },
+                { label: '-' },
+                { label: 'Remove', eventName: 'deleteFieldGroup' }
+            ],
+            bubbleTarget: self
         });
 
         formElement.append(list);
@@ -241,6 +252,23 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             function() {
                 formsModel.deleteForm(formId);
                 self.render();
+            }
+        );
+    },
+
+    deleteFieldGroup: function(e) {
+        var self = this;
+        var formsModel = this.get('formsModel');
+        var formElement = e.node.get('parentNode');
+        var formId = formElement.get('name');
+
+        Y.Libbit.Dialog.confirm(
+            'Delete', 'Delete the fieldgroup "' + e.node.getAttribute('name') + '"',
+            function() {
+                formsModel.deleteFieldGroup(formId, e.node.get('id'));
+
+                e.node.remove();
+                self.reOrderFieldGroup(formElement);
             }
         );
     },

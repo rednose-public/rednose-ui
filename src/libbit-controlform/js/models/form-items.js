@@ -78,6 +78,14 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
                 self.remove(formItem);
             }
         });
+    },
+    
+    deleteFieldGroup: function(formId, fgId) {
+        this.each(function(formItem) {
+            if (formItem.get('id') == formId) {
+                formItem.get('controlForm').removeFieldGroup(fgId);
+            }
+        });
     }
 }, {
     ATTRS: {
