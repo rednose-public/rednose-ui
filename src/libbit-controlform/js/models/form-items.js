@@ -79,7 +79,20 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
             }
         });
     },
-    
+
+    getFieldGroup: function(fgId) {
+        var fgId = parseInt(fgId);
+        var fg = null;
+
+        this.each(function(formItem) {
+            if (formItem.get('controlForm').getFieldGroup(fgId)) {
+                fg = formItem.get('controlForm').getFieldGroup(fgId);
+            }
+        });
+
+        return fg;
+    },
+
     deleteFieldGroup: function(formId, fgId) {
         this.each(function(formItem) {
             if (formItem.get('id') == formId) {

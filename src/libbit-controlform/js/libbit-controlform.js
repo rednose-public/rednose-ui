@@ -13,9 +13,12 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
 
     initializer: function() {
+        var self = this;
+
         this.on('contextMenu:editLabel', this.editLabel);
         this.on('contextMenu:deleteForm', this.deleteForm);
         this.on('contextMenu:deleteFieldGroup', this.deleteFieldGroup);
+        this.on('contextMenu:editFieldGroup', this.editFieldGroup);
     },
 
     render: function(formsModel) {
@@ -254,6 +257,12 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 self.render();
             }
         );
+    },
+
+    editFieldGroup: function(e) {
+        var fg = this.get('formsModel').getFieldGroup(e.node.get('id'));
+
+        this.fire('editFieldGroup', { 'fieldGroup': fg });
     },
 
     deleteFieldGroup: function(e) {

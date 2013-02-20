@@ -8,12 +8,22 @@ Form = Y.Base.create('form', Y.Model, [], {
         for (var i in this.get('fieldGroups')) {
             if (this.get('fieldGroups')[i]['id'] == fgId) {
                 var fieldGroups = this.get('fieldGroups');
-                
+
                 fieldGroups.splice(i, 1);
 
                 this.set('fieldGroups', fieldGroups);
             }
         }
+    },
+
+    getFieldGroup: function(fgId) {
+        for (var i in this.get('fieldGroups')) {
+            if (this.get('fieldGroups')[i]['id'] == fgId) {
+                return this.get('fieldGroups')[i];
+            }
+        }
+
+        return false;
     }
 
 }, {
@@ -120,7 +130,20 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
             }
         });
     },
-    
+
+    getFieldGroup: function(fgId) {
+        var fgId = parseInt(fgId);
+        var fg = null;
+
+        this.each(function(formItem) {
+            if (formItem.get('controlForm').getFieldGroup(fgId)) {
+                fg = formItem.get('controlForm').getFieldGroup(fgId);
+            }
+        });
+
+        return fg;
+    },
+
     deleteFieldGroup: function(formId, fgId) {
         this.each(function(formItem) {
             if (formItem.get('id') == formId) {
@@ -150,9 +173,12 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
 
     initializer: function() {
+        var self = this;
+
         this.on('contextMenu:editLabel', this.editLabel);
         this.on('contextMenu:deleteForm', this.deleteForm);
         this.on('contextMenu:deleteFieldGroup', this.deleteFieldGroup);
+        this.on('contextMenu:editFieldGroup', this.editFieldGroup);
     },
 
     render: function(formsModel) {
@@ -391,6 +417,12 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 self.render();
             }
         );
+    },
+
+    editFieldGroup: function(e) {
+        var fg = this.get('formsModel').getFieldGroup(e.node.get('id'));
+
+        this.fire('editFieldGroup', { 'fieldGroup': fg });
     },
 
     deleteFieldGroup: function(e) {
