@@ -7,7 +7,6 @@ var TreeView;
 // TODO: Fix overflow CSS for Firefox
 // TODO: Implement sorting
 // TODO: Document data input
-// TODO: Add scrollable
 // TODO: Disable text selection within treenodes
 TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Filter, Y.Libbit.TreeView.DD ], {
 

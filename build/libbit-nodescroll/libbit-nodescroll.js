@@ -3,6 +3,8 @@ YUI.add('libbit-nodescroll', function (Y, NAME) {
 var NodeScroll;
 
 NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
+    anim: null,
+
     /**
      * Initializer, gets called upon instance initiation.
      */
@@ -23,6 +25,7 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
             bubbleTargets: this,
             groups       : this.get('groups')
         });
+
         dd.on('drop:over', function(e) {
             self._handle(e);
         });
@@ -36,9 +39,9 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
             dragY       = e.drag.mouseXY[1],
             nodeOffsetY = dropNode.get('offsetTop'),
             nodeHeight  = dropNode.get('offsetHeight'),
+            self        = this,
             relativeY,
             node,
-            anim,
             scrollFunc;
 
         // Determain scrolling direction (if needed)
@@ -49,22 +52,36 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
             };
         } else if (relativeY < 25) {
             scrollFunc = function() {
-                return [node.get('scrollTop') + node.get('offsetHeight'), 0]
+                return [0, node.get('scrollTop') - node.get('offsetHeight')]
             };
+        } else {
+            if (this.anim) {
+                if (this.anim.get('running')) {
+                    this.anim.stop();
+                }
+            }
         }
 
         // Scroll
         if (scrollFunc) {
             node = dropNode;
-            anim = new Y.Anim({
-                node: node,
-                to: {
-                    scroll: scrollFunc
-                },
-                easing: Y.Easing.easeOut
-            });
 
-            anim.run();
+            if (this.anim == null) {
+                this.anim = new Y.Anim({
+                    node: node,
+                    to: {
+                        scroll: scrollFunc
+                    },
+                    easing: Y.Easing.easeOut,
+                    duration: (0.01 * node.get('offsetHeight'))
+                });
+            }
+
+            this.anim.set('to', { scroll: scrollFunc });
+            this.anim.run();
+            this.anim.on('tween', function() {
+                self.fire('scrolling');
+            });
         }
     },
 }, {

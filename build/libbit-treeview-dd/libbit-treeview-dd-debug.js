@@ -35,6 +35,18 @@ DD = Y.Base.create('dd', Y.Base, [], {
     },
 
     /**
+     * Update all the the DD shims
+     * Most likely used in combination with libbit-nodescroll (scrolling event).
+     */
+    sizeShims: function() {
+        for (var i in this._ddMap) {
+            if (typeof(this._ddMap[i].sizeShim) === 'function') {
+                this._ddMap[i].sizeShim();
+            }
+        }
+    },
+
+    /**
      * Bind all DD instance after the parent view has been rendered.
      */
     _bindDD: function () {
