@@ -99,19 +99,24 @@ Dialog.prompt = function (title, question, callback, defaultVal) {
                             panel.destroy();
                         }
                     }
-                }
+                },
+                classNames: 'btn btn-primary'
              }, {
                 value  : 'Cancel',
                 section: Y.WidgetStdMod.FOOTER,
                 action : function () {
                     panel.destroy();
-                }
+                },
+                classNames: 'btn'
              }
         ],
         centered: true, modal: true, visible: true, render: true
     });
 
     panel.get('boundingBox').addClass('libbit-dialog');
+    panel.get('boundingBox').all('.yui3-button').each(function() {
+        this.removeClass('yui3-button').removeClass('yui3-button-primary');
+    });
 };
 
 Dialog.confirm = function (title, message, callback) {
@@ -120,7 +125,7 @@ Dialog.confirm = function (title, message, callback) {
 
     node = Y.Node.create(
         '<div class="icon dialog_warning_icon"></div>' +
-        '<div><p class="text-warning">' + message + '</p></div>'
+        '<div><p>' + message + '</p></div>'
     );
 
     panel = new Y.Panel({
@@ -132,26 +137,31 @@ Dialog.confirm = function (title, message, callback) {
              {
                 value  : 'Yes',
                 section: Y.WidgetStdMod.FOOTER,
-                isDefault: false,
+                isDefault: true,
                 action : function () {
                     if (callback) {
                         callback();
                     }
                     panel.destroy();
-                }
+                },
+                classNames: 'btn btn-primary'
              }, {
                 value  : 'No',
                 section: Y.WidgetStdMod.FOOTER,
-                isDefault: true,
+                isDefault: false,
                 action : function () {
                     panel.destroy();
-                }
+                },
+                classNames: 'btn'
              }
         ],
         centered: true, modal: true, visible: true, render: true
     });
 
     panel.get('boundingBox').addClass('libbit-dialog');
+    panel.get('boundingBox').all('.yui3-button').each(function() {
+        this.removeClass('yui3-button').removeClass('yui3-button-primary');
+    });
 };
 
 Dialog.error = function (title, message, warning) {
@@ -166,7 +176,7 @@ Dialog.error = function (title, message, warning) {
     } else {
         node = Y.Node.create(
             '<div class="icon dialog_warning_icon"></div>' +
-            '<div><p class="text-warning">' + message + '</p></div>'
+            '<div><p>' + message + '</p></div>'
         );
     }
 
@@ -182,13 +192,17 @@ Dialog.error = function (title, message, warning) {
                 isDefault: true,
                 action : function () {
                     panel.destroy();
-                }
+                },
+                classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-danger')
              }
         ],
         centered: true, modal: true, visible: true, render: true
     });
 
     panel.get('boundingBox').addClass('libbit-dialog');
+    panel.get('boundingBox').all('.yui3-button').each(function() {
+        this.removeClass('yui3-button').removeClass('yui3-button-primary');
+    });
 };
 
 // -- Namespace ----------------------------------------------------------------
