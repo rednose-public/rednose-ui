@@ -51,14 +51,19 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         var legend = Y.Node.create('<legend>');
 
         legend.set('innerHTML', form.get('caption'));
-        legend.plug(Y.Libbit.ContextMenu, {
-            content: [
-                { label: 'Rename', eventName: 'editLabel' },
-                { label: '-' },
-                { label: 'Remove', eventName: 'deleteForm' }
-            ],
-            bubbleTarget: self
-        });
+
+        if (this.get('editMode')) {
+            formElement.addClass('editMode');
+
+            legend.plug(Y.Libbit.ContextMenu, {
+                content: [
+                    { label: 'Rename', eventName: 'editLabel' },
+                    { label: '-' },
+                    { label: 'Remove', eventName: 'deleteForm' }
+                ],
+                bubbleTarget: self
+            });
+        }
 
         formElement.append(legend);
         formElement.set('name', formItem.get('id'));
@@ -87,24 +92,26 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             fieldGroupItems = fieldGroup['fieldGroupItems'];
         }
 
-        var fieldGroupDD = new Y.DD.Drag({
-            node: list,
-            group: ['fieldGroup']
-        }).plug(Y.Plugin.DDConstrained, {
-            constrain2node: formElement
-        }).plug(Y.Plugin.DDProxy, {
-            moveOnEnd: false
-        });
+        if (this.get('editMode')) {
+            var fieldGroupDD = new Y.DD.Drag({
+                node: list,
+                group: ['fieldGroup']
+            }).plug(Y.Plugin.DDConstrained, {
+                constrain2node: formElement
+            }).plug(Y.Plugin.DDProxy, {
+                moveOnEnd: false
+            });
 
-        fieldGroupDD.on('drag:start', function(e) {
-            e.target.get('dragNode').setHTML('');
-        });
-        fieldGroupDD.on('drag:drag', function(e) {
-            self.reOrderFieldGroupDD(e, formElement, list);
-        });
-        fieldGroupDD.on('drag:end', function(e) {
-            self.reOrderFieldGroup(formElement);
-        });
+            fieldGroupDD.on('drag:start', function(e) {
+                e.target.get('dragNode').setHTML('');
+            });
+            fieldGroupDD.on('drag:drag', function(e) {
+                self.reOrderFieldGroupDD(e, formElement, list);
+            });
+            fieldGroupDD.on('drag:end', function(e) {
+                self.reOrderFieldGroup(formElement);
+            });
+        }
 
         list.set('id', fieldGroup['id']);
         list.setAttribute('name', fieldGroup['name']);
@@ -131,14 +138,16 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             list.append(controlContainer);
         });
 
-        list.plug(Y.Libbit.ContextMenu, {
-            content: [
-                { label: 'Edit', eventName: 'editFieldGroup' },
-                { label: '-' },
-                { label: 'Remove', eventName: 'deleteFieldGroup' }
-            ],
-            bubbleTarget: self
-        });
+        if (this.get('editMode')) {
+            list.plug(Y.Libbit.ContextMenu, {
+                content: [
+                    { label: 'Edit', eventName: 'editFieldGroup' },
+                    { label: '-' },
+                    { label: 'Remove', eventName: 'deleteFieldGroup' }
+                ],
+                bubbleTarget: self
+            });
+        }
 
         formElement.append(list);
     },
