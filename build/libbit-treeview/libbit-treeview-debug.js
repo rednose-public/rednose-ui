@@ -115,6 +115,12 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         var tree = this.get('tree');
         var self = this;
 
+        tree.on('select', function(e) {
+            var li = tree.getHTMLNode(e.node);
+
+            self.fire('select', { data: li.getData() });
+        });
+
         this.openEvent = tree.on('open', function(e) {
             var li = tree.getHTMLNode(e.node);
 

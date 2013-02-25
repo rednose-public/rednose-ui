@@ -52,7 +52,7 @@ Filter = Y.Base.create('filter', Y.Base, [], {
 
         filterIds: {
             value : []
-        }
+        },
     }
 });
 
