@@ -9,6 +9,11 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
     _contextMenu: null,
 
     /**
+     * A model to send with the event, optional.
+     */
+    model: null,
+
+    /**
      * Initializer, gets called upon instance initiation.
      */
     initializer: function (config) {
@@ -19,6 +24,10 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         this._node = node;
         this._content = this._buildHTML(content);
         this.addTarget(bubbleTarget);
+
+        if (typeof config.model !== 'undefined') {
+            this.model = model;
+        }
 
         node.on('contextmenu', this._handleContextMenu, this);
     },
@@ -93,11 +102,16 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         // Bind the menu events
         contextMenu.get('boundingBox').all('a').each(function() {
             this.on(['click', 'contextmenu'], function (e) {
-                var target = e.currentTarget;
+                var target = e.currentTarget,
+                    args = { node: node };
 
                 e.preventDefault();
 
-                self.fire(target.getAttribute('data-event'), { node : node });
+                if (self.model !== null) {
+                    args.model = self.model;
+                }
+
+                self.fire(target.getAttribute('data-event'), args);
 
                 contextMenu.destroy();
             });
