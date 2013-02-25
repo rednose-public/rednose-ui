@@ -111,7 +111,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
                 e.preventDefault();
 
-                if (target.hasClass('disabled') !== false) {
+                if (target.hasClass('disabled') !== true) {
                     if (self.model !== null) {
                         args.model = self.model;
                     }
