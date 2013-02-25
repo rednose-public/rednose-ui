@@ -50,6 +50,10 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
                 elA.setAttribute('data-event', content[i].eventName);
 
                 elLi.append(elA);
+
+                if (content[i].disabled === true) {
+                    elLi.addClass('disabled');
+                }
             } else {
                 elLi.addClass('divider');
             }
@@ -107,13 +111,15 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
                 e.preventDefault();
 
-                if (self.model !== null) {
-                    args.model = self.model;
+                if (target.hasClass('disabled') !== false) {
+                    if (self.model !== null) {
+                        args.model = self.model;
+                    }
+
+                    self.fire(target.getAttribute('data-event'), args);
+
+                    contextMenu.destroy();
                 }
-
-                self.fire(target.getAttribute('data-event'), args);
-
-                contextMenu.destroy();
             });
         });
 
