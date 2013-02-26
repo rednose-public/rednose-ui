@@ -9,9 +9,9 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
     _contextMenu: null,
 
     /**
-     * A model to send with the event, optional.
+     * Optional data object, to pass with the event
      */
-    model: null,
+     data: null,
 
     /**
      * Initializer, gets called upon instance initiation.
@@ -25,8 +25,8 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         this._content = this._buildHTML(content);
         this.addTarget(bubbleTarget);
 
-        if (typeof config.model !== 'undefined') {
-            this.model = model;
+        if (typeof config.data !== 'undefined') {
+            this.data = config.data;
         }
 
         node.on('contextmenu', this._handleContextMenu, this);
@@ -112,8 +112,8 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
                 e.preventDefault();
 
                 if (target.hasClass('disabled') !== true) {
-                    if (self.model !== null) {
-                        args.model = self.model;
+                    if (self.data !== null) {
+                        args.data = self.data;
                     }
 
                     self.fire(target.getAttribute('data-event'), args);
