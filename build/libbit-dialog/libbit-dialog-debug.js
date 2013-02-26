@@ -121,12 +121,15 @@ Dialog.prompt = function (title, question, callback, defaultVal) {
     });
 };
 
-Dialog.confirm = function (title, message, callback) {
+Dialog.confirm = function (title, message, callback, warning, confirmVal) {
     var node,
         panel;
 
+    warning = typeof warning !== 'undefined' ? warning : false;
+    confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';
+
     node = Y.Node.create(
-        '<div class="icon dialog_warning_icon"></div>' +
+        '<div class="icon ' + (warning ? 'dialog_warning_icon' : 'dialog_prompt_icon') + '"></div>' +
         '<div><p>' + message + '</p></div>'
     );
 
@@ -137,7 +140,7 @@ Dialog.confirm = function (title, message, callback) {
         width: 500,
         buttons: [
              {
-                value  : 'Yes',
+                value  : confirmVal,
                 section: Y.WidgetStdMod.FOOTER,
                 isDefault: true,
                 action : function () {
@@ -146,7 +149,7 @@ Dialog.confirm = function (title, message, callback) {
                     }
                     panel.destroy();
                 },
-                classNames: 'btn btn-primary'
+                classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-primary')
              }, {
                 value  : 'No',
                 section: Y.WidgetStdMod.FOOTER,
