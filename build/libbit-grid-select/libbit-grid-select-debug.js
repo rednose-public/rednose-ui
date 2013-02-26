@@ -33,6 +33,13 @@ Selectable.prototype = {
     },
 
     /**
+    * Programmaticly select a grid item
+    **/
+    select: function(node) {
+        node.simulate('click');
+    },
+
+    /**
      * Setter.
      */
     _setSelectable: function () {
@@ -49,7 +56,7 @@ Selectable.prototype = {
     _bind: function () {
         var contentBox = this.get('contentBox');
 
-        contentBox.delegate('click', this._handleClick, '.template-grid-icon-container', this);
+        contentBox.delegate('click', this._handleClick, '.model-grid-icon-container', this);
         this.after('selectedItemChange', this._afterSelectedItemChange, this);
     },
 
@@ -77,11 +84,11 @@ Selectable.prototype = {
         }
 
         // Remove earlier selections.
-        contentBox.all('.template_list_item_selected').removeClass('template_list_item_selected');
+        contentBox.all('.model-grid-item-selected').removeClass('model-grid-item-selected');
 
         // Apply the CSS to the new selection and fire an event.
         if (Y.Lang.isNull(node) === false) {
-            node.addClass('template_list_item_selected');
+            node.addClass('model-grid-item-selected');
 
             model = this._getModelFromGridItem(node);
 
@@ -96,7 +103,7 @@ Selectable.prototype = {
     _getModelFromGridItem: function (node) {
         // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),
         // for example 'image_1'.
-        var id        = node.ancestor('.template-grid-container').getAttribute('data-yui3-record'),
+        var id        = node.ancestor('.model-grid-container').getAttribute('data-yui3-record'),
             data      = this.get('data'),
             found     = null;
 

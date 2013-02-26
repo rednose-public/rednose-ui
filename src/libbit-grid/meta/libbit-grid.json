@@ -3,6 +3,7 @@
         "requires": [
             "handlebars",
             "libbit-grid-select",
+            "libbit-contextmenu",
             "model-list",
             "view"
         ],

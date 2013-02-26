@@ -1,16 +1,16 @@
-.template-grid-container {
+.model-grid-container {
     float: left;
     display: block;
     width: 246px;
     height: 300px;
 }
 
-.template-grid-icon {
+.model-grid-icon {
     position: relative;
     background-color: white;
 }
 
-.template-grid-icon-wrapper {
+.model-grid-icon-wrapper {
     position: relative;
     width: 159px;
     height: 225px;
@@ -19,7 +19,7 @@
     box-shadow: 0 3px 3px #888888;
 }
 
-.template-grid-icon-container {
+.model-grid-icon-container {
     position: relative;
     width: 246px;
     height: 225px;
@@ -27,18 +27,18 @@
     margin-bottom: 3px;
 }
 
-.template-grid-footer {
+.model-grid-footer {
     width: 246px;
     height: 33px;
     margin-top: 10px;
 }
 
-.template-grid-icon {
+.model-grid-icon {
     position: relative;
     background-color: white;
 }
 
-.template-grid-footer .edit {
+.model-grid-footer .edit {
     display: none;
     width: 246px;
     height: 20px;
@@ -51,10 +51,10 @@
     border: 0;
 }
 
-.template-grid-footer.editing .edit {
+.model-grid-footer.editing .edit {
     display: block;
 }
 
-.template-grid-footer.editing .template-grid-name {
+.model-grid-footer.editing .model-grid-name {
     display: none;
 }
