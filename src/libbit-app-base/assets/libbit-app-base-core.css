@@ -1,0 +1,4 @@
+/* CSS FIX */
+.dropdown-menu .disabled > a:hover {
+    background-image: none;
+}
