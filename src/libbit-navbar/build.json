@@ -1,0 +1,10 @@
+{
+    "name": "libbit-navbar",
+    "builds": {
+        "libbit-navbar": {
+            "jsfiles": [
+                "libbit-navbar.js"
+            ]
+        }
+    }
+}
