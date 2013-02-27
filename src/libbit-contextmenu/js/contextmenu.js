@@ -51,6 +51,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
                 if (content[i].disabled === true) {
                     elLi.addClass('disabled');
+                    elA.addClass('disabled');
                 }
             } else {
                 elLi.addClass('divider');
