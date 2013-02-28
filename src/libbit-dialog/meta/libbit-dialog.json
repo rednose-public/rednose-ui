@@ -3,7 +3,6 @@
         "requires": [
             "dd",
             "dd-plugin",
-            "gallery-dispatcher",
             "json-parse",
             "node",
             "panel",
