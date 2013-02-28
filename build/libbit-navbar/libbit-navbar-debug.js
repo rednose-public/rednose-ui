@@ -30,8 +30,8 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
             this.template({ title: this.get('title') })
         );
 
-        this.appendMenu(this.get('menu'), false);
-        this.appendMenu(this.get('menuSecondary'), true);
+        this._appendMenu(this.get('menu'), false);
+        this._appendMenu(this.get('menuSecondary'), true);
     },
 
     bindUI: function() {
@@ -41,10 +41,16 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
         container.all('.dropdown-toggle').plug(Y.Bootstrap.Dropdown);
         container.all('.dropdown-menu > li > a').each(function() {
             this.on('click', function() {
-                var eventName = this.getAttribute('data-eventname');
+                if (this.ancestor('li').hasClass('disabled')) {
+                    this.blur();
 
-                if (eventName !== '') {
-                    self.fire(eventName);
+                    return;
+                }
+
+                var id = this.getAttribute('data-id');
+
+                if (id !== '') {
+                    self.fire(id);
                 }
 
                 this.ancestor('.dropdown').one('.dropdown-toggle').simulate('click');
@@ -52,7 +58,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
         });
     },
 
-    appendMenu: function(menu, secondary, parentMenu) {
+    _appendMenu: function(menu, secondary, parentMenu) {
         var container = this.get('contentBox');
         var navBarHTML = '';
 
@@ -66,7 +72,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
             );
 
             for (i in menu[m].items) {
-                var li = Y.Node.create ('<li></li>');
+                var li = Y.Node.create ('<li tabindex="-1"></li>');
 
                 if (menu[m].items[i].title == '-') {
                     li.addClass('divider');
@@ -74,14 +80,18 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
                 } else if (typeof(menu[m].items[i].children) === 'object') {
                     var subMenu = [ { title: menu[m].items[i].title, items: menu[m].items[i].children } ];
 
-                    this.appendMenu(subMenu, secondary, dropdown);
+                    this._appendMenu(subMenu, secondary, dropdown);
                 } else {
-                    var a  = Y.Node.create('<a href="#">' + menu[m].items[i].title + '</a>');
+                    var a  = Y.Node.create('<a tabindex="-1" href="#">' + menu[m].items[i].title + '</a>');
+
+                    if (typeof(menu[m].items[i].disabled) !== 'undefined') {
+                        li.addClass('disabled');
+                    }
 
                     li.append(a);
 
-                    if (typeof(menu[m].items[i].eventName) !== 'undefined') {
-                        a.setAttribute('data-eventname', menu[m].items[i].eventName);
+                    if (typeof(menu[m].items[i].id) !== 'undefined') {
+                        a.setAttribute('data-id', menu[m].items[i].id);
                     }
                 }
 
@@ -95,6 +105,29 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
             }
         }
     },
+
+    enable: function(id) {
+        this.disable(id);
+    },
+
+    disable: function(id) {
+        var container = this.get('contentBox'),
+            node = container.one('[data-id=' + id + ']');
+
+        if (node.ancestor('li').hasClass('disabled')) {
+            node.ancestor('li').removeClass('disabled');
+        } else {
+            node.ancestor('li').addClass('disabled');
+        }
+    },
+
+    rename: function(id, title) {
+        var container = this.get('contentBox'),
+            node = container.one('[data-id=' + id + ']');
+
+        node.setHTML(title);
+    }
+
 
 }, {
     ATTRS: {

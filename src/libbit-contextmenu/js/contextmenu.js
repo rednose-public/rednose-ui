@@ -118,6 +118,8 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
                     self.fire(target.getAttribute('data-event'), args);
 
                     contextMenu.destroy();
+                } else {
+                    target.blur();
                 }
             });
         });
