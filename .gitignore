@@ -1,1 +1,3 @@
-web/components/yui3-libbit/*
+node_modules/*
+web/*
+reports/*
