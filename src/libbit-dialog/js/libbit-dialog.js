@@ -171,14 +171,14 @@ Dialog.error = function (title, message, warning) {
     var node,
         panel;
 
-    if (warning == null) {
+    if (warning) {
         node = Y.Node.create(
-            '<div class="icon dialog_error_icon"></div>' +
-            '<div><p class="text-error">' + message + '</p></div>'
+            '<div class="icon dialog_warning_icon"></div>' +
+            '<div><p>' + message + '</p></div>'
         );
     } else {
         node = Y.Node.create(
-            '<div class="icon dialog_warning_icon"></div>' +
+            '<div class="icon dialog_error_icon"></div>' +
             '<div><p>' + message + '</p></div>'
         );
     }
