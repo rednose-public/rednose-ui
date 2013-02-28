@@ -1,8 +1,9 @@
 {
     "libbit-navbar" : {
-        "required": [
+        "requires": [
             "handlebars",
             "gallery-bootstrap-dropdown"
-        ]
+        ],
+        "skinnable": true
     }
 }
