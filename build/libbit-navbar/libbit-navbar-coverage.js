@@ -26,10 +26,10 @@ _yuitest_coverage["build/libbit-navbar/libbit-navbar.js"] = {
     path: "build/libbit-navbar/libbit-navbar.js",
     code: []
 };
-_yuitest_coverage["build/libbit-navbar/libbit-navbar.js"].code=["YUI.add('libbit-navbar', function (Y, NAME) {","","var Navbar;","","Navbar = Y.Base.create('navbar', Y.Widget, [ ], {","","    template:","    '<div class=\"navbar navbar-inverse\">' +","    '   <div class=\"navbar-inner\">' +","    '       <a class=\"brand\" href=\"#\"></a>' +","    '   </div>' +","    '</div>',","","    renderUI: function() {","        this.get('contentBox').setHTML(this.template);","    }","","}, {","    ATTRS: {","        title: { value: 'No title' },","        menu: { value: [] }","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').Navbar = Navbar;","","","}, '1.0.0', {\"required\": []});"];
-_yuitest_coverage["build/libbit-navbar/libbit-navbar.js"].lines = {"1":0,"3":0,"5":0,"15":0,"26":0};
+_yuitest_coverage["build/libbit-navbar/libbit-navbar.js"].code=["YUI.add('libbit-navbar', function (Y, NAME) {","","var Navbar;","","Navbar = Y.Base.create('navbar', Y.Widget, [ ], {","","    template:","    '<div class=\"navbar navbar-inverse\">' +","    '   <div class=\"navbar-inner\">' +","    '       <a class=\"brand\" href=\"#\">{{ title }}</a>' +","    '   </div>' +","    '</div>',","","    renderUI: function() {","//        this.template = Y.Handlebars.compile(this.template);","console.log(Y.Handlebars);","var template = Y.Handlebars.compile('The pie of the day is {{pie}}!.');","//template({pie: 'Pecan'});","//        this.get('contentBox').setHTML(","//            this.template({ title: this.get('title') })","//        );","    }","","}, {","    ATTRS: {","        title: { value: 'No title' },","        menu: { value: [] }","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').Navbar = Navbar;","","","}, '1.0.0', {\"required\": [\"handlebars\", \"gallery-bootstrap-dropdown\"]});"];
+_yuitest_coverage["build/libbit-navbar/libbit-navbar.js"].lines = {"1":0,"3":0,"5":0,"16":0,"17":0,"32":0};
 _yuitest_coverage["build/libbit-navbar/libbit-navbar.js"].functions = {"renderUI:14":0,"(anonymous 1):1":0};
-_yuitest_coverage["build/libbit-navbar/libbit-navbar.js"].coveredLines = 5;
+_yuitest_coverage["build/libbit-navbar/libbit-navbar.js"].coveredLines = 6;
 _yuitest_coverage["build/libbit-navbar/libbit-navbar.js"].coveredFunctions = 2;
 _yuitest_coverline("build/libbit-navbar/libbit-navbar.js", 1);
 YUI.add('libbit-navbar', function (Y, NAME) {
@@ -44,14 +44,21 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
     template:
     '<div class="navbar navbar-inverse">' +
     '   <div class="navbar-inner">' +
-    '       <a class="brand" href="#"></a>' +
+    '       <a class="brand" href="#">{{ title }}</a>' +
     '   </div>' +
     '</div>',
 
     renderUI: function() {
-        _yuitest_coverfunc("build/libbit-navbar/libbit-navbar.js", "renderUI", 14);
-_yuitest_coverline("build/libbit-navbar/libbit-navbar.js", 15);
-this.get('contentBox').setHTML(this.template);
+//        this.template = Y.Handlebars.compile(this.template);
+_yuitest_coverfunc("build/libbit-navbar/libbit-navbar.js", "renderUI", 14);
+_yuitest_coverline("build/libbit-navbar/libbit-navbar.js", 16);
+console.log(Y.Handlebars);
+_yuitest_coverline("build/libbit-navbar/libbit-navbar.js", 17);
+var template = Y.Handlebars.compile('The pie of the day is {{pie}}!.');
+//template({pie: 'Pecan'});
+//        this.get('contentBox').setHTML(
+//            this.template({ title: this.get('title') })
+//        );
     }
 
 }, {
@@ -62,8 +69,8 @@ this.get('contentBox').setHTML(this.template);
 });
 
 // -- Namespace ----------------------------------------------------------------
-_yuitest_coverline("build/libbit-navbar/libbit-navbar.js", 26);
+_yuitest_coverline("build/libbit-navbar/libbit-navbar.js", 32);
 Y.namespace('Libbit').Navbar = Navbar;
 
 
-}, '1.0.0', {"required": []});
+}, '1.0.0', {"required": ["handlebars", "gallery-bootstrap-dropdown"]});

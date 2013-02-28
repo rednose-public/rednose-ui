@@ -1,7 +1,8 @@
 {
     "libbit-navbar" : {
         "required": [
-
+            "handlebars",
+            "gallery-bootstrap-dropdown"
         ]
     }
 }
