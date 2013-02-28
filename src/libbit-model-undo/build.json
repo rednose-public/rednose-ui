@@ -1,0 +1,10 @@
+{
+    "name": "libbit-model-undo",
+    "builds": {
+        "libbit-model-undo": {
+            "jsfiles": [
+                "undo.js"
+            ]
+        }
+    }
+}

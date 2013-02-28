@@ -1,0 +1,7 @@
+{
+    "libbit-model-undo" : {
+        "requires": [
+            "model"
+        ]
+    }
+}
