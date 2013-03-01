@@ -2,6 +2,7 @@
     "libbit-app-base" : {
         "requires": [
             "app-base",
+            "event-custom",
             "handlebars-base",
             "libbit-panel"
         ],

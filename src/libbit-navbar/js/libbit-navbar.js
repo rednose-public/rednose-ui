@@ -4,7 +4,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
 
     template:
         '<div class="navbar navbar-inverse">' +
-        '   <div class="navbar-inner">' +
+        '   <div class="navbar-inner" style="-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;">' +
         '       <a class="brand brand-navbar" href="#">{{ title }}</a>' +
         '       <ul class="nav">' +
         '       </ul>' +

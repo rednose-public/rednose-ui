@@ -12,6 +12,20 @@ App = Y.Base.create('libbit-app', Y.App, [], {
      */
     _activePanel: null,
 
+    initializer: function () {
+        Y.Do.after(function () {
+            if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {
+                window.parent.openApp();
+            }
+        }, this, 'render', this);
+    },
+
+    closeApp: function () {
+        if ((window.self !== window.top) && typeof (window.parent.closeApp() === 'function')) {
+            window.parent.closeApp();
+        }
+    },
+
     /**
      * Override the superclass method to check if this view needs to be lazyloaded first.
      */
@@ -135,4 +149,4 @@ App.hideSpinner = function () {
 Y.namespace('Libbit').App = App;
 
 
-}, '1.0.0', {"requires": ["app-base", "handlebars-base", "libbit-panel"], "skinnable": true});
+}, '1.0.0', {"requires": ["app-base", "event-custom", "handlebars-base", "libbit-panel"], "skinnable": true});
