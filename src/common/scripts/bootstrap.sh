@@ -1,6 +1,6 @@
 #!/bin/bash
 
-rm -r web
+rm -rf web
 mkdir -p web/components/yui3-libbit
 cp -r build web/components/yui3-libbit/build
 cp -r src web/components/yui3-libbit/src

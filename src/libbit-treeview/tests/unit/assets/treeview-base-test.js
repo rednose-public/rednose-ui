@@ -54,33 +54,10 @@ suite.add(new Y.Test.Case({
 
     'Smoke test, tree should contain items': function () {
         var tree   = this.tree,
-            labels = tree.get('contentBox').all('.ygtvlabel');
+            labels = tree.get('contentBox').all('.yui3-treeview-label');
 
         Assert.areEqual('Category 1', labels.item(0).get('innerHTML'));
         Assert.areEqual('Field group 1', labels.item(1).get('innerHTML'));
-    },
-
-    'Selecting an item should add class `treeview-highlight`': function () {
-        var tree = this.tree,
-            cb   = tree.get('contentBox'),
-            item;
-
-        item = cb.one('span');
-
-        Assert.areEqual(0, cb.all('.treeview-highlight').size());
-
-        Assert.isNull(tree.get('selectedItem'));
-
-        Assert.isFalse(item.ancestor('table').hasClass('treeview-highlight'));
-
-        // Simulate the button click
-        item.simulate('click');
-
-        Assert.areEqual(1, cb.all('.treeview-highlight').size());
-
-        Assert.isTrue(item.ancestor('table').hasClass('treeview-highlight'));
-
-        Assert.isInstanceOf(Y.Model, tree.get('selectedItem').getData('model'));
     }
 }));
 
@@ -103,9 +80,10 @@ suite.add(new Y.Test.Case({
         container.append(treeNode);
 
         tree = new Y.Libbit.TreeView({
-            srcNode   : treeNode,
-            width     : '50px',
-            height    : '50px'
+            srcNode: treeNode,
+            data: new Y.Libbit.ModelTree(),
+            width: '50px',
+            height: '50px'
         });
 
         Assert.areEqual('50px', tree.get('contentBox').getStyle('width'));
