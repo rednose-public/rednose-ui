@@ -5,7 +5,7 @@
             "dd-plugin",
             "json-parse",
             "node",
-            "panel",
+            "libbit-panel",
             "widget"
         ],
         "skinnable": true

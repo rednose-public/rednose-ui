@@ -81,7 +81,7 @@ Dialog.prompt = function (title, question, callback, defaultVal) {
     );
     node.one('.input-question').append(input);
 
-    panel = new Y.Panel({
+    panel = new Y.Libbit.Panel({
         bodyContent: node,
         headerContent: title,
         zIndex: Y.all('*').size(),
@@ -110,8 +110,8 @@ Dialog.prompt = function (title, question, callback, defaultVal) {
                 classNames: 'btn'
              }
         ],
-        centered: true, modal: true, visible: true, render: true
-    });
+        centered: true, modal: true, visible: true
+    }).render();
 
     panel.get('boundingBox').addClass('libbit-dialog');
     panel.get('boundingBox').all('.yui3-button').each(function() {
@@ -131,7 +131,7 @@ Dialog.confirm = function (title, message, callback, warning, confirmVal) {
         '<div><p>' + message + '</p></div>'
     );
 
-    panel = new Y.Panel({
+    panel = new Y.Libbit.Panel({
         bodyContent: node,
         headerContent: title,
         zIndex: Y.all('*').size(),
@@ -158,8 +158,8 @@ Dialog.confirm = function (title, message, callback, warning, confirmVal) {
                 classNames: 'btn'
              }
         ],
-        centered: true, modal: true, visible: true, render: true
-    });
+        centered: true, modal: true, visible: true
+    }).render();
 
     panel.get('boundingBox').addClass('libbit-dialog');
     panel.get('boundingBox').all('.yui3-button').each(function() {
@@ -183,7 +183,7 @@ Dialog.error = function (title, message, warning) {
         );
     }
 
-    panel = new Y.Panel({
+    panel = new Y.Libbit.Panel({
         bodyContent: node,
         headerContent: title,
         zIndex: Y.all('*').size(),
@@ -199,8 +199,8 @@ Dialog.error = function (title, message, warning) {
                 classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-danger')
              }
         ],
-        centered: true, modal: true, visible: true, render: true
-    });
+        centered: true, modal: true, visible: true
+    }).render();
 
     panel.get('boundingBox').addClass('libbit-dialog');
     panel.get('boundingBox').all('.yui3-button').each(function() {
