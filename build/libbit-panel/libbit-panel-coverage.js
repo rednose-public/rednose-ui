@@ -26,11 +26,11 @@ _yuitest_coverage["build/libbit-panel/libbit-panel.js"] = {
     path: "build/libbit-panel/libbit-panel.js",
     code: []
 };
-_yuitest_coverage["build/libbit-panel/libbit-panel.js"].code=["YUI.add('libbit-panel', function (Y, NAME) {","","var Panel;","","Panel = Y.Base.create('panel', Y.Widget, [","    Y.WidgetPosition,","","    Y.WidgetAutohide,","    Y.WidgetModality,","    Y.WidgetPositionAlign,","    Y.WidgetPositionConstrain,","    Y.WidgetStack","]);","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').Panel = Panel;","","","}, '1.0.0', {","    \"requires\": [","        \"panel\",","        \"widget\",","        \"widget-autohide\",","        \"widget-modality\",","        \"widget-position\",","        \"widget-position-align\",","        \"widget-position-constrain\",","        \"widget-stack\"","    ]","});"];
-_yuitest_coverage["build/libbit-panel/libbit-panel.js"].lines = {"1":0,"3":0,"5":0,"16":0};
-_yuitest_coverage["build/libbit-panel/libbit-panel.js"].functions = {"(anonymous 1):1":0};
-_yuitest_coverage["build/libbit-panel/libbit-panel.js"].coveredLines = 4;
-_yuitest_coverage["build/libbit-panel/libbit-panel.js"].coveredFunctions = 1;
+_yuitest_coverage["build/libbit-panel/libbit-panel.js"].code=["YUI.add('libbit-panel', function (Y, NAME) {","","var Panel;","","Panel = Y.Base.create('panel', Y.Panel, [], {","","    initializer: function() {","        var container = this.get('boundingBox');","        var self = this;","","        this.after('render', function() {","            // Remove the first header (close button).","            var closeButton = container.one('.yui3-button-close');","","            if (closeButton) {","                closeButton.ancestor('.yui3-widget-hd').remove();","            }","","            // Re-align the modal panel.","            self.move(1, 1);","            self.centered();","        });","    }","","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').Panel = Panel;","","","}, '1.0.0', {\"requires\": [\"panel\"]});"];
+_yuitest_coverage["build/libbit-panel/libbit-panel.js"].lines = {"1":0,"3":0,"5":0,"8":0,"9":0,"11":0,"13":0,"15":0,"16":0,"20":0,"21":0,"28":0};
+_yuitest_coverage["build/libbit-panel/libbit-panel.js"].functions = {"(anonymous 2):11":0,"initializer:7":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-panel/libbit-panel.js"].coveredLines = 12;
+_yuitest_coverage["build/libbit-panel/libbit-panel.js"].coveredFunctions = 3;
 _yuitest_coverline("build/libbit-panel/libbit-panel.js", 1);
 YUI.add('libbit-panel', function (Y, NAME) {
 
@@ -39,30 +39,41 @@ _yuitest_coverline("build/libbit-panel/libbit-panel.js", 3);
 var Panel;
 
 _yuitest_coverline("build/libbit-panel/libbit-panel.js", 5);
-Panel = Y.Base.create('panel', Y.Widget, [
-    Y.WidgetPosition,
+Panel = Y.Base.create('panel', Y.Panel, [], {
 
-    Y.WidgetAutohide,
-    Y.WidgetModality,
-    Y.WidgetPositionAlign,
-    Y.WidgetPositionConstrain,
-    Y.WidgetStack
-]);
+    initializer: function() {
+        _yuitest_coverfunc("build/libbit-panel/libbit-panel.js", "initializer", 7);
+_yuitest_coverline("build/libbit-panel/libbit-panel.js", 8);
+var container = this.get('boundingBox');
+        _yuitest_coverline("build/libbit-panel/libbit-panel.js", 9);
+var self = this;
+
+        _yuitest_coverline("build/libbit-panel/libbit-panel.js", 11);
+this.after('render', function() {
+            // Remove the first header (close button).
+            _yuitest_coverfunc("build/libbit-panel/libbit-panel.js", "(anonymous 2)", 11);
+_yuitest_coverline("build/libbit-panel/libbit-panel.js", 13);
+var closeButton = container.one('.yui3-button-close');
+
+            _yuitest_coverline("build/libbit-panel/libbit-panel.js", 15);
+if (closeButton) {
+                _yuitest_coverline("build/libbit-panel/libbit-panel.js", 16);
+closeButton.ancestor('.yui3-widget-hd').remove();
+            }
+
+            // Re-align the modal panel.
+            _yuitest_coverline("build/libbit-panel/libbit-panel.js", 20);
+self.move(1, 1);
+            _yuitest_coverline("build/libbit-panel/libbit-panel.js", 21);
+self.centered();
+        });
+    }
+
+});
 
 // -- Namespace ----------------------------------------------------------------
-_yuitest_coverline("build/libbit-panel/libbit-panel.js", 16);
+_yuitest_coverline("build/libbit-panel/libbit-panel.js", 28);
 Y.namespace('Libbit').Panel = Panel;
 
 
-}, '1.0.0', {
-    "requires": [
-        "panel",
-        "widget",
-        "widget-autohide",
-        "widget-modality",
-        "widget-position",
-        "widget-position-align",
-        "widget-position-constrain",
-        "widget-stack"
-    ]
-});
+}, '1.0.0', {"requires": ["panel"]});
