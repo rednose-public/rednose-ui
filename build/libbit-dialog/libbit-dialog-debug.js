@@ -73,15 +73,17 @@ Dialog.prompt = function (title, question, callback, defaultVal) {
         defaultVal = '';
     }
 
-    input = Y.Node.create('<input type="value" value="' + defaultVal + '" />');
+    input = Y.Node.create('<input type="text" value="' + defaultVal + '" id="input">');
     node = Y.Node.create(
-        '<div class="icon dialog_prompt_icon"></div>' +
-        '<div>' +
-        '   <p class="text-question">' + question + '</p>' +
-        '   <p class="input-question"></p>' +
-        '</div>'
+        '<form action="#" class="form-horizontal">' +
+        '   <div class="icon icon_absolute dialog_prompt_icon"></div>' +
+        '   <div class="control-group">' +
+        '       <label for="input" class="control-label">' + question +  '</label>' +
+        '       <div class="controls"></div>' +
+        '   </div>' +
+        '</form>'
     );
-    node.one('.input-question').append(input);
+    node.one('.controls').append(input);
 
     panel = new Y.Libbit.Panel({
         bodyContent: node,
@@ -114,6 +116,21 @@ Dialog.prompt = function (title, question, callback, defaultVal) {
         ],
         centered: true, modal: true, visible: true
     }).render();
+
+    input.focus();
+    input.on('keyup', function(e) {
+        if (e.button === 13) {
+            var buttons = panel.get('buttons');
+
+            for (var i in buttons.footer) {
+                var button = buttons.footer[i];
+
+                if (button.hasClass('btn-primary')) {
+                    button.simulate('click');
+                }
+            }
+        }
+    });
 
     panel.get('boundingBox').addClass('libbit-dialog');
     panel.get('boundingBox').all('.yui3-button').each(function() {

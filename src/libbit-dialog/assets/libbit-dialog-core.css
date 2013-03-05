@@ -7,6 +7,15 @@
     min-height: 48px;
 }
 
+.libbit-dialog .form-horizontal {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.libbit-dialog .icon_absolute {
+    position: absolute;
+}
+
 .libbit-dialog .icon {
     float: left;
     margin-right: 15px;
