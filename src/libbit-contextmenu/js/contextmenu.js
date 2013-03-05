@@ -43,9 +43,9 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             var elLi = Y.Node.create('<li>');
             var elA = Y.Node.create('<a href="#">');
 
-            if (content[i].label !== '-') {
-                elA.set('innerHTML', content[i].label);
-                elA.setAttribute('data-event', content[i].eventName);
+            if (content[i].title !== '-') {
+                elA.set('innerHTML', content[i].title);
+                elA.setAttribute('data-id', content[i].id);
 
                 elLi.append(elA);
 
@@ -115,7 +115,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
                         args.data = self.data;
                     }
 
-                    self.fire(target.getAttribute('data-event'), args);
+                    self.fire(target.getAttribute('data-id'), args);
 
                     contextMenu.destroy();
                 } else {

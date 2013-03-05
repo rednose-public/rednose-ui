@@ -217,9 +217,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
             legend.plug(Y.Libbit.ContextMenu, {
                 content: [
-                    { label: 'Rename', eventName: 'editLabel' },
-                    { label: '-' },
-                    { label: 'Remove', eventName: 'deleteForm' }
+                    { title: 'Rename', id: 'editLabel' },
+                    { title: '-' },
+                    { title: 'Remove', id: 'deleteForm' }
                 ],
                 bubbleTarget: self
             });
@@ -301,9 +301,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         if (this.get('editMode')) {
             list.plug(Y.Libbit.ContextMenu, {
                 content: [
-                    { label: 'Edit', eventName: 'editFieldGroup' },
-                    { label: '-' },
-                    { label: 'Remove', eventName: 'deleteFieldGroup' }
+                    { title: 'Edit', id: 'editFieldGroup' },
+                    { title: '-' },
+                    { title: 'Remove', id: 'deleteFieldGroup' }
                 ],
                 bubbleTarget: self
             });
