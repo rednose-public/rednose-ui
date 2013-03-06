@@ -6,6 +6,7 @@
                 "models/form.js",
                 "models/form-item.js",
                 "models/form-items.js",
+                "models/field-content.js",
                 "libbit-controlform.js"
             ]
         }

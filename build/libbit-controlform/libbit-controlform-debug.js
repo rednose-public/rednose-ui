@@ -158,6 +158,20 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
 });
 
 Y.namespace('ControlForm').FormItems = FormItems;
+var fieldContent;
+
+fieldContent = Y.Base.create('fieldContent', Y.Model, [], {
+
+
+
+}, {
+    ATTRS: {
+        field: { value: null },
+        content: { value: '' }
+    }
+});
+
+Y.namespace('ControlForm').fieldContent = fieldContent;
 var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
@@ -167,7 +181,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         '   <div class="formContainer_left">&nbsp;</div>' +
         '   <div class="formContainer_right">&nbsp;</div>' +
         '   <div class="formContainer_proxy">' +
-        '       <div class="formContainer_proxy_arrow"></div>' +
         '   </div>' +
         '</div>',
 
@@ -183,8 +196,12 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     render: function(formsModel) {
         var self = this;
+        var container = this.get('srcNode');
 
-        this.get('srcNode').setHTML(this.viewTemplate);
+        container.setHTML(this.viewTemplate);
+        container.one('.formContainer').removeClass('formContainer').addClass(this.get('className'));
+        container.one('.formContainer_left').removeClass('formContainer_left').addClass(this.get('className') + '_left');
+        container.one('.formContainer_right').removeClass('formContainer_right').addClass(this.get('className') + '_right');
 
         if (formsModel == null) {
             formsModel = this.get('formsModel');
@@ -194,13 +211,13 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         formsModel.sort();
         formsModel.each(function(formItem) {
-            self.renderForm(formItem);
+            self._renderForm(formItem);
         });
 
         this.fire('rendered');
     },
 
-    renderForm: function(formItem) {
+    _renderForm: function(formItem) {
         var self = this;
         var container = this.get('srcNode').one('div');
         var fieldGroupOrder = formItem.get('fieldGroupOrder');
@@ -294,6 +311,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
             controlContainer.append(label);
             controlContainer.append(controlElement);
+            controlContainer.setData(control.field);
 
             list.append(controlContainer);
         });
@@ -473,11 +491,31 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             },
             legend.get('text')
         );
+    },
+
+    getFieldContent: function() {
+        var buffer = [];
+        var listCollection = this.get('srcNode').all('ol');
+
+        listCollection.each(function(list) {
+            list.all('li').each(function(control) {
+                var fieldContent = new Y.ControlForm.fieldContent({
+                    field: control.getData(),
+                    content: control.one('input, textarea, select').get('value')
+                });
+
+                buffer.push(fieldContent);
+            });
+        });
+
+        return buffer;
     }
+
 }, {
     ATTRS: {
         srcNode: { value: null },
         formsModel: { value: null },
+        className: { value: 'formContainer' },
         editMode: { value: false }
     }
 });
