@@ -40,10 +40,12 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
         this.get('panel').destroy();
     },
 
-    prompt: function (title, question, defaultVal, callback, htmlTemplate) {
+    prompt: function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {
         var self = this,
             node,
             panel;
+
+        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';
 
         if (defaultVal == null) {
             defaultVal = '';
@@ -81,7 +83,14 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             width: 500,
             buttons: [
                  {
-                    value  : 'OK',
+                    value  : 'Cancel',
+                    section: Y.WidgetStdMod.FOOTER,
+                    action : function () {
+                        panel.destroy();
+                    },
+                    classNames: 'btn'
+                 }, {
+                    value  : confirmVal,
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: true,
                     action : function () {
@@ -92,13 +101,6 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                         }
                     },
                     classNames: 'btn btn-primary'
-                 }, {
-                    value  : 'Cancel',
-                    section: Y.WidgetStdMod.FOOTER,
-                    action : function () {
-                        panel.destroy();
-                    },
-                    classNames: 'btn'
                  }
             ],
             centered: true, modal: true, visible: true
@@ -147,6 +149,14 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             width: 500,
             buttons: [
                  {
+                    value  : 'Cancel',
+                    section: Y.WidgetStdMod.FOOTER,
+                    isDefault: false,
+                    action : function () {
+                        panel.destroy();
+                    },
+                    classNames: 'btn'
+                 }, {
                     value  : confirmVal,
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: true,
@@ -157,14 +167,6 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                         panel.destroy();
                     },
                     classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-primary')
-                 }, {
-                    value  : 'No',
-                    section: Y.WidgetStdMod.FOOTER,
-                    isDefault: false,
-                    action : function () {
-                        panel.destroy();
-                    },
-                    classNames: 'btn'
                  }
             ],
             centered: true, modal: true, visible: true
@@ -227,6 +229,18 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
         panel: { value: null}
     }
 });
+
+Dialog.confirm = function (title, message, callback, warning, confirmVal) {
+    var dialog = new Dialog;
+
+    dialog.confirm(title, message, callback, warning, confirmVal);
+}
+
+Dialog.error = function (title, message, warning) {
+    var dialog = new Dialog;
+
+    dialog.error(title, message, warning);
+}
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit').Dialog = Dialog;
