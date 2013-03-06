@@ -50,7 +50,11 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
         }
 
         if (htmlTemplate) {
-            input = Y.Node.create(htmlTemplate);
+            if (typeof(htmlTemplate) == 'string') {
+                input = Y.Node.create(htmlTemplate);
+            } else {
+                input = htmlTemplate;
+            }
 
             node = Y.Node.create('<form action="#" class="form-horizontal"></form>');
             node.append(input);
