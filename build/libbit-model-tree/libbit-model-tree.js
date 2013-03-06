@@ -3,6 +3,14 @@ YUI.add('libbit-model-tree', function (Y, NAME) {
 var ModelTree;
 
 ModelTree = Y.Base.create('modelTree', Y.Model, [], {
+
+    getByAttr: function (type, attr, value) {
+        var tree = this.get('items'),
+            node = this._treeFind(value, tree, attr, type);
+
+        return node ? node.data : null;
+    },
+
     /**
      * Get a model from the tree by client ID.
      */
@@ -71,17 +79,21 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
     /**
      * Find a node in the tree by specified the client ID of the model it contains.
      */
-    _treeFind: function(clientID, branch) {
+    _treeFind: function(value, branch, attr, type) {
         var self  = this,
             found = null;
 
+        attr = attr || 'clientID';
+
         Y.Array.each(branch, function (item) {
-            if (item.data.get('clientId') === clientID) {
-                found = item;
+            if (item.data.get(attr) === value) {
+                if (!type || (item.data.name === type)) {
+                    found = item;
+                }
             }
 
             if (Y.Lang.isNull(found) && item.children) {
-                found = self._treeFind(clientID, item.children);
+                found = self._treeFind(value, item.children, attr, type);
             }
         });
 
