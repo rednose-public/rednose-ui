@@ -119,11 +119,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         list.set('id', fieldGroup['id']);
         list.setAttribute('name', fieldGroup['name']);
         list.on(['mouseover', 'mouseout'], function(e) {
-            if (e.type == 'mouseover') {
-                list.addClass('fieldGroupHighlight');
-            } else {
-                list.removeClass('fieldGroupHighlight');
-            }
+            list.toggleClass('fieldGroupHighlight');
         });
 
         Y.Array.each(fieldGroupItems, function(control) {
@@ -132,12 +128,18 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             var controlElement = null;
 
             controlElement = Y.Node.create('<input />');
+            controlElement.data = control;
 
             label.set('innerHTML', control.field.name);
 
             controlContainer.append(label);
             controlContainer.append(controlElement);
             controlContainer.setData(control.field);
+            controlContainer.on('click', function(e) {
+                controlContainer.addClass('controlSelected');
+
+                self.fire('controlSelected', { 'controlContainer': controlContainer });
+            });
 
             list.append(controlContainer);
         });
@@ -335,7 +337,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         return buffer;
-    }
+    },
 
 }, {
     ATTRS: {
