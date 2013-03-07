@@ -24,9 +24,8 @@ Undo = Y.Base.create('undo', Y.Model, [], {
 
         if (typeof action === 'function') {
             action();
+            redo = Y.JSON.stringify(this.toJSON());
         }
-
-        redo = Y.JSON.stringify(this.toJSON());
 
         if (this._index < this._revisions.length) {
             this._revisions.splice(this._index, this._revisions.length - this._index);
