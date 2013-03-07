@@ -140,45 +140,4 @@ return false;
     },
 
     canUndo: function () {
-        _yuitest_coverfunc("build/libbit-model-undo/libbit-model-undo.js", "canUndo", 73);
-_yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 74);
-return this._index > 1;
-    },
-
-    canRedo: function () {
-        _yuitest_coverfunc("build/libbit-model-undo/libbit-model-undo.js", "canRedo", 77);
-_yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 78);
-return (this._revisions[this._index] !== null) && this._index < this._revisions.length;
-    },
-
-    getUndo: function () {
-        _yuitest_coverfunc("build/libbit-model-undo/libbit-model-undo.js", "getUndo", 81);
-_yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 82);
-if (this.canUndo()) {
-            _yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 83);
-return this._revisions[this._index - 1].label;
-        }
-
-        _yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 86);
-return null;
-    },
-
-    getRedo: function () {
-        _yuitest_coverfunc("build/libbit-model-undo/libbit-model-undo.js", "getRedo", 89);
-_yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 90);
-if (this.canRedo()) {
-            _yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 91);
-return this._revisions[this._index].label;
-        }
-
-        _yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 94);
-return null;
-    }
-});
-
-// -- Namespace ----------------------------------------------------------------
-_yuitest_coverline("build/libbit-model-undo/libbit-model-undo.js", 99);
-Y.namespace('Libbit.Model').Undo = Undo;
-
-
-}, '1.0.0', {"requires": ["model"]});
+        _yuites

@@ -1,9 +1,14 @@
 {
-    "name": "libbit-app-base",
+    "name": "libbit-app",
     "builds": {
         "libbit-app-base": {
             "jsfiles": [
                 "js/app-base.js"
+            ]
+        },
+        "libbit-model-undo": {
+            "jsfiles": [
+                "js/model-extensions/undo.js"
             ]
         }
     }
