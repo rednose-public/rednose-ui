@@ -70,8 +70,17 @@ Nav = Y.Base.create('nav', Y.View, [], {
         // Render the panel within the view container.
         panel.render(container);
 
+        if (this.panel) {
+            this._repositionPanel(this.panel);
+        }
+
         // Add a CSS handle to the widget-body
         panel.get('boundingBox').one('.yui3-widget-bd').addClass('libbit-' + this.name);
+    },
+
+    _repositionPanel: function (panel) {
+        panel.move(1, 1);
+        panel.centered();
     },
 
     /**
