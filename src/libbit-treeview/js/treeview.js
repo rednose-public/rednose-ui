@@ -114,7 +114,18 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         var self = this;
 
         tree.on('select', function(e) {
-            var li = tree.getHTMLNode(e.node);
+            var node  = e.node,
+                li    = tree.getHTMLNode(node),
+                model = node.data;
+
+            self.get('boundingBox').all('.icon-white').removeClass('icon-white');
+
+            if (Y.instanceOf(model, Y.Model)) {
+                if (typeof(self._iconMap[model.name]) != 'undefined') {
+                    li.addClass('libbit-item-selected');
+                    li.one('.icon').addClass('icon-white');
+                }
+            }
 
             self.fire('select', { data: li.getData() });
         });
@@ -194,6 +205,15 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
 
             self._treeNodes.push(treeNode);
 
+            // FIX the width to be 100%.
+            var mlAttr = li.get('parentNode').getStyle('margin-left');
+            var ml = Number(mlAttr.substring(0, mlAttr.length - 2));
+
+            if (ml) {
+                li.setStyle('margin-left', -ml);
+                li.one('div').setStyle('padding-left', ml * 2);
+            }
+
             if (Y.instanceOf(model, Y.Model)) {
                 li.setAttribute('data-yui3-modelId', model.get('id'));
                 li.setAttribute('data-yui3-record', model.get('clientId'));
@@ -233,6 +253,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             if (iconNode) {
                 iconNode.removeClass('yui3-treeview-icon');
                 iconNode.addClass(className);
+                iconNode.addClass('icon');
             }
         }
     },

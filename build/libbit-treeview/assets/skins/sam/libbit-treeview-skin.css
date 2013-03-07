@@ -1,8 +1,39 @@
-
 .yui3-treeview .yui3-dd-drop {
     border: 2px solid white;
 }
 
 .libbit-content-drop-over {
     border: 2px solid #0088cc !important;
+}
+
+.yui3-skin-sam .yui3-treeview-row {
+    color: #0088cc !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-decoration: none !important;
+    border: none !important;
+}
+
+.yui3-skin-sam .yui3-treeview-row:hover {
+    color: #005580 !important;
+}
+
+.yui3-skin-sam .yui3-treeview-row {
+    background-image: none !important;
+    border-radius: 0 !important;
+}
+
+.yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row {
+    color: #ffffff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
+    background-color: #0088cc !important;
+}
+
+.yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row:hover {
+    color: #ffffff !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
+    background-color: #0088cc !important;
+}
+
+.yui3-skin-sam .yui3-treeview-row:hover {
+    background-color: #eeeeee !important;
 }
