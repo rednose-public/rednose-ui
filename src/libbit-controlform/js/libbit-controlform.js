@@ -299,16 +299,19 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     editLabel: function(e) {
         var self = this;
+        var dialog = new Y.Libbit.Dialog();
         var legend = e.node;
         var formId = legend.get('parentNode').get('name');
 
-        Y.Libbit.Dialog.prompt(
+        dialog.prompt(
             'Form title',
             'Value',
-            function(value) {
+            legend.get('text'),
+            function(node) {
                 self.get('formsModel').each(function(formItem) {
                     if (formItem.get('id') == formId) {
                         var form = formItem.get('controlForm');
+                        var value = node.one('input').get('value');
 
                         form.set('caption', value);
                         legend.set('text', form.get('caption'));
@@ -316,8 +319,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 });
 
                 return true;
-            },
-            legend.get('text')
+            }
         );
     },
 
