@@ -15,7 +15,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
     getByClientId: function (clientID) {
         var tree = this.get('items'),
             node = this._treeFind(clientID, tree);
-alert('hoi');
+
         return node ? node.data : null;
     },
 
@@ -81,7 +81,7 @@ alert('hoi');
         var self  = this,
             found = null;
 
-        attr = attr || 'clientID';
+        attr = attr || 'clientId';
 
         Y.Array.each(branch, function (item) {
             if (item.data.get(attr) === value) {
