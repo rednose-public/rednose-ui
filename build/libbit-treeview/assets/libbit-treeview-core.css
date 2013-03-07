@@ -6,3 +6,11 @@
 .libbit-treeview-content .label-container {
     white-space: nowrap;
 }
+
+.libbit-treeview-icon {
+    width: 16px !important;
+}
+
+.yui3-treeview-has-children {
+    overflow: hidden;
+}

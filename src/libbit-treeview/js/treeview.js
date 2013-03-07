@@ -123,7 +123,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             if (Y.instanceOf(model, Y.Model)) {
                 if (typeof(self._iconMap[model.name]) != 'undefined') {
                     li.addClass('libbit-item-selected');
-                    li.one('.icon').addClass('icon-white');
+                    li.one('.libbit-treeview-icon').addClass('icon-white');
                 }
             }
 
@@ -205,13 +205,15 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
 
             self._treeNodes.push(treeNode);
 
-            // FIX the width to be 100%.
-            var mlAttr = li.get('parentNode').getStyle('margin-left');
-            var ml = Number(mlAttr.substring(0, mlAttr.length - 2));
+            // Fix the width to be 100%.
+            var mlAttr = li.get('parentNode').getStyle('marginLeft');
+            if (mlAttr) {
+                var ml = Number(mlAttr.substring(0, mlAttr.length - 2));
 
-            if (ml) {
-                li.setStyle('margin-left', -ml);
-                li.one('div').setStyle('padding-left', ml * 2);
+                if (ml) {
+                    li.setStyle('marginLeft', -ml);
+                    li.one('div').setStyle('paddingLeft', ml * 2);
+                }
             }
 
             if (Y.instanceOf(model, Y.Model)) {
@@ -253,7 +255,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             if (iconNode) {
                 iconNode.removeClass('yui3-treeview-icon');
                 iconNode.addClass(className);
-                iconNode.addClass('icon');
+                iconNode.addClass('libbit-treeview-icon');
             }
         }
     },
