@@ -17,7 +17,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
     getByClientId: function (clientID) {
         var tree = this.get('items'),
             node = this._treeFind(clientID, tree);
-
+alert('hoi');
         return node ? node.data : null;
     },
 
