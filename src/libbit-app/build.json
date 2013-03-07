@@ -10,6 +10,11 @@
             "jsfiles": [
                 "js/model-extensions/undo.js"
             ]
+        },
+        "libbit-model-spinner": {
+            "jsfiles": [
+                "js/model-extensions/spinner.js"
+            ]
         }
     }
 }
