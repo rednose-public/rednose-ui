@@ -51,7 +51,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         }
 
         if (model) {
-            this.afterEvent = model.after('load', this._refresh, this);
+            this.afterEvent = model.after('load', this.refresh, this);
         }
     },
 
@@ -180,7 +180,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         });
     },
 
-    _refresh: function () {
+    refresh: function () {
         this._renderTree();
 
         this.fire('refresh');
