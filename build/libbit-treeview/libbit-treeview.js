@@ -210,13 +210,22 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             self._treeNodes.push(treeNode);
 
             // Fix the width to be 100%.
-            var mlAttr = li.get('parentNode').getStyle('marginLeft');
-            if (mlAttr) {
-                var ml = Number(mlAttr.substring(0, mlAttr.length - 2));
+            var count = 0;
+            var current = li.ancestor('.yui3-treeview-children');
+
+            while (current.ancestor('.yui3-treeview-children')) {
+                count++;
+                current = current.ancestor('.yui3-treeview-children');
+            }
+
+            if (count > 0) {
+                var ml = count * 20;
 
                 if (ml) {
                     li.setStyle('marginLeft', -ml);
-                    li.one('div').setStyle('paddingLeft', ml * 2);
+                    li.one('div').setStyle('paddingLeft', ml + 20);
+                    li.ancestor('.yui3-treeview-children').setStyle('marginLeft', ml);
+                    li.one('.yui3-treeview-indicator').setStyle('marginLeft', ml);
                 }
             }
 
