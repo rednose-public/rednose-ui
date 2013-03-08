@@ -45,6 +45,10 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
             var elLi = Y.Node.create('<li>');
             var elA = Y.Node.create('<a href="#">');
 
+            if (content[i].className) {
+                elLi.addClass(content[i].className);
+            }
+
             if (content[i].title !== '-') {
                 elA.set('innerHTML', content[i].title);
                 elA.setAttribute('data-id', content[i].id);
