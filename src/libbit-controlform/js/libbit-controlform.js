@@ -348,7 +348,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         return buffer;
-    },
+    }
 
 }, {
     ATTRS: {
@@ -356,7 +356,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formsModel: { value: null },
         className: { value: 'formContainer' },
         editMode: { value: false },
-        draftId: {value: null }
+        draftId: { value: null }
     }
 });
 
