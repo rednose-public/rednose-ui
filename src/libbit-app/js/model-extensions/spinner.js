@@ -13,11 +13,11 @@ Spinner = Y.Base.create('undo', Y.Model, [], {
 
         Y.Libbit.App.showSpinner();
 
-        this.constructor.superclass.destroy.apply(this, [ options, function () {
+        this.constructor.superclass.destroy.apply(this, [ options, function (err) {
             Y.Libbit.App.hideSpinner();
 
             if (typeof callback === 'function') {
-                callback();
+                callback(err);
             }
         } ]);
     },
@@ -33,11 +33,11 @@ Spinner = Y.Base.create('undo', Y.Model, [], {
 
         Y.Libbit.App.showSpinner();
 
-        this.constructor.superclass.save.apply(this, [ options, function () {
+        this.constructor.superclass.save.apply(this, [ options, function (err) {
             Y.Libbit.App.hideSpinner();
 
             if (typeof callback === 'function') {
-                callback();
+                callback(err);
             }
         } ]);
     },
@@ -53,11 +53,11 @@ Spinner = Y.Base.create('undo', Y.Model, [], {
 
         Y.Libbit.App.showSpinner();
 
-        this.constructor.superclass.load.apply(this, [ options, function () {
+        this.constructor.superclass.load.apply(this, [ options, function (err) {
             Y.Libbit.App.hideSpinner();
 
             if (typeof callback === 'function') {
-                callback();
+                callback(err);
             }
         } ]);
     }
