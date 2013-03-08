@@ -158,9 +158,9 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
 });
 
 Y.namespace('ControlForm').FormItems = FormItems;
-var fieldContent;
+var FieldContent;
 
-fieldContent = Y.Base.create('fieldContent', Y.Model, [], {
+FieldContent = Y.Base.create('fieldContent', Y.Model, [], {
 
 
 
@@ -171,7 +171,31 @@ fieldContent = Y.Base.create('fieldContent', Y.Model, [], {
     }
 });
 
-Y.namespace('ControlForm').fieldContent = fieldContent;
+Y.namespace('ControlForm').FieldContent = FieldContent;
+var Datepicker;
+
+Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
+
+    initializer: function() {
+        this.after('render', function() {
+            var wrapper = Y.Node.create('<span class="calendarWrapper" />');
+            var container = this.get('contentBox');
+
+            container.prepend(wrapper);
+
+            wrapper.append(container.one('.yui3-calendar-pane'));
+            wrapper.one('.yui3-calendar-pane').setStyle('display', 'none');
+            wrapper.append('<span>This is a calender</span>');
+        });
+    },
+
+}, {
+    ATTRS: {
+        rules: { value: [] },
+    }
+});
+
+Y.namespace('Libbit').ControlFormDatepicker = Datepicker;
 var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
@@ -188,10 +212,10 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     initializer: function() {
         var self = this;
 
-        this.on('contextMenu:editLabel', this.editLabel);
+        this.on('contextMenu:editLabel', this._editLabel);
         this.on('contextMenu:deleteForm', this.deleteForm);
-        this.on('contextMenu:deleteFieldGroup', this.deleteFieldGroup);
-        this.on('contextMenu:editFieldGroup', this.editFieldGroup);
+        this.on('contextMenu:deleteFieldGroup', this._deleteFieldGroup);
+        this.on('contextMenu:editFieldGroup', this._editFieldGroup);
     },
 
     render: function(formsModel) {
@@ -301,7 +325,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             var controlContainer = Y.Node.create('<li>');
             var controlElement = null;
 
-            controlElement = Y.Node.create('<input />');
+            controlElement = self._createInputElement(control.rules);
             controlElement.data = control;
 
             label.set('innerHTML', control.field.name);
@@ -330,6 +354,20 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         }
 
         formElement.append(list);
+    },
+
+    _createInputElement: function(rules) {
+        var node;
+
+        if (rules.is_date) {
+            node = Y.Node.create('<span />');
+
+            new Y.Libbit.ControlFormDatepicker({ srcNode: node, rules: rules }).render();
+        } else {
+            node = Y.Node.create('<input />');
+        }
+
+        return node;
     },
 
     reOrderFieldGroupDD: function(e, formElement, sender) {
@@ -448,13 +486,13 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         );
     },
 
-    editFieldGroup: function(e) {
+    _editFieldGroup: function(e) {
         var fg = this.get('formsModel').getFieldGroup(e.node.get('id'));
 
         this.fire('editFieldGroup', { 'fieldGroup': fg });
     },
 
-    deleteFieldGroup: function(e) {
+    _deleteFieldGroup: function(e) {
         var self = this;
         var formsModel = this.get('formsModel');
         var formElement = e.node.get('parentNode');
@@ -471,7 +509,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         );
     },
 
-    editLabel: function(e) {
+    _editLabel: function(e) {
         var self = this;
         var dialog = new Y.Libbit.Dialog();
         var legend = e.node;
@@ -512,7 +550,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         listCollection.each(function(list) {
             list.all('li').each(function(control) {
-                var fieldContent = new Y.ControlForm.fieldContent({
+                var fieldContent = new Y.ControlForm.FieldContent({
                     field: control.getData(),
                     content: control.one('input, textarea, select').get('value')
                 });
@@ -522,23 +560,24 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         return buffer;
-    },
+    }
 
 }, {
     ATTRS: {
         srcNode: { value: null },
         formsModel: { value: null },
         className: { value: 'formContainer' },
-        editMode: { value: false }
+        editMode: { value: false },
+        draftId: { value: null }
     }
 });
-
 
 Y.namespace('Libbit').ControlForm = ControlForm;
 
 
 }, '1.0.0', {
     "requires": [
+        "calendar",
         "dd-proxy",
         "dd-constrain",
         "node",
