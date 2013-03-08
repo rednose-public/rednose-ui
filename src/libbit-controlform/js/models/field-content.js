@@ -1,6 +1,6 @@
-var fieldContent;
+var FieldContent;
 
-fieldContent = Y.Base.create('fieldContent', Y.Model, [], {
+FieldContent = Y.Base.create('fieldContent', Y.Model, [], {
 
 
 
@@ -11,4 +11,4 @@ fieldContent = Y.Base.create('fieldContent', Y.Model, [], {
     }
 });
 
-Y.namespace('ControlForm').fieldContent = fieldContent;
+Y.namespace('ControlForm').FieldContent = FieldContent;

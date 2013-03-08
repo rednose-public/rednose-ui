@@ -327,7 +327,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         listCollection.each(function(list) {
             list.all('li').each(function(control) {
-                var fieldContent = new Y.ControlForm.fieldContent({
+                var fieldContent = new Y.ControlForm.FieldContent({
                     field: control.getData(),
                     content: control.one('input, textarea, select').get('value')
                 });
@@ -344,7 +344,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         srcNode: { value: null },
         formsModel: { value: null },
         className: { value: 'formContainer' },
-        editMode: { value: false }
+        editMode: { value: false },
+        draftId: {value: null }
     }
 });
 
