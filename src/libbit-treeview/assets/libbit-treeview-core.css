@@ -1,29 +1,3 @@
-.libbit-treeview-content .ygtvchildren {
-    overflow: hidden;
-}
-
-.ygtvlabel,
-.ygtvlabel:link,
-.ygtvlabel:visited,
-.ygtvlabel:hover,
-.libbit-treeview-content a {
-    cursor: default !important;
-}
-
-.ygtvtp,
-.ygtvtph,
-.ygtvlp,
-.ygtvlph {
-    background: #fff !important;
-}
-
-.ygtvtm,
-.ygtvtmh,
-.ygtvlm,
-.ygtvlmh {
-    background: #fff !important;
-}
-
 .libbit-treeview-content .icon-toggle {
     margin-left: 2px;
     margin-top: 3px;
@@ -33,14 +7,10 @@
     white-space: nowrap;
 }
 
-.ygtvtable {
-    /*table-layout: fixed;*/
+.libbit-treeview-icon {
+    width: 16px !important;
 }
 
-.label-container span {
-/*    display: inline-block;
+.yui3-treeview-has-children {
     overflow: hidden;
-    width: 100%;
-    max-width: 100%;
-    text-overflow: ellipsis;
-*/}
+}

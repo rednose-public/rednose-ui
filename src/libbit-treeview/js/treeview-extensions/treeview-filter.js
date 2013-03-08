@@ -14,7 +14,7 @@ Filter = Y.Base.create('filter', Y.Base, [], {
             model.set('items', self._applyFilterToModel(model.get('items')));
 
             self.set('data', model);
-            self._refresh();
+            self.refresh();
         });
     },
 

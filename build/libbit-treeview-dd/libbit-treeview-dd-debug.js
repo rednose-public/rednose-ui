@@ -22,7 +22,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
         if (this.get('dragdrop')) {
             Y.Do.after(this._bindDD, this, '_bindEvents', this);
 
-            model.before('load', function() {
+            self.on('beforeRefresh', function() {
                 self._destroyDD();
             });
 

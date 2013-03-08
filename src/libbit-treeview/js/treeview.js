@@ -51,7 +51,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         }
 
         if (model) {
-            this.afterEvent = model.after('load', this._refresh, this);
+            this.afterEvent = model.after('load', this.refresh, this);
         }
     },
 
@@ -114,7 +114,18 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         var self = this;
 
         tree.on('select', function(e) {
-            var li = tree.getHTMLNode(e.node);
+            var node  = e.node,
+                li    = tree.getHTMLNode(node),
+                model = node.data;
+
+            self.get('boundingBox').all('.icon-white').removeClass('icon-white');
+
+            if (Y.instanceOf(model, Y.Model)) {
+                if (typeof(self._iconMap[model.name]) != 'undefined') {
+                    li.addClass('libbit-item-selected');
+                    li.one('.libbit-treeview-icon').addClass('icon-white');
+                }
+            }
 
             self.fire('select', { data: li.getData() });
         });
@@ -169,7 +180,9 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         });
     },
 
-    _refresh: function () {
+    refresh: function () {
+        this.fire('beforeRefresh');
+
         this._renderTree();
 
         this.fire('refresh');
@@ -193,6 +206,17 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
                 model = treeNode.data;
 
             self._treeNodes.push(treeNode);
+
+            // Fix the width to be 100%.
+            var mlAttr = li.get('parentNode').getStyle('marginLeft');
+            if (mlAttr) {
+                var ml = Number(mlAttr.substring(0, mlAttr.length - 2));
+
+                if (ml) {
+                    li.setStyle('marginLeft', -ml);
+                    li.one('div').setStyle('paddingLeft', ml * 2);
+                }
+            }
 
             if (Y.instanceOf(model, Y.Model)) {
                 li.setAttribute('data-yui3-modelId', model.get('id'));
@@ -233,6 +257,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
             if (iconNode) {
                 iconNode.removeClass('yui3-treeview-icon');
                 iconNode.addClass(className);
+                iconNode.addClass('libbit-treeview-icon');
             }
         }
     },

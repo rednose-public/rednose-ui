@@ -81,7 +81,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         var self  = this,
             found = null;
 
-        attr = attr || 'clientID';
+        attr = attr || 'clientId';
 
         Y.Array.each(branch, function (item) {
             if (item.data.get(attr) === value) {
