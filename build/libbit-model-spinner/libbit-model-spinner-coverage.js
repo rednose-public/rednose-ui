@@ -26,7 +26,7 @@ _yuitest_coverage["build/libbit-model-spinner/libbit-model-spinner.js"] = {
     path: "build/libbit-model-spinner/libbit-model-spinner.js",
     code: []
 };
-_yuitest_coverage["build/libbit-model-spinner/libbit-model-spinner.js"].code=["YUI.add('libbit-model-spinner', function (Y, NAME) {","","var Spinner;","","Spinner = Y.Base.create('undo', Y.Model, [], {","","    destroy: function (options, callback) {","       var self = this;","","        // Allow callback as only arg.","        if (typeof options === 'function') {","            callback = options;","            options  = {};","        }","","        Y.Libbit.App.showSpinner();","","        this.constructor.superclass.destroy.apply(this, [ options, function () {","            Y.Libbit.App.hideSpinner();","","            if (typeof callback === 'function') {","                callback();","            }","        } ]);","    },","","    save: function (options, callback) {","       var self = this;","","        // Allow callback as only arg.","        if (typeof options === 'function') {","            callback = options;","            options  = {};","        }","","        Y.Libbit.App.showSpinner();","","        this.constructor.superclass.save.apply(this, [ options, function () {","            Y.Libbit.App.hideSpinner();","","            if (typeof callback === 'function') {","                callback();","            }","        } ]);","    },","","    load: function (options, callback) {","       var self = this;","","        // Allow callback as only arg.","        if (typeof options === 'function') {","            callback = options;","            options  = {};","        }","","        Y.Libbit.App.showSpinner();","","        this.constructor.superclass.load.apply(this, [ options, function () {","            Y.Libbit.App.hideSpinner();","","            if (typeof callback === 'function') {","                callback();","            }","        } ]);","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.Model').Spinner = Spinner;","","","}, '1.0.0', {\"requires\": [\"libbit-app-base\", \"model\"]});"];
+_yuitest_coverage["build/libbit-model-spinner/libbit-model-spinner.js"].code=["YUI.add('libbit-model-spinner', function (Y, NAME) {","","var Spinner;","","Spinner = Y.Base.create('undo', Y.Model, [], {","","    destroy: function (options, callback) {","       var self = this;","","        // Allow callback as only arg.","        if (typeof options === 'function') {","            callback = options;","            options  = {};","        }","","        Y.Libbit.App.showSpinner();","","        this.constructor.superclass.destroy.apply(this, [ options, function (err) {","            Y.Libbit.App.hideSpinner();","","            if (typeof callback === 'function') {","                callback(err);","            }","        } ]);","    },","","    save: function (options, callback) {","       var self = this;","","        // Allow callback as only arg.","        if (typeof options === 'function') {","            callback = options;","            options  = {};","        }","","        Y.Libbit.App.showSpinner();","","        this.constructor.superclass.save.apply(this, [ options, function (err) {","            Y.Libbit.App.hideSpinner();","","            if (typeof callback === 'function') {","                callback(err);","            }","        } ]);","    },","","    load: function (options, callback) {","       var self = this;","","        // Allow callback as only arg.","        if (typeof options === 'function') {","            callback = options;","            options  = {};","        }","","        Y.Libbit.App.showSpinner();","","        this.constructor.superclass.load.apply(this, [ options, function (err) {","            Y.Libbit.App.hideSpinner();","","            if (typeof callback === 'function') {","                callback(err);","            }","        } ]);","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.Model').Spinner = Spinner;","","","}, '1.0.0', {\"requires\": [\"libbit-app-base\", \"model\"]});"];
 _yuitest_coverage["build/libbit-model-spinner/libbit-model-spinner.js"].lines = {"1":0,"3":0,"5":0,"8":0,"11":0,"12":0,"13":0,"16":0,"18":0,"19":0,"21":0,"22":0,"28":0,"31":0,"32":0,"33":0,"36":0,"38":0,"39":0,"41":0,"42":0,"48":0,"51":0,"52":0,"53":0,"56":0,"58":0,"59":0,"61":0,"62":0,"69":0};
 _yuitest_coverage["build/libbit-model-spinner/libbit-model-spinner.js"].functions = {"(anonymous 2):18":0,"destroy:7":0,"(anonymous 3):38":0,"save:27":0,"(anonymous 4):58":0,"load:47":0,"(anonymous 1):1":0};
 _yuitest_coverage["build/libbit-model-spinner/libbit-model-spinner.js"].coveredLines = 31;
@@ -59,7 +59,7 @@ options  = {};
 Y.Libbit.App.showSpinner();
 
         _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 18);
-this.constructor.superclass.destroy.apply(this, [ options, function () {
+this.constructor.superclass.destroy.apply(this, [ options, function (err) {
             _yuitest_coverfunc("build/libbit-model-spinner/libbit-model-spinner.js", "(anonymous 2)", 18);
 _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 19);
 Y.Libbit.App.hideSpinner();
@@ -67,7 +67,7 @@ Y.Libbit.App.hideSpinner();
             _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 21);
 if (typeof callback === 'function') {
                 _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 22);
-callback();
+callback(err);
             }
         } ]);
     },
@@ -90,7 +90,7 @@ options  = {};
 Y.Libbit.App.showSpinner();
 
         _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 38);
-this.constructor.superclass.save.apply(this, [ options, function () {
+this.constructor.superclass.save.apply(this, [ options, function (err) {
             _yuitest_coverfunc("build/libbit-model-spinner/libbit-model-spinner.js", "(anonymous 3)", 38);
 _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 39);
 Y.Libbit.App.hideSpinner();
@@ -98,7 +98,7 @@ Y.Libbit.App.hideSpinner();
             _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 41);
 if (typeof callback === 'function') {
                 _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 42);
-callback();
+callback(err);
             }
         } ]);
     },
@@ -121,7 +121,7 @@ options  = {};
 Y.Libbit.App.showSpinner();
 
         _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 58);
-this.constructor.superclass.load.apply(this, [ options, function () {
+this.constructor.superclass.load.apply(this, [ options, function (err) {
             _yuitest_coverfunc("build/libbit-model-spinner/libbit-model-spinner.js", "(anonymous 4)", 58);
 _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 59);
 Y.Libbit.App.hideSpinner();
@@ -129,7 +129,7 @@ Y.Libbit.App.hideSpinner();
             _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 61);
 if (typeof callback === 'function') {
                 _yuitest_coverline("build/libbit-model-spinner/libbit-model-spinner.js", 62);
-callback();
+callback(err);
             }
         } ]);
     }
