@@ -28,7 +28,10 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
         // Append the message node at the given path
         input = bb.one('[data-path=' + error.path + ']');
         input.ancestor('.control-group').addClass('error');
-        input.get('parentNode').append('<span class="help-block">' + error.message + '</span>');
+
+        if (error.message) {
+            input.get('parentNode').append('<span class="help-block">' + error.message + '</span>');
+        }
 
         input.focus();
     },
@@ -61,7 +64,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             node = Y.Node.create('<form action="#" class="form-horizontal"></form>');
             node.append(input);
         } else {
-            input = Y.Node.create('<input type="text" value="' + defaultVal + '" id="input">');
+            input = Y.Node.create('<input type="text" value="' + defaultVal + '" data-path="input" id="input">');
 
             node = Y.Node.create(
                 '<form action="#" class="form-horizontal">' +
@@ -77,7 +80,6 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         panel = new Y.Libbit.Panel({
             bodyContent: node,
-            hideOn: [],
             headerContent: title,
             zIndex: Y.all('*').size(),
             width: 500,
@@ -106,8 +108,8 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             centered: true, modal: true, visible: true
         }).render();
 
-        node.one('input,textarea,select').focus();
-        node.all('input, textarea, select').on('keyup', function(e) {
+        node.one('input,textarea,select').focus().select();
+        node.one('input,textarea,select').on('keyup', function(e) {
             if (e.button === 13) {
                 var buttons = panel.get('buttons');
 
@@ -143,7 +145,6 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         panel = new Y.Libbit.Panel({
             bodyContent: node,
-            hideOn: [],
             headerContent: title,
             zIndex: Y.all('*').size(),
             width: 500,
@@ -198,7 +199,6 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         panel = new Y.Libbit.Panel({
             bodyContent: node,
-            hideOn: [],
             headerContent: title,
             zIndex: Y.all('*').size(),
             width: 500,
