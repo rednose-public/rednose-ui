@@ -6,7 +6,7 @@ var TreeView;
 // TODO: Implement sorting
 // TODO: Document data input
 // TODO: Disable text selection within treenodes
-TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Filter, Y.Libbit.TreeView.DD ], {
+TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Filter, Y.Libbit.TreeView.DD ], {
 
     /**
      * Stores the state of expanded nodes.
@@ -29,12 +29,11 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
     _iconMap: [],
 
     /**
-    * Reference pointer to events
-    */
+     * Reference pointer to events
+     */
     afterEvent: null,
     openEvent: null,
     closeEvent: null,
-    selectEvent: null,
 
     initializer: function () {
         var contentBox = this.get('contentBox'),
@@ -85,7 +84,6 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
 
             this.openEvent.detach();
             this.closeEvent.detach();
-            this.selectEvent.detach();
 
             while (tree.rootNode.children.length > 0) {
                 tree.removeNode(tree.rootNode.children[0]);
@@ -113,23 +111,6 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
         var tree = this.get('tree');
         var self = this;
 
-        tree.on('select', function(e) {
-            var node  = e.node,
-                li    = tree.getHTMLNode(node),
-                model = node.data;
-
-            self.get('boundingBox').all('.icon-white').removeClass('icon-white');
-
-            if (Y.instanceOf(model, Y.Model)) {
-                if (typeof(self._iconMap[model.name]) != 'undefined') {
-                    li.addClass('libbit-item-selected');
-                    li.one('.libbit-treeview-icon').addClass('icon-white');
-                }
-            }
-
-            self.fire('select', { data: li.getData() });
-        });
-
         this.openEvent = tree.on('open', function(e) {
             var li = tree.getHTMLNode(e.node);
 
@@ -143,13 +124,6 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Anim, Y.Libbi
 
             delete self._stateMap[stateIndex];
             self.fire('collapse', e);
-        });
-
-        this.selectEvent = tree.on('select', function(e) {
-            var li = tree.getHTMLNode(e.node);
-
-            self.selectedNode = parseInt(li.getAttribute('data-yui3-modelId'));
-            self.fire('nodeSelected', e);
         });
 
         this.fire('Finished');
