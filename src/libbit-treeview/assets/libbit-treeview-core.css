@@ -14,3 +14,8 @@
 .yui3-treeview-has-children {
     overflow: hidden;
 }
+
+/* Reserve the pointer for hyperlinks */
+.yui3-treeview-row {
+    cursor: default !important;
+}

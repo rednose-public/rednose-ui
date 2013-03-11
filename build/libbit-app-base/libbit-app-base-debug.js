@@ -13,6 +13,9 @@ App = Y.Base.create('libbit-app', Y.App, [], {
     _activePanel: null,
 
     initializer: function () {
+        // Set the cursor for drag proxies.
+        Y.DD.DDM.set('dragCursor', 'default');
+
         Y.Do.after(function () {
             if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {
                 window.parent.openApp();
@@ -137,6 +140,7 @@ App = Y.Base.create('libbit-app', Y.App, [], {
     }
 });
 
+// -- Class methods ------------------------------------------------------------
 App.showSpinner = function () {
     Y.one('body').prepend(Y.Node.create('<div class="libbit-spinner"></div>'));
 };
