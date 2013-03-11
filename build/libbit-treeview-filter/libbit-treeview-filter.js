@@ -7,7 +7,7 @@ var Filter;
  */
 Filter = Y.Base.create('filter', Y.Base, [], {
 
-    applyFilter: function() {
+    applyFilter: function (refresh) {
         var self = this;
         var model = this.get('data');
 
@@ -16,12 +16,16 @@ Filter = Y.Base.create('filter', Y.Base, [], {
             model.set('items', self._applyFilterToModel(model.get('items')));
 
             self.set('data', model);
-            self.refresh();
+
+            if (refresh) {
+                self.refresh();
+            }
         });
+
+        return this;
     },
 
-    _applyFilterToModel: function(modelItems)
-    {
+    _applyFilterToModel: function (modelItems) {
         var buffer = [];
         var filterIds = this.get('filterIds');
         var self = this;
@@ -44,8 +48,7 @@ Filter = Y.Base.create('filter', Y.Base, [], {
         }
 
         return buffer;
-    },
-
+    }
 }, {
     ATTRS: {
         filterApplyTo: {
@@ -54,7 +57,7 @@ Filter = Y.Base.create('filter', Y.Base, [], {
 
         filterIds: {
             value : []
-        },
+        }
     }
 });
 
