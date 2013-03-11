@@ -21,7 +21,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
         var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
-        this.animSlideInY(children);
+        Y.Libbit.Anim.slideInY(children);
     },
 
     /**
@@ -31,47 +31,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
         var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
-        this.animSlideOutY(children);
-    },
-
-    /**
-     * Animates a slide in of an collapsed element as a post process.
-     */
-    animSlideInY: function (node) {
-        // Animate the object to a height of 0.
-        node.transition({
-            duration: 0.3,
-            easing: 'ease-in',
-            height: '0px'
-        }, function() {
-            // Restore the 'display' style attribute and reset the height to 100%.
-            node.setStyle('display', 'none');
-            node.setStyle('height', '100%');
-        });
-    },
-
-    /**
-     * Animates a slide in of an expanded element as a post process.
-     */
-    animSlideOutY: function (node) {
-        // Hide potential scrollbars
-        node.ancestor('.yui3-treeview').setStyle('overflow', 'hidden');
-
-        // Make sure the chileElement is not hidden, otherwise height cannot be
-        // calculated.
-        node.setStyle('display', 'block');
-
-        var height = node.getComputedStyle('height');
-
-        node.setStyle('height', 0);
-
-        node.transition({
-            duration: 0.3,
-            easing: 'ease-out',
-            height: height
-        }, function() {
-            node.setStyle('height', null);
-        });
+        Y.Libbit.Anim.slideOutY(children);
     },
 
     /**
@@ -89,4 +49,4 @@ Anim = Y.Base.create('anim', Y.Base, [], {
 Y.namespace('Libbit.TreeView').Anim = Anim;
 
 
-}, '1.0.0');
+}, '1.0.0', {"requires": ["libbit-anim"]});
