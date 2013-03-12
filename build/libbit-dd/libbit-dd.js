@@ -21,12 +21,6 @@ DD = Y.Base.create('dd', Y.View, [], {
         // Set the cursor for drag proxies.
         Y.DD.DDM.set('dragCursor', 'default');
 
-        this.on('drag:start', this._handleStart, this);
-        this.on('drag:end', this._handleEnd, this);
-
-        this.on('drop:over', this._dropOver, this);
-        this.on('drop:enter', this._dropEnter, this);
-
         // Pass the event through a bubble target, so we get the first event in the chain
         this.bubbleTarget = new BubbleTarget();
         this.bubbleTarget.addTarget(this);

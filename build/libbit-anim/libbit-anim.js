@@ -112,6 +112,59 @@ Anim.width = function (node, width) {
 }
 
 /**
+ * Vortext effect, animate to a given location
+ * while reducing dimensions and opacity
+ */
+Anim.vortex = function (node, x, y) {
+    var anim;
+
+    anim = new Y.Anim({
+        node: node,
+        to: {
+            height : 20,
+            width  : 20,
+            opacity: 0,
+            top    : x,
+            left   : y
+        }, from: {
+            width : node.get('offsetWidth'),
+            height: node.get('offsetHeight')
+        },
+        duration: '.25'
+    });
+
+    anim.on('end', function () {
+        node.remove();
+    });
+
+    anim.run();
+}
+
+/**
+ * Squeeze the node and remove it
+ */
+Anim.squeeze = function (node) {
+    var anim;
+
+    node.setStyle('opacity', 0);
+
+    anim = new Y.Anim({
+        node: node,
+        to: {
+            width: 0
+        },
+        duration: '.25',
+        easing: Y.Easing.easeOut
+    });
+
+    anim.on('end', function () {
+        node.remove();
+    });
+
+    anim.run();
+}
+
+/**
  * Morphs between two nodes.
  */
 Anim.morph = function (oldNode, newNode, animOut, animIn) {
