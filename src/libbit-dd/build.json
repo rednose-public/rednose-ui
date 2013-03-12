@@ -5,6 +5,11 @@
             "jsfiles": [
                 "libbit-dd.js"
             ]
+        },
+        "libbit-dd-css": {
+            "cssfiles": [
+                "libbit-dd.css"
+            ]
         }
     }
 }
