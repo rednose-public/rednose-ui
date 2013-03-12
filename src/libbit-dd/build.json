@@ -1,0 +1,10 @@
+{
+    "name": "libbit-dd",
+    "builds": {
+        "libbit-dd": {
+            "jsfiles": [
+                "libbit-dd.js"
+            ]
+        }
+    }
+}

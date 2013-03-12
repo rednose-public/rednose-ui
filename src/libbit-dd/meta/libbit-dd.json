@@ -1,0 +1,7 @@
+{
+    "libbit-dd" : {
+        "requires": [
+            "view"
+        ]
+    }
+}
