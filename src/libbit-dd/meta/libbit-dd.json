@@ -1,8 +1,9 @@
 {
     "libbit-dd" : {
         "requires": [
-            "view",
-            "libbit-dd-css"
+            "libbit-anim",
+            "libbit-dd-css",
+            "view"
         ]
     },
     "libbit-dd-css" : {}

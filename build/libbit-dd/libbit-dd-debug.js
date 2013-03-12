@@ -406,4 +406,4 @@ DD = Y.Base.create('dd', Y.View, [], {
 Y.namespace('Libbit').DD = DD;
 
 
-}, '1.0.0', {"requires": ["view", "libbit-dd-css"]});
+}, '1.0.0', {"requires": ["libbit-anim", "libbit-dd-css", "view"]});
