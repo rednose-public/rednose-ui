@@ -1,6 +1,7 @@
 {
     "libbit-controlform" : {
         "requires": [
+            "calendar",
             "dd-proxy",
             "dd-constrain",
             "node",

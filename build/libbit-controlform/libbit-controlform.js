@@ -172,6 +172,91 @@ FieldContent = Y.Base.create('fieldContent', Y.Model, [], {
 });
 
 Y.namespace('ControlForm').FieldContent = FieldContent;
+<<<<<<< HEAD
+=======
+var Datepicker;
+
+Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
+
+    initializer: function() {
+        var self = this;
+
+        this.after('render', function() {
+            var wrapper = Y.Node.create('<span />');
+            var input = Y.Node.create('<input />');
+            var icon = Y.Node.create('<span />');
+            var container = this.get('contentBox');
+
+            icon.addClass('icon-calendar');
+
+            input.addClass('dialogCalendar');
+            input.setAttribute('readonly', 'true');
+            input.on('click', function() {
+                self.showCalendar(input, wrapper);
+            });
+
+            wrapper.addClass('calendarWrapper');
+            wrapper.hide();
+            wrapper.append(container.one('.yui3-calendar-pane'));
+            wrapper.one('.yui3-calendar-pane').addClass('dialogCalendarPane');
+
+            container.append(input);
+            container.append(icon);
+            container.append(wrapper);
+
+            this.set('wrapper', wrapper);
+
+            self.dateSelected({date: new Date() });
+        });
+
+        this.on('dateClick', self.dateSelected);
+    },
+
+    showCalendar: function(sender) {
+        var wrapper = this.get('wrapper');
+        var rules = this.get('rules');
+
+        if (typeof(rules['is_date']['accepts_input']) == 'undefined') {
+            return;
+        }
+
+        // Events
+        var activateHide = false;
+
+        wrapper.detach('clickoutside');
+        wrapper.on('clickoutside', function() {
+            if (activateHide === false) {
+                activateHide = true;
+            } else {
+                wrapper.hide();
+            }
+        });
+
+        // Show and set position
+        wrapper.show();
+        wrapper.setX(sender.getX());
+        wrapper.setY(sender.getY() + parseInt(sender.getStyle('height')) + 5);
+    },
+
+    dateSelected: function(e) {
+        var wrapper = this.get('wrapper');
+        var input = wrapper.ancestor().one('input')
+
+        input.set('value', e.date.toLocaleDateString());
+        input.setAttribute('data-unixtime', e.date.getTime());
+
+        wrapper.hide();
+    }
+
+}, {
+    ATTRS: {
+        wrapper: { value: null },
+        rules: { value: [] },
+    }
+});
+
+Y.namespace('Libbit').ControlFormDatepicker = Datepicker;
+>>>>>>> a9f0d7372d497289dd6917dc9a874eed789573bd
 var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
@@ -188,10 +273,10 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     initializer: function() {
         var self = this;
 
-        this.on('contextMenu:editLabel', this.editLabel);
+        this.on('contextMenu:editLabel', this._editLabel);
         this.on('contextMenu:deleteForm', this.deleteForm);
-        this.on('contextMenu:deleteFieldGroup', this.deleteFieldGroup);
-        this.on('contextMenu:editFieldGroup', this.editFieldGroup);
+        this.on('contextMenu:deleteFieldGroup', this._deleteFieldGroup);
+        this.on('contextMenu:editFieldGroup', this._editFieldGroup);
     },
 
     render: function(formsModel) {
@@ -300,7 +385,11 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             var label = Y.Node.create('<label>');
             var controlContainer = Y.Node.create('<li>');
 
+<<<<<<< HEAD
             var controlElement = Y.Node.create('<input />');
+=======
+            controlElement = self._createInputElement(control.rules);
+>>>>>>> a9f0d7372d497289dd6917dc9a874eed789573bd
             controlElement.data = control;
             label.set('innerHTML', control.field.name);
 
@@ -335,6 +424,20 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         }
 
         formElement.append(list);
+    },
+
+    _createInputElement: function(rules) {
+        var node;
+
+        if (rules.is_date) {
+            node = Y.Node.create('<span />');
+
+            new Y.Libbit.ControlFormDatepicker({ srcNode: node, rules: rules }).render();
+        } else {
+            node = Y.Node.create('<input />');
+        }
+
+        return node;
     },
 
     reOrderFieldGroupDD: function(e, formElement, sender) {
@@ -453,13 +556,13 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         );
     },
 
-    editFieldGroup: function(e) {
+    _editFieldGroup: function(e) {
         var fg = this.get('formsModel').getFieldGroup(e.node.get('id'));
 
         this.fire('editFieldGroup', { 'fieldGroup': fg });
     },
 
-    deleteFieldGroup: function(e) {
+    _deleteFieldGroup: function(e) {
         var self = this;
         var formsModel = this.get('formsModel');
         var formElement = e.node.get('parentNode');
@@ -476,7 +579,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         );
     },
 
-    editLabel: function(e) {
+    _editLabel: function(e) {
         var self = this;
         var dialog = new Y.Libbit.Dialog();
         var legend = e.node;
@@ -535,16 +638,20 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formsModel: { value: null },
         className: { value: 'formContainer' },
         editMode: { value: false },
+<<<<<<< HEAD
         draft: { value: null }
+=======
+        draftId: { value: null }
+>>>>>>> a9f0d7372d497289dd6917dc9a874eed789573bd
     }
 });
-
 
 Y.namespace('Libbit').ControlForm = ControlForm;
 
 
 }, '1.0.0', {
     "requires": [
+        "calendar",
         "dd-proxy",
         "dd-constrain",
         "node",

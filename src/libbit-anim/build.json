@@ -1,0 +1,10 @@
+{
+    "name": "libbit-anim",
+    "builds": {
+        "libbit-anim": {
+            "jsfiles": [
+                "anim.js"
+            ]
+        }
+    }
+}
