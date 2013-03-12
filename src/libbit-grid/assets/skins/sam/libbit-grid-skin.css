@@ -44,10 +44,8 @@ div.model-grid-item-selected > div.model-grid-icon-wrapper {
     color: #AAA;
 }
 
-
 /*
-
-.model-grid-message-container {
+.template-grid-main-container {
     color: #B3B3B3;
     font-weight: bold;
     text-align: center;
@@ -57,15 +55,39 @@ div.model-grid-item-selected > div.model-grid-icon-wrapper {
     -ms-text-rendering: optimizeLegibility;
     -o-text-rendering: optimizeLegibility;
     text-rendering: optimizeLegibility;
-    margin-top: 300px; /* Temporary */
+    margin-top: 300px;
 }
-/*
-.model-grid-message-title {
+
+.template-grid-main-title {
     font-size: 42px;
     line-height: 50px;
 }
 
-.model-grid-message-body {
+.template-grid-main-body {
     font-size: 16px;
     line-height: 19px;
-}*/
+}
+
+.template-main-message-container {
+    color: #B3B3B3;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+    margin-top: 300px;
+}
+
+.template-main-message-title {
+    font-size: 42px;
+    line-height: 50px;
+}
+
+.template-main-message-body {
+    font-size: 16px;
+    line-height: 19px;
+}
+*/

@@ -94,10 +94,6 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         if (e.keyCode === ENTER_KEY) {
             this.close();
         }
-    },
-
-    contextMenu: function (e) {
-
     }
 }, {
     ATTRS: {

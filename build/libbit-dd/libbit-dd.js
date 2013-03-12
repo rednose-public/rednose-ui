@@ -345,7 +345,7 @@ DD = Y.Base.create('dd', Y.View, [], {
             parent      = dropNode.get('offsetParent'),
             // nodeOffsetY = dropNode.get('offsetTop'),
             // nodeHeight  = dropNode.get('offsetHeight'),
-            nodeHeight  = Y.one('#main').get('offsetHeight'),
+            nodeHeight  = this.get('container').get('offsetHeight'),
             relativeY,
             node,
             anim,
