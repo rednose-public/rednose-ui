@@ -17,7 +17,7 @@
 }
 
 .libbit-dd-drag-placeholder * {
-    visibility: hidden;
+    /*visibility: hidden;*/
 }
 
 .libbit-dd-drag-proxy {
@@ -29,6 +29,11 @@
     -webkit-border-radius: 3px;
        -moz-border-radius: 3px;
             border-radius: 3px;
+}
+
+/* FIXME */
+.libbit-dd-drop-over {
+    background-color: yellow;
 }
 
 /* YUI CSS Detection Stamp */

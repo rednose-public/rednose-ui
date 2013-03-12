@@ -7,6 +7,8 @@ BubbleTarget = Y.Base.create('bubbleTarget', Y.Base, [], {});
 // NOT GENERIC YET: Dropenterglobal morphing
 DD = Y.Base.create('dd', Y.View, [], {
 
+    dropHighlight: false,
+
     /**
      * Hover events, handling complex, stacked hovers
      */
@@ -20,6 +22,8 @@ DD = Y.Base.create('dd', Y.View, [], {
     initializer: function() {
         // Set the cursor for drag proxies.
         Y.DD.DDM.set('dragCursor', 'default');
+
+        this.on('drop:over', this._handleDropHighlight, this);
 
         // Pass the event through a bubble target, so we get the first event in the chain
         this.bubbleTarget = new BubbleTarget();
@@ -95,6 +99,16 @@ DD = Y.Base.create('dd', Y.View, [], {
     },
 
 // -- Event handlers -----------------------------------------------------------
+
+    _handleDropHighlight: function (e) {
+        Y.all('.libbit-dd-drop-over').each(function (node) {
+            node.removeClass('libbit-dd-drop-over');
+        });
+
+        if (this.dropHighlight) {
+            e.drop.get('node').addClass('libbit-dd-drop-over');
+        }
+    },
 
     _handleStart: function (e) {
         var drag = e.target;
