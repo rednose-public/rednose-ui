@@ -1,3 +1,4 @@
+
 .libbit-spinner {
     width: 32px;
     height: 32px;
@@ -10,5 +11,151 @@
     margin-left: -16px;
     margin-top: -16px;
     z-index: 200;
+    overflow: auto;
+}
+
+/* Master-detail app template */
+.libbit-app-master-detail-container {
+    padding-left: 228px;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.libbit-app-master-view {
+    margin-left: -228px;
+    width: 228px;
+    height: 100%;
+    overflow: auto;
+    background-color: white;
+    border-right: 1px solid #EEE;
+}
+
+.libbit-app-detail-view {
+    height:100%;
+    overflow: auto;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #4D4D4D;
+    background: #EAEAEA url('bg.png');
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+/* FIXME */
+.libbit-app-detail-view {
+    left: 228px;
+    right: 0px;
+    position: absolute;
+}
+
+.libbit-app-master-view .yui3-widget-stdmod {
+    position: absolute;
+    width: 228px;
+}
+
+.libbit-app-master-view .yui3-widget-hd {
+    position: absolute;
+    width: 228px;
+    padding: 0 !important;
+}
+
+.libbit-app-master-view .yui3-widget-bd {
+    position: absolute;
+    top: 0;
+    width: 228px;
+    bottom: 56px;
+    overflow-y: auto;
+    padding: 0 !important;
+}
+
+.libbit-app-master-view .yui3-widget-ft {
+    position: absolute;
+    bottom: 0;
+    width: 198px;
+}
+
+.libbit-app-master-detail-container {
+    padding-left: 228px;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.libbit-app-master-view {
+    margin-left: -228px;
+    width: 228px;
+    height: 100%;
+    overflow: auto;
+    background-color: white;
+    border-right: 1px solid #EEE;
+}
+
+.libbit-app-detail-view {
+    height:100%;
+    overflow: auto;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #4D4D4D;
+    background: #EAEAEA url('bg.png');
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+.libbit-app-detail-view {
+    left: 228px;
+    right: 0px;
+    position: absolute;
+}
+
+.libbit-app-master-view .yui3-widget-stdmod {
+    position: absolute;
+    width: 228px;
+}
+
+.libbit-app-master-view .yui3-widget-hd {
+    position: absolute;
+    width: 228px;
+    padding: 0 !important;
+}
+
+.libbit-app-master-view .yui3-widget-bd {
+    position: absolute;
+    top: 0;
+    width: 228px;
+    bottom: 56px;
+    overflow-y: auto;
+    padding: 0 !important;
+}
+
+.libbit-app-master-view .yui3-widget-ft {
+    position: absolute;
+    bottom: 0;
+    width: 198px;
+}
+
+/* Master-detail grid template */
+.libbit-grid-master-view {
+    width: 180px;
+    height: 443px;
+}
+
+.libbit-grid-detail-view {
+    width: 800px;
+    height: 443px;
     overflow: auto;
 }

@@ -6,6 +6,11 @@
                 "js/app-base.js"
             ]
         },
+        "libbit-app-templates": {
+            "jsfiles": [
+                "js/app-templates.js"
+            ]
+        },
         "libbit-model-undo": {
             "jsfiles": [
                 "js/model-extensions/undo.js"

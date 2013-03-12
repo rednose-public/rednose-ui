@@ -150,4 +150,13 @@ App.hideSpinner = function () {
 Y.namespace('Libbit').App = App;
 
 
-}, '1.0.0', {"requires": ["app-base", "event-custom", "handlebars-base", "libbit-panel"], "skinnable": true});
+}, '1.0.0', {
+    "requires": [
+        "app-base",
+        "event-custom",
+        "handlebars-base",
+        "libbit-app-templates",
+        "libbit-panel"
+    ],
+    "skinnable": true
+});

@@ -4,6 +4,7 @@
             "app-base",
             "event-custom",
             "handlebars-base",
+            "libbit-app-templates",
             "libbit-panel"
         ],
         "skinnable": true
