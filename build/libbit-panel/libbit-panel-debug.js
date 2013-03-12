@@ -28,4 +28,4 @@ Panel = Y.Base.create('panel', Y.Panel, [], {
 Y.namespace('Libbit').Panel = Panel;
 
 
-}, '1.0.0', {"requires": ["panel"]});
+}, '1.0.0', {"requires": ["libbit-panel-css", "panel"]});

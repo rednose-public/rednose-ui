@@ -5,6 +5,11 @@
             "jsfiles": [
                 "libbit-panel.js"
             ]
+        },
+        "libbit-panel-css": {
+            "cssfiles": [
+                "libbit-panel.css"
+            ]
         }
     }
 }

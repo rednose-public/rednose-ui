@@ -1,3 +1,19 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #4D4D4D;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+li {
+    list-style: none;
+}
+
 /* CSS FIX */
 .dropdown-menu .disabled > a:hover {
     background-image: none;
