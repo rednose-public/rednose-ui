@@ -226,7 +226,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
 }, {
     ATTRS: {
         error: { value: {} },
-        panel: { value: null}
+        panel: { value: null }
     }
 });
 

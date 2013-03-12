@@ -158,9 +158,9 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
 });
 
 Y.namespace('ControlForm').FormItems = FormItems;
-var fieldContent;
+var FieldContent;
 
-fieldContent = Y.Base.create('fieldContent', Y.Model, [], {
+FieldContent = Y.Base.create('fieldContent', Y.Model, [], {
 
 
 
@@ -171,7 +171,7 @@ fieldContent = Y.Base.create('fieldContent', Y.Model, [], {
     }
 });
 
-Y.namespace('ControlForm').fieldContent = fieldContent;
+Y.namespace('ControlForm').FieldContent = FieldContent;
 var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
@@ -299,12 +299,17 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         Y.Array.each(fieldGroupItems, function(control) {
             var label = Y.Node.create('<label>');
             var controlContainer = Y.Node.create('<li>');
-            var controlElement = null;
 
-            controlElement = Y.Node.create('<input />');
+            var controlElement = Y.Node.create('<input />');
             controlElement.data = control;
-
             label.set('innerHTML', control.field.name);
+
+            var draft = self.get('draft');
+
+            if (draft !== null) {
+                var content = draft.getValue(control.field.id);
+                controlElement.set('value', content);
+            }
 
             controlContainer.append(label);
             controlContainer.append(controlElement);
@@ -512,7 +517,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         listCollection.each(function(list) {
             list.all('li').each(function(control) {
-                var fieldContent = new Y.ControlForm.fieldContent({
+                var fieldContent = new Y.ControlForm.FieldContent({
                     field: control.getData(),
                     content: control.one('input, textarea, select').get('value')
                 });
@@ -522,14 +527,15 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         return buffer;
-    },
+    }
 
 }, {
     ATTRS: {
         srcNode: { value: null },
         formsModel: { value: null },
         className: { value: 'formContainer' },
-        editMode: { value: false }
+        editMode: { value: false },
+        draft: { value: null }
     }
 });
 
