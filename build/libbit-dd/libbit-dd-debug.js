@@ -23,7 +23,9 @@ DD = Y.Base.create('dd', Y.View, [], {
         // Set the cursor for drag proxies.
         Y.DD.DDM.set('dragCursor', 'default');
 
-        this.on('drop:over', this._handleDropHighlight, this);
+        // this.on('drag:end', this._removeDropHighlight, this);
+        // this.on('drop:over', this._removeDropHighlight, this);
+        // this.on('drop:over', this._addDropHighlight, this);
 
         // Pass the event through a bubble target, so we get the first event in the chain
         this.bubbleTarget = new BubbleTarget();
@@ -100,11 +102,13 @@ DD = Y.Base.create('dd', Y.View, [], {
 
 // -- Event handlers -----------------------------------------------------------
 
-    _handleDropHighlight: function (e) {
+    _removeDropHighlight: function (e) {
         Y.all('.libbit-dd-drop-over').each(function (node) {
             node.removeClass('libbit-dd-drop-over');
         });
+    },
 
+    _addDropHighlight: function (e) {
         if (this.dropHighlight) {
             e.drop.get('node').addClass('libbit-dd-drop-over');
         }
@@ -116,6 +120,7 @@ DD = Y.Base.create('dd', Y.View, [], {
         var proxy = drag.get('node').cloneNode(true).addClass('libbit-dd-drag-proxy');
 
         drag.get('dragNode').set('innerHTML', proxy.get('outerHTML'));
+        drag.get('dragNode').setStyle('zIndex', '10000');
         drag.get('node').addClass('libbit-dd-drag-placeholder');
     },
 
