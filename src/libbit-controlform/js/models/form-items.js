@@ -59,7 +59,7 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
         var newForm = {
             id: 'tmp_' + Math.round((new Date()).getTime() / 1000) + (Math.round(Math.random()) * 999999),
             direction: 'left',
-            controlForm: new self.model({
+            controlForm: new Y.ControlForm.Form({
                 caption: title,
                 fieldGroups: []
             }),

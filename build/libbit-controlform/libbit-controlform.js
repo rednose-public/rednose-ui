@@ -4,6 +4,10 @@ var Form;
 
 Form = Y.Base.create('form', Y.Model, [], {
 
+    sync: function (action, options, callback) {
+        alert(action);
+    },
+
     removeFieldGroup: function(fgId) {
         for (var i in this.get('fieldGroups')) {
             if (this.get('fieldGroups')[i]['id'] == fgId) {
@@ -37,7 +41,7 @@ Y.namespace('ControlForm').Form = Form;
 var FormItem;
 
 FormItem = Y.Base.create('formItem', Y.Model, [], {
-    
+
 }, {
     ATTRS: {
         template: { value: null },
@@ -110,7 +114,7 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
         var newForm = {
             id: 'tmp_' + Math.round((new Date()).getTime() / 1000) + (Math.round(Math.random()) * 999999),
             direction: 'left',
-            controlForm: new self.model({
+            controlForm: new Y.ControlForm.Form({
                 caption: title,
                 fieldGroups: []
             }),
@@ -249,11 +253,84 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
 }, {
     ATTRS: {
         wrapper: { value: null },
-        rules: { value: [] },
+        rules: { value: {} },
     }
 });
 
 Y.namespace('Libbit').ControlFormDatepicker = Datepicker;
+var Common;
+
+Common = Y.Base.create('common', Y.Widget, [ ], {
+
+    initializer: function() {
+    },
+
+    render: function() {
+        var rules = this.get('rules');
+        var container = this.get('srcNode');
+
+        if (typeof(rules['input_method']) === 'undefined') {
+            this._renderInput();
+
+            return;
+        }
+
+        switch (rules['input_method'].inputElement) {
+            case 'input':
+                this._renderInput();
+                break;
+
+            case 'textarea':
+                this._renderInput(true);
+                break;
+
+            case 'dropdown':
+                this._renderDropdown();
+                break;
+
+            case 'checkbox':
+                this._renderCheckbox();
+                break;
+
+            case 'radio':
+                this._renderRadio();
+                break;
+        }
+    },
+
+    _renderInput: function(textarea) {
+        this.get('srcNode').append(
+            Y.Node.create(textarea ? '<textarea />' : '<input />')
+        );
+    },
+
+    _renderDropdown: function() {
+        var select = Y.Node.create('<select />');
+
+        this.get('srcNode').append(select);
+    },
+
+    _renderCheckbox: function() {
+        var checkbox = Y.Node.create('<input type="checkbox" />');
+
+        this.get('srcNode').append(checkbox);
+    },
+
+    _renderRadio: function() {
+        var name = 'rand' + Math.floor(Math.random() * 1010101) + (new Date().getTime());
+        var radio = Y.Node.create('<input type="radio" />');
+
+        radio.setAttribute('name', name);
+
+        this.get('srcNode').append(radio);
+    }
+}, {
+    ATTRS: {
+        rules: { value: {} },
+    }
+});
+
+Y.namespace('Libbit').ControlFormCommon = Common;
 var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
@@ -330,7 +407,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         Y.Array.each(fieldGroupOrder, function(groupId) {
             Y.Array.each(fieldGroups, function(group) {
                 if (groupId == group['id']) {
-                    self.addFieldGroup(formElement, group);
+                    self._addFieldGroup(formElement, group);
                 }
             });
         });
@@ -340,7 +417,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         container.one('.' + directionClassName).append(formElement);
     },
 
-    addFieldGroup: function(formElement, fieldGroup) {
+    _addFieldGroup: function(formElement, fieldGroup) {
         var self = this;
         var list = Y.Node.create('<ol />');
         var fieldGroupItems;
@@ -365,10 +442,10 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 e.target.get('dragNode').setHTML('');
             });
             fieldGroupDD.on('drag:drag', function(e) {
-                self.reOrderFieldGroupDD(e, formElement, list);
+                self._reOrderFieldGroupDD(e, formElement, list);
             });
             fieldGroupDD.on('drag:end', function(e) {
-                self.reOrderFieldGroup(formElement);
+                self._reOrderFieldGroup(formElement);
             });
         }
 
@@ -390,7 +467,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
             controlContainer.append(label);
             controlContainer.append(controlElement);
-            controlContainer.setData(control.field);
+            controlContainer.setData(control);
             controlContainer.on('click', function(e) {
                 controlContainer.addClass('controlSelected');
 
@@ -415,20 +492,22 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     },
 
     _createInputElement: function(rules) {
-        var node;
+        var node = Y.Node.create('<span />');
 
         if (rules.is_date) {
-            node = Y.Node.create('<span />');
-
             new Y.Libbit.ControlFormDatepicker({ srcNode: node, rules: rules }).render();
         } else {
-            node = Y.Node.create('<input />');
+            new Y.Libbit.ControlFormCommon({ srcNode: node, rules: rules }).render();
+
+            if (node.one('*')) {
+                node = node.one('*');
+            }
         }
 
         return node;
     },
 
-    reOrderFieldGroupDD: function(e, formElement, sender) {
+    _reOrderFieldGroupDD: function(e, formElement, sender) {
         var y = e.currentTarget.mouseXY[1];
         var hit = false;
 
@@ -453,7 +532,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         }
     },
 
-    reOrderFieldGroup: function(formElement) {
+    _reOrderFieldGroup: function(formElement) {
         var formsModel = this.get('formsModel');
         var formId = formElement.get('name');
         var fieldGroupOrder = [];
@@ -465,7 +544,22 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formsModel.updateProperty(formId, 'fieldGroupOrder', fieldGroupOrder);
     },
 
-    addFieldGroupToModel: function(formId, fieldGroup) {
+    updateControl: function(control) {
+        var formsModel = this.get('formsModel');
+        var fieldGroup = formsModel.getFieldGroup(control.fieldGroup);
+
+        if (fieldGroup.fieldGroupItems) {
+            for (var item in fieldGroup.fieldGroupItems) {
+                if (fieldGroup.fieldGroupItems[item].id == control.id) {
+                    fieldGroup.fieldGroupItems[item].rules = control.rules;
+                }
+            }
+        }
+
+        this.render();
+    },
+
+    _addFieldGroupToModel: function(formId, fieldGroup) {
         var self = this;
         var formsModel = this.get('formsModel');
 
@@ -504,9 +598,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         if (Y.instanceOf(drag.get('data'), Y.TB.FieldGroup)) {
             fieldGroup = drag.get('data');
 
-            self.addFieldGroup(formNode, fieldGroup.getAttrs(), true);
-            self.addFieldGroupToModel(formNode.get('name'), fieldGroup);
-            self.reOrderFieldGroup(formNode);
+            self._addFieldGroup(formNode, fieldGroup.getAttrs(), true);
+            self._addFieldGroupToModel(formNode.get('name'), fieldGroup);
+            self._reOrderFieldGroup(formNode);
         } else {
             if (console.exception) {
                 console.exception('DD Error: Expected a Y.TB.FieldGroup');
@@ -562,7 +656,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 formsModel.deleteFieldGroup(formId, e.node.get('id'));
 
                 e.node.remove();
-                self.reOrderFieldGroup(formElement);
+                self._reOrderFieldGroup(formElement);
             }
         );
     },

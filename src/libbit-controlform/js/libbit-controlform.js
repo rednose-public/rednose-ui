@@ -74,7 +74,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         Y.Array.each(fieldGroupOrder, function(groupId) {
             Y.Array.each(fieldGroups, function(group) {
                 if (groupId == group['id']) {
-                    self.addFieldGroup(formElement, group);
+                    self._addFieldGroup(formElement, group);
                 }
             });
         });
@@ -84,7 +84,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         container.one('.' + directionClassName).append(formElement);
     },
 
-    addFieldGroup: function(formElement, fieldGroup) {
+    _addFieldGroup: function(formElement, fieldGroup) {
         var self = this;
         var list = Y.Node.create('<ol />');
         var fieldGroupItems;
@@ -109,10 +109,10 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 e.target.get('dragNode').setHTML('');
             });
             fieldGroupDD.on('drag:drag', function(e) {
-                self.reOrderFieldGroupDD(e, formElement, list);
+                self._reOrderFieldGroupDD(e, formElement, list);
             });
             fieldGroupDD.on('drag:end', function(e) {
-                self.reOrderFieldGroup(formElement);
+                self._reOrderFieldGroup(formElement);
             });
         }
 
@@ -134,7 +134,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
             controlContainer.append(label);
             controlContainer.append(controlElement);
-            controlContainer.setData(control.field);
+            controlContainer.setData(control);
             controlContainer.on('click', function(e) {
                 controlContainer.addClass('controlSelected');
 
@@ -159,20 +159,22 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     },
 
     _createInputElement: function(rules) {
-        var node;
+        var node = Y.Node.create('<span />');
 
         if (rules.is_date) {
-            node = Y.Node.create('<span />');
-
             new Y.Libbit.ControlFormDatepicker({ srcNode: node, rules: rules }).render();
         } else {
-            node = Y.Node.create('<input />');
+            new Y.Libbit.ControlFormCommon({ srcNode: node, rules: rules }).render();
+
+            if (node.one('*')) {
+                node = node.one('*');
+            }
         }
 
         return node;
     },
 
-    reOrderFieldGroupDD: function(e, formElement, sender) {
+    _reOrderFieldGroupDD: function(e, formElement, sender) {
         var y = e.currentTarget.mouseXY[1];
         var hit = false;
 
@@ -197,7 +199,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         }
     },
 
-    reOrderFieldGroup: function(formElement) {
+    _reOrderFieldGroup: function(formElement) {
         var formsModel = this.get('formsModel');
         var formId = formElement.get('name');
         var fieldGroupOrder = [];
@@ -209,7 +211,22 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formsModel.updateProperty(formId, 'fieldGroupOrder', fieldGroupOrder);
     },
 
-    addFieldGroupToModel: function(formId, fieldGroup) {
+    updateControl: function(control) {
+        var formsModel = this.get('formsModel');
+        var fieldGroup = formsModel.getFieldGroup(control.fieldGroup);
+
+        if (fieldGroup.fieldGroupItems) {
+            for (var item in fieldGroup.fieldGroupItems) {
+                if (fieldGroup.fieldGroupItems[item].id == control.id) {
+                    fieldGroup.fieldGroupItems[item].rules = control.rules;
+                }
+            }
+        }
+
+        this.render();
+    },
+
+    _addFieldGroupToModel: function(formId, fieldGroup) {
         var self = this;
         var formsModel = this.get('formsModel');
 
@@ -248,9 +265,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         if (Y.instanceOf(drag.get('data'), Y.TB.FieldGroup)) {
             fieldGroup = drag.get('data');
 
-            self.addFieldGroup(formNode, fieldGroup.getAttrs(), true);
-            self.addFieldGroupToModel(formNode.get('name'), fieldGroup);
-            self.reOrderFieldGroup(formNode);
+            self._addFieldGroup(formNode, fieldGroup.getAttrs(), true);
+            self._addFieldGroupToModel(formNode.get('name'), fieldGroup);
+            self._reOrderFieldGroup(formNode);
         } else {
             if (console.exception) {
                 console.exception('DD Error: Expected a Y.TB.FieldGroup');
@@ -306,7 +323,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 formsModel.deleteFieldGroup(formId, e.node.get('id'));
 
                 e.node.remove();
-                self.reOrderFieldGroup(formElement);
+                self._reOrderFieldGroup(formElement);
             }
         );
     },

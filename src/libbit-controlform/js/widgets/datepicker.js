@@ -75,7 +75,7 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
 }, {
     ATTRS: {
         wrapper: { value: null },
-        rules: { value: [] },
+        rules: { value: {} },
     }
 });
 

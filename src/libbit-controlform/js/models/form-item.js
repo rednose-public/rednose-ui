@@ -1,7 +1,7 @@
 var FormItem;
 
 FormItem = Y.Base.create('formItem', Y.Model, [], {
-    
+
 }, {
     ATTRS: {
         template: { value: null },
