@@ -137,6 +137,7 @@ App = Y.Base.create('libbit-app', Y.App, [], {
     }
 });
 
+// -- Class methods ------------------------------------------------------------
 App.showSpinner = function () {
     Y.one('body').prepend(Y.Node.create('<div class="libbit-spinner"></div>'));
 };

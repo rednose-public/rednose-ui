@@ -4,10 +4,6 @@ var Form;
 
 Form = Y.Base.create('form', Y.Model, [], {
 
-    sync: function (action, options, callback) {
-        alert(action);
-    },
-
     removeFieldGroup: function(fgId) {
         for (var i in this.get('fieldGroups')) {
             if (this.get('fieldGroups')[i]['id'] == fgId) {
@@ -458,12 +454,17 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         Y.Array.each(fieldGroupItems, function(control) {
             var label = Y.Node.create('<label>');
             var controlContainer = Y.Node.create('<li>');
-            var controlElement = null;
+            var draft = self.get('draft');
 
             controlElement = self._createInputElement(control.rules);
             controlElement.data = control;
-
             label.set('innerHTML', control.field.name);
+
+            if (draft !== null) {
+                var content = draft.getValue(control.field.id);
+
+                controlElement.set('value', content);
+            }
 
             controlContainer.append(label);
             controlContainer.append(controlElement);
@@ -720,7 +721,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formsModel: { value: null },
         className: { value: 'formContainer' },
         editMode: { value: false },
-        draftId: { value: null }
+        draft: { value: null }
     }
 });
 
