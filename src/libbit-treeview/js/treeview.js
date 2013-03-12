@@ -49,9 +49,9 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
             this._iconMap = model.get('icons');
         }
 
-        if (model) {
-            this.afterEvent = model.after('load', this.refresh, this);
-        }
+        // if (model) {
+        //     this.afterEvent = model.after('load', this.refresh, this);
+        // }
     },
 
     getNodes: function() {

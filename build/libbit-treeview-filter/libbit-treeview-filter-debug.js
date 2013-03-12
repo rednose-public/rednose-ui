@@ -7,20 +7,26 @@ var Filter;
  */
 Filter = Y.Base.create('filter', Y.Base, [], {
 
+    render: function () {
+        this.applyFilter();
+
+        this.constructor.superclass.render.apply(this);
+    },
+
     applyFilter: function (refresh) {
         var self = this;
         var model = this.get('data');
 
-        self.afterEvent.detach();
-        self.afterEvent = model.after('load', function() {
+        // self.afterEvent.detach();
+        // self.afterEvent = model.after('load', function() {
             model.set('items', self._applyFilterToModel(model.get('items')));
 
             self.set('data', model);
 
-            if (refresh) {
-                self.refresh();
-            }
-        });
+            // if (refresh) {
+            //     self.refresh();
+            // }
+        // });
 
         return this;
     },
