@@ -126,7 +126,7 @@ App = Y.Base.create('libbit-app', Y.App, [], {
                 render       : true,
                 width        : 1024,
                 height       : 576,
-                zIndex       : Y.all('*').size(),
+                zIndex       : Y.Object.size(this._viewInfoMap),
                 // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.
                 hideOn       : []
             });
