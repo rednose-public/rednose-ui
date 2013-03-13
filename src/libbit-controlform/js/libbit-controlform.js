@@ -141,8 +141,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             controlContainer.append(controlElement);
             controlContainer.setData(control);
             controlContainer.on('click', function(e) {
-                controlContainer.addClass('controlSelected');
-
                 self.fire('controlSelected', { 'controlContainer': controlContainer });
             });
 

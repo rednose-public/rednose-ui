@@ -302,6 +302,22 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderDropdown: function() {
         var select = Y.Node.create('<select />');
+        var rules = this.get('rules');
+
+        if (typeof(rules.input_restrictions) !== 'undefined') {
+            for (var i in rules.input_restrictions) {
+                var restrictions = rules.input_restrictions[i];
+                var option = Y.Node.create('<option>' + restrictions.name + '</option>');
+
+                if (restrictions.value === '') {
+                    option.setAttribute('value', restrictions.name);
+                } else {
+                    option.setAttribute('value', restrictions.value);
+                }
+
+                select.append(option);
+            }
+        }
 
         this.get('srcNode').append(select);
     },
@@ -314,11 +330,28 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderRadio: function() {
         var name = 'rand' + Math.floor(Math.random() * 1010101) + (new Date().getTime());
-        var radio = Y.Node.create('<input type="radio" />');
+        var rules = this.get('rules');
+        var container = Y.Node.create('<span class="radioGroup" id="' + name + '" />');
 
-        radio.setAttribute('name', name);
+        if (typeof(rules.input_restrictions) !== 'undefined') {
+            for (var i in rules.input_restrictions) {
+                var restrictions = rules.input_restrictions[i];
+                var radio = Y.Node.create('<input type="radio" />' + restrictions.name);
 
-        this.get('srcNode').append(radio);
+                radio.setAttribute('name', name);
+
+                if (restrictions.value === '') {
+                    radio.setAttribute('value', restrictions.name);
+                } else {
+                    radio.setAttribute('value', restrictions.value);
+                }
+
+                container.append(radio);
+                container.append(Y.Node.create('<br />'));
+            }
+
+            this.get('srcNode').append(container);
+        }
     }
 }, {
     ATTRS: {
@@ -470,8 +503,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             controlContainer.append(controlElement);
             controlContainer.setData(control);
             controlContainer.on('click', function(e) {
-                controlContainer.addClass('controlSelected');
-
                 self.fire('controlSelected', { 'controlContainer': controlContainer });
             });
 
