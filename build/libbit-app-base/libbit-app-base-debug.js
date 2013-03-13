@@ -128,6 +128,8 @@ App = Y.Base.create('libbit-app', Y.App, [], {
                 // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.
                 hideOn       : []
             });
+
+            this._activePanel.get('boundingBox').addClass('libbit-app-modal-view');
         } else {
             // Insert view into the DOM.
             viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
