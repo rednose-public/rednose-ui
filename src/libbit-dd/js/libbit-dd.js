@@ -75,9 +75,10 @@ DD = Y.Base.create('dd', Y.View, [], {
         return dd;
     },
 
-    bindGlobalDrop: function (groups) {
-        var container = this.get('container'),
-            drop;
+    bindGlobalDrop: function (groups, container) {
+        var drop;
+
+        container = container || this.get('container'),
 
         container.addClass('libbit-global-drop');
 

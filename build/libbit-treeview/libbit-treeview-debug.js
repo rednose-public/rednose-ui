@@ -8,7 +8,7 @@ var TreeView;
 // TODO: Implement sorting
 // TODO: Document data input
 // TODO: Disable text selection within treenodes
-TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.DD ], {
+TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.Filter, Y.Libbit.TreeView.DD ], {
 
     /**
      * Stores the state of expanded nodes.
@@ -57,15 +57,6 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
     },
 
     renderUI: function () {
-        var src        = this.get('srcNode'),
-            container  = Y.Node.create('<div class="libbit-treeview-content"></div>'),
-            sID        = Y.stamp(container);
-
-        container.set('id', sID);
-        src.append(container);
-
-        this.set('treeContainer', container);
-
         this._renderTree();
     },
 
