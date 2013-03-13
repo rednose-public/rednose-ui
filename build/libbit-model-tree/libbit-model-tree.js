@@ -11,6 +11,13 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         return node ? node.data : null;
     },
 
+    filterByAttr: function (type, attr, value) {
+        var tree  = this.get('items'),
+            nodes = this._treeFilter(value, tree, attr, type);
+
+        return nodes;
+    },
+
     /**
      * Get a model from the tree by client ID.
      */
@@ -98,13 +105,51 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         });
 
         return found;
-    }
+    },
 
+    _treeFilter: function(value, branch, attr, type) {
+        var self   = this,
+            buffer = [];
+
+        attr = attr || 'clientId';
+
+        Y.Array.each(branch, function (item) {
+            var obj = {};
+
+            if (item.data.name !== type || Y.Array.indexOf(value, item.data.get(attr)) !== -1) {
+                obj.label = item.label;
+                obj.data = item.data;
+
+                if (item.children) {
+                    obj.children = self._treeFilter(value, item.children, attr, type)
+                }
+
+                buffer.push(obj);
+            }
+        });
+
+        return buffer;
+    }
 }, {
 	ATTRS: {
 		items: {
-			value: []
-		}
+			value: [],
+            getter: function (val) {
+                if (this.get('filterApplyTo')) {
+                    return this._treeFilter(this.get('filterIds'), val, 'id', this.get('filterApplyTo'));
+                }
+
+                return val;
+            }
+		},
+
+        filterApplyTo: {
+            value : null
+        },
+
+        filterIds: {
+            value : []
+        }
 	}
 });
 
