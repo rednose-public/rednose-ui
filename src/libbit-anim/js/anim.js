@@ -21,7 +21,7 @@ Anim.slideInY = function (node) {
         node.setStyle('display', 'none');
         node.setStyle('height', '100%');
     });
-}
+};
 
 /**
  * Animates a slide-out of an expanded element as a post process.
@@ -45,7 +45,7 @@ Anim.slideOutY = function (node) {
     }, function() {
         node.setStyle('height', null);
     });
-}
+};
 
 /**
  * Clone the node, position it on top of the original for secondary animation.
@@ -69,7 +69,7 @@ Anim.fadeOut = function (node) {
     });
 
     anim.run();
-}
+};
 
 /**
  * Animate a slide in of a node.
@@ -93,7 +93,7 @@ Anim.slideIn = function (node) {
     });
 
     anim.run();
-}
+};
 
 /**
  * Animate a node to a given width
@@ -107,7 +107,7 @@ Anim.width = function (node, width) {
     });
 
     anim.run();
-}
+};
 
 /**
  * Vortext effect, animate to a given location
@@ -136,7 +136,7 @@ Anim.vortex = function (node, x, y) {
     });
 
     anim.run();
-}
+};
 
 /**
  * Squeeze the node and remove it
@@ -160,7 +160,7 @@ Anim.squeeze = function (node) {
     });
 
     anim.run();
-}
+};
 
 /**
  * Morphs between two nodes.
@@ -169,7 +169,7 @@ Anim.morph = function (oldNode, newNode, animOut, animIn) {
     animOut(oldNode);
     oldNode.set('innerHTML', newNode.get('outerHTML'));
     animIn(oldNode);
-}
+};
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit').Anim = Anim;

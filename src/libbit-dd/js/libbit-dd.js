@@ -130,6 +130,8 @@ DD = Y.Base.create('dd', Y.View, [], {
 
         drag.get('node').removeClass('libbit-dd-drag-placeholder');
         drag.get('dragNode').set('innerHTML', '');
+
+        drag.get('node').setStyle('visibility', '');
     },
 
     /**
@@ -238,10 +240,50 @@ DD = Y.Base.create('dd', Y.View, [], {
         if ((dropNode !== null) && dir) {
             if (dropNode && dropNode.get('parentNode')) {
                 if (!append) {
+                    // var clone = dragNode.cloneNode(true);
+                    var clone = Y.Node.create(dragNode.get('innerHTML'));
+
+                    dropNode.get('parentNode').insertBefore(clone, dragNode);
                     dropNode.get('parentNode').insertBefore(dragNode, dropNode);
+
+                    var height = dragNode.get('scrollHeight');
+
+                    dragNode.setStyle('height', 0);
+
+                    clone.setStyle('overflow', 'hidden');
+
+                    dragNode.setStyle('visibility', 'hidden');
+                    clone.setStyle('visibility', 'hidden');
+
+                    var anim = new Y.Anim({
+                        node: dragNode,
+                        to: {
+                            height: height
+                        },
+                        duration: '.25',
+                        easing: Y.Easing.easeOut
+                    });
+                    anim.run();
+
+                    var anim2 = new Y.Anim({
+                        node: clone,
+                        to: {
+                            height: 0
+                        },
+                        duration: '.25',
+                        easing: Y.Easing.easeOut
+                    });
+                    anim2.on('end', function () {
+                        clone.remove();
+                    });
+                    anim2.run();
+
+                    // dropNode.get('parentNode').insertBefore(dragNode, dropNode);
                 } else {
                     dropNode.get('parentNode').appendChild(dragNode);
                 }
+                //Resync all the targets because something moved.
+                Y.DD.DDM.syncActiveShims(true);
             }
         }
     },
