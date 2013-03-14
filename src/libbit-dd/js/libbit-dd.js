@@ -104,6 +104,8 @@ DD = Y.Base.create('dd', Y.View, [], {
 
         drag.get('dragNode').set('innerHTML', proxy.get('outerHTML'));
         drag.get('node').addClass('libbit-dd-drag-placeholder');
+
+        drag.get('node').setStyle('visibility', 'hidden');
     },
 
     /**
@@ -159,9 +161,16 @@ DD = Y.Base.create('dd', Y.View, [], {
      * Handles dragging into a drop region.
      */
     _dropEnter: function (e) {
-        var drag = e.drag,
-            drop = e.drop,
-            dragNode = drag.get('node'),
+        if (!e.drag || !e.drop || (e.drop !== e.target)) {
+            return false;
+        }
+        if (e.drop.get('node').get('tagName').toLowerCase() === 'li') {
+            this._moveItem(e.drag, e.drop);
+        }
+    },
+
+    _moveItem: function(drag, drop) {
+        var dragNode = drag.get('node'),
             dropNode = drop.get('node'),
             append = false,
             //padding = 5,
@@ -221,12 +230,12 @@ DD = Y.Base.create('dd', Y.View, [], {
 
         switch (dir) {
             case 'top':
-                next = dropNode.get('nextSibling');
-                if (next) {
-                    dropNode = next;
-                } else {
-                    append = true;
-                }
+                // next = dropNode.get('nextSibling');
+                // if (next) {
+                //     dropNode = next;
+                // } else {
+                //     append = true;
+                // }
                 break;
 
             case 'bottom':
@@ -243,8 +252,22 @@ DD = Y.Base.create('dd', Y.View, [], {
                     // var clone = dragNode.cloneNode(true);
                     var clone = Y.Node.create(dragNode.get('innerHTML'));
 
-                    dropNode.get('parentNode').insertBefore(clone, dragNode);
-                    dropNode.get('parentNode').insertBefore(dragNode, dropNode);
+                    if (dir === 'top') {
+                        dropNode.get('parentNode').insertBefore(clone, dragNode);
+
+                        if (dropNode.get('previousSibling') && dropNode.get('nextSibling')) {
+                            dropNode = dropNode.get('nextSibling');
+                        }
+
+                        if (dropNode.get('nextSibling')) {
+                            dropNode.get('parentNode').insertBefore(dragNode, dropNode);
+                        } else {
+                            dropNode.get('parentNode').appendChild(dragNode);
+                        }
+                    } else {
+                        dropNode.get('parentNode').insertBefore(clone, dragNode);
+                        dropNode.get('parentNode').insertBefore(dragNode, dropNode);
+                    }
 
                     var height = dragNode.get('scrollHeight');
 
@@ -252,7 +275,6 @@ DD = Y.Base.create('dd', Y.View, [], {
 
                     clone.setStyle('overflow', 'hidden');
 
-                    dragNode.setStyle('visibility', 'hidden');
                     clone.setStyle('visibility', 'hidden');
 
                     var anim = new Y.Anim({
