@@ -19,6 +19,12 @@ DD = Y.Base.create('dd', Y.Base, [], {
         if (this.get('dragdrop')) {
             Y.Do.after(this._bindDD, this, '_bindEvents', this);
 
+            this.on('drop:enter', function (e) {
+                e.drop.get('node').all('.libbit-treeview-icon').addClass('icon-white');
+            });
+            this.on('drop:exit', function (e) {
+                e.drop.get('node').all('.icon-white').removeClass('icon-white');
+            });
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
         }
@@ -65,6 +71,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
                     bubbleTargets: self
                 });
 
+                node.addClass('libbit-treeview-drop');
                 self._ddMap.push(catDD);
             }
 
@@ -72,11 +79,18 @@ DD = Y.Base.create('dd', Y.Base, [], {
         });
 
         if (this.get('header')) {
-            new Y.DD.Drop({
+            var headerDrop = new Y.DD.Drop({
                 node         : this.get('contentBox').one('.nav-header'),
                 // Only allow categories to drop here
                 groups       : [ Y.stamp(this) ],
                 bubbleTargets: self
+            });
+
+            headerDrop.on('drop:enter', function (e) {
+                e.drop.get('node').get('parentNode').get('parentNode').addClass('libbit-treeview-drop-over-global');
+            });
+            headerDrop.on('drop:exit', function () {
+                Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
             });
         }
     },
@@ -140,9 +154,12 @@ DD = Y.Base.create('dd', Y.Base, [], {
             newCatID  = e.drop.get('node').get('parentNode').getAttribute('data-yui3-record'),
             // The model that was moved.
             obj       = treeModel.getByClientId(objID);
-            // The category model it was dropped on, or null if it was dropped outside the tree.
+            // The category model it was dropped on, or null if it was dropped onto the header.
             newCat    = treeModel.getByClientId(newCatID),
             self      = this;
+
+        Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
+        e.drop.get('node').all('.icon-white').removeClass('icon-white');
 
         if (obj) {
             if (Y.instanceOf(obj, Y.TB.Category)) {

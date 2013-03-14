@@ -1,7 +1,6 @@
 body {
     font-family: Helvetica, Arial, sans-serif;
     font-size: 13px;
-    line-height: 1.5;
     color: #4D4D4D;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
@@ -67,4 +66,8 @@ li {
  .libbit-app-message-body {
     font-size: 16px;
     line-height: 19px;
+}
+
+.nav-header {
+    cursor: default;
 }

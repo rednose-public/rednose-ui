@@ -55,10 +55,12 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
     },
 
     renderUI: function () {
+        this.get('boundingBox').addClass('libbit-treeview-outer-container');
+        this.get('srcNode').addClass('libbit-treeview-inner-container');
+
         if (this.get('header')) {
             this.get('srcNode').prepend('<div class="nav-header">' + this.get('header') + '</div>');
         }
-
         this._renderTree();
     },
 

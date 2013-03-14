@@ -31,12 +31,19 @@
 }
 
 /* Custom drag highlight */
-.yui3-treeview .yui3-dd-drop-over {
-    background-color: #0088cc !important;
+.yui3-treeview .libbit-treeview-drop.yui3-dd-drop-over {
+    background-color: #80C4E6 !important;
     color: #ffffff !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
-    opacity: 0.5 !important;
     -webkit-border-radius: 5px !important;
      -moz-border-radius: 5px !important;
           border-radius: 5px !important;
+}
+
+.libbit-treeview-drop-over-global .libbit-treeview-inner-container {
+    margin: -2px;
+}
+
+.libbit-treeview-outer-container.libbit-treeview-drop-over-global {
+    border: 2px solid #80C4E6;
 }
