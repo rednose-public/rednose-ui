@@ -198,7 +198,10 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
                 li.setAttribute('data-yui3-modelId', model.get('id'));
                 li.setAttribute('data-yui3-record', model.get('clientId'));
 
-                if (typeof(self._iconMap[model.name]) != 'undefined') {
+                // Set the title for mouseovers on long labels
+                li.set('title', treeNode.label);
+
+                if (typeof(self._iconMap[model.name]) !== 'undefined') {
                     self._setIcon(li, self._iconMap[model.name]);
                 }
 
