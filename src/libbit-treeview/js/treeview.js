@@ -55,6 +55,10 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
     },
 
     renderUI: function () {
+        if (this.get('header')) {
+            this.get('srcNode').prepend('<div class="nav-header">' + this.get('header') + '</div>');
+        }
+
         this._renderTree();
     },
 
@@ -230,10 +234,14 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
                 iconNode.addClass('libbit-treeview-icon');
             }
         }
-    },
+    }
 
 }, {
     ATTRS: {
+        // Tree header, optional.
+        header : {
+            value: null
+        },
         // The data object containing the models.
         data : {
             value: null

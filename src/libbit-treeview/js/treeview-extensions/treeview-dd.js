@@ -14,21 +14,11 @@ DD = Y.Base.create('dd', Y.Base, [], {
      * Subscribe to the render event and set up DD listeners.
      */
     initializer: function () {
-        var self = this;
-
         if (this.get('dragdrop')) {
             Y.Do.after(this._bindDD, this, '_bindEvents', this);
 
-            self.on('beforeRefresh', function() {
-                self._destroyDD();
-            });
-
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
-
-            // this.on('drop:over', this._setClass, this);
-            // this.on('drag:end', this._setClass, this);
-            this.on('drop:over', this._handleOver, this);
         }
     },
 
@@ -66,8 +56,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
             model = value.data;
 
             if (Y.instanceOf(model, Y.TB.Category)) {
-                // This is a category model.
-                // Categories allow dropping
+                // This is a category model. Categories allow dropping.
                 var catDD = new Y.DD.Drop({
                     node         : node,
                     groups       : self.get('groups'),
@@ -79,16 +68,31 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
             self._createDD(node, model);
         });
+
+        if (this.get('header')) {
+            new Y.DD.Drop({
+                node         : this.get('contentBox').one('.nav-header'),
+                // Only allow categories to drop here
+                groups       : [ Y.stamp(this) ],
+                bubbleTargets: self
+            });
+        }
     },
 
     _createDD: function (node, data) {
-        var self = this,
+        var groups = this.get('groups'),
+            self = this,
             dd;
 
+        if (data instanceof Y.TB.Category) {
+            groups = groups.concat([ Y.stamp(this) ]);
+        }
+
+        // Add an extra unique group for the category drags.
         dd = new Y.DD.Drag({
-            node   : node,
-            data   : data,
-            groups : this.get('groups'),
+            node         : node,
+            data         : data,
+            groups       : groups,
             bubbleTargets: self
         }).plug(Y.Plugin.DDProxy, {
             moveOnEnd  : false,
@@ -100,17 +104,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
         return dd;
     },
 
-    /**
-     * All DD references must be destoyed if the model is reloaded.
-     */
-    _destroyDD: function() {
-        for (var i in this._ddMap) {
-            this._ddMap[i].destroy();
-        }
-
-        this._ddMap = [];
-    },
-
     _handleStart: function (e) {
         var drag = e.target,
             model,
@@ -118,10 +111,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
             origin,
             dd;
 
-        // var drag = e.target;
-        // var proxy = drag.get('node').cloneNode(true).addClass('libbit-dd-drag-proxy');
-
-        // drag.get('dragNode').set('innerHTML', proxy.get('outerHTML'));
         model = drag.get('data');
 
         drag.get('dragNode').setContent(
@@ -149,48 +138,22 @@ DD = Y.Base.create('dd', Y.Base, [], {
             newCatID  = e.drop.get('node').get('parentNode').getAttribute('data-yui3-record'),
             // The model that was moved.
             obj       = treeModel.getByClientId(objID);
-            // The category model it was dropped on, or null if it was dropped outside the tree.
-            newCat    = treeModel.getByClientId(newCatID);
+            // The category model it was dropped on, or null if it was dropped onto the header.
+            newCat    = treeModel.getByClientId(newCatID),
+            self      = this;
 
-            console.log(e.drop.get('node'));
-        // if (obj) {
-        //     if (Y.instanceOf(obj, Y.TB.Category)) {
-        //         obj.set('parent', newCat);
-        //     } else {
-        //         obj.set('category', newCat);
-        //     }
+        if (obj) {
+            if (Y.instanceOf(obj, Y.TB.Category)) {
+                obj.set('parent', newCat);
+            } else {
+                obj.set('category', newCat);
+            }
 
-        //     obj.save(function () {
-        //         treeModel.load();
-        //     });
-        // }
-    },
-
-    _handleOver: function (e) {
-        // console.log(e);
-    },
-
-    _setClass: function (e) {
-        var activeEl;
-
-        switch (e.type) {
-            case 'drop:over':
-                var node = e.drop.get('node');
-
-                if (node.hasClass('libbit-content-drop-over') === false) {
-                    if (activeEl = this.get('contentBox').one('.libbit-content-drop-over')) {
-                        activeEl.removeClass('libbit-content-drop-over');
-                    }
-
-                    node.addClass('libbit-content-drop-over');
-                }
-                break;
-
-            case 'drag:end':
-                if (activeEl = this.get('contentBox').one('.libbit-content-drop-over')) {
-                    activeEl.removeClass('libbit-content-drop-over');
-                }
-                break;
+            obj.save(function () {
+                treeModel.load(function () {
+                    self.refresh();
+                });
+            });
         }
     }
 }, {

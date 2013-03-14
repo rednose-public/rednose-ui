@@ -94,14 +94,12 @@ DD = Y.Base.create('dd', Y.View, [], {
 
         // Bind the global drop object.
         drop.on('drop:enter', this._dropEnterGlobal, this);
-        drop.on('drop:over', this._handleScroll, this);
     },
 
 // -- Event handlers -----------------------------------------------------------
 
     _handleStart: function (e) {
         var drag = e.target;
-
         var proxy = drag.get('node').cloneNode(true).addClass('libbit-dd-drag-proxy');
 
         drag.get('dragNode').set('innerHTML', proxy.get('outerHTML'));
@@ -152,9 +150,7 @@ DD = Y.Base.create('dd', Y.View, [], {
         if (drop.get('tagName').toLowerCase() !== 'li') {
             if (!drop.contains(drag)) {
                 drop.appendChild(drag);
-                Y.Lang.later(50, Y, function () {
-                    Y.DD.DDM.syncActiveShims(true);
-                });
+                Y.DD.DDM.syncActiveShims(true);
             }
         }
     },
@@ -396,69 +392,6 @@ DD = Y.Base.create('dd', Y.View, [], {
 
         if (target.ancestor('.libbit-dd-drag-hover-disabled')) {
             target.ancestor('.libbit-dd-drag-hover-disabled').replaceClass('libbit-dd-drag-hover-disabled', 'libbit-dd-drag-hover');
-        }
-    },
-
-// -- Scroll handler for the global drop region --------------------------------------
-
-    /**
-     * Scroll the view up or down when a drag reaches the boundaries on the Y axis
-     */
-    _handleScroll: function (e) {
-        var dropNode    = e.drop.get('node'),
-            dragY       = Y.DD.DDM.activeDrag.get('dragNode').getY(),
-            parent      = dropNode.get('offsetParent'),
-            // nodeOffsetY = dropNode.get('offsetTop'),
-            // nodeHeight  = dropNode.get('offsetHeight'),
-            nodeHeight  = this.get('container').get('offsetHeight'),
-            relativeY,
-            node,
-            anim,
-            dir;
-
-        var buffer = 30;
-        var delay = 235;
-        var marginTop = 40;
-
-        if (dragY < prevY) {
-            dir = 'up';
-        } else {
-            dir = 'down';
-        }
-
-        // GLOBAL
-        prevY = dragY;
-
-        if (dragY - marginTop < buffer && dir === 'up') {
-            // Scroll up
-            node = parent;
-            anim = new Y.Anim({
-                node: node,
-                to: {
-                    scroll: function(node) {
-                        return [node.get('scrollTop') + node.get('offsetHeight'), 0];
-                    }
-                },
-                easing: Y.Easing.easeOut
-            });
-
-            anim.run();
-        }
-
-        if (dragY - marginTop > nodeHeight - buffer && dir === 'down') {
-            // Scroll down
-            node = parent;
-            anim = new Y.Anim({
-                node: node,
-                to: {
-                    scroll: function(node) {
-                        return [0, node.get('scrollTop') + node.get('offsetHeight')];
-                    }
-                },
-                easing: Y.Easing.easeOut
-            });
-
-            anim.run();
         }
     }
 });
