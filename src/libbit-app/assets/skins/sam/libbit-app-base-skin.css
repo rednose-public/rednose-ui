@@ -170,3 +170,8 @@
     -o-font-smoothing: antialiased;
     font-smoothing: antialiased;
 }
+
+/* Scrollable navigation view */
+.libbit-grid-master-view {
+    overflow-y: auto;
+}
