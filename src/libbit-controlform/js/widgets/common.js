@@ -39,14 +39,20 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     },
 
     _renderInput: function(textarea) {
-        this.get('srcNode').append(
-            Y.Node.create(textarea ? '<textarea />' : '<input />')
-        );
+        var textfield = Y.Node.create(textarea ? '<textarea />' : '<input />')
+        var properties = this._getProperties();
+
+        if (properties.defaultValue) {
+            textfield.set('value', properties.defaultValue);
+        }
+
+        this.get('srcNode').append(textfield);
     },
 
     _renderDropdown: function() {
         var select = Y.Node.create('<select />');
         var rules = this.get('rules');
+        var properties = this._getProperties();
 
         if (typeof(rules.input_restrictions) !== 'undefined') {
             for (var i in rules.input_restrictions) {
@@ -59,6 +65,12 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
                     option.setAttribute('value', restrictions.value);
                 }
 
+                if (properties.defaultValue) {
+                    if (option.get('innerHTML') === properties.defaultValue) {
+                        option.setAttribute('selected', 'selected');
+                    }
+                }
+
                 select.append(option);
             }
         }
@@ -67,22 +79,32 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     },
 
     _renderCheckbox: function() {
+        var properties = this._getProperties();
         var checkbox = Y.Node.create('<input type="checkbox" />');
 
         this.get('srcNode').append(checkbox);
+
+        if (properties.defaultValue) {
+            checkbox.set('checked', (properties.defaultValue === 'true'));
+        }
     },
 
     _renderRadio: function() {
         var name = 'rand' + Math.floor(Math.random() * 1010101) + (new Date().getTime());
         var rules = this.get('rules');
+        var properties = this._getProperties();
         var container = Y.Node.create('<span class="radioGroup" id="' + name + '" />');
 
         if (typeof(rules.input_restrictions) !== 'undefined') {
             for (var i in rules.input_restrictions) {
                 var restrictions = rules.input_restrictions[i];
-                var radio = Y.Node.create('<input type="radio" />' + restrictions.name);
+                var radio = Y.Node.create('<input type="radio" name="' + name + '" />');
 
-                radio.setAttribute('name', name);
+                if (properties.defaultValue) {
+                    if (properties.defaultValue === restrictions.name) {
+                        radio.set('checked', true);
+                    }
+                }
 
                 if (restrictions.value === '') {
                     radio.setAttribute('value', restrictions.name);
@@ -91,11 +113,24 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
                 }
 
                 container.append(radio);
+                container.append(Y.Node.create(restrictions.name));
                 container.append(Y.Node.create('<br />'));
             }
 
             this.get('srcNode').append(container);
         }
+    },
+
+    _getProperties: function() {
+        var rules = this.get('rules');
+
+        if (rules.input_properties) {
+            var properties = rules.input_properties;
+
+            return properties;
+        }
+
+        return {};
     }
 }, {
     ATTRS: {

@@ -225,8 +225,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 }
             }
         }
-
-        this.render();
     },
 
     _addFieldGroupToModel: function(formId, fieldGroup) {
