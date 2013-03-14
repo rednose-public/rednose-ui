@@ -134,6 +134,7 @@
 }
 
 .libbit-grid-detail-view {
+    overflow: auto;
     width: 800px;
     height: 443px;
     font-family: Helvetica, Arial, sans-serif;
