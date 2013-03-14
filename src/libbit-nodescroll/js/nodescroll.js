@@ -8,7 +8,6 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
      */
     initializer: function () {
         this._bindDD(this.get('container'), this.get('groups'));
-
         this.on('drop:over', this._handle, this);
     },
 

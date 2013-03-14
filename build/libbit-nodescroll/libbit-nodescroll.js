@@ -9,6 +9,14 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
      * Initializer, gets called upon instance initiation.
      */
     initializer: function () {
+        var groups = [];
+
+        // Y.Array.each(this.get('targets', function (target) {
+        //     Y.Array.each(target.get('groups')) {
+        //         console.log(group);
+        //     }
+        // }));
+        // scroll.addTarget(this);
         this._bindDD(this.get('container'), this.get('groups'));
 
         this.on('drop:over', this._handle, this);

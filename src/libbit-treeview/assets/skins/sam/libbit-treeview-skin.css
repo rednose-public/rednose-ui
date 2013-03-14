@@ -2,10 +2,6 @@
     border: 2px solid white;
 }
 
-.libbit-content-drop-over {
-    border: 2px solid #0088cc !important;
-}
-
 .yui3-skin-sam .yui3-treeview-row {
     color: #0088cc !important;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -36,4 +32,9 @@
 
 .yui3-skin-sam .yui3-treeview-row:hover {
     background-color: #eeeeee !important;
+}
+
+/* DD */
+.yui3-treeview .yui3-dd-drop-over {
+    border: 2px solid #0088cc !important;
 }

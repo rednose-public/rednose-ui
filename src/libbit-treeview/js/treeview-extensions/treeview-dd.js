@@ -15,7 +15,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
      */
     initializer: function () {
         var self = this;
-        var model = this.get('data');
 
         if (this.get('dragdrop')) {
             Y.Do.after(this._bindDD, this, '_bindEvents', this);
@@ -27,8 +26,9 @@ DD = Y.Base.create('dd', Y.Base, [], {
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
 
-            this.on('drop:over', this._setClass, this);
-            this.on('drag:end', this._setClass, this);
+            // this.on('drop:over', this._setClass, this);
+            // this.on('drag:end', this._setClass, this);
+            this.on('drop:over', this._handleOver, this);
         }
     },
 
@@ -59,12 +59,10 @@ DD = Y.Base.create('dd', Y.Base, [], {
         }
 
         Y.each(nodes, function (value) {
-            var data = self.get('data'),
-                clientId,
-                node,
+            var node,
                 model;
 
-            node = tree.getHTMLNode(value);
+            node = tree.getHTMLNode(value).one('div');
             model = value.data;
 
             if (Y.instanceOf(model, Y.TB.Category)) {
@@ -120,10 +118,14 @@ DD = Y.Base.create('dd', Y.Base, [], {
             origin,
             dd;
 
+        // var drag = e.target;
+        // var proxy = drag.get('node').cloneNode(true).addClass('libbit-dd-drag-proxy');
+
+        // drag.get('dragNode').set('innerHTML', proxy.get('outerHTML'));
         model = drag.get('data');
 
         drag.get('dragNode').setContent(
-            drag.get('node').one('div').get('outerHTML')
+            drag.get('node').get('outerHTML')
         );
 
         origin = drag.get('node');
@@ -144,23 +146,28 @@ DD = Y.Base.create('dd', Y.Base, [], {
     _handleDrop: function (e) {
         var treeModel = this.get('data'),
             objID     = e.drag.get('data').get('clientId'),
-            newCatID  = e.drop.get('node').getAttribute('data-yui3-record'),
+            newCatID  = e.drop.get('node').get('parentNode').getAttribute('data-yui3-record'),
             // The model that was moved.
             obj       = treeModel.getByClientId(objID);
             // The category model it was dropped on, or null if it was dropped outside the tree.
             newCat    = treeModel.getByClientId(newCatID);
 
-        if (obj) {
-            if (Y.instanceOf(obj, Y.TB.Category)) {
-                obj.set('parent', newCat);
-            } else {
-                obj.set('category', newCat);
-            }
+            console.log(e.drop.get('node'));
+        // if (obj) {
+        //     if (Y.instanceOf(obj, Y.TB.Category)) {
+        //         obj.set('parent', newCat);
+        //     } else {
+        //         obj.set('category', newCat);
+        //     }
 
-            obj.save(function () {
-                treeModel.load();
-            });
-        }
+        //     obj.save(function () {
+        //         treeModel.load();
+        //     });
+        // }
+    },
+
+    _handleOver: function (e) {
+        // console.log(e);
     },
 
     _setClass: function (e) {

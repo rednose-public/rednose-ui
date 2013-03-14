@@ -99,7 +99,6 @@ DD = Y.Base.create('dd', Y.View, [], {
 
     _handleStart: function (e) {
         var drag = e.target;
-
         var proxy = drag.get('node').cloneNode(true).addClass('libbit-dd-drag-proxy');
 
         drag.get('dragNode').set('innerHTML', proxy.get('outerHTML'));
