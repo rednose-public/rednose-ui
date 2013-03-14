@@ -150,9 +150,7 @@ DD = Y.Base.create('dd', Y.View, [], {
         if (drop.get('tagName').toLowerCase() !== 'li') {
             if (!drop.contains(drag)) {
                 drop.appendChild(drag);
-                Y.Lang.later(50, Y, function () {
-                    Y.DD.DDM.syncActiveShims(true);
-                });
+                Y.DD.DDM.syncActiveShims(true);
             }
         }
     },

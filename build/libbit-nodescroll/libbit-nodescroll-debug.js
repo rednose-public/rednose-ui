@@ -9,25 +9,16 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
      * Initializer, gets called upon instance initiation.
      */
     initializer: function () {
-        var self = this;
+        this._bindDD(this.get('container'), this.get('groups'));
 
-        var event = Y.delegate('DOMNodeInserted', function(e) {
-            event.detach();
-
-            self._bindDD(e);
-        }, 'body', this.get('nodeSelector'));
+        this.on('drop:over', this._handle, this);
     },
 
-    _bindDD: function(e) {
-        var self = this;
-        var dd = new Y.DD.Drop({
-            node         : e.currentTarget,
+    _bindDD: function (node, groups) {
+        new Y.DD.Drop({
+            node         : node,
             bubbleTargets: this,
-            groups       : this.get('groups')
-        });
-
-        dd.on('drop:over', function(e) {
-            self._handle(e);
+            groups       : groups
         });
     },
 
@@ -37,27 +28,27 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
     _handle: function (e) {
         var dropNode    = e.drop.get('node'),
             dragY       = e.drag.mouseXY[1],
-            nodeOffsetY = dropNode.get('offsetTop'),
             nodeHeight  = dropNode.get('offsetHeight'),
+            margin      = 25,
+            relativeY   = dragY - margin,
             self        = this,
-            relativeY,
             node,
             scrollFunc;
 
-        // Determain scrolling direction (if needed)
-        relativeY = dragY - nodeOffsetY - 25; /* Margin top */
+        // Determine scrolling direction (if needed)
         if (relativeY > nodeHeight) {
             scrollFunc = function() {
-                return [0, node.get('scrollTop') + node.get('offsetHeight')]
+                return [0, node.get('scrollTop') + node.get('offsetHeight')];
             };
         } else if (relativeY < 25) {
             scrollFunc = function() {
-                return [0, node.get('scrollTop') - node.get('offsetHeight')]
+                return [0, node.get('scrollTop') - node.get('offsetHeight')];
             };
         } else {
             if (this.anim) {
                 if (this.anim.get('running')) {
                     this.anim.stop();
+                    Y.DD.DDM.syncActiveShims(true);
                 }
             }
         }
@@ -66,7 +57,7 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
         if (scrollFunc) {
             node = dropNode;
 
-            if (this.anim == null) {
+            if (this.anim === null) {
                 this.anim = new Y.Anim({
                     node: node,
                     to: {
@@ -82,10 +73,14 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
             this.anim.on('tween', function() {
                 self.fire('scrolling');
             });
+            this.anim.on('end', function() {
+                Y.DD.DDM.syncActiveShims(true);
+            });
         }
-    },
+    }
 }, {
     ATTRS : {
+        container: null,
         nodeSelector: { value: '' },
         groups: { value: [] }
     }
