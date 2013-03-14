@@ -46,8 +46,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
         container.all('.dropdown-toggle').plug(Y.Bootstrap.Dropdown);
         container.all('.dropdown-menu > li > a').each(function() {
             this.on('click', function () {
-                console.log(e);
-
                 if (this.ancestor('li').hasClass('disabled')) {
                     this.blur();
 
