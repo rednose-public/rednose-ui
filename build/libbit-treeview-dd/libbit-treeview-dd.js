@@ -199,17 +199,19 @@ DD = Y.Base.create('dd', Y.Base, [], {
         }
 
         if (obj) {
-            if (Y.instanceOf(obj, Y.TB.Category)) {
-                obj.set('parent', newCat);
-            } else {
-                obj.set('category', newCat);
-            }
+            var property      = obj instanceof Y.TB.Category ? 'parent' : 'category',
+                oldCat        = obj.get(property),
+                oldCatModelID = oldCat ? oldCat.id : null,
+                newCatModelID = newCat ? newCat.get('id') : null;
 
-            obj.save(function () {
-                treeModel.load(function () {
-                    self.refresh();
+            if (oldCatModelID !== newCatModelID) {
+                obj.set(property, newCat);
+                obj.save(function () {
+                    treeModel.load(function () {
+                        self.refresh();
+                    });
                 });
-            });
+            }
         }
     }
 }, {

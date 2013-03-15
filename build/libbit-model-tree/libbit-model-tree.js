@@ -121,7 +121,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
                 obj.data = item.data;
 
                 if (item.children) {
-                    obj.children = self._treeFilter(value, item.children, attr, type)
+                    obj.children = self._treeFilter(value, item.children, attr, type);
                 }
 
                 buffer.push(obj);
