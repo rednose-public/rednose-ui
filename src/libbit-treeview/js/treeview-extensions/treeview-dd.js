@@ -5,6 +5,8 @@ var DD;
  */
 DD = Y.Base.create('dd', Y.Base, [], {
 
+    _callbacks: {},
+
     /**
      * DD references store
      */
@@ -18,14 +20,22 @@ DD = Y.Base.create('dd', Y.Base, [], {
             Y.Do.after(this._bindDD, this, '_bindEvents', this);
 
             this.on('drop:enter', function (e) {
-                e.drop.get('node').all('.libbit-treeview-icon').addClass('icon-white');
+                e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');
             });
             this.on('drop:exit', function (e) {
+                // FIXME: Ignore selected nodes
                 e.drop.get('node').all('.icon-white').removeClass('icon-white');
             });
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
         }
+    },
+
+    addCallback: function(group, callback, context) {
+        this._callbacks[group] = {
+            callback: callback,
+            context: context
+        };
     },
 
     /**
@@ -95,7 +105,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
     _createDD: function (node, data) {
         var groups = this.get('groups'),
-            self = this,
+            self   = this,
             dd;
 
         if (data instanceof Y.TB.Category) {
@@ -131,6 +141,9 @@ DD = Y.Base.create('dd', Y.Base, [], {
             drag.get('node').get('outerHTML')
         );
 
+        drag.get('dragNode').all('.icon-white').removeClass('icon-white');
+
+        // Recreate the drag instance
         origin = drag.get('node');
 
         drag._prep();
@@ -154,10 +167,30 @@ DD = Y.Base.create('dd', Y.Base, [], {
             obj       = treeModel.getByClientId(objID);
             // The category model it was dropped on, or null if it was dropped onto the header.
             newCat    = treeModel.getByClientId(newCatID),
+            callback  = false,
             self      = this;
 
         Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
-        e.drop.get('node').all('.icon-white').removeClass('icon-white');
+
+        if (!e.drop.get('node').get('parentNode').hasClass('libbit-item-selected')) {
+            e.drop.get('node').all('.icon-white').removeClass('icon-white');
+        }
+
+        // Check for custom override callbacks
+        Y.Array.each(e.drag.get('groups'), function (group) {
+            if (group in self._callbacks) {
+                var config = self._callbacks[group];
+
+                e.drop.set('data', newCat);
+                config.callback.apply(config.context, [e]);
+
+                callback = true;
+            }
+        });
+
+        if (callback) {
+            return true;
+        }
 
         if (obj) {
             if (Y.instanceOf(obj, Y.TB.Category)) {

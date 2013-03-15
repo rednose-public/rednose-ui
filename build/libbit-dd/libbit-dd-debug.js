@@ -43,12 +43,13 @@ DD = Y.Base.create('dd', Y.View, [], {
     /**
      * Create a new drag instance from a DOM node.
      */
-    createDrag: function (node, groups) {
+    createDrag: function (node, groups, data) {
         node.addClass('libbit-dd-drag');
 
         var dd = new Y.DD.Drag({
             node         : node,
-            groups: groups,
+            data         : data,
+            groups       : groups,
             bubbleTargets: this,
             target       : true
         });
@@ -64,13 +65,13 @@ DD = Y.Base.create('dd', Y.View, [], {
     /**
      * Create a new drop instance from a DOM node.
      */
-    createDrop: function (node, groups) {
+    createDrop: function (node, groups, data) {
         node.addClass('libbit-dd-drop');
 
         var dd = new Y.DD.Drop({
-            node        : node,
-            //padding     : '20 0',
-            groups: groups,
+            node         : node,
+            data         : data,
+            groups       : groups,
             bubbleTargets: this
         });
 
