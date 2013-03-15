@@ -4,6 +4,12 @@ var ModelTree;
 
 ModelTree = Y.Base.create('modelTree', Y.Model, [], {
 
+    getByType: function (type) {
+        var tree = this.get('items');
+
+        return this._treeFindByType(type, tree);
+    },
+
     getByAttr: function (type, attr, value) {
         var tree = this.get('items'),
             node = this._treeFind(value, tree, attr, type);
@@ -12,10 +18,9 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
     },
 
     filterByAttr: function (type, attr, value) {
-        var tree  = this.get('items'),
-            nodes = this._treeFilter(value, tree, attr, type);
+        var tree  = this.get('items');
 
-        return nodes;
+        return this._treeFilter(value, tree, attr, type);
     },
 
     /**
@@ -59,7 +64,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
     /**
      * Return all (potential) sub-branches of a given branch.
      */
-    _findBranches: function(branch) {
+    _findBranches: function (branch) {
         var self     = this,
             branches = [];
 
@@ -86,7 +91,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
     /**
      * Find a node in the tree by specified the client ID of the model it contains.
      */
-    _treeFind: function(value, branch, attr, type) {
+    _treeFind: function (value, branch, attr, type) {
         var self  = this,
             found = null;
 
@@ -107,7 +112,25 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         return found;
     },
 
-    _treeFilter: function(value, branch, attr, type) {
+    _treeFindByType: function (type, branch, buffer) {
+        var self   = this;
+
+        buffer = buffer || [];
+
+        Y.Array.each(branch, function (item) {
+            if (item.data.name === type) {
+                buffer.push(item.data);
+            }
+
+            if (item.children) {
+                buffer = self._treeFindByType(type, item.children, buffer);
+            }
+        });
+
+        return buffer;
+    },
+
+    _treeFilter: function (value, branch, attr, type) {
         var self   = this,
             buffer = [];
 
@@ -135,9 +158,9 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
 		items: {
 			value: [],
             getter: function (val) {
-                if (this.get('filterApplyTo')) {
-                    return this._treeFilter(this.get('filterIds'), val, 'id', this.get('filterApplyTo'));
-                }
+                // if (this.get('filterApplyTo')) {
+                //     return this._treeFilter(this.get('filterIds'), val, 'id', this.get('filterApplyTo'));
+                // }
 
                 return val;
             }

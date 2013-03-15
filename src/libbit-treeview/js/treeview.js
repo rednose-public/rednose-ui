@@ -75,8 +75,8 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
         if (this.get('tree')) {
             tree = this.get('tree');
 
-            this.openEvent.detach();
-            this.closeEvent.detach();
+            tree.detach('open', this._handleExpand);
+            tree.detach('close', this._handleCollapse);
 
             while (tree.rootNode.children.length > 0) {
                 tree.removeNode(tree.rootNode.children[0]);
@@ -92,9 +92,9 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
             });
 
             this.set('tree', tree);
-        }
 
-        tree.render();
+            tree.render();
+        }
 
         this._processTree(tree.rootNode);
         this._bindEvents();
@@ -102,24 +102,28 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
 
     _bindEvents: function() {
         var tree = this.get('tree');
-        var self = this;
 
-        this.openEvent = tree.on('open', function(e) {
-            var li = tree.getHTMLNode(e.node);
-
-            self._stateMap.push(parseInt(li.getAttribute('data-yui3-modelId')));
-            self.fire('expend', e);
-        });
-
-        this.closeEvent = tree.on('close', function(e) {
-            var li = tree.getHTMLNode(e.node);
-            var stateIndex = Y.Array.indexOf(self._stateMap, parseInt(li.getAttribute('data-yui3-modelId')));
-
-            delete self._stateMap[stateIndex];
-            self.fire('collapse', e);
-        });
+        tree.on('open', this._handleExpand, this);
+        tree.on('close', this._handleCollapse, this);
 
         this.fire('Finished');
+    },
+
+    _handleExpand: function (e) {
+        var tree = this.get('tree');
+        var li = tree.getHTMLNode(e.node);
+
+        this._stateMap.push(parseInt(li.getAttribute('data-yui3-modelId')));
+        this.fire('expand', e);
+    },
+
+    _handleCollapse: function (e) {
+        var tree = this.get('tree');
+        var li = tree.getHTMLNode(e.node);
+        var stateIndex = Y.Array.indexOf(this._stateMap, parseInt(li.getAttribute('data-yui3-modelId')));
+
+        delete this._stateMap[stateIndex];
+        this.fire('collapse', e);
     },
 
     /**
@@ -131,12 +135,12 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
         tree.on(['open', 'close'], function(e) {
             var iconEl = tree.getHTMLNode(e.node).one('.icon-folder-close');
 
-            if (e.type == 'treeView:close') {
+            if (e.type === 'treeView:close') {
                 iconEl = tree.getHTMLNode(e.node).one('.icon-folder-open');
             }
 
             if (iconEl) {
-                if (e.type == 'treeView:close') {
+                if (e.type === 'treeView:close') {
                     iconEl.removeClass('icon-folder-open');
                     iconEl.addClass('icon-folder-close');
                 } else {
@@ -148,10 +152,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
     },
 
     refresh: function () {
-        this.fire('beforeRefresh');
-
         this._renderTree();
-
         this.fire('refresh');
     },
 
@@ -166,6 +167,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
         if (rootNode.children.length) {
             rootNode.open();
         }
+
         // Attach data to the nodes
         for (var i in rootNode.children) {
             var treeNode = rootNode.children[i],

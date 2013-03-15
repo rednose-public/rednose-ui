@@ -27,9 +27,6 @@ Anim.slideInY = function (node) {
  * Animates a slide-out of an expanded element as a post process.
  */
 Anim.slideOutY = function (node) {
-    // Hide potential scrollbars
-    node.ancestor('.yui3-treeview').setStyle('overflow', 'hidden');
-
     // Make sure the chileElement is not hidden, otherwise height cannot be
     // calculated.
     node.setStyle('display', 'block');

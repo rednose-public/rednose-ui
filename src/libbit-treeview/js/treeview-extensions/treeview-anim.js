@@ -8,7 +8,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Initializer, gets called upon instance initiation.
      */
     initializer: function () {
-        this.on('expend', this._afterExpand, this);
+        this.on('expand', this._afterExpand, this);
         this.on('collapse', this._afterCollapse, this);
     },
 
@@ -19,6 +19,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
         var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
+        children.setStyle('display', 'block');
         Y.Libbit.Anim.slideInY(children);
     },
 
@@ -29,6 +30,9 @@ Anim = Y.Base.create('anim', Y.Base, [], {
         var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
+        // Hide potential scrollbars
+        children.ancestor('.yui3-treeview').setStyle('overflow', 'hidden');
+        children.setStyle('display', 'block');
         Y.Libbit.Anim.slideOutY(children);
     },
 
@@ -37,9 +41,8 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      */
     _getChildrenElement: function (node) {
         var domNode = this.get('tree').getHTMLNode(node);
-        var ul = Y.Node('#' + domNode.getAttribute('id')).one('ul');
 
-        return ul;
+        return Y.Node('#' + domNode.getAttribute('id')).one('ul');
     }
 });
 
