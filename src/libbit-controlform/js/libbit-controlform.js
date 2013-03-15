@@ -131,9 +131,10 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             controlElement.data = control;
             label.set('innerHTML', control.field.name);
 
+//            console.warn('name:' + control.field.name + ' // content: ' + controlElement.get('value'));
             if (draft !== null) {
                 var content = draft.getValue(control.field.id);
-
+//                console.warn(content);
                 controlElement.set('value', content);
             }
 
@@ -371,7 +372,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         listCollection.each(function(list) {
             list.all('li').each(function(control) {
                 var fieldContent = new Y.ControlForm.FieldContent({
-                    field: control.getData(),
+                    field: control.getData().field,
                     content: control.one('input, textarea, select').get('value')
                 });
 
