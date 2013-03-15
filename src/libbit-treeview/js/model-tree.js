@@ -154,22 +154,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
 }, {
 	ATTRS: {
 		items: {
-			value: [],
-            getter: function (val) {
-                // if (this.get('filterApplyTo')) {
-                //     return this._treeFilter(this.get('filterIds'), val, 'id', this.get('filterApplyTo'));
-                // }
-
-                return val;
-            }
-		},
-
-        filterApplyTo: {
-            value : null
-        },
-
-        filterIds: {
-            value : []
+			value: []
         }
 	}
 });

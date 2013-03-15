@@ -65,10 +65,12 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
     },
 
     _renderTree: function () {
-        var model = this.get('data'),
+        var filter = this.get('filter'),
+            model  = this.get('data'),
+            items,
             tree;
 
-        items = model.get('items');
+        items = filter && filter.type ? model.filterByAttr(filter.type, filter.attr, filter.value) : model.get('items');
 
         this._treeNodes = [];
 
@@ -113,14 +115,14 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
         var tree = this.get('tree');
         var li = tree.getHTMLNode(e.node);
 
-        this._stateMap.push(parseInt(li.getAttribute('data-yui3-modelId')));
+        this._stateMap.push(parseInt(li.getAttribute('data-yui3-modelId'), 10));
         this.fire('expand', e);
     },
 
     _handleCollapse: function (e) {
         var tree = this.get('tree');
         var li = tree.getHTMLNode(e.node);
-        var stateIndex = Y.Array.indexOf(this._stateMap, parseInt(li.getAttribute('data-yui3-modelId')));
+        var stateIndex = Y.Array.indexOf(this._stateMap, parseInt(li.getAttribute('data-yui3-modelId'), 10));
 
         delete this._stateMap[stateIndex];
         this.fire('collapse', e);
@@ -249,27 +251,46 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
         header : {
             value: null
         },
+
         // The data object containing the models.
         data : {
             value: null
         },
+
         // The original tree object.
         tree : {
             value: null
         },
+
         width : {
             value: null
         },
+
         height : {
             value: null
         },
+
         // Wether to render all nodes or just branches.
         renderLeaves: {
             value: true
         },
+
         // State attribute.
         iconClicked : {
             value: false
+        },
+
+        /**
+         * A filter to apply to the tree
+         *
+         * @attribute {Object} filter
+         */
+        filter: {
+            value : {
+                type: null,
+                attr: null,
+                value: []
+            }
         }
     }
 });
