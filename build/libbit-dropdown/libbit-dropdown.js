@@ -55,6 +55,14 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
                 elA.set('innerHTML', content[i].title);
                 elA.setAttribute('data-id', content[i].id);
 
+                if (content[i].icon) {
+                    var icon = Y.Node.create('<i></i>');
+
+                    icon.addClass('icon-' + content[i].icon);
+
+                    elA.prepend(icon);
+                }
+
                 elLi.append(elA);
 
                 if (content[i].disabled === true) {
