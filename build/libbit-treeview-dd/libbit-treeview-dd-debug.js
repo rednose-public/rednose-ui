@@ -22,11 +22,15 @@ DD = Y.Base.create('dd', Y.Base, [], {
             Y.Do.after(this._bindDD, this, '_bindEvents', this);
 
             this.on('drop:enter', function (e) {
-                e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');
+               if (e.drop.get('node').one('.libbit-treeview-icon')) {
+                    e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');
+                }
             });
             this.on('drop:exit', function (e) {
                 // FIXME: Ignore selected nodes
-                e.drop.get('node').all('.icon-white').removeClass('icon-white');
+                if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
+                    e.drop.get('node').all('.icon-white').removeClass('icon-white');
+                }
             });
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
@@ -174,7 +178,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
         Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
 
-        if (!e.drop.get('node').get('parentNode').hasClass('libbit-item-selected')) {
+        if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
             e.drop.get('node').all('.icon-white').removeClass('icon-white');
         }
 
