@@ -9,6 +9,7 @@
 
     "libbit-navbar-recent" : {
         "requires": [
+            "cookie",
             "plugin",
             "libbit-navbar"
         ]

@@ -1,3 +1,5 @@
+// WIP
+
 Y.namespace('Libbit.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
@@ -16,8 +18,8 @@ Y.namespace('Libbit.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plug
 
     // -- Public Methods -------------------------------------------------------
 
-    // TODO: Unique cookie
-    // TODO: Specify size as config param
+    // TODO: Unique cookie.
+    // TODO: Specify the number of items as config param.
     addEntry: function (id, label) {
         var cookie   = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),
             attrs    = { id: id, label: label },
@@ -48,7 +50,6 @@ Y.namespace('Libbit.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plug
     },
 
     _updateMenuEntries: function (node) {
-        // Cookie
         var self   = this,
             cookie = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),
             ul     = node.ancestor('li').one('ul'),
@@ -65,7 +66,7 @@ Y.namespace('Libbit.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plug
                 li.one('a').setContent(item.label);
                 ul.append(li);
 
-                li.one('a').on('click', function (e) {
+                li.one('a').on('click', function () {
                     self._host.fire(self.node.getAttribute('data-id'), { id: item.id });
                 });
             });
