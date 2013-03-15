@@ -23,11 +23,15 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
         menuNode.delegate('click', function(e) {
             e.preventDefault();
 
-            if (e.target.getAttribute('data-id')) {
-                node.dropdown.fire(e.target.getAttribute('data-id'));
-            }
+            if (e.target.hasClass('disabled') !== true) {
+                if (e.target.getAttribute('data-id')) {
+                    node.dropdown.fire(e.target.getAttribute('data-id'));
+                }
 
-            node.dropdown.toggle();
+                node.dropdown.toggle();
+            } else {
+                e.target.blur();
+            }
         }, 'a');
 
         this.set('node', menuNode);
