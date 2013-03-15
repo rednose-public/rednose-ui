@@ -2,70 +2,91 @@ YUI.add('libbit-navbar', function (Y, NAME) {
 
 var Navbar;
 
-Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
+Navbar = Y.Base.create('navbar', Y.Widget, [], {
+    // -- Public Properties ----------------------------------------------------
 
-    template:
+    template: Y.Handlebars.compile(
         '<div class="navbar navbar-inverse">' +
-        '   <div class="navbar-inner" style="-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;">' +
-        '       <a class="brand brand-navbar" href="#">{{ title }}</a>' +
-        '       <ul class="nav">' +
-        '       </ul>' +
-        '       <ul class="nav pull-right">' +
-        '       </ui>' +
-        '   </div>' +
-        '</div>',
+            '<div class="navbar-inner" style="-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;">' +
+                '<a class="brand brand-navbar" href="#">{{ title }}</a>' +
+                '<ul class="nav"></ul>' +
+                '<ul class="nav pull-right"></ui>' +
+            '</div>' +
+        '</div>'
+    ),
 
-    dropdownTemplate:
-            '<li class="dropdown{{ submenu }}">' +
-            '  <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ title }} <{{ caret }}></b></a>' +
-            '  <ul class="dropdown-menu">' +
-            '  </ul>' +
-            '</li>',
+    dropdownTemplate: Y.Handlebars.compile(
+        '<li class="dropdown{{ submenu }}">' +
+            '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ title }} <{{ caret }}></b></a>' +
+                '<ul class="dropdown-menu">' +
+            '</ul>' +
+        '</li>'
+    ),
+
+    // -- Lifecycle Methods ----------------------------------------------------
+
+    initializer: function () {
+        var container = this.get('contentBox');
+
+        // Prevent default URL behaviour.
+        container.delegate('click', this._prevent, 'a', this);
+
+        // Bind the handler for clicking on menu items.
+        container.delegate('click', this._handleClick, '.dropdown-menu a', this);
+    },
+
+    // -- Public Methods -------------------------------------------------------
 
     renderUI: function() {
-        this.template = Y.Handlebars.compile(this.template);
-        this.dropdownTemplate = Y.Handlebars.compile(this.dropdownTemplate);
+        var menuLeft  = this.get('menu'),
+            menuRight = this.get('menuSecondary'),
+            template  = this.template,
+            title     = this.get('title');
 
-        this.get('contentBox').setHTML(
-            this.template({ title: this.get('title') })
-        );
+        this.get('contentBox').setHTML(template({ title: title }));
 
-        this._appendMenu(this.get('menu'), false);
-        this._appendMenu(this.get('menuSecondary'), true);
+        this._appendMenu(menuLeft, false);
+        this._appendMenu(menuRight, true);
     },
 
     bindUI: function() {
-        var self = this;
         var container = this.get('contentBox');
-
-        // Prevent default URL behaviour
-        container.all('a').on('click', function (e) {
-            e.preventDefault();
-        });
 
         container.all('.dropdown-toggle').plug(Y.Bootstrap.Dropdown);
-        container.all('.dropdown-menu > li > a').each(function() {
-            this.on('click', function () {
-                if (this.ancestor('li').hasClass('disabled')) {
-                    this.blur();
-
-                    return;
-                }
-
-                var id = this.getAttribute('data-id');
-
-                if (id !== '') {
-                    self.fire(id);
-                }
-
-                this.ancestor('.dropdown').one('.dropdown-toggle').simulate('click');
-            });
-        });
     },
 
-    _appendMenu: function(menu, secondary, parentMenu) {
+    getNode: function (id) {
         var container = this.get('contentBox');
-        var navBarHTML = '';
+
+        return container.one('[data-id=' + id + ']');
+    },
+
+    enable: function (id) {
+        this.disable(id);
+    },
+
+    disable: function (id) {
+        var container = this.get('contentBox'),
+            node = container.one('[data-id=' + id + ']');
+
+        if (node.ancestor('li').hasClass('disabled')) {
+            node.ancestor('li').removeClass('disabled');
+        } else {
+            node.ancestor('li').addClass('disabled');
+        }
+    },
+
+    rename: function (id, title) {
+        var container = this.get('contentBox'),
+            node = container.one('[data-id=' + id + ']');
+
+        node.setHTML(title);
+    },
+
+    // -- Protected Methods ----------------------------------------------------
+
+    _appendMenu: function (menu, secondary, parentMenu) {
+        var container = this.get('contentBox');
 
         for (var m in menu) {
             var dropdown = Y.Node.create(
@@ -76,10 +97,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
                 })
             );
 
-            for (i in menu[m].items) {
+            for (var i in menu[m].items) {
                 var li = Y.Node.create ('<li tabindex="-1"></li>');
 
-                if (menu[m].items[i].title == '-') {
+                if (menu[m].items[i].title === '-') {
                     li.addClass('divider');
 
                 } else if (typeof(menu[m].items[i].children) === 'object') {
@@ -111,34 +132,42 @@ Navbar = Y.Base.create('navbar', Y.Widget, [ ], {
         }
     },
 
-    enable: function(id) {
-        this.disable(id);
-    },
+    // -- Protected Event Handlers ---------------------------------------------
 
-    disable: function(id) {
-        var container = this.get('contentBox'),
-            node = container.one('[data-id=' + id + ']');
+    _handleClick: function (e) {
+        var node = e.currentTarget,
+            id   = node.getAttribute('data-id');
 
-        if (node.ancestor('li').hasClass('disabled')) {
-            node.ancestor('li').removeClass('disabled');
-        } else {
-            node.ancestor('li').addClass('disabled');
+        // Ignore clicks on disabled nodes and submenus.
+        if (node.ancestor('li').hasClass('disabled') || node.ancestor('li').hasClass('dropdown-submenu')) {
+            node.blur();
+
+            return;
         }
+
+        if (id) {
+            this.fire(id);
+        }
+
+        node.ancestor('.dropdown').one('.dropdown-toggle').simulate('click');
     },
 
-    rename: function(id, title) {
-        var container = this.get('contentBox'),
-            node = container.one('[data-id=' + id + ']');
-
-        node.setHTML(title);
+    _prevent: function (e) {
+        e.preventDefault();
     }
-
-
 }, {
     ATTRS: {
-        title: { value: 'No title' },
-        menu: { value: [] },
-        menuSecondary: { value: [] }
+        title: {
+            value: 'No title'
+        },
+
+        menu: {
+            value: []
+        },
+
+        menuSecondary: {
+            value: []
+        }
     }
 });
 

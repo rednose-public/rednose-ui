@@ -52,6 +52,18 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
         }
     },
 
+    destroy: function () {
+            var tree = this.get('tree');
+
+            tree.detach('open', this._handleExpand);
+            tree.detach('close', this._handleCollapse);
+
+        this.get('tree').destroy();
+        this.set('tree', null);
+        this.get('srcNode').empty();
+        console.log('treedest!');
+    },
+
     getNodes: function() {
         return this._treeNodes;
     },

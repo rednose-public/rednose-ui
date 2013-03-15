@@ -5,5 +5,12 @@
             "gallery-bootstrap-dropdown"
         ],
         "skinnable": true
+    },
+
+    "libbit-navbar-recent" : {
+        "requires": [
+            "plugin",
+            "libbit-navbar"
+        ]
     }
 }

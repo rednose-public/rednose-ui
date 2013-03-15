@@ -1,5 +1,3 @@
-YUI.add('libbit-navbar', function (Y, NAME) {
-
 var Navbar;
 
 Navbar = Y.Base.create('navbar', Y.Widget, [], {
@@ -173,6 +171,3 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit').Navbar = Navbar;
-
-
-}, '1.0.0', {"requires": ["handlebars", "gallery-bootstrap-dropdown"], "skinnable": true});
