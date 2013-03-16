@@ -13,11 +13,31 @@ DD = Y.Base.create('dd', Y.Base, [], {
     _ddMap: [],
 
     /**
+     * All DD references must be destoyed if the model is reloaded.
+     */
+    _destroyDD: function() {
+        for (var i in this._ddMap) {
+            this._ddMap[i].destroy();
+        }
+        this._ddMap = [];
+    },
+
+    /**
      * Subscribe to the render event and set up DD listeners.
      */
     initializer: function () {
+        Y.Do.before(this._destroyDD, this, 'refresh', this);
+
+        // TODO: Bind on dragdrop attribute change.
         if (this.get('dragdrop')) {
-            Y.Do.after(this._bindDD, this, '_bindEvents', this);
+            Y.Do.after(this._afterRender, this, 'render', this);
+            this.after('open', function (e) {
+                var treeNode = e.node,
+                    htmlNode = this.getHTMLNode(treeNode);
+
+                this._handleBind(htmlNode);
+            }, this);
+
 
             this.on('drop:enter', function (e) {
                if (e.drop.get('node').one('.libbit-treeview-icon')) {
@@ -33,6 +53,36 @@ DD = Y.Base.create('dd', Y.Base, [], {
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
         }
+    },
+
+    _afterRender: function () {
+        var parent = this.get('container');
+
+        this._handleBind(parent);
+    },
+
+    _handleBind: function (parent) {
+        var nodes = parent.one('.' + this.classNames.children).all('[data-libbit-type]:not(.libbit-treeview-drag)'),
+            self  = this;
+
+        nodes.each(function (node) {
+            var model = self.getNodeById(node.getData('node-id')).data;
+
+            self._createDD(node, model);
+
+            if (model instanceof Y.TB.Category) {
+                // This is a category model. Categories allow dropping.
+                var catDD = new Y.DD.Drop({
+                    node         : node,
+                    groups       : self.get('groups'),
+                    bubbleTargets: self
+                });
+
+                node.addClass('libbit-treeview-drop');
+                node.addClass('libbit-dd-drop');
+                self._ddMap.push(catDD);
+            }
+        });
     },
 
     addCallback: function(group, callback, context) {
@@ -104,6 +154,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
             headerDrop.on('drop:exit', function () {
                 Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
             });
+            self._ddMap.push(headerDrop);
         }
     },
 
@@ -127,6 +178,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
             borderStyle: 'none'
         });
 
+        node.addClass('libbit-treeview-drag');
         this._ddMap.push(dd);
 
         return dd;
@@ -165,12 +217,8 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
     _handleDrop: function (e) {
         var treeModel = this.get('data'),
-            objID     = e.drag.get('data').get('clientId'),
-            newCatID  = e.drop.get('node').get('parentNode').getAttribute('data-yui3-record'),
-            // The model that was moved.
-            obj       = treeModel.getByClientId(objID);
-            // The category model it was dropped on, or null if it was dropped onto the header.
-            newCat    = treeModel.getByClientId(newCatID),
+            obj       = e.drag.get('data');
+            newCat    = this.getNodeById(e.drop.get('node').getData('node-id')).data;
             callback  = false,
             self      = this;
 

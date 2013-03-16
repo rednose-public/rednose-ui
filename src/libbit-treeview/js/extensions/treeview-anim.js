@@ -8,8 +8,8 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Initializer, gets called upon instance initiation.
      */
     initializer: function () {
-        this.on('expand', this._afterExpand, this);
-        this.on('collapse', this._afterCollapse, this);
+        this.after('open', this._afterExpand, this);
+        this.after('close', this._afterCollapse, this);
     },
 
     /**
@@ -40,7 +40,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Retrieve the DOM element containing the children of a given TreeView node.
      */
     _getChildrenElement: function (node) {
-        var domNode = this.get('tree').getHTMLNode(node);
+        var domNode = this.getHTMLNode(node);
 
         return Y.Node('#' + domNode.getAttribute('id')).one('ul');
     }

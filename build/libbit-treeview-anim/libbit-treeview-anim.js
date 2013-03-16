@@ -10,8 +10,8 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Initializer, gets called upon instance initiation.
      */
     initializer: function () {
-        this.on('expand', this._afterExpand, this);
-        this.on('collapse', this._afterCollapse, this);
+        this.after('open', this._afterExpand, this);
+        this.after('close', this._afterCollapse, this);
     },
 
     /**
@@ -42,7 +42,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Retrieve the DOM element containing the children of a given TreeView node.
      */
     _getChildrenElement: function (node) {
-        var domNode = this.get('tree').getHTMLNode(node);
+        var domNode = this.getHTMLNode(node);
 
         return Y.Node('#' + domNode.getAttribute('id')).one('ul');
     }
@@ -52,4 +52,4 @@ Anim = Y.Base.create('anim', Y.Base, [], {
 Y.namespace('Libbit.TreeView').Anim = Anim;
 
 
-}, '1.0.0', {"requires": ["libbit-anim"]});
+}, '1.0.0', {"requires": ["libbit-anim", "libbit-treeview"]});

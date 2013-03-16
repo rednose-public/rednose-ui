@@ -1,5 +1,3 @@
-YUI.add('libbit-treeview-select', function (Y, NAME) {
-
 /**
  * Selection extension for the LiBBiT TreeView widget.
  */
@@ -45,6 +43,3 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit.TreeView').Selectable = Selectable;
-
-
-}, '1.0.0', {"requires": ["libbit-treeview"]});

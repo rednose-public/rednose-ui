@@ -7,60 +7,35 @@ var Selectable;
 
 Selectable = Y.Base.create('selectable', Y.Base, [], {
 
-    /**
-     * Reference pointer to event
-     */
-    selectEvent: null,
-
-    /**
-     * Set up a listener for the selectedItem attribute.
-     */
     initializer: function () {
-        this.after('render', this._afterRender, this);
+        this.on('select', this._handleSelect, this);
     },
 
-    /**
-     * Bind the click events.
-     */
-    _afterRender: function () {
-        var self = this;
+    _handleSelect: function (e) {
+        var selectable = this.get('selectable');
 
-        if (this.selectEvent) {
-            this.selectEvent.detach();
-        }
+        if (selectable) {
+            var container = this.get('container'),
+                node      = e.node,
+                li        = this.getHTMLNode(node),
+                model     = node.data;
 
-        if (!self.get('selectable')) {
-            self.get('tree').detach('select', self.get('tree')._afterSelect);
-        } else {
-            this.get('tree').on('select', function (e) {
-                var node  = e.node,
-                    li    = self.get('tree').getHTMLNode(node),
-                    model = node.data;
+            container.all('.icon-white').removeClass('icon-white');
 
-                self.get('boundingBox').all('.icon-white').removeClass('icon-white');
-
-                if (Y.instanceOf(model, Y.Model)) {
-                    if (typeof(self._iconMap[model.name]) != 'undefined') {
-                        li.addClass('libbit-item-selected');
-                        li.one('.libbit-treeview-icon').addClass('icon-white');
-                    }
+            if (Y.instanceOf(model, Y.Model)) {
+                if (typeof(this._iconMap[model.name]) !== 'undefined') {
+                    li.addClass('libbit-item-selected');
+                    li.one('.libbit-treeview-icon').addClass('icon-white');
                 }
-
-                self.fire('select', { data: li.getData() });
-            });
-
-            self.selectEvent = self.get('tree').on('select', function (e) {
-                var li = self.get('tree').getHTMLNode(e.node);
-
-                self.selectedNode = parseInt(li.getAttribute('data-yui3-modelId'));
-                self.fire('nodeSelected', e);
-            });
+            }
+        } else {
+            e.stopImmediatePropagation();
         }
     }
 }, {
     ATTRS: {
         /**
-         * Config property, enable selection for this TreeView instance
+         * Enable selection for this TreeView instance
          */
         selectable: {
             value : true
@@ -72,4 +47,4 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
 Y.namespace('Libbit.TreeView').Selectable = Selectable;
 
 
-}, '1.0.0');
+}, '1.0.0', {"requires": ["libbit-treeview"]});

@@ -1,7 +1,0 @@
-{
-    "libbit-model-tree" : {
-        "requires": [
-            "model"
-        ]
-    }
-}

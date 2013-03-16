@@ -1,15 +1,50 @@
 {
     "libbit-treeview" : {
         "requires": [
-            "transition",
+            "gallery-sm-treeview",
             "libbit-model-tree",
-            "libbit-treeview-filter",
             "libbit-treeview-anim",
-            "libbit-treeview-select",
             "libbit-treeview-dd",
-            "widget",
-            "gallery-sm-treeview"
+            "libbit-treeview-filter",
+            "libbit-treeview-select"
         ],
+
+        "supersedes": [
+            "gallery-sm-treeview-templates"
+        ],
+
         "skinnable": true
+    },
+
+    "libbit-treeview-anim" : {
+        "requires": [
+            "libbit-anim",
+            "libbit-treeview"
+        ]
+    },
+
+    "libbit-treeview-dd" : {
+        "requires": [
+            "libbit-dd",
+            "libbit-treeview"
+        ]
+    },
+
+    "libbit-treeview-filter" : {
+        "requires": [
+            "libbit-treeview"
+        ]
+    },
+
+    "libbit-treeview-select" : {
+        "requires": [
+            "libbit-treeview"
+        ]
+    },
+
+    "libbit-model-tree" : {
+        "requires": [
+            "model"
+        ]
     }
 }
