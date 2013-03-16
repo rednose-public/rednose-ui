@@ -50,14 +50,13 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
         if (model.get('icons')) {
             this._iconMap = model.get('icons');
         }
+
+        this.tc = Y.Node.create('<div class="tc"></div>');
     },
 
-    // FIXME
-    // destroy: function () {
-    //       for (var i in this._ddMap) {
-    //         this._ddMap[i].destroy();
-    //     }
-    // },
+    destroy: function () {
+        this.get('tree').destroy({ remove: true });
+    },
 
     getNodes: function() {
         return this._treeNodes;
@@ -65,10 +64,10 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
 
     renderUI: function () {
         this.get('boundingBox').addClass('libbit-treeview-outer-container');
-        this.get('srcNode').addClass('libbit-treeview-inner-container');
+        this.get('srcNode').append(this.tc).addClass('libbit-treeview-inner-container');
 
         if (this.get('header')) {
-            this.get('srcNode').prepend('<div class="nav-header">' + this.get('header') + '</div>');
+            this.tc.prepend('<div class="nav-header">' + this.get('header') + '</div>');
         }
         this._renderTree();
     },
@@ -98,7 +97,7 @@ TreeView = Y.Base.create('treeView', Y.Widget, [ Y.Libbit.TreeView.Selectable, Y
             }
         } else {
             tree = new Y.TreeView({
-                container: this.get('srcNode'),
+                container: this.get('srcNode').one('.tc'),
                 nodes: items
             });
 

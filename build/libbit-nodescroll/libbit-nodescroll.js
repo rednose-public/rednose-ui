@@ -1,17 +1,52 @@
 YUI.add('libbit-nodescroll', function (Y, NAME) {
 
+/**
+ * Node scroll utility - Configures a node containing DD nodes to automatically scroll when dragging.
+ *
+ * @module libbit-nodescroll
+ */
+
 var NodeScroll;
 
+/**
+ * A base class for Nodescroll, providing:
+ * <ul>
+ *    <li>Adds the needed scrolling CSS to the node</li>
+ *    <li>Binds to the provided DD groups</li>
+ * </ul>
+ *
+ * Quick Example:<br/>
+ *
+ * <pre><code>var instance = new Y.Libbit.NodeScroll({
+ *     container: this.get('container').one('.libbit-scroll-view'),
+ *     groups: ['libbit-treeview']
+ * });
+ * </code></pre>
+ *
+ * @class NodeScroll
+ * @param {Object} [config] The following configuration properties are required:
+ *
+ *     @param {Object} [config.container] The container to bind the scrollview to.
+ *     @param {Array} [config.groups] The DD groups that can interact with this
+ *         scrollview instance.
+ *
+ * @constructor
+ * @extends Base
+ */
 NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
     // -- Protected Properties -------------------------------------------------
 
+    /**
+     * Reference to the currently active animation instance.
+     *
+     * @property {Anim} _anim
+     * @default null
+     * @protected
+     */
     _anim: null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
-    /**
-     * Initializer, gets called upon instance initiation.
-     */
     initializer: function () {
         this._bindDD(this.get('container'), this.get('groups'));
         this.on('drop:over', this._handle, this);
@@ -85,13 +120,21 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
     }
 }, {
     ATTRS : {
+        /**
+         * The scrollable container.
+         *
+         * @attribute {Object}
+         * @default null
+         */
         container: {
             value: null
         },
 
         /**
          * The DD groups that can interact with this scroll instance.
+         *
          * @attribute {Array}
+         * @default []
          */
         groups: {
             value: []
