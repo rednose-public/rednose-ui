@@ -26,24 +26,12 @@ Y.namespace('TreeView').Templates = {
     )
 };
 
-TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.DD /*, Y.Libbit.TreeView.Selectable, Y.Libbit.TreeView.Filter*/ ], {
+TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.DD,  Y.Libbit.TreeView.Selectable/*, Y.Libbit.TreeView.Filter*/ ], {
 
     /**
      * Stores the state of expanded nodes.
      */
     _stateMap: [],
-
-    _selectMap: [],
-
-    // /**
-    // * Reference to all nodes (for use in extensions)
-    // **/
-    // _treeNodes: [],
-
-    // /**
-    // * Selected node
-    // **/
-    // selectedNode: null,
 
     /**
     * Icon (className) mapping for different types of models
@@ -53,13 +41,14 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
     initializer: function (config) {
         // if nodes typeof model tree then get items
         // console.log(config);
-        config.nodes = config.data.get('items');
+        // Hook into the initializer chain
+        config.nodes = config.model.get('items');
         // TODO: check for initial filter
-        this.set('data', config.data);
-        // console.log(config.data.get('items')[0]);
+        this.set('model', config.model);
         // config.nodes = [];
         // var self = this;
 
+        // console.log(config.model);
         if (config.header) {
             this.header = config.header;
         }
@@ -68,21 +57,19 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
         var container = this.get('container'),
             // width      = this.get('width'),
             // height     = this.get('height'),
-            model      = this.get('data');
+            model      = this.get('model');
 
         // container.delegate('click', this._onRowClick, '.' + classNames.row, this),
          // container.delegate('click', function (e) {
          //    var node = this.getNodeById(e.currentTarget.getData('node-id'));
-         //    console.log(node.data);
          // }, '.' + classNames.row, this);
-
 
 
         this.on('open', this._handleExpand, this);
         this.on('close', this._handleCollapse, this);
 
-        this.on('select', this._handleSelectState, this);
-        this.on('unselect', this._handleUnSelectState, this);
+        // this._restoreSelectState();
+
         // contentBox.setStyle('width', width);
         // contentBox.setStyle('height', height);
         // contentBox.setStyle('overflow', 'auto');
@@ -91,12 +78,15 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
             this._iconMap = model.get('icons');
         }
 
-        // model.after('load', this.refresh, this);
+        this._eventHandles || (this._eventHandles = []);
+
+
+        this._eventHandles.push(
+            model.after('change', this._handleModelChange, this)
+        );
         // this._attachEvents();
         // this.on(['open', 'close'], this._handleIcon, this);
         // this.on('initializedChange', function () {
-            // console.log(config);
-            // console.log(this.config);
             // console.log(this.nodes);
 
             // console.log(this.get('nodes'));
@@ -106,14 +96,35 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
         // console.log(this.get('nodes'));
         // this.insertNode(this.rootNode, [], {silent: true});
         // console.log('tree');
-        // this.set('nodes', this.get('data').get('items'));
+        // this.set('nodes', this.get('model').get('items'));
     //     this.tc = Y.Node.create('<div class="tc"></div>');
         // this._attachEvents();
     },
 
+    // Destroy the associated model to clean up attached events.
+    destructor: function () {
+        (new Y.EventHandle(this._eventHandles)).detach();
+        // this.get('model').destroy();
+    },
+
     render: function () {
-        var container = this.get('container'),
-            header    = this.get('header');
+        var container     = this.get('container'),
+            isTouchDevice = 'ontouchstart' in Y.config.win;
+
+        container.addClass(this.classNames.treeview);
+        container.addClass(this.classNames[isTouchDevice ? 'touch' : 'noTouch']);
+
+        this._childrenNode = this.renderChildren(this.rootNode, {
+            container: container
+        });
+
+        // console.log(this.rootNode);
+        this.rendered = true;
+
+        console.log('renderTree');
+        return this;
+        // var container = this.get('container'),
+        //     header    = this.get('header');
 
         // if (header) {
         //     container.append('<div class="nav-header">' + header + '</div>');
@@ -125,22 +136,8 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
         // this.set('container', inner);
         // this.get('srcNode').addClass('libbit-treeview-inner-container');
 
-        this.constructor.superclass.render.apply(this);
+        // this.constructor.superclass.render.apply(this);
 
-        var self = this;
-        // Select needs to be restored after the tree is rendered.
-        Y.Array.each(this._selectMap, function (id) {
-            // TODO: if the selected node is not visible yet, bind an event on 'open' and unbind it
-            // after another selection is made.
-            var record = self._parseLibbitRecordId(id);
-
-            container.all('[data-libbit-type=' + record[0] + ']').each(function (node) {
-
-                if (node.getData('libbit-id') === record[1]) {
-                    self.getNodeById(node.getData('node-id')).select();
-                }
-            });
-        });
         // console.log(index);
 
         // DD
@@ -149,21 +146,16 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
         // this._processTree(this.rootNode);
     },
 
-    // FIXME: Render gets called twice after model reload
-    refresh: function () {
-        if (!this.rendered) {
-            return;
-        }
-
-        var nodes = this.get('data').get('items');
+    _handleModelChange: function () {
+        this.fire('mc');
+        var nodes = this.get('model').get('items');
 
         this.clear({silent: true});
 
         if (nodes) {
+            // Returns an array of references to the created tree nodes.
             var treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
-            Y.Array.each(treeNodes, function (treeNode) {
-                this.test(treeNode);
-            }, this);
+            this._restoreTreeOpenState(treeNodes);
         }
 
         this.render();
@@ -181,9 +173,20 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
         return id.split('_');
     },
 
-    test: function (node) {
-         var id = this._generateLibbitRecordId(node.data);
-         var index = Y.Array.indexOf(this._stateMap, id);
+    _restoreTreeOpenState: function () {
+        var self     = this,
+            rootNode = this.rootNode;
+
+        if (rootNode.hasChildren() && this._stateMap && this._stateMap.length > 0) {
+            Y.Array.each(rootNode.children, function (node) {
+                self._restoreNodeOpenState(node);
+            });
+        }
+    },
+
+    _restoreNodeOpenState: function (node) {
+         var id    = this._generateLibbitRecordId(node.data),
+             index = Y.Array.indexOf(this._stateMap, id);
 
          if (index !== -1) {
             node.open({silent: true});
@@ -192,7 +195,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
          // Look for child nodes to open, even if their parent is closed.
         if (node.hasChildren()) {
             Y.Array.each(node.children, function (child) {
-                this.test(child);
+                this._restoreNodeOpenState(child);
             }, this);
         }
         // if open map
@@ -200,30 +203,8 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
 
         // this._detachEvents();
         // this._processTree(this.rootNode);
-        // this._buildTree();
 
         // this._attachEvents();
-    },
-
-    _buildTree: function () {
-        var items = this.get('data').get('items');
-
-        if (this.rendered) {
-            while (this.rootNode.children.length > 0) {
-                this.removeNode(this.rootNode.children[0]);
-            }
-        }
-
-        for (var i in items) {
-            var node = this.insertNode(this.rootNode, items[i], { silent: true });
-            console.log(node);
-        }
-
-        // this._childrenNode = this.renderChildren(this.rootNode, {
-        //     container: this.get('container').container
-        // });
-
-        // this.render();
     },
 
     /**
@@ -331,24 +312,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
         this.detach('open', this._handleExpand);
         this.detach('close', this._handleCollapse);
         this.detach('select', this._handleSelectState);
-    },
-
-    _handleSelectState: function (e) {
-        var id = this._generateLibbitRecordId(e.node.data);
-        var index = Y.Array.indexOf(this._selectMap, id);
-
-        if (index === -1) {
-            this._selectMap.push(id);
-        }
-    },
-
-    _handleUnSelectState: function (e) {
-        var id = this._generateLibbitRecordId(e.node.data);
-        var index = Y.Array.indexOf(this._selectMap, id);
-
-        if (index !== -1) {
-           this._selectMap.splice(index, 1);
-        }
     },
 
     /**

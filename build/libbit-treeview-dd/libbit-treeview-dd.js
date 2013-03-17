@@ -18,9 +18,14 @@ DD = Y.Base.create('dd', Y.Base, [], {
      * All DD references must be destoyed if the model is reloaded.
      */
     _destroyDD: function() {
+        if (!this.rendered) {
+            return;
+        }
+
         for (var i in this._ddMap) {
             this._ddMap[i].destroy();
         }
+
         this._ddMap = [];
     },
 
@@ -28,7 +33,11 @@ DD = Y.Base.create('dd', Y.Base, [], {
      * Subscribe to the render event and set up DD listeners.
      */
     initializer: function () {
-        Y.Do.before(this._destroyDD, this, 'refresh', this);
+        var model = this.get('model');
+
+        // this.on('mc', this._destroyDD, this);
+        // this.on('refresh', this._destroyDD, this);
+        model.on('change', this._destroyDD, this);
 
         // TODO: Bind on dragdrop attribute change.
         if (this.get('dragdrop')) {
@@ -55,6 +64,10 @@ DD = Y.Base.create('dd', Y.Base, [], {
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
         }
+    },
+
+    destructor: function () {
+        this._destroyDD();
     },
 
     _afterRender: function () {
@@ -218,11 +231,11 @@ DD = Y.Base.create('dd', Y.Base, [], {
     },
 
     _handleDrop: function (e) {
-        var treeModel = this.get('data'),
-            obj       = e.drag.get('data');
-            newCat    = this.getNodeById(e.drop.get('node').getData('node-id')).data;
-            callback  = false,
-            self      = this;
+        var model    = this.get('model'),
+            obj      = e.drag.get('data');
+            newCat   = this.getNodeById(e.drop.get('node').getData('node-id')).data;
+            callback = false,
+            self     = this;
 
         Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
 
@@ -255,8 +268,8 @@ DD = Y.Base.create('dd', Y.Base, [], {
             if (oldCatModelID !== newCatModelID) {
                 obj.set(property, newCat);
                 obj.save(function () {
-                    treeModel.load(function () {
-                        self.refresh();
+                    model.load(function () {
+                        // self.render();
                     });
                 });
             }
