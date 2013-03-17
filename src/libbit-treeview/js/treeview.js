@@ -282,18 +282,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
             this.render();
         }
     }
-}, {
-    /**
-     * The scrollable container.
-     *
-     * @attribute {Object}
-     * @default null
-     */
-    ATTRS: {
-        filter: {
-            value : null
-        }
-    }
 });
 
 // -- Namespace ----------------------------------------------------------------
