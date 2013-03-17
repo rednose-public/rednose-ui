@@ -228,11 +228,13 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     //     if (count > 0) {
     //         var ml = count * 20;
 
+
     //         if (ml) {
     //             li.setStyle('marginLeft', -ml);
     //             li.one('div').setStyle('paddingLeft', ml + 20);
     //             li.ancestor('.' + this.classNames.children).setStyle('marginLeft', ml);
     //             li.one('.' + this.classNames.indicator).setStyle('marginLeft', ml);
+    
     //         }
     //     }
     // },
@@ -281,12 +283,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         // listeners bound to the render function yet.
         if (this.rendered) {
             this.render();
-        }
-    }
-}, {
-    ATTRS: {
-        filter: {
-            value : null
         }
     }
 });
