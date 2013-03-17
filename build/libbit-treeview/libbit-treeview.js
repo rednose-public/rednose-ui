@@ -115,7 +115,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     },
 
     /**
-     * Return a CSS class string, modified by the given nodel and it's associated model.
+     * Return a CSS class string, modified by the given model and it's associated model.
      *
      * @method icon
      * @param  {Y.Tree.Node} node Tee Node.
@@ -234,7 +234,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     //             li.one('div').setStyle('paddingLeft', ml + 20);
     //             li.ancestor('.' + this.classNames.children).setStyle('marginLeft', ml);
     //             li.one('.' + this.classNames.indicator).setStyle('marginLeft', ml);
-    
     //         }
     //     }
     // },
@@ -283,6 +282,18 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         // listeners bound to the render function yet.
         if (this.rendered) {
             this.render();
+        }
+    }
+}, {
+    /**
+     * The scrollable container.
+     *
+     * @attribute {Object}
+     * @default null
+     */
+    ATTRS: {
+        filter: {
+            value : null
         }
     }
 });
