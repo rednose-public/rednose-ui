@@ -29,7 +29,7 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '.edit': {
             blur: 'close',
             keypress: 'enterUpdate'
-        },
+        }
     },
 
     // Render this view in our <li> container, and fill it with the
@@ -44,13 +44,13 @@ GridView = Y.Base.create('gridView', Y.View, [], {
 
         container.setContent(content);
 
-        if (contextMenu !== false) {
-            container.one('.model-grid-icon-container').plug(Y.Libbit.ContextMenu, {
-                content: contextMenu,
-                data: model,
-                bubbleTarget: this
-            });
-        }
+        // if (contextMenu !== false) {
+        //     container.one('.model-grid-icon-container').plug(Y.Libbit.ContextMenu, {
+        //         content: contextMenu,
+        //         data: model,
+        //         bubbleTarget: this
+        //     });
+        // }
 
         this.set('inputNode', container.one('.edit'));
         this.set('footerNode', container.one('.model-grid-footer'));
@@ -108,9 +108,11 @@ GridView = Y.Base.create('gridView', Y.View, [], {
 });
 
 // TODO: Y.Libbit.Grid.Message
-Grid = Y.Base.create('grid', Y.Widget,  [ Y.Libbit.Grid.Selectable ], {
+Grid = Y.Base.create('grid', Y.Widget, [ Y.Libbit.Grid.Selectable ], {
 
     targets: null,
+
+    views: [],
 
     renderUI : function () {
         this.targets = this.getTargets();
@@ -127,6 +129,7 @@ Grid = Y.Base.create('grid', Y.Widget,  [ Y.Libbit.Grid.Selectable ], {
             var view = new GridView({ model: model, contextMenu: contextMenu }),
                 node = view.render().get('container');
 
+            self.views.push(view);
             for (var i in self.targets) {
                 view.addTarget(self.targets[i]);
             }
@@ -151,6 +154,8 @@ Grid = Y.Base.create('grid', Y.Widget,  [ Y.Libbit.Grid.Selectable ], {
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit').Grid = Grid;
+Y.namespace('TB').GridView = GridView;
+
 
 
 }, '1.0.0', {

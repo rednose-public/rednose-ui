@@ -18,6 +18,8 @@ DD = Y.Base.create('dd', Y.View, [], {
     },
 
     initializer: function() {
+        this._ddMap || (this._ddMap = []);
+
         // Set the cursor for drag proxies.
         Y.DD.DDM.set('dragCursor', 'default');
 
@@ -27,16 +29,15 @@ DD = Y.Base.create('dd', Y.View, [], {
         this.bubbleTarget.on('drop:hit', this._libbitDropHit, this);
     },
 
-    _libbitDropHit: function (e) {
-        // Workaround: We can't detect the libbit-global-drop node from e.drop.get('node'), because it doesn't bubble
-        // properly. We can however block this node in the 'drop:over' and 'drop:enter' events, resulting in the parentNode
-        // of the drag node being null.
-        if (e.drag.get('node').get('parentNode') === null) {
-            e.stopImmediatePropagation();
+    destructor: function () {
+        for (var i in this._ddMap) {
+            this._ddMap[i].destroy();
         }
+
+        this._ddMap = [];
     },
 
-// -- Node setup ---------------------------------------------------------------
+    // -- Node setup ---------------------------------------------------------------
 
     /**
      * Create a new drag instance from a DOM node.
@@ -57,6 +58,8 @@ DD = Y.Base.create('dd', Y.View, [], {
             borderStyle: 'none'
         });
 
+        this._ddMap.push(dd);
+
         return dd;
     },
 
@@ -73,29 +76,41 @@ DD = Y.Base.create('dd', Y.View, [], {
             bubbleTargets: this
         });
 
+        this._ddMap.push(dd);
+
         return dd;
     },
 
     bindGlobalDrop: function (groups, container) {
-        var drop;
+        container = container || this.get('container');
 
-        container = container || this.get('container'),
+        var dd;
 
         container.addClass('libbit-global-drop');
 
         // Global drop object.
-        drop = new Y.DD.Drop({
+        dd = new Y.DD.Drop({
             node   : container,
             groups: groups,
             bubbleTargets: this.bubbleTarget
-            // bubbleTargets: this
         });
 
+        this._ddMap.push(dd);
+
         // Bind the global drop object.
-        drop.on('drop:enter', this._dropEnterGlobal, this);
+        dd.on('drop:enter', this._dropEnterGlobal, this);
     },
 
-// -- Event handlers -----------------------------------------------------------
+    _libbitDropHit: function (e) {
+        // Workaround: We can't detect the libbit-global-drop node from e.drop.get('node'), because it doesn't bubble
+        // properly. We can however block this node in the 'drop:over' and 'drop:enter' events, resulting in the parentNode
+        // of the drag node being null.
+        if (e.drag.get('node').get('parentNode') === null) {
+            e.stopImmediatePropagation();
+        }
+    },
+
+    // -- Event handlers -----------------------------------------------------------
 
     _handleStart: function (e) {
         var drag = e.target;
@@ -360,7 +375,7 @@ DD = Y.Base.create('dd', Y.View, [], {
         }
     },
 
-// -- Hover Event handlers -----------------------------------------------------------
+    // -- Hover Event handlers -----------------------------------------------------------
 
     /**
      * Bind hover and prevent hover stacking.
