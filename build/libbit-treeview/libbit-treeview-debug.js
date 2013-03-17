@@ -17,11 +17,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
      */
     _stateMap: [],
 
-    /**
-    * Icon (className) mapping for different types of models
-    */
-    // _iconMap: [],
-
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function (config) {
@@ -35,10 +30,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         var model = config.model;
 
         this.set('model', model);
-
-        // if (model.get('icons')) {
-        //     this._iconMap = model.get('icons');
-        // }
 
         this._attachEventHandles();
     },

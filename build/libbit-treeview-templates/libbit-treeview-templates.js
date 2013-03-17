@@ -2,7 +2,7 @@ YUI.add('libbit-treeview-templates', function (Y, NAME) {
 
 var Micro = Y.Template.Micro;
 
-// Override of the extended Treeview templates.
+// Overrides `gallery-sm-treeview-templates`
 Y.namespace('TreeView').Templates = {
     children: Micro.compile(
         '<ul class="<%= data.classNames.children %>" ' +
