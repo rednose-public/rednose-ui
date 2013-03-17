@@ -37,11 +37,12 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     destructor: function () {
         this._detachEventHandles();
 
-        this.clear({silent: true});
-        // this.get('model').destroy();
+        for (var i in this._stateMap) {
+            delete this._stateMap[i];
+        }
 
-        // Remove the container that we wrapped around the subcontainer.
-        // this.get('container').remove();
+        // Remove the container from the DOM and destroy it.
+        this.get('container').remove().destroy(true);
     },
 
     // -- Public Methods -------------------------------------------------------

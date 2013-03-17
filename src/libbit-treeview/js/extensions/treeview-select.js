@@ -22,6 +22,12 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
         Y.Do.after(this._restoreSelectState, this, 'render');
     },
 
+    destructor: function () {
+        for (var i in this._selectMap) {
+            delete this._selectMap[i];
+        }
+    },
+
     // -- Protected Methods ----------------------------------------------------
 
     _restoreSelectState: function () {
