@@ -90,6 +90,39 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         return this;
     },
 
+    // Used by template.
+    icon: function (node) {
+        var model     = node.data,
+            icons     = this.get('model').get('icons'),
+            className = 'libbit-treeview-icon' + (node.isSelected() ? ' icon-white' : '');
+
+        if (icons && model instanceof Y.Model  && icons[model.name]) {
+            var icon = icons[model.name];
+
+            if (Y.Lang.isString(icon)) {
+                return className + ' ' + icon;
+            }
+
+            if (Y.Lang.isArray(icon)) {
+                return className + ' ' + (node.isOpen() ? icon[0] : icon[1]);
+            }
+        }
+
+        return className;
+    },
+
+    generateLibbitRecordId: function (model) {
+        if (model instanceof Y.Model) {
+            return model.name + '_' + model.get('id');
+        }
+
+        return null;
+    },
+
+    parseLibbitRecordId: function (id) {
+        return id.split('_');
+    },
+
     // -- Protected Methods ----------------------------------------------------
 
     // Store a reference to custom events so we can detach them later.
@@ -102,6 +135,8 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
             this.on('open', this._handleExpand, this),
             this.on('close', this._handleCollapse, this),
 
+            this.after(['open', 'close'], this._handleToggle, this),
+
             model.after('change', this._handleModelChange, this)
         );
     },
@@ -109,18 +144,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     // Destroy the custom events.
     _detachEventHandles: function () {
         (new Y.EventHandle(this._eventHandles)).detach();
-    },
-
-    _generateLibbitRecordId: function (model) {
-        if (model instanceof Y.Model) {
-            return model.name + '_' + model.get('id');
-        }
-
-        return null;
-    },
-
-    _parseLibbitRecordId: function (id) {
-        return id.split('_');
     },
 
     _restoreTreeOpenState: function () {
@@ -135,7 +158,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     },
 
     _restoreNodeOpenState: function (node) {
-         var id    = this._generateLibbitRecordId(node.data),
+         var id    = this.generateLibbitRecordId(node.data),
              index = Y.Array.indexOf(this._stateMap, id);
 
          if (index !== -1) {
@@ -172,48 +195,17 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     //     }
     // },
 
-    // /**
-    //  * Update the icon classes
-    //  */
-    // _setIcon: function(node, className) {
-    //     if (node) {
-    //         var iconNode = node.one('.' + this.classNames.icon);
-
-    //         if (iconNode) {
-    //             iconNode.removeClass(this.classNames.icon);
-    //             iconNode.addClass(className);
-    //             iconNode.addClass('libbit-treeview-icon');
-    //         }
-    //     }
-    // },
-
     // -- Protected Event Handlers ---------------------------------------------
 
-    // /**
-    // * Folderstate icons
-    // **/
-    // _handleIcon: function (e) {
-    //     var node   = e.node,
-    //         type   = e.type,
-    //         iconEl = this.getHTMLNode(node).one('.icon-folder-close');
+    _handleToggle: function (e) {
+        var node      = e.node,
+            htmlNode  = this.getHTMLNode(e.node);
 
-    //     if (type === 'treeView:close') {
-    //         iconEl = this.getHTMLNode(node).one('.icon-folder-open');
-    //     }
-
-    //     if (iconEl) {
-    //         if (type === 'treeView:close') {
-    //             iconEl.removeClass('icon-folder-open');
-    //             iconEl.addClass('icon-folder-close');
-    //         } else {
-    //             iconEl.removeClass('icon-folder-close');
-    //             iconEl.addClass('icon-folder-open');
-    //         }
-    //     }
-    // },
+        htmlNode.one('.libbit-treeview-icon').set('className', this.icon(node));
+    },
 
     _handleExpand: function (e) {
-         var id    = this._generateLibbitRecordId(e.node.data),
+         var id    = this.generateLibbitRecordId(e.node.data),
              index = Y.Array.indexOf(this._stateMap, id);
 
         if (index === -1) {
@@ -222,7 +214,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     },
 
     _handleCollapse: function (e) {
-        var id    = this._generateLibbitRecordId(e.node.data),
+        var id    = this.generateLibbitRecordId(e.node.data),
             index = Y.Array.indexOf(this._stateMap, id);
 
         if (index !== -1) {
