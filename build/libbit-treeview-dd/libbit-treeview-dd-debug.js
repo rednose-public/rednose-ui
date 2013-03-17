@@ -7,6 +7,8 @@ var DD;
  */
 DD = Y.Base.create('dd', Y.Base, [], {
 
+    // -- Protected Properties -------------------------------------------------
+
     _callbacks: {},
 
     /**
@@ -14,20 +16,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
      */
     _ddMap: [],
 
-    /**
-     * All DD references must be destoyed if the model is reloaded.
-     */
-    _destroyDD: function() {
-        if (!this.rendered) {
-            return;
-        }
-
-        for (var i in this._ddMap) {
-            this._ddMap[i].destroy();
-        }
-
-        this._ddMap = [];
-    },
+    // -- Lifecycle Methods ----------------------------------------------------
 
     /**
      * Subscribe to the render event and set up DD listeners.
@@ -35,8 +24,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
     initializer: function () {
         var model = this.get('model');
 
-        // this.on('mc', this._destroyDD, this);
-        // this.on('refresh', this._destroyDD, this);
         model.on('change', this._destroyDD, this);
 
         // TODO: Bind on dragdrop attribute change.
@@ -70,10 +57,42 @@ DD = Y.Base.create('dd', Y.Base, [], {
         this._destroyDD();
     },
 
-    _afterRender: function () {
-        var parent = this.get('container');
+    // -- Public Methods -------------------------------------------------------
 
-        this._handleBind(parent);
+    addCallback: function(group, callback, context) {
+        this._callbacks[group] = {
+            callback: callback,
+            context: context
+        };
+    },
+
+    /**
+     * Update all the the DD shims
+     * Most likely used in combination with libbit-nodescroll (scrolling event).
+     */
+    sizeShims: function() {
+        for (var i in this._ddMap) {
+            if (typeof(this._ddMap[i].sizeShim) === 'function') {
+                this._ddMap[i].sizeShim();
+            }
+        }
+    },
+
+    // -- Protected Methods ----------------------------------------------------
+
+    /**
+     * All DD references must be destoyed if the model is reloaded.
+     */
+    _destroyDD: function() {
+        if (!this.rendered) {
+            return;
+        }
+
+        for (var i in this._ddMap) {
+            this._ddMap[i].destroy();
+        }
+
+        this._ddMap = [];
     },
 
     _handleBind: function (parent) {
@@ -98,25 +117,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
                 self._ddMap.push(catDD);
             }
         });
-    },
-
-    addCallback: function(group, callback, context) {
-        this._callbacks[group] = {
-            callback: callback,
-            context: context
-        };
-    },
-
-    /**
-     * Update all the the DD shims
-     * Most likely used in combination with libbit-nodescroll (scrolling event).
-     */
-    sizeShims: function() {
-        for (var i in this._ddMap) {
-            if (typeof(this._ddMap[i].sizeShim) === 'function') {
-                this._ddMap[i].sizeShim();
-            }
-        }
     },
 
     /**
@@ -197,6 +197,14 @@ DD = Y.Base.create('dd', Y.Base, [], {
         this._ddMap.push(dd);
 
         return dd;
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
+
+    _afterRender: function () {
+        var parent = this.get('container');
+
+        this._handleBind(parent);
     },
 
     _handleStart: function (e) {

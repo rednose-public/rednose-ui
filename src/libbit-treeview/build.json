@@ -8,6 +8,12 @@
             ]
         },
 
+        "libbit-treeview-templates": {
+            "jsfiles": [
+                "js/treeview-templates.js"
+            ]
+        },
+
         "libbit-treeview-anim": {
             "jsfiles": [
                 "js/extensions/treeview-anim.js"

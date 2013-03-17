@@ -6,6 +6,7 @@
             "libbit-treeview-anim",
             "libbit-treeview-dd",
             "libbit-treeview-filter",
+            "libbit-treeview-templates",
             "libbit-treeview-select"
         ],
 
@@ -14,6 +15,12 @@
         ],
 
         "skinnable": true
+    },
+
+    "libbit-treeview-templates" : {
+        "requires": [
+            "template-micro"
+        ]
     },
 
     "libbit-treeview-anim" : {

@@ -7,7 +7,11 @@ var Selectable;
 
 Selectable = Y.Base.create('selectable', Y.Base, [], {
 
+    // -- Protected Properties -------------------------------------------------
+
     _selectMap: [],
+
+    // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
         this.on('select', this._handleSelect, this);
@@ -17,6 +21,8 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
         // Select needs to be restored after the tree is rendered.
         Y.Do.after(this._restoreSelectState, this, 'render');
     },
+
+    // -- Protected Methods ----------------------------------------------------
 
     _restoreSelectState: function () {
         var container = this.get('container'),
@@ -37,6 +43,8 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
             });
         }
     },
+
+    // -- Protected Event Handlers ---------------------------------------------
 
     _handleSelect: function (e) {
         var selectable = this.get('selectable');
