@@ -91,20 +91,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
         (new Y.EventHandle(this._eventHandles)).detach();
     },
 
-    _handleModelChange: function () {
-        var nodes = this.get('model').get('items');
-
-        this.clear({silent: true});
-
-        if (nodes) {
-            // Returns an array of references to the created tree nodes.
-            var treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
-            this._restoreTreeOpenState(treeNodes);
-        }
-
-        this.render();
-    },
-
     _generateLibbitRecordId: function (model) {
         if (model instanceof Y.Model) {
             return model.name + '_' + model.get('id');
@@ -222,6 +208,20 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
         if (index !== -1) {
             this._stateMap.splice(index, 1);
         }
+    },
+
+    _handleModelChange: function () {
+        var nodes = this.get('model').get('items');
+
+        this.clear({silent: true});
+
+        if (nodes) {
+            // Returns an array of references to the created tree nodes.
+            var treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
+            this._restoreTreeOpenState(treeNodes);
+        }
+
+        this.render();
     }
 });
 

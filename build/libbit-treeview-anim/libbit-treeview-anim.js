@@ -8,9 +8,6 @@ var Anim;
 Anim = Y.Base.create('anim', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
-    /**
-     * Initializer, gets called upon instance initiation.
-     */
     initializer: function () {
         this.after('open', this._afterExpand, this);
         this.after('close', this._afterCollapse, this);

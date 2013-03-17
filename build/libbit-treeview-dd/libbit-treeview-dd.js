@@ -18,9 +18,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
     // -- Lifecycle Methods ----------------------------------------------------
 
-    /**
-     * Subscribe to the render event and set up DD listeners.
-     */
     initializer: function () {
         var model = this.get('model');
 
@@ -117,60 +114,32 @@ DD = Y.Base.create('dd', Y.Base, [], {
                 self._ddMap.push(catDD);
             }
         });
+
+        if(this.header) {
+            this._bindHeader();
+        }
     },
 
-    /**
-     * Bind all DD instance after the parent view has been rendered.
-     */
-    _bindDD: function () {
-        var self       = this,
-            tree       = this.get('tree'),
-            nodes;
+    _bindHeader: function () {
+        var container  = this.get('container'),
+            headerDrop;
 
-        if (this._treeNodes.length === 0) {
-            return;
-        } else {
-            nodes = this._treeNodes;
-        }
-
-        Y.each(nodes, function (value) {
-            var node,
-                model;
-
-            node = tree.getHTMLNode(value).one('div');
-            model = value.data;
-
-            if (Y.instanceOf(model, Y.TB.Category)) {
-                // This is a category model. Categories allow dropping.
-                var catDD = new Y.DD.Drop({
-                    node         : node,
-                    groups       : self.get('groups'),
-                    bubbleTargets: self
-                });
-
-                node.addClass('libbit-treeview-drop');
-                self._ddMap.push(catDD);
-            }
-
-            self._createDD(node, model);
+        headerDrop = new Y.DD.Drop({
+            node         : container.one('.nav-header'),
+            // Only allow categories to drop here
+            groups       : [ Y.stamp(this) ],
+            bubbleTargets: this
         });
 
-        if (this.get('header')) {
-            var headerDrop = new Y.DD.Drop({
-                node         : this.get('contentBox').one('.nav-header'),
-                // Only allow categories to drop here
-                groups       : [ Y.stamp(this) ],
-                bubbleTargets: self
-            });
+        headerDrop.on('drop:enter', function (e) {
+            e.drop.get('node').get('parentNode').get('parentNode').addClass('libbit-treeview-drop-over-global');
+        });
 
-            headerDrop.on('drop:enter', function (e) {
-                e.drop.get('node').get('parentNode').get('parentNode').addClass('libbit-treeview-drop-over-global');
-            });
-            headerDrop.on('drop:exit', function () {
-                Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
-            });
-            self._ddMap.push(headerDrop);
-        }
+        headerDrop.on('drop:exit', function () {
+            Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
+        });
+
+        this._ddMap.push(headerDrop);
     },
 
     _createDD: function (node, data) {
@@ -240,8 +209,9 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
     _handleDrop: function (e) {
         var model    = this.get('model'),
-            obj      = e.drag.get('data');
-            newCat   = this.getNodeById(e.drop.get('node').getData('node-id')).data;
+            obj      = e.drag.get('data'),
+            dropNode = e.drop.get('node'),
+            newCat   = dropNode.hasClass('nav-header') ? null: this.getNodeById(dropNode.getData('node-id')).data;
             callback = false,
             self     = this;
 
@@ -275,11 +245,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
             if (oldCatModelID !== newCatModelID) {
                 obj.set(property, newCat);
-                obj.save(function () {
-                    model.load(function () {
-                        // self.render();
-                    });
-                });
+                obj.save(function () { model.load(); });
             }
         }
     }
