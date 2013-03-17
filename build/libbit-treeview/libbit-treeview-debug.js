@@ -115,7 +115,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     },
 
     /**
-     * Return a CSS class string, modified by the given model and it's associated model.
+     * Return a CSS class string, modified by the given tree node and it's associated model.
      *
      * @method icon
      * @param  {Y.Tree.Node} node Tee Node.
