@@ -1,13 +1,6 @@
 var TreeView;
 
 TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.DD, Y.Libbit.TreeView.Selectable], {
-    // -- Public Properties ----------------------------------------------------
-
-    // Tree header, optional.
-    header : {
-        value: null
-    },
-
     // -- Protected Properties -------------------------------------------------
 
     /**
@@ -216,6 +209,8 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     _handleModelChange: function () {
         var nodes = this.get('model').get('items');
 
+        // This is a full tree refresh, so handle the tree methods silently, we don't propagate the
+        // events to our animation listeners etc.
         this.clear({silent: true});
 
         if (nodes) {
@@ -224,6 +219,8 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
             this._restoreTreeOpenState(treeNodes);
         }
 
+        // The model might change before the view is rendered, in this case we don't want to trigger any
+        // listeners bound to the render function yet.
         if (this.rendered) {
             this.render();
         }

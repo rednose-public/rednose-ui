@@ -31,7 +31,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
                 this._handleBind(htmlNode);
             }, this);
 
-
             this.on('drop:enter', function (e) {
                if (e.drop.get('node').one('.libbit-treeview-icon')) {
                     e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');
