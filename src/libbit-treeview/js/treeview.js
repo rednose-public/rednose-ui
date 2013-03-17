@@ -1,10 +1,48 @@
+/**
+ * Provides the `Y.Libbit.TreeView` widget.
+ *
+ * @module libbit-treeview
+ */
+
 var TreeView;
 
+/**
+ * A TreeView widget, implementing Y.View.
+ * Quick Example:<br/>
+ *
+ * <pre><code>var instance = new Y.Libbit.TreeView({
+ *    model     : model,
+ *    dragdrop  : true,
+ *    selectable: true,
+ *    groups    : ['libbit-treeview'],
+ *    header    : 'LiBBiT TreeView'
+ * });
+ * </code></pre>
+ *
+ * @class TreeView
+ * @param {Object} [config] The following configuration properties are required:
+ *
+ *     @param {Object} [config.container] The container to bind the treeView to.
+ *     @param {Boolean} [config.dragdrop] Enable standalone drag and drop for this instance.
+ *     @param {Boolean} [config.selectable] Enables selection of tree nodes. Only single selection
+ *         is supported for now
+ *     @param {Y.Libbit.ModelTree} [config.model] A LiBBiT Tree model. Change events are bound to update
+ *         the view when the model changes.
+ *     @param {Array} [config.groups] The DD groups that can interact with this
+ *         TreeView instance.
+ *     @param {String} [config.header] An optional header, needed for global dropping on the root node
+ *
+ * @constructor
+ * @extends Y.TreeView
+ */
 TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.DD, Y.Libbit.TreeView.Selectable], {
     // -- Protected Properties -------------------------------------------------
 
     /**
-     * Stores the state of expanded nodes.
+     * Stores the state of the opened tree nodes.
+     *
+     * @property {Array} _stateMap
+     * @protected
      */
     _stateMap: [],
 
@@ -42,7 +80,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
      *
      * @method render
      * @chainable
-     * @see TreeView.render()
+     * @see Y.TreeView.render()
      */
     render: function () {
         var container     = this.get('container'),
@@ -74,7 +112,13 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         return this;
     },
 
-    // Used by template.
+    /**
+     * Return a CSS class string, modified by the given nodel and it's associated model.
+     *
+     * @method icon
+     * @param  {Y.Tree.Node} node Tee Node.
+     * @return {String} A composed CSS string.
+     */
     icon: function (node) {
         var model     = node.data,
             icons     = this.get('model').get('icons'),
@@ -95,6 +139,13 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         return className;
     },
 
+    /**
+     * Generate a unique LiBBiT record ID, composed of the class type and the model ID.
+     *
+     * @method generateLibbitRecordID
+     * @param  {Y.Model} model A model instance.
+     * @return {String} A unique ID.
+     */
     generateLibbitRecordId: function (model) {
         if (model instanceof Y.Model) {
             return model.name + '_' + model.get('id');
@@ -103,13 +154,19 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         return null;
     },
 
+    /**
+     * Parse a unique LiBBiT model id.
+     *
+     * @method parseLibbitRecordID
+     * @param  {String} id A LiBBiT record ID.
+     * @return {Array} An array containing type and ID.
+     */
     parseLibbitRecordId: function (id) {
         return id.split('_');
     },
 
     // -- Protected Methods ----------------------------------------------------
 
-    // Store a reference to custom events so we can detach them later.
     _attachEventHandles: function () {
         this._eventHandles || (this._eventHandles = []);
 
@@ -125,7 +182,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         );
     },
 
-    // Destroy the custom events.
     _detachEventHandles: function () {
         (new Y.EventHandle(this._eventHandles)).detach();
     },
