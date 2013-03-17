@@ -2,21 +2,23 @@ var ModelTree;
 
 ModelTree = Y.Base.create('modelTree', Y.Model, [], {
 
+    _items: [],
+
     getByType: function (type) {
-        var tree = this.get('items');
+        var tree = this._items;
 
         return this._treeFindByType(type, tree);
     },
 
     getByAttr: function (type, attr, value) {
-        var tree = this.get('items'),
+        var tree = this._items,
             node = this._treeFind(value, tree, attr, type);
 
         return node ? node.data : null;
     },
 
     filterByAttr: function (type, attr, value) {
-        var tree  = this.get('items');
+        var tree  = this._items;
 
         return this._treeFilter(value, tree, attr, type);
     },
@@ -25,7 +27,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
      * Get a model from the tree by client ID.
      */
     getByClientId: function (clientID) {
-        var tree = this.get('items'),
+        var tree = this._items,
             node = this._treeFind(clientID, tree);
 
         return node ? node.data : null;
@@ -35,7 +37,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
      * Get a model's leaves from the tree by client ID.
      */
     getLeavesByClientId: function (clientID) {
-        var tree   = this.get('items'),
+        var tree   = this._items,
             node   = this._treeFind(clientID, tree),
             leaves = [];
 
@@ -53,7 +55,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
      * Returns just the (potential) branch nodes.
      */
     getBranches: function () {
-        var tree     = this.get('items'),
+        var tree     = this._items,
             branches = this._findBranches(tree);
 
         return branches;
@@ -150,13 +152,32 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         });
 
         return buffer;
+    },
+
+    _setItems: function (val) {
+        this._items = val;
+    },
+
+    _getItems: function () {
+        var filter = this.get('filter');
+
+        if (filter && filter.type) {
+            return this.filterByAttr(filter.type, filter.attr, filter.value);
+        }
+
+        return this._items;
     }
 }, {
 	ATTRS: {
 		items: {
-			value: []
+            setter: '_setItems',
+            getter: '_getItems'
+        },
+
+        filter: {
+            value : {}
         }
-	}
+    }
 });
 
 // -- Namespace ----------------------------------------------------------------

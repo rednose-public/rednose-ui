@@ -1,6 +1,6 @@
 var TreeView;
 
-TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.DD,  Y.Libbit.TreeView.Selectable/*, Y.Libbit.TreeView.Filter*/ ], {
+TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libbit.TreeView.DD, Y.Libbit.TreeView.Selectable], {
     // -- Public Properties ----------------------------------------------------
 
     // Tree header, optional.
@@ -43,26 +43,44 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
 
     destructor: function () {
         this._detachEventHandles();
+
+        // Remove the container that we wrapped around the subcontainer.
+        this.get('container').remove();
     },
 
     // -- Public Methods -------------------------------------------------------
 
+    /**
+     * Overrides TreeView's `render()` method to wrap the container into a parent container,
+     * and hook into the rendering process.
+     *
+     * @method render
+     * @chainable
+     * @see TreeView.render()
+     */
     render: function () {
         var container     = this.get('container'),
             isTouchDevice = 'ontouchstart' in Y.config.win,
             header        = this.header;
 
         if (!this.rendered) {
+            // Append a subcontainer to render the tree.
+            var subContainer = Y.Node.create('<div class="libbit-treeview-inner-container"></div>');
+
+            container.addClass('libbit-treeview-outer-container');
+            container.append(subContainer);
+
             container.addClass(this.classNames.treeview);
             container.addClass(this.classNames[isTouchDevice ? 'touch' : 'noTouch']);
 
             if (header) {
-                container.append('<div class="nav-header">' + header + '</div>');
+                subContainer.append('<div class="nav-header">' + header + '</div>');
             }
         }
 
         this._childrenNode = this.renderChildren(this.rootNode, {
-            container: container
+            // Pass the subcontainer.
+            container: container.one('.libbit-treeview-inner-container')
         });
 
         this.rendered = true;
@@ -221,7 +239,15 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [ Y.Libbit.TreeView.Anim, Y.Lib
             this._restoreTreeOpenState(treeNodes);
         }
 
-        this.render();
+        if (this.rendered) {
+            this.render();
+        }
+    }
+}, {
+    ATTRS: {
+        filter: {
+            value : null
+        }
     }
 });
 

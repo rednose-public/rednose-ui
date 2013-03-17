@@ -171,6 +171,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
     _afterRender: function () {
         var parent = this.get('container');
 
+        this._destroyDD();
         this._handleBind(parent);
     },
 

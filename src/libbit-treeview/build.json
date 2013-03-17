@@ -26,12 +26,6 @@
             ]
         },
 
-        "libbit-treeview-filter": {
-            "jsfiles": [
-                "js/extensions/treeview-filter.js"
-            ]
-        },
-
         "libbit-treeview-select": {
             "jsfiles": [
                 "js/extensions/treeview-select.js"
