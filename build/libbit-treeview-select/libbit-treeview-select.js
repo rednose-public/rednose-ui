@@ -14,6 +14,8 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
+        this._selectMap = [];
+
         this.on('select', this._handleSelectState, this);
         this.on('unselect', this._handleUnSelectState, this);
 
@@ -25,9 +27,7 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     },
 
     destructor: function () {
-        for (var i in this._selectMap) {
-            delete this._selectMap[i];
-        }
+        this._selectMap = null;
     },
 
     // -- Protected Methods ----------------------------------------------------
@@ -71,7 +71,7 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     _handleSelectState: function (e) {
         var id         = this.generateLibbitRecordId(e.node.data),
-            index      = Y.Array.indexOf(this._selectMap, id);
+            index      = this._selectMap.indexOf(id),
             selectable = this.get('selectable');
 
         if (!selectable) {
@@ -87,7 +87,7 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     _handleUnSelectState: function (e) {
         var id    = this.generateLibbitRecordId(e.node.data),
-            index = Y.Array.indexOf(this._selectMap, id);
+            index = this._selectMap.indexOf(id);
 
         if (index !== -1) {
            this._selectMap.splice(index, 1);

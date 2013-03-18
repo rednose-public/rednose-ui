@@ -26,10 +26,10 @@ _yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"] = {
     path: "build/libbit-treeview-select/libbit-treeview-select.js",
     code: []
 };
-_yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].code=["YUI.add('libbit-treeview-select', function (Y, NAME) {","","/**"," * Selection extension for the LiBBiT TreeView widget."," */","var Selectable;","","Selectable = Y.Base.create('selectable', Y.Base, [], {","","    // -- Protected Properties -------------------------------------------------","","    _selectMap: [],","","    // -- Lifecycle Methods ----------------------------------------------------","","    initializer: function () {","        this.on('select', this._handleSelectState, this);","        this.on('unselect', this._handleUnSelectState, this);","","        this.after('select', this._handleSelect, this);","        this.after('unselect', this._handleUnselect, this);","","        // Select needs to be restored after the tree is rendered.","        Y.Do.after(this._restoreSelectState, this, 'render');","    },","","    destructor: function () {","        for (var i in this._selectMap) {","            delete this._selectMap[i];","        }","    },","","    // -- Protected Methods ----------------------------------------------------","","    _restoreSelectState: function () {","        var container = this.get('container'),","            self      = this;","","        if (this._selectMap && this._selectMap.length > 0) {","            Y.Array.each(this._selectMap, function (id) {","                // TODO: if the selected node is not visible yet, bind an event on 'open' and unbind it","                // after another selection is made.","                var record = self.parseLibbitRecordId(id);","","                container.all('[data-libbit-type=' + record[0] + ']').each(function (node) {","","                    if (node.getData('libbit-id') === record[1]) {","                        self.getNodeById(node.getData('node-id')).select();","                    }","                });","            });","        }","    },","","    // -- Protected Event Handlers ---------------------------------------------","","    _handleSelect: function (e) {","        var htmlNode   = this.getHTMLNode(e.node);","","        htmlNode.one('.libbit-treeview-icon').addClass('icon-white');","    },","","    _handleUnselect: function (e) {","        var htmlNode   = this.getHTMLNode(e.node);","            selectable = this.get('selectable');","","        if (htmlNode.one('.libbit-treeview-icon').hasClass('icon-white')) {","            htmlNode.one('.libbit-treeview-icon').removeClass('icon-white');","        }","    },","","    _handleSelectState: function (e) {","        var id         = this.generateLibbitRecordId(e.node.data),","            index      = Y.Array.indexOf(this._selectMap, id);","            selectable = this.get('selectable');","","        if (!selectable) {","            // If selectable is disabled, don't allow this event to propagate","            // to other select handlers.","            e.stopImmediatePropagation();","        }","","        if (selectable && index === -1) {","            this._selectMap.push(id);","        }","    },","","    _handleUnSelectState: function (e) {","        var id    = this.generateLibbitRecordId(e.node.data),","            index = Y.Array.indexOf(this._selectMap, id);","","        if (index !== -1) {","           this._selectMap.splice(index, 1);","        }","    }","","}, {","    ATTRS: {","        /**","         * Enable selection for this TreeView instance","         */","        selectable: {","            value : true","        }","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.TreeView').Selectable = Selectable;","","","}, '1.0.0', {\"requires\": [\"libbit-treeview\"]});"];
-_yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].lines = {"1":0,"6":0,"8":0,"17":0,"18":0,"20":0,"21":0,"24":0,"28":0,"29":0,"36":0,"39":0,"40":0,"43":0,"45":0,"47":0,"48":0,"58":0,"60":0,"64":0,"65":0,"67":0,"68":0,"73":0,"75":0,"77":0,"80":0,"83":0,"84":0,"89":0,"92":0,"93":0,"109":0};
-_yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].functions = {"initializer:16":0,"destructor:27":0,"(anonymous 3):45":0,"(anonymous 2):40":0,"_restoreSelectState:35":0,"_handleSelect:57":0,"_handleUnselect:63":0,"_handleSelectState:72":0,"_handleUnSelectState:88":0,"(anonymous 1):1":0};
-_yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].coveredLines = 33;
+_yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].code=["YUI.add('libbit-treeview-select', function (Y, NAME) {","","/**"," * Selection extension for the LiBBiT TreeView widget."," */","var Selectable;","","Selectable = Y.Base.create('selectable', Y.Base, [], {","","    // -- Protected Properties -------------------------------------------------","","    _selectMap: [],","","    // -- Lifecycle Methods ----------------------------------------------------","","    initializer: function () {","        this._selectMap = [];","","        this.on('select', this._handleSelectState, this);","        this.on('unselect', this._handleUnSelectState, this);","","        this.after('select', this._handleSelect, this);","        this.after('unselect', this._handleUnselect, this);","","        // Select needs to be restored after the tree is rendered.","        Y.Do.after(this._restoreSelectState, this, 'render');","    },","","    destructor: function () {","        this._selectMap = null;","    },","","    // -- Protected Methods ----------------------------------------------------","","    _restoreSelectState: function () {","        var container = this.get('container'),","            self      = this;","","        if (this._selectMap && this._selectMap.length > 0) {","            Y.Array.each(this._selectMap, function (id) {","                // TODO: if the selected node is not visible yet, bind an event on 'open' and unbind it","                // after another selection is made.","                var record = self.parseLibbitRecordId(id);","","                container.all('[data-libbit-type=' + record[0] + ']').each(function (node) {","","                    if (node.getData('libbit-id') === record[1]) {","                        self.getNodeById(node.getData('node-id')).select();","                    }","                });","            });","        }","    },","","    // -- Protected Event Handlers ---------------------------------------------","","    _handleSelect: function (e) {","        var htmlNode   = this.getHTMLNode(e.node);","","        htmlNode.one('.libbit-treeview-icon').addClass('icon-white');","    },","","    _handleUnselect: function (e) {","        var htmlNode   = this.getHTMLNode(e.node);","            selectable = this.get('selectable');","","        if (htmlNode.one('.libbit-treeview-icon').hasClass('icon-white')) {","            htmlNode.one('.libbit-treeview-icon').removeClass('icon-white');","        }","    },","","    _handleSelectState: function (e) {","        var id         = this.generateLibbitRecordId(e.node.data),","            index      = this._selectMap.indexOf(id),","            selectable = this.get('selectable');","","        if (!selectable) {","            // If selectable is disabled, don't allow this event to propagate","            // to other select handlers.","            e.stopImmediatePropagation();","        }","","        if (selectable && index === -1) {","            this._selectMap.push(id);","        }","    },","","    _handleUnSelectState: function (e) {","        var id    = this.generateLibbitRecordId(e.node.data),","            index = this._selectMap.indexOf(id);","","        if (index !== -1) {","           this._selectMap.splice(index, 1);","        }","    }","","}, {","    ATTRS: {","        /**","         * Enable selection for this TreeView instance","         */","        selectable: {","            value : true","        }","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.TreeView').Selectable = Selectable;","","","}, '1.0.0', {\"requires\": [\"libbit-treeview\"]});"];
+_yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].lines = {"1":0,"6":0,"8":0,"17":0,"19":0,"20":0,"22":0,"23":0,"26":0,"30":0,"36":0,"39":0,"40":0,"43":0,"45":0,"47":0,"48":0,"58":0,"60":0,"64":0,"65":0,"67":0,"68":0,"73":0,"77":0,"80":0,"83":0,"84":0,"89":0,"92":0,"93":0,"109":0};
+_yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].functions = {"initializer:16":0,"destructor:29":0,"(anonymous 3):45":0,"(anonymous 2):40":0,"_restoreSelectState:35":0,"_handleSelect:57":0,"_handleUnselect:63":0,"_handleSelectState:72":0,"_handleUnSelectState:88":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].coveredLines = 32;
 _yuitest_coverage["build/libbit-treeview-select/libbit-treeview-select.js"].coveredFunctions = 10;
 _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 1);
 YUI.add('libbit-treeview-select', function (Y, NAME) {
@@ -53,27 +53,27 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     initializer: function () {
         _yuitest_coverfunc("build/libbit-treeview-select/libbit-treeview-select.js", "initializer", 16);
 _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 17);
+this._selectMap = [];
+
+        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 19);
 this.on('select', this._handleSelectState, this);
-        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 18);
+        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 20);
 this.on('unselect', this._handleUnSelectState, this);
 
-        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 20);
+        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 22);
 this.after('select', this._handleSelect, this);
-        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 21);
+        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 23);
 this.after('unselect', this._handleUnselect, this);
 
         // Select needs to be restored after the tree is rendered.
-        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 24);
+        _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 26);
 Y.Do.after(this._restoreSelectState, this, 'render');
     },
 
     destructor: function () {
-        _yuitest_coverfunc("build/libbit-treeview-select/libbit-treeview-select.js", "destructor", 27);
-_yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 28);
-for (var i in this._selectMap) {
-            _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 29);
-delete this._selectMap[i];
-        }
+        _yuitest_coverfunc("build/libbit-treeview-select/libbit-treeview-select.js", "destructor", 29);
+_yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 30);
+this._selectMap = null;
     },
 
     // -- Protected Methods ----------------------------------------------------
@@ -137,9 +137,8 @@ htmlNode.one('.libbit-treeview-icon').removeClass('icon-white');
         _yuitest_coverfunc("build/libbit-treeview-select/libbit-treeview-select.js", "_handleSelectState", 72);
 _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 73);
 var id         = this.generateLibbitRecordId(e.node.data),
-            index      = Y.Array.indexOf(this._selectMap, id);
-            _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 75);
-selectable = this.get('selectable');
+            index      = this._selectMap.indexOf(id),
+            selectable = this.get('selectable');
 
         _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 77);
 if (!selectable) {
@@ -160,7 +159,7 @@ this._selectMap.push(id);
         _yuitest_coverfunc("build/libbit-treeview-select/libbit-treeview-select.js", "_handleUnSelectState", 88);
 _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 89);
 var id    = this.generateLibbitRecordId(e.node.data),
-            index = Y.Array.indexOf(this._selectMap, id);
+            index = this._selectMap.indexOf(id);
 
         _yuitest_coverline("build/libbit-treeview-select/libbit-treeview-select.js", 92);
 if (index !== -1) {

@@ -58,6 +58,9 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
             this.header = config.header;
         }
 
+        // Initialize the state map so it doesn't contain any garbage from previous instances.
+        this._stateMap = [];
+
         this.set('model', config.model);
 
         this._attachEventHandles();
@@ -66,12 +69,11 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     destructor: function () {
         this._detachEventHandles();
 
-        for (var i in this._stateMap) {
-            delete this._stateMap[i];
-        }
+        // Free the reference so the property is eligible for garbage collection.
+        this._stateMap = null;
 
         // Remove the container from the DOM and destroy it.
-        this.get('container').remove().destroy(true);
+        this._destroyContainer();
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -201,7 +203,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
 
     _restoreNodeOpenState: function (node) {
          var id    = this.generateLibbitRecordId(node.data),
-             index = Y.Array.indexOf(this._stateMap, id);
+             index = this._stateMap.indexOf(id);
 
          if (index !== -1) {
             node.open({silent: true});
@@ -249,7 +251,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
 
     _handleExpand: function (e) {
          var id    = this.generateLibbitRecordId(e.node.data),
-             index = Y.Array.indexOf(this._stateMap, id);
+             index = this._stateMap.indexOf(id);
 
         if (index === -1) {
             this._stateMap.push(id);
@@ -258,7 +260,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
 
     _handleCollapse: function (e) {
         var id    = this.generateLibbitRecordId(e.node.data),
-            index = Y.Array.indexOf(this._stateMap, id);
+            index = this._stateMap.indexOf(id);
 
         if (index !== -1) {
             this._stateMap.splice(index, 1);
@@ -283,6 +285,17 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         if (this.rendered) {
             this.render();
         }
+    },
+
+    /**
+     * Removes the `container` from the DOM and purges all its event listeners.
+     *
+     * @method _destroyContainer
+     * @protected
+     */
+    _destroyContainer: function () {
+        var container = this.get('container');
+        container && container.remove(true);
     }
 });
 

@@ -23,6 +23,8 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
         model.on('change', this._destroyDD, this);
 
+        this._ddMap = [];
+
         // TODO: Bind on dragdrop attribute change.
         if (this.get('dragdrop')) {
             Y.Do.after(this._afterRender, this, 'render', this);
