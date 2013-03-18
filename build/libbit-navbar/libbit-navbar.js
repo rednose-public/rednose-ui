@@ -62,14 +62,14 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     },
 
     enable: function (id) {
-        this.disable(id);
+        this.disable(id, true);
     },
 
-    disable: function (id) {
+    disable: function (id, _enable) {
         var container = this.get('contentBox'),
             node = container.one('[data-id=' + id + ']');
 
-        if (node.ancestor('li').hasClass('disabled')) {
+        if (_enable) {
             node.ancestor('li').removeClass('disabled');
         } else {
             node.ancestor('li').addClass('disabled');
