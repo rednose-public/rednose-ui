@@ -97,10 +97,13 @@ DD = Y.Base.create('dd', Y.Base, [], {
             self  = this;
 
         nodes.each(function (node) {
-            var model = self.getNodeById(node.getData('node-id')).data;
+            var model = new Y.Model();
+            // var model = self.get('model').getByAttr(node.getData('libbit-type'), 'id', node.getData('libbit-id'));
+            // var model = self.getNodeById(node.getData('node-id')).data;
 
             self._createDD(node, model);
 
+            // FIXME: Use a more generic way to specify droppable models.
             if (model instanceof Y.TB.Category) {
                 // This is a category model. Categories allow dropping.
                 var catDD = new Y.DD.Drop({
@@ -173,7 +176,10 @@ DD = Y.Base.create('dd', Y.Base, [], {
     _afterRender: function () {
         var parent = this.get('container');
 
-        this._destroyDD();
+        if (this._ddMap.length > 0) {
+            this._destroyDD();
+        }
+
         this._handleBind(parent);
     },
 

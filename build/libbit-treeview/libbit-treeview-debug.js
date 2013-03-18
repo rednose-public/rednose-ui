@@ -258,7 +258,8 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
         if (nodes) {
             // Returns an array of references to the created tree nodes.
             var treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
-            this._restoreTreeOpenState(treeNodes);
+            // this._restoreTreeOpenState(treeNodes);
+            this._restoreTreeOpenState();
         }
 
         this.rendered && this.render();
