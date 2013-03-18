@@ -89,26 +89,23 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     render: function () {
         var container     = this.get('container'),
             isTouchDevice = 'ontouchstart' in Y.config.win,
-            header        = this.header;
+            header        = this.header,
+            subContainer  = Y.Node.create('<div class="libbit-treeview-inner-container"></div>');
 
-        if (!this.rendered) {
-            // Append a subcontainer to render the tree.
-            var subContainer = Y.Node.create('<div class="libbit-treeview-inner-container"></div>');
+        container.addClass(this.classNames.treeview);
+        container.addClass(this.classNames[isTouchDevice ? 'touch' : 'noTouch']);
 
-            container.addClass('libbit-treeview-outer-container');
-            container.append(subContainer);
+        // Append a subcontainer to render the tree.
+        container.addClass('libbit-treeview-outer-container');
+        container.append(subContainer);
 
-            container.addClass(this.classNames.treeview);
-            container.addClass(this.classNames[isTouchDevice ? 'touch' : 'noTouch']);
-
-            if (header) {
-                subContainer.append('<div class="nav-header">' + header + '</div>');
-            }
+        if (header) {
+            subContainer.append('<div class="nav-header">' + header + '</div>');
         }
 
         this._childrenNode = this.renderChildren(this.rootNode, {
             // Pass the subcontainer.
-            container: container.one('.libbit-treeview-inner-container')
+            container: subContainer
         });
 
         this.rendered = true;
@@ -242,6 +239,31 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
 
     // -- Protected Event Handlers ---------------------------------------------
 
+    _handleModelChange: function () {
+        var nodes = this.get('model').get('items');
+
+        // This is a full tree refresh, so handle the tree methods silently, we don't propagate the
+        // events to our animation listeners etc.
+        this.clear(false, {silent: true});
+
+        // Clean up, normally this would be handled by the original Treeview's handler, but we are clearing
+        // the tree silently.
+        if (this.rendered) {
+            delete this._childrenNode;
+
+            this.get('container').empty();
+        }
+
+        // Build a new tree silently, and trigger a new render if needed.
+        if (nodes) {
+            // Returns an array of references to the created tree nodes.
+            var treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
+            this._restoreTreeOpenState(treeNodes);
+        }
+
+        this.rendered && this.render();
+    },
+
     _handleToggle: function (e) {
         var node      = e.node,
             htmlNode  = this.getHTMLNode(e.node);
@@ -264,26 +286,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
 
         if (index !== -1) {
             this._stateMap.splice(index, 1);
-        }
-    },
-
-    _handleModelChange: function () {
-        var nodes = this.get('model').get('items');
-
-        // This is a full tree refresh, so handle the tree methods silently, we don't propagate the
-        // events to our animation listeners etc.
-        this.clear({silent: true});
-
-        if (nodes) {
-            // Returns an array of references to the created tree nodes.
-            var treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
-            this._restoreTreeOpenState(treeNodes);
-        }
-
-        // The model might change before the view is rendered, in this case we don't want to trigger any
-        // listeners bound to the render function yet.
-        if (this.rendered) {
-            this.render();
         }
     },
 

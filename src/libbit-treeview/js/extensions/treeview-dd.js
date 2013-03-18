@@ -19,13 +19,14 @@ DD = Y.Base.create('dd', Y.Base, [], {
     initializer: function () {
         var model = this.get('model');
 
-        model.on('change', this._destroyDD, this);
-
         this._ddMap = [];
 
         // TODO: Bind on dragdrop attribute change.
         if (this.get('dragdrop')) {
+            // Setup the initial DD instances when the view is rendered.
+            model.on('change', this._destroyDD, this);
             Y.Do.after(this._afterRender, this, 'render', this);
+
             this.after('open', function (e) {
                 var treeNode = e.node,
                     htmlNode = this.getHTMLNode(treeNode);
@@ -44,6 +45,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
                     e.drop.get('node').all('.icon-white').removeClass('icon-white');
                 }
             });
+
             this.on('drag:start', this._handleStart, this);
             this.on('drop:hit', this._handleDrop, this);
         }
@@ -51,6 +53,9 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
     destructor: function () {
         this._destroyDD();
+
+        this.get('model').detach('change', this._destroyDD());
+        this._ddMap = null;
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -80,15 +85,11 @@ DD = Y.Base.create('dd', Y.Base, [], {
      * All DD references must be destoyed if the model is reloaded.
      */
     _destroyDD: function() {
-        if (!this.rendered) {
-            return;
-        }
-
         for (var i in this._ddMap) {
             this._ddMap[i].destroy();
         }
 
-        this._ddMap = [];
+        this._ddMap.length = 0;
     },
 
     _handleBind: function (parent) {

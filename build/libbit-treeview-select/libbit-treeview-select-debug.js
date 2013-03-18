@@ -14,8 +14,6 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-        this._selectMap = [];
-
         this.on('select', this._handleSelectState, this);
         this.on('unselect', this._handleUnSelectState, this);
 
@@ -27,7 +25,8 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     },
 
     destructor: function () {
-        this._selectMap = null;
+        // Destroy the array so it doesn't persist.
+        this._selectMap.length = 0;
     },
 
     // -- Protected Methods ----------------------------------------------------
