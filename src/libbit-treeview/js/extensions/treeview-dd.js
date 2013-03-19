@@ -17,45 +17,17 @@ DD = Y.Base.create('dd', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-        var model = this.get('model');
-
         this._ddMap = [];
 
-        // TODO: Bind on dragdrop attribute change.
-        if (this.get('dragdrop')) {
-            // Setup the initial DD instances when the view is rendered.
-            model.on('change', this._destroyDD, this);
-            Y.Do.after(this._afterRender, this, 'render', this);
-
-            this.after('open', function (e) {
-                var treeNode = e.node,
-                    htmlNode = this.getHTMLNode(treeNode);
-
-                this._handleBind(htmlNode);
-            }, this);
-
-            this.on('drop:enter', function (e) {
-               if (e.drop.get('node').one('.libbit-treeview-icon')) {
-                    e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');
-                }
-            });
-            this.on('drop:exit', function (e) {
-                // FIXME: Ignore selected nodes
-                if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
-                    e.drop.get('node').all('.icon-white').removeClass('icon-white');
-                }
-            });
-
-            this.on('drag:start', this._handleStart, this);
-            this.on('drop:hit', this._handleDrop, this);
-        }
+        this.get('dragdrop') && this._attachDdEvents();
     },
 
     destructor: function () {
-        this._destroyDD();
+        this._destroyDd();
+        this._detachDdEvents();
 
-        this.get('model').detach('change', this._destroyDD());
-        this._ddMap = null;
+        this._callbacks = null;
+        this._ddMap     = null;
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -81,27 +53,14 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
     // -- Protected Methods ----------------------------------------------------
 
-    /**
-     * All DD references must be destoyed if the model is reloaded.
-     */
-    _destroyDD: function() {
-        for (var i in this._ddMap) {
-            this._ddMap[i].destroy();
-        }
-
-        this._ddMap.length = 0;
-    },
-
     _handleBind: function (parent) {
         var nodes = parent.one('.' + this.classNames.children).all('[data-libbit-type]:not(.libbit-treeview-drag)'),
             self  = this;
 
         nodes.each(function (node) {
-            var model = new Y.Model();
-            // var model = self.get('model').getByAttr(node.getData('libbit-type'), 'id', node.getData('libbit-id'));
-            // var model = self.getNodeById(node.getData('node-id')).data;
+            var model = self.getNodeById(node.getData('node-id')).data;
 
-            self._createDD(node, model);
+            self._createDd(node, model);
 
             // FIXME: Use a more generic way to specify droppable models.
             if (model instanceof Y.TB.Category) {
@@ -118,34 +77,25 @@ DD = Y.Base.create('dd', Y.Base, [], {
             }
         });
 
-        if(this.header) {
-            this._bindHeader();
-        }
+        this.header && this._bindHeader();
     },
 
     _bindHeader: function () {
         var container  = this.get('container'),
-            headerDrop;
+            dd;
 
-        headerDrop = new Y.DD.Drop({
+        dd = new Y.DD.Drop({
             node         : container.one('.nav-header'),
-            // Only allow categories to drop here
+            // Only allow categories to drop here.
             groups       : [ Y.stamp(this) ],
             bubbleTargets: this
         });
 
-        headerDrop.on('drop:enter', function (e) {
-            e.drop.get('node').get('parentNode').get('parentNode').addClass('libbit-treeview-drop-over-global');
-        });
-
-        headerDrop.on('drop:exit', function () {
-            Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
-        });
-
-        this._ddMap.push(headerDrop);
+        this._attachHeaderEvents(dd);
+        this._ddMap.push(dd);
     },
 
-    _createDD: function (node, data) {
+    _createDd: function (node, data) {
         var groups = this.get('groups'),
             self   = this,
             dd;
@@ -160,7 +110,9 @@ DD = Y.Base.create('dd', Y.Base, [], {
             data         : data,
             groups       : groups,
             bubbleTargets: self
-        }).plug(Y.Plugin.DDProxy, {
+        });
+
+        dd.plug(Y.Plugin.DDProxy, {
             moveOnEnd  : false,
             borderStyle: 'none'
         });
@@ -171,16 +123,85 @@ DD = Y.Base.create('dd', Y.Base, [], {
         return dd;
     },
 
+    _attachDdEvents: function () {
+        this._ddEventHandles || (this._ddEventHandles = []);
+
+        this._ddEventHandles.push(
+            // Setup the initial DD instances when the view is rendered.
+            Y.Do.after(this._afterRender, this, 'render', this),
+
+            this.on({
+                'drop:enter': this._handleDdEnter,
+                'drop:exit' : this._handleDdExit,
+                'drag:start': this._handleStart,
+                'drop:hit'  : this._handleDrop
+            }),
+
+            this.after('open', this._handleDdOpen)
+        );
+    },
+
+    _attachHeaderEvents: function (dd) {
+        this._ddEventHandles.push(
+            dd.on({
+                'drop:enter': this._handleHeaderEnter,
+                'drop:exit' : this._handleHeaderExit
+            })
+        );
+    },
+
+    _detachDdEvents: function () {
+        (new Y.EventHandle(this._ddEventHandles)).detach();
+    },
+
+    /**
+     * All DD references must be destoyed if the model is reloaded.
+     */
+    _destroyDd: function() {
+        for (var i in this._ddMap) {
+            this._ddMap[i].destroy();
+        }
+
+        this._ddMap.length = 0;
+    },
+
     // -- Protected Event Handlers ---------------------------------------------
 
     _afterRender: function () {
-        var parent = this.get('container');
+        this._destroyDd();
+        this._handleBind(this.get('container'));
+    },
 
-        if (this._ddMap.length > 0) {
-            this._destroyDD();
+    _handleHeaderEnter: function (e) {
+        var node = e.drop.get('node').ancestor('.libbit-treeview-outer-container');
+
+        node.addClass('libbit-treeview-drop-over-global');
+    },
+
+    _handleHeaderExit: function (e) {
+        var node = e.drop.get('node').ancestor('.libbit-treeview-outer-container');
+
+        node.hasClass('libbit-treeview-drop-over-global') && node.removeClass('libbit-treeview-drop-over-global');
+    },
+
+    _handleDdOpen: function (e) {
+        var treeNode = e.node,
+            htmlNode = this.getHTMLNode(treeNode);
+
+        this._handleBind(htmlNode);
+    },
+
+    _handleDdEnter: function (e) {
+       if (e.drop.get('node').one('.libbit-treeview-icon')) {
+            e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');
         }
+    },
 
-        this._handleBind(parent);
+    _handleDdExit: function (e) {
+        // FIXME: Ignore selected nodes
+        if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
+            e.drop.get('node').all('.icon-white').removeClass('icon-white');
+        }
     },
 
     _handleStart: function (e) {
@@ -211,7 +232,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
         drag.set('target', true);
         drag._prep();
 
-        dd = this._createDD(origin, model);
+        dd = this._createDd(origin, model);
     },
 
     _handleDrop: function (e) {

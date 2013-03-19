@@ -248,17 +248,25 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
 
         // Clean up, normally this would be handled by the original Treeview's handler, but we are clearing
         // the tree silently.
-        if (this.rendered) {
+       if (this.rendered) {
+            var childNodes = this.get('container').get('childNodes');
+
             delete this._childrenNode;
 
-            this.get('container').empty();
+            childNodes.remove();
+
+            // Fix for DD. YUI creates the shims on a 100 ms timer after DD init, so if we destroy
+            // the node within 100 ms after initialization, the internal node property points to NULL and
+            // we get an error.
+            Y.later(150, Y, function () {
+                childNodes.destroy(true);
+            });
         }
 
         // Build a new tree silently, and trigger a new render if needed.
         if (nodes) {
             // Returns an array of references to the created tree nodes.
-            var treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
-            // this._restoreTreeOpenState(treeNodes);
+            treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
             this._restoreTreeOpenState();
         }
 
