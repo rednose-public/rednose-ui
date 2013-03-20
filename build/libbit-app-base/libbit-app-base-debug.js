@@ -153,6 +153,7 @@ Y.namespace('Libbit').App = App;
 }, '1.0.0', {
     "requires": [
         "app-base",
+        "cssgrids",
         "event-custom",
         "handlebars-base",
         "libbit-app-templates",
