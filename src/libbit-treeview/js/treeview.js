@@ -49,6 +49,12 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function (config) {
+        config || (config = {});
+
+        if (!config.model) {
+            Y.log('Libbit TreeView requires a configured ModelTree', 'warn', 'libbit-treeview');
+        }
+
         // Hook into the initializer chain to set the nodes.
         config.nodes = config.model.get('items');
 
