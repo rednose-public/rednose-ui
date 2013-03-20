@@ -5,8 +5,6 @@ var Spinner;
 Spinner = Y.Base.create('undo', Y.Model, [], {
 
     destroy: function (options, callback) {
-       var self = this;
-
         // Allow callback as only arg.
         if (typeof options === 'function') {
             callback = options;
@@ -25,8 +23,6 @@ Spinner = Y.Base.create('undo', Y.Model, [], {
     },
 
     save: function (options, callback) {
-       var self = this;
-
         // Allow callback as only arg.
         if (typeof options === 'function') {
             callback = options;
@@ -45,8 +41,6 @@ Spinner = Y.Base.create('undo', Y.Model, [], {
     },
 
     load: function (options, callback) {
-       var self = this;
-
         // Allow callback as only arg.
         if (typeof options === 'function') {
             callback = options;

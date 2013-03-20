@@ -1,5 +1,3 @@
-var Templates;
-
 /**
  * LiBBiT framework app/view templates
  */

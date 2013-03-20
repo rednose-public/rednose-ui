@@ -1,5 +1,3 @@
-var Anim;
-
 /**
  * Several animation class methods to be used throughout the LiBBiT framework.
  */

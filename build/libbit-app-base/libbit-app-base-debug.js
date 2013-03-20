@@ -3,8 +3,8 @@ YUI.add('libbit-app-base', function (Y, NAME) {
 var App;
 
 /**
-Extension of the original Y.App, to provide support for modal views.
-**/
+ *Extension of the original Y.App, to provide support for modal views.
+ */
 App = Y.Base.create('libbit-app', Y.App, [], {
 
     /**

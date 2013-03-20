@@ -44,8 +44,6 @@ Undo = Y.Base.create('undo', Y.Model, [], {
     },
 
     undo: function () {
-        var newIndex;
-
         if (this.canUndo()) {
             this._index--;
             this.setAttrs(Y.JSON.parse(this._revisions[this._index].undo));
@@ -57,8 +55,6 @@ Undo = Y.Base.create('undo', Y.Model, [], {
     },
 
     redo: function () {
-        var newIndex;
-
         if (this.canRedo()) {
             this._index++;
             this.setAttrs(Y.JSON.parse(this._revisions[this._index - 1].redo));

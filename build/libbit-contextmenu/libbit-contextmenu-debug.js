@@ -37,7 +37,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         var node = Y.Node.create(template);
         var ul = node.one('ul');
 
-        if (content == '') {
+        if (content === '') {
             return content;
         }
 

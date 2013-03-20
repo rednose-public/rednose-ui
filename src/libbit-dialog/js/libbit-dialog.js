@@ -1,6 +1,6 @@
+var Dialog;
 
 Dialog = Y.Base.create('dialog', Y.Widget, [], {
-
 
     initializer: function () {
         // Bind the error attribute change event
@@ -44,18 +44,17 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
     },
 
     prompt: function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {
-        var self = this,
-            node,
+        var node,
             panel;
 
         confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';
 
-        if (defaultVal == null) {
+        if (defaultVal === null) {
             defaultVal = '';
         }
 
         if (htmlTemplate) {
-            if (typeof(htmlTemplate) == 'string') {
+            if (typeof(htmlTemplate) === 'string') {
                 input = Y.Node.create(htmlTemplate);
             } else {
                 input = htmlTemplate;
@@ -96,7 +95,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: true,
                     action : function () {
-                        if (callback != null) {
+                        if (callback !== null) {
                             if (callback(node) === true) {
                                 panel.destroy();
                             }
@@ -231,16 +230,16 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
 });
 
 Dialog.confirm = function (title, message, callback, warning, confirmVal) {
-    var dialog = new Dialog;
+    var dialog = new Dialog();
 
     dialog.confirm(title, message, callback, warning, confirmVal);
-}
+};
 
 Dialog.error = function (title, message, warning) {
-    var dialog = new Dialog;
+    var dialog = new Dialog();
 
     dialog.error(title, message, warning);
-}
+};
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Libbit').Dialog = Dialog;

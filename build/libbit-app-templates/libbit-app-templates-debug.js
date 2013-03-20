@@ -1,7 +1,5 @@
 YUI.add('libbit-app-templates', function (Y, NAME) {
 
-var Templates;
-
 /**
  * LiBBiT framework app/view templates
  */
