@@ -17,4 +17,17 @@ YUI().use('libbit-treeview',  function (Y) {
     });
 
     tm.render();
+
+    Y.one('#refreshModel').on('click', function () {
+        console.log('Refresh model');
+    });
+
+    Y.one('#applyFilter').on('click', function () {
+        console.log('Apply filter');
+    });
+
+    Y.one('#removeFilter').on('click', function () {
+        console.log('Remove filter');
+    });
+
 });
