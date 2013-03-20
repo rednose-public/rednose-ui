@@ -1,9 +1,0 @@
-{
-    "libbit-nav-container" : {
-        "requires": [
-            "widget",
-            "widget-buttons",
-            "widget-stdmod"
-        ]
-    }
-}

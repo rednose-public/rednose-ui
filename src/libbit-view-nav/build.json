@@ -1,9 +1,16 @@
 {
     "name": "libbit-view-nav",
+
     "builds": {
         "libbit-view-nav": {
             "jsfiles": [
-                "libbit-view-nav.js"
+                "js/view-nav.js"
+            ]
+        },
+
+        "libbit-nav-container": {
+            "jsfiles": [
+                "js/nav-container.js"
             ]
         }
     }

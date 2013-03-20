@@ -1,49 +1,46 @@
-.yui3-skin-sam .yui3-treeview-row {
-    color: #0088cc !important;
+/* Basic item styling */
+.libbit-bootstrap .yui3-skin-sam .yui3-treeview-row {
+    color: #0088cc;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    text-decoration: none !important;
-    border: none !important;
+    text-decoration: none;
+    border: none;
+    background-image: none;
+    border-radius: 0;
 }
 
-.yui3-skin-sam .yui3-treeview-row:hover {
-    color: #005580 !important;
+/* Basic hover */
+.libbit-bootstrap .yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-row:hover {
+    color: #005580;
+    background-color: #eeeeee;
 }
 
-.yui3-skin-sam .yui3-treeview-row {
-    background-image: none !important;
-    border-radius: 0 !important;
+/* Selected items and selected item hover. */
+.libbit-bootstrap .yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row,
+.libbit-bootstrap .yui3-skin-sam .yui3-treeview-selected:focus > .yui3-treeview-row,
+.libbit-bootstrap .yui3-skin-sam .yui3-treeview-children[aria-multiselectable="true"] .yui3-treeview-selected > .yui3-treeview-row,
+.libbit-bootstrap .yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row:hover,
+.libbit-bootstrap .yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-selected > .yui3-treeview-row:hover {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    background-color: #0088cc;
 }
 
-.yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row {
-    color: #ffffff !important;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
-    background-color: #0088cc !important;
+/* Drag over highlight */
+.libbit-bootstrap .yui3-treeview .libbit-treeview-drop.yui3-dd-drop-over {
+    background-color: #80C4E6;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
 }
 
-.yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row:hover {
-    color: #ffffff !important;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
-    background-color: #0088cc !important;
-}
-
-.yui3-skin-sam .yui3-treeview-row:hover {
-    background-color: #eeeeee !important;
-}
-
-/* Custom drag highlight */
-.yui3-treeview .libbit-treeview-drop.yui3-dd-drop-over {
-    background-color: #80C4E6 !important;
-    color: #ffffff !important;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
-    -webkit-border-radius: 5px !important;
-     -moz-border-radius: 5px !important;
-          border-radius: 5px !important;
-}
-
-.libbit-treeview-drop-over-global .libbit-treeview-inner-container {
+/* Helper class for the inner container, so the border on the outer's container doesn't squeeze the view. */
+.libbit-bootstrap .libbit-treeview-drop-over-global .libbit-treeview-inner-container {
     margin: -2px;
 }
 
-.libbit-treeview-outer-container.libbit-treeview-drop-over-global {
+/* Drop over for the outer container */
+.libbit-bootstrap .libbit-treeview-outer-container.libbit-treeview-drop-over-global {
     border: 2px solid #80C4E6;
 }

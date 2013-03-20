@@ -13,10 +13,6 @@ li {
     list-style: none;
 }
 
-.libbit-app-modal-view .yui3-widget-bd {
-    padding: 0 !important;
-}
-
 /* CSS FIX */
 .dropdown-menu .disabled > a:hover {
     background-image: none;
@@ -68,6 +64,10 @@ li {
     line-height: 19px;
 }
 
-.nav-header {
+.libbit-bootstrap .nav-header {
     cursor: default;
+}
+
+.libbit-bootstrap .yui3-skin-sam .libbit-app-modal-view .yui3-widget-bd {
+    padding: 0;
 }

@@ -1,4 +1,3 @@
-
 .libbit-spinner {
     width: 32px;
     height: 32px;
@@ -53,17 +52,6 @@
     position: absolute;
 }
 
-.libbit-app-master-view .yui3-widget-stdmod {
-    position: absolute;
-    width: 228px;
-}
-
-.libbit-app-master-view .yui3-widget-ft {
-    position: absolute;
-    bottom: 0;
-    width: 198px;
-}
-
 .libbit-app-master-detail-container {
     padding-left: 228px;
     position: absolute;
@@ -71,60 +59,6 @@
     bottom: 0;
     left: 0;
     right: 0;
-}
-
-.libbit-app-master-view {
-    margin-left: -228px;
-    width: 228px;
-    height: 100%;
-    background-color: white;
-    border-right: 1px solid #EEE;
-}
-
-.libbit-app-detail-view {
-    height:100%;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 1.5;
-    color: #4D4D4D;
-    background: #EAEAEA url('bg.png');
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    -ms-font-smoothing: antialiased;
-    -o-font-smoothing: antialiased;
-    font-smoothing: antialiased;
-}
-
-.libbit-app-detail-view {
-    left: 228px;
-    right: 0px;
-    position: absolute;
-}
-
-.libbit-app-master-view .yui3-widget-stdmod {
-    position: absolute;
-    width: 228px;
-}
-
-.libbit-app-master-view .yui3-widget-hd {
-    position: absolute;
-    width: 228px;
-    padding: 0 !important;
-}
-
-.libbit-app-master-view .yui3-widget-bd {
-    position: absolute;
-    top: 0;
-    width: 228px;
-    bottom: 56px;
-    padding: 0 !important;
-}
-
-.libbit-app-master-view .yui3-widget-ft {
-    position: absolute;
-    bottom: 0;
-    width: 198px;
 }
 
 /* Master-detail grid template */
@@ -155,5 +89,31 @@
     position: absolute;
     height: 100%;
     width: 100%;
-    overflow-y: auto !important;
+    overflow-y: auto;
+}
+
+/* YUI Overrides. */
+.libbit-bootstrap .yui3-skin-sam .libbit-app-master-view .yui3-widget-stdmod {
+    position: absolute;
+    width: 228px;
+}
+
+.libbit-bootstrap .yui3-skin-sam .libbit-app-master-view .yui3-widget-hd {
+    position: absolute;
+    width: 228px;
+    padding: 0;
+}
+
+.libbit-bootstrap .yui3-skin-sam .libbit-app-master-view .yui3-widget-bd {
+    position: absolute;
+    top: 0;
+    width: 228px;
+    bottom: 56px;
+    padding: 0;
+}
+
+.libbit-bootstrap .yui3-skin-sam .libbit-app-master-view .yui3-widget-ft {
+    position: absolute;
+    bottom: 0;
+    width: 198px;
 }

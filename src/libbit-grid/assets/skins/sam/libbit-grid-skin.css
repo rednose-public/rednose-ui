@@ -1,28 +1,27 @@
-
-div.model-grid-icon {
+.libbit-bootstrap .model-grid-icon {
     background-image: url('noimage.png');
 
     min-height: 100%;
     min-width: 100%;
 }
 
-div.model-grid-item-selected > div.model-grid-icon-wrapper {
+.libbit-bootstrap .model-grid-item-selected > .model-grid-icon-wrapper {
     border: 2px solid #4e81d3;
 }
 
-.model-grid-footer .edit {
+.libbit-bootstrap .model-grid-footer .edit {
     display: none;
 }
 
-.editing .edit {
-    display: block !important;
+.libbit-bootstrap .editing .edit {
+    display: block;
 }
 
-.editing .model-grid-name {
+.libbit-bootstrap .editing .model-grid-name {
     display: none;
 }
 
-.model-grid-name {
+.libbit-bootstrap .model-grid-name {
     width: 246px;
     height: 19px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
@@ -33,7 +32,7 @@ div.model-grid-item-selected > div.model-grid-icon-wrapper {
     color: rgb(51, 51, 51);
 }
 
-.model-grid-date {
+.libbit-bootstrap .model-grid-date {
     width: 246px;
     height: 14px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);

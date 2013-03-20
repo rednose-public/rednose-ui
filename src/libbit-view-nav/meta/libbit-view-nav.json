@@ -5,5 +5,13 @@
             "libbit-nav-container",
             "view"
         ]
+    },
+
+    "libbit-nav-container" : {
+        "requires": [
+            "widget",
+            "widget-buttons",
+            "widget-stdmod"
+        ]
     }
 }

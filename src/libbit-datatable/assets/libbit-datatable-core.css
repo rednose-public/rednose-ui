@@ -1,13 +1,13 @@
-.yui3-datatable-col-hidden {
+.libbit-bootstrap .yui3-datatable-col-hidden {
   display: none;
 }
 
-.yui3-datatable-sort-liner {
+.libbit-bootstrap .yui3-datatable-sort-liner {
   outline: none;
 }
 
-.yui3-datatable td {
-  border: none !important;
+.libbit-bootstrap .yui3-datatable td {
+  border: none;
   cursor: default;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
