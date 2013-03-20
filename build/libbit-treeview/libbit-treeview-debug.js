@@ -327,7 +327,8 @@ Y.namespace('Libbit').TreeView = TreeView;
         "libbit-treeview-anim",
         "libbit-treeview-dd",
         "libbit-treeview-templates",
-        "libbit-treeview-select"
+        "libbit-treeview-select",
+        "node"
     ],
     "supersedes": [
         "gallery-sm-treeview-templates"

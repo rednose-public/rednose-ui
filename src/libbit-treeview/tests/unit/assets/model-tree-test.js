@@ -6,7 +6,6 @@ var Assert = Y.Assert,
 // -- Suite --------------------------------------------------------------------
 suite = new Y.Test.Suite('model-tree');
 
-
 // -- Model ----------------------------------------------------------------
 suite.add(new Y.Test.Case({
     name: 'Basic',

@@ -11,6 +11,7 @@
     width: 16px;
 }
 
+/* Hide overflow for animating nodes */
 .libbit-bootstrap .yui3-treeview-has-children {
     overflow: hidden;
 }

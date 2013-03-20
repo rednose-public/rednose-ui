@@ -55,4 +55,4 @@ Anim = Y.Base.create('anim', Y.Base, [], {
 Y.namespace('Libbit.TreeView').Anim = Anim;
 
 
-}, '1.0.0', {"requires": ["libbit-anim", "libbit-treeview"]});
+}, '1.0.0', {"requires": ["libbit-anim", "libbit-treeview", "transition"]});

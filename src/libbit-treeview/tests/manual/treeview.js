@@ -10,24 +10,16 @@ YUI().use('libbit-treeview',  function (Y) {
         ]
     });
 
-    var tm = new Y.Libbit.TreeView({
+    var treeView = new Y.Libbit.TreeView({
         container: '#mytreeview',
         header   : 'TreeView',
         model    : model
     });
 
-    tm.render();
+    treeView.render();
 
-    Y.one('#refreshModel').on('click', function () {
-        console.log('Refresh model');
-    });
-
-    Y.one('#applyFilter').on('click', function () {
-        console.log('Apply filter');
-    });
-
-    Y.one('#removeFilter').on('click', function () {
-        console.log('Remove filter');
+    Y.one('#toggleSelectable').on('click', function () {
+        treeView.get('selectable') ? treeView.set('selectable', false) : treeView.set('selectable', true);
     });
 
 });

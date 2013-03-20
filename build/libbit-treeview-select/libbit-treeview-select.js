@@ -20,6 +20,8 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
         this.after('select', this._handleSelect, this);
         this.after('unselect', this._handleUnselect, this);
 
+        this.after('selectableChange', this._afterChange, this);
+
         // Select needs to be restored after the tree is rendered.
         Y.Do.after(this._restoreSelectState, this, 'render');
     },
@@ -91,8 +93,11 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
         if (index !== -1) {
            this._selectMap.splice(index, 1);
         }
-    }
+    },
 
+    _afterChange: function () {
+        this.unselect();
+    }
 }, {
     ATTRS: {
         /**

@@ -6,7 +6,8 @@
             "libbit-treeview-anim",
             "libbit-treeview-dd",
             "libbit-treeview-templates",
-            "libbit-treeview-select"
+            "libbit-treeview-select",
+            "node"
         ],
 
         "supersedes": [
@@ -25,7 +26,8 @@
     "libbit-treeview-anim" : {
         "requires": [
             "libbit-anim",
-            "libbit-treeview"
+            "libbit-treeview",
+            "transition"
         ]
     },
 
