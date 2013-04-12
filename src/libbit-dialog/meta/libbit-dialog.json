@@ -5,6 +5,7 @@
             "dd-plugin",
             "json-parse",
             "node",
+            "node-event-simulate",
             "libbit-panel",
             "widget"
         ],

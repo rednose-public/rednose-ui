@@ -83,7 +83,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             bodyContent: node,
             headerContent: title,
             zIndex: Y.all('*').size(),
-            width: 500,
+            width: this.get('width'),
             buttons: [
                  {
                     value  : 'Cancel',
@@ -148,7 +148,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             bodyContent: node,
             headerContent: title,
             zIndex: Y.all('*').size(),
-            width: 500,
+            width: this.get('width'),
             buttons: [
                  {
                     value  : 'Cancel',
@@ -202,7 +202,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             bodyContent: node,
             headerContent: title,
             zIndex: Y.all('*').size(),
-            width: 500,
+            width: this.get('width'),
             buttons: [
                  {
                     value  : 'OK',
@@ -227,7 +227,8 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
 }, {
     ATTRS: {
         error: { value: {} },
-        panel: { value: null }
+        panel: { value: null },
+        width: { value: 500 }
     }
 });
 
@@ -247,4 +248,15 @@ Dialog.error = function (title, message, warning) {
 Y.namespace('Libbit').Dialog = Dialog;
 
 
-}, '1.0.0', {"requires": ["dd", "dd-plugin", "json-parse", "node", "libbit-panel", "widget"], "skinnable": true});
+}, '1.0.0', {
+    "requires": [
+        "dd",
+        "dd-plugin",
+        "json-parse",
+        "node",
+        "node-event-simulate",
+        "libbit-panel",
+        "widget"
+    ],
+    "skinnable": true
+});

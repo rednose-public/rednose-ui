@@ -81,7 +81,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             bodyContent: node,
             headerContent: title,
             zIndex: Y.all('*').size(),
-            width: 500,
+            width: this.get('width'),
             buttons: [
                  {
                     value  : 'Cancel',
@@ -146,7 +146,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             bodyContent: node,
             headerContent: title,
             zIndex: Y.all('*').size(),
-            width: 500,
+            width: this.get('width'),
             buttons: [
                  {
                     value  : 'Cancel',
@@ -200,7 +200,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             bodyContent: node,
             headerContent: title,
             zIndex: Y.all('*').size(),
-            width: 500,
+            width: this.get('width'),
             buttons: [
                  {
                     value  : 'OK',
@@ -225,7 +225,8 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
 }, {
     ATTRS: {
         error: { value: {} },
-        panel: { value: null }
+        panel: { value: null },
+        width: { value: 500 }
     }
 });
 
