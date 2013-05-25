@@ -9,7 +9,6 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
     initializer: function () {
         var node      = this._node,
             menuNode  = null,
-            content   = this.config.content ? this.config.content : '',
             direction = this.config.dropup ? 'dropup' : 'dropdown';
 
         node.wrap('<div class="dropdown-wrapper ' + direction + '"></div>');
@@ -43,7 +42,7 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
         var template = '<ul class="dropdown-menu"></ul>';
         var node = Y.Node.create(template);
 
-        if (content == '') {
+        if (content === '') {
             return content;
         }
 
@@ -62,7 +61,7 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
                 if (content[i].icon) {
                     var icon = Y.Node.create('<i></i>');
 
-                    icon.addClass('icon-' + content[i].icon);
+                    icon.addClass('icon icon-' + content[i].icon);
 
                     elA.prepend(icon);
                 }

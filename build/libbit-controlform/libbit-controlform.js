@@ -254,6 +254,56 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
 });
 
 Y.namespace('Libbit').ControlFormDatepicker = Datepicker;
+var RichTextEditor;
+
+RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
+
+    render: function() {
+        CKEDITOR.replace(this.get('srcNode').getDOMNode(), {
+            toolbar: [
+                {
+                    "name": "styles",
+                    "items": ["Font","FontSize"]
+                    }, {
+                        "name": "editing",
+                        "items": ["Find", "Replace", "-", "SelectAll"]
+                    }, {
+                        "name": "clipboard",
+                        "items": ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"
+                        ]
+                    }, {
+                        "name": "clipboard",
+                        "items": ["Undo", "Redo"]
+                    }, {
+                        "name": "basicstyles",
+                        "items": ["Bold", "Italic", "Underline", "-", "RemoveFormat"]
+                    }, {
+                        "name": "paragraph",
+                        "items": ["NumberedList", "BulletedList", "-", "Outdent", "Indent"]
+                    }, {
+                        "name": "links",
+                        "items": ["Link", "Unlink"]
+                    }, {
+                        "name": "insert",
+                        "items": ["SpecialChar"]
+                    }, {
+                        "name": "tools",
+                        "items": ["Maximize"]
+                    }
+                ],
+                disableNativeSpellChecker: false,
+                scayt_sLang: YUI_config.lang,
+                language: YUI_config.lang,
+                height: '100'
+        });
+    }
+}, {
+    ATTRS: {
+        rules: { value: {} }
+    }
+});
+
+Y.namespace('Libbit').ControlFormRichTextEditor = RichTextEditor;
 var Common;
 
 Common = Y.Base.create('common', Y.Widget, [ ], {
@@ -564,6 +614,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         if (rules.is_date) {
             new Y.Libbit.ControlFormDatepicker({ srcNode: node, rules: rules }).render();
+        } else if (rules.is_html) {
+            new Y.Libbit.ControlFormRichTextEditor({ srcNode: node, rules: rules }).render();
         } else {
             new Y.Libbit.ControlFormCommon({ srcNode: node, rules: rules }).render();
 

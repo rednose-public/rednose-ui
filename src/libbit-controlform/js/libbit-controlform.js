@@ -167,6 +167,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         if (rules.is_date) {
             new Y.Libbit.ControlFormDatepicker({ srcNode: node, rules: rules }).render();
+        } else if (rules.is_html) {
+            new Y.Libbit.ControlFormRichTextEditor({ srcNode: node, rules: rules }).render();
         } else {
             new Y.Libbit.ControlFormCommon({ srcNode: node, rules: rules }).render();
 
