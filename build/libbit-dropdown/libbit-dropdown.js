@@ -61,7 +61,7 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
                 if (content[i].icon) {
                     var icon = Y.Node.create('<i></i>');
 
-                    icon.addClass('icon-' + content[i].icon);
+                    icon.addClass('icon icon-' + content[i].icon);
 
                     elA.prepend(icon);
                 }

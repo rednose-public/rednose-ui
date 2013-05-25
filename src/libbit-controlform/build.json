@@ -8,6 +8,7 @@
                 "models/form-items.js",
                 "models/field-content.js",
                 "widgets/datepicker.js",
+                "widgets/rich-text-editor.js",
                 "widgets/common.js",
                 "libbit-controlform.js"
             ]
