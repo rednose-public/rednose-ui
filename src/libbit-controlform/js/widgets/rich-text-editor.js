@@ -3,42 +3,77 @@ var RichTextEditor;
 RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
 
     render: function() {
-        CKEDITOR.replace(this.get('srcNode').getDOMNode(), {
-            toolbar: [
-                {
+        var inputProperties = this.get('rules').input_properties,
+            toolbar         = [];
+
+        if (inputProperties) {
+            if (inputProperties.styles === 'true') {
+                toolbar.push({
                     "name": "styles",
                     "items": ["Font","FontSize"]
-                    }, {
-                        "name": "editing",
-                        "items": ["Find", "Replace", "-", "SelectAll"]
-                    }, {
-                        "name": "clipboard",
-                        "items": ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"
-                        ]
-                    }, {
-                        "name": "clipboard",
-                        "items": ["Undo", "Redo"]
-                    }, {
-                        "name": "basicstyles",
-                        "items": ["Bold", "Italic", "Underline", "-", "RemoveFormat"]
-                    }, {
-                        "name": "paragraph",
-                        "items": ["NumberedList", "BulletedList", "-", "Outdent", "Indent"]
-                    }, {
-                        "name": "links",
-                        "items": ["Link", "Unlink"]
-                    }, {
-                        "name": "insert",
-                        "items": ["SpecialChar"]
-                    }, {
-                        "name": "tools",
-                        "items": ["Maximize"]
-                    }
-                ],
-                disableNativeSpellChecker: false,
-                scayt_sLang: YUI_config.lang,
-                language: YUI_config.lang,
-                height: '100'
+                });
+            }
+
+            if (inputProperties.editing === 'true') {
+                toolbar.push({
+                    "name": "editing",
+                    "items": ["Find", "Replace", "-", "SelectAll"]
+                });
+            }
+
+            if (inputProperties.clipboard === 'true') {
+                toolbar.push({
+                    "name": "clipboard",
+                    "items": ["Cut", "Copy", "Paste", "PasteText"
+                    ]
+                });
+            }
+
+            if (inputProperties.undoredo === 'true') {
+                // Note: The key `clipboard` is used twice, to divide them into separate blocks.
+                toolbar.push({
+                    "name": "clipboard",
+                    "items": ["Undo", "Redo"]
+                });
+            }
+
+            if (inputProperties.basicstyles === 'true') {
+                toolbar.push({
+                    "name": "basicstyles",
+                    "items": ["Bold", "Italic", "Underline", "-", "RemoveFormat"]
+                });
+            }
+
+            if (inputProperties.paragraph === 'true') {
+                toolbar.push({
+                    "name": "paragraph",
+                    "items": ["NumberedList", "BulletedList", "-", "Outdent", "Indent"]
+                });
+            }
+
+            if (inputProperties.insert === 'true') {
+                toolbar.push({
+                    "name": "links",
+                    "items": ["Link", "Unlink"]
+                });
+            }
+
+            if (inputProperties.tools === 'true') {
+                toolbar.push({
+                    "name": "tools",
+                    "items": ["Maximize"]
+                });
+            }
+        }
+
+        CKEDITOR.appendTo(this.get('srcNode').getDOMNode(), {
+            toolbar: toolbar,
+            removePlugins: 'elementspath',
+            resize_enabled: false,
+            disableNativeSpellChecker: false,
+            scayt_sLang: YUI_config.lang,
+            language: YUI_config.lang,
+            height: '100'
         });
     }
 }, {
