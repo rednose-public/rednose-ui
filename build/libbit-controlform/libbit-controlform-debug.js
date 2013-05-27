@@ -609,25 +609,27 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             var controlContainer = Y.Node.create('<li>');
             var draft = self.get('draft');
 
-            controlElement = self._createInputElement(control.rules);
-            controlElement.data = control;
-            label.set('innerHTML', control.field.name);
+            if (!control.rules.is_text_value) {
+                controlElement = self._createInputElement(control.rules);
+                controlElement.data = control;
+                label.set('innerHTML', control.field.name);
 
-//            console.warn('name:' + control.field.name + ' // content: ' + controlElement.get('value'));
-            if (draft !== null) {
-                var content = draft.getValue(control.field.id);
-//                console.warn(content);
-                controlElement.set('value', content);
+    //            console.warn('name:' + control.field.name + ' // content: ' + controlElement.get('value'));
+                if (draft !== null) {
+                    var content = draft.getValue(control.field.id);
+    //                console.warn(content);
+                    controlElement.set('value', content);
+                }
+
+                controlContainer.append(label);
+                controlContainer.append(controlElement);
+                controlContainer.setData(control);
+                controlContainer.on('click', function(e) {
+                    self.fire('controlSelected', { 'controlContainer': controlContainer });
+                });
+
+                list.append(controlContainer);
             }
-
-            controlContainer.append(label);
-            controlContainer.append(controlElement);
-            controlContainer.setData(control);
-            controlContainer.on('click', function(e) {
-                self.fire('controlSelected', { 'controlContainer': controlContainer });
-            });
-
-            list.append(controlContainer);
         });
 
         if (this.get('editMode')) {
