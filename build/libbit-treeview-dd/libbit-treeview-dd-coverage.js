@@ -1,6 +1,439 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-treeview-dd/libbit-treeview-dd.js']) {
-   __coverage__['build/libbit-treeview-dd/libbit-treeview-dd.js'] = {"path":"build/libbit-treeview-dd/libbit-treeview-dd.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0,"76":0,"77":0,"78":0,"79":0,"80":0,"81":0,"82":0,"83":0,"84":0,"85":0,"86":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":30},"end":{"line":1,"column":49}}},"2":{"name":"(anonymous_2)","line":21,"loc":{"start":{"line":21,"column":17},"end":{"line":21,"column":29}}},"3":{"name":"(anonymous_3)","line":27,"loc":{"start":{"line":27,"column":16},"end":{"line":27,"column":28}}},"4":{"name":"(anonymous_4)","line":37,"loc":{"start":{"line":37,"column":17},"end":{"line":37,"column":52}}},"5":{"name":"(anonymous_5)","line":48,"loc":{"start":{"line":48,"column":15},"end":{"line":48,"column":26}}},"6":{"name":"(anonymous_6)","line":58,"loc":{"start":{"line":58,"column":17},"end":{"line":58,"column":35}}},"7":{"name":"(anonymous_7)","line":62,"loc":{"start":{"line":62,"column":19},"end":{"line":62,"column":35}}},"8":{"name":"(anonymous_8)","line":85,"loc":{"start":{"line":85,"column":17},"end":{"line":85,"column":29}}},"9":{"name":"(anonymous_9)","line":100,"loc":{"start":{"line":100,"column":15},"end":{"line":100,"column":37}}},"10":{"name":"(anonymous_10)","line":128,"loc":{"start":{"line":128,"column":21},"end":{"line":128,"column":33}}},"11":{"name":"(anonymous_11)","line":146,"loc":{"start":{"line":146,"column":25},"end":{"line":146,"column":39}}},"12":{"name":"(anonymous_12)","line":155,"loc":{"start":{"line":155,"column":21},"end":{"line":155,"column":33}}},"13":{"name":"(anonymous_13)","line":162,"loc":{"start":{"line":162,"column":16},"end":{"line":162,"column":27}}},"14":{"name":"(anonymous_14)","line":172,"loc":{"start":{"line":172,"column":18},"end":{"line":172,"column":30}}},"15":{"name":"(anonymous_15)","line":177,"loc":{"start":{"line":177,"column":24},"end":{"line":177,"column":37}}},"16":{"name":"(anonymous_16)","line":183,"loc":{"start":{"line":183,"column":23},"end":{"line":183,"column":36}}},"17":{"name":"(anonymous_17)","line":189,"loc":{"start":{"line":189,"column":19},"end":{"line":189,"column":32}}},"18":{"name":"(anonymous_18)","line":196,"loc":{"start":{"line":196,"column":20},"end":{"line":196,"column":33}}},"19":{"name":"(anonymous_19)","line":202,"loc":{"start":{"line":202,"column":19},"end":{"line":202,"column":32}}},"20":{"name":"(anonymous_20)","line":209,"loc":{"start":{"line":209,"column":18},"end":{"line":209,"column":31}}},"21":{"name":"(anonymous_21)","line":240,"loc":{"start":{"line":240,"column":17},"end":{"line":240,"column":30}}},"22":{"name":"(anonymous_22)","line":255,"loc":{"start":{"line":255,"column":43},"end":{"line":255,"column":60}}},"23":{"name":"(anonymous_23)","line":278,"loc":{"start":{"line":278,"column":25},"end":{"line":278,"column":37}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":298,"column":60}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":7}},"3":{"start":{"line":8,"column":0},"end":{"line":292,"column":3}},"4":{"start":{"line":22,"column":8},"end":{"line":22,"column":25}},"5":{"start":{"line":24,"column":8},"end":{"line":24,"column":55}},"6":{"start":{"line":28,"column":8},"end":{"line":28,"column":26}},"7":{"start":{"line":29,"column":8},"end":{"line":29,"column":31}},"8":{"start":{"line":31,"column":8},"end":{"line":31,"column":31}},"9":{"start":{"line":32,"column":8},"end":{"line":32,"column":31}},"10":{"start":{"line":38,"column":8},"end":{"line":41,"column":10}},"11":{"start":{"line":49,"column":8},"end":{"line":53,"column":9}},"12":{"start":{"line":50,"column":12},"end":{"line":52,"column":13}},"13":{"start":{"line":51,"column":16},"end":{"line":51,"column":42}},"14":{"start":{"line":59,"column":8},"end":{"line":60,"column":25}},"15":{"start":{"line":62,"column":8},"end":{"line":80,"column":11}},"16":{"start":{"line":63,"column":12},"end":{"line":63,"column":71}},"17":{"start":{"line":65,"column":12},"end":{"line":65,"column":40}},"18":{"start":{"line":68,"column":12},"end":{"line":79,"column":13}},"19":{"start":{"line":70,"column":16},"end":{"line":74,"column":19}},"20":{"start":{"line":76,"column":16},"end":{"line":76,"column":54}},"21":{"start":{"line":77,"column":16},"end":{"line":77,"column":48}},"22":{"start":{"line":78,"column":16},"end":{"line":78,"column":40}},"23":{"start":{"line":82,"column":8},"end":{"line":82,"column":42}},"24":{"start":{"line":86,"column":8},"end":{"line":87,"column":15}},"25":{"start":{"line":89,"column":8},"end":{"line":94,"column":11}},"26":{"start":{"line":96,"column":8},"end":{"line":96,"column":37}},"27":{"start":{"line":97,"column":8},"end":{"line":97,"column":29}},"28":{"start":{"line":101,"column":8},"end":{"line":103,"column":15}},"29":{"start":{"line":105,"column":8},"end":{"line":107,"column":9}},"30":{"start":{"line":106,"column":12},"end":{"line":106,"column":54}},"31":{"start":{"line":110,"column":8},"end":{"line":115,"column":11}},"32":{"start":{"line":117,"column":8},"end":{"line":120,"column":11}},"33":{"start":{"line":122,"column":8},"end":{"line":122,"column":46}},"34":{"start":{"line":123,"column":8},"end":{"line":123,"column":29}},"35":{"start":{"line":125,"column":8},"end":{"line":125,"column":18}},"36":{"start":{"line":129,"column":8},"end":{"line":129,"column":60}},"37":{"start":{"line":131,"column":8},"end":{"line":143,"column":10}},"38":{"start":{"line":147,"column":8},"end":{"line":152,"column":10}},"39":{"start":{"line":156,"column":8},"end":{"line":156,"column":59}},"40":{"start":{"line":163,"column":8},"end":{"line":165,"column":9}},"41":{"start":{"line":164,"column":12},"end":{"line":164,"column":37}},"42":{"start":{"line":167,"column":8},"end":{"line":167,"column":31}},"43":{"start":{"line":173,"column":8},"end":{"line":173,"column":26}},"44":{"start":{"line":174,"column":8},"end":{"line":174,"column":48}},"45":{"start":{"line":178,"column":8},"end":{"line":178,"column":83}},"46":{"start":{"line":180,"column":8},"end":{"line":180,"column":58}},"47":{"start":{"line":184,"column":8},"end":{"line":184,"column":83}},"48":{"start":{"line":186,"column":8},"end":{"line":186,"column":114}},"49":{"start":{"line":190,"column":8},"end":{"line":191,"column":50}},"50":{"start":{"line":193,"column":8},"end":{"line":193,"column":35}},"51":{"start":{"line":197,"column":7},"end":{"line":199,"column":9}},"52":{"start":{"line":198,"column":12},"end":{"line":198,"column":83}},"53":{"start":{"line":204,"column":8},"end":{"line":206,"column":9}},"54":{"start":{"line":205,"column":12},"end":{"line":205,"column":76}},"55":{"start":{"line":210,"column":8},"end":{"line":214,"column":15}},"56":{"start":{"line":216,"column":8},"end":{"line":216,"column":33}},"57":{"start":{"line":218,"column":8},"end":{"line":220,"column":10}},"58":{"start":{"line":222,"column":8},"end":{"line":222,"column":74}},"59":{"start":{"line":225,"column":8},"end":{"line":225,"column":34}},"60":{"start":{"line":227,"column":8},"end":{"line":227,"column":21}},"61":{"start":{"line":229,"column":8},"end":{"line":229,"column":37}},"62":{"start":{"line":231,"column":8},"end":{"line":231,"column":49}},"63":{"start":{"line":232,"column":8},"end":{"line":232,"column":36}},"64":{"start":{"line":234,"column":8},"end":{"line":234,"column":33}},"65":{"start":{"line":235,"column":8},"end":{"line":235,"column":21}},"66":{"start":{"line":237,"column":8},"end":{"line":237,"column":43}},"67":{"start":{"line":241,"column":8},"end":{"line":244,"column":114}},"68":{"start":{"line":245,"column":12},"end":{"line":246,"column":28}},"69":{"start":{"line":248,"column":8},"end":{"line":248,"column":99}},"70":{"start":{"line":250,"column":8},"end":{"line":252,"column":9}},"71":{"start":{"line":251,"column":12},"end":{"line":251,"column":76}},"72":{"start":{"line":255,"column":8},"end":{"line":264,"column":11}},"73":{"start":{"line":256,"column":12},"end":{"line":263,"column":13}},"74":{"start":{"line":257,"column":16},"end":{"line":257,"column":52}},"75":{"start":{"line":259,"column":16},"end":{"line":259,"column":43}},"76":{"start":{"line":260,"column":16},"end":{"line":260,"column":59}},"77":{"start":{"line":262,"column":16},"end":{"line":262,"column":32}},"78":{"start":{"line":266,"column":8},"end":{"line":268,"column":9}},"79":{"start":{"line":267,"column":12},"end":{"line":267,"column":24}},"80":{"start":{"line":270,"column":8},"end":{"line":280,"column":9}},"81":{"start":{"line":271,"column":12},"end":{"line":274,"column":65}},"82":{"start":{"line":276,"column":12},"end":{"line":279,"column":13}},"83":{"start":{"line":277,"column":16},"end":{"line":277,"column":42}},"84":{"start":{"line":278,"column":16},"end":{"line":278,"column":56}},"85":{"start":{"line":278,"column":39},"end":{"line":278,"column":52}},"86":{"start":{"line":295,"column":0},"end":{"line":295,"column":39}}},"branchMap":{"1":{"line":24,"type":"binary-expr","locations":[{"start":{"line":24,"column":8},"end":{"line":24,"column":28}},{"start":{"line":24,"column":32},"end":{"line":24,"column":54}}]},"2":{"line":50,"type":"if","locations":[{"start":{"line":50,"column":12},"end":{"line":50,"column":12}},{"start":{"line":50,"column":12},"end":{"line":50,"column":12}}]},"3":{"line":68,"type":"if","locations":[{"start":{"line":68,"column":12},"end":{"line":68,"column":12}},{"start":{"line":68,"column":12},"end":{"line":68,"column":12}}]},"4":{"line":82,"type":"binary-expr","locations":[{"start":{"line":82,"column":8},"end":{"line":82,"column":19}},{"start":{"line":82,"column":23},"end":{"line":82,"column":41}}]},"5":{"line":105,"type":"if","locations":[{"start":{"line":105,"column":8},"end":{"line":105,"column":8}},{"start":{"line":105,"column":8},"end":{"line":105,"column":8}}]},"6":{"line":129,"type":"binary-expr","locations":[{"start":{"line":129,"column":8},"end":{"line":129,"column":28}},{"start":{"line":129,"column":33},"end":{"line":129,"column":58}}]},"7":{"line":186,"type":"binary-expr","locations":[{"start":{"line":186,"column":8},"end":{"line":186,"column":57}},{"start":{"line":186,"column":61},"end":{"line":186,"column":113}}]},"8":{"line":197,"type":"if","locations":[{"start":{"line":197,"column":7},"end":{"line":197,"column":7}},{"start":{"line":197,"column":7},"end":{"line":197,"column":7}}]},"9":{"line":204,"type":"if","locations":[{"start":{"line":204,"column":8},"end":{"line":204,"column":8}},{"start":{"line":204,"column":8},"end":{"line":204,"column":8}}]},"10":{"line":244,"type":"cond-expr","locations":[{"start":{"line":244,"column":57},"end":{"line":244,"column":61}},{"start":{"line":244,"column":63},"end":{"line":244,"column":113}}]},"11":{"line":250,"type":"if","locations":[{"start":{"line":250,"column":8},"end":{"line":250,"column":8}},{"start":{"line":250,"column":8},"end":{"line":250,"column":8}}]},"12":{"line":256,"type":"if","locations":[{"start":{"line":256,"column":12},"end":{"line":256,"column":12}},{"start":{"line":256,"column":12},"end":{"line":256,"column":12}}]},"13":{"line":266,"type":"if","locations":[{"start":{"line":266,"column":8},"end":{"line":266,"column":8}},{"start":{"line":266,"column":8},"end":{"line":266,"column":8}}]},"14":{"line":270,"type":"if","locations":[{"start":{"line":270,"column":8},"end":{"line":270,"column":8}},{"start":{"line":270,"column":8},"end":{"line":270,"column":8}}]},"15":{"line":271,"type":"cond-expr","locations":[{"start":{"line":271,"column":63},"end":{"line":271,"column":71}},{"start":{"line":271,"column":74},"end":{"line":271,"column":84}}]},"16":{"line":273,"type":"cond-expr","locations":[{"start":{"line":273,"column":41},"end":{"line":273,"column":50}},{"start":{"line":273,"column":53},"end":{"line":273,"column":57}}]},"17":{"line":274,"type":"cond-expr","locations":[{"start":{"line":274,"column":41},"end":{"line":274,"column":57}},{"start":{"line":274,"column":60},"end":{"line":274,"column":64}}]},"18":{"line":276,"type":"if","locations":[{"start":{"line":276,"column":12},"end":{"line":276,"column":12}},{"start":{"line":276,"column":12},"end":{"line":276,"column":12}}]}},"code":["(function () { YUI.add('libbit-treeview-dd', function (Y, NAME) {","","var DD;","","/**"," * Drag and drop extension for the TreeView."," */","DD = Y.Base.create('dd', Y.Base, [], {","","    // -- Protected Properties -------------------------------------------------","","    _callbacks: {},","","    /**","     * DD references store","     */","    _ddMap: [],","","    // -- Lifecycle Methods ----------------------------------------------------","","    initializer: function () {","        this._ddMap = [];","","        this.get('dragdrop') && this._attachDdEvents();","    },","","    destructor: function () {","        this._destroyDd();","        this._detachDdEvents();","","        this._callbacks = null;","        this._ddMap     = null;","    },","","    // -- Public Methods -------------------------------------------------------","","    addCallback: function(group, callback, context) {","        this._callbacks[group] = {","            callback: callback,","            context: context","        };","    },","","    /**","     * Update all the the DD shims","     * Most likely used in combination with libbit-nodescroll (scrolling event).","     */","    sizeShims: function() {","        for (var i in this._ddMap) {","            if (typeof(this._ddMap[i].sizeShim) === 'function') {","                this._ddMap[i].sizeShim();","            }","        }","    },","","    // -- Protected Methods ----------------------------------------------------","","    _handleBind: function (parent) {","        var nodes = parent.one('.' + this.classNames.children).all('[data-libbit-type]:not(.libbit-treeview-drag)'),","            self  = this;","","        nodes.each(function (node) {","            var model = self.getNodeById(node.getData('node-id')).data;","","            self._createDd(node, model);","","            // FIXME: Use a more generic way to specify droppable models.","            if (model instanceof Y.TB.Category) {","                // This is a category model. Categories allow dropping.","                var catDD = new Y.DD.Drop({","                    node         : node,","                    groups       : self.get('groups'),","                    bubbleTargets: self","                });","","                node.addClass('libbit-treeview-drop');","                node.addClass('libbit-dd-drop');","                self._ddMap.push(catDD);","            }","        });","","        this.header && this._bindHeader();","    },","","    _bindHeader: function () {","        var container  = this.get('container'),","            dd;","","        dd = new Y.DD.Drop({","            node         : container.one('.nav-header'),","            // Only allow categories to drop here.","            groups       : [ Y.stamp(this) ],","            bubbleTargets: this","        });","","        this._attachHeaderEvents(dd);","        this._ddMap.push(dd);","    },","","    _createDd: function (node, data) {","        var groups = this.get('groups'),","            self   = this,","            dd;","","        if (data instanceof Y.TB.Category) {","            groups = groups.concat([ Y.stamp(this) ]);","        }","","        // Add an extra unique group for the category drags.","        dd = new Y.DD.Drag({","            node         : node,","            data         : data,","            groups       : groups,","            bubbleTargets: self","        });","","        dd.plug(Y.Plugin.DDProxy, {","            moveOnEnd  : false,","            borderStyle: 'none'","        });","","        node.addClass('libbit-treeview-drag');","        this._ddMap.push(dd);","","        return dd;","    },","","    _attachDdEvents: function () {","        this._ddEventHandles || (this._ddEventHandles = []);","","        this._ddEventHandles.push(","            // Setup the initial DD instances when the view is rendered.","            Y.Do.after(this._afterRender, this, 'render', this),","","            this.on({","                'drop:enter': this._handleDdEnter,","                'drop:exit' : this._handleDdExit,","                'drag:start': this._handleStart,","                'drop:hit'  : this._handleDrop","            }),","","            this.after('open', this._handleDdOpen)","        );","    },","","    _attachHeaderEvents: function (dd) {","        this._ddEventHandles.push(","            dd.on({","                'drop:enter': this._handleHeaderEnter,","                'drop:exit' : this._handleHeaderExit","            })","        );","    },","","    _detachDdEvents: function () {","        (new Y.EventHandle(this._ddEventHandles)).detach();","    },","","    /**","     * All DD references must be destoyed if the model is reloaded.","     */","    _destroyDd: function() {","        for (var i in this._ddMap) {","            this._ddMap[i].destroy();","        }","","        this._ddMap.length = 0;","    },","","    // -- Protected Event Handlers ---------------------------------------------","","    _afterRender: function () {","        this._destroyDd();","        this._handleBind(this.get('container'));","    },","","    _handleHeaderEnter: function (e) {","        var node = e.drop.get('node').ancestor('.libbit-treeview-outer-container');","","        node.addClass('libbit-treeview-drop-over-global');","    },","","    _handleHeaderExit: function (e) {","        var node = e.drop.get('node').ancestor('.libbit-treeview-outer-container');","","        node.hasClass('libbit-treeview-drop-over-global') && node.removeClass('libbit-treeview-drop-over-global');","    },","","    _handleDdOpen: function (e) {","        var treeNode = e.node,","            htmlNode = this.getHTMLNode(treeNode);","","        this._handleBind(htmlNode);","    },","","    _handleDdEnter: function (e) {","       if (e.drop.get('node').one('.libbit-treeview-icon')) {","            e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');","        }","    },","","    _handleDdExit: function (e) {","        // FIXME: Ignore selected nodes","        if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {","            e.drop.get('node').all('.icon-white').removeClass('icon-white');","        }","    },","","    _handleStart: function (e) {","        var drag = e.target,","            model,","            container,","            origin,","            dd;","","        model = drag.get('data');","","        drag.get('dragNode').setContent(","            drag.get('node').get('outerHTML')","        );","","        drag.get('dragNode').all('.icon-white').removeClass('icon-white');","","        // Recreate the drag instance","        origin = drag.get('node');","","        drag._prep();","","        drag.detachAll('drag:start');","","        container = Y.Node.create('<div></div>');","        drag.set('node', container);","","        drag.set('target', true);","        drag._prep();","","        dd = this._createDd(origin, model);","    },","","    _handleDrop: function (e) {","        var model    = this.get('model'),","            obj      = e.drag.get('data'),","            dropNode = e.drop.get('node'),","            newCat   = dropNode.hasClass('nav-header') ? null: this.getNodeById(dropNode.getData('node-id')).data;","            callback = false,","            self     = this;","","        Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');","","        if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {","            e.drop.get('node').all('.icon-white').removeClass('icon-white');","        }","","        // Check for custom override callbacks","        Y.Array.each(e.drag.get('groups'), function (group) {","            if (group in self._callbacks) {","                var config = self._callbacks[group];","","                e.drop.set('data', newCat);","                config.callback.apply(config.context, [e]);","","                callback = true;","            }","        });","","        if (callback) {","            return true;","        }","","        if (obj) {","            var property      = obj instanceof Y.TB.Category ? 'parent' : 'category',","                oldCat        = obj.get(property),","                oldCatModelID = oldCat ? oldCat.id : null,","                newCatModelID = newCat ? newCat.get('id') : null;","","            if (oldCatModelID !== newCatModelID) {","                obj.set(property, newCat);","                obj.save(function () { model.load(); });","            }","        }","    }","}, {","    ATTRS: {","        dragdrop: {","            value : false","        },","","        groups: {","            value : ['libbit-treeview']","        }","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.TreeView').DD = DD;","","","}, '1.0.0', {\"requires\": [\"libbit-dd\", \"libbit-treeview\"]});","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_lCM$U78YEa_rSTfS$iRTyQ = __coverage__['build/libbit-treeview-dd/libbit-treeview-dd.js'];
-__cov_lCM$U78YEa_rSTfS$iRTyQ.s['1']++;YUI.add('libbit-treeview-dd',function(Y,NAME){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['1']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['2']++;var DD;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['3']++;DD=Y.Base.create('dd',Y.Base,[],{_callbacks:{},_ddMap:[],initializer:function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['2']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['4']++;this._ddMap=[];__cov_lCM$U78YEa_rSTfS$iRTyQ.s['5']++;(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['1'][0]++,this.get('dragdrop'))&&(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['1'][1]++,this._attachDdEvents());},destructor:function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['3']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['6']++;this._destroyDd();__cov_lCM$U78YEa_rSTfS$iRTyQ.s['7']++;this._detachDdEvents();__cov_lCM$U78YEa_rSTfS$iRTyQ.s['8']++;this._callbacks=null;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['9']++;this._ddMap=null;},addCallback:function(group,callback,context){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['4']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['10']++;this._callbacks[group]={callback:callback,context:context};},sizeShims:function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['5']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['11']++;for(var i in this._ddMap){__cov_lCM$U78YEa_rSTfS$iRTyQ.s['12']++;if(typeof this._ddMap[i].sizeShim==='function'){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['2'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['13']++;this._ddMap[i].sizeShim();}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['2'][1]++;}}},_handleBind:function(parent){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['6']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['14']++;var nodes=parent.one('.'+this.classNames.children).all('[data-libbit-type]:not(.libbit-treeview-drag)'),self=this;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['15']++;nodes.each(function(node){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['7']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['16']++;var model=self.getNodeById(node.getData('node-id')).data;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['17']++;self._createDd(node,model);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['18']++;if(model instanceof Y.TB.Category){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['3'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['19']++;var catDD=new Y.DD.Drop({node:node,groups:self.get('groups'),bubbleTargets:self});__cov_lCM$U78YEa_rSTfS$iRTyQ.s['20']++;node.addClass('libbit-treeview-drop');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['21']++;node.addClass('libbit-dd-drop');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['22']++;self._ddMap.push(catDD);}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['3'][1]++;}});__cov_lCM$U78YEa_rSTfS$iRTyQ.s['23']++;(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['4'][0]++,this.header)&&(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['4'][1]++,this._bindHeader());},_bindHeader:function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['8']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['24']++;var container=this.get('container'),dd;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['25']++;dd=new Y.DD.Drop({node:container.one('.nav-header'),groups:[Y.stamp(this)],bubbleTargets:this});__cov_lCM$U78YEa_rSTfS$iRTyQ.s['26']++;this._attachHeaderEvents(dd);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['27']++;this._ddMap.push(dd);},_createDd:function(node,data){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['9']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['28']++;var groups=this.get('groups'),self=this,dd;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['29']++;if(data instanceof Y.TB.Category){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['5'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['30']++;groups=groups.concat([Y.stamp(this)]);}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['5'][1]++;}__cov_lCM$U78YEa_rSTfS$iRTyQ.s['31']++;dd=new Y.DD.Drag({node:node,data:data,groups:groups,bubbleTargets:self});__cov_lCM$U78YEa_rSTfS$iRTyQ.s['32']++;dd.plug(Y.Plugin.DDProxy,{moveOnEnd:false,borderStyle:'none'});__cov_lCM$U78YEa_rSTfS$iRTyQ.s['33']++;node.addClass('libbit-treeview-drag');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['34']++;this._ddMap.push(dd);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['35']++;return dd;},_attachDdEvents:function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['10']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['36']++;(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['6'][0]++,this._ddEventHandles)||(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['6'][1]++,this._ddEventHandles=[]);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['37']++;this._ddEventHandles.push(Y.Do.after(this._afterRender,this,'render',this),this.on({'drop:enter':this._handleDdEnter,'drop:exit':this._handleDdExit,'drag:start':this._handleStart,'drop:hit':this._handleDrop}),this.after('open',this._handleDdOpen));},_attachHeaderEvents:function(dd){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['11']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['38']++;this._ddEventHandles.push(dd.on({'drop:enter':this._handleHeaderEnter,'drop:exit':this._handleHeaderExit}));},_detachDdEvents:function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['12']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['39']++;new Y.EventHandle(this._ddEventHandles).detach();},_destroyDd:function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['13']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['40']++;for(var i in this._ddMap){__cov_lCM$U78YEa_rSTfS$iRTyQ.s['41']++;this._ddMap[i].destroy();}__cov_lCM$U78YEa_rSTfS$iRTyQ.s['42']++;this._ddMap.length=0;},_afterRender:function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['14']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['43']++;this._destroyDd();__cov_lCM$U78YEa_rSTfS$iRTyQ.s['44']++;this._handleBind(this.get('container'));},_handleHeaderEnter:function(e){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['15']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['45']++;var node=e.drop.get('node').ancestor('.libbit-treeview-outer-container');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['46']++;node.addClass('libbit-treeview-drop-over-global');},_handleHeaderExit:function(e){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['16']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['47']++;var node=e.drop.get('node').ancestor('.libbit-treeview-outer-container');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['48']++;(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['7'][0]++,node.hasClass('libbit-treeview-drop-over-global'))&&(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['7'][1]++,node.removeClass('libbit-treeview-drop-over-global'));},_handleDdOpen:function(e){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['17']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['49']++;var treeNode=e.node,htmlNode=this.getHTMLNode(treeNode);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['50']++;this._handleBind(htmlNode);},_handleDdEnter:function(e){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['18']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['51']++;if(e.drop.get('node').one('.libbit-treeview-icon')){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['8'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['52']++;e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['8'][1]++;}},_handleDdExit:function(e){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['19']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['53']++;if(!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['9'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['54']++;e.drop.get('node').all('.icon-white').removeClass('icon-white');}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['9'][1]++;}},_handleStart:function(e){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['20']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['55']++;var drag=e.target,model,container,origin,dd;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['56']++;model=drag.get('data');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['57']++;drag.get('dragNode').setContent(drag.get('node').get('outerHTML'));__cov_lCM$U78YEa_rSTfS$iRTyQ.s['58']++;drag.get('dragNode').all('.icon-white').removeClass('icon-white');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['59']++;origin=drag.get('node');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['60']++;drag._prep();__cov_lCM$U78YEa_rSTfS$iRTyQ.s['61']++;drag.detachAll('drag:start');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['62']++;container=Y.Node.create('<div></div>');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['63']++;drag.set('node',container);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['64']++;drag.set('target',true);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['65']++;drag._prep();__cov_lCM$U78YEa_rSTfS$iRTyQ.s['66']++;dd=this._createDd(origin,model);},_handleDrop:function(e){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['21']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['67']++;var model=this.get('model'),obj=e.drag.get('data'),dropNode=e.drop.get('node'),newCat=dropNode.hasClass('nav-header')?(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['10'][0]++,null):(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['10'][1]++,this.getNodeById(dropNode.getData('node-id')).data);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['68']++;callback=false,self=this;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['69']++;Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');__cov_lCM$U78YEa_rSTfS$iRTyQ.s['70']++;if(!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['11'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['71']++;e.drop.get('node').all('.icon-white').removeClass('icon-white');}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['11'][1]++;}__cov_lCM$U78YEa_rSTfS$iRTyQ.s['72']++;Y.Array.each(e.drag.get('groups'),function(group){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['22']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['73']++;if(group in self._callbacks){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['12'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['74']++;var config=self._callbacks[group];__cov_lCM$U78YEa_rSTfS$iRTyQ.s['75']++;e.drop.set('data',newCat);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['76']++;config.callback.apply(config.context,[e]);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['77']++;callback=true;}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['12'][1]++;}});__cov_lCM$U78YEa_rSTfS$iRTyQ.s['78']++;if(callback){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['13'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['79']++;return true;}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['13'][1]++;}__cov_lCM$U78YEa_rSTfS$iRTyQ.s['80']++;if(obj){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['14'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['81']++;var property=obj instanceof Y.TB.Category?(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['15'][0]++,'parent'):(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['15'][1]++,'category'),oldCat=obj.get(property),oldCatModelID=oldCat?(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['16'][0]++,oldCat.id):(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['16'][1]++,null),newCatModelID=newCat?(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['17'][0]++,newCat.get('id')):(__cov_lCM$U78YEa_rSTfS$iRTyQ.b['17'][1]++,null);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['82']++;if(oldCatModelID!==newCatModelID){__cov_lCM$U78YEa_rSTfS$iRTyQ.b['18'][0]++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['83']++;obj.set(property,newCat);__cov_lCM$U78YEa_rSTfS$iRTyQ.s['84']++;obj.save(function(){__cov_lCM$U78YEa_rSTfS$iRTyQ.f['23']++;__cov_lCM$U78YEa_rSTfS$iRTyQ.s['85']++;model.load();});}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['18'][1]++;}}else{__cov_lCM$U78YEa_rSTfS$iRTyQ.b['14'][1]++;}}},{ATTRS:{dragdrop:{value:false},groups:{value:['libbit-treeview']}}});__cov_lCM$U78YEa_rSTfS$iRTyQ.s['86']++;Y.namespace('Libbit.TreeView').DD=DD;},'1.0.0',{'requires':['libbit-dd','libbit-treeview']});
+_yuitest_coverage["build/libbit-treeview-dd/libbit-treeview-dd.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-treeview-dd/libbit-treeview-dd.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-treeview-dd/libbit-treeview-dd.js"].code=["YUI.add('libbit-treeview-dd', function (Y, NAME) {","","var DD;","","/**"," * Drag and drop extension for the TreeView."," */","DD = Y.Base.create('dd', Y.Base, [], {","","    // -- Protected Properties -------------------------------------------------","","    _callbacks: {},","","    /**","     * DD references store","     */","    _ddMap: [],","","    // -- Lifecycle Methods ----------------------------------------------------","","    initializer: function () {","        this._ddMap = [];","","        this.get('dragdrop') && this._attachDdEvents();","    },","","    destructor: function () {","        this._destroyDd();","        this._detachDdEvents();","","        this._callbacks = null;","        this._ddMap     = null;","    },","","    // -- Public Methods -------------------------------------------------------","","    addCallback: function(group, callback, context) {","        this._callbacks[group] = {","            callback: callback,","            context: context","        };","    },","","    /**","     * Update all the the DD shims","     * Most likely used in combination with libbit-nodescroll (scrolling event).","     */","    sizeShims: function() {","        for (var i in this._ddMap) {","            if (typeof(this._ddMap[i].sizeShim) === 'function') {","                this._ddMap[i].sizeShim();","            }","        }","    },","","    // -- Protected Methods ----------------------------------------------------","","    _handleBind: function (parent) {","        var nodes = parent.one('.' + this.classNames.children).all('[data-libbit-type]:not(.libbit-treeview-drag)'),","            self  = this;","","        nodes.each(function (node) {","            var model = self.getNodeById(node.getData('node-id')).data;","","            self._createDd(node, model);","","            // FIXME: Use a more generic way to specify droppable models.","            if (model instanceof Y.TB.Category) {","                // This is a category model. Categories allow dropping.","                var catDD = new Y.DD.Drop({","                    node         : node,","                    groups       : self.get('groups'),","                    bubbleTargets: self","                });","","                node.addClass('libbit-treeview-drop');","                node.addClass('libbit-dd-drop');","                self._ddMap.push(catDD);","            }","        });","","        this.header && this._bindHeader();","    },","","    _bindHeader: function () {","        var container  = this.get('container'),","            dd;","","        dd = new Y.DD.Drop({","            node         : container.one('.nav-header'),","            // Only allow categories to drop here.","            groups       : [ Y.stamp(this) ],","            bubbleTargets: this","        });","","        this._attachHeaderEvents(dd);","        this._ddMap.push(dd);","    },","","    _createDd: function (node, data) {","        var groups = this.get('groups'),","            self   = this,","            dd;","","        if (data instanceof Y.TB.Category) {","            groups = groups.concat([ Y.stamp(this) ]);","        }","","        // Add an extra unique group for the category drags.","        dd = new Y.DD.Drag({","            node         : node,","            data         : data,","            groups       : groups,","            bubbleTargets: self","        });","","        dd.plug(Y.Plugin.DDProxy, {","            moveOnEnd  : false,","            borderStyle: 'none'","        });","","        node.addClass('libbit-treeview-drag');","        this._ddMap.push(dd);","","        return dd;","    },","","    _attachDdEvents: function () {","        this._ddEventHandles || (this._ddEventHandles = []);","","        this._ddEventHandles.push(","            // Setup the initial DD instances when the view is rendered.","            Y.Do.after(this._afterRender, this, 'render', this),","","            this.on({","                'drop:enter': this._handleDdEnter,","                'drop:exit' : this._handleDdExit,","                'drag:start': this._handleStart,","                'drop:hit'  : this._handleDrop","            }),","","            this.after('open', this._handleDdOpen)","        );","    },","","    _attachHeaderEvents: function (dd) {","        this._ddEventHandles.push(","            dd.on({","                'drop:enter': this._handleHeaderEnter,","                'drop:exit' : this._handleHeaderExit","            })","        );","    },","","    _detachDdEvents: function () {","        (new Y.EventHandle(this._ddEventHandles)).detach();","    },","","    /**","     * All DD references must be destoyed if the model is reloaded.","     */","    _destroyDd: function() {","        for (var i in this._ddMap) {","            this._ddMap[i].destroy();","        }","","        this._ddMap.length = 0;","    },","","    // -- Protected Event Handlers ---------------------------------------------","","    _afterRender: function () {","        this._destroyDd();","        this._handleBind(this.get('container'));","    },","","    _handleHeaderEnter: function (e) {","        var node = e.drop.get('node').ancestor('.libbit-treeview-outer-container');","","        node.addClass('libbit-treeview-drop-over-global');","    },","","    _handleHeaderExit: function (e) {","        var node = e.drop.get('node').ancestor('.libbit-treeview-outer-container');","","        node.hasClass('libbit-treeview-drop-over-global') && node.removeClass('libbit-treeview-drop-over-global');","    },","","    _handleDdOpen: function (e) {","        var treeNode = e.node,","            htmlNode = this.getHTMLNode(treeNode);","","        this._handleBind(htmlNode);","    },","","    _handleDdEnter: function (e) {","       if (e.drop.get('node').one('.libbit-treeview-icon')) {","            e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');","        }","    },","","    _handleDdExit: function (e) {","        // FIXME: Ignore selected nodes","        if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {","            e.drop.get('node').all('.icon-white').removeClass('icon-white');","        }","    },","","    _handleStart: function (e) {","        var drag = e.target,","            model,","            container,","            origin,","            dd;","","        model = drag.get('data');","","        drag.get('dragNode').setContent(","            drag.get('node').get('outerHTML')","        );","","        drag.get('dragNode').all('.icon-white').removeClass('icon-white');","","        // Recreate the drag instance","        origin = drag.get('node');","","        drag._prep();","","        drag.detachAll('drag:start');","","        container = Y.Node.create('<div></div>');","        drag.set('node', container);","","        drag.set('target', true);","        drag._prep();","","        dd = this._createDd(origin, model);","    },","","    _handleDrop: function (e) {","        var model    = this.get('model'),","            obj      = e.drag.get('data'),","            dropNode = e.drop.get('node'),","            newCat   = dropNode.hasClass('nav-header') ? null: this.getNodeById(dropNode.getData('node-id')).data;","            callback = false,","            self     = this;","","        Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');","","        if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {","            e.drop.get('node').all('.icon-white').removeClass('icon-white');","        }","","        // Check for custom override callbacks","        Y.Array.each(e.drag.get('groups'), function (group) {","            if (group in self._callbacks) {","                var config = self._callbacks[group];","","                e.drop.set('data', newCat);","                config.callback.apply(config.context, [e]);","","                callback = true;","            }","        });","","        if (callback) {","            return true;","        }","","        if (obj) {","            var property      = obj instanceof Y.TB.Category ? 'parent' : 'category',","                oldCat        = obj.get(property),","                oldCatModelID = oldCat ? oldCat.id : null,","                newCatModelID = newCat ? newCat.get('id') : null;","","            if (oldCatModelID !== newCatModelID) {","                obj.set(property, newCat);","                obj.save(function () { model.load(); });","            }","        }","    }","}, {","    ATTRS: {","        dragdrop: {","            value : false","        },","","        groups: {","            value : ['libbit-treeview']","        }","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.TreeView').DD = DD;","","","}, '1.0.0', {\"requires\": [\"libbit-dd\", \"libbit-treeview\"]});"];
+_yuitest_coverage["build/libbit-treeview-dd/libbit-treeview-dd.js"].lines = {"1":0,"3":0,"8":0,"22":0,"24":0,"28":0,"29":0,"31":0,"32":0,"38":0,"49":0,"50":0,"51":0,"59":0,"62":0,"63":0,"65":0,"68":0,"70":0,"76":0,"77":0,"78":0,"82":0,"86":0,"89":0,"96":0,"97":0,"101":0,"105":0,"106":0,"110":0,"117":0,"122":0,"123":0,"125":0,"129":0,"131":0,"147":0,"156":0,"163":0,"164":0,"167":0,"173":0,"174":0,"178":0,"180":0,"184":0,"186":0,"190":0,"193":0,"197":0,"198":0,"204":0,"205":0,"210":0,"216":0,"218":0,"222":0,"225":0,"227":0,"229":0,"231":0,"232":0,"234":0,"235":0,"237":0,"241":0,"245":0,"248":0,"250":0,"251":0,"255":0,"256":0,"257":0,"259":0,"260":0,"262":0,"266":0,"267":0,"270":0,"271":0,"276":0,"277":0,"278":0,"295":0};
+_yuitest_coverage["build/libbit-treeview-dd/libbit-treeview-dd.js"].functions = {"initializer:21":0,"destructor:27":0,"addCallback:37":0,"sizeShims:48":0,"(anonymous 2):62":0,"_handleBind:58":0,"_bindHeader:85":0,"_createDd:100":0,"_attachDdEvents:128":0,"_attachHeaderEvents:146":0,"_detachDdEvents:155":0,"_destroyDd:162":0,"_afterRender:172":0,"_handleHeaderEnter:177":0,"_handleHeaderExit:183":0,"_handleDdOpen:189":0,"_handleDdEnter:196":0,"_handleDdExit:202":0,"_handleStart:209":0,"(anonymous 3):255":0,"(anonymous 4):278":0,"_handleDrop:240":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-treeview-dd/libbit-treeview-dd.js"].coveredLines = 85;
+_yuitest_coverage["build/libbit-treeview-dd/libbit-treeview-dd.js"].coveredFunctions = 23;
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 1);
+YUI.add('libbit-treeview-dd', function (Y, NAME) {
+
+_yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 3);
+var DD;
+
+/**
+ * Drag and drop extension for the TreeView.
+ */
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 8);
+DD = Y.Base.create('dd', Y.Base, [], {
+
+    // -- Protected Properties -------------------------------------------------
+
+    _callbacks: {},
+
+    /**
+     * DD references store
+     */
+    _ddMap: [],
+
+    // -- Lifecycle Methods ----------------------------------------------------
+
+    initializer: function () {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "initializer", 21);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 22);
+this._ddMap = [];
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 24);
+this.get('dragdrop') && this._attachDdEvents();
+    },
+
+    destructor: function () {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "destructor", 27);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 28);
+this._destroyDd();
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 29);
+this._detachDdEvents();
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 31);
+this._callbacks = null;
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 32);
+this._ddMap     = null;
+    },
+
+    // -- Public Methods -------------------------------------------------------
+
+    addCallback: function(group, callback, context) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "addCallback", 37);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 38);
+this._callbacks[group] = {
+            callback: callback,
+            context: context
+        };
+    },
+
+    /**
+     * Update all the the DD shims
+     * Most likely used in combination with libbit-nodescroll (scrolling event).
+     */
+    sizeShims: function() {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "sizeShims", 48);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 49);
+for (var i in this._ddMap) {
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 50);
+if (typeof(this._ddMap[i].sizeShim) === 'function') {
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 51);
+this._ddMap[i].sizeShim();
+            }
+        }
+    },
+
+    // -- Protected Methods ----------------------------------------------------
+
+    _handleBind: function (parent) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_handleBind", 58);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 59);
+var nodes = parent.one('.' + this.classNames.children).all('[data-libbit-type]:not(.libbit-treeview-drag)'),
+            self  = this;
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 62);
+nodes.each(function (node) {
+            _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "(anonymous 2)", 62);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 63);
+var model = self.getNodeById(node.getData('node-id')).data;
+
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 65);
+self._createDd(node, model);
+
+            // FIXME: Use a more generic way to specify droppable models.
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 68);
+if (model instanceof Y.TB.Category) {
+                // This is a category model. Categories allow dropping.
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 70);
+var catDD = new Y.DD.Drop({
+                    node         : node,
+                    groups       : self.get('groups'),
+                    bubbleTargets: self
+                });
+
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 76);
+node.addClass('libbit-treeview-drop');
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 77);
+node.addClass('libbit-dd-drop');
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 78);
+self._ddMap.push(catDD);
+            }
+        });
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 82);
+this.header && this._bindHeader();
+    },
+
+    _bindHeader: function () {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_bindHeader", 85);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 86);
+var container  = this.get('container'),
+            dd;
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 89);
+dd = new Y.DD.Drop({
+            node         : container.one('.nav-header'),
+            // Only allow categories to drop here.
+            groups       : [ Y.stamp(this) ],
+            bubbleTargets: this
+        });
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 96);
+this._attachHeaderEvents(dd);
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 97);
+this._ddMap.push(dd);
+    },
+
+    _createDd: function (node, data) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_createDd", 100);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 101);
+var groups = this.get('groups'),
+            self   = this,
+            dd;
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 105);
+if (data instanceof Y.TB.Category) {
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 106);
+groups = groups.concat([ Y.stamp(this) ]);
+        }
+
+        // Add an extra unique group for the category drags.
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 110);
+dd = new Y.DD.Drag({
+            node         : node,
+            data         : data,
+            groups       : groups,
+            bubbleTargets: self
+        });
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 117);
+dd.plug(Y.Plugin.DDProxy, {
+            moveOnEnd  : false,
+            borderStyle: 'none'
+        });
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 122);
+node.addClass('libbit-treeview-drag');
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 123);
+this._ddMap.push(dd);
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 125);
+return dd;
+    },
+
+    _attachDdEvents: function () {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_attachDdEvents", 128);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 129);
+this._ddEventHandles || (this._ddEventHandles = []);
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 131);
+this._ddEventHandles.push(
+            // Setup the initial DD instances when the view is rendered.
+            Y.Do.after(this._afterRender, this, 'render', this),
+
+            this.on({
+                'drop:enter': this._handleDdEnter,
+                'drop:exit' : this._handleDdExit,
+                'drag:start': this._handleStart,
+                'drop:hit'  : this._handleDrop
+            }),
+
+            this.after('open', this._handleDdOpen)
+        );
+    },
+
+    _attachHeaderEvents: function (dd) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_attachHeaderEvents", 146);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 147);
+this._ddEventHandles.push(
+            dd.on({
+                'drop:enter': this._handleHeaderEnter,
+                'drop:exit' : this._handleHeaderExit
+            })
+        );
+    },
+
+    _detachDdEvents: function () {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_detachDdEvents", 155);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 156);
+(new Y.EventHandle(this._ddEventHandles)).detach();
+    },
+
+    /**
+     * All DD references must be destoyed if the model is reloaded.
+     */
+    _destroyDd: function() {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_destroyDd", 162);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 163);
+for (var i in this._ddMap) {
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 164);
+this._ddMap[i].destroy();
+        }
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 167);
+this._ddMap.length = 0;
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
+
+    _afterRender: function () {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_afterRender", 172);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 173);
+this._destroyDd();
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 174);
+this._handleBind(this.get('container'));
+    },
+
+    _handleHeaderEnter: function (e) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_handleHeaderEnter", 177);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 178);
+var node = e.drop.get('node').ancestor('.libbit-treeview-outer-container');
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 180);
+node.addClass('libbit-treeview-drop-over-global');
+    },
+
+    _handleHeaderExit: function (e) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_handleHeaderExit", 183);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 184);
+var node = e.drop.get('node').ancestor('.libbit-treeview-outer-container');
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 186);
+node.hasClass('libbit-treeview-drop-over-global') && node.removeClass('libbit-treeview-drop-over-global');
+    },
+
+    _handleDdOpen: function (e) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_handleDdOpen", 189);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 190);
+var treeNode = e.node,
+            htmlNode = this.getHTMLNode(treeNode);
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 193);
+this._handleBind(htmlNode);
+    },
+
+    _handleDdEnter: function (e) {
+       _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_handleDdEnter", 196);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 197);
+if (e.drop.get('node').one('.libbit-treeview-icon')) {
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 198);
+e.drop.get('node').one('.libbit-treeview-icon').addClass('icon-white');
+        }
+    },
+
+    _handleDdExit: function (e) {
+        // FIXME: Ignore selected nodes
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_handleDdExit", 202);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 204);
+if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 205);
+e.drop.get('node').all('.icon-white').removeClass('icon-white');
+        }
+    },
+
+    _handleStart: function (e) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_handleStart", 209);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 210);
+var drag = e.target,
+            model,
+            container,
+            origin,
+            dd;
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 216);
+model = drag.get('data');
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 218);
+drag.get('dragNode').setContent(
+            drag.get('node').get('outerHTML')
+        );
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 222);
+drag.get('dragNode').all('.icon-white').removeClass('icon-white');
+
+        // Recreate the drag instance
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 225);
+origin = drag.get('node');
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 227);
+drag._prep();
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 229);
+drag.detachAll('drag:start');
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 231);
+container = Y.Node.create('<div></div>');
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 232);
+drag.set('node', container);
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 234);
+drag.set('target', true);
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 235);
+drag._prep();
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 237);
+dd = this._createDd(origin, model);
+    },
+
+    _handleDrop: function (e) {
+        _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "_handleDrop", 240);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 241);
+var model    = this.get('model'),
+            obj      = e.drag.get('data'),
+            dropNode = e.drop.get('node'),
+            newCat   = dropNode.hasClass('nav-header') ? null: this.getNodeById(dropNode.getData('node-id')).data;
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 245);
+callback = false,
+            self     = this;
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 248);
+Y.all('.libbit-treeview-drop-over-global').removeClass('libbit-treeview-drop-over-global');
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 250);
+if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 251);
+e.drop.get('node').all('.icon-white').removeClass('icon-white');
+        }
+
+        // Check for custom override callbacks
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 255);
+Y.Array.each(e.drag.get('groups'), function (group) {
+            _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "(anonymous 3)", 255);
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 256);
+if (group in self._callbacks) {
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 257);
+var config = self._callbacks[group];
+
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 259);
+e.drop.set('data', newCat);
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 260);
+config.callback.apply(config.context, [e]);
+
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 262);
+callback = true;
+            }
+        });
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 266);
+if (callback) {
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 267);
+return true;
+        }
+
+        _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 270);
+if (obj) {
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 271);
+var property      = obj instanceof Y.TB.Category ? 'parent' : 'category',
+                oldCat        = obj.get(property),
+                oldCatModelID = oldCat ? oldCat.id : null,
+                newCatModelID = newCat ? newCat.get('id') : null;
+
+            _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 276);
+if (oldCatModelID !== newCatModelID) {
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 277);
+obj.set(property, newCat);
+                _yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 278);
+obj.save(function () { _yuitest_coverfunc("build/libbit-treeview-dd/libbit-treeview-dd.js", "(anonymous 4)", 278);
+model.load(); });
+            }
+        }
+    }
+}, {
+    ATTRS: {
+        dragdrop: {
+            value : false
+        },
+
+        groups: {
+            value : ['libbit-treeview']
+        }
+    }
+});
+
+// -- Namespace ----------------------------------------------------------------
+_yuitest_coverline("build/libbit-treeview-dd/libbit-treeview-dd.js", 295);
+Y.namespace('Libbit.TreeView').DD = DD;
+
+
+}, '1.0.0', {"requires": ["libbit-dd", "libbit-treeview"]});

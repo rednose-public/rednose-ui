@@ -1,6 +1,74 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-app-templates/libbit-app-templates.js']) {
-   __coverage__['build/libbit-app-templates/libbit-app-templates.js'] = {"path":"build/libbit-app-templates/libbit-app-templates.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"b":{},"f":{"1":0,"2":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":32},"end":{"line":1,"column":51}}},"2":{"name":"Templates","line":6,"loc":{"start":{"line":6,"column":0},"end":{"line":6,"column":21}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":33,"column":12}},"2":{"start":{"line":6,"column":0},"end":{"line":8,"column":1}},"3":{"start":{"line":7,"column":4},"end":{"line":7,"column":49}},"4":{"start":{"line":13,"column":0},"end":{"line":17,"column":13}},"5":{"start":{"line":22,"column":0},"end":{"line":26,"column":13}},"6":{"start":{"line":30,"column":0},"end":{"line":30,"column":44}}},"branchMap":{},"code":["(function () { YUI.add('libbit-app-templates', function (Y, NAME) {","","/**"," * LiBBiT framework app/view templates"," */","function Templates() {","    Templates.superclass.constructor.apply(this);","}","","/**"," * Basic master-detail app view"," */","Templates.masterDetailApp =","    '<div class=\"yui3-g libbit-app-master-detail-container\">' +","        '<div class=\"yui3-u libbit-app-master-view\"></div>' +","        '<div class=\"yui3-u libbit-app-detail-view\"></div>' +","    '</div>';","","/**"," * Basic master-detail grid subview"," */","Templates.masterDetailGrid =","    '<div class=\"yui3-g libbit-grid-master-detail-container\">' +","        '<div class=\"yui3-u libbit-grid-master-view\"></div>' +","        '<div class=\"yui3-u libbit-grid-detail-view\"></div>' +","    '</div>';","","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').Templates = Templates;","","","}, '1.0.0');","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_GMLPuPvnWA_HDYDIxzFDmA = __coverage__['build/libbit-app-templates/libbit-app-templates.js'];
-__cov_GMLPuPvnWA_HDYDIxzFDmA.s['1']++;YUI.add('libbit-app-templates',function(Y,NAME){__cov_GMLPuPvnWA_HDYDIxzFDmA.f['1']++;__cov_GMLPuPvnWA_HDYDIxzFDmA.s['2']++;function Templates(){__cov_GMLPuPvnWA_HDYDIxzFDmA.f['2']++;__cov_GMLPuPvnWA_HDYDIxzFDmA.s['3']++;Templates.superclass.constructor.apply(this);}__cov_GMLPuPvnWA_HDYDIxzFDmA.s['4']++;Templates.masterDetailApp='<div class="yui3-g libbit-app-master-detail-container">'+'<div class="yui3-u libbit-app-master-view"></div>'+'<div class="yui3-u libbit-app-detail-view"></div>'+'</div>';__cov_GMLPuPvnWA_HDYDIxzFDmA.s['5']++;Templates.masterDetailGrid='<div class="yui3-g libbit-grid-master-detail-container">'+'<div class="yui3-u libbit-grid-master-view"></div>'+'<div class="yui3-u libbit-grid-detail-view"></div>'+'</div>';__cov_GMLPuPvnWA_HDYDIxzFDmA.s['6']++;Y.namespace('Libbit').Templates=Templates;},'1.0.0');
+_yuitest_coverage["build/libbit-app-templates/libbit-app-templates.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-app-templates/libbit-app-templates.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-app-templates/libbit-app-templates.js"].code=["YUI.add('libbit-app-templates', function (Y, NAME) {","","/**"," * LiBBiT framework app/view templates"," */","function Templates() {","    Templates.superclass.constructor.apply(this);","}","","/**"," * Basic master-detail app view"," */","Templates.masterDetailApp =","    '<div class=\"yui3-g libbit-app-master-detail-container\">' +","        '<div class=\"yui3-u libbit-app-master-view\"></div>' +","        '<div class=\"yui3-u libbit-app-detail-view\"></div>' +","    '</div>';","","/**"," * Basic master-detail grid subview"," */","Templates.masterDetailGrid =","    '<div class=\"yui3-g libbit-grid-master-detail-container\">' +","        '<div class=\"yui3-u libbit-grid-master-view\"></div>' +","        '<div class=\"yui3-u libbit-grid-detail-view\"></div>' +","    '</div>';","","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').Templates = Templates;","","","}, '1.0.0');"];
+_yuitest_coverage["build/libbit-app-templates/libbit-app-templates.js"].lines = {"1":0,"6":0,"7":0,"13":0,"22":0,"30":0};
+_yuitest_coverage["build/libbit-app-templates/libbit-app-templates.js"].functions = {"Templates:6":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-app-templates/libbit-app-templates.js"].coveredLines = 6;
+_yuitest_coverage["build/libbit-app-templates/libbit-app-templates.js"].coveredFunctions = 2;
+_yuitest_coverline("build/libbit-app-templates/libbit-app-templates.js", 1);
+YUI.add('libbit-app-templates', function (Y, NAME) {
+
+/**
+ * LiBBiT framework app/view templates
+ */
+_yuitest_coverfunc("build/libbit-app-templates/libbit-app-templates.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-app-templates/libbit-app-templates.js", 6);
+function Templates() {
+    _yuitest_coverfunc("build/libbit-app-templates/libbit-app-templates.js", "Templates", 6);
+_yuitest_coverline("build/libbit-app-templates/libbit-app-templates.js", 7);
+Templates.superclass.constructor.apply(this);
+}
+
+/**
+ * Basic master-detail app view
+ */
+_yuitest_coverline("build/libbit-app-templates/libbit-app-templates.js", 13);
+Templates.masterDetailApp =
+    '<div class="yui3-g libbit-app-master-detail-container">' +
+        '<div class="yui3-u libbit-app-master-view"></div>' +
+        '<div class="yui3-u libbit-app-detail-view"></div>' +
+    '</div>';
+
+/**
+ * Basic master-detail grid subview
+ */
+_yuitest_coverline("build/libbit-app-templates/libbit-app-templates.js", 22);
+Templates.masterDetailGrid =
+    '<div class="yui3-g libbit-grid-master-detail-container">' +
+        '<div class="yui3-u libbit-grid-master-view"></div>' +
+        '<div class="yui3-u libbit-grid-detail-view"></div>' +
+    '</div>';
+
+
+// -- Namespace ----------------------------------------------------------------
+_yuitest_coverline("build/libbit-app-templates/libbit-app-templates.js", 30);
+Y.namespace('Libbit').Templates = Templates;
+
+
+}, '1.0.0');

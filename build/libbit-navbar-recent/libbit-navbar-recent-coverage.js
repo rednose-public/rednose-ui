@@ -1,6 +1,196 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-navbar-recent/libbit-navbar-recent.js']) {
-   __coverage__['build/libbit-navbar-recent/libbit-navbar-recent.js'] = {"path":"build/libbit-navbar-recent/libbit-navbar-recent.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":32},"end":{"line":1,"column":51}}},"2":{"name":"(anonymous_2)","line":8,"loc":{"start":{"line":8,"column":17},"end":{"line":8,"column":35}}},"3":{"name":"(anonymous_3)","line":25,"loc":{"start":{"line":25,"column":14},"end":{"line":25,"column":35}}},"4":{"name":"(anonymous_4)","line":31,"loc":{"start":{"line":31,"column":20},"end":{"line":31,"column":39}}},"5":{"name":"(anonymous_5)","line":54,"loc":{"start":{"line":54,"column":24},"end":{"line":54,"column":40}}},"6":{"name":"(anonymous_6)","line":65,"loc":{"start":{"line":65,"column":24},"end":{"line":65,"column":40}}},"7":{"name":"(anonymous_7)","line":71,"loc":{"start":{"line":71,"column":40},"end":{"line":71,"column":52}}},"8":{"name":"(anonymous_8)","line":88,"loc":{"start":{"line":88,"column":51},"end":{"line":88,"column":64}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":112,"column":65}},"2":{"start":{"line":5,"column":0},"end":{"line":109,"column":3}},"3":{"start":{"line":9,"column":8},"end":{"line":9,"column":33}},"4":{"start":{"line":11,"column":8},"end":{"line":11,"column":51}},"5":{"start":{"line":12,"column":8},"end":{"line":12,"column":25}},"6":{"start":{"line":13,"column":8},"end":{"line":13,"column":44}},"7":{"start":{"line":15,"column":8},"end":{"line":15,"column":44}},"8":{"start":{"line":16,"column":8},"end":{"line":16,"column":72}},"9":{"start":{"line":18,"column":8},"end":{"line":18,"column":38}},"10":{"start":{"line":26,"column":8},"end":{"line":28,"column":50}},"11":{"start":{"line":31,"column":8},"end":{"line":35,"column":11}},"12":{"start":{"line":32,"column":12},"end":{"line":34,"column":13}},"13":{"start":{"line":33,"column":16},"end":{"line":33,"column":35}},"14":{"start":{"line":38,"column":8},"end":{"line":38,"column":27}},"15":{"start":{"line":41,"column":8},"end":{"line":43,"column":9}},"16":{"start":{"line":42,"column":12},"end":{"line":42,"column":22}},"17":{"start":{"line":46,"column":8},"end":{"line":46,"column":39}},"18":{"start":{"line":49,"column":8},"end":{"line":49,"column":66}},"19":{"start":{"line":51,"column":8},"end":{"line":51,"column":43}},"20":{"start":{"line":55,"column":8},"end":{"line":58,"column":16}},"21":{"start":{"line":60,"column":8},"end":{"line":60,"column":19}},"22":{"start":{"line":62,"column":8},"end":{"line":105,"column":9}},"23":{"start":{"line":63,"column":12},"end":{"line":63,"column":39}},"24":{"start":{"line":65,"column":12},"end":{"line":74,"column":15}},"25":{"start":{"line":66,"column":16},"end":{"line":66,"column":82}},"26":{"start":{"line":68,"column":16},"end":{"line":68,"column":51}},"27":{"start":{"line":69,"column":16},"end":{"line":69,"column":30}},"28":{"start":{"line":71,"column":16},"end":{"line":73,"column":19}},"29":{"start":{"line":72,"column":20},"end":{"line":72,"column":88}},"30":{"start":{"line":76,"column":12},"end":{"line":78,"column":13}},"31":{"start":{"line":77,"column":16},"end":{"line":77,"column":70}},"32":{"start":{"line":80,"column":12},"end":{"line":80,"column":154}},"33":{"start":{"line":82,"column":12},"end":{"line":84,"column":13}},"34":{"start":{"line":83,"column":16},"end":{"line":83,"column":43}},"35":{"start":{"line":86,"column":12},"end":{"line":86,"column":29}},"36":{"start":{"line":88,"column":12},"end":{"line":104,"column":15}},"37":{"start":{"line":90,"column":16},"end":{"line":90,"column":35}},"38":{"start":{"line":92,"column":16},"end":{"line":92,"column":45}},"39":{"start":{"line":95,"column":16},"end":{"line":99,"column":17}},"40":{"start":{"line":96,"column":20},"end":{"line":96,"column":32}},"41":{"start":{"line":98,"column":20},"end":{"line":98,"column":27}},"42":{"start":{"line":102,"column":16},"end":{"line":102,"column":72}},"43":{"start":{"line":103,"column":16},"end":{"line":103,"column":46}}},"branchMap":{"1":{"line":28,"type":"binary-expr","locations":[{"start":{"line":28,"column":23},"end":{"line":28,"column":43}},{"start":{"line":28,"column":47},"end":{"line":28,"column":49}}]},"2":{"line":32,"type":"if","locations":[{"start":{"line":32,"column":12},"end":{"line":32,"column":12}},{"start":{"line":32,"column":12},"end":{"line":32,"column":12}}]},"3":{"line":41,"type":"if","locations":[{"start":{"line":41,"column":8},"end":{"line":41,"column":8}},{"start":{"line":41,"column":8},"end":{"line":41,"column":8}}]},"4":{"line":62,"type":"if","locations":[{"start":{"line":62,"column":8},"end":{"line":62,"column":8}},{"start":{"line":62,"column":8},"end":{"line":62,"column":8}}]},"5":{"line":76,"type":"if","locations":[{"start":{"line":76,"column":12},"end":{"line":76,"column":12}},{"start":{"line":76,"column":12},"end":{"line":76,"column":12}}]},"6":{"line":82,"type":"if","locations":[{"start":{"line":82,"column":12},"end":{"line":82,"column":12}},{"start":{"line":82,"column":12},"end":{"line":82,"column":12}}]},"7":{"line":95,"type":"if","locations":[{"start":{"line":95,"column":16},"end":{"line":95,"column":16}},{"start":{"line":95,"column":16},"end":{"line":95,"column":16}}]}},"code":["(function () { YUI.add('libbit-navbar-recent', function (Y, NAME) {","","// WIP","","Y.namespace('Libbit.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {","    // -- Lifecycle Methods ----------------------------------------------------","","    initializer: function (config) {","        this._host = config.host;","","        var node = this._host.getNode(config.node);","        this.node = node;","        var parent = node.get('parentNode');","","        parent.addClass('dropdown-submenu');","        parent.append(Y.Node.create('<ul class=\"dropdown-menu\"></ul>'));","","        this._updateMenuEntries(node);","    },","","    // -- Public Methods -------------------------------------------------------","","    // TODO: Unique cookie.","    // TODO: Specify the number of items as config param.","    addEntry: function (id, label) {","        var cookie   = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),","            attrs    = { id: id, label: label },","            obj      = Y.JSON.parse(cookie) || [];","","        // Remove duplicate elements.","        Y.each(obj, function (el, key) {","            if (el.id === attrs.id) {","                obj.splice(key, 1);","            }","        });","","        // Prepend.","        obj.unshift(attrs);","","        // Keep the size.","        if (obj.length > 5) {","            obj.pop();","        }","","        // JSON encode the cookie data.","        cookie = Y.JSON.stringify(obj);","","        // Set the sub-cookie.","        Y.Cookie.setSub('docgenadmin', 'templatebuilder', cookie);","","        this._updateMenuEntries(this.node);","    },","","    _updateMenuEntries: function (node) {","        var self   = this,","            cookie = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),","            ul     = node.ancestor('li').one('ul'),","            obj;","","        ul.empty();","","        if (cookie) {","            obj = Y.JSON.parse(cookie);","","            Y.each(obj, function (item) {","                var li = Y.Node.create('<li><a tabindex=\"-1\" href=\"#\"></a></li>');","","                li.one('a').setContent(item.label);","                ul.append(li);","","                li.one('a').on('click', function () {","                    self._host.fire(self.node.getAttribute('data-id'), { id: item.id });","                });","            });","","            if (obj) {","                ul.append(Y.Node.create('<li class=\"divider\"></li>'));","            }","","            var clear = Y.Node.create('<li><a class=\"menu-clearitems\" tabindex=\"-1\" href=\"#\">' + Y.Intl.get('docgenadmin-core').clearitems + '</a></li>');","","            if (!Y.Object.size(obj)) {","                clear.addClass('disabled');","            }","","            ul.append(clear);","","            ul.one('.menu-clearitems').on('click', function (e) {","                // Disable the default URL behaviour.","                e.preventDefault();","","                var target = e.currentTarget;","","                // Ignore clicking on a disabled node.","                if (target.ancestor('li').hasClass('disabled')) {","                    node.blur();","","                    return;","                }","","                // Reset cookie and update.","                Y.Cookie.setSub('docgenadmin', 'templatebuilder', null);","                self._updateMenuEntries(node);","            });","        }","    }","}, {","    NS: 'recent'","});","","","}, '1.0.0', {\"requires\": [\"cookie\", \"plugin\", \"libbit-navbar\"]});","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_FI1eCzh$BGrpB_BfgcoFCw = __coverage__['build/libbit-navbar-recent/libbit-navbar-recent.js'];
-__cov_FI1eCzh$BGrpB_BfgcoFCw.s['1']++;YUI.add('libbit-navbar-recent',function(Y,NAME){__cov_FI1eCzh$BGrpB_BfgcoFCw.f['1']++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['2']++;Y.namespace('Libbit.Navbar').Recent=Y.Base.create('recentNavbarPlugin',Y.Plugin.Base,[],{initializer:function(config){__cov_FI1eCzh$BGrpB_BfgcoFCw.f['2']++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['3']++;this._host=config.host;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['4']++;var node=this._host.getNode(config.node);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['5']++;this.node=node;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['6']++;var parent=node.get('parentNode');__cov_FI1eCzh$BGrpB_BfgcoFCw.s['7']++;parent.addClass('dropdown-submenu');__cov_FI1eCzh$BGrpB_BfgcoFCw.s['8']++;parent.append(Y.Node.create('<ul class="dropdown-menu"></ul>'));__cov_FI1eCzh$BGrpB_BfgcoFCw.s['9']++;this._updateMenuEntries(node);},addEntry:function(id,label){__cov_FI1eCzh$BGrpB_BfgcoFCw.f['3']++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['10']++;var cookie=Y.Cookie.getSub('docgenadmin','templatebuilder'),attrs={id:id,label:label},obj=(__cov_FI1eCzh$BGrpB_BfgcoFCw.b['1'][0]++,Y.JSON.parse(cookie))||(__cov_FI1eCzh$BGrpB_BfgcoFCw.b['1'][1]++,[]);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['11']++;Y.each(obj,function(el,key){__cov_FI1eCzh$BGrpB_BfgcoFCw.f['4']++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['12']++;if(el.id===attrs.id){__cov_FI1eCzh$BGrpB_BfgcoFCw.b['2'][0]++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['13']++;obj.splice(key,1);}else{__cov_FI1eCzh$BGrpB_BfgcoFCw.b['2'][1]++;}});__cov_FI1eCzh$BGrpB_BfgcoFCw.s['14']++;obj.unshift(attrs);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['15']++;if(obj.length>5){__cov_FI1eCzh$BGrpB_BfgcoFCw.b['3'][0]++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['16']++;obj.pop();}else{__cov_FI1eCzh$BGrpB_BfgcoFCw.b['3'][1]++;}__cov_FI1eCzh$BGrpB_BfgcoFCw.s['17']++;cookie=Y.JSON.stringify(obj);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['18']++;Y.Cookie.setSub('docgenadmin','templatebuilder',cookie);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['19']++;this._updateMenuEntries(this.node);},_updateMenuEntries:function(node){__cov_FI1eCzh$BGrpB_BfgcoFCw.f['5']++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['20']++;var self=this,cookie=Y.Cookie.getSub('docgenadmin','templatebuilder'),ul=node.ancestor('li').one('ul'),obj;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['21']++;ul.empty();__cov_FI1eCzh$BGrpB_BfgcoFCw.s['22']++;if(cookie){__cov_FI1eCzh$BGrpB_BfgcoFCw.b['4'][0]++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['23']++;obj=Y.JSON.parse(cookie);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['24']++;Y.each(obj,function(item){__cov_FI1eCzh$BGrpB_BfgcoFCw.f['6']++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['25']++;var li=Y.Node.create('<li><a tabindex="-1" href="#"></a></li>');__cov_FI1eCzh$BGrpB_BfgcoFCw.s['26']++;li.one('a').setContent(item.label);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['27']++;ul.append(li);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['28']++;li.one('a').on('click',function(){__cov_FI1eCzh$BGrpB_BfgcoFCw.f['7']++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['29']++;self._host.fire(self.node.getAttribute('data-id'),{id:item.id});});});__cov_FI1eCzh$BGrpB_BfgcoFCw.s['30']++;if(obj){__cov_FI1eCzh$BGrpB_BfgcoFCw.b['5'][0]++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['31']++;ul.append(Y.Node.create('<li class="divider"></li>'));}else{__cov_FI1eCzh$BGrpB_BfgcoFCw.b['5'][1]++;}__cov_FI1eCzh$BGrpB_BfgcoFCw.s['32']++;var clear=Y.Node.create('<li><a class="menu-clearitems" tabindex="-1" href="#">'+Y.Intl.get('docgenadmin-core').clearitems+'</a></li>');__cov_FI1eCzh$BGrpB_BfgcoFCw.s['33']++;if(!Y.Object.size(obj)){__cov_FI1eCzh$BGrpB_BfgcoFCw.b['6'][0]++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['34']++;clear.addClass('disabled');}else{__cov_FI1eCzh$BGrpB_BfgcoFCw.b['6'][1]++;}__cov_FI1eCzh$BGrpB_BfgcoFCw.s['35']++;ul.append(clear);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['36']++;ul.one('.menu-clearitems').on('click',function(e){__cov_FI1eCzh$BGrpB_BfgcoFCw.f['8']++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['37']++;e.preventDefault();__cov_FI1eCzh$BGrpB_BfgcoFCw.s['38']++;var target=e.currentTarget;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['39']++;if(target.ancestor('li').hasClass('disabled')){__cov_FI1eCzh$BGrpB_BfgcoFCw.b['7'][0]++;__cov_FI1eCzh$BGrpB_BfgcoFCw.s['40']++;node.blur();__cov_FI1eCzh$BGrpB_BfgcoFCw.s['41']++;return;}else{__cov_FI1eCzh$BGrpB_BfgcoFCw.b['7'][1]++;}__cov_FI1eCzh$BGrpB_BfgcoFCw.s['42']++;Y.Cookie.setSub('docgenadmin','templatebuilder',null);__cov_FI1eCzh$BGrpB_BfgcoFCw.s['43']++;self._updateMenuEntries(node);});}else{__cov_FI1eCzh$BGrpB_BfgcoFCw.b['4'][1]++;}}},{NS:'recent'});},'1.0.0',{'requires':['cookie','plugin','libbit-navbar']});
+_yuitest_coverage["build/libbit-navbar-recent/libbit-navbar-recent.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-navbar-recent/libbit-navbar-recent.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-navbar-recent/libbit-navbar-recent.js"].code=["YUI.add('libbit-navbar-recent', function (Y, NAME) {","","// WIP","","Y.namespace('Libbit.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {","    // -- Lifecycle Methods ----------------------------------------------------","","    initializer: function (config) {","        this._host = config.host;","","        var node = this._host.getNode(config.node);","        this.node = node;","        var parent = node.get('parentNode');","","        parent.addClass('dropdown-submenu');","        parent.append(Y.Node.create('<ul class=\"dropdown-menu\"></ul>'));","","        this._updateMenuEntries(node);","    },","","    // -- Public Methods -------------------------------------------------------","","    // TODO: Unique cookie.","    // TODO: Specify the number of items as config param.","    addEntry: function (id, label) {","        var cookie   = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),","            attrs    = { id: id, label: label },","            obj      = Y.JSON.parse(cookie) || [];","","        // Remove duplicate elements.","        Y.each(obj, function (el, key) {","            if (el.id === attrs.id) {","                obj.splice(key, 1);","            }","        });","","        // Prepend.","        obj.unshift(attrs);","","        // Keep the size.","        if (obj.length > 5) {","            obj.pop();","        }","","        // JSON encode the cookie data.","        cookie = Y.JSON.stringify(obj);","","        // Set the sub-cookie.","        Y.Cookie.setSub('docgenadmin', 'templatebuilder', cookie);","","        this._updateMenuEntries(this.node);","    },","","    _updateMenuEntries: function (node) {","        var self   = this,","            cookie = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),","            ul     = node.ancestor('li').one('ul'),","            obj;","","        ul.empty();","","        if (cookie) {","            obj = Y.JSON.parse(cookie);","","            Y.each(obj, function (item) {","                var li = Y.Node.create('<li><a tabindex=\"-1\" href=\"#\"></a></li>');","","                li.one('a').setContent(item.label);","                ul.append(li);","","                li.one('a').on('click', function () {","                    self._host.fire(self.node.getAttribute('data-id'), { id: item.id });","                });","            });","","            if (obj) {","                ul.append(Y.Node.create('<li class=\"divider\"></li>'));","            }","","            var clear = Y.Node.create('<li><a class=\"menu-clearitems\" tabindex=\"-1\" href=\"#\">' + Y.Intl.get('docgenadmin-core').clearitems + '</a></li>');","","            if (!Y.Object.size(obj)) {","                clear.addClass('disabled');","            }","","            ul.append(clear);","","            ul.one('.menu-clearitems').on('click', function (e) {","                // Disable the default URL behaviour.","                e.preventDefault();","","                var target = e.currentTarget;","","                // Ignore clicking on a disabled node.","                if (target.ancestor('li').hasClass('disabled')) {","                    node.blur();","","                    return;","                }","","                // Reset cookie and update.","                Y.Cookie.setSub('docgenadmin', 'templatebuilder', null);","                self._updateMenuEntries(node);","            });","        }","    }","}, {","    NS: 'recent'","});","","","}, '1.0.0', {\"requires\": [\"cookie\", \"plugin\", \"libbit-navbar\"]});"];
+_yuitest_coverage["build/libbit-navbar-recent/libbit-navbar-recent.js"].lines = {"1":0,"5":0,"9":0,"11":0,"12":0,"13":0,"15":0,"16":0,"18":0,"26":0,"31":0,"32":0,"33":0,"38":0,"41":0,"42":0,"46":0,"49":0,"51":0,"55":0,"60":0,"62":0,"63":0,"65":0,"66":0,"68":0,"69":0,"71":0,"72":0,"76":0,"77":0,"80":0,"82":0,"83":0,"86":0,"88":0,"90":0,"92":0,"95":0,"96":0,"98":0,"102":0,"103":0};
+_yuitest_coverage["build/libbit-navbar-recent/libbit-navbar-recent.js"].functions = {"initializer:8":0,"(anonymous 2):31":0,"addEntry:25":0,"(anonymous 4):71":0,"(anonymous 3):65":0,"(anonymous 5):88":0,"_updateMenuEntries:54":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-navbar-recent/libbit-navbar-recent.js"].coveredLines = 43;
+_yuitest_coverage["build/libbit-navbar-recent/libbit-navbar-recent.js"].coveredFunctions = 8;
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 1);
+YUI.add('libbit-navbar-recent', function (Y, NAME) {
+
+// WIP
+
+_yuitest_coverfunc("build/libbit-navbar-recent/libbit-navbar-recent.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 5);
+Y.namespace('Libbit.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
+    // -- Lifecycle Methods ----------------------------------------------------
+
+    initializer: function (config) {
+        _yuitest_coverfunc("build/libbit-navbar-recent/libbit-navbar-recent.js", "initializer", 8);
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 9);
+this._host = config.host;
+
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 11);
+var node = this._host.getNode(config.node);
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 12);
+this.node = node;
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 13);
+var parent = node.get('parentNode');
+
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 15);
+parent.addClass('dropdown-submenu');
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 16);
+parent.append(Y.Node.create('<ul class="dropdown-menu"></ul>'));
+
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 18);
+this._updateMenuEntries(node);
+    },
+
+    // -- Public Methods -------------------------------------------------------
+
+    // TODO: Unique cookie.
+    // TODO: Specify the number of items as config param.
+    addEntry: function (id, label) {
+        _yuitest_coverfunc("build/libbit-navbar-recent/libbit-navbar-recent.js", "addEntry", 25);
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 26);
+var cookie   = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),
+            attrs    = { id: id, label: label },
+            obj      = Y.JSON.parse(cookie) || [];
+
+        // Remove duplicate elements.
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 31);
+Y.each(obj, function (el, key) {
+            _yuitest_coverfunc("build/libbit-navbar-recent/libbit-navbar-recent.js", "(anonymous 2)", 31);
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 32);
+if (el.id === attrs.id) {
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 33);
+obj.splice(key, 1);
+            }
+        });
+
+        // Prepend.
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 38);
+obj.unshift(attrs);
+
+        // Keep the size.
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 41);
+if (obj.length > 5) {
+            _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 42);
+obj.pop();
+        }
+
+        // JSON encode the cookie data.
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 46);
+cookie = Y.JSON.stringify(obj);
+
+        // Set the sub-cookie.
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 49);
+Y.Cookie.setSub('docgenadmin', 'templatebuilder', cookie);
+
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 51);
+this._updateMenuEntries(this.node);
+    },
+
+    _updateMenuEntries: function (node) {
+        _yuitest_coverfunc("build/libbit-navbar-recent/libbit-navbar-recent.js", "_updateMenuEntries", 54);
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 55);
+var self   = this,
+            cookie = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),
+            ul     = node.ancestor('li').one('ul'),
+            obj;
+
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 60);
+ul.empty();
+
+        _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 62);
+if (cookie) {
+            _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 63);
+obj = Y.JSON.parse(cookie);
+
+            _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 65);
+Y.each(obj, function (item) {
+                _yuitest_coverfunc("build/libbit-navbar-recent/libbit-navbar-recent.js", "(anonymous 3)", 65);
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 66);
+var li = Y.Node.create('<li><a tabindex="-1" href="#"></a></li>');
+
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 68);
+li.one('a').setContent(item.label);
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 69);
+ul.append(li);
+
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 71);
+li.one('a').on('click', function () {
+                    _yuitest_coverfunc("build/libbit-navbar-recent/libbit-navbar-recent.js", "(anonymous 4)", 71);
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 72);
+self._host.fire(self.node.getAttribute('data-id'), { id: item.id });
+                });
+            });
+
+            _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 76);
+if (obj) {
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 77);
+ul.append(Y.Node.create('<li class="divider"></li>'));
+            }
+
+            _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 80);
+var clear = Y.Node.create('<li><a class="menu-clearitems" tabindex="-1" href="#">' + Y.Intl.get('docgenadmin-core').clearitems + '</a></li>');
+
+            _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 82);
+if (!Y.Object.size(obj)) {
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 83);
+clear.addClass('disabled');
+            }
+
+            _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 86);
+ul.append(clear);
+
+            _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 88);
+ul.one('.menu-clearitems').on('click', function (e) {
+                // Disable the default URL behaviour.
+                _yuitest_coverfunc("build/libbit-navbar-recent/libbit-navbar-recent.js", "(anonymous 5)", 88);
+_yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 90);
+e.preventDefault();
+
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 92);
+var target = e.currentTarget;
+
+                // Ignore clicking on a disabled node.
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 95);
+if (target.ancestor('li').hasClass('disabled')) {
+                    _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 96);
+node.blur();
+
+                    _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 98);
+return;
+                }
+
+                // Reset cookie and update.
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 102);
+Y.Cookie.setSub('docgenadmin', 'templatebuilder', null);
+                _yuitest_coverline("build/libbit-navbar-recent/libbit-navbar-recent.js", 103);
+self._updateMenuEntries(node);
+            });
+        }
+    }
+}, {
+    NS: 'recent'
+});
+
+
+}, '1.0.0', {"requires": ["cookie", "plugin", "libbit-navbar"]});

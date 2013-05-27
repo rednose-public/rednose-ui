@@ -1,6 +1,269 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-contextmenu/libbit-contextmenu.js']) {
-   __coverage__['build/libbit-contextmenu/libbit-contextmenu.js'] = {"path":"build/libbit-contextmenu/libbit-contextmenu.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":30},"end":{"line":1,"column":49}}},"2":{"name":"(anonymous_2)","line":19,"loc":{"start":{"line":19,"column":17},"end":{"line":19,"column":35}}},"3":{"name":"(anonymous_3)","line":35,"loc":{"start":{"line":35,"column":16},"end":{"line":35,"column":34}}},"4":{"name":"(anonymous_4)","line":68,"loc":{"start":{"line":68,"column":24},"end":{"line":68,"column":37}}},"5":{"name":"(anonymous_5)","line":74,"loc":{"start":{"line":74,"column":43},"end":{"line":74,"column":59}}},"6":{"name":"(anonymous_6)","line":100,"loc":{"start":{"line":100,"column":22},"end":{"line":100,"column":34}}},"7":{"name":"(anonymous_7)","line":106,"loc":{"start":{"line":106,"column":53},"end":{"line":106,"column":64}}},"8":{"name":"(anonymous_8)","line":107,"loc":{"start":{"line":107,"column":46},"end":{"line":107,"column":59}}},"9":{"name":"(anonymous_9)","line":127,"loc":{"start":{"line":127,"column":66},"end":{"line":127,"column":79}}},"10":{"name":"(anonymous_10)","line":135,"loc":{"start":{"line":135,"column":66},"end":{"line":135,"column":79}}},"11":{"name":"(anonymous_11)","line":143,"loc":{"start":{"line":143,"column":58},"end":{"line":143,"column":71}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":162,"column":76}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":16}},"3":{"start":{"line":5,"column":0},"end":{"line":156,"column":3}},"4":{"start":{"line":20,"column":8},"end":{"line":22,"column":47}},"5":{"start":{"line":24,"column":8},"end":{"line":24,"column":26}},"6":{"start":{"line":25,"column":8},"end":{"line":25,"column":49}},"7":{"start":{"line":26,"column":8},"end":{"line":26,"column":37}},"8":{"start":{"line":28,"column":8},"end":{"line":30,"column":9}},"9":{"start":{"line":29,"column":12},"end":{"line":29,"column":36}},"10":{"start":{"line":32,"column":8},"end":{"line":32,"column":62}},"11":{"start":{"line":36,"column":8},"end":{"line":36,"column":90}},"12":{"start":{"line":37,"column":8},"end":{"line":37,"column":43}},"13":{"start":{"line":38,"column":8},"end":{"line":38,"column":32}},"14":{"start":{"line":40,"column":8},"end":{"line":42,"column":9}},"15":{"start":{"line":41,"column":12},"end":{"line":41,"column":27}},"16":{"start":{"line":44,"column":8},"end":{"line":63,"column":9}},"17":{"start":{"line":45,"column":12},"end":{"line":45,"column":45}},"18":{"start":{"line":46,"column":12},"end":{"line":46,"column":52}},"19":{"start":{"line":48,"column":12},"end":{"line":60,"column":13}},"20":{"start":{"line":49,"column":16},"end":{"line":49,"column":55}},"21":{"start":{"line":50,"column":16},"end":{"line":50,"column":59}},"22":{"start":{"line":52,"column":16},"end":{"line":52,"column":33}},"23":{"start":{"line":54,"column":16},"end":{"line":57,"column":17}},"24":{"start":{"line":55,"column":20},"end":{"line":55,"column":46}},"25":{"start":{"line":56,"column":20},"end":{"line":56,"column":45}},"26":{"start":{"line":59,"column":16},"end":{"line":59,"column":41}},"27":{"start":{"line":62,"column":12},"end":{"line":62,"column":28}},"28":{"start":{"line":65,"column":8},"end":{"line":65,"column":37}},"29":{"start":{"line":69,"column":8},"end":{"line":71,"column":40}},"30":{"start":{"line":74,"column":8},"end":{"line":76,"column":11}},"31":{"start":{"line":75,"column":12},"end":{"line":75,"column":39}},"32":{"start":{"line":78,"column":8},"end":{"line":78,"column":27}},"33":{"start":{"line":80,"column":8},"end":{"line":86,"column":11}},"34":{"start":{"line":88,"column":8},"end":{"line":88,"column":45}},"35":{"start":{"line":90,"column":8},"end":{"line":90,"column":71}},"36":{"start":{"line":92,"column":8},"end":{"line":92,"column":65}},"37":{"start":{"line":93,"column":8},"end":{"line":93,"column":64}},"38":{"start":{"line":94,"column":8},"end":{"line":94,"column":27}},"39":{"start":{"line":96,"column":8},"end":{"line":96,"column":40}},"40":{"start":{"line":97,"column":8},"end":{"line":97,"column":32}},"41":{"start":{"line":101,"column":8},"end":{"line":103,"column":45}},"42":{"start":{"line":106,"column":8},"end":{"line":125,"column":11}},"43":{"start":{"line":107,"column":12},"end":{"line":124,"column":15}},"44":{"start":{"line":108,"column":16},"end":{"line":109,"column":42}},"45":{"start":{"line":111,"column":16},"end":{"line":111,"column":35}},"46":{"start":{"line":113,"column":16},"end":{"line":123,"column":17}},"47":{"start":{"line":114,"column":20},"end":{"line":116,"column":21}},"48":{"start":{"line":115,"column":24},"end":{"line":115,"column":46}},"49":{"start":{"line":118,"column":20},"end":{"line":118,"column":68}},"50":{"start":{"line":120,"column":20},"end":{"line":120,"column":42}},"51":{"start":{"line":122,"column":20},"end":{"line":122,"column":34}},"52":{"start":{"line":127,"column":8},"end":{"line":133,"column":11}},"53":{"start":{"line":128,"column":12},"end":{"line":128,"column":39}},"54":{"start":{"line":130,"column":12},"end":{"line":132,"column":13}},"55":{"start":{"line":131,"column":16},"end":{"line":131,"column":53}},"56":{"start":{"line":135,"column":8},"end":{"line":141,"column":11}},"57":{"start":{"line":136,"column":12},"end":{"line":136,"column":39}},"58":{"start":{"line":138,"column":12},"end":{"line":140,"column":13}},"59":{"start":{"line":139,"column":16},"end":{"line":139,"column":56}},"60":{"start":{"line":143,"column":8},"end":{"line":150,"column":11}},"61":{"start":{"line":147,"column":12},"end":{"line":149,"column":13}},"62":{"start":{"line":148,"column":16},"end":{"line":148,"column":38}},"63":{"start":{"line":159,"column":0},"end":{"line":159,"column":48}}},"branchMap":{"1":{"line":21,"type":"cond-expr","locations":[{"start":{"line":21,"column":44},"end":{"line":21,"column":58}},{"start":{"line":21,"column":61},"end":{"line":21,"column":63}}]},"2":{"line":28,"type":"if","locations":[{"start":{"line":28,"column":8},"end":{"line":28,"column":8}},{"start":{"line":28,"column":8},"end":{"line":28,"column":8}}]},"3":{"line":40,"type":"if","locations":[{"start":{"line":40,"column":8},"end":{"line":40,"column":8}},{"start":{"line":40,"column":8},"end":{"line":40,"column":8}}]},"4":{"line":48,"type":"if","locations":[{"start":{"line":48,"column":12},"end":{"line":48,"column":12}},{"start":{"line":48,"column":12},"end":{"line":48,"column":12}}]},"5":{"line":54,"type":"if","locations":[{"start":{"line":54,"column":16},"end":{"line":54,"column":16}},{"start":{"line":54,"column":16},"end":{"line":54,"column":16}}]},"6":{"line":113,"type":"if","locations":[{"start":{"line":113,"column":16},"end":{"line":113,"column":16}},{"start":{"line":113,"column":16},"end":{"line":113,"column":16}}]},"7":{"line":114,"type":"if","locations":[{"start":{"line":114,"column":20},"end":{"line":114,"column":20}},{"start":{"line":114,"column":20},"end":{"line":114,"column":20}}]},"8":{"line":130,"type":"if","locations":[{"start":{"line":130,"column":12},"end":{"line":130,"column":12}},{"start":{"line":130,"column":12},"end":{"line":130,"column":12}}]},"9":{"line":138,"type":"if","locations":[{"start":{"line":138,"column":12},"end":{"line":138,"column":12}},{"start":{"line":138,"column":12},"end":{"line":138,"column":12}}]},"10":{"line":138,"type":"binary-expr","locations":[{"start":{"line":138,"column":16},"end":{"line":138,"column":29}},{"start":{"line":138,"column":33},"end":{"line":138,"column":69}}]},"11":{"line":147,"type":"if","locations":[{"start":{"line":147,"column":12},"end":{"line":147,"column":12}},{"start":{"line":147,"column":12},"end":{"line":147,"column":12}}]}},"code":["(function () { YUI.add('libbit-contextmenu', function (Y, NAME) {","","var ContextMenu;","","ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {","    /**","     * State variable, holds a possible active instance.","     */","    _contextMenu: null,","","    /**","     * Optional data object, to pass with the event","     */","     data: null,","","    /**","     * Initializer, gets called upon instance initiation.","     */","    initializer: function (config) {","        var node         = config.host,","            content      = config.content ? config.content : '',","            bubbleTarget = config.bubbleTarget;","","        this._node = node;","        this._content = this._buildHTML(content);","        this.addTarget(bubbleTarget);","","        if (typeof config.data !== 'undefined') {","            this.data = config.data;","        }","","        node.on('contextmenu', this._handleContextMenu, this);","    },","","    _buildHTML: function(content) {","        var template = '<div class=\"dropdown open\"><ul class=\"dropdown-menu\"></ul></div>';","        var node = Y.Node.create(template);","        var ul = node.one('ul');","","        if (content === '') {","            return content;","        }","","        for (var i in content) {","            var elLi = Y.Node.create('<li>');","            var elA = Y.Node.create('<a href=\"#\">');","","            if (content[i].title !== '-') {","                elA.set('innerHTML', content[i].title);","                elA.setAttribute('data-id', content[i].id);","","                elLi.append(elA);","","                if (content[i].disabled === true) {","                    elLi.addClass('disabled');","                    elA.addClass('disabled');","                }","            } else {","                elLi.addClass('divider');","            }","","            ul.append(elLi);","        }","","        return node.get('outerHTML');","    },","","    _handleContextMenu: function (e) {","        var node        = this._node,","            contextMenu = this._contextMenu,","            content     = this._content;","","        // Remove a previous context menu if it exists, ideally we prolly wanna toggle it.","        Y.all('.libbit-context-open').each(function (node) {","            node.contextMenu.destroy();","        });","","        e.preventDefault();","","        contextMenu = new Y.Overlay({","            bodyContent: content,","            visible: false,","            constrain: true,","            zIndex: Y.all('*').size(),","            render: true","        });","","        node.addClass('libbit-context-open');","","        contextMenu.get('boundingBox').addClass('libbit-context-menu');","","        contextMenu.get('boundingBox').setStyle('left', e.pageX);","        contextMenu.get('boundingBox').setStyle('top', e.pageY);","        contextMenu.show();","","        this._contextMenu = contextMenu;","        this._bindContextMenu();","    },","","    _bindContextMenu: function () {","        var self         = this,","            node         = this._node,","            contextMenu  = this._contextMenu;","","        // Bind the menu events","        contextMenu.get('boundingBox').all('a').each(function() {","            this.on(['click', 'contextmenu'], function (e) {","                var target = e.currentTarget,","                    args = { node: node };","","                e.preventDefault();","","                if (target.hasClass('disabled') !== true) {","                    if (self.data !== null) {","                        args.data = self.data;","                    }","","                    self.fire(target.getAttribute('data-id'), args);","","                    contextMenu.destroy();","                } else {","                    target.blur();","                }","            });","        });","","        contextMenu.get('boundingBox').all('li').on('mouseenter', function (e) {","            var node = e.currentTarget;","","            if (node.one('i')) {","                node.one('i').addClass('icon-white');","            }","        });","","        contextMenu.get('boundingBox').all('li').on('mouseleave', function (e) {","            var node = e.currentTarget;","","            if (node.one('i') && node.one('i').hasClass('icon-white')) {","                node.one('i').removeClass('icon-white');","            }","        });","","        contextMenu.get('boundingBox').on('clickoutside', function (e) {","            // Dont allow the rightclick mousebutton to hide the contextMenu","            // In some cases a browser (tested on FF17) will fire false positives and","            // immediately hide the contextmenu again.","            if (e.button !== 3) {","                contextMenu.destroy();","            }","        });","    }","","}, {","    NS : 'contextMenu',","    ATTRS : {}","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').ContextMenu = ContextMenu;","","","}, '1.0.0', {\"requires\": [\"base\", \"panel\", \"plugin\", \"widget\", \"overlay\"]});","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_hePRR8Dvm1Yp_RbBoLLnqg = __coverage__['build/libbit-contextmenu/libbit-contextmenu.js'];
-__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['1']++;YUI.add('libbit-contextmenu',function(Y,NAME){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['1']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['2']++;var ContextMenu;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['3']++;ContextMenu=Y.Base.create('contextMenu',Y.Plugin.Base,[],{_contextMenu:null,data:null,initializer:function(config){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['2']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['4']++;var node=config.host,content=config.content?(__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['1'][0]++,config.content):(__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['1'][1]++,''),bubbleTarget=config.bubbleTarget;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['5']++;this._node=node;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['6']++;this._content=this._buildHTML(content);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['7']++;this.addTarget(bubbleTarget);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['8']++;if(typeof config.data!=='undefined'){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['2'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['9']++;this.data=config.data;}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['2'][1]++;}__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['10']++;node.on('contextmenu',this._handleContextMenu,this);},_buildHTML:function(content){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['3']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['11']++;var template='<div class="dropdown open"><ul class="dropdown-menu"></ul></div>';__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['12']++;var node=Y.Node.create(template);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['13']++;var ul=node.one('ul');__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['14']++;if(content===''){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['3'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['15']++;return content;}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['3'][1]++;}__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['16']++;for(var i in content){__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['17']++;var elLi=Y.Node.create('<li>');__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['18']++;var elA=Y.Node.create('<a href="#">');__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['19']++;if(content[i].title!=='-'){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['4'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['20']++;elA.set('innerHTML',content[i].title);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['21']++;elA.setAttribute('data-id',content[i].id);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['22']++;elLi.append(elA);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['23']++;if(content[i].disabled===true){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['5'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['24']++;elLi.addClass('disabled');__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['25']++;elA.addClass('disabled');}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['5'][1]++;}}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['4'][1]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['26']++;elLi.addClass('divider');}__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['27']++;ul.append(elLi);}__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['28']++;return node.get('outerHTML');},_handleContextMenu:function(e){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['4']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['29']++;var node=this._node,contextMenu=this._contextMenu,content=this._content;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['30']++;Y.all('.libbit-context-open').each(function(node){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['5']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['31']++;node.contextMenu.destroy();});__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['32']++;e.preventDefault();__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['33']++;contextMenu=new Y.Overlay({bodyContent:content,visible:false,constrain:true,zIndex:Y.all('*').size(),render:true});__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['34']++;node.addClass('libbit-context-open');__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['35']++;contextMenu.get('boundingBox').addClass('libbit-context-menu');__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['36']++;contextMenu.get('boundingBox').setStyle('left',e.pageX);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['37']++;contextMenu.get('boundingBox').setStyle('top',e.pageY);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['38']++;contextMenu.show();__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['39']++;this._contextMenu=contextMenu;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['40']++;this._bindContextMenu();},_bindContextMenu:function(){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['6']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['41']++;var self=this,node=this._node,contextMenu=this._contextMenu;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['42']++;contextMenu.get('boundingBox').all('a').each(function(){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['7']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['43']++;this.on(['click','contextmenu'],function(e){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['8']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['44']++;var target=e.currentTarget,args={node:node};__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['45']++;e.preventDefault();__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['46']++;if(target.hasClass('disabled')!==true){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['6'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['47']++;if(self.data!==null){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['7'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['48']++;args.data=self.data;}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['7'][1]++;}__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['49']++;self.fire(target.getAttribute('data-id'),args);__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['50']++;contextMenu.destroy();}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['6'][1]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['51']++;target.blur();}});});__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['52']++;contextMenu.get('boundingBox').all('li').on('mouseenter',function(e){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['9']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['53']++;var node=e.currentTarget;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['54']++;if(node.one('i')){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['8'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['55']++;node.one('i').addClass('icon-white');}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['8'][1]++;}});__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['56']++;contextMenu.get('boundingBox').all('li').on('mouseleave',function(e){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['10']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['57']++;var node=e.currentTarget;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['58']++;if((__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['10'][0]++,node.one('i'))&&(__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['10'][1]++,node.one('i').hasClass('icon-white'))){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['9'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['59']++;node.one('i').removeClass('icon-white');}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['9'][1]++;}});__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['60']++;contextMenu.get('boundingBox').on('clickoutside',function(e){__cov_hePRR8Dvm1Yp_RbBoLLnqg.f['11']++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['61']++;if(e.button!==3){__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['11'][0]++;__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['62']++;contextMenu.destroy();}else{__cov_hePRR8Dvm1Yp_RbBoLLnqg.b['11'][1]++;}});}},{NS:'contextMenu',ATTRS:{}});__cov_hePRR8Dvm1Yp_RbBoLLnqg.s['63']++;Y.namespace('Libbit').ContextMenu=ContextMenu;},'1.0.0',{'requires':['base','panel','plugin','widget','overlay']});
+_yuitest_coverage["build/libbit-contextmenu/libbit-contextmenu.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-contextmenu/libbit-contextmenu.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-contextmenu/libbit-contextmenu.js"].code=["YUI.add('libbit-contextmenu', function (Y, NAME) {","","var ContextMenu;","","ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {","    /**","     * State variable, holds a possible active instance.","     */","    _contextMenu: null,","","    /**","     * Optional data object, to pass with the event","     */","     data: null,","","    /**","     * Initializer, gets called upon instance initiation.","     */","    initializer: function (config) {","        var node         = config.host,","            content      = config.content ? config.content : '',","            bubbleTarget = config.bubbleTarget;","","        this._node = node;","        this._content = this._buildHTML(content);","        this.addTarget(bubbleTarget);","","        if (typeof config.data !== 'undefined') {","            this.data = config.data;","        }","","        node.on('contextmenu', this._handleContextMenu, this);","    },","","    _buildHTML: function(content) {","        var template = '<div class=\"dropdown open\"><ul class=\"dropdown-menu\"></ul></div>';","        var node = Y.Node.create(template);","        var ul = node.one('ul');","","        if (content === '') {","            return content;","        }","","        for (var i in content) {","            var elLi = Y.Node.create('<li>');","            var elA = Y.Node.create('<a href=\"#\">');","","            if (content[i].title !== '-') {","                elA.set('innerHTML', content[i].title);","                elA.setAttribute('data-id', content[i].id);","","                elLi.append(elA);","","                if (content[i].disabled === true) {","                    elLi.addClass('disabled');","                    elA.addClass('disabled');","                }","            } else {","                elLi.addClass('divider');","            }","","            ul.append(elLi);","        }","","        return node.get('outerHTML');","    },","","    _handleContextMenu: function (e) {","        var node        = this._node,","            contextMenu = this._contextMenu,","            content     = this._content;","","        // Remove a previous context menu if it exists, ideally we prolly wanna toggle it.","        Y.all('.libbit-context-open').each(function (node) {","            node.contextMenu.destroy();","        });","","        e.preventDefault();","","        contextMenu = new Y.Overlay({","            bodyContent: content,","            visible: false,","            constrain: true,","            zIndex: Y.all('*').size(),","            render: true","        });","","        node.addClass('libbit-context-open');","","        contextMenu.get('boundingBox').addClass('libbit-context-menu');","","        contextMenu.get('boundingBox').setStyle('left', e.pageX);","        contextMenu.get('boundingBox').setStyle('top', e.pageY);","        contextMenu.show();","","        this._contextMenu = contextMenu;","        this._bindContextMenu();","    },","","    _bindContextMenu: function () {","        var self         = this,","            node         = this._node,","            contextMenu  = this._contextMenu;","","        // Bind the menu events","        contextMenu.get('boundingBox').all('a').each(function() {","            this.on(['click', 'contextmenu'], function (e) {","                var target = e.currentTarget,","                    args = { node: node };","","                e.preventDefault();","","                if (target.hasClass('disabled') !== true) {","                    if (self.data !== null) {","                        args.data = self.data;","                    }","","                    self.fire(target.getAttribute('data-id'), args);","","                    contextMenu.destroy();","                } else {","                    target.blur();","                }","            });","        });","","        contextMenu.get('boundingBox').all('li').on('mouseenter', function (e) {","            var node = e.currentTarget;","","            if (node.one('i')) {","                node.one('i').addClass('icon-white');","            }","        });","","        contextMenu.get('boundingBox').all('li').on('mouseleave', function (e) {","            var node = e.currentTarget;","","            if (node.one('i') && node.one('i').hasClass('icon-white')) {","                node.one('i').removeClass('icon-white');","            }","        });","","        contextMenu.get('boundingBox').on('clickoutside', function (e) {","            // Dont allow the rightclick mousebutton to hide the contextMenu","            // In some cases a browser (tested on FF17) will fire false positives and","            // immediately hide the contextmenu again.","            if (e.button !== 3) {","                contextMenu.destroy();","            }","        });","    }","","}, {","    NS : 'contextMenu',","    ATTRS : {}","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').ContextMenu = ContextMenu;","","","}, '1.0.0', {\"requires\": [\"base\", \"panel\", \"plugin\", \"widget\", \"overlay\"]});"];
+_yuitest_coverage["build/libbit-contextmenu/libbit-contextmenu.js"].lines = {"1":0,"3":0,"5":0,"20":0,"24":0,"25":0,"26":0,"28":0,"29":0,"32":0,"36":0,"37":0,"38":0,"40":0,"41":0,"44":0,"45":0,"46":0,"48":0,"49":0,"50":0,"52":0,"54":0,"55":0,"56":0,"59":0,"62":0,"65":0,"69":0,"74":0,"75":0,"78":0,"80":0,"88":0,"90":0,"92":0,"93":0,"94":0,"96":0,"97":0,"101":0,"106":0,"107":0,"108":0,"111":0,"113":0,"114":0,"115":0,"118":0,"120":0,"122":0,"127":0,"128":0,"130":0,"131":0,"135":0,"136":0,"138":0,"139":0,"143":0,"147":0,"148":0,"159":0};
+_yuitest_coverage["build/libbit-contextmenu/libbit-contextmenu.js"].functions = {"initializer:19":0,"_buildHTML:35":0,"(anonymous 2):74":0,"_handleContextMenu:68":0,"(anonymous 4):107":0,"(anonymous 3):106":0,"(anonymous 5):127":0,"(anonymous 6):135":0,"(anonymous 7):143":0,"_bindContextMenu:100":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-contextmenu/libbit-contextmenu.js"].coveredLines = 63;
+_yuitest_coverage["build/libbit-contextmenu/libbit-contextmenu.js"].coveredFunctions = 11;
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 1);
+YUI.add('libbit-contextmenu', function (Y, NAME) {
+
+_yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 3);
+var ContextMenu;
+
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 5);
+ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
+    /**
+     * State variable, holds a possible active instance.
+     */
+    _contextMenu: null,
+
+    /**
+     * Optional data object, to pass with the event
+     */
+     data: null,
+
+    /**
+     * Initializer, gets called upon instance initiation.
+     */
+    initializer: function (config) {
+        _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "initializer", 19);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 20);
+var node         = config.host,
+            content      = config.content ? config.content : '',
+            bubbleTarget = config.bubbleTarget;
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 24);
+this._node = node;
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 25);
+this._content = this._buildHTML(content);
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 26);
+this.addTarget(bubbleTarget);
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 28);
+if (typeof config.data !== 'undefined') {
+            _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 29);
+this.data = config.data;
+        }
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 32);
+node.on('contextmenu', this._handleContextMenu, this);
+    },
+
+    _buildHTML: function(content) {
+        _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "_buildHTML", 35);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 36);
+var template = '<div class="dropdown open"><ul class="dropdown-menu"></ul></div>';
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 37);
+var node = Y.Node.create(template);
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 38);
+var ul = node.one('ul');
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 40);
+if (content === '') {
+            _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 41);
+return content;
+        }
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 44);
+for (var i in content) {
+            _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 45);
+var elLi = Y.Node.create('<li>');
+            _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 46);
+var elA = Y.Node.create('<a href="#">');
+
+            _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 48);
+if (content[i].title !== '-') {
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 49);
+elA.set('innerHTML', content[i].title);
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 50);
+elA.setAttribute('data-id', content[i].id);
+
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 52);
+elLi.append(elA);
+
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 54);
+if (content[i].disabled === true) {
+                    _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 55);
+elLi.addClass('disabled');
+                    _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 56);
+elA.addClass('disabled');
+                }
+            } else {
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 59);
+elLi.addClass('divider');
+            }
+
+            _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 62);
+ul.append(elLi);
+        }
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 65);
+return node.get('outerHTML');
+    },
+
+    _handleContextMenu: function (e) {
+        _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "_handleContextMenu", 68);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 69);
+var node        = this._node,
+            contextMenu = this._contextMenu,
+            content     = this._content;
+
+        // Remove a previous context menu if it exists, ideally we prolly wanna toggle it.
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 74);
+Y.all('.libbit-context-open').each(function (node) {
+            _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "(anonymous 2)", 74);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 75);
+node.contextMenu.destroy();
+        });
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 78);
+e.preventDefault();
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 80);
+contextMenu = new Y.Overlay({
+            bodyContent: content,
+            visible: false,
+            constrain: true,
+            zIndex: Y.all('*').size(),
+            render: true
+        });
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 88);
+node.addClass('libbit-context-open');
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 90);
+contextMenu.get('boundingBox').addClass('libbit-context-menu');
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 92);
+contextMenu.get('boundingBox').setStyle('left', e.pageX);
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 93);
+contextMenu.get('boundingBox').setStyle('top', e.pageY);
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 94);
+contextMenu.show();
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 96);
+this._contextMenu = contextMenu;
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 97);
+this._bindContextMenu();
+    },
+
+    _bindContextMenu: function () {
+        _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "_bindContextMenu", 100);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 101);
+var self         = this,
+            node         = this._node,
+            contextMenu  = this._contextMenu;
+
+        // Bind the menu events
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 106);
+contextMenu.get('boundingBox').all('a').each(function() {
+            _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "(anonymous 3)", 106);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 107);
+this.on(['click', 'contextmenu'], function (e) {
+                _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "(anonymous 4)", 107);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 108);
+var target = e.currentTarget,
+                    args = { node: node };
+
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 111);
+e.preventDefault();
+
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 113);
+if (target.hasClass('disabled') !== true) {
+                    _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 114);
+if (self.data !== null) {
+                        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 115);
+args.data = self.data;
+                    }
+
+                    _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 118);
+self.fire(target.getAttribute('data-id'), args);
+
+                    _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 120);
+contextMenu.destroy();
+                } else {
+                    _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 122);
+target.blur();
+                }
+            });
+        });
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 127);
+contextMenu.get('boundingBox').all('li').on('mouseenter', function (e) {
+            _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "(anonymous 5)", 127);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 128);
+var node = e.currentTarget;
+
+            _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 130);
+if (node.one('i')) {
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 131);
+node.one('i').addClass('icon-white');
+            }
+        });
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 135);
+contextMenu.get('boundingBox').all('li').on('mouseleave', function (e) {
+            _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "(anonymous 6)", 135);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 136);
+var node = e.currentTarget;
+
+            _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 138);
+if (node.one('i') && node.one('i').hasClass('icon-white')) {
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 139);
+node.one('i').removeClass('icon-white');
+            }
+        });
+
+        _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 143);
+contextMenu.get('boundingBox').on('clickoutside', function (e) {
+            // Dont allow the rightclick mousebutton to hide the contextMenu
+            // In some cases a browser (tested on FF17) will fire false positives and
+            // immediately hide the contextmenu again.
+            _yuitest_coverfunc("build/libbit-contextmenu/libbit-contextmenu.js", "(anonymous 7)", 143);
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 147);
+if (e.button !== 3) {
+                _yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 148);
+contextMenu.destroy();
+            }
+        });
+    }
+
+}, {
+    NS : 'contextMenu',
+    ATTRS : {}
+});
+
+// -- Namespace ----------------------------------------------------------------
+_yuitest_coverline("build/libbit-contextmenu/libbit-contextmenu.js", 159);
+Y.namespace('Libbit').ContextMenu = ContextMenu;
+
+
+}, '1.0.0', {"requires": ["base", "panel", "plugin", "widget", "overlay"]});

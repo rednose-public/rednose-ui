@@ -1,6 +1,194 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-grid-select/libbit-grid-select.js']) {
-   __coverage__['build/libbit-grid-select/libbit-grid-select.js'] = {"path":"build/libbit-grid-select/libbit-grid-select.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":30},"end":{"line":1,"column":49}}},"2":{"name":"(anonymous_2)","line":8,"loc":{"start":{"line":8,"column":13},"end":{"line":8,"column":25}}},"3":{"name":"(anonymous_3)","line":31,"loc":{"start":{"line":31,"column":17},"end":{"line":31,"column":29}}},"4":{"name":"(anonymous_4)","line":38,"loc":{"start":{"line":38,"column":12},"end":{"line":38,"column":27}}},"5":{"name":"(anonymous_5)","line":45,"loc":{"start":{"line":45,"column":20},"end":{"line":45,"column":32}}},"6":{"name":"(anonymous_6)","line":56,"loc":{"start":{"line":56,"column":11},"end":{"line":56,"column":23}}},"7":{"name":"(anonymous_7)","line":67,"loc":{"start":{"line":67,"column":18},"end":{"line":67,"column":31}}},"8":{"name":"(anonymous_8)","line":75,"loc":{"start":{"line":75,"column":30},"end":{"line":75,"column":43}}},"9":{"name":"(anonymous_9)","line":103,"loc":{"start":{"line":103,"column":27},"end":{"line":103,"column":43}}},"10":{"name":"(anonymous_10)","line":110,"loc":{"start":{"line":110,"column":27},"end":{"line":110,"column":44}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":124,"column":12}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":15}},"3":{"start":{"line":8,"column":0},"end":{"line":8,"column":28}},"4":{"start":{"line":10,"column":0},"end":{"line":24,"column":2}},"5":{"start":{"line":26,"column":0},"end":{"line":118,"column":2}},"6":{"start":{"line":32,"column":8},"end":{"line":32,"column":30}},"7":{"start":{"line":39,"column":8},"end":{"line":39,"column":31}},"8":{"start":{"line":46,"column":8},"end":{"line":46,"column":48}},"9":{"start":{"line":48,"column":8},"end":{"line":50,"column":9}},"10":{"start":{"line":49,"column":12},"end":{"line":49,"column":25}},"11":{"start":{"line":57,"column":8},"end":{"line":57,"column":48}},"12":{"start":{"line":59,"column":8},"end":{"line":59,"column":92}},"13":{"start":{"line":60,"column":8},"end":{"line":60,"column":78}},"14":{"start":{"line":68,"column":8},"end":{"line":68,"column":50}},"15":{"start":{"line":76,"column":8},"end":{"line":79,"column":18}},"16":{"start":{"line":82,"column":8},"end":{"line":84,"column":9}},"17":{"start":{"line":83,"column":12},"end":{"line":83,"column":25}},"18":{"start":{"line":87,"column":8},"end":{"line":87,"column":92}},"19":{"start":{"line":90,"column":8},"end":{"line":97,"column":9}},"20":{"start":{"line":91,"column":12},"end":{"line":91,"column":54}},"21":{"start":{"line":93,"column":12},"end":{"line":93,"column":53}},"22":{"start":{"line":96,"column":12},"end":{"line":96,"column":50}},"23":{"start":{"line":106,"column":8},"end":{"line":108,"column":29}},"24":{"start":{"line":110,"column":8},"end":{"line":114,"column":11}},"25":{"start":{"line":111,"column":12},"end":{"line":113,"column":13}},"26":{"start":{"line":112,"column":16},"end":{"line":112,"column":30}},"27":{"start":{"line":116,"column":8},"end":{"line":116,"column":21}},"28":{"start":{"line":121,"column":0},"end":{"line":121,"column":51}}},"branchMap":{"1":{"line":48,"type":"if","locations":[{"start":{"line":48,"column":8},"end":{"line":48,"column":8}},{"start":{"line":48,"column":8},"end":{"line":48,"column":8}}]},"2":{"line":82,"type":"if","locations":[{"start":{"line":82,"column":8},"end":{"line":82,"column":8}},{"start":{"line":82,"column":8},"end":{"line":82,"column":8}}]},"3":{"line":90,"type":"if","locations":[{"start":{"line":90,"column":8},"end":{"line":90,"column":8}},{"start":{"line":90,"column":8},"end":{"line":90,"column":8}}]},"4":{"line":111,"type":"if","locations":[{"start":{"line":111,"column":12},"end":{"line":111,"column":12}},{"start":{"line":111,"column":12},"end":{"line":111,"column":12}}]}},"code":["(function () { YUI.add('libbit-grid-select', function (Y, NAME) {","","var Selectable;","","/**"," * Y.Libbit.Grid widget extension to support selection of grid items"," */","Selectable = function () {};","","Selectable.ATTRS = {","    /**","     * Config property, enable selection for this Grid instance","     */","    selectable: {","        value: false","    },","","    /**","     * The item currently selected.","     */","    selectedItem : {","        value: null","    }","};","","Selectable.prototype = {","","    /**","     * Initializer, gets called upon instance initiation.","     */","    initializer: function () {","        this._setSelectable();","    },","","    /**","    * Programmaticly select a grid item","    **/","    select: function(node) {","        node.simulate('click');","    },","","    /**","     * Setter.","     */","    _setSelectable: function () {","        var selectable = this.get('selectable');","","        if (selectable) {","            this._bind();","        }","    },","","    /**","     * Bind the click events and set up a listener for the selectedItem attribute.","     */","    _bind: function () {","        var contentBox = this.get('contentBox');","","        contentBox.delegate('click', this._handleClick, '.model-grid-icon-container', this);","        this.after('selectedItemChange', this._afterSelectedItemChange, this);","    },","","    /**","     * Handles the item click event, and updates the selectedItem attribute,","     * which fires an event on change.","     */","    _handleClick: function (e) {","        this.set('selectedItem', e.currentTarget);","    },","","    /**","     * The selection changed, update the DOM and fire an event containing","     * the model that was selected.","     */","    _afterSelectedItemChange: function (e) {","        var contentBox = this.get('contentBox'),","            node       = e.newVal,","            oldNode    = e.prevVal,","            model;","","        // Cancel if the selection did not change.","        if (node === oldNode) {","            return false;","        }","","        // Remove earlier selections.","        contentBox.all('.model-grid-item-selected').removeClass('model-grid-item-selected');","","        // Apply the CSS to the new selection and fire an event.","        if (Y.Lang.isNull(node) === false) {","            node.addClass('model-grid-item-selected');","","            model = this._getModelFromGridItem(node);","","            // Fires the select event and passes along the needed information.","            this.fire('select', { model: model });","        }","    },","","    /**","     * Parse an HTML node and retrieve the corresponding model from the model list.","     */","    _getModelFromGridItem: function (node) {","        // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),","        // for example 'image_1'.","        var id        = node.ancestor('.model-grid-container').getAttribute('data-yui3-record'),","            data      = this.get('data'),","            found     = null;","","        Y.Array.each(data, function (model) {","            if (model.get('clientId') === id) {","                found = model;","            }","        });","","        return found;","    }","};","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.Grid').Selectable = Selectable;","","","}, '1.0.0');","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_EwUjxK1HbPIrLSEtwZJsvg = __coverage__['build/libbit-grid-select/libbit-grid-select.js'];
-__cov_EwUjxK1HbPIrLSEtwZJsvg.s['1']++;YUI.add('libbit-grid-select',function(Y,NAME){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['1']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['2']++;var Selectable;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['3']++;Selectable=function(){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['2']++;};__cov_EwUjxK1HbPIrLSEtwZJsvg.s['4']++;Selectable.ATTRS={selectable:{value:false},selectedItem:{value:null}};__cov_EwUjxK1HbPIrLSEtwZJsvg.s['5']++;Selectable.prototype={initializer:function(){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['3']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['6']++;this._setSelectable();},select:function(node){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['4']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['7']++;node.simulate('click');},_setSelectable:function(){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['5']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['8']++;var selectable=this.get('selectable');__cov_EwUjxK1HbPIrLSEtwZJsvg.s['9']++;if(selectable){__cov_EwUjxK1HbPIrLSEtwZJsvg.b['1'][0]++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['10']++;this._bind();}else{__cov_EwUjxK1HbPIrLSEtwZJsvg.b['1'][1]++;}},_bind:function(){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['6']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['11']++;var contentBox=this.get('contentBox');__cov_EwUjxK1HbPIrLSEtwZJsvg.s['12']++;contentBox.delegate('click',this._handleClick,'.model-grid-icon-container',this);__cov_EwUjxK1HbPIrLSEtwZJsvg.s['13']++;this.after('selectedItemChange',this._afterSelectedItemChange,this);},_handleClick:function(e){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['7']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['14']++;this.set('selectedItem',e.currentTarget);},_afterSelectedItemChange:function(e){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['8']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['15']++;var contentBox=this.get('contentBox'),node=e.newVal,oldNode=e.prevVal,model;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['16']++;if(node===oldNode){__cov_EwUjxK1HbPIrLSEtwZJsvg.b['2'][0]++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['17']++;return false;}else{__cov_EwUjxK1HbPIrLSEtwZJsvg.b['2'][1]++;}__cov_EwUjxK1HbPIrLSEtwZJsvg.s['18']++;contentBox.all('.model-grid-item-selected').removeClass('model-grid-item-selected');__cov_EwUjxK1HbPIrLSEtwZJsvg.s['19']++;if(Y.Lang.isNull(node)===false){__cov_EwUjxK1HbPIrLSEtwZJsvg.b['3'][0]++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['20']++;node.addClass('model-grid-item-selected');__cov_EwUjxK1HbPIrLSEtwZJsvg.s['21']++;model=this._getModelFromGridItem(node);__cov_EwUjxK1HbPIrLSEtwZJsvg.s['22']++;this.fire('select',{model:model});}else{__cov_EwUjxK1HbPIrLSEtwZJsvg.b['3'][1]++;}},_getModelFromGridItem:function(node){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['9']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['23']++;var id=node.ancestor('.model-grid-container').getAttribute('data-yui3-record'),data=this.get('data'),found=null;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['24']++;Y.Array.each(data,function(model){__cov_EwUjxK1HbPIrLSEtwZJsvg.f['10']++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['25']++;if(model.get('clientId')===id){__cov_EwUjxK1HbPIrLSEtwZJsvg.b['4'][0]++;__cov_EwUjxK1HbPIrLSEtwZJsvg.s['26']++;found=model;}else{__cov_EwUjxK1HbPIrLSEtwZJsvg.b['4'][1]++;}});__cov_EwUjxK1HbPIrLSEtwZJsvg.s['27']++;return found;}};__cov_EwUjxK1HbPIrLSEtwZJsvg.s['28']++;Y.namespace('Libbit.Grid').Selectable=Selectable;},'1.0.0');
+_yuitest_coverage["build/libbit-grid-select/libbit-grid-select.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-grid-select/libbit-grid-select.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-grid-select/libbit-grid-select.js"].code=["YUI.add('libbit-grid-select', function (Y, NAME) {","","var Selectable;","","/**"," * Y.Libbit.Grid widget extension to support selection of grid items"," */","Selectable = function () {};","","Selectable.ATTRS = {","    /**","     * Config property, enable selection for this Grid instance","     */","    selectable: {","        value: false","    },","","    /**","     * The item currently selected.","     */","    selectedItem : {","        value: null","    }","};","","Selectable.prototype = {","","    /**","     * Initializer, gets called upon instance initiation.","     */","    initializer: function () {","        this._setSelectable();","    },","","    /**","    * Programmaticly select a grid item","    **/","    select: function(node) {","        node.simulate('click');","    },","","    /**","     * Setter.","     */","    _setSelectable: function () {","        var selectable = this.get('selectable');","","        if (selectable) {","            this._bind();","        }","    },","","    /**","     * Bind the click events and set up a listener for the selectedItem attribute.","     */","    _bind: function () {","        var contentBox = this.get('contentBox');","","        contentBox.delegate('click', this._handleClick, '.model-grid-icon-container', this);","        this.after('selectedItemChange', this._afterSelectedItemChange, this);","    },","","    /**","     * Handles the item click event, and updates the selectedItem attribute,","     * which fires an event on change.","     */","    _handleClick: function (e) {","        this.set('selectedItem', e.currentTarget);","    },","","    /**","     * The selection changed, update the DOM and fire an event containing","     * the model that was selected.","     */","    _afterSelectedItemChange: function (e) {","        var contentBox = this.get('contentBox'),","            node       = e.newVal,","            oldNode    = e.prevVal,","            model;","","        // Cancel if the selection did not change.","        if (node === oldNode) {","            return false;","        }","","        // Remove earlier selections.","        contentBox.all('.model-grid-item-selected').removeClass('model-grid-item-selected');","","        // Apply the CSS to the new selection and fire an event.","        if (Y.Lang.isNull(node) === false) {","            node.addClass('model-grid-item-selected');","","            model = this._getModelFromGridItem(node);","","            // Fires the select event and passes along the needed information.","            this.fire('select', { model: model });","        }","    },","","    /**","     * Parse an HTML node and retrieve the corresponding model from the model list.","     */","    _getModelFromGridItem: function (node) {","        // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),","        // for example 'image_1'.","        var id        = node.ancestor('.model-grid-container').getAttribute('data-yui3-record'),","            data      = this.get('data'),","            found     = null;","","        Y.Array.each(data, function (model) {","            if (model.get('clientId') === id) {","                found = model;","            }","        });","","        return found;","    }","};","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit.Grid').Selectable = Selectable;","","","}, '1.0.0');"];
+_yuitest_coverage["build/libbit-grid-select/libbit-grid-select.js"].lines = {"1":0,"3":0,"8":0,"10":0,"26":0,"32":0,"39":0,"46":0,"48":0,"49":0,"57":0,"59":0,"60":0,"68":0,"76":0,"82":0,"83":0,"87":0,"90":0,"91":0,"93":0,"96":0,"106":0,"110":0,"111":0,"112":0,"116":0,"121":0};
+_yuitest_coverage["build/libbit-grid-select/libbit-grid-select.js"].functions = {"initializer:31":0,"select:38":0,"_setSelectable:45":0,"_bind:56":0,"_handleClick:67":0,"_afterSelectedItemChange:75":0,"(anonymous 2):110":0,"_getModelFromGridItem:103":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-grid-select/libbit-grid-select.js"].coveredLines = 28;
+_yuitest_coverage["build/libbit-grid-select/libbit-grid-select.js"].coveredFunctions = 9;
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 1);
+YUI.add('libbit-grid-select', function (Y, NAME) {
+
+_yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 3);
+var Selectable;
+
+/**
+ * Y.Libbit.Grid widget extension to support selection of grid items
+ */
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 8);
+Selectable = function () {};
+
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 10);
+Selectable.ATTRS = {
+    /**
+     * Config property, enable selection for this Grid instance
+     */
+    selectable: {
+        value: false
+    },
+
+    /**
+     * The item currently selected.
+     */
+    selectedItem : {
+        value: null
+    }
+};
+
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 26);
+Selectable.prototype = {
+
+    /**
+     * Initializer, gets called upon instance initiation.
+     */
+    initializer: function () {
+        _yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "initializer", 31);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 32);
+this._setSelectable();
+    },
+
+    /**
+    * Programmaticly select a grid item
+    **/
+    select: function(node) {
+        _yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "select", 38);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 39);
+node.simulate('click');
+    },
+
+    /**
+     * Setter.
+     */
+    _setSelectable: function () {
+        _yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "_setSelectable", 45);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 46);
+var selectable = this.get('selectable');
+
+        _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 48);
+if (selectable) {
+            _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 49);
+this._bind();
+        }
+    },
+
+    /**
+     * Bind the click events and set up a listener for the selectedItem attribute.
+     */
+    _bind: function () {
+        _yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "_bind", 56);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 57);
+var contentBox = this.get('contentBox');
+
+        _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 59);
+contentBox.delegate('click', this._handleClick, '.model-grid-icon-container', this);
+        _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 60);
+this.after('selectedItemChange', this._afterSelectedItemChange, this);
+    },
+
+    /**
+     * Handles the item click event, and updates the selectedItem attribute,
+     * which fires an event on change.
+     */
+    _handleClick: function (e) {
+        _yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "_handleClick", 67);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 68);
+this.set('selectedItem', e.currentTarget);
+    },
+
+    /**
+     * The selection changed, update the DOM and fire an event containing
+     * the model that was selected.
+     */
+    _afterSelectedItemChange: function (e) {
+        _yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "_afterSelectedItemChange", 75);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 76);
+var contentBox = this.get('contentBox'),
+            node       = e.newVal,
+            oldNode    = e.prevVal,
+            model;
+
+        // Cancel if the selection did not change.
+        _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 82);
+if (node === oldNode) {
+            _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 83);
+return false;
+        }
+
+        // Remove earlier selections.
+        _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 87);
+contentBox.all('.model-grid-item-selected').removeClass('model-grid-item-selected');
+
+        // Apply the CSS to the new selection and fire an event.
+        _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 90);
+if (Y.Lang.isNull(node) === false) {
+            _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 91);
+node.addClass('model-grid-item-selected');
+
+            _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 93);
+model = this._getModelFromGridItem(node);
+
+            // Fires the select event and passes along the needed information.
+            _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 96);
+this.fire('select', { model: model });
+        }
+    },
+
+    /**
+     * Parse an HTML node and retrieve the corresponding model from the model list.
+     */
+    _getModelFromGridItem: function (node) {
+        // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),
+        // for example 'image_1'.
+        _yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "_getModelFromGridItem", 103);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 106);
+var id        = node.ancestor('.model-grid-container').getAttribute('data-yui3-record'),
+            data      = this.get('data'),
+            found     = null;
+
+        _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 110);
+Y.Array.each(data, function (model) {
+            _yuitest_coverfunc("build/libbit-grid-select/libbit-grid-select.js", "(anonymous 2)", 110);
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 111);
+if (model.get('clientId') === id) {
+                _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 112);
+found = model;
+            }
+        });
+
+        _yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 116);
+return found;
+    }
+};
+
+// -- Namespace ----------------------------------------------------------------
+_yuitest_coverline("build/libbit-grid-select/libbit-grid-select.js", 121);
+Y.namespace('Libbit.Grid').Selectable = Selectable;
+
+
+}, '1.0.0');

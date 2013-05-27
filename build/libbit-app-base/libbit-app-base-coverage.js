@@ -1,6 +1,254 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-app-base/libbit-app-base.js']) {
-   __coverage__['build/libbit-app-base/libbit-app-base.js'] = {"path":"build/libbit-app-base/libbit-app-base.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0],"18":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":27},"end":{"line":1,"column":46}}},"2":{"name":"(anonymous_2)","line":15,"loc":{"start":{"line":15,"column":17},"end":{"line":15,"column":29}}},"3":{"name":"(anonymous_3)","line":16,"loc":{"start":{"line":16,"column":19},"end":{"line":16,"column":31}}},"4":{"name":"(anonymous_4)","line":23,"loc":{"start":{"line":23,"column":14},"end":{"line":23,"column":26}}},"5":{"name":"(anonymous_5)","line":32,"loc":{"start":{"line":32,"column":14},"end":{"line":32,"column":57}}},"6":{"name":"(anonymous_6)","line":44,"loc":{"start":{"line":44,"column":37},"end":{"line":44,"column":49}}},"7":{"name":"(anonymous_7)","line":56,"loc":{"start":{"line":56,"column":17},"end":{"line":56,"column":33}}},"8":{"name":"(anonymous_8)","line":95,"loc":{"start":{"line":95,"column":17},"end":{"line":95,"column":42}}},"9":{"name":"(anonymous_9)","line":141,"loc":{"start":{"line":141,"column":18},"end":{"line":141,"column":30}}},"10":{"name":"(anonymous_10)","line":145,"loc":{"start":{"line":145,"column":18},"end":{"line":145,"column":30}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":163,"column":3}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":8}},"3":{"start":{"line":8,"column":0},"end":{"line":138,"column":3}},"4":{"start":{"line":16,"column":8},"end":{"line":20,"column":33}},"5":{"start":{"line":17,"column":12},"end":{"line":19,"column":13}},"6":{"start":{"line":18,"column":16},"end":{"line":18,"column":40}},"7":{"start":{"line":24,"column":8},"end":{"line":26,"column":9}},"8":{"start":{"line":25,"column":12},"end":{"line":25,"column":37}},"9":{"start":{"line":33,"column":8},"end":{"line":34,"column":46}},"10":{"start":{"line":36,"column":8},"end":{"line":39,"column":9}},"11":{"start":{"line":37,"column":12},"end":{"line":37,"column":36}},"12":{"start":{"line":38,"column":12},"end":{"line":38,"column":39}},"13":{"start":{"line":41,"column":8},"end":{"line":50,"column":9}},"14":{"start":{"line":42,"column":12},"end":{"line":42,"column":30}},"15":{"start":{"line":44,"column":12},"end":{"line":47,"column":15}},"16":{"start":{"line":45,"column":16},"end":{"line":45,"column":34}},"17":{"start":{"line":46,"column":16},"end":{"line":46,"column":89}},"18":{"start":{"line":49,"column":12},"end":{"line":49,"column":85}},"19":{"start":{"line":57,"column":8},"end":{"line":59,"column":9}},"20":{"start":{"line":58,"column":12},"end":{"line":58,"column":19}},"21":{"start":{"line":61,"column":8},"end":{"line":65,"column":9}},"22":{"start":{"line":62,"column":12},"end":{"line":62,"column":36}},"23":{"start":{"line":64,"column":12},"end":{"line":64,"column":19}},"24":{"start":{"line":67,"column":8},"end":{"line":67,"column":52}},"25":{"start":{"line":69,"column":8},"end":{"line":87,"column":9}},"26":{"start":{"line":70,"column":12},"end":{"line":70,"column":26}},"27":{"start":{"line":75,"column":12},"end":{"line":75,"column":41}},"28":{"start":{"line":81,"column":12},"end":{"line":81,"column":58}},"29":{"start":{"line":84,"column":12},"end":{"line":86,"column":13}},"30":{"start":{"line":85,"column":16},"end":{"line":85,"column":41}},"31":{"start":{"line":89,"column":8},"end":{"line":89,"column":32}},"32":{"start":{"line":96,"column":8},"end":{"line":98,"column":9}},"33":{"start":{"line":97,"column":12},"end":{"line":97,"column":19}},"34":{"start":{"line":100,"column":8},"end":{"line":101,"column":54}},"35":{"start":{"line":104,"column":8},"end":{"line":104,"column":29}},"36":{"start":{"line":107,"column":8},"end":{"line":109,"column":9}},"37":{"start":{"line":108,"column":12},"end":{"line":108,"column":37}},"38":{"start":{"line":117,"column":8},"end":{"line":119,"column":9}},"39":{"start":{"line":118,"column":12},"end":{"line":118,"column":40}},"40":{"start":{"line":121,"column":8},"end":{"line":136,"column":9}},"41":{"start":{"line":122,"column":12},"end":{"line":130,"column":15}},"42":{"start":{"line":132,"column":12},"end":{"line":132,"column":83}},"43":{"start":{"line":135,"column":12},"end":{"line":135,"column":81}},"44":{"start":{"line":141,"column":0},"end":{"line":143,"column":2}},"45":{"start":{"line":142,"column":4},"end":{"line":142,"column":79}},"46":{"start":{"line":145,"column":0},"end":{"line":147,"column":2}},"47":{"start":{"line":146,"column":4},"end":{"line":146,"column":38}},"48":{"start":{"line":150,"column":0},"end":{"line":150,"column":32}}},"branchMap":{"1":{"line":17,"type":"if","locations":[{"start":{"line":17,"column":12},"end":{"line":17,"column":12}},{"start":{"line":17,"column":12},"end":{"line":17,"column":12}}]},"2":{"line":17,"type":"binary-expr","locations":[{"start":{"line":17,"column":17},"end":{"line":17,"column":43}},{"start":{"line":17,"column":48},"end":{"line":17,"column":95}}]},"3":{"line":24,"type":"if","locations":[{"start":{"line":24,"column":8},"end":{"line":24,"column":8}},{"start":{"line":24,"column":8},"end":{"line":24,"column":8}}]},"4":{"line":24,"type":"binary-expr","locations":[{"start":{"line":24,"column":13},"end":{"line":24,"column":39}},{"start":{"line":24,"column":44},"end":{"line":24,"column":92}}]},"5":{"line":36,"type":"if","locations":[{"start":{"line":36,"column":8},"end":{"line":36,"column":8}},{"start":{"line":36,"column":8},"end":{"line":36,"column":8}}]},"6":{"line":36,"type":"binary-expr","locations":[{"start":{"line":36,"column":12},"end":{"line":36,"column":26}},{"start":{"line":36,"column":31},"end":{"line":36,"column":53}},{"start":{"line":36,"column":57},"end":{"line":36,"column":103}}]},"7":{"line":37,"type":"binary-expr","locations":[{"start":{"line":37,"column":22},"end":{"line":37,"column":29}},{"start":{"line":37,"column":33},"end":{"line":37,"column":35}}]},"8":{"line":41,"type":"if","locations":[{"start":{"line":41,"column":8},"end":{"line":41,"column":8}},{"start":{"line":41,"column":8},"end":{"line":41,"column":8}}]},"9":{"line":57,"type":"if","locations":[{"start":{"line":57,"column":8},"end":{"line":57,"column":8}},{"start":{"line":57,"column":8},"end":{"line":57,"column":8}}]},"10":{"line":61,"type":"if","locations":[{"start":{"line":61,"column":8},"end":{"line":61,"column":8}},{"start":{"line":61,"column":8},"end":{"line":61,"column":8}}]},"11":{"line":67,"type":"binary-expr","locations":[{"start":{"line":67,"column":23},"end":{"line":67,"column":45}},{"start":{"line":67,"column":49},"end":{"line":67,"column":51}}]},"12":{"line":69,"type":"if","locations":[{"start":{"line":69,"column":8},"end":{"line":69,"column":8}},{"start":{"line":69,"column":8},"end":{"line":69,"column":8}}]},"13":{"line":84,"type":"if","locations":[{"start":{"line":84,"column":12},"end":{"line":84,"column":12}},{"start":{"line":84,"column":12},"end":{"line":84,"column":12}}]},"14":{"line":96,"type":"if","locations":[{"start":{"line":96,"column":8},"end":{"line":96,"column":8}},{"start":{"line":96,"column":8},"end":{"line":96,"column":8}}]},"15":{"line":107,"type":"if","locations":[{"start":{"line":107,"column":8},"end":{"line":107,"column":8}},{"start":{"line":107,"column":8},"end":{"line":107,"column":8}}]},"16":{"line":117,"type":"if","locations":[{"start":{"line":117,"column":8},"end":{"line":117,"column":8}},{"start":{"line":117,"column":8},"end":{"line":117,"column":8}}]},"17":{"line":121,"type":"if","locations":[{"start":{"line":121,"column":8},"end":{"line":121,"column":8}},{"start":{"line":121,"column":8},"end":{"line":121,"column":8}}]},"18":{"line":135,"type":"cond-expr","locations":[{"start":{"line":135,"column":36},"end":{"line":135,"column":45}},{"start":{"line":135,"column":48},"end":{"line":135,"column":56}}]}},"code":["(function () { YUI.add('libbit-app-base', function (Y, NAME) {","","var App;","","/**"," *Extension of the original Y.App, to provide support for modal views."," */","App = Y.Base.create('libbit-app', Y.App, [], {","","    /**","     * Stores the Panel instances to manage the active modal views.","     */","    _activePanel: null,","","    initializer: function () {","        Y.Do.after(function () {","            if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {","                window.parent.openApp();","            }","        }, this, 'render', this);","    },","","    closeApp: function () {","        if ((window.self !== window.top) && typeof (window.parent.closeApp() === 'function')) {","            window.parent.closeApp();","        }","    },","","    /**","     * Override the superclass method to check if this view needs to be lazyloaded first.","     */","    showView: function (view, config, options, callback) {","        var self     = this,","            viewInfo = this.getViewInfo(view);","","        if (viewInfo.modal || (this.get('activeView') && this.getViewInfo(this.get('activeView')).modal) ) {","            options = options || {};","            options.transition = false;","        }","","        if (viewInfo.lazyload) {","            App.showSpinner();","            // Attach to the global Y object, this needs to be set (var Y = YUI();).","            Y.use(viewInfo.lazyload, function () {","                App.hideSpinner();","                App.superclass.showView.apply(self, [ view, config, options, callback ]);","            });","        } else {","            App.superclass.showView.apply(self, [ view, config, options, callback ]);","        }","    },","","    /**","     * Hook into the view change, to handle modal views.","     */","    _detachView: function (view) {","        if (!view) {","            return;","        }","","        if (this.getViewInfo(this.get('activeView')).modal) {","            view.removeTarget(this);","","            return;","        }","","        var viewInfo = this.getViewInfo(view) || {};","","        if (viewInfo.preserve) {","            view.remove();","            // TODO: Detach events here for preserved Views? It is possible that","            // some event subscriptions are made on elements other than the","            // View's `container`.","        } else {","            view.destroy({remove: true});","","            // TODO: The following should probably happen automagically from","            // `destroy()` being called! Possibly `removeTarget()` as well.","","            // Remove from view to view-info map.","            delete this._viewInfoMap[Y.stamp(view, true)];","","            // Remove from view-info instance property.","            if (view === viewInfo.instance) {","                delete viewInfo.instance;","            }","        }","","        view.removeTarget(this);","    },","","    /**","     * Hook into the view change, to handle modal views.","     */","    _attachView: function (view, prepend) {","        if (!view) {","            return;","        }","","        var viewInfo      = this.getViewInfo(view),","            viewContainer = this.get('viewContainer');","","        // Bubble the view's events to this app.","        view.addTarget(this);","","        // Save the view instance in the `views` registry.","        if (viewInfo) {","            viewInfo.instance = view;","        }","","        // TODO: Attach events here for persevered Views?","        // See related TODO in `_detachView`.","","        // TODO: Actually render the view here so that it gets \"attached\" before","        // it gets rendered?","","        if (this._activePanel) {","            this._activePanel.destroy();","        }","","        if (viewInfo.modal) {","            this._activePanel = new Y.Libbit.Panel({","                srcNode      : view.get('container'),","                centered     : true,","                modal        : true,","                render       : true,","                zIndex       : Y.Object.size(this._viewInfoMap),","                // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.","                hideOn       : []","            });","","            this._activePanel.get('boundingBox').addClass('libbit-app-modal-view');","        } else {","            // Insert view into the DOM.","            viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));","        }","    }","});","","// -- Class methods ------------------------------------------------------------","App.showSpinner = function () {","    Y.one('body').prepend(Y.Node.create('<div class=\"libbit-spinner\"></div>'));","};","","App.hideSpinner = function () {","    Y.all('.libbit-spinner').remove();","};","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').App = App;","","","}, '1.0.0', {","    \"requires\": [","        \"app-base\",","        \"cssgrids\",","        \"event-custom\",","        \"handlebars-base\",","        \"libbit-app-templates\",","        \"libbit-panel\"","    ],","    \"skinnable\": true","});","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_rE0T8abWKv$Yzik9s8XAzQ = __coverage__['build/libbit-app-base/libbit-app-base.js'];
-__cov_rE0T8abWKv$Yzik9s8XAzQ.s['1']++;YUI.add('libbit-app-base',function(Y,NAME){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['1']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['2']++;var App;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['3']++;App=Y.Base.create('libbit-app',Y.App,[],{_activePanel:null,initializer:function(){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['2']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['4']++;Y.Do.after(function(){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['3']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['5']++;if((__cov_rE0T8abWKv$Yzik9s8XAzQ.b['2'][0]++,window.self!==window.top)&&(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['2'][1]++,typeof(window.parent.openApp()==='function'))){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['1'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['6']++;window.parent.openApp();}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['1'][1]++;}},this,'render',this);},closeApp:function(){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['4']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['7']++;if((__cov_rE0T8abWKv$Yzik9s8XAzQ.b['4'][0]++,window.self!==window.top)&&(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['4'][1]++,typeof(window.parent.closeApp()==='function'))){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['3'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['8']++;window.parent.closeApp();}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['3'][1]++;}},showView:function(view,config,options,callback){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['5']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['9']++;var self=this,viewInfo=this.getViewInfo(view);__cov_rE0T8abWKv$Yzik9s8XAzQ.s['10']++;if((__cov_rE0T8abWKv$Yzik9s8XAzQ.b['6'][0]++,viewInfo.modal)||(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['6'][1]++,this.get('activeView'))&&(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['6'][2]++,this.getViewInfo(this.get('activeView')).modal)){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['5'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['11']++;options=(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['7'][0]++,options)||(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['7'][1]++,{});__cov_rE0T8abWKv$Yzik9s8XAzQ.s['12']++;options.transition=false;}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['5'][1]++;}__cov_rE0T8abWKv$Yzik9s8XAzQ.s['13']++;if(viewInfo.lazyload){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['8'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['14']++;App.showSpinner();__cov_rE0T8abWKv$Yzik9s8XAzQ.s['15']++;Y.use(viewInfo.lazyload,function(){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['6']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['16']++;App.hideSpinner();__cov_rE0T8abWKv$Yzik9s8XAzQ.s['17']++;App.superclass.showView.apply(self,[view,config,options,callback]);});}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['8'][1]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['18']++;App.superclass.showView.apply(self,[view,config,options,callback]);}},_detachView:function(view){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['7']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['19']++;if(!view){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['9'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['20']++;return;}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['9'][1]++;}__cov_rE0T8abWKv$Yzik9s8XAzQ.s['21']++;if(this.getViewInfo(this.get('activeView')).modal){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['10'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['22']++;view.removeTarget(this);__cov_rE0T8abWKv$Yzik9s8XAzQ.s['23']++;return;}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['10'][1]++;}__cov_rE0T8abWKv$Yzik9s8XAzQ.s['24']++;var viewInfo=(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['11'][0]++,this.getViewInfo(view))||(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['11'][1]++,{});__cov_rE0T8abWKv$Yzik9s8XAzQ.s['25']++;if(viewInfo.preserve){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['12'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['26']++;view.remove();}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['12'][1]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['27']++;view.destroy({remove:true});__cov_rE0T8abWKv$Yzik9s8XAzQ.s['28']++;delete this._viewInfoMap[Y.stamp(view,true)];__cov_rE0T8abWKv$Yzik9s8XAzQ.s['29']++;if(view===viewInfo.instance){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['13'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['30']++;delete viewInfo.instance;}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['13'][1]++;}}__cov_rE0T8abWKv$Yzik9s8XAzQ.s['31']++;view.removeTarget(this);},_attachView:function(view,prepend){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['8']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['32']++;if(!view){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['14'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['33']++;return;}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['14'][1]++;}__cov_rE0T8abWKv$Yzik9s8XAzQ.s['34']++;var viewInfo=this.getViewInfo(view),viewContainer=this.get('viewContainer');__cov_rE0T8abWKv$Yzik9s8XAzQ.s['35']++;view.addTarget(this);__cov_rE0T8abWKv$Yzik9s8XAzQ.s['36']++;if(viewInfo){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['15'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['37']++;viewInfo.instance=view;}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['15'][1]++;}__cov_rE0T8abWKv$Yzik9s8XAzQ.s['38']++;if(this._activePanel){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['16'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['39']++;this._activePanel.destroy();}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['16'][1]++;}__cov_rE0T8abWKv$Yzik9s8XAzQ.s['40']++;if(viewInfo.modal){__cov_rE0T8abWKv$Yzik9s8XAzQ.b['17'][0]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['41']++;this._activePanel=new Y.Libbit.Panel({srcNode:view.get('container'),centered:true,modal:true,render:true,zIndex:Y.Object.size(this._viewInfoMap),hideOn:[]});__cov_rE0T8abWKv$Yzik9s8XAzQ.s['42']++;this._activePanel.get('boundingBox').addClass('libbit-app-modal-view');}else{__cov_rE0T8abWKv$Yzik9s8XAzQ.b['17'][1]++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['43']++;viewContainer[prepend?(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['18'][0]++,'prepend'):(__cov_rE0T8abWKv$Yzik9s8XAzQ.b['18'][1]++,'append')](view.get('container'));}}});__cov_rE0T8abWKv$Yzik9s8XAzQ.s['44']++;App.showSpinner=function(){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['9']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['45']++;Y.one('body').prepend(Y.Node.create('<div class="libbit-spinner"></div>'));};__cov_rE0T8abWKv$Yzik9s8XAzQ.s['46']++;App.hideSpinner=function(){__cov_rE0T8abWKv$Yzik9s8XAzQ.f['10']++;__cov_rE0T8abWKv$Yzik9s8XAzQ.s['47']++;Y.all('.libbit-spinner').remove();};__cov_rE0T8abWKv$Yzik9s8XAzQ.s['48']++;Y.namespace('Libbit').App=App;},'1.0.0',{'requires':['app-base','cssgrids','event-custom','handlebars-base','libbit-app-templates','libbit-panel'],'skinnable':true});
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-app-base/libbit-app-base.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].code=["YUI.add('libbit-app-base', function (Y, NAME) {","","var App;","","/**"," *Extension of the original Y.App, to provide support for modal views."," */","App = Y.Base.create('libbit-app', Y.App, [], {","","    /**","     * Stores the Panel instances to manage the active modal views.","     */","    _activePanel: null,","","    initializer: function () {","        Y.Do.after(function () {","            if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {","                window.parent.openApp();","            }","        }, this, 'render', this);","    },","","    closeApp: function () {","        if ((window.self !== window.top) && typeof (window.parent.closeApp() === 'function')) {","            window.parent.closeApp();","        }","    },","","    /**","     * Override the superclass method to check if this view needs to be lazyloaded first.","     */","    showView: function (view, config, options, callback) {","        var self     = this,","            viewInfo = this.getViewInfo(view);","","        if (viewInfo.modal || (this.get('activeView') && this.getViewInfo(this.get('activeView')).modal) ) {","            options = options || {};","            options.transition = false;","        }","","        if (viewInfo.lazyload) {","            App.showSpinner();","            // Attach to the global Y object, this needs to be set (var Y = YUI();).","            Y.use(viewInfo.lazyload, function () {","                App.hideSpinner();","                App.superclass.showView.apply(self, [ view, config, options, callback ]);","            });","        } else {","            App.superclass.showView.apply(self, [ view, config, options, callback ]);","        }","    },","","    /**","     * Hook into the view change, to handle modal views.","     */","    _detachView: function (view) {","        if (!view) {","            return;","        }","","        if (this.getViewInfo(this.get('activeView')).modal) {","            view.removeTarget(this);","","            return;","        }","","        var viewInfo = this.getViewInfo(view) || {};","","        if (viewInfo.preserve) {","            view.remove();","            // TODO: Detach events here for preserved Views? It is possible that","            // some event subscriptions are made on elements other than the","            // View's `container`.","        } else {","            view.destroy({remove: true});","","            // TODO: The following should probably happen automagically from","            // `destroy()` being called! Possibly `removeTarget()` as well.","","            // Remove from view to view-info map.","            delete this._viewInfoMap[Y.stamp(view, true)];","","            // Remove from view-info instance property.","            if (view === viewInfo.instance) {","                delete viewInfo.instance;","            }","        }","","        view.removeTarget(this);","    },","","    /**","     * Hook into the view change, to handle modal views.","     */","    _attachView: function (view, prepend) {","        if (!view) {","            return;","        }","","        var viewInfo      = this.getViewInfo(view),","            viewContainer = this.get('viewContainer');","","        // Bubble the view's events to this app.","        view.addTarget(this);","","        // Save the view instance in the `views` registry.","        if (viewInfo) {","            viewInfo.instance = view;","        }","","        // TODO: Attach events here for persevered Views?","        // See related TODO in `_detachView`.","","        // TODO: Actually render the view here so that it gets \"attached\" before","        // it gets rendered?","","        if (this._activePanel) {","            this._activePanel.destroy();","        }","","        if (viewInfo.modal) {","            this._activePanel = new Y.Libbit.Panel({","                srcNode      : view.get('container'),","                centered     : true,","                modal        : true,","                render       : true,","                zIndex       : Y.Object.size(this._viewInfoMap),","                // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.","                hideOn       : []","            });","","            this._activePanel.get('boundingBox').addClass('libbit-app-modal-view');","        } else {","            // Insert view into the DOM.","            viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));","        }","    }","});","","// -- Class methods ------------------------------------------------------------","App.showSpinner = function () {","    Y.one('body').prepend(Y.Node.create('<div class=\"libbit-spinner\"></div>'));","};","","App.hideSpinner = function () {","    Y.all('.libbit-spinner').remove();","};","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').App = App;","","","}, '1.0.0', {","    \"requires\": [","        \"app-base\",","        \"cssgrids\",","        \"event-custom\",","        \"handlebars-base\",","        \"libbit-app-templates\",","        \"libbit-panel\"","    ],","    \"skinnable\": true","});"];
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].lines = {"1":0,"3":0,"8":0,"16":0,"17":0,"18":0,"24":0,"25":0,"33":0,"36":0,"37":0,"38":0,"41":0,"42":0,"44":0,"45":0,"46":0,"49":0,"57":0,"58":0,"61":0,"62":0,"64":0,"67":0,"69":0,"70":0,"75":0,"81":0,"84":0,"85":0,"89":0,"96":0,"97":0,"100":0,"104":0,"107":0,"108":0,"117":0,"118":0,"121":0,"122":0,"132":0,"135":0,"141":0,"142":0,"145":0,"146":0,"150":0};
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].functions = {"(anonymous 2):16":0,"initializer:15":0,"closeApp:23":0,"(anonymous 3):44":0,"showView:32":0,"_detachView:56":0,"_attachView:95":0,"showSpinner:141":0,"hideSpinner:145":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].coveredLines = 48;
+_yuitest_coverage["build/libbit-app-base/libbit-app-base.js"].coveredFunctions = 10;
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 1);
+YUI.add('libbit-app-base', function (Y, NAME) {
+
+_yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 3);
+var App;
+
+/**
+ *Extension of the original Y.App, to provide support for modal views.
+ */
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 8);
+App = Y.Base.create('libbit-app', Y.App, [], {
+
+    /**
+     * Stores the Panel instances to manage the active modal views.
+     */
+    _activePanel: null,
+
+    initializer: function () {
+        _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "initializer", 15);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 16);
+Y.Do.after(function () {
+            _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "(anonymous 2)", 16);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 17);
+if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {
+                _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 18);
+window.parent.openApp();
+            }
+        }, this, 'render', this);
+    },
+
+    closeApp: function () {
+        _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "closeApp", 23);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 24);
+if ((window.self !== window.top) && typeof (window.parent.closeApp() === 'function')) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 25);
+window.parent.closeApp();
+        }
+    },
+
+    /**
+     * Override the superclass method to check if this view needs to be lazyloaded first.
+     */
+    showView: function (view, config, options, callback) {
+        _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "showView", 32);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 33);
+var self     = this,
+            viewInfo = this.getViewInfo(view);
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 36);
+if (viewInfo.modal || (this.get('activeView') && this.getViewInfo(this.get('activeView')).modal) ) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 37);
+options = options || {};
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 38);
+options.transition = false;
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 41);
+if (viewInfo.lazyload) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 42);
+App.showSpinner();
+            // Attach to the global Y object, this needs to be set (var Y = YUI();).
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 44);
+Y.use(viewInfo.lazyload, function () {
+                _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "(anonymous 3)", 44);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 45);
+App.hideSpinner();
+                _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 46);
+App.superclass.showView.apply(self, [ view, config, options, callback ]);
+            });
+        } else {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 49);
+App.superclass.showView.apply(self, [ view, config, options, callback ]);
+        }
+    },
+
+    /**
+     * Hook into the view change, to handle modal views.
+     */
+    _detachView: function (view) {
+        _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "_detachView", 56);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 57);
+if (!view) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 58);
+return;
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 61);
+if (this.getViewInfo(this.get('activeView')).modal) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 62);
+view.removeTarget(this);
+
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 64);
+return;
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 67);
+var viewInfo = this.getViewInfo(view) || {};
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 69);
+if (viewInfo.preserve) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 70);
+view.remove();
+            // TODO: Detach events here for preserved Views? It is possible that
+            // some event subscriptions are made on elements other than the
+            // View's `container`.
+        } else {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 75);
+view.destroy({remove: true});
+
+            // TODO: The following should probably happen automagically from
+            // `destroy()` being called! Possibly `removeTarget()` as well.
+
+            // Remove from view to view-info map.
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 81);
+delete this._viewInfoMap[Y.stamp(view, true)];
+
+            // Remove from view-info instance property.
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 84);
+if (view === viewInfo.instance) {
+                _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 85);
+delete viewInfo.instance;
+            }
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 89);
+view.removeTarget(this);
+    },
+
+    /**
+     * Hook into the view change, to handle modal views.
+     */
+    _attachView: function (view, prepend) {
+        _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "_attachView", 95);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 96);
+if (!view) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 97);
+return;
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 100);
+var viewInfo      = this.getViewInfo(view),
+            viewContainer = this.get('viewContainer');
+
+        // Bubble the view's events to this app.
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 104);
+view.addTarget(this);
+
+        // Save the view instance in the `views` registry.
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 107);
+if (viewInfo) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 108);
+viewInfo.instance = view;
+        }
+
+        // TODO: Attach events here for persevered Views?
+        // See related TODO in `_detachView`.
+
+        // TODO: Actually render the view here so that it gets "attached" before
+        // it gets rendered?
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 117);
+if (this._activePanel) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 118);
+this._activePanel.destroy();
+        }
+
+        _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 121);
+if (viewInfo.modal) {
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 122);
+this._activePanel = new Y.Libbit.Panel({
+                srcNode      : view.get('container'),
+                centered     : true,
+                modal        : true,
+                render       : true,
+                zIndex       : Y.Object.size(this._viewInfoMap),
+                // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.
+                hideOn       : []
+            });
+
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 132);
+this._activePanel.get('boundingBox').addClass('libbit-app-modal-view');
+        } else {
+            // Insert view into the DOM.
+            _yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 135);
+viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
+        }
+    }
+});
+
+// -- Class methods ------------------------------------------------------------
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 141);
+App.showSpinner = function () {
+    _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "showSpinner", 141);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 142);
+Y.one('body').prepend(Y.Node.create('<div class="libbit-spinner"></div>'));
+};
+
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 145);
+App.hideSpinner = function () {
+    _yuitest_coverfunc("build/libbit-app-base/libbit-app-base.js", "hideSpinner", 145);
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 146);
+Y.all('.libbit-spinner').remove();
+};
+
+// -- Namespace ----------------------------------------------------------------
+_yuitest_coverline("build/libbit-app-base/libbit-app-base.js", 150);
+Y.namespace('Libbit').App = App;
+
+
+}, '1.0.0', {
+    "requires": [
+        "app-base",
+        "cssgrids",
+        "event-custom",
+        "handlebars-base",
+        "libbit-app-templates",
+        "libbit-panel"
+    ],
+    "skinnable": true
+});

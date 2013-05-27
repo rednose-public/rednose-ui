@@ -1,6 +1,49 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-nav-container/libbit-nav-container.js']) {
-   __coverage__['build/libbit-nav-container/libbit-nav-container.js'] = {"path":"build/libbit-nav-container/libbit-nav-container.js","s":{"1":0,"2":0,"3":0,"4":0},"b":{},"f":{"1":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":32},"end":{"line":1,"column":51}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":11,"column":73}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":17}},"3":{"start":{"line":5,"column":0},"end":{"line":5,"column":81}},"4":{"start":{"line":8,"column":0},"end":{"line":8,"column":50}}},"branchMap":{},"code":["(function () { YUI.add('libbit-nav-container', function (Y, NAME) {","","var NavContainer;","","NavContainer = Y.Base.create('nav', Y.Widget, [Y.WidgetStdMod, Y.WidgetButtons]);","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').NavContainer = NavContainer;","","","}, '1.0.0', {\"requires\": [\"widget\", \"widget-buttons\", \"widget-stdmod\"]});","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_VUg$xUM8rvtUXLqeGod4ig = __coverage__['build/libbit-nav-container/libbit-nav-container.js'];
-__cov_VUg$xUM8rvtUXLqeGod4ig.s['1']++;YUI.add('libbit-nav-container',function(Y,NAME){__cov_VUg$xUM8rvtUXLqeGod4ig.f['1']++;__cov_VUg$xUM8rvtUXLqeGod4ig.s['2']++;var NavContainer;__cov_VUg$xUM8rvtUXLqeGod4ig.s['3']++;NavContainer=Y.Base.create('nav',Y.Widget,[Y.WidgetStdMod,Y.WidgetButtons]);__cov_VUg$xUM8rvtUXLqeGod4ig.s['4']++;Y.namespace('Libbit').NavContainer=NavContainer;},'1.0.0',{'requires':['widget','widget-buttons','widget-stdmod']});
+_yuitest_coverage["build/libbit-nav-container/libbit-nav-container.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-nav-container/libbit-nav-container.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-nav-container/libbit-nav-container.js"].code=["YUI.add('libbit-nav-container', function (Y, NAME) {","","var NavContainer;","","NavContainer = Y.Base.create('nav', Y.Widget, [Y.WidgetStdMod, Y.WidgetButtons]);","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').NavContainer = NavContainer;","","","}, '1.0.0', {\"requires\": [\"widget\", \"widget-buttons\", \"widget-stdmod\"]});"];
+_yuitest_coverage["build/libbit-nav-container/libbit-nav-container.js"].lines = {"1":0,"3":0,"5":0,"8":0};
+_yuitest_coverage["build/libbit-nav-container/libbit-nav-container.js"].functions = {"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-nav-container/libbit-nav-container.js"].coveredLines = 4;
+_yuitest_coverage["build/libbit-nav-container/libbit-nav-container.js"].coveredFunctions = 1;
+_yuitest_coverline("build/libbit-nav-container/libbit-nav-container.js", 1);
+YUI.add('libbit-nav-container', function (Y, NAME) {
+
+_yuitest_coverfunc("build/libbit-nav-container/libbit-nav-container.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-nav-container/libbit-nav-container.js", 3);
+var NavContainer;
+
+_yuitest_coverline("build/libbit-nav-container/libbit-nav-container.js", 5);
+NavContainer = Y.Base.create('nav', Y.Widget, [Y.WidgetStdMod, Y.WidgetButtons]);
+
+// -- Namespace ----------------------------------------------------------------
+_yuitest_coverline("build/libbit-nav-container/libbit-nav-container.js", 8);
+Y.namespace('Libbit').NavContainer = NavContainer;
+
+
+}, '1.0.0', {"requires": ["widget", "widget-buttons", "widget-stdmod"]});

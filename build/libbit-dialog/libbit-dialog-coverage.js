@@ -1,6 +1,389 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-dialog/libbit-dialog.js']) {
-   __coverage__['build/libbit-dialog/libbit-dialog.js'] = {"path":"build/libbit-dialog/libbit-dialog.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0,"35":0,"36":0,"37":0,"38":0,"39":0,"40":0,"41":0,"42":0,"43":0,"44":0,"45":0,"46":0,"47":0,"48":0,"49":0,"50":0,"51":0,"52":0,"53":0,"54":0,"55":0,"56":0,"57":0,"58":0,"59":0,"60":0,"61":0,"62":0,"63":0,"64":0,"65":0,"66":0,"67":0,"68":0,"69":0,"70":0,"71":0,"72":0,"73":0,"74":0,"75":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0],"9":[0,0],"10":[0,0],"11":[0,0],"12":[0,0],"13":[0,0],"14":[0,0],"15":[0,0],"16":[0,0],"17":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":25},"end":{"line":1,"column":44}}},"2":{"name":"(anonymous_2)","line":7,"loc":{"start":{"line":7,"column":17},"end":{"line":7,"column":29}}},"3":{"name":"(anonymous_3)","line":16,"loc":{"start":{"line":16,"column":15},"end":{"line":16,"column":28}}},"4":{"name":"(anonymous_4)","line":22,"loc":{"start":{"line":22,"column":38},"end":{"line":22,"column":54}}},"5":{"name":"(anonymous_5)","line":44,"loc":{"start":{"line":44,"column":10},"end":{"line":44,"column":21}}},"6":{"name":"(anonymous_6)","line":48,"loc":{"start":{"line":48,"column":12},"end":{"line":48,"column":87}}},"7":{"name":"(anonymous_7)","line":91,"loc":{"start":{"line":91,"column":29},"end":{"line":91,"column":41}}},"8":{"name":"(anonymous_8)","line":99,"loc":{"start":{"line":99,"column":29},"end":{"line":99,"column":41}}},"9":{"name":"(anonymous_9)","line":113,"loc":{"start":{"line":113,"column":54},"end":{"line":113,"column":66}}},"10":{"name":"(anonymous_10)","line":128,"loc":{"start":{"line":128,"column":58},"end":{"line":128,"column":69}}},"11":{"name":"(anonymous_11)","line":135,"loc":{"start":{"line":135,"column":13},"end":{"line":135,"column":70}}},"12":{"name":"(anonymous_12)","line":157,"loc":{"start":{"line":157,"column":29},"end":{"line":157,"column":41}}},"13":{"name":"(anonymous_13)","line":165,"loc":{"start":{"line":165,"column":29},"end":{"line":165,"column":41}}},"14":{"name":"(anonymous_14)","line":178,"loc":{"start":{"line":178,"column":58},"end":{"line":178,"column":69}}},"15":{"name":"(anonymous_15)","line":185,"loc":{"start":{"line":185,"column":11},"end":{"line":185,"column":46}}},"16":{"name":"(anonymous_16)","line":211,"loc":{"start":{"line":211,"column":29},"end":{"line":211,"column":41}}},"17":{"name":"(anonymous_17)","line":221,"loc":{"start":{"line":221,"column":58},"end":{"line":221,"column":69}}},"18":{"name":"(anonymous_18)","line":235,"loc":{"start":{"line":235,"column":17},"end":{"line":235,"column":74}}},"19":{"name":"(anonymous_19)","line":241,"loc":{"start":{"line":241,"column":15},"end":{"line":241,"column":50}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":262,"column":3}},"2":{"start":{"line":3,"column":0},"end":{"line":3,"column":11}},"3":{"start":{"line":5,"column":0},"end":{"line":233,"column":3}},"4":{"start":{"line":9,"column":8},"end":{"line":9,"column":56}},"5":{"start":{"line":17,"column":8},"end":{"line":19,"column":18}},"6":{"start":{"line":22,"column":8},"end":{"line":28,"column":11}},"7":{"start":{"line":23,"column":12},"end":{"line":25,"column":13}},"8":{"start":{"line":24,"column":16},"end":{"line":24,"column":42}},"9":{"start":{"line":27,"column":12},"end":{"line":27,"column":45}},"10":{"start":{"line":31,"column":8},"end":{"line":31,"column":57}},"11":{"start":{"line":32,"column":8},"end":{"line":32,"column":59}},"12":{"start":{"line":34,"column":8},"end":{"line":36,"column":9}},"13":{"start":{"line":35,"column":12},"end":{"line":35,"column":100}},"14":{"start":{"line":38,"column":8},"end":{"line":38,"column":22}},"15":{"start":{"line":45,"column":8},"end":{"line":45,"column":36}},"16":{"start":{"line":49,"column":8},"end":{"line":50,"column":18}},"17":{"start":{"line":52,"column":8},"end":{"line":52,"column":75}},"18":{"start":{"line":54,"column":8},"end":{"line":56,"column":9}},"19":{"start":{"line":55,"column":12},"end":{"line":55,"column":28}},"20":{"start":{"line":58,"column":8},"end":{"line":80,"column":9}},"21":{"start":{"line":59,"column":12},"end":{"line":63,"column":13}},"22":{"start":{"line":60,"column":16},"end":{"line":60,"column":52}},"23":{"start":{"line":62,"column":16},"end":{"line":62,"column":37}},"24":{"start":{"line":65,"column":12},"end":{"line":65,"column":85}},"25":{"start":{"line":66,"column":12},"end":{"line":66,"column":31}},"26":{"start":{"line":68,"column":12},"end":{"line":68,"column":113}},"27":{"start":{"line":70,"column":12},"end":{"line":78,"column":14}},"28":{"start":{"line":79,"column":12},"end":{"line":79,"column":48}},"29":{"start":{"line":82,"column":8},"end":{"line":110,"column":20}},"30":{"start":{"line":92,"column":24},"end":{"line":92,"column":40}},"31":{"start":{"line":100,"column":24},"end":{"line":104,"column":25}},"32":{"start":{"line":101,"column":28},"end":{"line":103,"column":29}},"33":{"start":{"line":102,"column":32},"end":{"line":102,"column":48}},"34":{"start":{"line":112,"column":8},"end":{"line":112,"column":59}},"35":{"start":{"line":113,"column":8},"end":{"line":125,"column":11}},"36":{"start":{"line":114,"column":12},"end":{"line":124,"column":13}},"37":{"start":{"line":115,"column":16},"end":{"line":115,"column":51}},"38":{"start":{"line":117,"column":16},"end":{"line":123,"column":17}},"39":{"start":{"line":118,"column":20},"end":{"line":118,"column":51}},"40":{"start":{"line":120,"column":20},"end":{"line":122,"column":21}},"41":{"start":{"line":121,"column":24},"end":{"line":121,"column":49}},"42":{"start":{"line":127,"column":8},"end":{"line":127,"column":59}},"43":{"start":{"line":128,"column":8},"end":{"line":130,"column":11}},"44":{"start":{"line":129,"column":12},"end":{"line":129,"column":79}},"45":{"start":{"line":132,"column":8},"end":{"line":132,"column":33}},"46":{"start":{"line":136,"column":8},"end":{"line":137,"column":18}},"47":{"start":{"line":139,"column":8},"end":{"line":139,"column":67}},"48":{"start":{"line":140,"column":8},"end":{"line":140,"column":75}},"49":{"start":{"line":142,"column":8},"end":{"line":145,"column":10}},"50":{"start":{"line":147,"column":8},"end":{"line":175,"column":20}},"51":{"start":{"line":158,"column":24},"end":{"line":158,"column":40}},"52":{"start":{"line":166,"column":24},"end":{"line":168,"column":25}},"53":{"start":{"line":167,"column":28},"end":{"line":167,"column":39}},"54":{"start":{"line":169,"column":24},"end":{"line":169,"column":40}},"55":{"start":{"line":177,"column":8},"end":{"line":177,"column":59}},"56":{"start":{"line":178,"column":8},"end":{"line":180,"column":11}},"57":{"start":{"line":179,"column":12},"end":{"line":179,"column":79}},"58":{"start":{"line":182,"column":8},"end":{"line":182,"column":33}},"59":{"start":{"line":186,"column":8},"end":{"line":187,"column":18}},"60":{"start":{"line":189,"column":8},"end":{"line":199,"column":9}},"61":{"start":{"line":190,"column":12},"end":{"line":193,"column":14}},"62":{"start":{"line":195,"column":12},"end":{"line":198,"column":14}},"63":{"start":{"line":201,"column":8},"end":{"line":218,"column":20}},"64":{"start":{"line":212,"column":24},"end":{"line":212,"column":40}},"65":{"start":{"line":220,"column":8},"end":{"line":220,"column":59}},"66":{"start":{"line":221,"column":8},"end":{"line":223,"column":11}},"67":{"start":{"line":222,"column":12},"end":{"line":222,"column":79}},"68":{"start":{"line":225,"column":8},"end":{"line":225,"column":33}},"69":{"start":{"line":235,"column":0},"end":{"line":239,"column":2}},"70":{"start":{"line":236,"column":4},"end":{"line":236,"column":30}},"71":{"start":{"line":238,"column":4},"end":{"line":238,"column":66}},"72":{"start":{"line":241,"column":0},"end":{"line":245,"column":2}},"73":{"start":{"line":242,"column":4},"end":{"line":242,"column":30}},"74":{"start":{"line":244,"column":4},"end":{"line":244,"column":42}},"75":{"start":{"line":248,"column":0},"end":{"line":248,"column":38}}},"branchMap":{"1":{"line":23,"type":"if","locations":[{"start":{"line":23,"column":12},"end":{"line":23,"column":12}},{"start":{"line":23,"column":12},"end":{"line":23,"column":12}}]},"2":{"line":34,"type":"if","locations":[{"start":{"line":34,"column":8},"end":{"line":34,"column":8}},{"start":{"line":34,"column":8},"end":{"line":34,"column":8}}]},"3":{"line":52,"type":"cond-expr","locations":[{"start":{"line":52,"column":57},"end":{"line":52,"column":67}},{"start":{"line":52,"column":70},"end":{"line":52,"column":74}}]},"4":{"line":54,"type":"if","locations":[{"start":{"line":54,"column":8},"end":{"line":54,"column":8}},{"start":{"line":54,"column":8},"end":{"line":54,"column":8}}]},"5":{"line":58,"type":"if","locations":[{"start":{"line":58,"column":8},"end":{"line":58,"column":8}},{"start":{"line":58,"column":8},"end":{"line":58,"column":8}}]},"6":{"line":59,"type":"if","locations":[{"start":{"line":59,"column":12},"end":{"line":59,"column":12}},{"start":{"line":59,"column":12},"end":{"line":59,"column":12}}]},"7":{"line":100,"type":"if","locations":[{"start":{"line":100,"column":24},"end":{"line":100,"column":24}},{"start":{"line":100,"column":24},"end":{"line":100,"column":24}}]},"8":{"line":101,"type":"if","locations":[{"start":{"line":101,"column":28},"end":{"line":101,"column":28}},{"start":{"line":101,"column":28},"end":{"line":101,"column":28}}]},"9":{"line":114,"type":"if","locations":[{"start":{"line":114,"column":12},"end":{"line":114,"column":12}},{"start":{"line":114,"column":12},"end":{"line":114,"column":12}}]},"10":{"line":120,"type":"if","locations":[{"start":{"line":120,"column":20},"end":{"line":120,"column":20}},{"start":{"line":120,"column":20},"end":{"line":120,"column":20}}]},"11":{"line":139,"type":"cond-expr","locations":[{"start":{"line":139,"column":51},"end":{"line":139,"column":58}},{"start":{"line":139,"column":61},"end":{"line":139,"column":66}}]},"12":{"line":140,"type":"cond-expr","locations":[{"start":{"line":140,"column":57},"end":{"line":140,"column":67}},{"start":{"line":140,"column":70},"end":{"line":140,"column":74}}]},"13":{"line":143,"type":"cond-expr","locations":[{"start":{"line":143,"column":45},"end":{"line":143,"column":66}},{"start":{"line":143,"column":69},"end":{"line":143,"column":89}}]},"14":{"line":166,"type":"if","locations":[{"start":{"line":166,"column":24},"end":{"line":166,"column":24}},{"start":{"line":166,"column":24},"end":{"line":166,"column":24}}]},"15":{"line":171,"type":"cond-expr","locations":[{"start":{"line":171,"column":52},"end":{"line":171,"column":65}},{"start":{"line":171,"column":68},"end":{"line":171,"column":81}}]},"16":{"line":189,"type":"if","locations":[{"start":{"line":189,"column":8},"end":{"line":189,"column":8}},{"start":{"line":189,"column":8},"end":{"line":189,"column":8}}]},"17":{"line":214,"type":"cond-expr","locations":[{"start":{"line":214,"column":52},"end":{"line":214,"column":65}},{"start":{"line":214,"column":68},"end":{"line":214,"column":80}}]}},"code":["(function () { YUI.add('libbit-dialog', function (Y, NAME) {","","var Dialog;","","Dialog = Y.Base.create('dialog', Y.Widget, [], {","","    initializer: function () {","        // Bind the error attribute change event","        this.after('errorChange', this._setError, this);","    },","","    /**","     * Gets triggered after the 'error' attribute changes. Renders an","     * error message at a given property path.","     */","    _setError: function (e) {","        var error = e.newVal,","            bb    = this.get('panel').get('boundingBox'),","            input;","","        // Remove any previous error message","        bb.all('.control-group').each(function (node) {","            if (node.hasClass('error')) {","                node.removeClass('error');","            }","","            node.all('.help-block').remove();","        });","","        // Append the message node at the given path","        input = bb.one('[data-path=' + error.path + ']');","        input.ancestor('.control-group').addClass('error');","","        if (error.message) {","            input.get('parentNode').append('<span class=\"help-block\">' + error.message + '</span>');","        }","","        input.focus();","    },","","    /**","     * Hide the active panel","     */","    hide: function() {","        this.get('panel').destroy();","    },","","    prompt: function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {","        var node,","            panel;","","        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';","","        if (defaultVal === null) {","            defaultVal = '';","        }","","        if (htmlTemplate) {","            if (typeof(htmlTemplate) === 'string') {","                input = Y.Node.create(htmlTemplate);","            } else {","                input = htmlTemplate;","            }","","            node = Y.Node.create('<form action=\"#\" class=\"form-horizontal\"></form>');","            node.append(input);","        } else {","            input = Y.Node.create('<input type=\"text\" value=\"' + defaultVal + '\" data-path=\"input\" id=\"input\">');","","            node = Y.Node.create(","                '<form action=\"#\" class=\"form-horizontal\">' +","                '   <div class=\"icon icon_absolute dialog_prompt_icon\"></div>' +","                '   <div class=\"control-group\">' +","                '       <label for=\"input\" class=\"control-label\">' + question +  '</label>' +","                '       <div class=\"controls\"></div>' +","                '   </div>' +","                '</form>'","            );","            node.one('.controls').append(input);","        }","","        panel = new Y.Libbit.Panel({","            bodyContent: node,","            headerContent: title,","            zIndex: Y.all('*').size(),","            width: this.get('width'),","            buttons: [","                 {","                    value  : 'Cancel',","                    section: Y.WidgetStdMod.FOOTER,","                    action : function () {","                        panel.destroy();","                    },","                    classNames: 'btn'","                 }, {","                    value  : confirmVal,","                    section: Y.WidgetStdMod.FOOTER,","                    isDefault: true,","                    action : function () {","                        if (callback !== null) {","                            if (callback(node) === true) {","                                panel.destroy();","                            }","                        }","                    },","                    classNames: 'btn btn-primary'","                 }","            ],","            centered: true, modal: true, visible: true","        }).render();","","        node.one('input,textarea,select').focus().select();","        node.one('input,textarea,select').on('keyup', function(e) {","            if (e.button === 13) {","                var buttons = panel.get('buttons');","","                for (var i in buttons.footer) {","                    var button = buttons.footer[i];","","                    if (button.hasClass('btn-primary')) {","                        button.simulate('click');","                    }","                }","            }","        });","","        panel.get('boundingBox').addClass('libbit-dialog');","        panel.get('boundingBox').all('.yui3-button').each(function() {","            this.removeClass('yui3-button').removeClass('yui3-button-primary');","        });","","        this.set('panel', panel);","    },","","    confirm: function (title, message, callback, warning, confirmVal) {","        var node,","            panel;","","        warning = typeof warning !== 'undefined' ? warning : false;","        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';","","        node = Y.Node.create(","            '<div class=\"icon ' + (warning ? 'dialog_warning_icon' : 'dialog_prompt_icon') + '\"></div>' +","            '<div><p>' + message + '</p></div>'","        );","","        panel = new Y.Libbit.Panel({","            bodyContent: node,","            headerContent: title,","            zIndex: Y.all('*').size(),","            width: this.get('width'),","            buttons: [","                 {","                    value  : 'Cancel',","                    section: Y.WidgetStdMod.FOOTER,","                    isDefault: false,","                    action : function () {","                        panel.destroy();","                    },","                    classNames: 'btn'","                 }, {","                    value  : confirmVal,","                    section: Y.WidgetStdMod.FOOTER,","                    isDefault: true,","                    action : function () {","                        if (callback) {","                            callback();","                        }","                        panel.destroy();","                    },","                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-primary')","                 }","            ],","            centered: true, modal: true, visible: true","        }).render();","","        panel.get('boundingBox').addClass('libbit-dialog');","        panel.get('boundingBox').all('.yui3-button').each(function() {","            this.removeClass('yui3-button').removeClass('yui3-button-primary');","        });","","        this.set('panel', panel);","    },","","    error: function (title, message, warning) {","        var node,","            panel;","","        if (warning) {","            node = Y.Node.create(","                '<div class=\"icon dialog_warning_icon\"></div>' +","                '<div><p>' + message + '</p></div>'","            );","        } else {","            node = Y.Node.create(","                '<div class=\"icon dialog_error_icon\"></div>' +","                '<div><p>' + message + '</p></div>'","            );","        }","","        panel = new Y.Libbit.Panel({","            bodyContent: node,","            headerContent: title,","            zIndex: Y.all('*').size(),","            width: this.get('width'),","            buttons: [","                 {","                    value  : 'OK',","                    section: Y.WidgetStdMod.FOOTER,","                    isDefault: true,","                    action : function () {","                        panel.destroy();","                    },","                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-danger')","                 }","            ],","            centered: true, modal: true, visible: true","        }).render();","","        panel.get('boundingBox').addClass('libbit-dialog');","        panel.get('boundingBox').all('.yui3-button').each(function() {","            this.removeClass('yui3-button').removeClass('yui3-button-primary');","        });","","        this.set('panel', panel);","    }","}, {","    ATTRS: {","        error: { value: {} },","        panel: { value: null },","        width: { value: 500 }","    }","});","","Dialog.confirm = function (title, message, callback, warning, confirmVal) {","    var dialog = new Dialog();","","    dialog.confirm(title, message, callback, warning, confirmVal);","};","","Dialog.error = function (title, message, warning) {","    var dialog = new Dialog();","","    dialog.error(title, message, warning);","};","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').Dialog = Dialog;","","","}, '1.0.0', {","    \"requires\": [","        \"dd\",","        \"dd-plugin\",","        \"json-parse\",","        \"node\",","        \"node-event-simulate\",","        \"libbit-panel\",","        \"widget\"","    ],","    \"skinnable\": true","});","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_XG4iDNIceXdzi162sw1YbA = __coverage__['build/libbit-dialog/libbit-dialog.js'];
-__cov_XG4iDNIceXdzi162sw1YbA.s['1']++;YUI.add('libbit-dialog',function(Y,NAME){__cov_XG4iDNIceXdzi162sw1YbA.f['1']++;__cov_XG4iDNIceXdzi162sw1YbA.s['2']++;var Dialog;__cov_XG4iDNIceXdzi162sw1YbA.s['3']++;Dialog=Y.Base.create('dialog',Y.Widget,[],{initializer:function(){__cov_XG4iDNIceXdzi162sw1YbA.f['2']++;__cov_XG4iDNIceXdzi162sw1YbA.s['4']++;this.after('errorChange',this._setError,this);},_setError:function(e){__cov_XG4iDNIceXdzi162sw1YbA.f['3']++;__cov_XG4iDNIceXdzi162sw1YbA.s['5']++;var error=e.newVal,bb=this.get('panel').get('boundingBox'),input;__cov_XG4iDNIceXdzi162sw1YbA.s['6']++;bb.all('.control-group').each(function(node){__cov_XG4iDNIceXdzi162sw1YbA.f['4']++;__cov_XG4iDNIceXdzi162sw1YbA.s['7']++;if(node.hasClass('error')){__cov_XG4iDNIceXdzi162sw1YbA.b['1'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['8']++;node.removeClass('error');}else{__cov_XG4iDNIceXdzi162sw1YbA.b['1'][1]++;}__cov_XG4iDNIceXdzi162sw1YbA.s['9']++;node.all('.help-block').remove();});__cov_XG4iDNIceXdzi162sw1YbA.s['10']++;input=bb.one('[data-path='+error.path+']');__cov_XG4iDNIceXdzi162sw1YbA.s['11']++;input.ancestor('.control-group').addClass('error');__cov_XG4iDNIceXdzi162sw1YbA.s['12']++;if(error.message){__cov_XG4iDNIceXdzi162sw1YbA.b['2'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['13']++;input.get('parentNode').append('<span class="help-block">'+error.message+'</span>');}else{__cov_XG4iDNIceXdzi162sw1YbA.b['2'][1]++;}__cov_XG4iDNIceXdzi162sw1YbA.s['14']++;input.focus();},hide:function(){__cov_XG4iDNIceXdzi162sw1YbA.f['5']++;__cov_XG4iDNIceXdzi162sw1YbA.s['15']++;this.get('panel').destroy();},prompt:function(title,question,defaultVal,callback,htmlTemplate,confirmVal){__cov_XG4iDNIceXdzi162sw1YbA.f['6']++;__cov_XG4iDNIceXdzi162sw1YbA.s['16']++;var node,panel;__cov_XG4iDNIceXdzi162sw1YbA.s['17']++;confirmVal=typeof confirmVal!=='undefined'?(__cov_XG4iDNIceXdzi162sw1YbA.b['3'][0]++,confirmVal):(__cov_XG4iDNIceXdzi162sw1YbA.b['3'][1]++,'OK');__cov_XG4iDNIceXdzi162sw1YbA.s['18']++;if(defaultVal===null){__cov_XG4iDNIceXdzi162sw1YbA.b['4'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['19']++;defaultVal='';}else{__cov_XG4iDNIceXdzi162sw1YbA.b['4'][1]++;}__cov_XG4iDNIceXdzi162sw1YbA.s['20']++;if(htmlTemplate){__cov_XG4iDNIceXdzi162sw1YbA.b['5'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['21']++;if(typeof htmlTemplate==='string'){__cov_XG4iDNIceXdzi162sw1YbA.b['6'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['22']++;input=Y.Node.create(htmlTemplate);}else{__cov_XG4iDNIceXdzi162sw1YbA.b['6'][1]++;__cov_XG4iDNIceXdzi162sw1YbA.s['23']++;input=htmlTemplate;}__cov_XG4iDNIceXdzi162sw1YbA.s['24']++;node=Y.Node.create('<form action="#" class="form-horizontal"></form>');__cov_XG4iDNIceXdzi162sw1YbA.s['25']++;node.append(input);}else{__cov_XG4iDNIceXdzi162sw1YbA.b['5'][1]++;__cov_XG4iDNIceXdzi162sw1YbA.s['26']++;input=Y.Node.create('<input type="text" value="'+defaultVal+'" data-path="input" id="input">');__cov_XG4iDNIceXdzi162sw1YbA.s['27']++;node=Y.Node.create('<form action="#" class="form-horizontal">'+'   <div class="icon icon_absolute dialog_prompt_icon"></div>'+'   <div class="control-group">'+'       <label for="input" class="control-label">'+question+'</label>'+'       <div class="controls"></div>'+'   </div>'+'</form>');__cov_XG4iDNIceXdzi162sw1YbA.s['28']++;node.one('.controls').append(input);}__cov_XG4iDNIceXdzi162sw1YbA.s['29']++;panel=new Y.Libbit.Panel({bodyContent:node,headerContent:title,zIndex:Y.all('*').size(),width:this.get('width'),buttons:[{value:'Cancel',section:Y.WidgetStdMod.FOOTER,action:function(){__cov_XG4iDNIceXdzi162sw1YbA.f['7']++;__cov_XG4iDNIceXdzi162sw1YbA.s['30']++;panel.destroy();},classNames:'btn'},{value:confirmVal,section:Y.WidgetStdMod.FOOTER,isDefault:true,action:function(){__cov_XG4iDNIceXdzi162sw1YbA.f['8']++;__cov_XG4iDNIceXdzi162sw1YbA.s['31']++;if(callback!==null){__cov_XG4iDNIceXdzi162sw1YbA.b['7'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['32']++;if(callback(node)===true){__cov_XG4iDNIceXdzi162sw1YbA.b['8'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['33']++;panel.destroy();}else{__cov_XG4iDNIceXdzi162sw1YbA.b['8'][1]++;}}else{__cov_XG4iDNIceXdzi162sw1YbA.b['7'][1]++;}},classNames:'btn btn-primary'}],centered:true,modal:true,visible:true}).render();__cov_XG4iDNIceXdzi162sw1YbA.s['34']++;node.one('input,textarea,select').focus().select();__cov_XG4iDNIceXdzi162sw1YbA.s['35']++;node.one('input,textarea,select').on('keyup',function(e){__cov_XG4iDNIceXdzi162sw1YbA.f['9']++;__cov_XG4iDNIceXdzi162sw1YbA.s['36']++;if(e.button===13){__cov_XG4iDNIceXdzi162sw1YbA.b['9'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['37']++;var buttons=panel.get('buttons');__cov_XG4iDNIceXdzi162sw1YbA.s['38']++;for(var i in buttons.footer){__cov_XG4iDNIceXdzi162sw1YbA.s['39']++;var button=buttons.footer[i];__cov_XG4iDNIceXdzi162sw1YbA.s['40']++;if(button.hasClass('btn-primary')){__cov_XG4iDNIceXdzi162sw1YbA.b['10'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['41']++;button.simulate('click');}else{__cov_XG4iDNIceXdzi162sw1YbA.b['10'][1]++;}}}else{__cov_XG4iDNIceXdzi162sw1YbA.b['9'][1]++;}});__cov_XG4iDNIceXdzi162sw1YbA.s['42']++;panel.get('boundingBox').addClass('libbit-dialog');__cov_XG4iDNIceXdzi162sw1YbA.s['43']++;panel.get('boundingBox').all('.yui3-button').each(function(){__cov_XG4iDNIceXdzi162sw1YbA.f['10']++;__cov_XG4iDNIceXdzi162sw1YbA.s['44']++;this.removeClass('yui3-button').removeClass('yui3-button-primary');});__cov_XG4iDNIceXdzi162sw1YbA.s['45']++;this.set('panel',panel);},confirm:function(title,message,callback,warning,confirmVal){__cov_XG4iDNIceXdzi162sw1YbA.f['11']++;__cov_XG4iDNIceXdzi162sw1YbA.s['46']++;var node,panel;__cov_XG4iDNIceXdzi162sw1YbA.s['47']++;warning=typeof warning!=='undefined'?(__cov_XG4iDNIceXdzi162sw1YbA.b['11'][0]++,warning):(__cov_XG4iDNIceXdzi162sw1YbA.b['11'][1]++,false);__cov_XG4iDNIceXdzi162sw1YbA.s['48']++;confirmVal=typeof confirmVal!=='undefined'?(__cov_XG4iDNIceXdzi162sw1YbA.b['12'][0]++,confirmVal):(__cov_XG4iDNIceXdzi162sw1YbA.b['12'][1]++,'OK');__cov_XG4iDNIceXdzi162sw1YbA.s['49']++;node=Y.Node.create('<div class="icon '+(warning?(__cov_XG4iDNIceXdzi162sw1YbA.b['13'][0]++,'dialog_warning_icon'):(__cov_XG4iDNIceXdzi162sw1YbA.b['13'][1]++,'dialog_prompt_icon'))+'"></div>'+'<div><p>'+message+'</p></div>');__cov_XG4iDNIceXdzi162sw1YbA.s['50']++;panel=new Y.Libbit.Panel({bodyContent:node,headerContent:title,zIndex:Y.all('*').size(),width:this.get('width'),buttons:[{value:'Cancel',section:Y.WidgetStdMod.FOOTER,isDefault:false,action:function(){__cov_XG4iDNIceXdzi162sw1YbA.f['12']++;__cov_XG4iDNIceXdzi162sw1YbA.s['51']++;panel.destroy();},classNames:'btn'},{value:confirmVal,section:Y.WidgetStdMod.FOOTER,isDefault:true,action:function(){__cov_XG4iDNIceXdzi162sw1YbA.f['13']++;__cov_XG4iDNIceXdzi162sw1YbA.s['52']++;if(callback){__cov_XG4iDNIceXdzi162sw1YbA.b['14'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['53']++;callback();}else{__cov_XG4iDNIceXdzi162sw1YbA.b['14'][1]++;}__cov_XG4iDNIceXdzi162sw1YbA.s['54']++;panel.destroy();},classNames:'btn '+(warning?(__cov_XG4iDNIceXdzi162sw1YbA.b['15'][0]++,'btn-warning'):(__cov_XG4iDNIceXdzi162sw1YbA.b['15'][1]++,'btn-primary'))}],centered:true,modal:true,visible:true}).render();__cov_XG4iDNIceXdzi162sw1YbA.s['55']++;panel.get('boundingBox').addClass('libbit-dialog');__cov_XG4iDNIceXdzi162sw1YbA.s['56']++;panel.get('boundingBox').all('.yui3-button').each(function(){__cov_XG4iDNIceXdzi162sw1YbA.f['14']++;__cov_XG4iDNIceXdzi162sw1YbA.s['57']++;this.removeClass('yui3-button').removeClass('yui3-button-primary');});__cov_XG4iDNIceXdzi162sw1YbA.s['58']++;this.set('panel',panel);},error:function(title,message,warning){__cov_XG4iDNIceXdzi162sw1YbA.f['15']++;__cov_XG4iDNIceXdzi162sw1YbA.s['59']++;var node,panel;__cov_XG4iDNIceXdzi162sw1YbA.s['60']++;if(warning){__cov_XG4iDNIceXdzi162sw1YbA.b['16'][0]++;__cov_XG4iDNIceXdzi162sw1YbA.s['61']++;node=Y.Node.create('<div class="icon dialog_warning_icon"></div>'+'<div><p>'+message+'</p></div>');}else{__cov_XG4iDNIceXdzi162sw1YbA.b['16'][1]++;__cov_XG4iDNIceXdzi162sw1YbA.s['62']++;node=Y.Node.create('<div class="icon dialog_error_icon"></div>'+'<div><p>'+message+'</p></div>');}__cov_XG4iDNIceXdzi162sw1YbA.s['63']++;panel=new Y.Libbit.Panel({bodyContent:node,headerContent:title,zIndex:Y.all('*').size(),width:this.get('width'),buttons:[{value:'OK',section:Y.WidgetStdMod.FOOTER,isDefault:true,action:function(){__cov_XG4iDNIceXdzi162sw1YbA.f['16']++;__cov_XG4iDNIceXdzi162sw1YbA.s['64']++;panel.destroy();},classNames:'btn '+(warning?(__cov_XG4iDNIceXdzi162sw1YbA.b['17'][0]++,'btn-warning'):(__cov_XG4iDNIceXdzi162sw1YbA.b['17'][1]++,'btn-danger'))}],centered:true,modal:true,visible:true}).render();__cov_XG4iDNIceXdzi162sw1YbA.s['65']++;panel.get('boundingBox').addClass('libbit-dialog');__cov_XG4iDNIceXdzi162sw1YbA.s['66']++;panel.get('boundingBox').all('.yui3-button').each(function(){__cov_XG4iDNIceXdzi162sw1YbA.f['17']++;__cov_XG4iDNIceXdzi162sw1YbA.s['67']++;this.removeClass('yui3-button').removeClass('yui3-button-primary');});__cov_XG4iDNIceXdzi162sw1YbA.s['68']++;this.set('panel',panel);}},{ATTRS:{error:{value:{}},panel:{value:null},width:{value:500}}});__cov_XG4iDNIceXdzi162sw1YbA.s['69']++;Dialog.confirm=function(title,message,callback,warning,confirmVal){__cov_XG4iDNIceXdzi162sw1YbA.f['18']++;__cov_XG4iDNIceXdzi162sw1YbA.s['70']++;var dialog=new Dialog();__cov_XG4iDNIceXdzi162sw1YbA.s['71']++;dialog.confirm(title,message,callback,warning,confirmVal);};__cov_XG4iDNIceXdzi162sw1YbA.s['72']++;Dialog.error=function(title,message,warning){__cov_XG4iDNIceXdzi162sw1YbA.f['19']++;__cov_XG4iDNIceXdzi162sw1YbA.s['73']++;var dialog=new Dialog();__cov_XG4iDNIceXdzi162sw1YbA.s['74']++;dialog.error(title,message,warning);};__cov_XG4iDNIceXdzi162sw1YbA.s['75']++;Y.namespace('Libbit').Dialog=Dialog;},'1.0.0',{'requires':['dd','dd-plugin','json-parse','node','node-event-simulate','libbit-panel','widget'],'skinnable':true});
+_yuitest_coverage["build/libbit-dialog/libbit-dialog.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-dialog/libbit-dialog.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-dialog/libbit-dialog.js"].code=["YUI.add('libbit-dialog', function (Y, NAME) {","","var Dialog;","","Dialog = Y.Base.create('dialog', Y.Widget, [], {","","    initializer: function () {","        // Bind the error attribute change event","        this.after('errorChange', this._setError, this);","    },","","    /**","     * Gets triggered after the 'error' attribute changes. Renders an","     * error message at a given property path.","     */","    _setError: function (e) {","        var error = e.newVal,","            bb    = this.get('panel').get('boundingBox'),","            input;","","        // Remove any previous error message","        bb.all('.control-group').each(function (node) {","            if (node.hasClass('error')) {","                node.removeClass('error');","            }","","            node.all('.help-block').remove();","        });","","        // Append the message node at the given path","        input = bb.one('[data-path=' + error.path + ']');","        input.ancestor('.control-group').addClass('error');","","        if (error.message) {","            input.get('parentNode').append('<span class=\"help-block\">' + error.message + '</span>');","        }","","        input.focus();","    },","","    /**","     * Hide the active panel","     */","    hide: function() {","        this.get('panel').destroy();","    },","","    prompt: function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {","        var node,","            panel;","","        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';","","        if (defaultVal === null) {","            defaultVal = '';","        }","","        if (htmlTemplate) {","            if (typeof(htmlTemplate) === 'string') {","                input = Y.Node.create(htmlTemplate);","            } else {","                input = htmlTemplate;","            }","","            node = Y.Node.create('<form action=\"#\" class=\"form-horizontal\"></form>');","            node.append(input);","        } else {","            input = Y.Node.create('<input type=\"text\" value=\"' + defaultVal + '\" data-path=\"input\" id=\"input\">');","","            node = Y.Node.create(","                '<form action=\"#\" class=\"form-horizontal\">' +","                '   <div class=\"icon icon_absolute dialog_prompt_icon\"></div>' +","                '   <div class=\"control-group\">' +","                '       <label for=\"input\" class=\"control-label\">' + question +  '</label>' +","                '       <div class=\"controls\"></div>' +","                '   </div>' +","                '</form>'","            );","            node.one('.controls').append(input);","        }","","        panel = new Y.Libbit.Panel({","            bodyContent: node,","            headerContent: title,","            zIndex: Y.all('*').size(),","            width: this.get('width'),","            buttons: [","                 {","                    value  : 'Cancel',","                    section: Y.WidgetStdMod.FOOTER,","                    action : function () {","                        panel.destroy();","                    },","                    classNames: 'btn'","                 }, {","                    value  : confirmVal,","                    section: Y.WidgetStdMod.FOOTER,","                    isDefault: true,","                    action : function () {","                        if (callback !== null) {","                            if (callback(node) === true) {","                                panel.destroy();","                            }","                        }","                    },","                    classNames: 'btn btn-primary'","                 }","            ],","            centered: true, modal: true, visible: true","        }).render();","","        node.one('input,textarea,select').focus().select();","        node.one('input,textarea,select').on('keyup', function(e) {","            if (e.button === 13) {","                var buttons = panel.get('buttons');","","                for (var i in buttons.footer) {","                    var button = buttons.footer[i];","","                    if (button.hasClass('btn-primary')) {","                        button.simulate('click');","                    }","                }","            }","        });","","        panel.get('boundingBox').addClass('libbit-dialog');","        panel.get('boundingBox').all('.yui3-button').each(function() {","            this.removeClass('yui3-button').removeClass('yui3-button-primary');","        });","","        this.set('panel', panel);","    },","","    confirm: function (title, message, callback, warning, confirmVal) {","        var node,","            panel;","","        warning = typeof warning !== 'undefined' ? warning : false;","        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';","","        node = Y.Node.create(","            '<div class=\"icon ' + (warning ? 'dialog_warning_icon' : 'dialog_prompt_icon') + '\"></div>' +","            '<div><p>' + message + '</p></div>'","        );","","        panel = new Y.Libbit.Panel({","            bodyContent: node,","            headerContent: title,","            zIndex: Y.all('*').size(),","            width: this.get('width'),","            buttons: [","                 {","                    value  : 'Cancel',","                    section: Y.WidgetStdMod.FOOTER,","                    isDefault: false,","                    action : function () {","                        panel.destroy();","                    },","                    classNames: 'btn'","                 }, {","                    value  : confirmVal,","                    section: Y.WidgetStdMod.FOOTER,","                    isDefault: true,","                    action : function () {","                        if (callback) {","                            callback();","                        }","                        panel.destroy();","                    },","                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-primary')","                 }","            ],","            centered: true, modal: true, visible: true","        }).render();","","        panel.get('boundingBox').addClass('libbit-dialog');","        panel.get('boundingBox').all('.yui3-button').each(function() {","            this.removeClass('yui3-button').removeClass('yui3-button-primary');","        });","","        this.set('panel', panel);","    },","","    error: function (title, message, warning) {","        var node,","            panel;","","        if (warning) {","            node = Y.Node.create(","                '<div class=\"icon dialog_warning_icon\"></div>' +","                '<div><p>' + message + '</p></div>'","            );","        } else {","            node = Y.Node.create(","                '<div class=\"icon dialog_error_icon\"></div>' +","                '<div><p>' + message + '</p></div>'","            );","        }","","        panel = new Y.Libbit.Panel({","            bodyContent: node,","            headerContent: title,","            zIndex: Y.all('*').size(),","            width: this.get('width'),","            buttons: [","                 {","                    value  : 'OK',","                    section: Y.WidgetStdMod.FOOTER,","                    isDefault: true,","                    action : function () {","                        panel.destroy();","                    },","                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-danger')","                 }","            ],","            centered: true, modal: true, visible: true","        }).render();","","        panel.get('boundingBox').addClass('libbit-dialog');","        panel.get('boundingBox').all('.yui3-button').each(function() {","            this.removeClass('yui3-button').removeClass('yui3-button-primary');","        });","","        this.set('panel', panel);","    }","}, {","    ATTRS: {","        error: { value: {} },","        panel: { value: null },","        width: { value: 500 }","    }","});","","Dialog.confirm = function (title, message, callback, warning, confirmVal) {","    var dialog = new Dialog();","","    dialog.confirm(title, message, callback, warning, confirmVal);","};","","Dialog.error = function (title, message, warning) {","    var dialog = new Dialog();","","    dialog.error(title, message, warning);","};","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').Dialog = Dialog;","","","}, '1.0.0', {","    \"requires\": [","        \"dd\",","        \"dd-plugin\",","        \"json-parse\",","        \"node\",","        \"node-event-simulate\",","        \"libbit-panel\",","        \"widget\"","    ],","    \"skinnable\": true","});"];
+_yuitest_coverage["build/libbit-dialog/libbit-dialog.js"].lines = {"1":0,"3":0,"5":0,"9":0,"17":0,"22":0,"23":0,"24":0,"27":0,"31":0,"32":0,"34":0,"35":0,"38":0,"45":0,"49":0,"52":0,"54":0,"55":0,"58":0,"59":0,"60":0,"62":0,"65":0,"66":0,"68":0,"70":0,"79":0,"82":0,"92":0,"100":0,"101":0,"102":0,"112":0,"113":0,"114":0,"115":0,"117":0,"118":0,"120":0,"121":0,"127":0,"128":0,"129":0,"132":0,"136":0,"139":0,"140":0,"142":0,"147":0,"158":0,"166":0,"167":0,"169":0,"177":0,"178":0,"179":0,"182":0,"186":0,"189":0,"190":0,"195":0,"201":0,"212":0,"220":0,"221":0,"222":0,"225":0,"235":0,"236":0,"238":0,"241":0,"242":0,"244":0,"248":0};
+_yuitest_coverage["build/libbit-dialog/libbit-dialog.js"].functions = {"initializer:7":0,"(anonymous 2):22":0,"_setError:16":0,"hide:44":0,"action:91":0,"action:99":0,"(anonymous 3):113":0,"(anonymous 4):128":0,"prompt:48":0,"action:157":0,"action:165":0,"(anonymous 5):178":0,"confirm:135":0,"action:211":0,"(anonymous 6):221":0,"error:185":0,"confirm:235":0,"error:241":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-dialog/libbit-dialog.js"].coveredLines = 75;
+_yuitest_coverage["build/libbit-dialog/libbit-dialog.js"].coveredFunctions = 19;
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 1);
+YUI.add('libbit-dialog', function (Y, NAME) {
+
+_yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 3);
+var Dialog;
+
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 5);
+Dialog = Y.Base.create('dialog', Y.Widget, [], {
+
+    initializer: function () {
+        // Bind the error attribute change event
+        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "initializer", 7);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 9);
+this.after('errorChange', this._setError, this);
+    },
+
+    /**
+     * Gets triggered after the 'error' attribute changes. Renders an
+     * error message at a given property path.
+     */
+    _setError: function (e) {
+        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "_setError", 16);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 17);
+var error = e.newVal,
+            bb    = this.get('panel').get('boundingBox'),
+            input;
+
+        // Remove any previous error message
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 22);
+bb.all('.control-group').each(function (node) {
+            _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "(anonymous 2)", 22);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 23);
+if (node.hasClass('error')) {
+                _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 24);
+node.removeClass('error');
+            }
+
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 27);
+node.all('.help-block').remove();
+        });
+
+        // Append the message node at the given path
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 31);
+input = bb.one('[data-path=' + error.path + ']');
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 32);
+input.ancestor('.control-group').addClass('error');
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 34);
+if (error.message) {
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 35);
+input.get('parentNode').append('<span class="help-block">' + error.message + '</span>');
+        }
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 38);
+input.focus();
+    },
+
+    /**
+     * Hide the active panel
+     */
+    hide: function() {
+        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "hide", 44);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 45);
+this.get('panel').destroy();
+    },
+
+    prompt: function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {
+        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "prompt", 48);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 49);
+var node,
+            panel;
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 52);
+confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 54);
+if (defaultVal === null) {
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 55);
+defaultVal = '';
+        }
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 58);
+if (htmlTemplate) {
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 59);
+if (typeof(htmlTemplate) === 'string') {
+                _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 60);
+input = Y.Node.create(htmlTemplate);
+            } else {
+                _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 62);
+input = htmlTemplate;
+            }
+
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 65);
+node = Y.Node.create('<form action="#" class="form-horizontal"></form>');
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 66);
+node.append(input);
+        } else {
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 68);
+input = Y.Node.create('<input type="text" value="' + defaultVal + '" data-path="input" id="input">');
+
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 70);
+node = Y.Node.create(
+                '<form action="#" class="form-horizontal">' +
+                '   <div class="icon icon_absolute dialog_prompt_icon"></div>' +
+                '   <div class="control-group">' +
+                '       <label for="input" class="control-label">' + question +  '</label>' +
+                '       <div class="controls"></div>' +
+                '   </div>' +
+                '</form>'
+            );
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 79);
+node.one('.controls').append(input);
+        }
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 82);
+panel = new Y.Libbit.Panel({
+            bodyContent: node,
+            headerContent: title,
+            zIndex: Y.all('*').size(),
+            width: this.get('width'),
+            buttons: [
+                 {
+                    value  : 'Cancel',
+                    section: Y.WidgetStdMod.FOOTER,
+                    action : function () {
+                        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "action", 91);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 92);
+panel.destroy();
+                    },
+                    classNames: 'btn'
+                 }, {
+                    value  : confirmVal,
+                    section: Y.WidgetStdMod.FOOTER,
+                    isDefault: true,
+                    action : function () {
+                        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "action", 99);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 100);
+if (callback !== null) {
+                            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 101);
+if (callback(node) === true) {
+                                _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 102);
+panel.destroy();
+                            }
+                        }
+                    },
+                    classNames: 'btn btn-primary'
+                 }
+            ],
+            centered: true, modal: true, visible: true
+        }).render();
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 112);
+node.one('input,textarea,select').focus().select();
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 113);
+node.one('input,textarea,select').on('keyup', function(e) {
+            _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "(anonymous 3)", 113);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 114);
+if (e.button === 13) {
+                _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 115);
+var buttons = panel.get('buttons');
+
+                _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 117);
+for (var i in buttons.footer) {
+                    _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 118);
+var button = buttons.footer[i];
+
+                    _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 120);
+if (button.hasClass('btn-primary')) {
+                        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 121);
+button.simulate('click');
+                    }
+                }
+            }
+        });
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 127);
+panel.get('boundingBox').addClass('libbit-dialog');
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 128);
+panel.get('boundingBox').all('.yui3-button').each(function() {
+            _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "(anonymous 4)", 128);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 129);
+this.removeClass('yui3-button').removeClass('yui3-button-primary');
+        });
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 132);
+this.set('panel', panel);
+    },
+
+    confirm: function (title, message, callback, warning, confirmVal) {
+        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "confirm", 135);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 136);
+var node,
+            panel;
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 139);
+warning = typeof warning !== 'undefined' ? warning : false;
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 140);
+confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 142);
+node = Y.Node.create(
+            '<div class="icon ' + (warning ? 'dialog_warning_icon' : 'dialog_prompt_icon') + '"></div>' +
+            '<div><p>' + message + '</p></div>'
+        );
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 147);
+panel = new Y.Libbit.Panel({
+            bodyContent: node,
+            headerContent: title,
+            zIndex: Y.all('*').size(),
+            width: this.get('width'),
+            buttons: [
+                 {
+                    value  : 'Cancel',
+                    section: Y.WidgetStdMod.FOOTER,
+                    isDefault: false,
+                    action : function () {
+                        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "action", 157);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 158);
+panel.destroy();
+                    },
+                    classNames: 'btn'
+                 }, {
+                    value  : confirmVal,
+                    section: Y.WidgetStdMod.FOOTER,
+                    isDefault: true,
+                    action : function () {
+                        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "action", 165);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 166);
+if (callback) {
+                            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 167);
+callback();
+                        }
+                        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 169);
+panel.destroy();
+                    },
+                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-primary')
+                 }
+            ],
+            centered: true, modal: true, visible: true
+        }).render();
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 177);
+panel.get('boundingBox').addClass('libbit-dialog');
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 178);
+panel.get('boundingBox').all('.yui3-button').each(function() {
+            _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "(anonymous 5)", 178);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 179);
+this.removeClass('yui3-button').removeClass('yui3-button-primary');
+        });
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 182);
+this.set('panel', panel);
+    },
+
+    error: function (title, message, warning) {
+        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "error", 185);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 186);
+var node,
+            panel;
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 189);
+if (warning) {
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 190);
+node = Y.Node.create(
+                '<div class="icon dialog_warning_icon"></div>' +
+                '<div><p>' + message + '</p></div>'
+            );
+        } else {
+            _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 195);
+node = Y.Node.create(
+                '<div class="icon dialog_error_icon"></div>' +
+                '<div><p>' + message + '</p></div>'
+            );
+        }
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 201);
+panel = new Y.Libbit.Panel({
+            bodyContent: node,
+            headerContent: title,
+            zIndex: Y.all('*').size(),
+            width: this.get('width'),
+            buttons: [
+                 {
+                    value  : 'OK',
+                    section: Y.WidgetStdMod.FOOTER,
+                    isDefault: true,
+                    action : function () {
+                        _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "action", 211);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 212);
+panel.destroy();
+                    },
+                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-danger')
+                 }
+            ],
+            centered: true, modal: true, visible: true
+        }).render();
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 220);
+panel.get('boundingBox').addClass('libbit-dialog');
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 221);
+panel.get('boundingBox').all('.yui3-button').each(function() {
+            _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "(anonymous 6)", 221);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 222);
+this.removeClass('yui3-button').removeClass('yui3-button-primary');
+        });
+
+        _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 225);
+this.set('panel', panel);
+    }
+}, {
+    ATTRS: {
+        error: { value: {} },
+        panel: { value: null },
+        width: { value: 500 }
+    }
+});
+
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 235);
+Dialog.confirm = function (title, message, callback, warning, confirmVal) {
+    _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "confirm", 235);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 236);
+var dialog = new Dialog();
+
+    _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 238);
+dialog.confirm(title, message, callback, warning, confirmVal);
+};
+
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 241);
+Dialog.error = function (title, message, warning) {
+    _yuitest_coverfunc("build/libbit-dialog/libbit-dialog.js", "error", 241);
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 242);
+var dialog = new Dialog();
+
+    _yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 244);
+dialog.error(title, message, warning);
+};
+
+// -- Namespace ----------------------------------------------------------------
+_yuitest_coverline("build/libbit-dialog/libbit-dialog.js", 248);
+Y.namespace('Libbit').Dialog = Dialog;
+
+
+}, '1.0.0', {
+    "requires": [
+        "dd",
+        "dd-plugin",
+        "json-parse",
+        "node",
+        "node-event-simulate",
+        "libbit-panel",
+        "widget"
+    ],
+    "skinnable": true
+});

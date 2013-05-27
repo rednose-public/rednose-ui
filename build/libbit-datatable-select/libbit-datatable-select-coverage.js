@@ -1,6 +1,206 @@
-if (typeof __coverage__ === 'undefined') { __coverage__ = {}; }
-if (!__coverage__['build/libbit-datatable-select/libbit-datatable-select.js']) {
-   __coverage__['build/libbit-datatable-select/libbit-datatable-select.js'] = {"path":"build/libbit-datatable-select/libbit-datatable-select.js","s":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0,"7":0,"8":0,"9":0,"10":0,"11":0,"12":0,"13":0,"14":0,"15":0,"16":0,"17":0,"18":0,"19":0,"20":0,"21":0,"22":0,"23":0,"24":0,"25":0,"26":0,"27":0,"28":0,"29":0,"30":0,"31":0,"32":0,"33":0,"34":0},"b":{"1":[0,0],"2":[0,0],"3":[0,0],"4":[0,0],"5":[0,0],"6":[0,0],"7":[0,0],"8":[0,0]},"f":{"1":0,"2":0,"3":0,"4":0,"5":0,"6":0},"fnMap":{"1":{"name":"(anonymous_1)","line":1,"loc":{"start":{"line":1,"column":35},"end":{"line":1,"column":54}}},"2":{"name":"DataTableSelectPlugin","line":6,"loc":{"start":{"line":6,"column":0},"end":{"line":6,"column":39}}},"3":{"name":"(anonymous_3)","line":40,"loc":{"start":{"line":40,"column":17},"end":{"line":40,"column":29}}},"4":{"name":"(anonymous_4)","line":52,"loc":{"start":{"line":52,"column":18},"end":{"line":52,"column":31}}},"5":{"name":"(anonymous_5)","line":75,"loc":{"start":{"line":75,"column":29},"end":{"line":75,"column":42}}},"6":{"name":"(anonymous_6)","line":119,"loc":{"start":{"line":119,"column":27},"end":{"line":119,"column":43}}}},"statementMap":{"1":{"start":{"line":1,"column":0},"end":{"line":133,"column":58}},"2":{"start":{"line":6,"column":0},"end":{"line":8,"column":1}},"3":{"start":{"line":7,"column":4},"end":{"line":7,"column":72}},"4":{"start":{"line":13,"column":0},"end":{"line":13,"column":53}},"5":{"start":{"line":18,"column":0},"end":{"line":18,"column":40}},"6":{"start":{"line":24,"column":0},"end":{"line":32,"column":2}},"7":{"start":{"line":35,"column":0},"end":{"line":127,"column":3}},"8":{"start":{"line":41,"column":8},"end":{"line":42,"column":49}},"9":{"start":{"line":44,"column":8},"end":{"line":44,"column":76}},"10":{"start":{"line":45,"column":8},"end":{"line":45,"column":56}},"11":{"start":{"line":53,"column":8},"end":{"line":53,"column":30}},"12":{"start":{"line":55,"column":8},"end":{"line":66,"column":9}},"13":{"start":{"line":57,"column":12},"end":{"line":57,"column":80}},"14":{"start":{"line":59,"column":15},"end":{"line":66,"column":9}},"15":{"start":{"line":61,"column":12},"end":{"line":61,"column":25}},"16":{"start":{"line":65,"column":12},"end":{"line":65,"column":42}},"17":{"start":{"line":68,"column":8},"end":{"line":68,"column":20}},"18":{"start":{"line":77,"column":8},"end":{"line":80,"column":27}},"19":{"start":{"line":83,"column":8},"end":{"line":85,"column":9}},"20":{"start":{"line":84,"column":12},"end":{"line":84,"column":25}},"21":{"start":{"line":88,"column":8},"end":{"line":95,"column":9}},"22":{"start":{"line":89,"column":12},"end":{"line":89,"column":64}},"23":{"start":{"line":92,"column":12},"end":{"line":94,"column":13}},"24":{"start":{"line":93,"column":16},"end":{"line":93,"column":59}},"25":{"start":{"line":98,"column":8},"end":{"line":108,"column":9}},"26":{"start":{"line":100,"column":12},"end":{"line":100,"column":58}},"27":{"start":{"line":103,"column":12},"end":{"line":105,"column":13}},"28":{"start":{"line":104,"column":16},"end":{"line":104,"column":53}},"29":{"start":{"line":107,"column":12},"end":{"line":107,"column":53}},"30":{"start":{"line":111,"column":8},"end":{"line":111,"column":47}},"31":{"start":{"line":113,"column":8},"end":{"line":113,"column":20}},"32":{"start":{"line":122,"column":8},"end":{"line":123,"column":46}},"33":{"start":{"line":125,"column":8},"end":{"line":125,"column":43}},"34":{"start":{"line":130,"column":0},"end":{"line":130,"column":68}}},"branchMap":{"1":{"line":55,"type":"if","locations":[{"start":{"line":55,"column":8},"end":{"line":55,"column":8}},{"start":{"line":55,"column":8},"end":{"line":55,"column":8}}]},"2":{"line":59,"type":"if","locations":[{"start":{"line":59,"column":15},"end":{"line":59,"column":15}},{"start":{"line":59,"column":15},"end":{"line":59,"column":15}}]},"3":{"line":83,"type":"if","locations":[{"start":{"line":83,"column":8},"end":{"line":83,"column":8}},{"start":{"line":83,"column":8},"end":{"line":83,"column":8}}]},"4":{"line":88,"type":"if","locations":[{"start":{"line":88,"column":8},"end":{"line":88,"column":8}},{"start":{"line":88,"column":8},"end":{"line":88,"column":8}}]},"5":{"line":92,"type":"if","locations":[{"start":{"line":92,"column":12},"end":{"line":92,"column":12}},{"start":{"line":92,"column":12},"end":{"line":92,"column":12}}]},"6":{"line":92,"type":"binary-expr","locations":[{"start":{"line":92,"column":16},"end":{"line":92,"column":32}},{"start":{"line":92,"column":36},"end":{"line":92,"column":75}}]},"7":{"line":98,"type":"if","locations":[{"start":{"line":98,"column":8},"end":{"line":98,"column":8}},{"start":{"line":98,"column":8},"end":{"line":98,"column":8}}]},"8":{"line":103,"type":"if","locations":[{"start":{"line":103,"column":12},"end":{"line":103,"column":12}},{"start":{"line":103,"column":12},"end":{"line":103,"column":12}}]}},"code":["(function () { YUI.add('libbit-datatable-select', function (Y, NAME) {","","/**"," * Create a selection plugin for the LiBBiT DataTable widget."," */","function DataTableSelectPlugin(config) {","    DataTableSelectPlugin.superclass.constructor.apply(this, arguments);","}","","/**"," * The identity of the plugin."," */","DataTableSelectPlugin.NAME = 'dataTableSelectPlugin';","","/**"," * The namespace for the plugin."," */","DataTableSelectPlugin.NS = 'selectable';","","/**"," * Static property used to define the default attribute configuration of the"," * plugin."," */","DataTableSelectPlugin.ATTRS = {","","    /**","     * The row currently selected.","     */","    selectedRow : {","        value: null","    }","};","","// TODO: Persist selection after sorting.","Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {","","    /**","     * Bind the click events and set up a listener for the selectedRow attribute.","     */","    initializer: function () {","        var table      = this.get('host'),","            contentBox = table.get('contentBox');","","        this.after('selectedRowChange', this._afterSelectedRowChange, this);","        contentBox.on('click', this._handleClick, this);","    },","","    /**","     * Handles the click event, and updates the selectedRow attribute,","     * which fires an event on change.","     */","    _handleClick: function (e) {","        var target = e.target;","","        if (target.ancestor('.yui3-datatable-data tr')) {","            // This is a table row, update the selection.","            this.set('selectedRow', target.ancestor('.yui3-datatable-data tr'));","","        } else if (target.ancestor('.yui3-datatable-columns')) {","            // This is a table column, ignore.","            return false;","","        } else {","            // Clicked outside the rows, reset the selection.","            this.set('selectedRow', null);","        }","","        return true;","    },","","    /**","     * The selection changed, update the DOM and fire an event containing","     * the model that was selected.","     */","    _afterSelectedRowChange: function (e) {","        // TODO: Keep selection after sorting","        var table   = this.get('host'),","            node    = e.newVal,","            oldNode = e.prevVal,","            model   = null;","","        // Cancel if the selection did not change.","        if (node === oldNode) {","            return false;","        }","","        // Remove all selection CSS on the previous selection","        if (oldNode) {","            oldNode.all('td').removeClass('datatable-selected');","","            // Inverse the icon color if there is one.","            if (oldNode.one('i') && oldNode.one('i').hasClass('icon-white')) {","                oldNode.one('i').removeClass('icon-white');","            }","        }","","        // Apply the CSS to the new selection and fire an event.","        if (Y.Lang.isNull(node) === false) {","            // After unhighlighting, now highlight the current row.","            node.all('td').addClass('datatable-selected');","","            // Inverse the icon color if there is one.","            if (node.one('i')) {","                node.one('i').addClass('icon-white');","            }","","            model = this._getModelFromTableRow(node);","        }","","        // Fires the select event from the host and passes along the needed information.","        table.fire('select', { model: model });","","        return true;","    },","","    /**","     * Parse an HTML <tr/> node and retrieve the corresponding model from the model list.","     */","    _getModelFromTableRow: function (node) {","        // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),","        // for example 'image_1'.","        var id        = node.getAttribute('data-yui3-record'),","            modelList = this.get('host').data;","","        return modelList.getByClientId(id);","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').DataTableSelectPlugin = DataTableSelectPlugin;","","","}, '1.0.0', {\"requires\": [\"libbit-datatable\", \"plugin\"]});","","}());"]};
+if (typeof _yuitest_coverage == "undefined"){
+    _yuitest_coverage = {};
+    _yuitest_coverline = function(src, line){
+        var coverage = _yuitest_coverage[src];
+        if (!coverage.lines[line]){
+            coverage.calledLines++;
+        }
+        coverage.lines[line]++;
+    };
+    _yuitest_coverfunc = function(src, name, line){
+        var coverage = _yuitest_coverage[src],
+            funcId = name + ":" + line;
+        if (!coverage.functions[funcId]){
+            coverage.calledFunctions++;
+        }
+        coverage.functions[funcId]++;
+    };
 }
-var __cov_XvMVaKmMMAnvwsEfnuaLiw = __coverage__['build/libbit-datatable-select/libbit-datatable-select.js'];
-__cov_XvMVaKmMMAnvwsEfnuaLiw.s['1']++;YUI.add('libbit-datatable-select',function(Y,NAME){__cov_XvMVaKmMMAnvwsEfnuaLiw.f['1']++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['2']++;function DataTableSelectPlugin(config){__cov_XvMVaKmMMAnvwsEfnuaLiw.f['2']++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['3']++;DataTableSelectPlugin.superclass.constructor.apply(this,arguments);}__cov_XvMVaKmMMAnvwsEfnuaLiw.s['4']++;DataTableSelectPlugin.NAME='dataTableSelectPlugin';__cov_XvMVaKmMMAnvwsEfnuaLiw.s['5']++;DataTableSelectPlugin.NS='selectable';__cov_XvMVaKmMMAnvwsEfnuaLiw.s['6']++;DataTableSelectPlugin.ATTRS={selectedRow:{value:null}};__cov_XvMVaKmMMAnvwsEfnuaLiw.s['7']++;Y.extend(DataTableSelectPlugin,Y.Plugin.Base,{initializer:function(){__cov_XvMVaKmMMAnvwsEfnuaLiw.f['3']++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['8']++;var table=this.get('host'),contentBox=table.get('contentBox');__cov_XvMVaKmMMAnvwsEfnuaLiw.s['9']++;this.after('selectedRowChange',this._afterSelectedRowChange,this);__cov_XvMVaKmMMAnvwsEfnuaLiw.s['10']++;contentBox.on('click',this._handleClick,this);},_handleClick:function(e){__cov_XvMVaKmMMAnvwsEfnuaLiw.f['4']++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['11']++;var target=e.target;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['12']++;if(target.ancestor('.yui3-datatable-data tr')){__cov_XvMVaKmMMAnvwsEfnuaLiw.b['1'][0]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['13']++;this.set('selectedRow',target.ancestor('.yui3-datatable-data tr'));}else{__cov_XvMVaKmMMAnvwsEfnuaLiw.b['1'][1]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['14']++;if(target.ancestor('.yui3-datatable-columns')){__cov_XvMVaKmMMAnvwsEfnuaLiw.b['2'][0]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['15']++;return false;}else{__cov_XvMVaKmMMAnvwsEfnuaLiw.b['2'][1]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['16']++;this.set('selectedRow',null);}}__cov_XvMVaKmMMAnvwsEfnuaLiw.s['17']++;return true;},_afterSelectedRowChange:function(e){__cov_XvMVaKmMMAnvwsEfnuaLiw.f['5']++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['18']++;var table=this.get('host'),node=e.newVal,oldNode=e.prevVal,model=null;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['19']++;if(node===oldNode){__cov_XvMVaKmMMAnvwsEfnuaLiw.b['3'][0]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['20']++;return false;}else{__cov_XvMVaKmMMAnvwsEfnuaLiw.b['3'][1]++;}__cov_XvMVaKmMMAnvwsEfnuaLiw.s['21']++;if(oldNode){__cov_XvMVaKmMMAnvwsEfnuaLiw.b['4'][0]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['22']++;oldNode.all('td').removeClass('datatable-selected');__cov_XvMVaKmMMAnvwsEfnuaLiw.s['23']++;if((__cov_XvMVaKmMMAnvwsEfnuaLiw.b['6'][0]++,oldNode.one('i'))&&(__cov_XvMVaKmMMAnvwsEfnuaLiw.b['6'][1]++,oldNode.one('i').hasClass('icon-white'))){__cov_XvMVaKmMMAnvwsEfnuaLiw.b['5'][0]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['24']++;oldNode.one('i').removeClass('icon-white');}else{__cov_XvMVaKmMMAnvwsEfnuaLiw.b['5'][1]++;}}else{__cov_XvMVaKmMMAnvwsEfnuaLiw.b['4'][1]++;}__cov_XvMVaKmMMAnvwsEfnuaLiw.s['25']++;if(Y.Lang.isNull(node)===false){__cov_XvMVaKmMMAnvwsEfnuaLiw.b['7'][0]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['26']++;node.all('td').addClass('datatable-selected');__cov_XvMVaKmMMAnvwsEfnuaLiw.s['27']++;if(node.one('i')){__cov_XvMVaKmMMAnvwsEfnuaLiw.b['8'][0]++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['28']++;node.one('i').addClass('icon-white');}else{__cov_XvMVaKmMMAnvwsEfnuaLiw.b['8'][1]++;}__cov_XvMVaKmMMAnvwsEfnuaLiw.s['29']++;model=this._getModelFromTableRow(node);}else{__cov_XvMVaKmMMAnvwsEfnuaLiw.b['7'][1]++;}__cov_XvMVaKmMMAnvwsEfnuaLiw.s['30']++;table.fire('select',{model:model});__cov_XvMVaKmMMAnvwsEfnuaLiw.s['31']++;return true;},_getModelFromTableRow:function(node){__cov_XvMVaKmMMAnvwsEfnuaLiw.f['6']++;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['32']++;var id=node.getAttribute('data-yui3-record'),modelList=this.get('host').data;__cov_XvMVaKmMMAnvwsEfnuaLiw.s['33']++;return modelList.getByClientId(id);}});__cov_XvMVaKmMMAnvwsEfnuaLiw.s['34']++;Y.namespace('Libbit').DataTableSelectPlugin=DataTableSelectPlugin;},'1.0.0',{'requires':['libbit-datatable','plugin']});
+_yuitest_coverage["build/libbit-datatable-select/libbit-datatable-select.js"] = {
+    lines: {},
+    functions: {},
+    coveredLines: 0,
+    calledLines: 0,
+    coveredFunctions: 0,
+    calledFunctions: 0,
+    path: "build/libbit-datatable-select/libbit-datatable-select.js",
+    code: []
+};
+_yuitest_coverage["build/libbit-datatable-select/libbit-datatable-select.js"].code=["YUI.add('libbit-datatable-select', function (Y, NAME) {","","/**"," * Create a selection plugin for the LiBBiT DataTable widget."," */","function DataTableSelectPlugin(config) {","    DataTableSelectPlugin.superclass.constructor.apply(this, arguments);","}","","/**"," * The identity of the plugin."," */","DataTableSelectPlugin.NAME = 'dataTableSelectPlugin';","","/**"," * The namespace for the plugin."," */","DataTableSelectPlugin.NS = 'selectable';","","/**"," * Static property used to define the default attribute configuration of the"," * plugin."," */","DataTableSelectPlugin.ATTRS = {","","    /**","     * The row currently selected.","     */","    selectedRow : {","        value: null","    }","};","","// TODO: Persist selection after sorting.","Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {","","    /**","     * Bind the click events and set up a listener for the selectedRow attribute.","     */","    initializer: function () {","        var table      = this.get('host'),","            contentBox = table.get('contentBox');","","        this.after('selectedRowChange', this._afterSelectedRowChange, this);","        contentBox.on('click', this._handleClick, this);","    },","","    /**","     * Handles the click event, and updates the selectedRow attribute,","     * which fires an event on change.","     */","    _handleClick: function (e) {","        var target = e.target;","","        if (target.ancestor('.yui3-datatable-data tr')) {","            // This is a table row, update the selection.","            this.set('selectedRow', target.ancestor('.yui3-datatable-data tr'));","","        } else if (target.ancestor('.yui3-datatable-columns')) {","            // This is a table column, ignore.","            return false;","","        } else {","            // Clicked outside the rows, reset the selection.","            this.set('selectedRow', null);","        }","","        return true;","    },","","    /**","     * The selection changed, update the DOM and fire an event containing","     * the model that was selected.","     */","    _afterSelectedRowChange: function (e) {","        // TODO: Keep selection after sorting","        var table   = this.get('host'),","            node    = e.newVal,","            oldNode = e.prevVal,","            model   = null;","","        // Cancel if the selection did not change.","        if (node === oldNode) {","            return false;","        }","","        // Remove all selection CSS on the previous selection","        if (oldNode) {","            oldNode.all('td').removeClass('datatable-selected');","","            // Inverse the icon color if there is one.","            if (oldNode.one('i') && oldNode.one('i').hasClass('icon-white')) {","                oldNode.one('i').removeClass('icon-white');","            }","        }","","        // Apply the CSS to the new selection and fire an event.","        if (Y.Lang.isNull(node) === false) {","            // After unhighlighting, now highlight the current row.","            node.all('td').addClass('datatable-selected');","","            // Inverse the icon color if there is one.","            if (node.one('i')) {","                node.one('i').addClass('icon-white');","            }","","            model = this._getModelFromTableRow(node);","        }","","        // Fires the select event from the host and passes along the needed information.","        table.fire('select', { model: model });","","        return true;","    },","","    /**","     * Parse an HTML <tr/> node and retrieve the corresponding model from the model list.","     */","    _getModelFromTableRow: function (node) {","        // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),","        // for example 'image_1'.","        var id        = node.getAttribute('data-yui3-record'),","            modelList = this.get('host').data;","","        return modelList.getByClientId(id);","    }","});","","// -- Namespace ----------------------------------------------------------------","Y.namespace('Libbit').DataTableSelectPlugin = DataTableSelectPlugin;","","","}, '1.0.0', {\"requires\": [\"libbit-datatable\", \"plugin\"]});"];
+_yuitest_coverage["build/libbit-datatable-select/libbit-datatable-select.js"].lines = {"1":0,"6":0,"7":0,"13":0,"18":0,"24":0,"35":0,"41":0,"44":0,"45":0,"53":0,"55":0,"57":0,"59":0,"61":0,"65":0,"68":0,"77":0,"83":0,"84":0,"88":0,"89":0,"92":0,"93":0,"98":0,"100":0,"103":0,"104":0,"107":0,"111":0,"113":0,"122":0,"125":0,"130":0};
+_yuitest_coverage["build/libbit-datatable-select/libbit-datatable-select.js"].functions = {"DataTableSelectPlugin:6":0,"initializer:40":0,"_handleClick:52":0,"_afterSelectedRowChange:75":0,"_getModelFromTableRow:119":0,"(anonymous 1):1":0};
+_yuitest_coverage["build/libbit-datatable-select/libbit-datatable-select.js"].coveredLines = 34;
+_yuitest_coverage["build/libbit-datatable-select/libbit-datatable-select.js"].coveredFunctions = 6;
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 1);
+YUI.add('libbit-datatable-select', function (Y, NAME) {
+
+/**
+ * Create a selection plugin for the LiBBiT DataTable widget.
+ */
+_yuitest_coverfunc("build/libbit-datatable-select/libbit-datatable-select.js", "(anonymous 1)", 1);
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 6);
+function DataTableSelectPlugin(config) {
+    _yuitest_coverfunc("build/libbit-datatable-select/libbit-datatable-select.js", "DataTableSelectPlugin", 6);
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 7);
+DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
+}
+
+/**
+ * The identity of the plugin.
+ */
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 13);
+DataTableSelectPlugin.NAME = 'dataTableSelectPlugin';
+
+/**
+ * The namespace for the plugin.
+ */
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 18);
+DataTableSelectPlugin.NS = 'selectable';
+
+/**
+ * Static property used to define the default attribute configuration of the
+ * plugin.
+ */
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 24);
+DataTableSelectPlugin.ATTRS = {
+
+    /**
+     * The row currently selected.
+     */
+    selectedRow : {
+        value: null
+    }
+};
+
+// TODO: Persist selection after sorting.
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 35);
+Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
+
+    /**
+     * Bind the click events and set up a listener for the selectedRow attribute.
+     */
+    initializer: function () {
+        _yuitest_coverfunc("build/libbit-datatable-select/libbit-datatable-select.js", "initializer", 40);
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 41);
+var table      = this.get('host'),
+            contentBox = table.get('contentBox');
+
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 44);
+this.after('selectedRowChange', this._afterSelectedRowChange, this);
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 45);
+contentBox.on('click', this._handleClick, this);
+    },
+
+    /**
+     * Handles the click event, and updates the selectedRow attribute,
+     * which fires an event on change.
+     */
+    _handleClick: function (e) {
+        _yuitest_coverfunc("build/libbit-datatable-select/libbit-datatable-select.js", "_handleClick", 52);
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 53);
+var target = e.target;
+
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 55);
+if (target.ancestor('.yui3-datatable-data tr')) {
+            // This is a table row, update the selection.
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 57);
+this.set('selectedRow', target.ancestor('.yui3-datatable-data tr'));
+
+        } else {_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 59);
+if (target.ancestor('.yui3-datatable-columns')) {
+            // This is a table column, ignore.
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 61);
+return false;
+
+        } else {
+            // Clicked outside the rows, reset the selection.
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 65);
+this.set('selectedRow', null);
+        }}
+
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 68);
+return true;
+    },
+
+    /**
+     * The selection changed, update the DOM and fire an event containing
+     * the model that was selected.
+     */
+    _afterSelectedRowChange: function (e) {
+        // TODO: Keep selection after sorting
+        _yuitest_coverfunc("build/libbit-datatable-select/libbit-datatable-select.js", "_afterSelectedRowChange", 75);
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 77);
+var table   = this.get('host'),
+            node    = e.newVal,
+            oldNode = e.prevVal,
+            model   = null;
+
+        // Cancel if the selection did not change.
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 83);
+if (node === oldNode) {
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 84);
+return false;
+        }
+
+        // Remove all selection CSS on the previous selection
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 88);
+if (oldNode) {
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 89);
+oldNode.all('td').removeClass('datatable-selected');
+
+            // Inverse the icon color if there is one.
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 92);
+if (oldNode.one('i') && oldNode.one('i').hasClass('icon-white')) {
+                _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 93);
+oldNode.one('i').removeClass('icon-white');
+            }
+        }
+
+        // Apply the CSS to the new selection and fire an event.
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 98);
+if (Y.Lang.isNull(node) === false) {
+            // After unhighlighting, now highlight the current row.
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 100);
+node.all('td').addClass('datatable-selected');
+
+            // Inverse the icon color if there is one.
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 103);
+if (node.one('i')) {
+                _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 104);
+node.one('i').addClass('icon-white');
+            }
+
+            _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 107);
+model = this._getModelFromTableRow(node);
+        }
+
+        // Fires the select event from the host and passes along the needed information.
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 111);
+table.fire('select', { model: model });
+
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 113);
+return true;
+    },
+
+    /**
+     * Parse an HTML <tr/> node and retrieve the corresponding model from the model list.
+     */
+    _getModelFromTableRow: function (node) {
+        // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),
+        // for example 'image_1'.
+        _yuitest_coverfunc("build/libbit-datatable-select/libbit-datatable-select.js", "_getModelFromTableRow", 119);
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 122);
+var id        = node.getAttribute('data-yui3-record'),
+            modelList = this.get('host').data;
+
+        _yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 125);
+return modelList.getByClientId(id);
+    }
+});
+
+// -- Namespace ----------------------------------------------------------------
+_yuitest_coverline("build/libbit-datatable-select/libbit-datatable-select.js", 130);
+Y.namespace('Libbit').DataTableSelectPlugin = DataTableSelectPlugin;
+
+
+}, '1.0.0', {"requires": ["libbit-datatable", "plugin"]});
