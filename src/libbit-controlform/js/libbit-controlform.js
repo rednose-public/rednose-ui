@@ -127,15 +127,16 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             var controlContainer = Y.Node.create('<li>');
             var draft = self.get('draft');
 
-            if (!control.rules.is_text_value) {
+            // Filter out fields that have a 'is_text_value' and 'is_header' property.
+            if ((!control.rules.is_text_value) && (!control.rules.is_header)) {
                 controlElement = self._createInputElement(control.rules);
                 controlElement.data = control;
+
                 label.set('innerHTML', control.field.name);
 
-    //            console.warn('name:' + control.field.name + ' // content: ' + controlElement.get('value'));
                 if (draft !== null) {
                     var content = draft.getValue(control.field.id);
-    //                console.warn(content);
+
                     controlElement.set('value', content);
                 }
 
