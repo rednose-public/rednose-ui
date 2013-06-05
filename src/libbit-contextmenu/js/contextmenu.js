@@ -70,7 +70,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
         // Remove a previous context menu if it exists, ideally we prolly wanna toggle it.
         Y.all('.libbit-context-open').each(function (node) {
-            node.contextMenu.destroy();
+            node.contextMenu._contextMenu.destroy();
         });
 
         e.preventDefault();
@@ -86,7 +86,6 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         node.addClass('libbit-context-open');
 
         contextMenu.get('boundingBox').addClass('libbit-context-menu');
-
         contextMenu.get('boundingBox').setStyle('left', e.pageX);
         contextMenu.get('boundingBox').setStyle('top', e.pageY);
         contextMenu.show();
