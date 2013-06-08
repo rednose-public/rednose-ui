@@ -3,13 +3,8 @@
 }
 
 .libbit-dd-drag-hover {
-    background-color: #f5f5f5;
-    border: 1px solid #0088cc;
-    margin: -1px;
-    -webkit-border-radius: 3px;
-       -moz-border-radius: 3px;
-            border-radius: 3px;
- }
+    border: 2px solid #80C4E6;
+}
 
 .libbit-dd-drag-placeholder {
     background-color: #F9F9FC;
