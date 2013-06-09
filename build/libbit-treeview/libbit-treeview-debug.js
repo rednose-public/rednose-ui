@@ -129,7 +129,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Libbit.TreeView.Anim, Y.Libb
     icon: function (node) {
         var model     = node.data,
             icons     = this.get('model').get('icons'),
-            className = 'libbit-treeview-icon' + (node.isSelected() ? ' icon-white' : '');
+            className = 'libbit-treeview-icon' + (this.get('selectable') && node.isSelected() ? ' icon-white' : '');
 
         if (icons && model instanceof Y.Model  && icons[model.name]) {
             var icon = icons[model.name];
