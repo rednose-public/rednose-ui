@@ -7,6 +7,10 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
         this.after('errorChange', this._setError, this);
     },
 
+    destructor : function() {
+        this.get('panel') && this.get('panel').destroy();
+    },
+
     /**
      * Gets triggered after the 'error' attribute changes. Renders an
      * error message at a given property path.

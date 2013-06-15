@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>Treeview Test Page</title>
+    </head>
+
+    <body class='yui3-skin-sam'>
+
+        <div id="log"></div>
+        <div id="container"></div>
+
+        <script src="/build/yui/yui.js"></script>
+        <script>
+            var filter = (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw';
+            YUI({
+                coverage: ['libbit-dialog'],
+                filter: filter,
+                groups: {
+                    libbit: {
+                        combine:false,
+                            base: '/build/',
+                            patterns:{'libbit-': {
+                                configFn: function(me) {
+                                    if (/-css/.test(me.name)) {
+                                        me.type = 'css';
+                                        me.path = me.path.replace(/\.js/, '.css');
+                                        me.path = me.path.replace(/\-min/, '');
+                                    } else {
+                                        if (filter === 'coverage') {
+                                            me.path = me.path.replace(/\-min/, '-coverage');
+                                        } else {
+                                            me.path = me.path.replace(/\-min/, '');
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                modules: {
+                    'dialog-test': {
+                        use: [
+                            'dialog-base-test'
+                        ]
+                    },
+
+                    'dialog-base-test': {
+                        fullpath: './assets/dialog-base-test.js',
+                        requires: ['libbit-dialog', 'test']
+                    }
+                }
+            }).use('dialog-test', 'test-console', function (Y) {
+                new Y.Test.Console().render('#log');
+
+                Y.Test.Runner.setName('Dialog');
+                Y.Test.Runner.run();
+            });
+        </script>
+
+    </body>
+
+</html>
