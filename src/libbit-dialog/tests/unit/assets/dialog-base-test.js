@@ -3,28 +3,47 @@ YUI.add('dialog-base-test', function (Y) {
 var Assert = Y.Assert,
     suite;
 
-// -- Suite --------------------------------------------------------------------
 suite = new Y.Test.Suite('dialog');
 
+suite.add(new Y.Test.Case({
+    name: 'Lifecycle',
 
-// -- Widget ----------------------------------------------------------------
+    '`destroy()` should destroy the view': function () {
+        var dialog = new Y.Libbit.Dialog();
+
+        dialog.error('Test title', 'Test message body.', true);
+
+        Assert.isFalse(dialog.get('destroyed'));
+        Assert.isObject(Y.one('.libbit-dialog'));
+
+        dialog.destroy();
+
+        Assert.isTrue(dialog.get('destroyed'));
+        Assert.isNull(Y.one('.libbit-dialog'));
+    },
+
+    '`destroy()` shouldn\'t throw an error when called before the dialog is shown': function () {
+        var dialog = new Y.Libbit.Dialog();
+
+        Assert.isFalse(dialog.get('destroyed'));
+
+        dialog.destroy();
+
+        Assert.isTrue(dialog.get('destroyed'));
+    }
+}));
+
 suite.add(new Y.Test.Case({
     name: 'Basic',
 
-    setUp : function () {
-    },
-
-    tearDown: function () {
-    },
-
-    '`config()` should render the confirmation dialog correctly': function () {
+    '`confirm()` should render the confirmation dialog correctly': function () {
         var dialog = new Y.Libbit.Dialog();
 
         var title      = 'Test Title';
         var message    = 'Test message body.';
         var confirmVal = 'Confirm!';
 
-        dialog.confirm(title, message, undefined, undefined, confirmVal);
+        dialog.confirm(title, message, undefined, false, confirmVal);
 
         var titleNode   = Y.one('.libbit-dialog').one('.yui3-widget-hd');
         var messageNode = Y.one('.libbit-dialog').one('.yui3-widget-bd').one('p');
@@ -52,30 +71,69 @@ suite.add(new Y.Test.Case({
         Assert.areEqual(messageNode.get('text'), message);
 
         dialog.destroy();
-    },
+    }
+}));
 
-    '`destroy()` should destroy the view': function () {
+suite.add(new Y.Test.Case({
+    name: 'Callbacks',
+
+    '`confirm()` should close on cancel': function () {
         var dialog = new Y.Libbit.Dialog();
 
-        dialog.error('Test title', 'Test message body.', true);
+        var title   = 'Test Title';
+        var message = 'Test message body.';
 
-        Assert.isFalse(dialog.get('destroyed'));
-        Assert.isObject(Y.one('.libbit-dialog'));
+        dialog.confirm(title, message);
 
-        dialog.destroy();
+        Y.one('.yui3-widget-buttons').one('.btn').simulate('click');
 
-        Assert.isTrue(dialog.get('destroyed'));
         Assert.isNull(Y.one('.libbit-dialog'));
     },
 
-    '`destroy()` shouldn\'t throw an error when called before the dialog is shown': function () {
-        var dialog = new Y.Libbit.Dialog();
+    '`confirm()` should execute confirm callback method': function () {
+        var dialog = new Y.Libbit.Dialog(),
+            mock   = Y.Mock;
 
-        Assert.isFalse(dialog.get('destroyed'));
+        var title   = 'Test Title';
+        var message = 'Test message body.';
 
+        Y.Mock.expect(mock, { method: "callback", args: [] });
+
+        dialog.confirm(title, message, mock.callback);
+
+        Y.one('.yui3-widget-buttons').one('.btn-primary').simulate('click');
+
+        Y.Mock.verify(mock);
+        Assert.isNull(Y.one('.libbit-dialog'));
+    }
+}));
+
+suite.add(new Y.Test.Case({
+    name: 'Element focus',
+
+    'Default button should be focussed': function () {
+        var dialog;
+
+        dialog = Y.Libbit.Dialog.error('Test Title', 'Test message body.');
+        Y.Assert.areSame(Y.one('.yui3-widget-buttons').one('.btn').getDOMNode(), document.activeElement);
         dialog.destroy();
 
-        Assert.isTrue(dialog.get('destroyed'));
+        dialog = Y.Libbit.Dialog.confirm('Test Title', 'Test message body.');
+        Y.Assert.areSame(Y.one('.yui3-widget-buttons').one('.btn-primary').getDOMNode(), document.activeElement);
+        dialog.destroy();
+    }
+}));
+
+suite.add(new Y.Test.Case({
+    name: 'Keyboard events',
+
+    '`escape` key should close the dialog': function () {
+        var dialog;
+
+        dialog = Y.Libbit.Dialog.error('Test Title', 'Test message body.');
+
+        Y.one('.yui3-panel-content').simulate('keydown', {keyCode: 27});
+        Assert.isNull(Y.one('.libbit-dialog'));
     }
 }));
 

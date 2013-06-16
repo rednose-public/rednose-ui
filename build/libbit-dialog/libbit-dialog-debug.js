@@ -5,8 +5,12 @@ var Dialog;
 Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
     initializer: function () {
+        var self = this;
+
         // Bind the error attribute change event
         this.after('errorChange', this._setError, this);
+
+        Y.on('keydown', function (e) { if (e.keyCode === 27) { self.destroy(); }});
     },
 
     destructor : function() {
@@ -46,11 +50,12 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
      * Hide the active panel
      */
     hide: function() {
-        this.get('panel').destroy();
+        this.destroy();
     },
 
     prompt: function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {
-        var node,
+        var self = this,
+            node,
             panel;
 
         confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';
@@ -93,7 +98,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     value  : 'Cancel',
                     section: Y.WidgetStdMod.FOOTER,
                     action : function () {
-                        panel.destroy();
+                        self.destroy();
                     },
                     classNames: 'btn'
                  }, {
@@ -103,7 +108,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     action : function () {
                         if (callback !== null) {
                             if (callback(node) === true) {
-                                panel.destroy();
+                                self.destroy();
                             }
                         }
                     },
@@ -137,7 +142,8 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
     },
 
     confirm: function (title, message, callback, warning, confirmVal) {
-        var node,
+        var self = this,
+            node,
             panel;
 
         warning = typeof warning !== 'undefined' ? warning : false;
@@ -159,7 +165,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: false,
                     action : function () {
-                        panel.destroy();
+                        self.destroy();
                     },
                     classNames: 'btn'
                  }, {
@@ -170,7 +176,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                         if (callback) {
                             callback();
                         }
-                        panel.destroy();
+                        self.destroy();
                     },
                     classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-primary')
                  }
@@ -187,7 +193,8 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
     },
 
     error: function (title, message, warning) {
-        var node,
+        var self = this,
+            node,
             panel;
 
         if (warning) {
@@ -213,7 +220,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: true,
                     action : function () {
-                        panel.destroy();
+                        self.destroy();
                     },
                     classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-danger')
                  }
@@ -240,12 +247,16 @@ Dialog.confirm = function (title, message, callback, warning, confirmVal) {
     var dialog = new Dialog();
 
     dialog.confirm(title, message, callback, warning, confirmVal);
+
+    return dialog;
 };
 
 Dialog.error = function (title, message, warning) {
     var dialog = new Dialog();
 
     dialog.error(title, message, warning);
+
+    return dialog;
 };
 
 // -- Namespace ----------------------------------------------------------------
