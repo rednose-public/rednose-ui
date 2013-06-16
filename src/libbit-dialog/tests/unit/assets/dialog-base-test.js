@@ -3,7 +3,7 @@ YUI.add('dialog-base-test', function (Y) {
 var Assert = Y.Assert,
     suite;
 
-suite = new Y.Test.Suite('dialog');
+suite = new Y.Test.Suite('Dialog');
 
 suite.add(new Y.Test.Case({
     name: 'Lifecycle',
@@ -132,8 +132,8 @@ suite.add(new Y.Test.Case({
 
         dialog = Y.Libbit.Dialog.error('Test Title', 'Test message body.');
 
-        // Y.one('.yui3-panel-content').simulate('keydown', {keyCode: 27});
-        // Assert.isNull(Y.one('.libbit-dialog'));
+        Y.one('.yui3-panel-content').simulate('keydown', {keyCode: 27});
+        Assert.isNull(Y.one('.libbit-dialog'));
     }
 }));
 
