@@ -4,9 +4,10 @@
             "dd",
             "dd-plugin",
             "json-parse",
+            "libbit-css",
+            "libbit-panel",
             "node",
             "node-event-simulate",
-            "libbit-panel",
             "widget"
         ],
         "skinnable": true

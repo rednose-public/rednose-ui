@@ -1,12 +1,12 @@
-.libbit-bootstrap .yui3-datatable-col-hidden {
+.rednose-ui .yui3-datatable-col-hidden {
   display: none;
 }
 
-.libbit-bootstrap .yui3-datatable-sort-liner {
+.rednose-ui .yui3-datatable-sort-liner {
   outline: none;
 }
 
-.libbit-bootstrap .yui3-datatable td {
+.rednose-ui .yui3-datatable td {
   border: none;
   cursor: default;
   -webkit-touch-callout: none;

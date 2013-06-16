@@ -228,6 +228,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             centered: true, modal: true, visible: true
         }).render();
 
+        panel.get('boundingBox').addClass('rednose-widget');
         panel.get('boundingBox').addClass('libbit-dialog');
         panel.get('boundingBox').all('.yui3-button').each(function() {
             this.removeClass('yui3-button').removeClass('yui3-button-primary');
@@ -268,9 +269,10 @@ Y.namespace('Libbit').Dialog = Dialog;
         "dd",
         "dd-plugin",
         "json-parse",
+        "libbit-css",
+        "libbit-panel",
         "node",
         "node-event-simulate",
-        "libbit-panel",
         "widget"
     ],
     "skinnable": true

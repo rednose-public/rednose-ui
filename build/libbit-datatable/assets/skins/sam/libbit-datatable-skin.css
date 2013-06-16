@@ -1,30 +1,30 @@
-.libbit-bootstrap .yui3-skin-sam .yui3-datatable tr:hover td {
+.rednose-ui .yui3-skin-sam .yui3-datatable tr:hover td {
     background-color: #f5f5f5;
 }
 
-.libbit-bootstrap .yui3-skin-sam .yui3-datatable tr >td.datatable-selected,
-.libbit-bootstrap .yui3-skin-sam .yui3-datatable tr > td.datatable-selected:hover {
+.rednose-ui .yui3-skin-sam .yui3-datatable tr >td.datatable-selected,
+.rednose-ui .yui3-skin-sam .yui3-datatable tr > td.datatable-selected:hover {
     background-color: #0088cc;
     color: white;
 }
 
-.libbit-bootstrap .yui3-skin-sam .yui3-datatable-odd td.datatable-selected:hover  {
+.rednose-ui .yui3-skin-sam .yui3-datatable-odd td.datatable-selected:hover  {
     background-color: #0088cc;
     color: white;
 }
 
-.libbit-bootstrap .yui3-skin-sam .yui3-datatable-even .yui3-datatable-cell {
+.rednose-ui .yui3-skin-sam .yui3-datatable-even .yui3-datatable-cell {
     background-color: #f9f9f9;
 }
 
-.libbit-bootstrap .yui3-skin-sam .yui3-datatable-odd .yui3-datatable-cell {
+.rednose-ui .yui3-skin-sam .yui3-datatable-odd .yui3-datatable-cell {
     background-color: white;
 }
 
-.libbit-bootstrap .yui3-skin-sam .yui3-datatable-even .yui3-datatable-sorted {
+.rednose-ui .yui3-skin-sam .yui3-datatable-even .yui3-datatable-sorted {
     background-color: #f9f9f9;
 }
 
-.libbit-bootstrap .yui3-skin-sam .yui3-datatable-odd .yui3-datatable-cell {
+.rednose-ui .yui3-skin-sam .yui3-datatable-odd .yui3-datatable-cell {
     background-color: white;
 }

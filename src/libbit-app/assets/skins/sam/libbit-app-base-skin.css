@@ -93,18 +93,18 @@
 }
 
 /* YUI Overrides. */
-.libbit-bootstrap .yui3-skin-sam .libbit-app-master-view .yui3-widget-stdmod {
+.rednose-ui .yui3-skin-sam .libbit-app-master-view .yui3-widget-stdmod {
     position: absolute;
     width: 228px;
 }
 
-.libbit-bootstrap .yui3-skin-sam .libbit-app-master-view .yui3-widget-hd {
+.rednose-ui .yui3-skin-sam .libbit-app-master-view .yui3-widget-hd {
     position: absolute;
     width: 228px;
     padding: 0;
 }
 
-.libbit-bootstrap .yui3-skin-sam .libbit-app-master-view .yui3-widget-bd {
+.rednose-ui .yui3-skin-sam .libbit-app-master-view .yui3-widget-bd {
     position: absolute;
     top: 0;
     width: 228px;
@@ -112,7 +112,7 @@
     padding: 0;
 }
 
-.libbit-bootstrap .yui3-skin-sam .libbit-app-master-view .yui3-widget-ft {
+.rednose-ui .yui3-skin-sam .libbit-app-master-view .yui3-widget-ft {
     position: absolute;
     bottom: 0;
     width: 198px;

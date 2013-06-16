@@ -1,22 +1,22 @@
-.libbit-bootstrap .libbit-treeview-content .icon-toggle {
+.rednose-ui .libbit-treeview-content .icon-toggle {
     margin-left: 2px;
     margin-top: 3px;
 }
 
-.libbit-bootstrap .libbit-treeview-content .label-container {
+.rednose-ui .libbit-treeview-content .label-container {
     white-space: nowrap;
 }
 
-.libbit-bootstrap .libbit-treeview-icon {
+.rednose-ui .libbit-treeview-icon {
     width: 16px;
 }
 
 /* Hide overflow for animating nodes */
-.libbit-bootstrap .yui3-treeview-has-children {
+.rednose-ui .yui3-treeview-has-children {
     overflow: hidden;
 }
 
 /* Reserve the pointer for hyperlinks */
-.libbit-bootstrap .yui3-treeview-row {
+.rednose-ui .yui3-treeview-row {
     cursor: default;
 }

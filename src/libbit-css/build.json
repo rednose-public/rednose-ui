@@ -1,0 +1,11 @@
+{
+    "name": "libbit-css",
+    "builds": {
+        "libbit-css": {
+            "cssfiles": [
+                "bootstrap.css",
+                "rednose-css.css"
+            ]
+        }
+    }
+}

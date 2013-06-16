@@ -1,16 +1,16 @@
-.libbit-bootstrap .model-grid-container {
+.rednose-ui .model-grid-container {
     float: left;
     display: block;
     width: 246px;
     height: 300px;
 }
 
-.libbit-bootstrap .model-grid-icon {
+.rednose-ui .model-grid-icon {
     position: relative;
     background-color: white;
 }
 
-.libbit-bootstrap .model-grid-icon-wrapper {
+.rednose-ui .model-grid-icon-wrapper {
     position: relative;
     width: 159px;
     height: 225px;
@@ -19,7 +19,7 @@
     box-shadow: 0 3px 3px #888888;
 }
 
-.libbit-bootstrap .model-grid-icon-container {
+.rednose-ui .model-grid-icon-container {
     position: relative;
     width: 246px;
     height: 225px;
@@ -27,18 +27,18 @@
     margin-bottom: 3px;
 }
 
-.libbit-bootstrap .model-grid-footer {
+.rednose-ui .model-grid-footer {
     width: 246px;
     height: 33px;
     margin-top: 10px;
 }
 
-.libbit-bootstrap .model-grid-icon {
+.rednose-ui .model-grid-icon {
     position: relative;
     background-color: white;
 }
 
-.libbit-bootstrap .model-grid-footer .edit {
+.rednose-ui .model-grid-footer .edit {
     display: none;
     width: 246px;
     height: 20px;
@@ -51,10 +51,10 @@
     border: 0;
 }
 
-.libbit-bootstrap .model-grid-footer.editing .edit {
+.rednose-ui .model-grid-footer.editing .edit {
     display: block;
 }
 
-.libbit-bootstrap .model-grid-footer.editing .model-grid-name {
+.rednose-ui .model-grid-footer.editing .model-grid-name {
     display: none;
 }

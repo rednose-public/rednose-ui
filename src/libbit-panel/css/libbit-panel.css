@@ -1,5 +1,5 @@
 /* Outer panel styling. */
-.libbit-bootstrap .yui3-skin-sam .yui3-panel-content {
+.rednose-ui .yui3-skin-sam .yui3-panel-content {
     background-color: #ffffff;
     border: 1px solid #999;
     border: 1px solid rgba(0, 0, 0, 0.3);
@@ -15,20 +15,20 @@
 }
 
 /* Mask opacity */
-.libbit-bootstrap .yui3-skin-sam .yui3-widget-mask {
+.rednose-ui .yui3-skin-sam .yui3-widget-mask {
     opacity: 0.8;
     filter: alpha(opacity=80);
 }
 
 /* FIXME: Don't focus the panel to begin with. */
-.libbit-bootstrap .yui3-panel {
+.rednose-ui .yui3-panel {
     outline: none;
 }
 
 /* FIXME: These classes apply to Widget, not Panel. */
 
 /* Panel header styling. */
-.libbit-bootstrap .yui3-skin-sam .yui3-widget-stdmod .yui3-widget-hd {
+.rednose-ui .yui3-skin-sam .yui3-widget-stdmod .yui3-widget-hd {
     padding: 9px 15px;
     border-bottom: 1px solid #eee;
     margin: 0;
@@ -43,7 +43,7 @@
 }
 
 /* Panel footer styling. */
-.libbit-bootstrap .yui3-skin-sam .yui3-widget-stdmod .yui3-widget-ft {
+.rednose-ui .yui3-skin-sam .yui3-widget-stdmod .yui3-widget-ft {
     height: 26px;
     padding: 14px 15px 15px;
     border-top: 1px solid #ddd;
@@ -58,17 +58,17 @@
 }
 
 /* FIXME: Applies to nav panel in the main view, not the grid. */
-.libbit-bootstrap .yui3-widget-stdmod {
+.rednose-ui .yui3-widget-stdmod {
     height: 100%;
 }
 
 /* FIXME: Helper classes for the buttons, should prolly move up to a higer level within the framework. */
-.libbit-bootstrap .float-left {
+.rednose-ui .float-left {
     float: left;
     margin-right: 10px;
 }
 
-.libbit-bootstrap .float-right {
+.rednose-ui .float-right {
     float: right;
     margin-left: 10px;
 }

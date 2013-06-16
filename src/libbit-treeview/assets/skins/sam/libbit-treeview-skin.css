@@ -1,5 +1,5 @@
 /* Basic item styling */
-.libbit-bootstrap .yui3-skin-sam .yui3-treeview-row {
+.rednose-ui .yui3-skin-sam .yui3-treeview-row {
     color: #0088cc;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     text-decoration: none;
@@ -9,24 +9,24 @@
 }
 
 /* Basic hover */
-.libbit-bootstrap .yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-row:hover {
+.rednose-ui .yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-row:hover {
     color: #005580;
     background-color: #eeeeee;
 }
 
 /* Selected items and selected item hover. */
-.libbit-bootstrap .yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row,
-.libbit-bootstrap .yui3-skin-sam .yui3-treeview-selected:focus > .yui3-treeview-row,
-.libbit-bootstrap .yui3-skin-sam .yui3-treeview-children[aria-multiselectable="true"] .yui3-treeview-selected > .yui3-treeview-row,
-.libbit-bootstrap .yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row:hover,
-.libbit-bootstrap .yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-selected > .yui3-treeview-row:hover {
+.rednose-ui .yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row,
+.rednose-ui .yui3-skin-sam .yui3-treeview-selected:focus > .yui3-treeview-row,
+.rednose-ui .yui3-skin-sam .yui3-treeview-children[aria-multiselectable="true"] .yui3-treeview-selected > .yui3-treeview-row,
+.rednose-ui .yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row:hover,
+.rednose-ui .yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-selected > .yui3-treeview-row:hover {
     color: #ffffff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
     background-color: #0088cc;
 }
 
 /* Drag over highlight */
-.libbit-bootstrap .yui3-skin-sam .yui3-treeview .libbit-treeview-drop.yui3-dd-drop-over {
+.rednose-ui .yui3-skin-sam .yui3-treeview .libbit-treeview-drop.yui3-dd-drop-over {
     background-color: #80C4E6;
     color: #ffffff;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
@@ -36,11 +36,11 @@
 }
 
 /* Helper class for the inner container, so the border on the outer's container doesn't squeeze the view. */
-.libbit-bootstrap .libbit-treeview-drop-over-global .libbit-treeview-inner-container {
+.rednose-ui .libbit-treeview-drop-over-global .libbit-treeview-inner-container {
     margin: -2px;
 }
 
 /* Drop over for the outer container */
-.libbit-bootstrap .libbit-treeview-outer-container.libbit-treeview-drop-over-global {
+.rednose-ui .libbit-treeview-outer-container.libbit-treeview-drop-over-global {
     border: 2px solid #80C4E6;
 }
