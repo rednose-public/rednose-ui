@@ -1,6 +1,9 @@
 {
     "rednose-dropdown" : {
         "requires": [
+            "base",
+            "rednose-css",
+            "node",
             "gallery-bootstrap-dropdown"
         ]
     }

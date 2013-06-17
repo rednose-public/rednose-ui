@@ -2,10 +2,17 @@ YUI.add('rednose-dropdown', function (Y, NAME) {
 
 var Dropdown;
 
+/**
+ * content:
+ *     id: handle
+ *     title: display name
+ *     className: optional CSS class
+ *     icon: css Class?
+ *     disabled
+ */
 Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
-    /**
-     * Initializer, gets called upon instance initiation.
-     */
+    // -- Lifecycle methods ----------------------------------------------------
+
     initializer: function () {
         var node      = this._node,
             menuNode  = null,
@@ -14,6 +21,7 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
         node.wrap('<div class="dropdown-wrapper ' + direction + '"></div>');
         node.addClass('dropdown-toggle');
         node.setAttribute('data-toggle', 'dropdown');
+        this.node = node;
 
         menuNode = node.get('parentNode');
         menuNode.append(this._buildHTML(
@@ -37,6 +45,42 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
 
         this.set('node', menuNode);
     },
+
+    destructor: function () {
+        this.get('node').replace(this.node);
+
+        this.node.removeClass('dropdown-toggle');
+        this.node.removeAttribute('data-toggle');
+
+        delete this.node;
+    },
+
+    // -- Public methods -------------------------------------------------------
+
+    enable: function (id) {
+        // FIXME: Shouldn't we rename this to toggle?
+        this.disable(id);
+    },
+
+    disable: function (id) {
+        var container = this.get('node'),
+            node = container.one('[data-id=' + id + ']');
+
+        if (node.ancestor('li').hasClass('disabled')) {
+            node.ancestor('li').removeClass('disabled');
+        } else {
+            node.ancestor('li').addClass('disabled');
+        }
+    },
+
+    rename: function (id, title) {
+        var container = this.get('node'),
+            node = container.one('[data-id=' + id + ']');
+
+        node.setHTML(title);
+    },
+
+    // -- Protected methods ----------------------------------------------------
 
     _buildHTML: function(content) {
         var template = '<ul class="dropdown-menu"></ul>';
@@ -80,28 +124,6 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
         }
 
         return node.get('outerHTML');
-    },
-
-    enable: function(id) {
-        this.disable(id);
-    },
-
-    disable: function(id) {
-        var container = this.get('node'),
-            node = container.one('[data-id=' + id + ']');
-
-        if (node.ancestor('li').hasClass('disabled')) {
-            node.ancestor('li').removeClass('disabled');
-        } else {
-            node.ancestor('li').addClass('disabled');
-        }
-    },
-
-    rename: function(id, title) {
-        var container = this.get('node'),
-            node = container.one('[data-id=' + id + ']');
-
-        node.setHTML(title);
     }
 }, {
     NS : 'dropdown',
@@ -115,4 +137,4 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
 Y.namespace('Rednose').Dropdown = Dropdown;
 
 
-}, '1.0.0', {"requires": ["gallery-bootstrap-dropdown"]});
+}, '1.0.0', {"requires": ["base", "rednose-css", "node", "gallery-bootstrap-dropdown"]});
