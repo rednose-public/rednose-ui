@@ -1,0 +1,73 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    color: #4D4D4D;
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+li {
+    list-style: none;
+}
+
+/* CSS FIX */
+.dropdown-menu .disabled > a:hover {
+    background-image: none;
+}
+
+.rednose-grid-message-container {
+    color: #B3B3B3;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+    margin-top: 150px;
+}
+
+.rednose-grid-message-title {
+    font-size: 42px;
+    line-height: 50px;
+}
+
+.rednose-grid-message-body {
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.rednose-app-message-container {
+    color: #B3B3B3;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
+    -webkit-text-rendering: optimizeLegibility;
+    -moz-text-rendering: optimizeLegibility;
+    -ms-text-rendering: optimizeLegibility;
+    -o-text-rendering: optimizeLegibility;
+    text-rendering: optimizeLegibility;
+    margin-top: 300px;
+}
+
+ .rednose-app-message-title {
+    font-size: 42px;
+    line-height: 50px;
+}
+
+ .rednose-app-message-body {
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.rednose-ui .nav-header {
+    cursor: default;
+}
+
+.rednose-ui .yui3-skin-sam .rednose-app-modal-view .yui3-widget-bd {
+    padding: 0;
+}
