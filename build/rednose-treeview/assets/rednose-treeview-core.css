@@ -11,6 +11,10 @@
     width: 16px;
 }
 
+.rednose-ui .rednose-treeview-inner-container > .yui3-treeview-children {
+    margin: 0 !important;
+}
+
 /* Hide overflow for animating nodes */
 .rednose-ui .yui3-treeview-has-children {
     overflow: hidden;
