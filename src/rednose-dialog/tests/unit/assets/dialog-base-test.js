@@ -132,8 +132,8 @@ suite.add(new Y.Test.Case({
 
         dialog = Y.Rednose.Dialog.error('Test Title', 'Test message body.');
 
-        // Y.one('.yui3-panel-content').simulate('keydown', {keyCode: 27});
-        // Assert.isNull(Y.one('.rednose-dialog'));
+        Y.one('.yui3-panel-content').simulate('keydown', {keyCode: 27});
+        Assert.isNull(Y.one('.rednose-dialog'));
     }
 }));
 
