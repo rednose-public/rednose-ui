@@ -11,12 +11,17 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '<div class="model-grid-container" title="{{ name }}" data-yui3-record="{{ clientId }}">' +
         '    <div class="model-grid-icon-container">' +
         '        <div class="model-grid-icon-wrapper">' +
+        '        {{#if thumbnail}}' +
+        '            <img alt="{{ name }}" src="data:image/png;base64,{{ thumbnail }}" style="width: 159px; height: 225px;"/>' +
+        '        {{else}}' +
         '            <div class="model-grid-icon" />' +
+        '        {{/if}}' +
         '       </div>' +
         '    </div>' +
         '    <div class="model-grid-footer">' +
         '        <div class="model-grid-name">{{ name }}</div>' +
-        '        <input class="edit" type="text" value="{{ name }}" />' +
+        // FIXME
+        '        <input class="edit" type="text" value="{{ name }}" style="visibility: hidden;"/>' +
         '        <div class="model-grid-date">{{ dateCreated }}</div>' +
         '    </div>' +
         '</div>'
@@ -37,7 +42,7 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     render: function () {
         var container = this.get('container'),
             model = this.get('model'),
-            contextMenu = this.get('contextMenu'),
+            // contextMenu = this.get('contextMenu'),
             content;
 
         content = this.template(model.getAttrs());
