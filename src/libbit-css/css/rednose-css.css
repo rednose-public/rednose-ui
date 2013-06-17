@@ -1,9 +1,98 @@
+.rednose-ui {
+  /* Panel header styling. */
+
+  /* Panel footer styling. */
+
+  /* FIXME: Applies to nav panel in the main view, not the grid. */
+
+  /* FIXME: Helper classes for the buttons, should prolly move up to a higer level within the framework. */
+
+}
+
+.rednose-ui .clearfix {
+  *zoom: 1;
+}
+
+.rednose-ui .clearfix:before,
+.rednose-ui .clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.rednose-ui .clearfix:after {
+  clear: both;
+}
+
+.rednose-ui .hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.rednose-ui .input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 .rednose-ui .rednose-widget {
   margin: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: #333333;
+}
+
+.rednose-ui .yui3-skin-sam .yui3-widget-stdmod .yui3-widget-hd {
+  padding: 9px 15px;
+  margin: 0;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 27px;
+  color: inherit;
+  text-rendering: optimizelegibility;
+  background-color: transparent;
+  background-image: none;
+  border-bottom: 1px solid #eee;
+}
+
+.rednose-ui .yui3-skin-sam .yui3-widget-stdmod .yui3-widget-ft {
+  height: 26px;
+  padding: 14px 15px 15px;
+  margin-bottom: 0;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+     -moz-box-shadow: inset 0 1px 0 #ffffff;
+          box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.rednose-ui .yui3-skin-sam .yui3-widget-stdmod {
+  height: 100%;
+}
+
+.rednose-ui .yui3-skin-sam .float-left {
+  float: left;
+  margin-right: 10px;
+}
+
+.rednose-ui .yui3-skin-sam .float-right {
+  float: right;
+  margin-left: 10px;
+}
+
+.rednose-ui .navbar .brand {
+  font-weight: bold !important;
 }
 
 .rednose-ui .rednose-widget {

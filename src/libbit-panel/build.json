@@ -1,5 +1,8 @@
 {
     "name": "libbit-panel",
+    "exec": [
+        "recess --compile less/libbit-panel.less > css/libbit-panel.css"
+    ],
     "builds": {
         "libbit-panel": {
             "jsfiles": [

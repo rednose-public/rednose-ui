@@ -1,7 +1,63 @@
- .rednose-widget {
-   margin: 0;
-   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-   font-size: 14px;
-   line-height: 20px;
-   color: #333333;
+// Bootstrap core variables and mixins.
+@import "vendor/bootstrap/less/variables.less";
+@import "vendor/bootstrap/less/mixins.less";
+
+// Apply bootstrap body scaffolding to the widgets for now, as we don't want
+// to mess with the global body element.
+.rednose-widget {
+  margin: 0;
+  font-family: @baseFontFamily;
+  font-size: @baseFontSize;
+  line-height: @baseLineHeight;
+  color: @textColor;
+}
+
+
+// General YUI3 widget properties.
+
+/* Panel header styling. */
+.yui3-skin-sam .yui3-widget-stdmod .yui3-widget-hd {
+    padding: 9px 15px;
+    border-bottom: 1px solid #eee;
+    margin: 0;
+    font-family: inherit;
+    font-weight: bold;
+    color: inherit;
+    text-rendering: optimizelegibility;
+    font-size: 18px;
+    line-height: 27px;
+    background-color: transparent;
+    background-image: none;
+}
+
+/* Panel footer styling. */
+.yui3-skin-sam .yui3-widget-stdmod .yui3-widget-ft {
+    height: 26px;
+    padding: 14px 15px 15px;
+    border-top: 1px solid #ddd;
+    margin-bottom: 0;
+    background-color: @wellBackground;
+    .border-radius(0 0 6px 6px);
+    .box-shadow(inset 0 1px 0 #fff);
+}
+
+/* FIXME: Applies to nav panel in the main view, not the grid. */
+.yui3-skin-sam .yui3-widget-stdmod {
+    height: 100%;
+}
+
+/* FIXME: Helper classes for the buttons, should prolly move up to a higer level within the framework. */
+.yui3-skin-sam .float-left {
+    float: left;
+    margin-right: 10px;
+}
+
+.yui3-skin-sam .float-right {
+    float: right;
+    margin-left: 10px;
+}
+
+// Brand fix
+ .navbar .brand {
+    font-weight: bold !important;
 }
