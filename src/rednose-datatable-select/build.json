@@ -1,0 +1,10 @@
+{
+    "name": "rednose-datatable-select",
+    "builds": {
+        "rednose-datatable-select": {
+            "jsfiles": [
+                "rednose-datatable-select.js"
+            ]
+        }
+    }
+}

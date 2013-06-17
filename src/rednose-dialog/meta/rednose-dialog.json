@@ -1,0 +1,15 @@
+{
+    "rednose-dialog" : {
+        "requires": [
+            "dd",
+            "dd-plugin",
+            "json-parse",
+            "rednose-css",
+            "rednose-panel",
+            "node",
+            "node-event-simulate",
+            "widget"
+        ],
+        "skinnable": true
+    }
+}

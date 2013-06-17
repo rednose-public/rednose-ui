@@ -1,0 +1,24 @@
+{
+    "rednose-app-base" : {
+        "requires": [
+            "app-base",
+            "cssgrids",
+            "event-custom",
+            "handlebars-base",
+            "rednose-app-templates",
+            "rednose-panel"
+        ],
+        "skinnable": true
+    },
+    "rednose-model-undo" : {
+        "requires": [
+            "model"
+        ]
+    },
+    "rednose-model-spinner" : {
+        "requires": [
+            "rednose-app-base",
+            "model"
+        ]
+    }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "rednose-css",
+    "exec": [
+        "recess --compile less/rednose-ui.less > css/rednose-css.css",
+        "mkdir ../../build/img",
+        "cp vendor/bootstrap/img/* ../../build/img/"
+    ],
+    "builds": {
+        "rednose-css": {
+            "cssfiles": [
+                "rednose-css.css"
+            ]
+        }
+    }
+}

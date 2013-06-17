@@ -1,0 +1,10 @@
+{
+    "name": "rednose-contextmenu",
+    "builds": {
+        "rednose-contextmenu": {
+            "jsfiles": [
+                "contextmenu.js"
+            ]
+        }
+    }
+}

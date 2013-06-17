@@ -1,0 +1,7 @@
+{
+    "rednose-dropdown" : {
+        "requires": [
+            "gallery-bootstrap-dropdown"
+        ]
+    }
+}

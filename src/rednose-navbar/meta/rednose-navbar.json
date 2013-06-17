@@ -1,0 +1,17 @@
+{
+    "rednose-navbar" : {
+        "requires": [
+            "handlebars",
+            "gallery-bootstrap-dropdown"
+        ],
+        "skinnable": true
+    },
+
+    "rednose-navbar-recent" : {
+        "requires": [
+            "cookie",
+            "plugin",
+            "rednose-navbar"
+        ]
+    }
+}

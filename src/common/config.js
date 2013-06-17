@@ -11,10 +11,10 @@ YUI_config = {
                 'gallerycss-': { type: 'css' }
             }
         },
-        libbit: {
-            base: '../../../../../yui3-libbit/build/',
+        rednose: {
+            base: '../../../../../rednose-ui/build/',
             filter: 'debug',
-            patterns:  { 'libbit-': {
+            patterns:  { 'rednose-': {
                 configFn: function (me) {
                     if (/-css/.test(me.name)) {
                         me.type = 'css';

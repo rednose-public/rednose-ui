@@ -1,8 +1,0 @@
-{
-    "libbit-panel" : {
-        "requires": [
-            "libbit-panel-css",
-            "panel"
-        ]
-    }
-}

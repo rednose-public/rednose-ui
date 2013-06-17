@@ -1,0 +1,10 @@
+{
+    "name": "rednose-datatable",
+    "builds": {
+        "rednose-datatable": {
+            "jsfiles": [
+                "rednose-datatable.js"
+            ]
+        }
+    }
+}

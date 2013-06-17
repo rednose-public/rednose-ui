@@ -1,0 +1,8 @@
+{
+    "rednose-panel" : {
+        "requires": [
+            "rednose-panel-css",
+            "panel"
+        ]
+    }
+}

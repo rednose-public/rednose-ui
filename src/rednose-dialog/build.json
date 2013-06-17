@@ -1,0 +1,10 @@
+{
+    "name": "rednose-dialog",
+    "builds": {
+        "rednose-dialog": {
+            "jsfiles": [
+                "rednose-dialog.js"
+            ]
+        }
+    }
+}

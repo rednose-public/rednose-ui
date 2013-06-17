@@ -1,0 +1,9 @@
+{
+    "rednose-view-nav" : {
+        "requires": [
+            "event-custom",
+            "rednose-nav-container",
+            "view"
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+.rednose-ui .rednose-treeview-content .icon-toggle {
+    margin-left: 2px;
+    margin-top: 3px;
+}
+
+.rednose-ui .rednose-treeview-content .label-container {
+    white-space: nowrap;
+}
+
+.rednose-ui .rednose-treeview-icon {
+    width: 16px;
+}
+
+/* Hide overflow for animating nodes */
+.rednose-ui .yui3-treeview-has-children {
+    overflow: hidden;
+}
+
+/* Reserve the pointer for hyperlinks */
+.rednose-ui .yui3-treeview-row {
+    cursor: default;
+}

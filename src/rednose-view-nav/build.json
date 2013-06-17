@@ -1,0 +1,17 @@
+{
+    "name": "rednose-view-nav",
+
+    "builds": {
+        "rednose-view-nav": {
+            "jsfiles": [
+                "js/view-nav.js"
+            ]
+        },
+
+        "rednose-nav-container": {
+            "jsfiles": [
+                "js/nav-container.js"
+            ]
+        }
+    }
+}

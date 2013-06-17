@@ -1,0 +1,15 @@
+{
+    "rednose-controlform" : {
+        "requires": [
+            "calendar",
+            "dd-proxy",
+            "dd-constrain",
+            "node",
+            "model-list",
+            "model",
+            "base",
+            "rednose-dialog",
+            "rednose-contextmenu"
+        ]
+    }
+}

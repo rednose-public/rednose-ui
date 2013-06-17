@@ -1,0 +1,29 @@
+{
+    "name": "rednose-app",
+
+    "builds": {
+        "rednose-app-base": {
+            "jsfiles": [
+                "js/app-base.js"
+            ]
+        },
+
+        "rednose-app-templates": {
+            "jsfiles": [
+                "js/app-templates.js"
+            ]
+        },
+
+        "rednose-model-undo": {
+            "jsfiles": [
+                "js/model-extensions/undo.js"
+            ]
+        },
+
+        "rednose-model-spinner": {
+            "jsfiles": [
+                "js/model-extensions/spinner.js"
+            ]
+        }
+    }
+}

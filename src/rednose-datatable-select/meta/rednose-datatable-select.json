@@ -1,0 +1,8 @@
+{
+    "rednose-datatable-select" : {
+        "requires": [
+            "rednose-datatable",
+            "plugin"
+        ]
+    }
+}

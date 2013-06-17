@@ -1,0 +1,17 @@
+{
+    "rednose-view-nav" : {
+        "requires": [
+            "event-custom",
+            "rednose-nav-container",
+            "view"
+        ]
+    },
+
+    "rednose-nav-container" : {
+        "requires": [
+            "widget",
+            "widget-buttons",
+            "widget-stdmod"
+        ]
+    }
+}

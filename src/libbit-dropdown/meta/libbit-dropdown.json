@@ -1,7 +1,0 @@
-{
-    "libbit-dropdown" : {
-        "requires": [
-            "gallery-bootstrap-dropdown"
-        ]
-    }
-}
