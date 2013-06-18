@@ -55,6 +55,7 @@ Selectable.prototype = {
         var contentBox = this.get('contentBox');
 
         contentBox.delegate('click', this._handleClick, '.model-grid-icon-container', this);
+        contentBox.delegate('dblclick', this._handleDoubleClick, '.model-grid-icon-container', this);
         this.after('selectedItemChange', this._afterSelectedItemChange, this);
     },
 
@@ -64,6 +65,13 @@ Selectable.prototype = {
      */
     _handleClick: function (e) {
         this.set('selectedItem', e.currentTarget);
+    },
+
+    _handleDoubleClick: function (e) {
+        var node  = e.currentTarget,
+            model = this._getModelFromGridItem(node);
+
+        this.fire('open', { model: model });
     },
 
     /**

@@ -10,30 +10,30 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '    <div class="model-grid-icon-container">' +
         '        <div class="model-grid-icon-wrapper">' +
         '        {{#if thumbnail}}' +
-        '            <img alt="{{ name }}" src="data:image/png;base64,{{ thumbnail }}" style="width: 159px; height: 225px;"/>' +
+        '            <img alt="{{ name }}" src="data:image/png;base64,{{ thumbnail }}" style="width: 110px; height: 156px;"/>' +
         '        {{else}}' +
         '            <div class="model-grid-icon" />' +
         '        {{/if}}' +
-        '       </div>' +
         '    </div>' +
         '    <div class="model-grid-footer">' +
         '        <div class="model-grid-name">{{ name }}</div>' +
         // FIXME
-        '        <input class="edit" type="text" value="{{ name }}" style="visibility: hidden;"/>' +
+        // '        <input class="edit" type="text" value="{{ name }}" style="visibility: hidden;"/>' +
         '        <div class="model-grid-date">{{ dateCreated }}</div>' +
         '    </div>' +
         '</div>'
     ),
 
-    events: {
-        '.model-grid-name': {
-            click: 'edit'
-        },
-        '.edit': {
-            blur: 'close',
-            keypress: 'enterUpdate'
-        }
-    },
+    // FIXME
+    // events: {
+    //     '.model-grid-name': {
+    //         click: 'edit'
+    //     },
+    //     '.edit': {
+    //         blur: 'close',
+    //         keypress: 'enterUpdate'
+    //     }
+    // },
 
     // Render this view in our <li> container, and fill it with the
     // data in our Model.
