@@ -18,6 +18,9 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         this.on('contextMenu:deleteForm', this.deleteForm);
         this.on('contextMenu:deleteFieldGroup', this._deleteFieldGroup);
         this.on('contextMenu:editFieldGroup', this._editFieldGroup);
+
+        // Wizard step change triggered, show and hide the proper forms
+        this.after('stepChange', this._stepChange);
     },
 
     render: function(formsModel) {
@@ -40,6 +43,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             self._renderForm(formItem);
         });
 
+        this.set('step', 0);
         this.fire('rendered');
     },
 
@@ -70,6 +74,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         formElement.append(legend);
         formElement.set('name', formItem.get('id'));
+        formElement.setAttribute('data-step', formItem.get('step'));
 
         Y.Array.each(fieldGroupOrder, function(groupId) {
             Y.Array.each(fieldGroups, function(group) {
@@ -246,6 +251,21 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
     },
 
+    _stepChange: function(e) {
+        var self = this;
+        var container = this.get('srcNode');
+
+        container.all('*[data-step]').each(function(formElement) {
+            var formStep = formElement.getAttribute('data-step');
+
+            if (parseInt(formStep) !== parseInt(self.get('step'))) {
+                formElement.hide();
+            } else {
+                formElement.show();
+            }
+        });
+    },
+
     ddOver: function(e, referenceForm) {
         var formNode = Y.one('#' + referenceForm.get('id'));
 
@@ -391,6 +411,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 }, {
     ATTRS: {
         srcNode: { value: null },
+        step: { value: -1 },
         formsModel: { value: null },
         className: { value: 'formContainer' },
         editMode: { value: false },
