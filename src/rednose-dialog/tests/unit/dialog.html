@@ -12,46 +12,13 @@
         <div id="container"></div>
 
         <script src="/build/yui/yui.js"></script>
+        <script src="/tests/yui-config.js"></script>
+        <script src="./assets/dialog-base-test.js"></script>
         <script>
-            var filter = (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw';
             YUI({
                 coverage: ['rednose-dialog'],
-                filter: filter,
-                groups: {
-                    rednose: {
-                        combine:false,
-                            base: '/build/',
-                            patterns:{'rednose-': {
-                                configFn: function(me) {
-                                    if (/-css/.test(me.name)) {
-                                        me.type = 'css';
-                                        me.path = me.path.replace(/\.js/, '.css');
-                                        me.path = me.path.replace(/\-min/, '');
-                                    } else {
-                                        if (filter === 'coverage') {
-                                            me.path = me.path.replace(/\-min/, '-coverage');
-                                        } else {
-                                            me.path = me.path.replace(/\-min/, '');
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                },
-                modules: {
-                    'dialog-test': {
-                        use: [
-                            'dialog-base-test'
-                        ]
-                    },
-
-                    'dialog-base-test': {
-                        fullpath: './assets/dialog-base-test.js',
-                        requires: ['rednose-dialog', 'test']
-                    }
-                }
-            }).use('dialog-test', 'test-console', function (Y) {
+                filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
+            }).use('dialog-base-test', 'test-console', function (Y) {
                 new Y.Test.Console().render('#log');
 
                 Y.Test.Runner.setName('Dialog');

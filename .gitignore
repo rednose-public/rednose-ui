@@ -1,6 +1,4 @@
 .DS_Store
 *.swp
 node_modules/*
-web/*
-reports/*
-junit.xml
+vendor/*

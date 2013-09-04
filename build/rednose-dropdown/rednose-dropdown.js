@@ -3,6 +3,7 @@ YUI.add('rednose-dropdown', function (Y, NAME) {
 var Dropdown;
 
 /**
+ * dropup
  * content:
  *     id: handle
  *     title: display name
