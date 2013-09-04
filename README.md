@@ -28,5 +28,6 @@ yogi build
     [sudo] npm install -g phantomjs
 
 2. Run from the `src/` or a module folder:
+
     ```
     yogi test
