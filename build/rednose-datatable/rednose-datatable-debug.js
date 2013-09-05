@@ -8,7 +8,7 @@ DataTable = Y.Base.create('dataTable', Y.DataTable.Base, [ Y.DataTable.Scrollabl
 			return 'table';
 		}
 
-		return 'rednose-ui-' + name;
+		return 'rednose-datatable-' + name;
 	}
 });
 
