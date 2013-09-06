@@ -98,7 +98,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
             oldNode.all('td').removeClass(table.getClassName(CSS_SELECTED));
 
             // Inverse the icon color if there is one.
-            if (oldNode.one('i') && oldNode.one('i').hasClass(CSS_ICON_INVERT)) {
+            if (oldNode.one('i') && oldNode.one('i').hasClass(CSS_BOOTSTRAP_ICON_WHITE)) {
                 oldNode.one('i').removeClass(CSS_BOOTSTRAP_ICON_WHITE);
             }
         }
