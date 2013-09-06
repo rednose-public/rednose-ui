@@ -1,14 +1,13 @@
 /**
  * Create a selection plugin for the RedNose DataTable widget.
  */
-var CSS_DATATABLE   = 'datatable',
-    CSS_SELECTED    = 'selected',
+var CSS_SELECTED    = 'selected',
     CSS_DATA        = 'data',
     CSS_COLUMNS     = 'columns',
     CSS_ICON_INVERT = 'icon-white',
     DATA_RECORD     = 'data-yui3-record';
 
-function DataTableSelectPlugin() {
+function DataTableSelectPlugin () {
     DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
 }
 
@@ -92,7 +91,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
 
         // Remove all selection CSS on the previous selection
         if (oldNode) {
-            oldNode.all('td').removeClass(table.getClassName(CSS_DATATABLE, CSS_SELECTED));
+            oldNode.all('td').removeClass(table.getClassName(CSS_SELECTED));
 
             // Inverse the icon color if there is one.
             if (oldNode.one('i') && oldNode.one('i').hasClass(CSS_ICON_INVERT)) {
@@ -103,7 +102,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         // Apply the CSS to the new selection and fire an event.
         if (Y.Lang.isNull(node) === false) {
             // After unhighlighting, now highlight the current row.
-            node.all('td').addClass(table.getClassName(CSS_DATATABLE, CSS_SELECTED));
+            node.all('td').addClass(table.getClassName(CSS_SELECTED));
 
             // Inverse the icon color if there is one.
             if (node.one('i')) {

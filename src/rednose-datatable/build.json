@@ -5,11 +5,7 @@
             "jsfiles": [
                 "rednose-datatable.js"
             ]
-        }
-    },
-
-    "name": "rednose-datatable-select",
-    "builds": {
+        },
         "rednose-datatable-select": {
             "jsfiles": [
                 "plugins/rednose-datatable-select.js"
