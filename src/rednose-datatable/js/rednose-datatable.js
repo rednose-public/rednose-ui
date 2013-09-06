@@ -1,12 +1,24 @@
 var DataTable;
 
 DataTable = Y.Base.create('dataTable', Y.DataTable.Base, [ Y.DataTable.Scrollable, Y.DataTable.Sortable ], {
-	getClassName: function(name) {
-		if (name === 'table') {
+	getClassName: function() {
+		// XXX: Bootstrap compatible.
+		if (arguments[0] === 'table') {
 			return 'table';
 		}
 
-		return 'rednose-datatable-' + name;
+		var sPrefix    = 'rednose',
+			sDelimiter = '-';
+
+        var args = Y.Array(arguments);
+
+        if (args[args.length-1] !== true) {
+            args.unshift(sPrefix);
+        } else {
+            args.pop();
+        }
+
+		return args.join(sDelimiter);
 	}
 });
 

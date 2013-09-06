@@ -6,5 +6,11 @@
             "datatable-sort"
         ],
         "skinnable": true
+    },
+    "rednose-datatable-select" : {
+        "requires": [
+            "rednose-datatable",
+            "plugin"
+        ]
     }
 }

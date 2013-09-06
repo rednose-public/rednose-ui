@@ -1,7 +1,14 @@
 /**
  * Create a selection plugin for the RedNose DataTable widget.
  */
-function DataTableSelectPlugin(config) {
+var CSS_DATATABLE   = 'datatable',
+    CSS_SELECTED    = 'selected',
+    CSS_DATA        = 'data',
+    CSS_COLUMNS     = 'columns',
+    CSS_ICON_INVERT = 'icon-white',
+    DATA_RECORD     = 'data-yui3-record';
+
+function DataTableSelectPlugin() {
     DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
 }
 
@@ -48,13 +55,14 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
      * which fires an event on change.
      */
     _handleClick: function (e) {
-        var target = e.target;
+        var target = e.target,
+            host   = this.get('host');
 
-        if (target.ancestor('.yui3-datatable-data tr')) {
+        if (target.ancestor('.' + host.getClassName(CSS_DATA) + ' tr')) {
             // This is a table row, update the selection.
-            this.set('selectedRow', target.ancestor('.yui3-datatable-data tr'));
+            this.set('selectedRow', target.ancestor('.' + host.getClassName(CSS_DATA) +  ' tr'));
 
-        } else if (target.ancestor('.yui3-datatable-columns')) {
+        } else if (target.ancestor('.' + host.getClassName(CSS_COLUMNS))) {
             // This is a table column, ignore.
             return false;
 
@@ -84,22 +92,22 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
 
         // Remove all selection CSS on the previous selection
         if (oldNode) {
-            oldNode.all('td').removeClass('datatable-selected');
+            oldNode.all('td').removeClass(table.getClassName(CSS_DATATABLE, CSS_SELECTED));
 
             // Inverse the icon color if there is one.
-            if (oldNode.one('i') && oldNode.one('i').hasClass('icon-white')) {
-                oldNode.one('i').removeClass('icon-white');
+            if (oldNode.one('i') && oldNode.one('i').hasClass(CSS_ICON_INVERT)) {
+                oldNode.one('i').removeClass(CSS_ICON_INVERT);
             }
         }
 
         // Apply the CSS to the new selection and fire an event.
         if (Y.Lang.isNull(node) === false) {
             // After unhighlighting, now highlight the current row.
-            node.all('td').addClass('datatable-selected');
+            node.all('td').addClass(table.getClassName(CSS_DATATABLE, CSS_SELECTED));
 
             // Inverse the icon color if there is one.
             if (node.one('i')) {
-                node.one('i').addClass('icon-white');
+                node.one('i').addClass(CSS_ICON_INVERT);
             }
 
             model = this._getModelFromTableRow(node);
@@ -117,7 +125,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
     _getModelFromTableRow: function (node) {
         // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),
         // for example 'image_1'.
-        var id        = node.getAttribute('data-yui3-record'),
+        var id        = node.getAttribute(DATA_RECORD),
             modelList = this.get('host').data;
 
         return modelList.getByClientId(id);
