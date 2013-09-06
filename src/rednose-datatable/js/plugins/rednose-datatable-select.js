@@ -1,11 +1,13 @@
 /**
  * Create a selection plugin for the RedNose DataTable widget.
  */
-var CSS_SELECTED    = 'selected',
-    CSS_DATA        = 'data',
-    CSS_COLUMNS     = 'columns',
-    CSS_ICON_INVERT = 'icon-white',
-    DATA_RECORD     = 'data-yui3-record';
+var CSS_SELECTED = 'selected',
+    CSS_DATA     = 'data',
+    CSS_COLUMNS  = 'columns',
+
+    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white',
+
+    DATA_RECORD = 'data-yui3-record';
 
 function DataTableSelectPlugin () {
     DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
@@ -95,7 +97,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
 
             // Inverse the icon color if there is one.
             if (oldNode.one('i') && oldNode.one('i').hasClass(CSS_ICON_INVERT)) {
-                oldNode.one('i').removeClass(CSS_ICON_INVERT);
+                oldNode.one('i').removeClass(CSS_BOOTSTRAP_ICON_WHITE);
             }
         }
 
@@ -106,7 +108,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
 
             // Inverse the icon color if there is one.
             if (node.one('i')) {
-                node.one('i').addClass(CSS_ICON_INVERT);
+                node.one('i').addClass(CSS_BOOTSTRAP_ICON_WHITE);
             }
 
             model = this._getModelFromTableRow(node);
