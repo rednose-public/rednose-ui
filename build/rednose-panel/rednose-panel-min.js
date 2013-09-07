@@ -1,1 +1,0 @@
-YUI.add("rednose-panel",function(e,t){var n;n=e.Base.create("panel",e.Panel,[],{initializer:function(){var e=this.get("boundingBox"),t=this;this.after("render",function(){var n=e.one(".yui3-button-close");n&&n.ancestor(".yui3-widget-hd").remove(),t.move(1,1),t.centered()})}}),e.namespace("Rednose").Panel=n},"1.0.0",{requires:["rednose-panel-css","panel"]});
