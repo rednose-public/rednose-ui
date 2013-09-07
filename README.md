@@ -9,25 +9,21 @@
 2. Install global dependencies:
 
     ```
-    [sudo] npm install -g shifter yogi recess
+    [sudo] npm install -g grunt-cli
 
-### Yogi
+### Development
 
-Run from the `src/` or a module folder:
-
-* Build RedNoseUI:
+* Install local dependencies and build the source:
 
     ```
-yogi build
+    npm install
 
-### Testing
-
-1.  To run the test suites you'll need PhantomJS:
+* Building RedNoseUI:
 
     ```
-    [sudo] npm install -g phantomjs
+    grunt build
 
-2. Run from the `src/` or a module folder:
+* Run the unit tests:
 
     ```
-    yogi test
+    grunt test
