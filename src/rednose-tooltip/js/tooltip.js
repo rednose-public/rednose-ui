@@ -1,12 +1,14 @@
-var Tooltip;
+var Tooltip,
+
+	ATTR_STYLE_BOOTSTRAP_ZINDEX_TOOLTIP = '1030';
 
 Tooltip = Y.Base.create('tooltip', Y.Bootstrap.Tooltip, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function () {
-        // Correct the z-index because the parent class set's it to 0.
+        // Correct the z-index because the superclass set's it to 0.
         // Value is taken from Bootstrap's '@zindexTooltip' variable.
-        this.set('zIndex', 1030);
+        this.set('zIndex', ATTR_STYLE_BOOTSTRAP_ZINDEX_TOOLTIP);
     }
 });
 
