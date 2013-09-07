@@ -4,7 +4,7 @@
 
 ### Dependencies
 
-1. Install [NodeJS](http://nodejs.org), if you don't have it yet.
+1. Install [node.js](http://nodejs.org), if you don't have it yet.
 
 2. Install global dependencies:
 
