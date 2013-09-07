@@ -6,7 +6,9 @@ Tooltip = Y.Base.create('tooltip', Y.Bootstrap.Tooltip, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function () {
-        this.set('zIndex', 2000);
+        // Correct the z-index because the parent class set's it to 0.
+        // Value is taken from Bootstrap's '@zindexTooltip' variable.
+        this.set('zIndex', 1030);
     }
 });
 

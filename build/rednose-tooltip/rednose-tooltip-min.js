@@ -1,1 +1,1 @@
-YUI.add("rednose-tooltip",function(e,t){var n;n=e.Base.create("tooltip",e.Bootstrap.Tooltip,[],{initializer:function(){this.set("zIndex",2e3)}}),e.namespace("Rednose").Tooltip=n},"1.0.0",{requires:["gallery-bootstrap-tooltip"]});
+YUI.add("rednose-tooltip",function(e,t){var n;n=e.Base.create("tooltip",e.Bootstrap.Tooltip,[],{initializer:function(){this.set("zIndex",1030)}}),e.namespace("Rednose").Tooltip=n},"1.0.0",{requires:["gallery-bootstrap-tooltip"]});
