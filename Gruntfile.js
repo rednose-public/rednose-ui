@@ -12,6 +12,7 @@ module.exports = function(grunt) {
 			args = [
 				yogi,
 				'build',
+				'--no-lint',
 				'--replace-version=' + meta.version,
 			],
 			child;
