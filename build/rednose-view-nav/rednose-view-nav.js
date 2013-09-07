@@ -97,7 +97,6 @@ Nav = Y.Base.create('nav', Y.View, [], {
             var value     = button.value,
                 primary   = button.primary,
                 position  = button.position ? button.position : 'left',
-                title     = button.title ? button.title : (value ? value : null),
                 disabled  = button.disabled,
                 className = button.className,
                 icon      = button.icon,
@@ -108,10 +107,6 @@ Nav = Y.Base.create('nav', Y.View, [], {
 
             if (value) {
                 node.set('text', value);
-            }
-
-            if (title) {
-                node.set('title', title);
             }
 
             if (icon) {
