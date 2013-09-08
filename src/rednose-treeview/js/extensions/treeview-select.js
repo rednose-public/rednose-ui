@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 /**
  * Selection extension for the RedNose TreeView widget.
  */
@@ -26,7 +28,7 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     destructor: function () {
         // Destroy the array so it doesn't persist.
-        this._selectMap.length = 0;
+        this._selectMap = null;
     },
 
     // -- Protected Methods ----------------------------------------------------

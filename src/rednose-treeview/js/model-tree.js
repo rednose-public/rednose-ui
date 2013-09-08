@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var ModelTree;
 
 ModelTree = Y.Base.create('modelTree', Y.Model, [], {

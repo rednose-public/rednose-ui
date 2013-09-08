@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var DD;
 
 /**
@@ -159,7 +161,9 @@ DD = Y.Base.create('dd', Y.Base, [], {
      */
     _destroyDd: function() {
         for (var i in this._ddMap) {
-            this._ddMap[i].destroy();
+            if (this.ddMap[i]) {
+                this._ddMap[i].destroy();
+            }
         }
 
         this._ddMap.length = 0;

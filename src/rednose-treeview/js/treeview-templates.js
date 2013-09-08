@@ -1,3 +1,5 @@
+/*jshint expr:true, maxlen:200, onevar:false */
+
 var Micro = Y.Template.Micro;
 
 // Overrides `gallery-sm-treeview-templates`
