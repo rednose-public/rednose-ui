@@ -10,6 +10,7 @@ var TreeView,
 
     CSS_INNER_CONTAINER = 'rednose-treeview-inner-container',
 
+    CSS_BOOTSTRAP_ICON       = 'icon',
     CSS_BOOTSTRAP_ICON_WHITE = 'icon-white';
 
 /**
@@ -131,7 +132,14 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
     icon: function (node) {
         var model     = node.data,
             icons     = this.get('model').get('icons'),
-            className = 'rednose-treeview-icon' + (this.get('selectable') && node.isSelected() ? ' ' + CSS_BOOTSTRAP_ICON_WHITE : '');
+            className = 'rednose-treeview-icon',
+            htmlNode   = this.getHTMLNode(node);
+
+        // Only add helper class if this node has an icon.
+        if (htmlNode && htmlNode.one('.rednose-treeview-icon').hasClass(CSS_BOOTSTRAP_ICON) &&
+            this.get('selectable') && node.isSelected()) {
+            className += (' ' + CSS_BOOTSTRAP_ICON_WHITE);
+        }
 
         if (icons && model instanceof Y.Model  && icons[model.name]) {
             var icon = icons[model.name];
