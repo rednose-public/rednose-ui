@@ -4,6 +4,8 @@ var Nav;
  * Y.View extension to wrap the container into a panel with a header and footer navigation bar.
  */
 Nav = Y.Base.create('nav', Y.View, [], {
+    // -- Public Properties ----------------------------------------------------
+
     /**
      * Title property, sets the panel's header content.
      */
@@ -13,6 +15,8 @@ Nav = Y.Base.create('nav', Y.View, [], {
      * Buttons property, sets the panel's footer buttons.
      */
     buttons : null,
+
+    // -- Protected Properties -------------------------------------------------
 
     /**
      * Contains the footer DOM node.
@@ -24,6 +28,8 @@ Nav = Y.Base.create('nav', Y.View, [], {
      */
     _buttonMap: {},
 
+    // -- Lifecycle ------------------------------------------------------------
+
     /**
      * Initializer, gets called upon instance initiation.
      */
@@ -32,6 +38,15 @@ Nav = Y.Base.create('nav', Y.View, [], {
         this._buildFooter();
     },
 
+    destructor: function () {
+        this.title      = null;
+        this.buttons    = null;
+        this._footer    = null;
+        this._buttonMap = null;
+    },
+
+    // -- Public Methods -------------------------------------------------------
+
     /**
      * Get a button node by name.
      */
@@ -39,44 +54,7 @@ Nav = Y.Base.create('nav', Y.View, [], {
         return this._buttonMap[name];
     },
 
-    /**
-     * Wrap the view into a panel after it's rendered.
-     */
-    _afterRender: function () {
-        var container = this.get('container'),
-            header    = this.title,
-            body      = Y.Node.create('<div></div>'),
-            footer    = this._footer,
-            config    = { bodyContent: body },
-            panel;
-
-        container.addClass('rednose-view-nav');
-
-        // Transfer the child nodes from the view container to the new body container.
-        container.get('children').each(function (c) {
-            body.append(c);
-        });
-
-        if (header !== null) {
-            config.headerContent = header;
-        }
-
-        if (footer !== null) {
-            config.footerContent = footer;
-        }
-
-        panel = new Y.Rednose.NavContainer(config);
-
-        // Render the panel within the view container.
-        panel.render(container);
-
-        if (this.panel) {
-            this._repositionPanel(this.panel);
-        }
-
-        // Add a CSS handle to the widget-body
-        panel.get('boundingBox').one('.yui3-widget-bd').addClass('rednose-' + this.name);
-    },
+    // -- Protected Methods ----------------------------------------------------
 
     _repositionPanel: function (panel) {
         panel.move(1, 1);
@@ -170,8 +148,48 @@ Nav = Y.Base.create('nav', Y.View, [], {
      */
      _getButtons: function () {
         return this.buttons;
-    }
+    },
 
+    // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * Wrap the view into a panel after it's rendered.
+     */
+    _afterRender: function () {
+        var container = this.get('container'),
+            header    = this.title,
+            body      = Y.Node.create('<div></div>'),
+            footer    = this._footer,
+            config    = { bodyContent: body },
+            panel;
+
+        container.addClass('rednose-view-nav');
+
+        // Transfer the child nodes from the view container to the new body container.
+        container.get('children').each(function (c) {
+            body.append(c);
+        });
+
+        if (header !== null) {
+            config.headerContent = header;
+        }
+
+        if (footer !== null) {
+            config.footerContent = footer;
+        }
+
+        panel = new Y.Rednose.NavContainer(config);
+
+        // Render the panel within the view container.
+        panel.render(container);
+
+        if (this.panel) {
+            this._repositionPanel(this.panel);
+        }
+
+        // Add a CSS handle to the widget-body
+        panel.get('boundingBox').one('.yui3-widget-bd').addClass('rednose-' + this.name);
+    }
 }, {
     ATTRS: {
         buttons: {
