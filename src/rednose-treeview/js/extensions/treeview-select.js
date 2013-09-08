@@ -3,7 +3,10 @@
 /**
  * Selection extension for the RedNose TreeView widget.
  */
-var Selectable;
+var Selectable,
+
+    CSS_BOOTSTRAP_ICON       = 'icon',
+    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white';
 
 Selectable = Y.Base.create('selectable', Y.Base, [], {
 
@@ -58,15 +61,18 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     _handleSelect: function (e) {
         var htmlNode   = this.getHTMLNode(e.node);
 
-        htmlNode.one('.rednose-treeview-icon').addClass('icon-white');
+        // Only add helper class if this node has an icon.
+        if (htmlNode.one('.rednose-treeview-icon').hasClass(CSS_BOOTSTRAP_ICON)) {
+            htmlNode.one('.rednose-treeview-icon').addClass(CSS_BOOTSTRAP_ICON_WHITE);
+        }
     },
 
     _handleUnselect: function (e) {
         var htmlNode   = this.getHTMLNode(e.node);
             selectable = this.get('selectable');
 
-        if (htmlNode.one('.rednose-treeview-icon').hasClass('icon-white')) {
-            htmlNode.one('.rednose-treeview-icon').removeClass('icon-white');
+        if (htmlNode.one('.rednose-treeview-icon').hasClass(CSS_BOOTSTRAP_ICON_WHITE)) {
+            htmlNode.one('.rednose-treeview-icon').removeClass(CSS_BOOTSTRAP_ICON_WHITE);
         }
     },
 

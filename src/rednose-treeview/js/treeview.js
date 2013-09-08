@@ -6,7 +6,11 @@
  * @module rednose-treeview
  */
 
-var TreeView;
+var TreeView,
+
+    CSS_INNER_CONTAINER = 'rednose-treeview-inner-container',
+
+    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white';
 
 /**
  * A TreeView widget, implementing Y.View.
@@ -94,7 +98,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
         var container     = this.get('container'),
             isTouchDevice = 'ontouchstart' in Y.config.win,
             header        = this.header,
-            subContainer  = Y.Node.create('<div class="rednose-treeview-inner-container"></div>');
+            subContainer  = Y.Node.create('<div class="' + CSS_INNER_CONTAINER + '"></div>');
 
         container.addClass(this.classNames.treeview);
         container.addClass(this.classNames[isTouchDevice ? 'touch' : 'noTouch']);
@@ -127,7 +131,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
     icon: function (node) {
         var model     = node.data,
             icons     = this.get('model').get('icons'),
-            className = 'rednose-treeview-icon' + (this.get('selectable') && node.isSelected() ? ' icon-white' : '');
+            className = 'rednose-treeview-icon' + (this.get('selectable') && node.isSelected() ? ' ' + CSS_BOOTSTRAP_ICON_WHITE : '');
 
         if (icons && model instanceof Y.Model  && icons[model.name]) {
             var icon = icons[model.name];
@@ -278,6 +282,10 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
     },
 
     _handleToggle: function (e) {
+        if (this.rendered === false) {
+            return;
+        }
+
         var node      = e.node,
             htmlNode  = this.getHTMLNode(e.node);
 

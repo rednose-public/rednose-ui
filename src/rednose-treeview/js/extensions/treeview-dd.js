@@ -1,6 +1,8 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var DD;
+var DD,
+
+    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white';
 
 /**
  * Drag and drop extension for the TreeView.
@@ -197,14 +199,14 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
     _handleDdEnter: function (e) {
        if (e.drop.get('node').one('.rednose-treeview-icon')) {
-            e.drop.get('node').one('.rednose-treeview-icon').addClass('icon-white');
+            e.drop.get('node').one('.rednose-treeview-icon').addClass(CSS_BOOTSTRAP_ICON_WHITE);
         }
     },
 
     _handleDdExit: function (e) {
         // FIXME: Ignore selected nodes
         if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
-            e.drop.get('node').all('.icon-white').removeClass('icon-white');
+            e.drop.get('node').all('.' + CSS_BOOTSTRAP_ICON_WHITE).removeClass(CSS_BOOTSTRAP_ICON_WHITE);
         }
     },
 
@@ -221,7 +223,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
             drag.get('node').get('outerHTML')
         );
 
-        drag.get('dragNode').all('.icon-white').removeClass('icon-white');
+        drag.get('dragNode').all('.' + CSS_BOOTSTRAP_ICON_WHITE).removeClass(CSS_BOOTSTRAP_ICON_WHITE);
 
         // Recreate the drag instance
         origin = drag.get('node');
@@ -250,7 +252,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
         Y.all('.rednose-treeview-drop-over-global').removeClass('rednose-treeview-drop-over-global');
 
         if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
-            e.drop.get('node').all('.icon-white').removeClass('icon-white');
+            e.drop.get('node').all('.' + CSS_BOOTSTRAP_ICON_WHITE).removeClass(CSS_BOOTSTRAP_ICON_WHITE);
         }
 
         // Check for custom override callbacks

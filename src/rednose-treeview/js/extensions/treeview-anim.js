@@ -30,6 +30,10 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Handles the collapse event.
      */
     _afterCollapse: function (e) {
+        if (this.rendered === false) {
+            return;
+        }
+
         var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
@@ -41,6 +45,10 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Handles the expand event.
      */
     _afterExpand: function (e) {
+        if (this.rendered === false) {
+            return;
+        }
+
         var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
