@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 /**
  * Provides the `Y.Rednose.TreeView` widget.
  *
@@ -51,12 +53,10 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
     initializer: function (config) {
         config || (config = {});
 
-        if (!config.model) {
-            Y.log('Rednose TreeView requires a configured ModelTree', 'warn', 'rednose-treeview');
-        }
+        var model = config.model || new Y.Rednose.ModelTree();
 
         // Hook into the initializer chain to set the nodes.
-        config.nodes = config.model.get('items');
+        config.nodes = model.get('items');
 
         if (config.header) {
             this.header = config.header;
@@ -65,7 +65,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
         // Initialize the state map so it doesn't contain any garbage from previous instances.
         this._stateMap = [];
 
-        this.set('model', config.model);
+        this.set('model', model);
 
         this._attachEventHandles();
     },
