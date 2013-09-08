@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var Datepicker;
 
 Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
@@ -40,7 +42,7 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
         var wrapper = this.get('wrapper');
         var rules = this.get('rules');
 
-        if (typeof(rules['is_date']['accepts_input']) == 'undefined') {
+        if (typeof(rules.is_date.accepts_input) === 'undefined') {
             return;
         }
 
@@ -64,7 +66,7 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
 
     dateSelected: function(e) {
         var wrapper = this.get('wrapper');
-        var input = wrapper.ancestor().one('input')
+        var input = wrapper.ancestor().one('input');
 
         input.set('value', e.date.toLocaleDateString());
         input.setAttribute('data-unixtime', e.date.getTime());

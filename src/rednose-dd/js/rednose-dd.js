@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var DD, BubbleTarget;
 
 BubbleTarget = Y.Base.create('bubbleTarget', Y.Base, [], {});
@@ -31,7 +33,9 @@ DD = Y.Base.create('dd', Y.View, [], {
 
     destructor: function () {
         for (var i in this._ddMap) {
-            this._ddMap[i].destroy();
+            if (this._ddMap[i]) {
+                this._ddMap[i].destroy();
+            }
         }
 
         this._ddMap = [];
@@ -322,7 +326,7 @@ DD = Y.Base.create('dd', Y.View, [], {
         }
     },
 
-    _dropEnterGlobal: function (e) {
+    _dropEnterGlobal: function () {
         if (Y.DD.DDM.activeDrag) {
             var drag = Y.DD.DDM.activeDrag,
                 dragNode = drag.get('dragNode'),
@@ -335,7 +339,7 @@ DD = Y.Base.create('dd', Y.View, [], {
                 drag.on('drag:end', this._handleEnd, this);
 
                 // Render the item
-                var templateItem = new Y.TB.TemplateItem({
+                templateItem = new Y.TB.TemplateItem({
                     asset: obj
                 });
 

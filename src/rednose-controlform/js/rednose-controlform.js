@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var ControlForm;
 
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
@@ -12,8 +14,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
 
     initializer: function() {
-        var self = this;
-
         this.on('contextMenu:editLabel', this._editLabel);
         this.on('contextMenu:deleteForm', this.deleteForm);
         this.on('contextMenu:deleteFieldGroup', this._deleteFieldGroup);
@@ -32,7 +32,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         container.one('.formContainer_left').removeClass('formContainer_left').addClass(this.get('className') + '_left');
         container.one('.formContainer_right').removeClass('formContainer_right').addClass(this.get('className') + '_right');
 
-        if (formsModel == null) {
+        if (formsModel === null) {
             formsModel = this.get('formsModel');
         } else {
             this.set('formsModel', formsModel);
@@ -78,7 +78,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         Y.Array.each(fieldGroupOrder, function(groupId) {
             Y.Array.each(fieldGroups, function(group) {
-                if (groupId == group['id']) {
+                if (groupId === group.id) {
                     self._addFieldGroup(formElement, group);
                 }
             });
@@ -94,10 +94,10 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         var list = Y.Node.create('<ol />');
         var fieldGroupItems;
 
-        if (typeof(fieldGroup['fieldGroupItems']) == 'undefined') {
+        if (typeof(fieldGroup.fieldGroupItems) === 'undefined') {
             fieldGroupItems = fieldGroup.get('fieldGroupItems');
         } else {
-            fieldGroupItems = fieldGroup['fieldGroupItems'];
+            fieldGroupItems = fieldGroup.fieldGroupItems;
         }
 
         if (this.get('editMode')) {
@@ -116,14 +116,14 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             fieldGroupDD.on('drag:drag', function(e) {
                 self._reOrderFieldGroupDD(e, formElement, list);
             });
-            fieldGroupDD.on('drag:end', function(e) {
+            fieldGroupDD.on('drag:end', function() {
                 self._reOrderFieldGroup(formElement);
             });
         }
 
-        list.set('id', fieldGroup['id']);
-        list.setAttribute('name', fieldGroup['name']);
-        list.on(['mouseover', 'mouseout'], function(e) {
+        list.set('id', fieldGroup.id);
+        list.setAttribute('name', fieldGroup.name);
+        list.on(['mouseover', 'mouseout'], function() {
             list.toggleClass('fieldGroupHighlight');
         });
 
@@ -148,7 +148,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 controlContainer.append(label);
                 controlContainer.append(controlElement);
                 controlContainer.setData(control);
-                controlContainer.on('click', function(e) {
+                controlContainer.on('click', function() {
                     self.fire('controlSelected', { 'controlContainer': controlContainer });
                 });
 
@@ -208,7 +208,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         // If you are dragging at the bottom of the form, append the dragNode to the bottom.
-        if (hit == false && y > (formElement.getY() + parseInt(formElement.getComputedStyle('height')))) {
+        if (hit === false && y > (formElement.getY() + parseInt(formElement.getComputedStyle('height')))) {
             formElement.append(sender);
         }
     },
@@ -231,7 +231,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         if (fieldGroup.fieldGroupItems) {
             for (var item in fieldGroup.fieldGroupItems) {
-                if (fieldGroup.fieldGroupItems[item].id == control.id) {
+                if (fieldGroup.fieldGroupItems[item].id === control.id) {
                     fieldGroup.fieldGroupItems[item].rules = control.rules;
                 }
             }
@@ -239,11 +239,10 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     },
 
     _addFieldGroupToModel: function(formId, fieldGroup) {
-        var self = this;
         var formsModel = this.get('formsModel');
 
         formsModel.each(function(formItem) {
-            if (formItem.get('id') == formId) {
+            if (formItem.get('id') === formId) {
                 var fieldGroups = formItem.get('controlForm').get('fieldGroups');
 
                 fieldGroups.push(fieldGroup);
@@ -251,7 +250,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
     },
 
-    _stepChange: function(e) {
+    _stepChange: function() {
         var self = this;
         var container = this.get('srcNode');
 
@@ -269,7 +268,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
     ddOver: function(e, referenceForm) {
         var formNode = Y.one('#' + referenceForm.get('id'));
 
-        if (e.type == 'drop:over') {
+        if (e.type === 'drop:over') {
             if (formNode.hasClass('ddOver') === false) {
                 formNode.addClass('ddOver');
             }
@@ -369,7 +368,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
                 var value = '';
 
                 self.get('formsModel').each(function(formItem) {
-                    if (formItem.get('id') == formId) {
+                    if (formItem.get('id') === formId) {
                         var form = formItem.get('controlForm');
 
                         value = node.one('input').get('value');

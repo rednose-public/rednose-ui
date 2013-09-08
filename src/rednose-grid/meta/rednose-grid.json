@@ -8,5 +8,8 @@
             "view"
         ],
         "skinnable": true
+    },
+
+    "rednose-grid-select" : {
     }
 }

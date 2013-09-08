@@ -3,7 +3,12 @@
     "builds": {
         "rednose-grid": {
             "jsfiles": [
-                "rednose-grid.js"
+                "grid.js"
+            ]
+        },
+        "rednose-grid-select": {
+            "jsfiles": [
+                "js/extensions/grid-select.js"
             ]
         }
     }

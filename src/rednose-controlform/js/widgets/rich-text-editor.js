@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var RichTextEditor;
 
 RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {

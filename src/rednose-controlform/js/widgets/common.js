@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var Common;
 
 Common = Y.Base.create('common', Y.Widget, [ ], {
@@ -7,15 +9,14 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     render: function() {
         var rules = this.get('rules');
-        var container = this.get('srcNode');
 
-        if (typeof(rules['input_method']) === 'undefined') {
+        if (typeof(rules.input_method) === 'undefined') {
             this._renderInput();
 
             return;
         }
 
-        switch (rules['input_method'].inputElement) {
+        switch (rules.input_method.inputElement) {
             case 'input':
                 this._renderInput();
                 break;
@@ -39,7 +40,7 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     },
 
     _renderInput: function(textarea) {
-        var textfield = Y.Node.create(textarea ? '<textarea />' : '<input />')
+        var textfield = Y.Node.create(textarea ? '<textarea />' : '<input />');
         var properties = this._getProperties();
 
         if (properties.defaultValue) {

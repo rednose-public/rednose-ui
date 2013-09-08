@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var FormItem = Y.ControlForm.FormItem,
     Form = Y.ControlForm.Form,
     FormItems;
@@ -23,7 +25,7 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
                 method: 'GET',
                 on: {
                     success: function (tx, r) {
-                        self.set('templateId', options['templateId']);
+                        self.set('templateId', options.templateId);
 
                         callback(null, Y.JSON.parse(r.responseText));
                     }
@@ -43,7 +45,7 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
 
     updateProperty: function(formId, property, value) {
         this.each(function(formItem) {
-            if (formItem.get('id') == formId) {
+            if (formItem.get('id') === formId) {
                 formItem.set(property, value);
             }
         });
@@ -74,7 +76,7 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
         var self = this;
 
         this.each(function(formItem) {
-            if (formItem.get('id') == formId) {
+            if (formItem.get('id') === formId) {
                 self.remove(formItem);
             }
         });
@@ -95,7 +97,7 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
 
     deleteFieldGroup: function(formId, fgId) {
         this.each(function(formItem) {
-            if (formItem.get('id') == formId) {
+            if (formItem.get('id') === formId) {
                 formItem.get('controlForm').removeFieldGroup(fgId);
             }
         });
