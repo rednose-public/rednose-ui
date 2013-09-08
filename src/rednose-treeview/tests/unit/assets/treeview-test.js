@@ -20,7 +20,7 @@ suite.add(new Y.Test.Case({
         treeView.destroy();
     },
 
-    'destructor should destroy the container from the DOM': function () {
+    'destructor should remove the container from the DOM': function () {
         var treeView = new Y.Rednose.TreeView({
             container: Y.one('#treeview')
         });
