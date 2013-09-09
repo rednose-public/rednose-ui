@@ -1,10 +1,10 @@
+/*jshint expr:true, onevar:false */
+
 /**
  * Node scroll utility - Configures a node containing DD nodes to automatically scroll when dragging.
  *
  * @module rednose-nodescroll
  */
-
-var NodeScroll;
 
 /**
  * A base class for Nodescroll, providing:
@@ -31,7 +31,16 @@ var NodeScroll;
  * @constructor
  * @extends Base
  */
-NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
+var TRIGGER_MARGIN = 25,
+
+    /**
+    Fired when the node is scrolling.
+
+    @event scrolling
+    **/
+    EVT_SCROLLING = 'scrolling';
+
+var NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
     // -- Protected Properties -------------------------------------------------
 
     /**
@@ -46,8 +55,16 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-        this._bindDD(this.get('container'), this.get('groups'));
+        var container = this.get('container'),
+            groups    = this.get('groups');
+
+        this._bindDD(container, groups);
+
         this.on('drop:over', this._handle, this);
+    },
+
+    destructor: function () {
+        this._anim = null;
     },
 
     // -- Protected Methods ----------------------------------------------------
@@ -60,6 +77,8 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
         });
     },
 
+    // -- Protected Event Handlers ---------------------------------------------
+
     /**
      * Scroll the view up or down when a drag reaches the boundaries on the Y axis
      */
@@ -67,7 +86,7 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
         var dropNode    = e.drop.get('node'),
             dragY       = e.drag.mouseXY[1],
             nodeHeight  = dropNode.get('offsetHeight'),
-            margin      = 25,
+            margin      = TRIGGER_MARGIN,
             relativeY   = dragY - margin,
             self        = this,
             node,
@@ -78,7 +97,7 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
             scrollFunc = function() {
                 return [0, node.get('scrollTop') + node.get('offsetHeight')];
             };
-        } else if (relativeY < 25) {
+        } else if (relativeY < TRIGGER_MARGIN) {
             scrollFunc = function() {
                 return [0, node.get('scrollTop') - node.get('offsetHeight')];
             };
@@ -109,7 +128,7 @@ NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
             this._anim.set('to', { scroll: scrollFunc });
             this._anim.run();
             this._anim.on('tween', function() {
-                self.fire('scrolling');
+                self.fire(EVT_SCROLLING);
             });
             this._anim.on('end', function() {
                 Y.DD.DDM.syncActiveShims(true);

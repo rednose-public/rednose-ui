@@ -1,25 +1,51 @@
-var Panel;
+/*jshint expr:true, onevar:false */
+
+/**
+Provides a generic panel.
+
+By default this class provides a modal, centered panel.
+
+@module renodse-panel
+**/
+
+var Panel,
+
+    STYLE_DIALOG_WIDTH = 500,
+
+    // Taken from Bootstrap's @zindexModal
+    STYLE_BOOTSTRAP_ZINDEX = 1050,
+
+    CSS_BUTTON_CLOSE = 'yui3-button-close',
+    CSS_WIDGET_HD    = 'yui3-widget-hd';
 
 Panel = Y.Base.create('panel', Y.Panel, [], {
+    // -- Lifecycle Methods ----------------------------------------------------
 
-    initializer: function() {
-        var container = this.get('boundingBox');
-        var self = this;
+    initializer: function () {
+        this.set('zIndex'  , STYLE_BOOTSTRAP_ZINDEX);
+        this.set('centered', true);
+        this.set('modal'   , true);
+        this.set('hideOn'  , []);
+        this.set('width'   , STYLE_DIALOG_WIDTH);
 
-        this.after('render', function() {
+        this.after('render', this._afterRender, this);
+    },
+
+    // -- Protected Event Handlers ----------------------------------------------
+
+    _afterRender: function () {
+        var container   = this.get('boundingBox'),
+            closeButton = container.one('.' + CSS_BUTTON_CLOSE);
+
+        if (closeButton) {
             // Remove the first header (close button).
-            var closeButton = container.one('.yui3-button-close');
+            closeButton.ancestor('.' + CSS_WIDGET_HD).remove();
+        }
 
-            if (closeButton) {
-                closeButton.ancestor('.yui3-widget-hd').remove();
-            }
-
-            // Re-align the modal panel.
-            self.move(1, 1);
-            self.centered();
-        });
+        // Re-align the modal panel.
+        this.move(1, 1);
+        this.centered();
     }
-
 });
 
 // -- Namespace ----------------------------------------------------------------
