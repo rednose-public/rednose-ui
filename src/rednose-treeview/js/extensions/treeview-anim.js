@@ -30,7 +30,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Handles the collapse event.
      */
     _afterCollapse: function (e) {
-        if (this.rendered === false) {
+        if (!this.rendered || !this.get('animated')) {
             return;
         }
 
@@ -45,7 +45,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
      * Handles the expand event.
      */
     _afterExpand: function (e) {
-        if (this.rendered === false) {
+        if (!this.rendered || !this.get('animated')) {
             return;
         }
 
@@ -56,6 +56,15 @@ Anim = Y.Base.create('anim', Y.Base, [], {
         children.ancestor('.yui3-treeview').setStyle('overflow', 'hidden');
         children.setStyle('display', 'block');
         Y.Rednose.Anim.slideOutY(children);
+    }
+}, {
+    ATTRS: {
+        /**
+         * Enable animation for this TreeView instance
+         */
+        animated: {
+            value : false
+        }
     }
 });
 
