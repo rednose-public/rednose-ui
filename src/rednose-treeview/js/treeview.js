@@ -259,8 +259,12 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
         var depth = this._getHTMLNodeDepth(htmlNode);
 
         htmlNode.setStyle('margin-left', depth * -20);
+
         htmlNode.one('.' + this.classNames.indicator).setStyle('margin-left', depth * 20);
-        htmlNode.one('.' + CSS_TREEVIEW_ICON).setStyle('margin-left', depth * 20);
+
+        if (htmlNode.one('.' + CSS_TREEVIEW_ICON)) {
+            htmlNode.one('.' + CSS_TREEVIEW_ICON).setStyle('margin-left', depth * 20);
+        }
 
         this._correctChildrenMargin(htmlNode);
     },
