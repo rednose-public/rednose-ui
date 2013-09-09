@@ -8,11 +8,12 @@
 
 var TreeView,
 
+    CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',
     CSS_INNER_CONTAINER = 'rednose-treeview-inner-container',
+    CSS_TREEVIEW_ICON   = 'rednose-treeview-icon',
 
-    CSS_TREEVIEW_ICON = 'rednose-treeview-icon',
-
-    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white';
+    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white',
+    CSS_BOOTSTRAP_NAV_HEADER = 'nav-header';
 
 /**
  * A TreeView widget, implementing Y.View.
@@ -106,11 +107,11 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
         container.addClass(this.classNames[isTouchDevice ? 'touch' : 'noTouch']);
 
         // Append a subcontainer to render the tree.
-        container.addClass('rednose-treeview-outer-container');
+        container.addClass(CSS_OUTER_CONTAINER);
         container.append(subContainer);
 
         if (header) {
-            subContainer.append('<div class="nav-header">' + header + '</div>');
+            subContainer.append('<div class="' + CSS_BOOTSTRAP_NAV_HEADER + '">' + header + '</div>');
         }
 
         this._childrenNode = this.renderChildren(this.rootNode, {
