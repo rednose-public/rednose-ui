@@ -46,7 +46,8 @@
 
     "rednose-model-tree" : {
         "requires": [
-            "model"
+            "model",
+            "io"
         ]
     }
 }
