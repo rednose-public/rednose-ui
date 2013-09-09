@@ -35,6 +35,18 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
         this._selectMap = null;
     },
 
+    // -- Public Methods -------------------------------------------------------
+
+    getSelection: function () {
+        var selection = [];
+
+        Y.Array.each(this.getSelectedNodes(), function (node) {
+            selection.push(node.data);
+        });
+
+        return selection;
+    },
+
     // -- Protected Methods ----------------------------------------------------
 
     _restoreSelectState: function () {
