@@ -64,10 +64,10 @@ li {
     line-height: 19px;
 }
 
-.rednose-ui .nav-header {
+.nav-header {
     cursor: default;
 }
 
-.rednose-ui .yui3-skin-sam .rednose-app-modal-view .yui3-widget-bd {
+.yui3-skin-sam .rednose-app-modal-view .yui3-widget-bd {
     padding: 0;
 }

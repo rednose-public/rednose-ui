@@ -93,18 +93,18 @@
 }
 
 /* YUI Overrides. */
-.rednose-ui .yui3-skin-sam .rednose-app-master-view .yui3-widget-stdmod {
+.yui3-skin-sam .rednose-app-master-view .yui3-widget-stdmod {
     position: absolute;
     width: 228px;
 }
 
-.rednose-ui .yui3-skin-sam .rednose-app-master-view .yui3-widget-hd {
+.yui3-skin-sam .rednose-app-master-view .yui3-widget-hd {
     position: absolute;
     width: 228px;
     padding: 0;
 }
 
-.rednose-ui .yui3-skin-sam .rednose-app-master-view .yui3-widget-bd {
+.yui3-skin-sam .rednose-app-master-view .yui3-widget-bd {
     position: absolute;
     top: 0;
     width: 228px;
@@ -112,7 +112,7 @@
     padding: 0;
 }
 
-.rednose-ui .yui3-skin-sam .rednose-app-master-view .yui3-widget-ft {
+.yui3-skin-sam .rednose-app-master-view .yui3-widget-ft {
     position: absolute;
     bottom: 0;
     width: 198px;

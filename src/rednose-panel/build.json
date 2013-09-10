@@ -1,17 +1,9 @@
 {
     "name": "rednose-panel",
-    "exec": [
-        "recess --compile less/rednose-panel.less > css/rednose-panel.css"
-    ],
     "builds": {
         "rednose-panel": {
             "jsfiles": [
                 "rednose-panel.js"
-            ]
-        },
-        "rednose-panel-css": {
-            "cssfiles": [
-                "rednose-panel.css"
             ]
         }
     }
