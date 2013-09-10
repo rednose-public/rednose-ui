@@ -16,13 +16,19 @@
 
         "rednose-model-undo": {
             "jsfiles": [
-                "js/model-extensions/undo.js"
+                "js/model-extensions/model-undo.js"
             ]
         },
 
         "rednose-model-spinner": {
             "jsfiles": [
-                "js/model-extensions/spinner.js"
+                "js/model-extensions/model-spinner.js"
+            ]
+        },
+
+        "rednose-view-nav": {
+            "jsfiles": [
+                "js/view-extensions/view-nav.js"
             ]
         }
     }
