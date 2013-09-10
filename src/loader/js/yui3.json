@@ -104,13 +104,6 @@
             "model"
         ]
     },
-    "rednose-nav-container": {
-        "requires": [
-            "widget",
-            "widget-buttons",
-            "widget-stdmod"
-        ]
-    },
     "rednose-navbar": {
         "requires": [
             "handlebars",
@@ -135,7 +128,6 @@
     },
     "rednose-panel": {
         "requires": [
-            "rednose-panel-css",
             "panel"
         ]
     },
@@ -185,8 +177,15 @@
     "rednose-view-nav": {
         "requires": [
             "event-custom",
-            "rednose-nav-container",
+            "rednose-widget-nav-container",
             "view"
+        ]
+    },
+    "rednose-widget-nav-container": {
+        "requires": [
+            "widget",
+            "widget-buttons",
+            "widget-stdmod"
         ]
     }
 }
