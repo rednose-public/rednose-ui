@@ -1,26 +1,26 @@
-.rednose-ui .rednose-treeview-content .icon-toggle {
+.rednose-treeview-content .icon-toggle {
     margin-left: 2px;
     margin-top: 3px;
 }
 
-.rednose-ui .rednose-treeview-content .label-container {
+.rednose-treeview-content .label-container {
     white-space: nowrap;
 }
 
-.rednose-ui .rednose-treeview-icon {
+.rednose-treeview-icon {
     width: 16px;
 }
 
-.rednose-ui .rednose-treeview-inner-container > .yui3-treeview-children {
+.rednose-treeview-inner-container > .yui3-treeview-children {
     margin: 0 !important;
 }
 
 /* Hide overflow for animating nodes */
-.rednose-ui .yui3-treeview-has-children {
+.yui3-treeview-has-children {
     overflow: hidden;
 }
 
 /* Reserve the pointer for hyperlinks */
-.rednose-ui .yui3-treeview-row {
+.yui3-treeview-row {
     cursor: default;
 }

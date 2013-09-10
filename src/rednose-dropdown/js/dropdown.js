@@ -1,14 +1,19 @@
+/*jshint boss:true, expr:true, onevar:false */
+
+/**
+Provides a dropdown plugin with custom event binding.
+
+@module renodse-dropdown
+**/
 var Dropdown;
 
 /**
- * dropup
- * content:
- *     id: handle
- *     title: display name
- *     className: optional CSS class
- *     icon: css Class?
- *     disabled
- */
+Provides a context menu plugin with custom event binding.
+
+@class Dropdown
+@constructor
+@extends Bootstrap.Dropdown
+**/
 Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
@@ -81,7 +86,7 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
 
     // -- Protected methods ----------------------------------------------------
 
-    _buildHTML: function(content) {
+    _buildHTML: function (content) {
         var template = '<ul class="dropdown-menu"></ul>';
         var node = Y.Node.create(template);
 
@@ -89,29 +94,29 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
             return content;
         }
 
-        for (var i in content) {
+        Y.Array.each(content, function (item) {
             var elLi = Y.Node.create('<li>');
             var elA = Y.Node.create('<a href="#">');
 
-            if (content[i].className) {
-                elLi.addClass(content[i].className);
+            if (item.className) {
+                elLi.addClass(item.className);
             }
 
-            if (content[i].title !== '-') {
-                elA.set('innerHTML', content[i].title);
-                elA.setAttribute('data-id', content[i].id);
+            if (item.title !== '-') {
+                elA.set('innerHTML', item.title);
+                elA.setAttribute('data-id', item.id);
 
-                if (content[i].icon) {
+                if (item.icon) {
                     var icon = Y.Node.create('<i></i>');
 
-                    icon.addClass('icon icon-' + content[i].icon);
+                    icon.addClass('icon icon-' + item.icon);
 
                     elA.prepend(icon);
                 }
 
                 elLi.append(elA);
 
-                if (content[i].disabled === true) {
+                if (item.disabled === true) {
                     elLi.addClass('disabled');
                     elA.addClass('disabled');
                 }
@@ -120,7 +125,7 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
             }
 
             node.append(elLi);
-        }
+        });
 
         return node.get('outerHTML');
     }

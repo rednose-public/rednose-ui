@@ -10,15 +10,25 @@
         ],
         "skinnable": true
     },
+
     "rednose-model-undo" : {
         "requires": [
             "model"
         ]
     },
+
     "rednose-model-spinner" : {
         "requires": [
             "rednose-app-base",
             "model"
+        ]
+    },
+
+    "rednose-view-nav" : {
+        "requires": [
+            "event-custom",
+            "rednose-widget-nav-container",
+            "view"
         ]
     }
 }

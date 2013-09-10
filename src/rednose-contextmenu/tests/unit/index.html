@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html class="rednose-ui">
+<html>
 
     <head>
         <meta charset="utf-8">
-        <title>Navigation View Test Page</title>
+        <title>ContextMenu Test Page</title>
     </head>
 
     <body class="yui3-skin-sam">
@@ -13,15 +13,15 @@
 
         <script src="/build/yui/yui.js"></script>
         <script src="/tests/yui-config.js"></script>
-        <script src="./assets/view-nav-test.js"></script>
+        <script src="./assets/contextmenu-test.js"></script>
         <script>
             YUI({
-                coverage: ['rednose-view-nav'],
+                coverage: ['rednose-contextmenu'],
                 filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
-            }).use('view-nav-test', 'test-console', function (Y) {
+            }).use('contextmenu-test', 'test-console', function (Y) {
                 new Y.Test.Console().render('#log');
 
-                Y.Test.Runner.setName('Tooltip');
+                Y.Test.Runner.setName('ContextMenu');
                 Y.Test.Runner.run();
             });
         </script>

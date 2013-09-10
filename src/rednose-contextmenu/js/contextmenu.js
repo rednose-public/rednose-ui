@@ -1,17 +1,47 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var ContextMenu;
+/**
+Provides a context menu plugin with custom event binding.
 
+@module renodse-contextmenu
+**/
+var ContextMenu,
+
+    CSS_CONTEXT_MENU = 'rednose-context-menu',
+    CSS_CONTEXT_OPEN = 'rednose-context-open';
+
+    CSS_BOOTSTRAP_ICON_WHITE    = 'icon-white',
+    CSS_BOOTSTRAP_DROPDOWN      = 'dropdown',
+    CSS_BOOTSTRAP_DROPDOWN_MENU = 'dropdown-menu',
+    CSS_BOOTSTRAP_OPEN          = 'open';
+
+/**
+Provides a context menu plugin with custom event binding.
+
+@class ContextMenu
+@param {Object} [config] Config properties.
+    @param {Object} [config.content] Contextmenu configuration object.
+    @param {Oject} [config.data] Optional object to pass with fired events.
+    @param {Object} [config.bubbleTarget] Optional bubble target.
+@constructor
+@extends Plugin.Base
+**/
 ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
-    /**
-     * State variable, holds a possible active instance.
-     */
-    _contextMenu: null,
+    // -- Public Properties ----------------------------------------------------
 
     /**
      * Optional data object, to pass with the event
      */
      data: null,
+
+    // -- Protected Properties -------------------------------------------------
+
+    /**
+     * State variable, holds a possible active instance.
+     */
+    _contextMenu: null,
+
+    // -- Lifecycle Methods ----------------------------------------------------
 
     /**
      * Initializer, gets called upon instance initiation.
@@ -23,7 +53,10 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
         this._node = node;
         this._content = this._buildHTML(content);
-        this.addTarget(bubbleTarget);
+
+        if (bubbleTarget) {
+            this.addTarget(bubbleTarget);
+        }
 
         if (typeof config.data !== 'undefined') {
             this.data = config.data;
@@ -32,50 +65,25 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         node.on('contextmenu', this._handleContextMenu, this);
     },
 
-    _buildHTML: function(content) {
-        var template = '<div class="dropdown open"><ul class="dropdown-menu"></ul></div>';
-        var node = Y.Node.create(template);
-        var ul = node.one('ul');
-
-        if (content === '') {
-            return content;
+    destructor: function () {
+        if (this._contextMenu) {
+            this._contextMenu.destroy();
         }
 
-        for (var i in content) {
-            var elLi = Y.Node.create('<li>');
-            var elA = Y.Node.create('<a href="#">');
-
-            if (content[i].title !== '-') {
-                elA.set('innerHTML', content[i].title);
-                elA.setAttribute('data-id', content[i].id);
-
-                elLi.append(elA);
-
-                if (content[i].disabled === true) {
-                    elLi.addClass('disabled');
-                    elA.addClass('disabled');
-                }
-            } else {
-                elLi.addClass('divider');
-            }
-
-            ul.append(elLi);
-        }
-
-        return node.get('outerHTML');
+        this.data         = null;
+        this._contextMenu = null;
     },
 
-    _handleContextMenu: function (e) {
+    // -- Public Methods -------------------------------------------------------
+    open: function (x, y) {
         var node        = this._node,
             contextMenu = this._contextMenu,
             content     = this._content;
 
         // Remove a previous context menu if it exists, ideally we prolly wanna toggle it.
-        Y.all('.rednose-context-open').each(function (node) {
+        Y.all('.' + CSS_CONTEXT_OPEN).each(function (node) {
             node.contextMenu._contextMenu.destroy();
         });
-
-        e.preventDefault();
 
         contextMenu = new Y.Overlay({
             bodyContent: content,
@@ -85,15 +93,54 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             render: true
         });
 
-        node.addClass('rednose-context-open');
+        node.addClass(CSS_CONTEXT_OPEN);
 
-        contextMenu.get('boundingBox').addClass('rednose-context-menu');
-        contextMenu.get('boundingBox').setStyle('left', e.pageX);
-        contextMenu.get('boundingBox').setStyle('top', e.pageY);
+        contextMenu.get('boundingBox').addClass(CSS_CONTEXT_MENU);
+        contextMenu.get('boundingBox').setStyle('left', x);
+        contextMenu.get('boundingBox').setStyle('top', y);
         contextMenu.show();
 
         this._contextMenu = contextMenu;
         this._bindContextMenu();
+    },
+
+    // -- Protected Methods ----------------------------------------------------
+
+    _buildHTML: function (content) {
+        var template =
+            '<div class="' + CSS_BOOTSTRAP_DROPDOWN + ' ' + CSS_BOOTSTRAP_OPEN + '">' +
+                '<ul class="' + CSS_BOOTSTRAP_DROPDOWN_MENU + '"></ul>' +
+            '</div>';
+
+        var node = Y.Node.create(template);
+        var ul = node.one('ul');
+
+        if (content === '') {
+            return content;
+        }
+
+        Y.Array.each(content, function (item) {
+            var elLi = Y.Node.create('<li>');
+            var elA = Y.Node.create('<a href="#">');
+
+            if (item.title !== '-') {
+                elA.set('innerHTML', item.title);
+                elA.setAttribute('data-id', item.id);
+
+                elLi.append(elA);
+
+                if (item.disabled === true) {
+                    elLi.addClass('disabled');
+                    elA.addClass('disabled');
+                }
+            } else {
+                elLi.addClass('divider');
+            }
+
+            ul.append(elLi);
+        });
+
+        return node.get('outerHTML');
     },
 
     _bindContextMenu: function () {
@@ -127,15 +174,15 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             var node = e.currentTarget;
 
             if (node.one('i')) {
-                node.one('i').addClass('icon-white');
+                node.one('i').addClass(CSS_BOOTSTRAP_ICON_WHITE);
             }
         });
 
         contextMenu.get('boundingBox').all('li').on('mouseleave', function (e) {
             var node = e.currentTarget;
 
-            if (node.one('i') && node.one('i').hasClass('icon-white')) {
-                node.one('i').removeClass('icon-white');
+            if (node.one('i') && node.one('i').hasClass(CSS_BOOTSTRAP_ICON_WHITE)) {
+                node.one('i').removeClass(CSS_BOOTSTRAP_ICON_WHITE);
             }
         });
 
@@ -147,11 +194,20 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
                 contextMenu.destroy();
             }
         });
-    }
+    },
 
+    // -- Protected Event Handlers ---------------------------------------------
+
+    _handleContextMenu: function (e) {
+        var x = e.pageX,
+            y = e.pageY;
+
+        e.preventDefault();
+
+        this.open(x, y);
+    }
 }, {
     NS : 'contextMenu',
-    ATTRS : {}
 });
 
 // -- Namespace ----------------------------------------------------------------
