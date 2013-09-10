@@ -59,7 +59,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
     // -- Protected Methods ----------------------------------------------------
 
-    _buildHTML: function(content) {
+    _buildHTML: function (content) {
         var template = '<div class="dropdown open"><ul class="dropdown-menu"></ul></div>';
         var node = Y.Node.create(template);
         var ul = node.one('ul');
@@ -68,17 +68,17 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             return content;
         }
 
-        for (var i in content) {
+        Y.Array.each(content, function (item) {
             var elLi = Y.Node.create('<li>');
             var elA = Y.Node.create('<a href="#">');
 
-            if (content[i].title !== '-') {
-                elA.set('innerHTML', content[i].title);
-                elA.setAttribute('data-id', content[i].id);
+            if (item.title !== '-') {
+                elA.set('innerHTML', item.title);
+                elA.setAttribute('data-id', item.id);
 
                 elLi.append(elA);
 
-                if (content[i].disabled === true) {
+                if (item.disabled === true) {
                     elLi.addClass('disabled');
                     elA.addClass('disabled');
                 }
@@ -87,7 +87,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             }
 
             ul.append(elLi);
-        }
+        });
 
         return node.get('outerHTML');
     },
