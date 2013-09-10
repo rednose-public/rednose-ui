@@ -5,7 +5,15 @@ Provides a context menu plugin with custom event binding.
 
 @module renodse-contextmenu
 **/
-var ContextMenu;
+var ContextMenu,
+
+    CSS_CONTEXT_MENU = 'rednose-context-menu',
+    CSS_CONTEXT_OPEN = 'rednose-context-open';
+
+    CSS_BOOTSTRAP_ICON_WHITE    = 'icon-white',
+    CSS_BOOTSTRAP_DROPDOWN      = 'dropdown',
+    CSS_BOOTSTRAP_DROPDOWN_MENU = 'dropdown-menu',
+    CSS_BOOTSTRAP_OPEN          = 'open';
 
 /**
 Provides a context menu plugin with custom event binding.
@@ -57,10 +65,53 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         node.on('contextmenu', this._handleContextMenu, this);
     },
 
+    destructor: function () {
+        if (this._contextMenu) {
+            this._contextMenu.destroy();
+        }
+
+        this.data         = null;
+        this._contextMenu = null;
+    },
+
+    // -- Public Methods -------------------------------------------------------
+    open: function (x, y) {
+        var node        = this._node,
+            contextMenu = this._contextMenu,
+            content     = this._content;
+
+        // Remove a previous context menu if it exists, ideally we prolly wanna toggle it.
+        Y.all('.' + CSS_CONTEXT_OPEN).each(function (node) {
+            node.contextMenu._contextMenu.destroy();
+        });
+
+        contextMenu = new Y.Overlay({
+            bodyContent: content,
+            visible: false,
+            constrain: true,
+            zIndex: Y.all('*').size(),
+            render: true
+        });
+
+        node.addClass(CSS_CONTEXT_OPEN);
+
+        contextMenu.get('boundingBox').addClass(CSS_CONTEXT_MENU);
+        contextMenu.get('boundingBox').setStyle('left', x);
+        contextMenu.get('boundingBox').setStyle('top', y);
+        contextMenu.show();
+
+        this._contextMenu = contextMenu;
+        this._bindContextMenu();
+    },
+
     // -- Protected Methods ----------------------------------------------------
 
     _buildHTML: function (content) {
-        var template = '<div class="dropdown open"><ul class="dropdown-menu"></ul></div>';
+        var template =
+            '<div class="' + CSS_BOOTSTRAP_DROPDOWN + ' ' + CSS_BOOTSTRAP_OPEN + '">' +
+                '<ul class="' + CSS_BOOTSTRAP_DROPDOWN_MENU + '"></ul>' +
+            '</div>';
+
         var node = Y.Node.create(template);
         var ul = node.one('ul');
 
@@ -123,15 +174,15 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             var node = e.currentTarget;
 
             if (node.one('i')) {
-                node.one('i').addClass('icon-white');
+                node.one('i').addClass(CSS_BOOTSTRAP_ICON_WHITE);
             }
         });
 
         contextMenu.get('boundingBox').all('li').on('mouseleave', function (e) {
             var node = e.currentTarget;
 
-            if (node.one('i') && node.one('i').hasClass('icon-white')) {
-                node.one('i').removeClass('icon-white');
+            if (node.one('i') && node.one('i').hasClass(CSS_BOOTSTRAP_ICON_WHITE)) {
+                node.one('i').removeClass(CSS_BOOTSTRAP_ICON_WHITE);
             }
         });
 
@@ -148,37 +199,15 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
     // -- Protected Event Handlers ---------------------------------------------
 
     _handleContextMenu: function (e) {
-        var node        = this._node,
-            contextMenu = this._contextMenu,
-            content     = this._content;
-
-        // Remove a previous context menu if it exists, ideally we prolly wanna toggle it.
-        Y.all('.rednose-context-open').each(function (node) {
-            node.contextMenu._contextMenu.destroy();
-        });
+        var x = e.pageX,
+            y = e.pageY;
 
         e.preventDefault();
 
-        contextMenu = new Y.Overlay({
-            bodyContent: content,
-            visible: false,
-            constrain: true,
-            zIndex: Y.all('*').size(),
-            render: true
-        });
-
-        node.addClass('rednose-context-open');
-
-        contextMenu.get('boundingBox').addClass('rednose-context-menu');
-        contextMenu.get('boundingBox').setStyle('left', e.pageX);
-        contextMenu.get('boundingBox').setStyle('top', e.pageY);
-        contextMenu.show();
-
-        this._contextMenu = contextMenu;
-        this._bindContextMenu();
+        this.open(x, y);
     }
 }, {
-    NS : 'contextmenu',
+    NS : 'contextMenu',
 });
 
 // -- Namespace ----------------------------------------------------------------

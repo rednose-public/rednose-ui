@@ -27,9 +27,9 @@ suite.add(new Y.Test.Case({
             data   : {}
         });
 
-        Assert.isInstanceOf(Y.Rednose.ContextMenu, button.hasPlugin('contextmenu'));
+        Assert.isInstanceOf(Y.Rednose.ContextMenu, button.hasPlugin('contextMenu'));
 
-        button.unplug('contextmenu');
+        button.unplug('contextMenu');
     },
 
     '`unplug()` should purge the menu': function () {
@@ -43,9 +43,9 @@ suite.add(new Y.Test.Case({
             data   : {}
         });
 
-        button.unplug('contextmenu');
+        button.unplug('contextMenu');
 
-        Assert.isUndefined(button.hasPlugin('contextmenu'));
+        Assert.isUndefined(button.hasPlugin('contextMenu'));
     }
 }));
 
