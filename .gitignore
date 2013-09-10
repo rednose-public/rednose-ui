@@ -3,5 +3,3 @@
 node_modules/*
 vendor/*
 build/*
-src/yui/*
-src/loader/*
