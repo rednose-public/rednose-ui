@@ -1,3 +1,5 @@
 {
-    "rednose-css" : {}
+    "rednose-css" : {
+    	"type": "css"
+    }
 }

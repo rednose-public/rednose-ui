@@ -32,7 +32,9 @@
             "rednose-contextmenu"
         ]
     },
-    "rednose-css": {},
+    "rednose-css": {
+        "type": "css"
+    },
     "rednose-datatable": {
         "requires": [
             "datatable-base",
@@ -54,7 +56,9 @@
             "view"
         ]
     },
-    "rednose-dd-css": {},
+    "rednose-dd-css": {
+        "type": "css"
+    },
     "rednose-dialog": {
         "requires": [
             "dd",
