@@ -27,3 +27,10 @@
 
     ```
     grunt test
+
+### Loader metadata
+
+* After changing any of the metadata files, run the following command to update the metadata JSON file:
+
+    ```
+    yogi loader --yes
