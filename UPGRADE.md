@@ -15,3 +15,4 @@ Upgrade instructions
 
 * The build directory is removed from the repository. Builds are now handled by [node.js](http://nodejs.org) & [Grunt](http://gruntjs.com).
 
+* Builds now rely on fully generated metadata, created by running `yogi builder --yes`.
