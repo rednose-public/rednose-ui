@@ -26,5 +26,5 @@ suite.add(new Y.Test.Case({
 Y.Test.Runner.add(suite);
 
 }, '@VERSION@', {
-    requires: ['rednose-view-nav', 'test', 'node-event-simulate']
+    requires: ['rednose-view-nav', 'test']
 });

@@ -13,14 +13,32 @@
 
         <script src="/build/yui/yui.js"></script>
         <script src="/tests/yui-config.js"></script>
-        <script src="./assets/view-nav-test.js"></script>
         <script>
             YUI({
-                coverage: ['rednose-view-nav'],
-                filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
-            }).use('view-nav-test', 'test-console', function (Y) {
-                new Y.Test.Console().render('#log');
+                coverage: ['rednose-app-base' ,'rednose-view-nav'],
+                filter  : (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
 
+                modules: {
+                    'app-test': {
+                        use: [
+                            'app-base-test',
+                            'view-nav-test'
+                        ]
+                    },
+
+                    'app-base-test': {
+                        fullpath: 'assets/app-base-test.js',
+                        requires: ['rednose-app-base', 'test']
+                    },
+
+                    'view-nav-test': {
+                        fullpath: 'assets/view-nav-test.js',
+                        requires: ['rednose-view-nav', 'test']
+                    }
+                }
+
+            }).use('app-test', 'test-console', function (Y) {
+                new Y.Test.Console().render('#log');
                 Y.Test.Runner.setName('App');
                 Y.Test.Runner.run();
             });

@@ -1,7 +1,21 @@
-var Nav;
+/*jshint boss:true, expr:true, onevar:false */
+
+var Nav,
+
+    CSS_MAGIC_PREFIX = 'rednose',
+    CSS_VIEW_NAV     = 'rednose-view-nav',
+
+    CSS_BOOTSTRAP_BTN         = 'btn',
+    CSS_BOOTSTRAP_BTN_PRIMARY = 'btn-primary',
+    CSS_BOOTSTRAP_DISABLED    = 'disabled',
+    CSS_BOOTSTRAP_FLOAT_LEFT  = 'float-left',
+    CSS_BOOTSTRAP_FLOAT_RIGHT = 'float-right',
+
+    CSS_YUI3_WIDGET_BD = 'yui3-widget-bd',
+    CSS_YUI3_WIDGET_FT = 'yui3-widget-ft';
 
 /**
- * Y.View extension to wrap the container into a panel with a header and footer navigation bar.
+ * View extension to wrap the container into a panel with a header and footer navigation bar.
  */
 Nav = Y.Base.create('nav', Y.View, [], {
     // -- Public Properties ----------------------------------------------------
@@ -34,11 +48,18 @@ Nav = Y.Base.create('nav', Y.View, [], {
      * Initializer, gets called upon instance initiation.
      */
     initializer: function () {
-        Y.Do.after(this._afterRender, this, 'render', this);
+        this._viewNavEventHandles || (this._viewNavEventHandles = []);
+
+        this._viewNavEventHandles.push(
+            Y.Do.after(this._afterRender, this, 'render', this)
+        );
+
         this._buildFooter();
     },
 
     destructor: function () {
+        (new Y.EventHandle(this._viewNavEventHandles)).detach();
+
         this.title      = null;
         this.buttons    = null;
         this._footer    = null;
@@ -79,7 +100,7 @@ Nav = Y.Base.create('nav', Y.View, [], {
                 // Format the action event by prepending 'button', for example the event
                 // fired for 'cancel' will be 'buttonCancel'
                 action    = 'button' + self._capitalizeFirstLetter(key),
-                node      = Y.Node.create('<button class="btn"></button>');
+                node      = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
 
             if (value) {
                 node.set('text', value);
@@ -90,23 +111,29 @@ Nav = Y.Base.create('nav', Y.View, [], {
             }
 
             if (primary) {
-                node.addClass('btn-primary');
+                node.addClass(CSS_BOOTSTRAP_BTN_PRIMARY);
             }
 
             if (disabled) {
-                node.addClass('disabled');
+                node.addClass(CSS_BOOTSTRAP_DISABLED);
             }
 
             if (className) {
                 node.addClass(className);
             }
 
-            node.addClass('float-' + position);
+            if (position === 'left') {
+                node.addClass(CSS_BOOTSTRAP_FLOAT_LEFT);
+            }
+
+            if (position === 'right') {
+                node.addClass(CSS_BOOTSTRAP_FLOAT_RIGHT);
+            }
 
             node.on('click', function (e) {
                 var btn = e.target;
 
-                if (btn.hasClass('disabled') === false) {
+                if (btn.hasClass(CSS_BOOTSTRAP_DISABLED) === false) {
                     self.fire(action);
                 }
             });
@@ -127,11 +154,11 @@ Nav = Y.Base.create('nav', Y.View, [], {
     },
 
     /**
-     * Magic function to update the buttons properties
+     * Magic method to update the buttons properties
      */
     _setButtons: function (value) {
         var self    = this,
-            footer  = this.get('container').one('.yui3-widget-ft'),
+            footer  = this.get('container').one('.' + CSS_YUI3_WIDGET_FT),
             buttons = this.buttons;
 
         Y.Object.each(value, function (properties, key) {
@@ -144,13 +171,26 @@ Nav = Y.Base.create('nav', Y.View, [], {
     },
 
     /**
-     * Magic function to get the current button properties
+     * Magic method to get the current button properties
      */
      _getButtons: function () {
         return this.buttons;
     },
 
-    // -- Default Event Handlers -----------------------------------------------
+    /**
+    Formatting helper method.
+
+    @method _camelCaseToDash
+    @param {String} string The string to convert.
+    @protected
+    **/
+    _camelCaseToDash: function (string) {
+        return string.replace(/([A-Z])/g, function ($1) {
+            return '-' + $1.toLowerCase();
+        });
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
 
     /**
      * Wrap the view into a panel after it's rendered.
@@ -163,7 +203,7 @@ Nav = Y.Base.create('nav', Y.View, [], {
             config    = { bodyContent: body },
             panel;
 
-        container.addClass('rednose-view-nav');
+        container.addClass(CSS_VIEW_NAV);
 
         // Transfer the child nodes from the view container to the new body container.
         container.get('children').each(function (c) {
@@ -187,8 +227,8 @@ Nav = Y.Base.create('nav', Y.View, [], {
             this._repositionPanel(this.panel);
         }
 
-        // Add a CSS handle to the widget-body
-        panel.get('boundingBox').one('.yui3-widget-bd').addClass('rednose-' + this.name);
+        // Add a magic CSS handle to the widget-body.
+        panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).addClass(CSS_MAGIC_PREFIX + '-' + this._camelCaseToDash(this.name));
     }
 }, {
     ATTRS: {

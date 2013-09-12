@@ -7,9 +7,13 @@ Upgrade instructions
 
 * Module `rednose-nav-container` has been renamed to `rednose-widget-nav-container`.
 
+* The `NAME` property of module `rednose-app-base` has been renamed from `rednose-app` to `app`, event prefixes should be updated.
+
 ### CSS
 
 * CSS now depends on having Bootstrap globally available. The CSS classes `rednose-ui` and `rednose-widget` are deprecated within the Bootstrap skinning context.
+
+* The magic CSS class assignment in module `rednose-view-nav` has changed to dashed formatting, for example from `rednose-fileTableView` to `rednose-file-table-view`.
 
 ### Builds
 

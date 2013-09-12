@@ -1,15 +1,37 @@
-var App;
+/**
+Extension of the original Y.App, to provide support for modal views.
+
+@module rednose-app
+**/
+var App,
+
+    CSS_SPINNER = 'rednose-spinner';
 
 /**
- *Extension of the original Y.App, to provide support for modal views.
- */
-App = Y.Base.create('rednose-app', Y.App, [], {
+Extension of the original Y.App, to provide support for modal views.
+
+@class App
+@constructor
+@extends App
+**/
+App = Y.Base.create('app', Y.App, [], {
+    // -- Protected Properties -------------------------------------------------
 
     /**
-     * Stores the Panel instances to manage the active modal views.
-     */
+    Stores the Panel instances to manage the active modal views.
+
+    @property containerTemplate
+    @type String
+    @protected
+    **/
     _activePanel: null,
 
+    // -- Lifecycle Methods ----------------------------------------------------
+
+    /**
+    @method initializer
+    @protected
+    **/
     initializer: function () {
         Y.Do.after(function () {
             if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {
@@ -18,6 +40,25 @@ App = Y.Base.create('rednose-app', Y.App, [], {
         }, this, 'render', this);
     },
 
+    /**
+    @method detructor
+    @protected
+    **/
+    destructor: function () {
+        if (this._activePanel) {
+            this._activePanel.destroy();
+        }
+
+        this._activePanel = null;
+    },
+
+    // -- Public Methods -------------------------------------------------------
+
+    /**
+    Helper method, to inform a potential higher level window that this app has been closed.
+
+    @method closeApp
+    **/
     closeApp: function () {
         if ((window.self !== window.top) && typeof (window.parent.closeApp() === 'function')) {
             window.parent.closeApp();
@@ -25,8 +66,10 @@ App = Y.Base.create('rednose-app', Y.App, [], {
     },
 
     /**
-     * Override the superclass method to check if this view needs to be lazyloaded first.
-     */
+    Override the superclass method to check if this view needs to be lazyloaded first.
+
+    @method showView
+    **/
     showView: function (view, config, options, callback) {
         var self     = this,
             viewInfo = this.getViewInfo(view);
@@ -48,9 +91,14 @@ App = Y.Base.create('rednose-app', Y.App, [], {
         }
     },
 
+    // -- Protected Methods ----------------------------------------------------
+
     /**
-     * Hook into the view change, to handle modal views.
-     */
+    Hook into the view change, to handle modal views.
+
+    @method _detachView
+    @protected
+    **/
     _detachView: function (view) {
         if (!view) {
             return;
@@ -88,8 +136,11 @@ App = Y.Base.create('rednose-app', Y.App, [], {
     },
 
     /**
-     * Hook into the view change, to handle modal views.
-     */
+    Hook into the view change, to handle modal views.
+
+    @method _attachView
+    @protected
+    **/
     _attachView: function (view, prepend) {
         if (!view) {
             return;
@@ -135,13 +186,26 @@ App = Y.Base.create('rednose-app', Y.App, [], {
     }
 });
 
-// -- Class methods ------------------------------------------------------------
+// -- Static methods ------------------------------------------------------------
+
+/**
+Show the spinner icon in the center of the screen.
+
+@method showSpinner
+@static
+**/
 App.showSpinner = function () {
-    Y.one('body').prepend(Y.Node.create('<div class="rednose-spinner"></div>'));
+    Y.one('body').prepend(Y.Node.create('<div class="' + CSS_SPINNER + '"></div>'));
 };
 
+/**
+Hide all active spinner icon instances.
+
+@method hideSpinner
+@static
+**/
 App.hideSpinner = function () {
-    Y.all('.rednose-spinner').remove();
+    Y.all('.' + CSS_SPINNER).remove();
 };
 
 // -- Namespace ----------------------------------------------------------------
