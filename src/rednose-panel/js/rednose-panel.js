@@ -11,6 +11,7 @@ By default this class provides a modal, centered panel.
 var Panel,
 
     STYLE_DIALOG_WIDTH = 500,
+    STYLE_POSITION_TOP = 100,
 
     // Taken from Bootstrap's @zindexModal
     STYLE_BOOTSTRAP_ZINDEX = 1050,
@@ -21,12 +22,14 @@ var Panel,
 Panel = Y.Base.create('panel', Y.Panel, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
-    initializer: function () {
+    initializer: function (config) {
+        config || (config = {});
+
         this.set('zIndex'  , STYLE_BOOTSTRAP_ZINDEX);
         this.set('centered', true);
         this.set('modal'   , true);
         this.set('hideOn'  , []);
-        this.set('width'   , STYLE_DIALOG_WIDTH);
+        this.set('width'   , config.width || STYLE_DIALOG_WIDTH);
 
         this.after('render', this._afterRender, this);
     },
@@ -42,9 +45,7 @@ Panel = Y.Base.create('panel', Y.Panel, [], {
             closeButton.ancestor('.' + CSS_WIDGET_HD).remove();
         }
 
-        // Re-align the modal panel.
-        this.move(1, 1);
-        this.centered();
+        container.setStyle('top', STYLE_POSITION_TOP);
     }
 });
 

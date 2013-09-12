@@ -10,9 +10,12 @@ var Nav,
     CSS_BOOTSTRAP_DISABLED    = 'disabled',
     CSS_BOOTSTRAP_FLOAT_LEFT  = 'float-left',
     CSS_BOOTSTRAP_FLOAT_RIGHT = 'float-right',
+    CSS_BOOTSTRAP_CLOSE       = 'close',
 
     CSS_YUI3_WIDGET_BD = 'yui3-widget-bd',
     CSS_YUI3_WIDGET_FT = 'yui3-widget-ft';
+
+    EVT_BUTTON_CLOSE = 'buttonClose',
 
 /**
  * View extension to wrap the container into a panel with a header and footer navigation bar.
@@ -29,6 +32,11 @@ Nav = Y.Base.create('nav', Y.View, [], {
      * Buttons property, sets the panel's footer buttons.
      */
     buttons : null,
+
+    /**
+     * Optional close button in the header.
+     */
+    close : false,
 
     // -- Protected Properties -------------------------------------------------
 
@@ -197,10 +205,12 @@ Nav = Y.Base.create('nav', Y.View, [], {
      */
     _afterRender: function () {
         var container = this.get('container'),
-            header    = this.title,
+            title     = this.title,
             body      = Y.Node.create('<div></div>'),
             footer    = this._footer,
             config    = { bodyContent: body },
+            close     = this.close,
+            self      = this,
             panel;
 
         container.addClass(CSS_VIEW_NAV);
@@ -210,7 +220,17 @@ Nav = Y.Base.create('nav', Y.View, [], {
             body.append(c);
         });
 
-        if (header !== null) {
+        if (title !== null) {
+            var header = Y.Node.create('<div>' + title + '</div>');
+
+            if (close) {
+                header.append(Y.Node.create('<button class="' + CSS_BOOTSTRAP_CLOSE + '">×</button>'));
+
+                header.one('.' + CSS_BOOTSTRAP_CLOSE).on('click', function () {
+                    self.fire(EVT_BUTTON_CLOSE);
+                });
+            }
+
             config.headerContent = header;
         }
 
