@@ -1,7 +1,29 @@
+/**
+Extension for View, triggers the App spinner when the model is being loaded from or
+persisted to a sync-layer.
+
+@module rednose-model-spinner
+**/
 var Spinner;
 
-Spinner = Y.Base.create('undo', Y.Model, [], {
+/**
+Extension for View, triggers the App spinner when the model is being loaded from or
+persisted to a sync-layer.
 
+Overrides al the model sync methods through a Decorator pattern.
+
+@class Spinner
+@constructor
+@extensionfor Model
+**/
+Spinner = Y.Base.create('undo', Y.Model, [], {
+    // -- Public Methods -------------------------------------------------------
+
+    /**
+    Decorates the `destroy` method.
+
+    @method destroy
+    **/
     destroy: function (options, callback) {
         // Allow callback as only arg.
         if (typeof options === 'function') {
@@ -20,6 +42,11 @@ Spinner = Y.Base.create('undo', Y.Model, [], {
         } ]);
     },
 
+    /**
+    Decorates the `save` method.
+
+    @method save
+    **/
     save: function (options, callback) {
         // Allow callback as only arg.
         if (typeof options === 'function') {
@@ -38,6 +65,11 @@ Spinner = Y.Base.create('undo', Y.Model, [], {
         } ]);
     },
 
+    /**
+    Decorates the `load` method.
+
+    @method load
+    **/
     load: function (options, callback) {
         // Allow callback as only arg.
         if (typeof options === 'function') {

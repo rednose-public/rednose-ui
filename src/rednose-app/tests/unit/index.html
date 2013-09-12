@@ -15,13 +15,15 @@
         <script src="/tests/yui-config.js"></script>
         <script>
             YUI({
-                coverage: ['rednose-app-base' ,'rednose-view-nav'],
+                coverage: ['rednose-app-base' ,'rednose-model-spinner', 'rednose-view-nav'],
                 filter  : (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
 
                 modules: {
                     'app-test': {
                         use: [
                             'app-base-test',
+                            'model-spinner-test',
+                            'model-undo-test',
                             'view-nav-test'
                         ]
                     },
@@ -29,6 +31,16 @@
                     'app-base-test': {
                         fullpath: 'assets/app-base-test.js',
                         requires: ['rednose-app-base', 'test']
+                    },
+
+                    'model-spinner-test': {
+                        fullpath: 'assets/model-spinner-test.js',
+                        requires: ['rednose-model-spinner', 'test']
+                    },
+
+                    'model-undo-test': {
+                        fullpath: 'assets/model-undo-test.js',
+                        requires: ['rednose-model-undo', 'test']
                     },
 
                     'view-nav-test': {

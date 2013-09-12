@@ -1,10 +1,18 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var Nav,
+/**
+View extension, adds a title section to an instance of View, and a footer section with a
+configuration of buttons.
 
+@module rednose-view-nav
+**/
+var ViewNav,
+
+    // Bird's-eye view of the CSS classes used.
     CSS_MAGIC_PREFIX = 'rednose',
     CSS_VIEW_NAV     = 'rednose-view-nav',
 
+    // Bird's-eye view of the Bootstrap CSS classes used.
     CSS_BOOTSTRAP_BTN         = 'btn',
     CSS_BOOTSTRAP_BTN_PRIMARY = 'btn-primary',
     CSS_BOOTSTRAP_DISABLED    = 'disabled',
@@ -12,49 +20,87 @@ var Nav,
     CSS_BOOTSTRAP_FLOAT_RIGHT = 'float-right',
     CSS_BOOTSTRAP_CLOSE       = 'close',
 
+    // Bird's-eye view of the YUI3 CSS classes used.
     CSS_YUI3_WIDGET_BD = 'yui3-widget-bd',
     CSS_YUI3_WIDGET_FT = 'yui3-widget-ft';
 
+    /**
+    Fired when the optional close button is clicked.
+
+    @event buttonClose
+    **/
     EVT_BUTTON_CLOSE = 'buttonClose',
 
 /**
- * View extension to wrap the container into a panel with a header and footer navigation bar.
- */
-Nav = Y.Base.create('nav', Y.View, [], {
+View extension, adds a title section to an instance of View, and a footer section with a
+configuration of buttons.
+
+@class ViewNav
+@constructor
+@extensionfor View
+**/
+ViewNav = Y.Base.create('viewNav', Y.View, [], {
     // -- Public Properties ----------------------------------------------------
 
     /**
-     * Title property, sets the panel's header content.
-     */
+    Title property, sets the panel's header content.
+
+    @property title
+    @type String
+    **/
     title : null,
 
     /**
-     * Buttons property, sets the panel's footer buttons.
-     */
+    Buttons property, sets the panel's footer buttons.
+
+    @property buttons
+    @type Object
+    **/
     buttons : null,
 
     /**
-     * Optional close button in the header.
-     */
+    Optional close button in the header.
+
+    @property close
+    @type Boolean
+    **/
     close : false,
 
     // -- Protected Properties -------------------------------------------------
 
     /**
-     * Contains the footer DOM node.
-     */
+    References the footer DOM node.
+
+    @property _footer
+    @type Node
+    @protected
+    **/
     _footer: null,
 
     /**
-     * Stores references to the created nodes
-     */
+    Stores references to the created nodes.
+
+    @property _buttonMap
+    @type Object
+    @protected
+    **/
     _buttonMap: {},
 
-    // -- Lifecycle ------------------------------------------------------------
+    /**
+    Stores references to an active panel.
+
+    @property _pabel
+    @type Object
+    @protected
+    **/
+    _panel: null,
+
+    // -- Lifecycle Methods ----------------------------------------------------
 
     /**
-     * Initializer, gets called upon instance initiation.
-     */
+    @method initializer
+    @protected
+    **/
     initializer: function () {
         this._viewNavEventHandles || (this._viewNavEventHandles = []);
 
@@ -65,34 +111,56 @@ Nav = Y.Base.create('nav', Y.View, [], {
         this._buildFooter();
     },
 
+    /**
+    @method destructor
+    @protected
+    **/
     destructor: function () {
         (new Y.EventHandle(this._viewNavEventHandles)).detach();
+
+        if (this._panel) {
+            this._panel.destroy();
+        }
 
         this.title      = null;
         this.buttons    = null;
         this._footer    = null;
         this._buttonMap = null;
+        this._panel     = null;
     },
 
     // -- Public Methods -------------------------------------------------------
 
     /**
-     * Get a button node by name.
-     */
+    Get a button node by name.
+
+    @method getButton
+    @param {String} name The name of the button.
+    **/
     getButton: function (name) {
         return this._buttonMap[name];
     },
 
     // -- Protected Methods ----------------------------------------------------
 
+    /**
+    Reposition the panel on the screen, for example after the container contents have changed.
+
+    @method _repositionPanel
+    @param {Object} panel An instance of Panel.
+    @protected
+    **/
     _repositionPanel: function (panel) {
         panel.move(1, 1);
         panel.centered();
     },
 
     /**
-     * Build the footer buttons and bind them to fire events
-    */
+    Build the footer buttons and bind them to fire events.
+
+    @method _buildFooter
+    @protected
+    **/
     _buildFooter: function () {
         var self    = this,
             buttons = this.buttons;
@@ -105,10 +173,11 @@ Nav = Y.Base.create('nav', Y.View, [], {
                 disabled  = button.disabled,
                 className = button.className,
                 icon      = button.icon,
+
                 // Format the action event by prepending 'button', for example the event
                 // fired for 'cancel' will be 'buttonCancel'
-                action    = 'button' + self._capitalizeFirstLetter(key),
-                node      = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
+                action = 'button' + self._capitalizeFirstLetter(key),
+                node   = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
 
             if (value) {
                 node.set('text', value);
@@ -155,15 +224,12 @@ Nav = Y.Base.create('nav', Y.View, [], {
     },
 
     /**
-     * Capitalize the first letter of a given string
-     */
-    _capitalizeFirstLetter: function (value) {
-        return value.charAt(0).toUpperCase() + value.slice(1);
-    },
+    Setter to update the buttons properties.
 
-    /**
-     * Magic method to update the buttons properties
-     */
+    @method _setButtons
+    @param {Object} value The button config object
+    @protected
+    **/
     _setButtons: function (value) {
         var self    = this,
             footer  = this.get('container').one('.' + CSS_YUI3_WIDGET_FT),
@@ -175,14 +241,29 @@ Nav = Y.Base.create('nav', Y.View, [], {
 
         // TODO: Update instead of rerendering.
         this._buildFooter();
+
         footer.one('div').replace(this._footer);
     },
 
     /**
-     * Magic method to get the current button properties
-     */
+    Getter to get the current button properties.
+
+    @method _getButtons
+    @protected
+    **/
      _getButtons: function () {
         return this.buttons;
+    },
+
+    /**
+    Formatting helper method to capitalize the first letter of a given string
+
+    @method _getButtons
+    @param {String} value The string to capitalize.
+    @protected
+    **/
+    _capitalizeFirstLetter: function (value) {
+        return value.charAt(0).toUpperCase() + value.slice(1);
     },
 
     /**
@@ -201,8 +282,11 @@ Nav = Y.Base.create('nav', Y.View, [], {
     // -- Protected Event Handlers ---------------------------------------------
 
     /**
-     * Wrap the view into a panel after it's rendered.
-     */
+    Wraps the view into a panel after it's rendered.
+
+    @method _afterRender
+    @protected
+    **/
     _afterRender: function () {
         var container = this.get('container'),
             title     = this.title,
@@ -210,8 +294,7 @@ Nav = Y.Base.create('nav', Y.View, [], {
             footer    = this._footer,
             config    = { bodyContent: body },
             close     = this.close,
-            self      = this,
-            panel;
+            self      = this;
 
         container.addClass(CSS_VIEW_NAV);
 
@@ -238,20 +321,26 @@ Nav = Y.Base.create('nav', Y.View, [], {
             config.footerContent = footer;
         }
 
-        panel = new Y.Rednose.NavContainer(config);
+        this._panel = new Y.Rednose.NavContainer(config);
 
         // Render the panel within the view container.
-        panel.render(container);
+        this._panel.render(container);
 
-        if (this.panel) {
-            this._repositionPanel(this.panel);
+        if (this._panel) {
+            this._repositionPanel(this._panel);
         }
 
         // Add a magic CSS handle to the widget-body.
-        panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).addClass(CSS_MAGIC_PREFIX + '-' + this._camelCaseToDash(this.name));
+        this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).addClass(CSS_MAGIC_PREFIX + '-' + this._camelCaseToDash(this.name));
     }
 }, {
     ATTRS: {
+        /**
+        Button attribute, triggers a setter to update the DOM on setting.
+
+        @attribute buttons
+        @type Object
+        **/
         buttons: {
             setter: '_setButtons',
             getter: '_getButtons'
@@ -260,4 +349,4 @@ Nav = Y.Base.create('nav', Y.View, [], {
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose.View').Nav = Nav;
+Y.namespace('Rednose.View').Nav = ViewNav;

@@ -9,6 +9,10 @@ Upgrade instructions
 
 * The `NAME` property of module `rednose-app-base` has been renamed from `rednose-app` to `app`, event prefixes should be updated.
 
+* The `NAME` property of module `rednose-view-nav` has been renamed from `nav` to `viewNav`, event prefixes should be updated.
+
+* The `NAME` property of module `rednose-widget-nav-container` (previously `rendose-nav-container` has been renamed from `nav` to `navContainer`, event prefixes should be updated.
+
 ### CSS
 
 * CSS now depends on having Bootstrap globally available. The CSS classes `rednose-ui` and `rednose-widget` are deprecated within the Bootstrap skinning context.
