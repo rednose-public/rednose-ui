@@ -1,4 +1,10 @@
-var Nav;
+/*jshint boss:true, expr:true, onevar:false */
+
+var Nav,
+
+    EVT_BUTTON_CLOSE = 'buttonClose',
+
+    CSS_BOOTSTRAP_CLOSE = 'close';
 
 /**
  * Y.View extension to wrap the container into a panel with a header and footer navigation bar.
@@ -15,6 +21,11 @@ Nav = Y.Base.create('nav', Y.View, [], {
      * Buttons property, sets the panel's footer buttons.
      */
     buttons : null,
+
+    /**
+     * Optional close button in the header.
+     */
+    close : false,
 
     // -- Protected Properties -------------------------------------------------
 
@@ -157,10 +168,12 @@ Nav = Y.Base.create('nav', Y.View, [], {
      */
     _afterRender: function () {
         var container = this.get('container'),
-            header    = this.title,
+            title     = this.title,
             body      = Y.Node.create('<div></div>'),
             footer    = this._footer,
             config    = { bodyContent: body },
+            close     = this.close,
+            self      = this,
             panel;
 
         container.addClass('rednose-view-nav');
@@ -170,7 +183,17 @@ Nav = Y.Base.create('nav', Y.View, [], {
             body.append(c);
         });
 
-        if (header !== null) {
+        if (title !== null) {
+            var header = Y.Node.create('<div>' + title + '</div>');
+
+            if (close) {
+                header.append(Y.Node.create('<button class="' + CSS_BOOTSTRAP_CLOSE + '">×</button>'));
+
+                header.one('.' + CSS_BOOTSTRAP_CLOSE).on('click', function () {
+                    self.fire(EVT_BUTTON_CLOSE);
+                });
+            }
+
             config.headerContent = header;
         }
 
