@@ -5,7 +5,6 @@
  *
  * @module rednose-treeview
  */
-
 var TreeView,
 
     CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',

@@ -1,8 +1,29 @@
-var Navbar;
+/*jshint boss:true, expr:true, onevar:false */
 
+/**
+Provides a navigation bar.
+
+@module rednose-navbar
+**/
+var Navbar,
+
+    DEFAULT_TITLE = 'No title';
+
+/**
+Provides a navigation bar.
+
+@class NavBar
+@constructor
+@extends Y.Widget
+**/
 Navbar = Y.Base.create('navbar', Y.Widget, [], {
     // -- Public Properties ----------------------------------------------------
 
+    /**
+    @property template
+    @type String
+    @public
+    **/
     template: Y.Handlebars.compile(
         '<div class="navbar navbar-inverse">' +
             '<div class="navbar-inner" style="-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;">' +
@@ -13,6 +34,11 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         '</div>'
     ),
 
+    /**
+    @property dropdownTemplate
+    @type String
+    @public
+    **/
     dropdownTemplate: Y.Handlebars.compile(
         '<li class="dropdown{{ submenu }}">' +
             '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ title }} <{{ caret }}></b></a>' +
@@ -23,6 +49,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
     // -- Lifecycle Methods ----------------------------------------------------
 
+    /**
+    @method initializer
+    @protected
+    **/
     initializer: function () {
         var container = this.get('contentBox');
 
@@ -33,8 +63,21 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         container.delegate('click', this._handleClick, '.dropdown-menu a', this);
     },
 
+    /**
+    @method destructor
+    @protected
+    **/
+    destructor: function () {
+        this.template         = null;
+        this.dropdownTemplate = null;
+    },
+
     // -- Public Methods -------------------------------------------------------
 
+    /**
+    @method bindUI
+    @public
+    **/
     renderUI: function() {
         var menuLeft  = this.get('menu'),
             menuRight = this.get('menuSecondary'),
@@ -47,22 +90,45 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         this._appendMenu(menuRight, true);
     },
 
+    /**
+    @method bindUI
+    @public
+    **/
     bindUI: function() {
         var container = this.get('contentBox');
 
-        container.all('.dropdown-toggle').plug(Y.Bootstrap.Dropdown);
+        container.all('.dropdown-toggle').each(function (node) {
+            node.plug(Y.Bootstrap.Dropdown);
+        });
     },
 
+    /**
+    @method getNode
+    @param {String} id Menu entry id
+    @return {Node}
+    @public
+    **/
     getNode: function (id) {
         var container = this.get('contentBox');
 
         return container.one('[data-id=' + id + ']');
     },
 
+    /**
+    @method enable
+    @param {String} id Menu entry id
+    @public
+    **/
     enable: function (id) {
         this.disable(id, true);
     },
 
+    /**
+    @method disable
+    @param {String} id Menu entry id
+    @param {Boolean} _enable Toggle the enabled state
+    @public
+    **/
     disable: function (id, _enable) {
         var container = this.get('contentBox'),
             node = container.one('[data-id=' + id + ']');
@@ -74,6 +140,12 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         }
     },
 
+    /**
+    @method rename
+    @param {String} id Menu entry id
+    @param {Array} title The new name
+    @public
+    **/
     rename: function (id, title) {
         var container = this.get('contentBox'),
             node = container.one('[data-id=' + id + ']');
@@ -83,55 +155,68 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
     // -- Protected Methods ----------------------------------------------------
 
+    /**
+    @method _appendMenu
+    @param {Array} menu Menu config
+    @param {Array} secondary Secondary menu config
+    @param {Node} Parent node
+    @protected
+    **/
     _appendMenu: function (menu, secondary, parentMenu) {
-        var container = this.get('contentBox');
+        var container = this.get('contentBox'),
+            self      = this;
 
-        for (var m in menu) {
+        Y.Array.each(menu, function (m) {
             var dropdown = Y.Node.create(
-                this.dropdownTemplate({
-                    title: menu[m].title,
+                self.dropdownTemplate({
+                    title: m.title,
                     submenu: (typeof(parentMenu) !== 'undefined' ? '-submenu' : ''),
                     caret: (typeof(parentMenu) === 'undefined' ? "b class=caret" : 'b')
                 })
             );
 
-            for (var i in menu[m].items) {
+            Y.Array.each(m.items, function (i) {
                 var li = Y.Node.create ('<li tabindex="-1"></li>');
 
-                if (menu[m].items[i].title === '-') {
+                if (i.title === '-') {
                     li.addClass('divider');
 
-                } else if (typeof(menu[m].items[i].children) === 'object') {
-                    var subMenu = [ { title: menu[m].items[i].title, items: menu[m].items[i].children } ];
+                } else if (typeof(i.children) === 'object') {
+                    var subMenu = [ { title: i.title, items: i.children } ];
 
-                    this._appendMenu(subMenu, secondary, dropdown);
+                    self._appendMenu(subMenu, secondary, dropdown);
                 } else {
-                    var a  = Y.Node.create('<a tabindex="-1" href="#">' + menu[m].items[i].title + '</a>');
+                    var a  = Y.Node.create('<a tabindex="-1" href="#">' + i.title + '</a>');
 
-                    if (typeof(menu[m].items[i].disabled) !== 'undefined') {
+                    if (typeof(i.disabled) !== 'undefined') {
                         li.addClass('disabled');
                     }
 
                     li.append(a);
 
-                    if (typeof(menu[m].items[i].id) !== 'undefined') {
-                        a.setAttribute('data-id', menu[m].items[i].id);
+                    if (typeof(i.id) !== 'undefined') {
+                        a.setAttribute('data-id', i.id);
                     }
                 }
 
                 dropdown.one('.dropdown-menu').append(li);
-            }
+            });
 
             if (typeof(parentMenu) === 'undefined') {
                 container.one(secondary === false ? '.nav' : '.pull-right').append(dropdown);
             } else {
                 parentMenu.one('.dropdown-menu').append(dropdown);
             }
-        }
+        });
     },
 
     // -- Protected Event Handlers ---------------------------------------------
 
+    /**
+    @method _handleClick
+    @param {EventFacade} e Event
+    @protected
+    **/
     _handleClick: function (e) {
         var node = e.currentTarget,
             id   = node.getAttribute('data-id');
@@ -150,19 +235,36 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         node.ancestor('.dropdown').one('.dropdown-toggle').simulate('click');
     },
 
+    /**
+    @method _prevent
+    @param {EventFacade} e Event
+    @protected
+    **/
     _prevent: function (e) {
         e.preventDefault();
     }
 }, {
     ATTRS: {
+        /**
+        @attribute title
+        @type String
+        **/
         title: {
-            value: 'No title'
+            value: DEFAULT_TITLE,
         },
 
+        /**
+        @attribute menu
+        @type Array
+        **/
         menu: {
             value: []
         },
 
+        /**
+        @attribute menuSecondary
+        @type Array
+        **/
         menuSecondary: {
             value: []
         }

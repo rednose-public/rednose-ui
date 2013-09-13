@@ -1,13 +1,33 @@
-// WIP
+/*jshint boss:true, expr:true, onevar:false */
 
+/**
+Provides a navigation bar plugin to show a list of recent entries.
+
+@module rednose-navbar-recent
+**/
+
+/**
+Provides a navigation bar plugin to show a list of recent entries.
+
+@class NavBar.Recent
+@constructor
+@extends Y.Plugin.Base
+@extensionfor NavBar
+**/
 Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
+    /**
+    @method initializer
+    @protected
+    **/
     initializer: function (config) {
+        // TODO: Remove dependency on docgenadmin.
         this._host = config.host;
 
         var node = this._host.getNode(config.node);
         this.node = node;
+
         var parent = node.get('parentNode');
 
         parent.addClass('dropdown-submenu');
@@ -16,11 +36,25 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
         this._updateMenuEntries(node);
     },
 
+    /**
+    @method destructor
+    @protected
+    **/
+    destructor: function () {
+        this.node = null;
+    },
+
     // -- Public Methods -------------------------------------------------------
 
-    // TODO: Unique cookie.
-    // TODO: Specify the number of items as config param.
+    /**
+    @method addEntry
+    @param {String} id Unique id
+    @param {String} label Menu entry label
+    @public
+    **/
     addEntry: function (id, label) {
+        // TODO: Unique cookie.
+        // TODO: Specify the number of items as config param.
         var cookie   = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),
             attrs    = { id: id, label: label },
             obj      = Y.JSON.parse(cookie) || [];
@@ -49,7 +83,13 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
         this._updateMenuEntries(this.node);
     },
 
+    /**
+    @method _updateMenuEntries
+    @param {Node} node Parent node
+    @protected
+    **/
     _updateMenuEntries: function (node) {
+        // XXX: WIP
         var self   = this,
             cookie = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),
             ul     = node.ancestor('li').one('ul'),
@@ -75,7 +115,11 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
                 ul.append(Y.Node.create('<li class="divider"></li>'));
             }
 
-            var clear = Y.Node.create('<li><a class="menu-clearitems" tabindex="-1" href="#">' + Y.Intl.get('docgenadmin-core').clearitems + '</a></li>');
+            var clear = Y.Node.create(
+                '<li>' +
+                    '<a class="menu-clearitems" tabindex="-1" href="#">' + Y.Intl.get('docgenadmin-core').clearitems + '</a>' +
+                '</li>'
+            );
 
             if (!Y.Object.size(obj)) {
                 clear.addClass('disabled');

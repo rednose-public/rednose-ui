@@ -1,8 +1,11 @@
 {
     "rednose-navbar" : {
         "requires": [
+            "base",
+            "node-pluginhost",
+            "gallery-bootstrap-dropdown",
             "handlebars",
-            "gallery-bootstrap-dropdown"
+            "widget"
         ],
         "skinnable": true
     },
