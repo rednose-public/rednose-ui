@@ -3,12 +3,12 @@
     "builds": {
         "rednose-datatable": {
             "jsfiles": [
-                "rednose-datatable.js"
+                "datatable.js"
             ]
         },
         "rednose-datatable-select": {
             "jsfiles": [
-                "plugins/rednose-datatable-select.js"
+                "plugins/datatable-select.js"
             ]
         }
     }

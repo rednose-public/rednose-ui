@@ -1,9 +1,7 @@
 {
-    "rednose-view-nav" : {
+    "rednose-anim" : {
         "requires": [
-            "event-custom",
-            "rednose-nav-container",
-            "view"
+            "anim"
         ]
     }
 }
