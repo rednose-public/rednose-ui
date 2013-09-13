@@ -1,37 +1,13 @@
 /*jshint expr:true, onevar:false */
 
 /**
- * Node scroll utility - Configures a node containing DD nodes to automatically scroll when dragging.
- *
- * @module rednose-nodescroll
- */
+Node scroll utility - Configures a node containing DD nodes to automatically scroll when dragging.
 
-/**
- * A base class for Nodescroll, providing:
- * <ul>
- *    <li>Adds the needed scrolling CSS to the node</li>
- *    <li>Binds to the provided DD groups</li>
- * </ul>
- *
- * Quick Example:<br/>
- *
- * <pre><code>var instance = new Y.Rednose.NodeScroll({
- *     container: this.get('container').one('.rednose-scroll-view'),
- *     groups: ['rednose-treeview']
- * });
- * </code></pre>
- *
- * @class NodeScroll
- * @param {Object} [config] The following configuration properties are required:
- *
- *     @param {Object} [config.container] The container to bind the scrollview to.
- *     @param {Array} [config.groups] The DD groups that can interact with this
- *         scrollview instance.
- *
- * @constructor
- * @extends Base
- */
+@module rednose-nodescroll
+**/
 var TRIGGER_MARGIN = 25,
+
+    CSS_SCROLL_VIEW = 'rednose-scroll-view',
 
     /**
     Fired when the node is scrolling.
@@ -40,35 +16,76 @@ var TRIGGER_MARGIN = 25,
     **/
     EVT_SCROLLING = 'scrolling';
 
+/**
+A base class for Nodescroll, providing:
+<ul>
+   <li>Adds the needed scrolling CSS to the node</li>
+   <li>Binds to the provided DD groups</li>
+</ul>
+
+Quick Example:<br/>
+
+<pre><code>var instance = new Y.Rednose.NodeScroll({
+    container: this.get('container').one('.example-scroll-view'),
+    groups: ['rednose-treeview']
+});
+</code></pre>
+
+@class NodeScroll
+@param {Object} [config] The following configuration properties are required:
+    @param {Object} [config.container] The container to bind the scrollview to.
+    @param {Array} [config.groups] The DD groups that can interact with this
+        scrollview instance.
+@constructor
+@extends Base
+**/
 var NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
     // -- Protected Properties -------------------------------------------------
 
     /**
-     * Reference to the currently active animation instance.
-     *
-     * @property {Anim} _anim
-     * @default null
-     * @protected
-     */
+    Reference to the currently active animation instance.
+
+    @property {Anim} _anim
+    @default null
+    @protected
+    **/
     _anim: null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
+    /**
+    @method initializer
+    @protected
+    **/
     initializer: function () {
         var container = this.get('container'),
             groups    = this.get('groups');
+
+        container.addClass(CSS_SCROLL_VIEW);
 
         this._bindDD(container, groups);
 
         this.on('drop:over', this._handle, this);
     },
 
+    /**
+    @method destructor
+    @protected
+    **/
     destructor: function () {
+        var container = this.get('container');
+
+        container.hasClass(CSS_SCROLL_VIEW) && container.removeClass(CSS_SCROLL_VIEW);
+
         this._anim = null;
     },
 
     // -- Protected Methods ----------------------------------------------------
 
+    /**
+    @method _bindDD
+    @protected
+    **/
     _bindDD: function (node, groups) {
         new Y.DD.Drop({
             node         : node,
@@ -80,8 +97,12 @@ var NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
     // -- Protected Event Handlers ---------------------------------------------
 
     /**
-     * Scroll the view up or down when a drag reaches the boundaries on the Y axis
-     */
+    Scroll the view up or down when a drag reaches the boundaries on the Y axis
+
+    @method _handle
+    @param {EventFacade} e Even
+    @protected
+    **/
     _handle: function (e) {
         var dropNode    = e.drop.get('node'),
             dragY       = e.drag.mouseXY[1],
@@ -138,21 +159,21 @@ var NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
 }, {
     ATTRS : {
         /**
-         * The scrollable container.
-         *
-         * @attribute {Object}
-         * @default null
-         */
+        The scrollable container.
+
+        @attribute {Object}
+        @default null
+        **/
         container: {
             value: null
         },
 
         /**
-         * The DD groups that can interact with this scroll instance.
-         *
-         * @attribute {Array}
-         * @default []
-         */
+        The DD groups that can interact with this scroll instance.
+
+        @attribute {Array}
+        @default []
+        **/
         groups: {
             value: []
         }
