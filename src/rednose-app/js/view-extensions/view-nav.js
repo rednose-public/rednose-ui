@@ -144,18 +144,6 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     // -- Protected Methods ----------------------------------------------------
 
     /**
-    Reposition the panel on the screen, for example after the container contents have changed.
-
-    @method _repositionPanel
-    @param {Object} panel An instance of Panel.
-    @protected
-    **/
-    _repositionPanel: function (panel) {
-        panel.move(1, 1);
-        panel.centered();
-    },
-
-    /**
     Build the footer buttons and bind them to fire events.
 
     @method _buildFooter
@@ -325,10 +313,6 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
         // Render the panel within the view container.
         this._panel.render(container);
-
-        if (this._panel) {
-            this._repositionPanel(this._panel);
-        }
 
         // Add a magic CSS handle to the widget-body.
         this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).addClass(CSS_MAGIC_PREFIX + '-' + this._camelCaseToDash(this.name));
