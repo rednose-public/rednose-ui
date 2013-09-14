@@ -11,7 +11,7 @@ Upgrade instructions
 
 * The `NAME` property of module `rednose-view-nav` has been renamed from `nav` to `viewNav`, event prefixes should be updated.
 
-* The `NAME` property of module `rednose-widget-nav-container` (previously `rendose-nav-container` has been renamed from `nav` to `navContainer`, event prefixes should be updated.
+* The `NAME` property of module `rednose-widget-nav-container` (previously `rendose-nav-container`) has been renamed from `nav` to `navContainer`, event prefixes should be updated.
 
 ### CSS
 
