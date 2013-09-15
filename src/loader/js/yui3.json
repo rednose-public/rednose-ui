@@ -1,4 +1,9 @@
 {
+    "rednose-anim": {
+        "requires": [
+            "anim"
+        ]
+    },
     "rednose-app-base": {
         "requires": [
             "app-base",
@@ -91,6 +96,7 @@
         "skinnable": true
     },
     "rednose-grid-select": {},
+    "rednose-jquery": {},
     "rednose-model-spinner": {
         "requires": [
             "rednose-app-base",
@@ -110,8 +116,11 @@
     },
     "rednose-navbar": {
         "requires": [
+            "base",
+            "node-pluginhost",
+            "gallery-bootstrap-dropdown",
             "handlebars",
-            "gallery-bootstrap-dropdown"
+            "widget"
         ],
         "skinnable": true
     },
@@ -129,6 +138,15 @@
             "dd",
             "anim"
         ]
+    },
+    "rednose-notifier": {
+        "requires": [
+            "rednose-jquery",
+            "rednose-notifier-css"
+        ]
+    },
+    "rednose-notifier-css": {
+        "type": "css"
     },
     "rednose-panel": {
         "requires": [

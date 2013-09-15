@@ -8,6 +8,11 @@
  * @submodule loader-yui3
  */
 YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
+    "rednose-anim": {
+        "requires": [
+            "anim"
+        ]
+    },
     "rednose-app-base": {
         "requires": [
             "app-base",
@@ -100,6 +105,7 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         "skinnable": true
     },
     "rednose-grid-select": {},
+    "rednose-jquery": {},
     "rednose-model-spinner": {
         "requires": [
             "rednose-app-base",
@@ -119,8 +125,11 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
     },
     "rednose-navbar": {
         "requires": [
+            "base",
+            "node-pluginhost",
+            "gallery-bootstrap-dropdown",
             "handlebars",
-            "gallery-bootstrap-dropdown"
+            "widget"
         ],
         "skinnable": true
     },
@@ -138,6 +147,15 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
             "dd",
             "anim"
         ]
+    },
+    "rednose-notifier": {
+        "requires": [
+            "rednose-jquery",
+            "rednose-notifier-css"
+        ]
+    },
+    "rednose-notifier-css": {
+        "type": "css"
     },
     "rednose-panel": {
         "requires": [
@@ -202,4 +220,4 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     }
 };
-YUI.Env[Y.version].md5 = '71e28e39571a040ab721673cac4c7333';
+YUI.Env[Y.version].md5 = 'a869ddead23c0921d745a65e9b635282';
