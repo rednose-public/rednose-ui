@@ -21,7 +21,7 @@ $.pnotify.defaults.styling = 'bootstrap';
 Triggers a notification.
 
 @method notify
-@param {Function} fn Function to test.
+@param {notification} Pines Notify notification object.
 @static
 @public
 **/
