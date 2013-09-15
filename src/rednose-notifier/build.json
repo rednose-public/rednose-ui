@@ -9,7 +9,8 @@
         },
         "rednose-notifier-css": {
             "cssfiles": [
-                "jquery.pnotify.default.css"
+                "jquery.pnotify.default.css",
+                "notifier.css"
             ]
         }
     }
