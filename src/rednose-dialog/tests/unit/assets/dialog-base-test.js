@@ -1,3 +1,5 @@
+/* jshint expr:true, onevar:false */
+
 YUI.add('dialog-base-test', function (Y) {
 
 var Assert = Y.Assert,
@@ -97,7 +99,7 @@ suite.add(new Y.Test.Case({
         var title   = 'Test Title';
         var message = 'Test message body.';
 
-        Y.Mock.expect(mock, { method: "callback", args: [] });
+        Y.Mock.expect(mock, { method: 'callback', args: [] });
 
         dialog.confirm(title, message, mock.callback);
 

@@ -24,6 +24,12 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ],
         "skinnable": true
     },
+    "rednose-breadcrumb": {
+        "requires": [
+            "base",
+            "view"
+        ]
+    },
     "rednose-contextmenu": {
         "requires": [
             "base",
@@ -220,4 +226,4 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     }
 };
-YUI.Env[Y.version].md5 = 'a869ddead23c0921d745a65e9b635282';
+YUI.Env[Y.version].md5 = '9ee15f24d2baa47a6eebd287f2f4de7b';

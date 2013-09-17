@@ -15,6 +15,12 @@
         ],
         "skinnable": true
     },
+    "rednose-breadcrumb": {
+        "requires": [
+            "base",
+            "view"
+        ]
+    },
     "rednose-contextmenu": {
         "requires": [
             "base",
