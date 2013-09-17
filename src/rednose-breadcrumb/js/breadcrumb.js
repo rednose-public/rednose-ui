@@ -46,7 +46,7 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
     _LI_ITEM_TEMPLATE: '<li><a href="#">{itemLabel}</a> <span class="{dividerClass}">/</span></li>',
 
     /**
-    Template for the breadcrumb training <li/> item
+    Template for the breadcrumb trailing <li/> item
     @property
     @type {String}
     @protected
