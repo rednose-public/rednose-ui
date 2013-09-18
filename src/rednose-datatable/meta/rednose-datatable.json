@@ -8,7 +8,7 @@
         ],
 
         "supersedes": [
-            "rednose-app-base"
+            "skin-sam-datatable-base"
         ],
 
         "skinnable": true

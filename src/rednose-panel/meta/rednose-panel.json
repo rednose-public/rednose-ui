@@ -3,6 +3,10 @@
         "group": "rednose-ui",
         "requires": [
             "panel"
+        ],
+        "supersedes": [
+            "skin-sam-widget-base",
+            "skin-sam-panel"
         ]
     }
 }

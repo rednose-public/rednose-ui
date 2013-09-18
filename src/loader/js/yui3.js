@@ -79,7 +79,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ],
         "skinnable": true,
         "supersedes": [
-            "rednose-app-base"
+            "skin-sam-datatable-base"
         ]
     },
     "rednose-datatable-select": {
@@ -204,6 +204,10 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "panel"
+        ],
+        "supersedes": [
+            "skin-sam-widget-base",
+            "skin-sam-panel"
         ]
     },
     "rednose-tooltip": {
@@ -273,4 +277,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '475452365f03fdcb9624d31b094a86c8';
+YUI.Env[Y.version].md5 = '95908884d0390ab8c9a0da1e85dcfcdd';

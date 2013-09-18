@@ -69,7 +69,7 @@
         ],
         "skinnable": true,
         "supersedes": [
-            "rednose-app-base"
+            "skin-sam-datatable-base"
         ]
     },
     "rednose-datatable-select": {
@@ -194,6 +194,10 @@
         "group": "rednose-ui",
         "requires": [
             "panel"
+        ],
+        "supersedes": [
+            "skin-sam-widget-base",
+            "skin-sam-panel"
         ]
     },
     "rednose-tooltip": {
