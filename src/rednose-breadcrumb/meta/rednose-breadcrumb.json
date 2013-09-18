@@ -1,5 +1,6 @@
 {
     "rednose-breadcrumb" : {
+        "group": "rednose-ui",
         "requires": [
         	"base",
         	"view"

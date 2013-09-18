@@ -1,5 +1,6 @@
 {
     "rednose-panel" : {
+        "group": "rednose-ui",
         "requires": [
             "panel"
         ]

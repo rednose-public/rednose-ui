@@ -1,5 +1,6 @@
 {
     "rednose-css" : {
+        "group": "rednose-ui",
     	"type": "css"
     }
 }

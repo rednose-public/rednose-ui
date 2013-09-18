@@ -1,6 +1,5 @@
 {
     "rednose-app" : {
-        "group": "rednose-ui",
         "use": [
             "rednose-app-base",
             "rednose-model-undo",
@@ -10,6 +9,7 @@
 
         "submodules": {
             "rednose-app-base" : {
+                "group": "rednose-ui",
                 "requires": [
                     "app-base",
                     "cssgrids",
@@ -22,12 +22,14 @@
             },
 
             "rednose-model-undo" : {
+                "group": "rednose-ui",
                 "requires": [
                     "model"
                 ]
             },
 
             "rednose-model-spinner" : {
+                "group": "rednose-ui",
                 "requires": [
                     "rednose-app-base",
                     "model"
@@ -35,6 +37,7 @@
             },
 
             "rednose-view-nav" : {
+                "group": "rednose-ui",
                 "requires": [
                     "event-custom",
                     "rednose-widget-nav-container",

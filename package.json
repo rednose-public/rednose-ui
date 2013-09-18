@@ -10,7 +10,7 @@
 
     "devDependencies": {
         "yogi": "~0.1.0",
-        "grunt": "~0.4.1",
+        "grunt": "~0.4.1"
     },
 
     "scripts": {

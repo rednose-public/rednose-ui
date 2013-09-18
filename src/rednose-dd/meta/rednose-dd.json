@@ -1,5 +1,6 @@
 {
     "rednose-dd" : {
+        "group": "rednose-ui",
         "requires": [
             "rednose-anim",
             "rednose-dd-css",
@@ -7,6 +8,7 @@
         ]
     },
     "rednose-dd-css" : {
+        "group": "rednose-ui",
     	"type": "css"
     }
 }

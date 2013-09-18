@@ -1,5 +1,6 @@
 {
     "rednose-treeview" : {
+        "group": "rednose-ui",
         "requires": [
             "gallery-sm-treeview",
             "rednose-model-tree",
@@ -18,12 +19,14 @@
     },
 
     "rednose-treeview-templates" : {
+        "group": "rednose-ui",
         "requires": [
             "template-micro"
         ]
     },
 
     "rednose-treeview-anim" : {
+        "group": "rednose-ui",
         "requires": [
             "rednose-anim",
             "rednose-treeview",
@@ -32,6 +35,7 @@
     },
 
     "rednose-treeview-dd" : {
+        "group": "rednose-ui",
         "requires": [
             "rednose-dd",
             "rednose-treeview"
@@ -39,12 +43,14 @@
     },
 
     "rednose-treeview-select" : {
+        "group": "rednose-ui",
         "requires": [
             "rednose-treeview"
         ]
     },
 
     "rednose-model-tree" : {
+        "group": "rednose-ui",
         "requires": [
             "model",
             "io"

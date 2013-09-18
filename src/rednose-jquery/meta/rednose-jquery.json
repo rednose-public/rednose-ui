@@ -1,3 +1,5 @@
 {
-    "rednose-jquery" : {}
+    "rednose-jquery" : {
+        "group": "rednose-ui"
+    }
 }

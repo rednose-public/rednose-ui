@@ -1,5 +1,6 @@
 {
     "rednose-contextmenu" : {
+        "group": "rednose-ui",
         "requires": [
             "base",
             "panel",

@@ -1,5 +1,6 @@
 {
     "rednose-anim" : {
+    	"group": "rednose-ui",
         "requires": [
             "anim"
         ]

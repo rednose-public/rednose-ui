@@ -1,5 +1,6 @@
 {
     "rednose-datatable" : {
+        "group": "rednose-ui",
         "requires": [
             "datatable-base",
             "datatable-scroll",
@@ -8,6 +9,7 @@
         "skinnable": true
     },
     "rednose-datatable-select" : {
+        "group": "rednose-ui",
         "requires": [
             "rednose-datatable",
             "plugin"
