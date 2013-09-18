@@ -1,34 +1,45 @@
 {
-    "rednose-app-base" : {
-        "requires": [
-            "app-base",
-            "cssgrids",
-            "event-custom",
-            "handlebars-base",
-            "rednose-app-templates",
-            "rednose-panel"
-        ],
-        "skinnable": true
-    },
-
-    "rednose-model-undo" : {
-        "requires": [
-            "model"
-        ]
-    },
-
-    "rednose-model-spinner" : {
-        "requires": [
+    "rednose-app" : {
+        "use": [
             "rednose-app-base",
-            "model"
-        ]
-    },
+            "rednose-model-undo",
+            "rednose-model-spinner",
+            "rednose-view-nav"
+        ],
 
-    "rednose-view-nav" : {
-        "requires": [
-            "event-custom",
-            "rednose-widget-nav-container",
-            "view"
-        ]
+        "submodules": {
+            "rednose-app-base" : {
+                "requires": [
+                    "app-base",
+                    "cssgrids",
+                    "event-custom",
+                    "handlebars-base",
+                    "rednose-app-templates",
+                    "rednose-panel"
+                ],
+                "skinnable": true
+            },
+
+            "rednose-model-undo" : {
+                "requires": [
+                    "model"
+                ]
+            },
+
+            "rednose-model-spinner" : {
+                "requires": [
+                    "rednose-app-base",
+                    "model"
+                ]
+            },
+
+            "rednose-view-nav" : {
+                "requires": [
+                    "event-custom",
+                    "rednose-widget-nav-container",
+                    "view"
+                ]
+            }
+        }
     }
 }
