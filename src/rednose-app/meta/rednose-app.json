@@ -1,5 +1,6 @@
 {
     "rednose-app" : {
+        "group": "rednose-ui",
         "use": [
             "rednose-app-base",
             "rednose-model-undo",

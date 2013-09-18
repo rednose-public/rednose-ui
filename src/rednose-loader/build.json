@@ -1,0 +1,13 @@
+{
+	"name": "loader-rednose",
+	"exec": [
+	    "yogi loader --yes --mix --js js/rednose-loader.js --json js/rednose-loader.json --start ../"
+	],
+	"builds": {
+		"loader-rednose": {
+			"jsfiles": [
+				"js/rednose-loader.js"
+			]
+		}
+	}
+}
