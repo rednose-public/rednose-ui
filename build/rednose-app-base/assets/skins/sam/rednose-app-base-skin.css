@@ -1,0 +1,119 @@
+.rednose-spinner {
+    width: 32px;
+    height: 32px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background:url(spinner.gif) no-repeat center;
+    text-align:center;
+    padding: 0;
+    margin-left: -16px;
+    margin-top: -16px;
+    z-index: 200;
+}
+
+/* Master-detail app template */
+.rednose-app-master-detail-container {
+    padding-left: 228px;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.rednose-app-master-view {
+    margin-left: -228px;
+    width: 228px;
+    height: 100%;
+    background-color: white;
+    border-right: 1px solid #EEE;
+}
+
+.rednose-app-detail-view {
+    height:100%;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #4D4D4D;
+    background: #EAEAEA url('bg.png');
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+/* FIXME */
+.rednose-app-detail-view {
+    left: 228px;
+    right: 0px;
+    position: absolute;
+}
+
+.rednose-app-master-detail-container {
+    padding-left: 228px;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+/* Master-detail grid template */
+.rednose-grid-master-view {
+    width: 180px;
+    height: 443px;
+}
+
+.rednose-grid-detail-view {
+    overflow: auto;
+    width: 800px;
+    height: 443px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #4D4D4D;
+    background: #EAEAEA url('bg.png');
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    -ms-font-smoothing: antialiased;
+    -o-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+/* Scrollable navigation view */
+.rednose-scroll-view {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+}
+
+/* YUI Overrides. */
+.yui3-skin-sam .rednose-app-master-view .yui3-widget-stdmod {
+    position: absolute;
+    width: 228px;
+}
+
+.yui3-skin-sam .rednose-app-master-view .yui3-widget-hd {
+    position: absolute;
+    width: 228px;
+    padding: 0;
+}
+
+.yui3-skin-sam .rednose-app-master-view .yui3-widget-bd {
+    position: absolute;
+    top: 0;
+    width: 228px;
+    bottom: 56px;
+    padding: 0;
+}
+
+.yui3-skin-sam .rednose-app-master-view .yui3-widget-ft {
+    position: absolute;
+    bottom: 0;
+    width: 198px;
+}
