@@ -67,7 +67,10 @@
             "datatable-scroll",
             "datatable-sort"
         ],
-        "skinnable": true
+        "skinnable": true,
+        "supersedes": [
+            "rednose-app-base"
+        ]
     },
     "rednose-datatable-select": {
         "group": "rednose-ui",
@@ -210,6 +213,7 @@
             "rednose-treeview-select",
             "node"
         ],
+        "rollup": 1,
         "skinnable": true,
         "supersedes": [
             "gallery-sm-treeview-templates"

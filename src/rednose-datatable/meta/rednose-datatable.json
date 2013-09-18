@@ -6,6 +6,11 @@
             "datatable-scroll",
             "datatable-sort"
         ],
+
+        "supersedes": [
+            "rednose-app-base"
+        ],
+
         "skinnable": true
     },
     "rednose-datatable-select" : {

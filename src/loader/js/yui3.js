@@ -77,7 +77,10 @@ Y.mix(YUI.Env[Y.version].modules, {
             "datatable-scroll",
             "datatable-sort"
         ],
-        "skinnable": true
+        "skinnable": true,
+        "supersedes": [
+            "rednose-app-base"
+        ]
     },
     "rednose-datatable-select": {
         "group": "rednose-ui",
@@ -220,6 +223,7 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-treeview-select",
             "node"
         ],
+        "rollup": 1,
         "skinnable": true,
         "supersedes": [
             "gallery-sm-treeview-templates"
@@ -269,4 +273,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'a7e5a550d54a011b12a5b015fd33e577';
+YUI.Env[Y.version].md5 = '475452365f03fdcb9624d31b094a86c8';
