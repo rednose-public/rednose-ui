@@ -107,12 +107,16 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
             "dd",
             "dd-plugin",
             "json-parse",
+            "rednose-dialog-css",
             "rednose-panel",
             "node",
             "node-event-simulate",
             "widget"
         ],
         "skinnable": true
+    },
+    "rednose-dialog-css": {
+        "type": "css"
     },
     "rednose-dropdown": {
         "group": "rednose-ui",
@@ -280,4 +284,4 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     }
 };
-YUI.Env[Y.version].md5 = '22dcb5566b26133d4f26830d9cedec19';
+YUI.Env[Y.version].md5 = 'f4e49999ac383361d0eb52e08eb179d9';

@@ -64,7 +64,12 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     /**
     Shows a basic `alert` dialog.
 
-    @method prompt
+    @method alert
+    @param {Object} [config] The following configuration properties can be specified:
+        @param {String} [config.title] The dialog title.
+        @param {String} [config.text] The dialog body text.
+        @param {String} [config.type] The dialog body type ('default', 'info', 'warning', success', 'danger', 'error').
+        @param {String} [config.confirm] The confirm button value.
     @public
     **/
     alert: function (options) {
@@ -108,7 +113,14 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     /**
     Shows a basic `confirm` dialog.
 
-    @method prompt
+    @method confirm
+    @param {Object} [config] The following configuration properties can be specified:
+        @param {String} [config.title] The dialog title.
+        @param {String} [config.text] The dialog body text.
+        @param {String} [config.type] The dialog body type ('default', 'info', 'warning', success', 'danger', 'error').
+        @param {String} [config.confirm] The confirm button value.
+        @param {String} [config.cancel] The cancel button value.
+    @param {Function} callback Optional callback function.
     @public
     **/
     confirm: function (options, callback) {
@@ -166,6 +178,15 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     Shows a basic `prompt` dialog.
 
     @method prompt
+    @param {String} [config.cancel] The cancel button value.
+        @param {String} [config.title] The dialog title.
+        @param {String} [config.text] The dialog body text.
+        @param {String} [config.type] The dialog body type ('default', 'info', 'warning', success', 'danger', 'error').
+        @param {String} [config.confirm] The confirm button value.
+        @param {String} [config.cancel] The cancel button value.
+        @param {String} [config.value] The default field value, optional.
+        @param {String} [config.html] An HTML template to render, optional.
+    @param {Function} callback Optional callback function, closes the the dialog when it returns `true`.
     @public
     **/
     prompt: function (options, callback) {
@@ -228,9 +249,10 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     isDefault: true,
                     action : function () {
                         if (typeof callback === 'function') {
-                            callback();
+                            if (callback(node) === true) {
+                                self.destroy();
+                            }
                         }
-                        self.destroy();
                     },
                     classNames: CSS_BOOTSTRAP_BTN + ' ' + this._getButtonForType(options.type)
                  }
@@ -348,6 +370,8 @@ Static wrapper for the `alert` method
 
 @method alert
 @static
+@param {Object} options
+@param {Function} callback
 @return {Rednose.Dialog}
 **/
 Dialog.alert = function (options, callback) {
@@ -363,6 +387,8 @@ Static wrapper for the `confirm` method
 
 @method confirm
 @static
+@param {Object} options
+@param {Function} callback
 @return {Rednose.Dialog}
 **/
 Dialog.confirm = function (options, callback) {
@@ -378,6 +404,8 @@ Static wrapper for the `confirm` method
 
 @method prompt
 @static
+@param {Object} options
+@param {Function} callback
 @return {Rednose.Dialog}
 **/
 Dialog.prompt = function (options, callback) {

@@ -3,7 +3,12 @@
     "builds": {
         "rednose-dialog": {
             "jsfiles": [
-                "rednose-dialog.js"
+                "dialog.js"
+            ]
+        },
+        "rednose-dialog-css": {
+            "cssfiles": [
+                "dialog.css"
             ]
         }
     }

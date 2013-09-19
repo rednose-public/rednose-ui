@@ -98,12 +98,16 @@
             "dd",
             "dd-plugin",
             "json-parse",
+            "rednose-dialog-css",
             "rednose-panel",
             "node",
             "node-event-simulate",
             "widget"
         ],
         "skinnable": true
+    },
+    "rednose-dialog-css": {
+        "type": "css"
     },
     "rednose-dropdown": {
         "group": "rednose-ui",
