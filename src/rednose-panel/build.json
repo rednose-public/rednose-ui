@@ -5,10 +5,7 @@
             "jsfiles": [
                 "panel.js"
             ]
-        }
-    },
-    "name": "rednose-panel-css",
-    "builds": {
+        },
         "rednose-panel-css": {
             "cssfiles": [
                 "panel.css"
