@@ -5,9 +5,7 @@ Extension of the original Y.App, to provide support for modal views.
 
 @module rednose-app
 **/
-var App,
-
-    CSS_SPINNER = 'rednose-spinner';
+var CSS_SPINNER = 'rednose-spinner';
 
 /**
 Extension of the original Y.App, to provide support for modal views.
@@ -16,7 +14,7 @@ Extension of the original Y.App, to provide support for modal views.
 @constructor
 @extends App
 **/
-App = Y.Base.create('app', Y.App, [], {
+var App = Y.Base.create('app', Y.App, [], {
     // -- Protected Properties -------------------------------------------------
 
     /**
@@ -188,7 +186,7 @@ App = Y.Base.create('app', Y.App, [], {
     }
 });
 
-// -- Static methods ------------------------------------------------------------
+// -- Static methods -----------------------------------------------------------
 
 /**
 Show the spinner icon in the center of the screen.

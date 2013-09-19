@@ -1,9 +1,40 @@
 YUI.add('rednose-dialog', function (Y, NAME) {
 
-var Dialog;
+/*jshint expr:true, onevar:false */
 
-Dialog = Y.Base.create('dialog', Y.Widget, [], {
+/**
+Provides several dialog windows.
 
+@module rednose-dialog
+**/
+var CSS_WIDGET = 'rednose-widget',
+    CSS_DIALOG = 'rednose-dialog',
+
+    CSS_BOOTSTRAP_PULL_RIGHT  = 'pull-right',
+    CSS_BOOTSTRAP_BTN         = 'btn',
+    CSS_BOOTSTRAP_BTN_WARNING = 'btn-warning',
+    CSS_BOOTSTRAP_BTN_PRIMARY = 'btn-primary',
+    CSS_BOOTSTRAP_BTN_DANGER  = 'btn-danger',
+
+    TEXT_CONFIRM = 'OK',
+    TEXT_CANCEL  = 'Cancel';
+
+/**
+Provides several dialog windows.
+
+@class Dialog
+@namespace Rednose
+@constructor
+@extends Widget
+**/
+var Dialog = Y.Base.create('dialog', Y.Widget, [], {
+
+    // -- Lifecycle Methods ----------------------------------------------------
+
+    /**
+    @method initializer
+    @protected
+    **/
     initializer: function () {
         var self = this;
 
@@ -13,52 +44,126 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
         Y.on('keydown', function (e) { if (e.keyCode === 27) { self.destroy(); }});
     },
 
+    /**
+    @method destructor
+    @protected
+    **/
     destructor : function() {
         this.get('panel') && this.get('panel').destroy();
     },
 
+    // -- Public Methods -------------------------------------------------------
+
     /**
-     * Gets triggered after the 'error' attribute changes. Renders an
-     * error message at a given property path.
-     */
-    _setError: function (e) {
-        var error = e.newVal,
-            bb    = this.get('panel').get('boundingBox'),
-            input;
+    Shows a basic `alert` dialog.
 
-        // Remove any previous error message
-        bb.all('.control-group').each(function (node) {
-            if (node.hasClass('error')) {
-                node.removeClass('error');
-            }
+    @method prompt
+    @public
+    **/
+    alert: function (title, message, warning) {
+        var self = this,
+            node,
+            panel;
 
-            node.all('.help-block').remove();
-        });
-
-        // Append the message node at the given path
-        input = bb.one('[data-path=' + error.path + ']');
-        input.ancestor('.control-group').addClass('error');
-
-        if (error.message) {
-            input.get('parentNode').append('<span class="help-block">' + error.message + '</span>');
+        if (warning) {
+            node = Y.Node.create(
+                '<div class="icon dialog_warning_icon"></div>' +
+                '<div><p>' + message + '</p></div>'
+            );
+        } else {
+            node = Y.Node.create(
+                '<div class="icon dialog_error_icon"></div>' +
+                '<div><p>' + message + '</p></div>'
+            );
         }
 
-        input.focus();
+        panel = new Y.Rednose.Panel({
+            bodyContent: node,
+            headerContent: title,
+            zIndex: Y.all('*').size(),
+            width: this.get('width'),
+            buttons: [
+                 {
+                    value  : TEXT_CONFIRM,
+                    section: Y.WidgetStdMod.FOOTER,
+                    isDefault: true,
+                    action : function () {
+                        self.destroy();
+                    },
+                    classNames: 'btn ' + (warning ? CSS_BOOTSTRAP_BTN_WARNING : CSS_BOOTSTRAP_BTN_DANGER)
+                 }
+            ]
+        }).render();
+
+        this._setPanelStyle(panel);
+        this.set('panel', panel);
     },
 
     /**
-     * Hide the active panel
-     */
-    hide: function() {
-        this.destroy();
+    Shows a basic `confirm` dialog.
+
+    @method prompt
+    @public
+    **/
+    confirm: function (title, message, callback, warning, confirmVal) {
+        var self = this,
+            node,
+            panel;
+
+        warning = typeof warning !== 'undefined' ? warning : false;
+        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : TEXT_CONFIRM;
+
+        node = Y.Node.create(
+            '<div class="icon ' + (warning ? 'dialog_warning_icon' : 'dialog_prompt_icon') + '"></div>' +
+            '<div><p>' + message + '</p></div>'
+        );
+
+        panel = new Y.Rednose.Panel({
+            bodyContent: node,
+            headerContent: title,
+            zIndex: Y.all('*').size(),
+            width: this.get('width'),
+            buttons: [
+                 {
+                    value  : TEXT_CANCEL,
+                    section: Y.WidgetStdMod.FOOTER,
+                    isDefault: false,
+                    action : function () {
+                        self.destroy();
+                    },
+                    classNames: CSS_BOOTSTRAP_BTN
+                 },
+                 {
+                    value  : confirmVal,
+                    section: Y.WidgetStdMod.FOOTER,
+                    isDefault: true,
+                    action : function () {
+                        if (callback) {
+                            callback();
+                        }
+                        self.destroy();
+                    },
+                    classNames: CSS_BOOTSTRAP_BTN + ' ' + (warning ? CSS_BOOTSTRAP_BTN_WARNING : CSS_BOOTSTRAP_BTN_PRIMARY)
+                 }
+            ]
+        }).render();
+
+        this._setPanelStyle(panel);
+        this.set('panel', panel);
     },
 
+    /**
+    Shows a basic `prompt` dialog.
+
+    @method prompt
+    @public
+    **/
     prompt: function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {
         var self = this,
             node,
             panel;
 
-        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';
+        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : TEXT_CONFIRM;
 
         if (defaultVal === null) {
             defaultVal = '';
@@ -95,13 +200,14 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             width: this.get('width'),
             buttons: [
                  {
-                    value  : 'Cancel',
+                    value  : TEXT_CANCEL,
                     section: Y.WidgetStdMod.FOOTER,
                     action : function () {
                         self.destroy();
                     },
-                    classNames: 'btn'
-                 }, {
+                    classNames: CSS_BOOTSTRAP_BTN
+                 },
+                 {
                     value  : confirmVal,
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: true,
@@ -112,10 +218,9 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                             }
                         }
                     },
-                    classNames: 'btn btn-primary'
+                    classNames: CSS_BOOTSTRAP_BTN + ' ' + CSS_BOOTSTRAP_BTN_PRIMARY
                  }
-            ],
-            centered: true, modal: true, visible: true
+            ]
         }).render();
 
         node.one('input,textarea,select').focus().select();
@@ -123,118 +228,71 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             if (e.button === 13) {
                 var buttons = panel.get('buttons');
 
-                for (var i in buttons.footer) {
-                    var button = buttons.footer[i];
-
-                    if (button.hasClass('btn-primary')) {
+                Y.Array.each(buttons.footer, function (button) {
+                    if (button.hasClass(CSS_BOOTSTRAP_BTN_PRIMARY)) {
                         button.simulate('click');
                     }
-                }
+                });
             }
         });
 
-        panel.get('boundingBox').addClass('rednose-dialog');
-        panel.get('boundingBox').all('.yui3-button').each(function() {
-            this.removeClass('yui3-button').removeClass('yui3-button-primary');
-        });
-
+        this._setPanelStyle(panel);
         this.set('panel', panel);
     },
 
-    confirm: function (title, message, callback, warning, confirmVal) {
-        var self = this,
-            node,
-            panel;
+    // -- Protected Methods ----------------------------------------------------
 
-        warning = typeof warning !== 'undefined' ? warning : false;
-        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : 'OK';
+    /**
+    @method _setPanelStyle
+    @param {Rednose.Panel} panel
+    @protected
+    **/
+    _setPanelStyle: function (panel) {
+        var boundingBox = panel.get('boundingBox');
 
-        node = Y.Node.create(
-            '<div class="icon ' + (warning ? 'dialog_warning_icon' : 'dialog_prompt_icon') + '"></div>' +
-            '<div><p>' + message + '</p></div>'
-        );
+        boundingBox.addClass(CSS_WIDGET);
+        boundingBox.addClass(CSS_DIALOG);
 
-        panel = new Y.Rednose.Panel({
-            bodyContent: node,
-            headerContent: title,
-            zIndex: Y.all('*').size(),
-            width: this.get('width'),
-            buttons: [
-                 {
-                    value  : 'Cancel',
-                    section: Y.WidgetStdMod.FOOTER,
-                    isDefault: false,
-                    action : function () {
-                        self.destroy();
-                    },
-                    classNames: 'btn'
-                 }, {
-                    value  : confirmVal,
-                    section: Y.WidgetStdMod.FOOTER,
-                    isDefault: true,
-                    action : function () {
-                        if (callback) {
-                            callback();
-                        }
-                        self.destroy();
-                    },
-                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-primary')
-                 }
-            ],
-            centered: true, modal: true, visible: true
-        }).render();
+        boundingBox.one('.yui3-widget-buttons').addClass(CSS_BOOTSTRAP_PULL_RIGHT);
 
-        panel.get('boundingBox').addClass('rednose-dialog');
-        panel.get('boundingBox').all('.yui3-button').each(function() {
-            this.removeClass('yui3-button').removeClass('yui3-button-primary');
+        boundingBox.all('.yui3-button').each(function (button) {
+            button.removeClass('yui3-button').removeClass('yui3-button-primary');
         });
-
-        this.set('panel', panel);
     },
 
-    error: function (title, message, warning) {
-        var self = this,
-            node,
-            panel;
+    // -- Protected Event Handlers ---------------------------------------------
 
-        if (warning) {
-            node = Y.Node.create(
-                '<div class="icon dialog_warning_icon"></div>' +
-                '<div><p>' + message + '</p></div>'
-            );
-        } else {
-            node = Y.Node.create(
-                '<div class="icon dialog_error_icon"></div>' +
-                '<div><p>' + message + '</p></div>'
-            );
+    /**
+    Gets triggered after the 'error' attribute changes. Renders an
+    error message at a given property path.
+
+    @method _setError
+    @param {EventFacade} e Event
+    @protected
+    **/
+    _setError: function (e) {
+        var error = e.newVal,
+            bb    = this.get('panel').get('boundingBox'),
+            input;
+
+        // Remove any previous error message
+        bb.all('.control-group').each(function (node) {
+            if (node.hasClass('error')) {
+                node.removeClass('error');
+            }
+
+            node.all('.help-block').remove();
+        });
+
+        // Append the message node at the given path
+        input = bb.one('[data-path=' + error.path + ']');
+        input.ancestor('.control-group').addClass('error');
+
+        if (error.message) {
+            input.get('parentNode').append('<span class="help-block">' + error.message + '</span>');
         }
 
-        panel = new Y.Rednose.Panel({
-            bodyContent: node,
-            headerContent: title,
-            zIndex: Y.all('*').size(),
-            width: this.get('width'),
-            buttons: [
-                 {
-                    value  : 'OK',
-                    section: Y.WidgetStdMod.FOOTER,
-                    isDefault: true,
-                    action : function () {
-                        self.destroy();
-                    },
-                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-danger')
-                 }
-            ],
-            centered: true, modal: true, visible: true
-        }).render();
-
-        panel.get('boundingBox').addClass('rednose-widget');
-        panel.get('boundingBox').addClass('rednose-dialog');
-        panel.get('boundingBox').all('.yui3-button').each(function() {
-            this.removeClass('yui3-button').removeClass('yui3-button-primary');
-        });
-
-        this.set('panel', panel);
+        input.focus();
     }
 }, {
     ATTRS: {
@@ -244,6 +302,28 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
     }
 });
 
+/**
+Static wrapper for the `alert` method
+
+@method alert
+@static
+@return {Rednose.Dialog}
+**/
+Dialog.alert = function (title, message, warning) {
+    var dialog = new Dialog();
+
+    dialog.alert(title, message, warning);
+
+    return dialog;
+};
+
+/**
+Static wrapper for the `confirm` method
+
+@method confirm
+@static
+@return {Rednose.Dialog}
+**/
 Dialog.confirm = function (title, message, callback, warning, confirmVal) {
     var dialog = new Dialog();
 
@@ -252,10 +332,17 @@ Dialog.confirm = function (title, message, callback, warning, confirmVal) {
     return dialog;
 };
 
-Dialog.error = function (title, message, warning) {
+/**
+Static wrapper for the `confirm` method
+
+@method prompt
+@static
+@return {Rednose.Dialog}
+**/
+Dialog.prompt = function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {
     var dialog = new Dialog();
 
-    dialog.error(title, message, warning);
+    dialog.confirm(title, message, callback, warning, confirmVal);
 
     return dialog;
 };

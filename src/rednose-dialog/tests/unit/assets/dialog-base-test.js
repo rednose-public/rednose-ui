@@ -13,7 +13,7 @@ suite.add(new Y.Test.Case({
     '`destroy()` should destroy the view': function () {
         var dialog = new Y.Rednose.Dialog();
 
-        dialog.error('Test title', 'Test message body.', true);
+        dialog.alert('Test title', 'Test message body.', true);
 
         Assert.isFalse(dialog.get('destroyed'));
         Assert.isObject(Y.one('.rednose-dialog'));
@@ -58,13 +58,13 @@ suite.add(new Y.Test.Case({
         dialog.destroy();
     },
 
-    '`error()` should render the error dialog correctly': function () {
+    '`alert()` should render the alert dialog correctly': function () {
         var dialog = new Y.Rednose.Dialog();
 
         var title      = 'Test Title';
         var message    = 'Test message body.';
 
-        dialog.error(title, message, false);
+        dialog.alert(title, message, false);
 
         var titleNode   = Y.one('.rednose-dialog').one('.yui3-widget-hd');
         var messageNode = Y.one('.rednose-dialog').one('.yui3-widget-bd').one('p');
@@ -116,7 +116,7 @@ suite.add(new Y.Test.Case({
     'Default button should be focussed': function () {
         var dialog;
 
-        dialog = Y.Rednose.Dialog.error('Test Title', 'Test message body.');
+        dialog = Y.Rednose.Dialog.alert('Test Title', 'Test message body.');
         Y.Assert.areSame(Y.one('.yui3-widget-buttons').one('.btn').getDOMNode(), document.activeElement);
         dialog.destroy();
 
@@ -132,7 +132,7 @@ suite.add(new Y.Test.Case({
     '`escape` key should close the dialog': function () {
         var dialog;
 
-        dialog = Y.Rednose.Dialog.error('Test Title', 'Test message body.');
+        dialog = Y.Rednose.Dialog.alert('Test Title', 'Test message body.');
 
         Y.one('.yui3-panel-content').simulate('keydown', {keyCode: 27});
         Assert.isNull(Y.one('.rednose-dialog'));
