@@ -216,4 +216,14 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 Y.namespace('Rednose').ContextMenu = ContextMenu;
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["base", "panel", "plugin", "widget", "overlay"]});
+}, '1.1.0-DEV', {
+    "group": "rednose-ui",
+    "requires": [
+        "base",
+        "overlay",
+        "panel",
+        "plugin",
+        "rednose-contextmenu-css",
+        "widget"
+    ]
+});

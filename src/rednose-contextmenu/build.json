@@ -1,6 +1,11 @@
 {
     "name": "rednose-contextmenu",
     "builds": {
+        "rednose-contextmenu-css": {
+            "cssfiles": [
+                "contextmenu.css"
+            ]
+        },
         "rednose-contextmenu": {
             "jsfiles": [
                 "contextmenu.js"

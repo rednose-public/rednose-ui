@@ -3,7 +3,15 @@
     "builds": {
         "rednose-panel": {
             "jsfiles": [
-                "rednose-panel.js"
+                "panel.js"
+            ]
+        }
+    },
+    "name": "rednose-panel-css",
+    "builds": {
+        "rednose-panel-css": {
+            "cssfiles": [
+                "panel.css"
             ]
         }
     }

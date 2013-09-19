@@ -2,11 +2,16 @@
     "rednose-panel" : {
         "group": "rednose-ui",
         "requires": [
-            "panel"
+            "panel",
+            "rednose-panel-css"
         ],
         "supersedes": [
             "skin-sam-widget-base",
             "skin-sam-panel"
         ]
+    },
+    "rednose-panel-css" : {
+        "group": "rednose-ui",
+        "type": "css"
     }
 }

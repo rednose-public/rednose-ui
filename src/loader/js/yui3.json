@@ -36,11 +36,16 @@
         "group": "rednose-ui",
         "requires": [
             "base",
+            "overlay",
             "panel",
             "plugin",
-            "widget",
-            "overlay"
+            "rednose-contextmenu-css",
+            "widget"
         ]
+    },
+    "rednose-contextmenu-css": {
+        "group": "rednose-ui",
+        "type": "css"
     },
     "rednose-controlform": {
         "group": "rednose-ui",
@@ -55,10 +60,6 @@
             "rednose-dialog",
             "rednose-contextmenu"
         ]
-    },
-    "rednose-css": {
-        "group": "rednose-ui",
-        "type": "css"
     },
     "rednose-datatable": {
         "group": "rednose-ui",
@@ -97,7 +98,6 @@
             "dd",
             "dd-plugin",
             "json-parse",
-            "rednose-css",
             "rednose-panel",
             "node",
             "node-event-simulate",
@@ -109,7 +109,6 @@
         "group": "rednose-ui",
         "requires": [
             "base",
-            "rednose-css",
             "node",
             "gallery-bootstrap-dropdown"
         ]
@@ -193,12 +192,17 @@
     "rednose-panel": {
         "group": "rednose-ui",
         "requires": [
-            "panel"
+            "panel",
+            "rednose-panel-css"
         ],
         "supersedes": [
             "skin-sam-widget-base",
             "skin-sam-panel"
         ]
+    },
+    "rednose-panel-css": {
+        "group": "rednose-ui",
+        "type": "css"
     },
     "rednose-tooltip": {
         "group": "rednose-ui",

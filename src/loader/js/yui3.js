@@ -46,11 +46,16 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "base",
+            "overlay",
             "panel",
             "plugin",
-            "widget",
-            "overlay"
+            "rednose-contextmenu-css",
+            "widget"
         ]
+    },
+    "rednose-contextmenu-css": {
+        "group": "rednose-ui",
+        "type": "css"
     },
     "rednose-controlform": {
         "group": "rednose-ui",
@@ -65,10 +70,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-dialog",
             "rednose-contextmenu"
         ]
-    },
-    "rednose-css": {
-        "group": "rednose-ui",
-        "type": "css"
     },
     "rednose-datatable": {
         "group": "rednose-ui",
@@ -107,7 +108,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "dd",
             "dd-plugin",
             "json-parse",
-            "rednose-css",
             "rednose-panel",
             "node",
             "node-event-simulate",
@@ -119,7 +119,6 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "base",
-            "rednose-css",
             "node",
             "gallery-bootstrap-dropdown"
         ]
@@ -203,12 +202,17 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-panel": {
         "group": "rednose-ui",
         "requires": [
-            "panel"
+            "panel",
+            "rednose-panel-css"
         ],
         "supersedes": [
             "skin-sam-widget-base",
             "skin-sam-panel"
         ]
+    },
+    "rednose-panel-css": {
+        "group": "rednose-ui",
+        "type": "css"
     },
     "rednose-tooltip": {
         "group": "rednose-ui",
@@ -277,4 +281,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '95908884d0390ab8c9a0da1e85dcfcdd';
+YUI.Env[Y.version].md5 = '22dcb5566b26133d4f26830d9cedec19';
