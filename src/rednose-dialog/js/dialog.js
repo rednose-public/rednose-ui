@@ -371,7 +371,6 @@ Static wrapper for the `alert` method
 @method alert
 @static
 @param {Object} options
-@param {Function} callback
 @return {Rednose.Dialog}
 **/
 Dialog.alert = function (options) {
