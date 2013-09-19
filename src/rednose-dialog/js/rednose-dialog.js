@@ -1,6 +1,14 @@
-var Dialog;
+/*jshint expr:true, onevar:false */
 
-Dialog = Y.Base.create('dialog', Y.Widget, [], {
+var CSS_WIDGET = 'rednose-widget',
+    CSS_DIALOG = 'rednose-dialog',
+
+    CSS_BOOTSTRAP_PULL_RIGHT  = 'pull-right',
+    CSS_BOOTSTRAP_BTN_WARNING = 'btn-warning',
+    CSS_BOOTSTRAP_BTN_PRIMARY = 'btn-primary',
+    CSS_BOOTSTRAP_BTN_DANGER  = 'btn-danger';
+
+var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
     initializer: function () {
         var self = this;
@@ -131,7 +139,7 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
             }
         });
 
-        panel.get('boundingBox').addClass('rednose-dialog');
+        panel.get('boundingBox').addClass(CSS_DIALOG);
         panel.get('boundingBox').all('.yui3-button').each(function() {
             this.removeClass('yui3-button').removeClass('yui3-button-primary');
         });
@@ -176,13 +184,13 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                         }
                         self.destroy();
                     },
-                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-primary')
+                    classNames: 'btn ' + (warning ? CSS_BOOTSTRAP_BTN_WARNING : CSS_BOOTSTRAP_BTN_PRIMARY)
                  }
             ],
             centered: true, modal: true, visible: true
         }).render();
 
-        panel.get('boundingBox').addClass('rednose-dialog');
+        panel.get('boundingBox').addClass(CSS_DIALOG);
         panel.get('boundingBox').all('.yui3-button').each(function() {
             this.removeClass('yui3-button').removeClass('yui3-button-primary');
         });
@@ -220,14 +228,14 @@ Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     action : function () {
                         self.destroy();
                     },
-                    classNames: 'btn ' + (warning ? 'btn-warning' : 'btn-danger')
+                    classNames: 'btn ' + (warning ? CSS_BOOTSTRAP_BTN_WARNING : CSS_BOOTSTRAP_BTN_DANGER)
                  }
             ],
             centered: true, modal: true, visible: true
         }).render();
 
-        panel.get('boundingBox').addClass('rednose-widget');
-        panel.get('boundingBox').addClass('rednose-dialog');
+        panel.get('boundingBox').addClass(CSS_WIDGET);
+        panel.get('boundingBox').addClass(CSS_DIALOG);
         panel.get('boundingBox').all('.yui3-button').each(function() {
             this.removeClass('yui3-button').removeClass('yui3-button-primary');
         });
