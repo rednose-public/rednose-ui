@@ -68,7 +68,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @param {Object} [config] The following configuration properties can be specified:
         @param {String} [config.title] The dialog title.
         @param {String} [config.text] The dialog body text.
-        @param {String} [config.type] The dialog body type ('default', 'info', 'warning', success', 'danger', 'error').
+        @param {String} [config.type] The dialog type ('default', 'info', 'warning', success', 'danger', 'error').
         @param {String} [config.confirm] The confirm button value.
     @public
     **/
@@ -117,7 +117,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @param {Object} [config] The following configuration properties can be specified:
         @param {String} [config.title] The dialog title.
         @param {String} [config.text] The dialog body text.
-        @param {String} [config.type] The dialog body type ('default', 'info', 'warning', success', 'danger', 'error').
+        @param {String} [config.type] The dialog type ('default', 'info', 'warning', success', 'danger', 'error').
         @param {String} [config.confirm] The confirm button value.
         @param {String} [config.cancel] The cancel button value.
     @param {Function} callback Optional callback function.
@@ -181,7 +181,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @param {String} [config.cancel] The cancel button value.
         @param {String} [config.title] The dialog title.
         @param {String} [config.text] The dialog body text.
-        @param {String} [config.type] The dialog body type ('default', 'info', 'warning', success', 'danger', 'error').
+        @param {String} [config.type] The dialog type ('default', 'info', 'warning', success', 'danger', 'error').
         @param {String} [config.confirm] The confirm button value.
         @param {String} [config.cancel] The cancel button value.
         @param {String} [config.value] The default field value, optional.
