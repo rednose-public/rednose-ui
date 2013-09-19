@@ -42,7 +42,7 @@ var TreeView,
  *     @param {String} [config.header] An optional header, needed for global dropping on the root node
  *
  * @constructor
- * @extends Y.TreeView
+ * @extends TreeView
  */
 TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Rednose.TreeView.DD, Y.Rednose.TreeView.Selectable], {
     // -- Protected Properties -------------------------------------------------

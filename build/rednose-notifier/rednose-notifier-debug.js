@@ -935,7 +935,7 @@ $.pnotify.defaults.styling = 'bootstrap';
 Triggers a notification.
 
 @method notify
-@param {notification} Pines Notify notification object.
+@param {notification} notification Notify notification object.
 @static
 @public
 **/

@@ -15,7 +15,7 @@ Provides a navigation bar.
 @class NavBar
 @namespace Rednose
 @constructor
-@extends Y.Widget
+@extends Widget
 **/
 Navbar = Y.Base.create('navbar', Y.Widget, [], {
     // -- Public Properties ----------------------------------------------------

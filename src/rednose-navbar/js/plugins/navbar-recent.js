@@ -12,7 +12,7 @@ Provides a navigation bar plugin to show a list of recent entries.
 @class Recent
 @namespace Rednose.NavBar
 @constructor
-@extends Y.Plugin.Base
+@extends Plugin.Base
 @extensionfor Rednose.NavBar
 **/
 Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
