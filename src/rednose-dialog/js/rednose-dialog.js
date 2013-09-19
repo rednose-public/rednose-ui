@@ -13,9 +13,18 @@ var CSS_WIDGET = 'rednose-widget',
     CSS_BOOTSTRAP_BTN_WARNING = 'btn-warning',
     CSS_BOOTSTRAP_BTN_PRIMARY = 'btn-primary',
     CSS_BOOTSTRAP_BTN_DANGER  = 'btn-danger',
+    CSS_BOOTSTRAP_BTN_INFO    = 'btn-info',
+    CSS_BOOTSTRAP_BTN_SUCCESS = 'btn-success',
 
     TEXT_CONFIRM = 'OK',
-    TEXT_CANCEL  = 'Cancel';
+    TEXT_CANCEL  = 'Cancel',
+
+    TYPE_DEFAULT = 'default',
+    TYPE_INFO    = 'info',
+    TYPE_SUCCESS = 'success',
+    TYPE_WARNING = 'warning',
+    TYPE_DANGER  = 'danger',
+    TYPE_ERROR   = 'error';
 
 /**
 Provides several dialog windows.
@@ -58,37 +67,36 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @method prompt
     @public
     **/
-    alert: function (title, message, warning) {
+    alert: function (options) {
+        options || (options = {});
+
         var self = this,
             node,
             panel;
 
-        if (warning) {
-            node = Y.Node.create(
-                '<div class="icon dialog_warning_icon"></div>' +
-                '<div><p>' + message + '</p></div>'
-            );
-        } else {
-            node = Y.Node.create(
-                '<div class="icon dialog_error_icon"></div>' +
-                '<div><p>' + message + '</p></div>'
-            );
-        }
+        options = Y.mix(options, {
+            title  : '',
+            text   : '',
+            type   : TYPE_DEFAULT,
+            confirm: TEXT_CONFIRM
+        });
+
+        node = Y.Node.create('<div><p>' + options.text + '</p></div>');
 
         panel = new Y.Rednose.Panel({
             bodyContent: node,
-            headerContent: title,
+            headerContent: options.title,
             zIndex: Y.all('*').size(),
             width: this.get('width'),
             buttons: [
                  {
-                    value  : TEXT_CONFIRM,
+                    value  : options.confirm,
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: true,
                     action : function () {
                         self.destroy();
                     },
-                    classNames: 'btn ' + (warning ? CSS_BOOTSTRAP_BTN_WARNING : CSS_BOOTSTRAP_BTN_DANGER)
+                    classNames: CSS_BOOTSTRAP_BTN + ' ' + this._getButtonForType(options.type)
                  }
             ]
         }).render();
@@ -103,27 +111,31 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @method prompt
     @public
     **/
-    confirm: function (title, message, callback, warning, confirmVal) {
+    confirm: function (options, callback) {
+        options || (options = {});
+
         var self = this,
             node,
             panel;
 
-        warning = typeof warning !== 'undefined' ? warning : false;
-        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : TEXT_CONFIRM;
+        options = Y.mix(options, {
+            title  : '',
+            text   : '',
+            type   : TYPE_DEFAULT,
+            confirm: TEXT_CONFIRM,
+            cancel : TEXT_CANCEL,
+        });
 
-        node = Y.Node.create(
-            '<div class="icon ' + (warning ? 'dialog_warning_icon' : 'dialog_prompt_icon') + '"></div>' +
-            '<div><p>' + message + '</p></div>'
-        );
+        node = Y.Node.create('<div><p>' + options.text + '</p></div>');
 
         panel = new Y.Rednose.Panel({
             bodyContent: node,
-            headerContent: title,
+            headerContent: options.title,
             zIndex: Y.all('*').size(),
             width: this.get('width'),
             buttons: [
                  {
-                    value  : TEXT_CANCEL,
+                    value  : options.cancel,
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: false,
                     action : function () {
@@ -132,16 +144,16 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     classNames: CSS_BOOTSTRAP_BTN
                  },
                  {
-                    value  : confirmVal,
+                    value  : options.confirm,
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: true,
                     action : function () {
-                        if (callback) {
+                        if (typeof callback === 'function') {
                             callback();
                         }
                         self.destroy();
                     },
-                    classNames: CSS_BOOTSTRAP_BTN + ' ' + (warning ? CSS_BOOTSTRAP_BTN_WARNING : CSS_BOOTSTRAP_BTN_PRIMARY)
+                    classNames: CSS_BOOTSTRAP_BTN + ' ' + this._getButtonForType(options.type)
                  }
             ]
         }).render();
@@ -156,34 +168,39 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @method prompt
     @public
     **/
-    prompt: function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {
+    prompt: function (options, callback) {
+        options || (options = {});
+
         var self = this,
             node,
             panel;
 
-        confirmVal = typeof confirmVal !== 'undefined' ? confirmVal : TEXT_CONFIRM;
+        options = Y.mix(options, {
+            title  : '',
+            text   : '',
+            type   : TYPE_DEFAULT,
+            confirm: TEXT_CONFIRM,
+            cancel : TEXT_CANCEL,
+            value  : '',
+            html   : null
+        });
 
-        if (defaultVal === null) {
-            defaultVal = '';
-        }
-
-        if (htmlTemplate) {
-            if (typeof(htmlTemplate) === 'string') {
-                input = Y.Node.create(htmlTemplate);
+        if (options.html) {
+            if (typeof(options.html) === 'string') {
+                input = Y.Node.create(options.html);
             } else {
-                input = htmlTemplate;
+                input = options.html;
             }
 
             node = Y.Node.create('<form action="#" class="form-horizontal"></form>');
             node.append(input);
         } else {
-            input = Y.Node.create('<input type="text" value="' + defaultVal + '" data-path="input" id="input">');
+            input = Y.Node.create('<input type="text" value="' + value + '" data-path="input" id="input">');
 
             node = Y.Node.create(
                 '<form action="#" class="form-horizontal">' +
-                '   <div class="icon icon_absolute dialog_prompt_icon"></div>' +
                 '   <div class="control-group">' +
-                '       <label for="input" class="control-label">' + question +  '</label>' +
+                '       <label for="input" class="control-label">' + text +  '</label>' +
                 '       <div class="controls"></div>' +
                 '   </div>' +
                 '</form>'
@@ -193,12 +210,12 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         panel = new Y.Rednose.Panel({
             bodyContent: node,
-            headerContent: title,
+            headerContent: options.title,
             zIndex: Y.all('*').size(),
             width: this.get('width'),
             buttons: [
                  {
-                    value  : TEXT_CANCEL,
+                    value  : options.cancel,
                     section: Y.WidgetStdMod.FOOTER,
                     action : function () {
                         self.destroy();
@@ -206,17 +223,16 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     classNames: CSS_BOOTSTRAP_BTN
                  },
                  {
-                    value  : confirmVal,
+                    value  : options.confirm,
                     section: Y.WidgetStdMod.FOOTER,
                     isDefault: true,
                     action : function () {
-                        if (callback !== null) {
-                            if (callback(node) === true) {
-                                self.destroy();
-                            }
+                        if (typeof callback === 'function') {
+                            callback();
                         }
+                        self.destroy();
                     },
-                    classNames: CSS_BOOTSTRAP_BTN + ' ' + CSS_BOOTSTRAP_BTN_PRIMARY
+                    classNames: CSS_BOOTSTRAP_BTN + ' ' + this._getButtonForType(options.type)
                  }
             ]
         }).render();
@@ -256,6 +272,33 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         boundingBox.all('.yui3-button').each(function (button) {
             button.removeClass('yui3-button').removeClass('yui3-button-primary');
         });
+    },
+
+    /**
+    @method _getButtonForType
+    @protected
+    **/
+    _getButtonForType: function (type) {
+        switch (type) {
+            case TYPE_DEFAULT:
+                return CSS_BOOTSTRAP_BTN_PRIMARY;
+
+            case TYPE_INFO:
+                return CSS_BOOTSTRAP_BTN_INFO;
+
+            case TYPE_SUCCESS:
+                return CSS_BOOTSTRAP_BTN_SUCCESS;
+
+            case TYPE_WARNING:
+                return CSS_BOOTSTRAP_BTN_WARNING;
+
+            case TYPE_DANGER:
+            case TYPE_ERROR:
+                return CSS_BOOTSTRAP_BTN_DANGER;
+
+            default:
+                return CSS_BOOTSTRAP_BTN_PRIMARY;
+        }
     },
 
     // -- Protected Event Handlers ---------------------------------------------
@@ -307,10 +350,10 @@ Static wrapper for the `alert` method
 @static
 @return {Rednose.Dialog}
 **/
-Dialog.alert = function (title, message, warning) {
+Dialog.alert = function (options, callback) {
     var dialog = new Dialog();
 
-    dialog.alert(title, message, warning);
+    dialog.alert(options, callback);
 
     return dialog;
 };
@@ -322,10 +365,10 @@ Static wrapper for the `confirm` method
 @static
 @return {Rednose.Dialog}
 **/
-Dialog.confirm = function (title, message, callback, warning, confirmVal) {
+Dialog.confirm = function (options, callback) {
     var dialog = new Dialog();
 
-    dialog.confirm(title, message, callback, warning, confirmVal);
+    dialog.confirm(options, callback);
 
     return dialog;
 };
@@ -337,10 +380,10 @@ Static wrapper for the `confirm` method
 @static
 @return {Rednose.Dialog}
 **/
-Dialog.prompt = function (title, question, defaultVal, callback, htmlTemplate, confirmVal) {
+Dialog.prompt = function (options, callback) {
     var dialog = new Dialog();
 
-    dialog.confirm(title, message, callback, warning, confirmVal);
+    dialog.prompt(options, callback);
 
     return dialog;
 };

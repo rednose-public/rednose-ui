@@ -13,7 +13,10 @@ suite.add(new Y.Test.Case({
     '`destroy()` should destroy the view': function () {
         var dialog = new Y.Rednose.Dialog();
 
-        dialog.alert('Test title', 'Test message body.', true);
+        dialog.alert({
+            title: 'Test title',
+            text: 'Test message body.'
+        });
 
         Assert.isFalse(dialog.get('destroyed'));
         Assert.isObject(Y.one('.rednose-dialog'));
@@ -45,7 +48,11 @@ suite.add(new Y.Test.Case({
         var message    = 'Test message body.';
         var confirmVal = 'Confirm!';
 
-        dialog.confirm(title, message, undefined, false, confirmVal);
+        dialog.confirm({
+            title: title,
+            text: message,
+            confirm: confirmVal
+        });
 
         var titleNode   = Y.one('.rednose-dialog').one('.yui3-widget-hd');
         var messageNode = Y.one('.rednose-dialog').one('.yui3-widget-bd').one('p');
@@ -64,7 +71,10 @@ suite.add(new Y.Test.Case({
         var title      = 'Test Title';
         var message    = 'Test message body.';
 
-        dialog.alert(title, message, false);
+        dialog.confirm({
+            title: title,
+            text: message
+        });
 
         var titleNode   = Y.one('.rednose-dialog').one('.yui3-widget-hd');
         var messageNode = Y.one('.rednose-dialog').one('.yui3-widget-bd').one('p');
@@ -85,7 +95,10 @@ suite.add(new Y.Test.Case({
         var title   = 'Test Title';
         var message = 'Test message body.';
 
-        dialog.confirm(title, message);
+        dialog.confirm({
+            title: title,
+            text: message
+        });
 
         Y.one('.yui3-widget-buttons').one('.btn').simulate('click');
 
@@ -101,7 +114,10 @@ suite.add(new Y.Test.Case({
 
         Y.Mock.expect(mock, { method: 'callback', args: [] });
 
-        dialog.confirm(title, message, mock.callback);
+        dialog.confirm({
+            title: title,
+            text : message
+        }, mock.callback);
 
         Y.one('.yui3-widget-buttons').one('.btn-primary').simulate('click');
 
@@ -116,11 +132,19 @@ suite.add(new Y.Test.Case({
     'Default button should be focussed': function () {
         var dialog;
 
-        dialog = Y.Rednose.Dialog.alert('Test Title', 'Test message body.');
+        dialog = Y.Rednose.Dialog.alert({
+            title: 'Test Title',
+            text : 'Test message body.'
+        });
+
         Y.Assert.areSame(Y.one('.yui3-widget-buttons').one('.btn').getDOMNode(), document.activeElement);
         dialog.destroy();
 
-        dialog = Y.Rednose.Dialog.confirm('Test Title', 'Test message body.');
+        dialog = Y.Rednose.Dialog.confirm({
+            title: 'Test Title',
+            text : 'Test message body.'
+        });
+
         Y.Assert.areSame(Y.one('.yui3-widget-buttons').one('.btn-primary').getDOMNode(), document.activeElement);
         dialog.destroy();
     }
@@ -132,7 +156,10 @@ suite.add(new Y.Test.Case({
     '`escape` key should close the dialog': function () {
         var dialog;
 
-        dialog = Y.Rednose.Dialog.alert('Test Title', 'Test message body.');
+        dialog = Y.Rednose.Dialog.alert({
+            title: 'Test Title',
+            text: 'Test message body.'
+        });
 
         Y.one('.yui3-panel-content').simulate('keydown', {keyCode: 27});
         Assert.isNull(Y.one('.rednose-dialog'));
