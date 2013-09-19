@@ -423,7 +423,6 @@ Y.namespace('Rednose').Dialog = Dialog;
 
 
 }, '1.1.0-DEV', {
-    "group": "rednose-ui",
     "requires": [
         "dd",
         "dd-plugin",
@@ -433,6 +432,5 @@ Y.namespace('Rednose').Dialog = Dialog;
         "node",
         "node-event-simulate",
         "widget"
-    ],
-    "skinnable": true
+    ]
 });

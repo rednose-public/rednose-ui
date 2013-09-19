@@ -912,7 +912,6 @@ Y.namespace('Rednose').ControlForm = ControlForm;
 
 
 }, '1.1.0-DEV', {
-    "group": "rednose-ui",
     "requires": [
         "calendar",
         "dd-proxy",

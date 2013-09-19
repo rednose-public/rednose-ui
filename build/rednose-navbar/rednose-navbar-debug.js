@@ -278,7 +278,6 @@ Y.namespace('Rednose').Navbar = Navbar;
 
 
 }, '1.1.0-DEV', {
-    "group": "rednose-ui",
     "requires": [
         "base",
         "node-pluginhost",

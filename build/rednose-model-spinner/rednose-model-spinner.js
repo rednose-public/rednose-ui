@@ -95,4 +95,4 @@ Spinner = Y.Base.create('undo', Y.Model, [], {
 Y.namespace('Rednose.Model').Spinner = Spinner;
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["rednose-app-base", "model"]});
+}, '1.1.0-DEV', {"requires": ["rednose-app-base", "model"]});

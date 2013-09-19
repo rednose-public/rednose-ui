@@ -30,4 +30,4 @@ Y.namespace('TreeView').Templates = {
 };
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["template-micro"]});
+}, '1.1.0-DEV', {"requires": ["template-micro"]});

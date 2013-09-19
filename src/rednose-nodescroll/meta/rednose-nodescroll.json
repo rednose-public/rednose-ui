@@ -1,6 +1,5 @@
 {
     "rednose-nodescroll" : {
-        "group": "rednose-ui",
         "requires": [
             "node",
             "event",

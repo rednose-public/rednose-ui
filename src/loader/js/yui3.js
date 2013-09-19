@@ -9,7 +9,6 @@
  */
 YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
     "rednose-anim": {
-        "group": "rednose-ui",
         "requires": [
             "anim"
         ]
@@ -23,7 +22,6 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-app-base": {
-        "group": "rednose-ui",
         "requires": [
             "app-base",
             "cssgrids",
@@ -35,14 +33,12 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         "skinnable": true
     },
     "rednose-breadcrumb": {
-        "group": "rednose-ui",
         "requires": [
             "base",
             "view"
         ]
     },
     "rednose-contextmenu": {
-        "group": "rednose-ui",
         "requires": [
             "base",
             "overlay",
@@ -53,11 +49,9 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-contextmenu-css": {
-        "group": "rednose-ui",
         "type": "css"
     },
     "rednose-controlform": {
-        "group": "rednose-ui",
         "requires": [
             "calendar",
             "dd-proxy",
@@ -71,7 +65,6 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-datatable": {
-        "group": "rednose-ui",
         "requires": [
             "datatable-base",
             "datatable-scroll",
@@ -83,14 +76,12 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-datatable-select": {
-        "group": "rednose-ui",
         "requires": [
             "rednose-datatable",
             "plugin"
         ]
     },
     "rednose-dd": {
-        "group": "rednose-ui",
         "requires": [
             "rednose-anim",
             "rednose-dd-css",
@@ -98,11 +89,9 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-dd-css": {
-        "group": "rednose-ui",
         "type": "css"
     },
     "rednose-dialog": {
-        "group": "rednose-ui",
         "requires": [
             "dd",
             "dd-plugin",
@@ -112,14 +101,12 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
             "node",
             "node-event-simulate",
             "widget"
-        ],
-        "skinnable": true
+        ]
     },
     "rednose-dialog-css": {
         "type": "css"
     },
     "rednose-dropdown": {
-        "group": "rednose-ui",
         "requires": [
             "base",
             "node",
@@ -127,7 +114,6 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-grid": {
-        "group": "rednose-ui",
         "requires": [
             "handlebars",
             "rednose-grid-select",
@@ -137,34 +123,26 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ],
         "skinnable": true
     },
-    "rednose-grid-select": {
-        "group": "rednose-ui"
-    },
-    "rednose-jquery": {
-        "group": "rednose-ui"
-    },
+    "rednose-grid-select": {},
+    "rednose-jquery": {},
     "rednose-model-spinner": {
-        "group": "rednose-ui",
         "requires": [
             "rednose-app-base",
             "model"
         ]
     },
     "rednose-model-tree": {
-        "group": "rednose-ui",
         "requires": [
             "model",
             "io"
         ]
     },
     "rednose-model-undo": {
-        "group": "rednose-ui",
         "requires": [
             "model"
         ]
     },
     "rednose-navbar": {
-        "group": "rednose-ui",
         "requires": [
             "base",
             "node-pluginhost",
@@ -175,7 +153,6 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         "skinnable": true
     },
     "rednose-navbar-recent": {
-        "group": "rednose-ui",
         "requires": [
             "cookie",
             "plugin",
@@ -183,7 +160,6 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-nodescroll": {
-        "group": "rednose-ui",
         "requires": [
             "node",
             "event",
@@ -192,18 +168,15 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-notifier": {
-        "group": "rednose-ui",
         "requires": [
             "rednose-jquery",
             "rednose-notifier-css"
         ]
     },
     "rednose-notifier-css": {
-        "group": "rednose-ui",
         "type": "css"
     },
     "rednose-panel": {
-        "group": "rednose-ui",
         "requires": [
             "panel",
             "rednose-panel-css"
@@ -214,17 +187,14 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-panel-css": {
-        "group": "rednose-ui",
         "type": "css"
     },
     "rednose-tooltip": {
-        "group": "rednose-ui",
         "requires": [
             "gallery-bootstrap-tooltip"
         ]
     },
     "rednose-treeview": {
-        "group": "rednose-ui",
         "requires": [
             "gallery-sm-treeview",
             "rednose-model-tree",
@@ -241,7 +211,6 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-treeview-anim": {
-        "group": "rednose-ui",
         "requires": [
             "rednose-anim",
             "rednose-treeview",
@@ -249,26 +218,22 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-treeview-dd": {
-        "group": "rednose-ui",
         "requires": [
             "rednose-dd",
             "rednose-treeview"
         ]
     },
     "rednose-treeview-select": {
-        "group": "rednose-ui",
         "requires": [
             "rednose-treeview"
         ]
     },
     "rednose-treeview-templates": {
-        "group": "rednose-ui",
         "requires": [
             "template-micro"
         ]
     },
     "rednose-view-nav": {
-        "group": "rednose-ui",
         "requires": [
             "event-custom",
             "rednose-widget-nav-container",
@@ -276,7 +241,6 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     },
     "rednose-widget-nav-container": {
-        "group": "rednose-ui",
         "requires": [
             "widget",
             "widget-buttons",
@@ -284,4 +248,4 @@ YUI.Env[Y.version].modules = YUI.Env[Y.version].modules || {
         ]
     }
 };
-YUI.Env[Y.version].md5 = 'f4e49999ac383361d0eb52e08eb179d9';
+YUI.Env[Y.version].md5 = 'e6f9b5e3302d36f156e28704bef6e569';

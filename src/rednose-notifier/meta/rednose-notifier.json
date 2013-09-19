@@ -1,13 +1,11 @@
 {
     "rednose-notifier" : {
-        "group": "rednose-ui",
         "requires": [
             "rednose-jquery",
             "rednose-notifier-css"
         ]
     },
     "rednose-notifier-css" : {
-        "group": "rednose-ui",
     	"type": "css"
     }
 }

@@ -139,4 +139,4 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
 Y.namespace('Rednose').DataTableSelectPlugin = DataTableSelectPlugin;
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["rednose-datatable", "plugin"]});
+}, '1.1.0-DEV', {"requires": ["rednose-datatable", "plugin"]});

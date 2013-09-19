@@ -153,4 +153,4 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
 });
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["cookie", "plugin", "rednose-navbar"]});
+}, '1.1.0-DEV', {"requires": ["cookie", "plugin", "rednose-navbar"]});

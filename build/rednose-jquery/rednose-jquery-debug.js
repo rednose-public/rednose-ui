@@ -9791,4 +9791,4 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 })( window );
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui"});
+}, '1.1.0-DEV');

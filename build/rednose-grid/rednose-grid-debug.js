@@ -164,7 +164,6 @@ Y.namespace('TB').GridView = GridView;
 
 
 }, '1.1.0-DEV', {
-    "group": "rednose-ui",
     "requires": [
         "handlebars",
         "rednose-grid-select",

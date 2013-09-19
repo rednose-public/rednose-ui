@@ -213,7 +213,6 @@ Y.namespace('Rednose').App = App;
 
 
 }, '1.1.0-DEV', {
-    "group": "rednose-ui",
     "requires": [
         "app-base",
         "cssgrids",

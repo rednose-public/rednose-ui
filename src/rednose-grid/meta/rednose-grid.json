@@ -1,6 +1,5 @@
 {
     "rednose-grid" : {
-        "group": "rednose-ui",
         "requires": [
             "handlebars",
             "rednose-grid-select",
@@ -11,7 +10,5 @@
         "skinnable": true
     },
 
-    "rednose-grid-select" : {
-        "group": "rednose-ui"
-    }
+    "rednose-grid-select" : {}
 }

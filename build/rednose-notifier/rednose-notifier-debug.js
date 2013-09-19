@@ -943,4 +943,4 @@ N.notify = function (notification) {
 };
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["rednose-jquery", "rednose-notifier-css"]});
+}, '1.1.0-DEV', {"requires": ["rednose-jquery", "rednose-notifier-css"]});

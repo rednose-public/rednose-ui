@@ -175,4 +175,4 @@ Undo = Y.Base.create('undo', Y.Model, [], {
 Y.namespace('Rednose.Model').Undo = Undo;
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["model"]});
+}, '1.1.0-DEV', {"requires": ["model"]});

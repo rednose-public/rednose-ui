@@ -1,6 +1,5 @@
 {
     "rednose-widget-nav-container" : {
-        "group": "rednose-ui",
         "requires": [
             "widget",
             "widget-buttons",

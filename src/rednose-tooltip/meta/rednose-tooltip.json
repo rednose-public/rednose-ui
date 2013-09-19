@@ -1,6 +1,5 @@
 {
     "rednose-tooltip" : {
-        "group": "rednose-ui",
         "requires": [
             "gallery-bootstrap-tooltip"
         ]

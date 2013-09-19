@@ -373,7 +373,6 @@ Y.namespace('Rednose').TreeView = TreeView;
 
 
 }, '1.1.0-DEV', {
-    "group": "rednose-ui",
     "requires": [
         "gallery-sm-treeview",
         "rednose-model-tree",

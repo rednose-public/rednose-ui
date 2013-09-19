@@ -420,4 +420,4 @@ DD = Y.Base.create('dd', Y.View, [], {
 Y.namespace('Rednose').DD = DD;
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["rednose-anim", "rednose-dd-css", "view"]});
+}, '1.1.0-DEV', {"requires": ["rednose-anim", "rednose-dd-css", "view"]});

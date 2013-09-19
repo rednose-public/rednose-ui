@@ -1,6 +1,5 @@
 {
     "rednose-contextmenu" : {
-        "group": "rednose-ui",
         "requires": [
             "base",
             "overlay",
@@ -11,7 +10,6 @@
         ]
     },
     "rednose-contextmenu-css" : {
-        "group": "rednose-ui",
         "type": "css"
     }
 }

@@ -1,6 +1,5 @@
 {
     "rednose-dropdown" : {
-        "group": "rednose-ui",
         "requires": [
             "base",
             "node",

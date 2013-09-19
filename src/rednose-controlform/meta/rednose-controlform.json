@@ -1,6 +1,5 @@
 {
     "rednose-controlform" : {
-        "group": "rednose-ui",
         "requires": [
             "calendar",
             "dd-proxy",

@@ -23,7 +23,6 @@ Y.namespace('Rednose').DataTable = DataTable;
 
 
 }, '1.1.0-DEV', {
-    "group": "rednose-ui",
     "requires": [
         "datatable-base",
         "datatable-scroll",

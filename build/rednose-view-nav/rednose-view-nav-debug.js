@@ -338,4 +338,4 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 Y.namespace('Rednose.View').Nav = ViewNav;
 
 
-}, '1.1.0-DEV', {"group": "rednose-ui", "requires": ["event-custom", "rednose-widget-nav-container", "view"]});
+}, '1.1.0-DEV', {"requires": ["event-custom", "rednose-widget-nav-container", "view"]});

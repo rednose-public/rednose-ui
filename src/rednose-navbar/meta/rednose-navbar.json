@@ -1,6 +1,5 @@
 {
     "rednose-navbar" : {
-        "group": "rednose-ui",
         "requires": [
             "base",
             "node-pluginhost",
@@ -12,7 +11,6 @@
     },
 
     "rednose-navbar-recent" : {
-        "group": "rednose-ui",
         "requires": [
             "cookie",
             "plugin",
