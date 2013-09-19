@@ -4,7 +4,8 @@ YUI.add('rednose-model-spinner', function (Y, NAME) {
 Extension for View, triggers the App spinner when the model is being loaded from or
 persisted to a sync-layer.
 
-@module rednose-model-spinner
+@module rednose-app
+@submodule rednose-model-spinner
 **/
 var Spinner;
 
@@ -15,6 +16,7 @@ persisted to a sync-layer.
 Overrides al the model sync methods through a Decorator pattern.
 
 @class Spinner
+@namespace Rednose.Model
 @constructor
 @extensionfor Model
 **/

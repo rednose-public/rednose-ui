@@ -8,6 +8,7 @@ Notfier class, wraps around Pines Notify
 Notfier class, wraps around Pines Notify
 
 @class Notifier
+@namespace Rednose
 @static
 **/
 var N = Y.namespace('Rednose').Notifier || (Y.namespace('Rednose').Notifier = {});
@@ -21,7 +22,7 @@ $.pnotify.defaults.styling = 'bootstrap';
 Triggers a notification.
 
 @method notify
-@param {notification} Pines Notify notification object.
+@param {notification} notification Notify notification object.
 @static
 @public
 **/

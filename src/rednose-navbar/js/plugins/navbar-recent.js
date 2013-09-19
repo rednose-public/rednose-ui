@@ -9,10 +9,11 @@ Provides a navigation bar plugin to show a list of recent entries.
 /**
 Provides a navigation bar plugin to show a list of recent entries.
 
-@class NavBar.Recent
+@class Recent
+@namespace Rednose.NavBar
 @constructor
 @extends Y.Plugin.Base
-@extensionfor NavBar
+@extensionfor Rednose.NavBar
 **/
 Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------

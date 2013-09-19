@@ -11,6 +11,7 @@ var DURATION = 0.25;
 Several animation class methods to be used throughout the rednose-ui framework.
 
 @class Anim
+@namespace Rednose
 @constructor
 **/
 function Anim() {

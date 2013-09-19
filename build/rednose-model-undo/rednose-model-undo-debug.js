@@ -3,7 +3,8 @@ YUI.add('rednose-model-undo', function (Y, NAME) {
 /**
 Extension for Model, allows moving forward or backward to a model's snapshot list.
 
-@module rednose-model-undo
+@module rednose-app
+@submodule rednose-model-undo
 **/
 var Undo;
 
@@ -11,6 +12,7 @@ var Undo;
 Extension for Model, allows moving forward or backward to a model's snapshot list.
 
 @class Undo
+@namespace Rednose.Model
 @constructor
 @extensionfor Model
 **/

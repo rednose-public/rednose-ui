@@ -15,6 +15,7 @@ var Navbar,
 Provides a navigation bar.
 
 @class NavBar
+@namespace Rednose
 @constructor
 @extends Y.Widget
 **/

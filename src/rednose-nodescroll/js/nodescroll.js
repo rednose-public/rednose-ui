@@ -32,6 +32,7 @@ Quick Example:<br/>
 </code></pre>
 
 @class NodeScroll
+@namespace Rednose
 @param {Object} [config] The following configuration properties are required:
     @param {Object} [config.container] The container to bind the scrollview to.
     @param {Array} [config.groups] The DD groups that can interact with this

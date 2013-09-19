@@ -24,6 +24,7 @@ var Panel,
 Provides a generic panel.
 
 @class Panel
+@namespace Rednose
 @constructor
 @extends Panel
 **/

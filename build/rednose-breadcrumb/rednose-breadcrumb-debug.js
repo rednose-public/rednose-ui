@@ -25,6 +25,7 @@ var CSS_BOOTSTRAP_BREADCRUMB = 'breadcrumb',
 Provides an interactive breadcrumb based on a path.
 
 @class Breadcrumb
+@namespace Rednose
 @constructor
 @extends View
 **/

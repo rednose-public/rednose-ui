@@ -11,6 +11,7 @@ var CSS_SPINNER = 'rednose-spinner';
 Extension of the original Y.App, to provide support for modal views.
 
 @class App
+@namespace Rednose
 @constructor
 @extends App
 **/

@@ -28,6 +28,7 @@ var TreeView,
  * </code></pre>
  *
  * @class TreeView
+ * @namespace Rednose
  * @param {Object} [config] The following configuration properties are required:
  *
  *     @param {Object} [config.container] The container to bind the treeView to.

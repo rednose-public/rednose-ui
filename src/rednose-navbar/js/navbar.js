@@ -13,6 +13,7 @@ var Navbar,
 Provides a navigation bar.
 
 @class NavBar
+@namespace Rednose
 @constructor
 @extends Y.Widget
 **/
@@ -75,7 +76,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     // -- Public Methods -------------------------------------------------------
 
     /**
-    @method bindUI
+    @method renderUI
     @public
     **/
     renderUI: function() {

@@ -11,7 +11,7 @@ var ATTR_STYLE_BOOTSTRAP_ZINDEX_TOOLTIP = '1030';
 /**
 Provides a tooltip manager.
 
-@class FileBrowserView
+@class Tooltip
 @namespace Rednose
 @constructor
 @extends Bootstrap.Tooltip

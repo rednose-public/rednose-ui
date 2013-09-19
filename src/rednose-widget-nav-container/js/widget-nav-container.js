@@ -11,6 +11,7 @@ Basic navigation container, provides a widget with a body, header and a footer o
 buttons.
 
 @class NavContainer
+@namespace Rednose
 @constructor
 @extensionfor Widget
 **/

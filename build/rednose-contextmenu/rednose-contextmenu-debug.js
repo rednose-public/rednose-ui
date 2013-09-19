@@ -21,6 +21,7 @@ var ContextMenu,
 Provides a context menu plugin with custom event binding.
 
 @class ContextMenu
+@namespace Rednose
 @param {Object} [config] Config properties.
     @param {Object} [config.content] Contextmenu configuration object.
     @param {Oject} [config.data] Optional object to pass with fired events.

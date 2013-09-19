@@ -11,6 +11,7 @@ var Dropdown;
 Provides a context menu plugin with custom event binding.
 
 @class Dropdown
+@namespace Rednose
 @constructor
 @extends Bootstrap.Dropdown
 **/

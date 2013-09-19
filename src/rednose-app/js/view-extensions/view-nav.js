@@ -4,7 +4,8 @@
 View extension, adds a title section to an instance of View, and a footer section with a
 configuration of buttons.
 
-@module rednose-view-nav
+@module rednose-app
+@submodule rednose-view-nav
 **/
 var ViewNav,
 
@@ -36,6 +37,7 @@ View extension, adds a title section to an instance of View, and a footer sectio
 configuration of buttons.
 
 @class ViewNav
+@namespace Rednose.View
 @constructor
 @extensionfor View
 **/
