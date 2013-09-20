@@ -22,9 +22,3 @@ Upgrade instructions
 * The magic CSS class assignment in module `rednose-view-nav` has changed to dashed formatting, for example from `rednose-fileTableView` to `rednose-file-table-view`.
 
 * Module `rednose-css` has been removed.
-
-### Builds
-
-* The build directory is removed from the repository. Builds are now handled by [node.js](http://nodejs.org) & [Grunt](http://gruntjs.com).
-
-* Builds now rely on fully generated metadata, created by running `yogi builder --yes`.
