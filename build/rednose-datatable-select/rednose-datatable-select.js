@@ -50,7 +50,9 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
             contentBox = table.get('contentBox');
 
         this.after('selectedRowChange', this._afterSelectedRowChange, this);
+
         contentBox.on('click', this._handleClick, this);
+        contentBox.on('clickoutside', this._handleClickOutside, this);
     },
 
     /**
@@ -75,6 +77,13 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         }
 
         return true;
+    },
+
+    /**
+     * Handles the click event outside of the content-box and clears the selection.
+     */
+    _handleClickOutside: function () {
+        this.set('selectedRow', null);
     },
 
     /**
