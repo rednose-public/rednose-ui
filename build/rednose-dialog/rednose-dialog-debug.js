@@ -37,7 +37,6 @@ Provides several dialog windows.
 @extends Widget
 **/
 var Dialog = Y.Base.create('dialog', Y.Widget, [], {
-
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
@@ -218,12 +217,12 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             node = Y.Node.create('<form action="#" class="form-horizontal"></form>');
             node.append(input);
         } else {
-            input = Y.Node.create('<input type="text" value="' + value + '" data-path="input" id="input">');
+            input = Y.Node.create('<input type="text" value="' + options.value + '" data-path="input" id="input">');
 
             node = Y.Node.create(
                 '<form action="#" class="form-horizontal">' +
                 '   <div class="control-group">' +
-                '       <label for="input" class="control-label">' + text +  '</label>' +
+                '       <label for="input" class="control-label">' + options.text +  '</label>' +
                 '       <div class="controls"></div>' +
                 '   </div>' +
                 '</form>'
@@ -373,7 +372,6 @@ Static wrapper for the `alert` method
 @method alert
 @static
 @param {Object} options
-@param {Function} callback
 @return {Rednose.Dialog}
 **/
 Dialog.alert = function (options) {

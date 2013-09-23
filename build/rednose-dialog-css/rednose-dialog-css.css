@@ -63,5 +63,9 @@
     margin: 47px 2px 57px 1px;
 }
 
+.rednose-dialog .form-horizontal .controls input {
+    height: 28px;
+}
+
 /* YUI CSS Detection Stamp */
 #yui3-css-stamp.rednose-dialog-css { display: none; }
