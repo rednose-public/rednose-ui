@@ -29,6 +29,8 @@ var App = Y.Base.create('app', Y.App, [], {
     **/
     _activePanel: null,
 
+    _backgroundView: null,
+
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
@@ -65,6 +67,22 @@ var App = Y.Base.create('app', Y.App, [], {
     closeApp: function () {
         if ((window.self !== window.top) && typeof (window.parent.closeApp() === 'function')) {
             window.parent.closeApp();
+        }
+    },
+
+    /**
+    Pops a modal view from the navigation stack.
+
+    @method popModalView
+    **/
+    popModalView: function () {
+        var view     = this.get('activeView'),
+            viewInfo = this.getViewInfo(view);
+
+        if (viewInfo && viewInfo.parent) {
+            this._set('activeView', this._backgroundView);
+
+            this._backgroundView = null;
         }
     },
 
@@ -108,6 +126,8 @@ var App = Y.Base.create('app', Y.App, [], {
         }
 
         if (this.getViewInfo(this.get('activeView')).modal) {
+            // console.log(view);
+            this._backgroundView = view;
             view.removeTarget(this);
 
             return;
@@ -173,7 +193,8 @@ var App = Y.Base.create('app', Y.App, [], {
         if (viewInfo.modal) {
             this._activePanel = new Y.Rednose.Panel({
                 srcNode      : view.get('container'),
-                width        : STYLE_MODAL_WIDTH
+                width        : STYLE_MODAL_WIDTH,
+                modal        : false
             });
 
             this._activePanel.render();
