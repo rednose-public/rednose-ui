@@ -225,6 +225,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                 '   </div>' +
                 '</form>'
             );
+
             node.one('.controls').append(input);
         }
 
@@ -248,7 +249,10 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     isDefault: true,
                     action : function () {
                         if (typeof callback === 'function') {
-                            if (callback(node) === true) {
+                            // If HTML is specified, return the complete node, else just return the value.
+                            var val = options.html ? node : node.one('#input').get('value');
+
+                            if (callback(val) === true) {
                                 self.destroy();
                             }
                         }
@@ -346,8 +350,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             node.all('.help-block').remove();
         });
 
-        // Append the message node at the given path
-        input = bb.one('[data-path=' + error.path + ']');
+        // Append the message node at the given path (defaults to 'input')
+        input = bb.one('[data-path=' + (error.path || 'input') + ']');
         input.ancestor('.control-group').addClass('error');
 
         if (error.message) {
