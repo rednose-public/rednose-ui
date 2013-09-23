@@ -191,8 +191,7 @@ var App = Y.Base.create('app', Y.App, [], {
         if (viewInfo.modal) {
             this._activePanel = new Y.Rednose.Panel({
                 srcNode      : view.get('container'),
-                width        : STYLE_MODAL_WIDTH,
-                modal        : false
+                width        : viewInfo.width || STYLE_MODAL_WIDTH
             });
 
             this._activePanel.render();
