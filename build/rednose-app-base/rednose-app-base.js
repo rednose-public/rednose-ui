@@ -5,7 +5,9 @@ Extension of the original Y.App, to provide support for modal views.
 
 @module rednose-app
 **/
-var CSS_SPINNER = 'rednose-spinner';
+var CSS_SPINNER = 'rednose-spinner',
+
+    STYLE_MODAL_WIDTH = 640;
 
 /**
 Extension of the original Y.App, to provide support for modal views.
@@ -171,15 +173,11 @@ var App = Y.Base.create('app', Y.App, [], {
         if (viewInfo.modal) {
             this._activePanel = new Y.Rednose.Panel({
                 srcNode      : view.get('container'),
-                centered     : true,
-                modal        : true,
-                render       : true,
-                zIndex       : Y.Object.size(this._viewInfoMap),
-                // Disable the default hide on ESC keypress, the panel needs to be dismissed by the App.
-                hideOn       : []
+                width        : STYLE_MODAL_WIDTH
             });
 
-            this._activePanel.get('boundingBox').addClass('rednose-app-modal-view');
+            this._activePanel.render();
+            // this._activePanel.get('boundingBox').addClass('rednose-app-modal-view');
         } else {
             // Insert view into the DOM.
             viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
