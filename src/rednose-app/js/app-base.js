@@ -190,12 +190,11 @@ var App = Y.Base.create('app', Y.App, [], {
 
         if (viewInfo.modal) {
             this._activePanel = new Y.Rednose.Panel({
-                srcNode      : view.get('container'),
-                width        : viewInfo.width || STYLE_MODAL_WIDTH
+                srcNode: view.get('container'),
+                width  : viewInfo.width || STYLE_MODAL_WIDTH
             });
 
             this._activePanel.render();
-            // this._activePanel.get('boundingBox').addClass('rednose-app-modal-view');
         } else {
             // Insert view into the DOM.
             viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
