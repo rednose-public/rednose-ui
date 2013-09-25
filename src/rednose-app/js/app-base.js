@@ -200,6 +200,15 @@ var App = Y.Base.create('app', Y.App, [], {
             viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
         }
     }
+}, {
+    ATTRS: {
+        /**
+        Overrides the linkSelector to disable pjax binding
+        **/
+        linkSelector: {
+            value: null
+        }
+    }
 });
 
 // -- Static methods -----------------------------------------------------------
