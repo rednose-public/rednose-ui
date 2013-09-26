@@ -30,7 +30,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     template: '<div class="navbar navbar-inverse navbar-fixed-top">' +
                   '<div class="navbar-inner">' +
                       '<div class="container">' +
-                          '<a class="brand brand-navbar" href="#">{title}</a>' +
+                          '<a class="brand brand-navbar" data-url="{url}" href="#">{title}</a>' +
                           '<ul class="nav"></ul>' +
                           '<ul class="nav pull-right"></ui>' +
                       '</div>' +
@@ -62,6 +62,11 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
         // Bind the handler for clicking on menu items.
         container.delegate('click', this._handleClick, '.dropdown-menu a', this);
+        container.delegate('click', this._handleClick, 'ul.nav > li.nav-item > a', this);
+
+        // Bind the handler for clicking on the brand.
+        container.delegate('click', this._handleClick, 'a.brand', this);
+
     },
 
     /**
@@ -83,9 +88,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         var menuLeft  = this.get('menu'),
             menuRight = this.get('menuSecondary'),
             template  = this.template,
-            title     = this.get('title');
+            title     = this.get('title'),
+            url       = this.get('url');
 
-        this.get('contentBox').setHTML(Y.Lang.sub(template, { title: title }));
+        this.get('contentBox').setHTML(Y.Lang.sub(template, { title: title, url: url }));
 
         this._appendMenu(menuLeft, false);
         this._appendMenu(menuRight, true);
@@ -191,6 +197,8 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             } else {
                 var li = self._createLi(m);
 
+                li.addClass('nav-item');
+
                 container.one(secondary === false ? '.nav' : '.pull-right').append(li);
             }
         });
@@ -245,11 +253,17 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             id   = node.getAttribute('data-id'),
             url  = node.getAttribute('data-url');
 
-        // Ignore clicks on disabled nodes and submenus.
-        if (node.ancestor('li').hasClass('disabled') || node.ancestor('li').hasClass('dropdown-submenu')) {
-            node.blur();
-
+        if (node.hasClass('dropdown')) {
             return;
+        }
+
+        // Ignore clicks on disabled nodes and submenus.
+        if (node.ancestor('li')) {
+            if (node.ancestor('li').hasClass('disabled') || node.ancestor('li').hasClass('dropdown-submenu')) {
+                node.blur();
+
+                return;
+            }
         }
 
         if (url) {
@@ -262,7 +276,9 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             this.fire(id);
         }
 
-        node.ancestor('.dropdown').one('.dropdown-toggle').simulate('click');
+        if (node.ancestor('.dropdown')) {
+            node.ancestor('.dropdown').one('.dropdown-toggle').simulate('click');
+        }
     },
 
     /**
@@ -281,6 +297,14 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         **/
         title: {
             value: DEFAULT_TITLE,
+        },
+
+        /**
+        @attribute title url
+        @type String
+        **/
+        url: {
+            value: '',
         },
 
         /**
