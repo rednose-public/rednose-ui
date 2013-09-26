@@ -4,7 +4,8 @@
             "base",
             "node-pluginhost",
             "gallery-bootstrap-dropdown",
-            "widget"
+            "widget",
+            "node-event-simulate"
         ],
         "skinnable": true
     },

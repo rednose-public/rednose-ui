@@ -168,50 +168,72 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             self      = this;
 
         Y.Array.each(menu, function (m) {
-            var dropdown = Y.Node.create(
-                Y.Lang.sub(self.dropdownTemplate, {
-                    title  : m.title,
-                    submenu: (typeof(parentMenu) !== 'undefined' ? '-submenu' : ''),
-                    caret  : (typeof(parentMenu) === 'undefined' ? "b class=caret" : 'b')
-                })
-            );
+            if (m.items) {
+                var dropdown = Y.Node.create(
+                    Y.Lang.sub(self.dropdownTemplate, {
+                        title  : m.title,
+                        submenu: (typeof(parentMenu) !== 'undefined' ? '-submenu' : ''),
+                        caret  : (typeof(parentMenu) === 'undefined' ? "b class=caret" : 'b')
+                    })
+                );
 
-            Y.Array.each(m.items, function (i) {
-                var li = Y.Node.create ('<li tabindex="-1"></li>');
+                Y.Array.each(m.items, function (i) {
+                    li = self._createLi(i, dropdown);
 
-                if (i.title === '-') {
-                    li.addClass('divider');
+                    dropdown.one('.dropdown-menu').append(li);
+                });
 
-                } else if (typeof(i.children) === 'object') {
-                    var subMenu = [ { title: i.title, items: i.children } ];
-
-                    self._appendMenu(subMenu, secondary, dropdown);
+                if (typeof(parentMenu) === 'undefined') {
+                    container.one(secondary === false ? '.nav' : '.pull-right').append(dropdown);
                 } else {
-                    var a  = Y.Node.create('<a tabindex="-1" href="#">' + i.title + '</a>');
-
-                    if (typeof(i.disabled) !== 'undefined') {
-                        li.addClass('disabled');
-                    }
-
-                    li.append(a);
-
-                    if (typeof(i.id) !== 'undefined') {
-                        a.setAttribute('data-id', i.id);
-                    }
+                    parentMenu.one('.dropdown-menu').append(dropdown);
                 }
-
-                dropdown.one('.dropdown-menu').append(li);
-            });
-
-            if (typeof(parentMenu) === 'undefined') {
-                container.one(secondary === false ? '.nav' : '.pull-right').append(dropdown);
             } else {
-                parentMenu.one('.dropdown-menu').append(dropdown);
+                var li = self._createLi(m);
+
+                container.one(secondary === false ? '.nav' : '.pull-right').append(li);
             }
         });
     },
 
     // -- Protected Event Handlers ---------------------------------------------
+
+    /**
+    @method _createLi
+    @param {Object} item
+    @protected
+    **/
+    _createLi: function(i, dropdown) {
+        var self =  this;
+        var li = Y.Node.create ('<li tabindex="-1"></li>');
+
+        if (i.title === '-') {
+            li.addClass('divider');
+
+        } else if (typeof(i.items) === 'object') {
+            self._appendMenu(Array(i), null, dropdown);
+
+            return;
+        } else {
+            var a = Y.Node.create('<a tabindex="-1" href="#">' + i.title + '</a>');
+
+            if (typeof(i.disabled) !== 'undefined') {
+                li.addClass('disabled');
+            }
+
+            li.append(a);
+
+            if (typeof(i.id) !== 'undefined') {
+                a.setAttribute('data-id', i.id);
+            }
+
+            if (typeof(i.url) !== 'undefined') {
+                a.setAttribute('data-url', i.url);
+            }
+        }
+
+        return li;
+    },
 
     /**
     @method _handleClick
@@ -220,11 +242,18 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     **/
     _handleClick: function (e) {
         var node = e.currentTarget,
-            id   = node.getAttribute('data-id');
+            id   = node.getAttribute('data-id'),
+            url  = node.getAttribute('data-url');
 
         // Ignore clicks on disabled nodes and submenus.
         if (node.ancestor('li').hasClass('disabled') || node.ancestor('li').hasClass('dropdown-submenu')) {
             node.blur();
+
+            return;
+        }
+
+        if (url) {
+            document.location.href = url;
 
             return;
         }
@@ -276,4 +305,13 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 Y.namespace('Rednose').Navbar = Navbar;
 
 
-}, '1.1.0-DEV', {"requires": ["base", "node-pluginhost", "gallery-bootstrap-dropdown", "widget"], "skinnable": true});
+}, '1.1.0-DEV', {
+    "requires": [
+        "base",
+        "node-pluginhost",
+        "gallery-bootstrap-dropdown",
+        "widget",
+        "node-event-simulate"
+    ],
+    "skinnable": true
+});
