@@ -27,28 +27,24 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @type String
     @public
     **/
-    template: Y.Handlebars.compile(
-        '<div class="navbar navbar-inverse">' +
-            '<div class="navbar-inner" style="-webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0;">' +
-                '<a class="brand brand-navbar" href="#">{{ title }}</a>' +
-                '<ul class="nav"></ul>' +
-                '<ul class="nav pull-right"></ui>' +
-            '</div>' +
-        '</div>'
-    ),
+    template: '<div class="navbar navbar-inverse navbar-fixed-top">' +
+                  '<div class="navbar-inner">' +
+                      '<a class="brand brand-navbar" href="#">{title}</a>' +
+                      '<ul class="nav"></ul>' +
+                      '<ul class="nav pull-right"></ui>' +
+                  '</div>' +
+              '</div>',
 
     /**
     @property dropdownTemplate
     @type String
     @public
     **/
-    dropdownTemplate: Y.Handlebars.compile(
-        '<li class="dropdown{{ submenu }}">' +
-            '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ title }} <{{ caret }}></b></a>' +
-                '<ul class="dropdown-menu">' +
-            '</ul>' +
-        '</li>'
-    ),
+    dropdownTemplate: '<li class="dropdown{submenu}">' +
+                          '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{title} <{caret}></a>' +
+                          '<ul class="dropdown-menu">' +
+                          '</ul>' +
+                      '</li>',
 
     // -- Lifecycle Methods ----------------------------------------------------
 
@@ -87,7 +83,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             template  = this.template,
             title     = this.get('title');
 
-        this.get('contentBox').setHTML(template({ title: title }));
+        this.get('contentBox').setHTML(Y.Lang.sub(template, { title: title }));
 
         this._appendMenu(menuLeft, false);
         this._appendMenu(menuRight, true);
@@ -171,10 +167,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
         Y.Array.each(menu, function (m) {
             var dropdown = Y.Node.create(
-                self.dropdownTemplate({
-                    title: m.title,
+                Y.Lang.sub(self.dropdownTemplate, {
+                    title  : m.title,
                     submenu: (typeof(parentMenu) !== 'undefined' ? '-submenu' : ''),
-                    caret: (typeof(parentMenu) === 'undefined' ? "b class=caret" : 'b')
+                    caret  : (typeof(parentMenu) === 'undefined' ? "b class=caret" : 'b')
                 })
             );
 
@@ -278,13 +274,4 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 Y.namespace('Rednose').Navbar = Navbar;
 
 
-}, '1.1.0-DEV', {
-    "requires": [
-        "base",
-        "node-pluginhost",
-        "gallery-bootstrap-dropdown",
-        "handlebars",
-        "widget"
-    ],
-    "skinnable": true
-});
+}, '1.1.0-DEV', {"requires": ["base", "node-pluginhost", "gallery-bootstrap-dropdown", "widget"], "skinnable": true});
