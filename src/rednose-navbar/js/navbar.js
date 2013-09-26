@@ -27,9 +27,11 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     **/
     template: '<div class="navbar navbar-inverse navbar-fixed-top">' +
                   '<div class="navbar-inner">' +
-                      '<a class="brand brand-navbar" href="#">{title}</a>' +
-                      '<ul class="nav"></ul>' +
-                      '<ul class="nav pull-right"></ui>' +
+                      '<div class="container">' +
+                          '<a class="brand brand-navbar" href="#">{title}</a>' +
+                          '<ul class="nav"></ul>' +
+                          '<ul class="nav pull-right"></ui>' +
+                      '</div>' +
                   '</div>' +
               '</div>',
 
