@@ -3,7 +3,7 @@
 /**
 Provides a dropdown plugin with custom event binding.
 
-@module renodse-dropdown
+@module rednose-dropdown
 **/
 var Dropdown;
 
