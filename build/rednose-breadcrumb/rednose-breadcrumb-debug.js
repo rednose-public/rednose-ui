@@ -54,7 +54,7 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
     @type {String}
     @protected
     **/
-    _LI_ITEM_TRAILING_TEMPLATE: '<li class="{activeClass}">{itemLabel}</li>',
+    _LI_ITEM_TRAILING_TEMPLATE: '<li class="{activeClass}"><span>{itemLabel}</span></li>',
 
     /**
     UI delegation events
