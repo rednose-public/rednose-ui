@@ -64,7 +64,7 @@ suite.add(new Y.Test.Case({
 
         this.breadcrumb.render();
 
-        Assert.areEqual('Home', Y.one('.breadcrumb li').get('innerHTML'));
+        Assert.areEqual('Home', Y.one('.breadcrumb li span').get('innerHTML'));
     },
 
     'render() should set the `data` attribute': function () {
@@ -87,7 +87,7 @@ suite.add(new Y.Test.Case({
 
         Assert.areEqual('Home', Y.all('.breadcrumb li').item(0).one('a').get('innerHTML'));
         Assert.areEqual('Folder 1', Y.all('.breadcrumb li').item(1).one('a').get('innerHTML'));
-        Assert.areEqual('Folder 2', Y.all('.breadcrumb li').item(2).get('innerHTML'));
+        Assert.areEqual('Folder 2', Y.all('.breadcrumb li').item(2).one('span').get('innerHTML'));
     }
 }));
 
@@ -110,7 +110,7 @@ suite.add(new Y.Test.Case({
 
         Assert.areEqual('Home', Y.all('.breadcrumb li').item(0).one('a').get('innerHTML'));
         Assert.areEqual('Folder 1', Y.all('.breadcrumb li').item(1).one('a').get('innerHTML'));
-        Assert.areEqual('Folder 2', Y.all('.breadcrumb li').item(2).get('innerHTML'));
+        Assert.areEqual('Folder 2', Y.all('.breadcrumb li').item(2).one('span').get('innerHTML'));
     },
 
     'clicking a token should fire the `navigate` event': function () {
