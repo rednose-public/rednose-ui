@@ -123,9 +123,18 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         Y.Array.each(content, function (item) {
             var elLi = Y.Node.create('<li>');
             var elA = Y.Node.create('<a href="#">');
+            var html = item.title;
+
+            if (item.className) {
+                elLi.addClass(item.className);
+            }
 
             if (item.title !== '-') {
-                elA.set('innerHTML', item.title);
+                if (item.icon) {
+                    html = '<i class="icon icon-' + item.icon + '"></i> ' + html;
+                }
+
+                elA.set('innerHTML', html);
                 elA.setAttribute('data-id', item.id);
 
                 elLi.append(elA);
@@ -134,7 +143,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
                     elLi.addClass('disabled');
                     elA.addClass('disabled');
                 }
-            } else {
+             } else {
                 elLi.addClass('divider');
             }
 
@@ -164,9 +173,9 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
                     self.fire(target.getAttribute('data-id'), args);
 
-                    contextMenu.destroy();
+                    // contextMenu.destroy();
                 } else {
-                    target.blur();
+                    // target.blur();
                 }
             });
         });

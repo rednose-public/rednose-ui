@@ -5,7 +5,7 @@ YUI.add('rednose-dropdown', function (Y, NAME) {
 /**
 Provides a dropdown plugin with custom event binding.
 
-@module renodse-dropdown
+@module rednose-dropdown
 **/
 var Dropdown;
 
@@ -100,22 +100,19 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
         Y.Array.each(content, function (item) {
             var elLi = Y.Node.create('<li>');
             var elA = Y.Node.create('<a href="#">');
+            var html = item.title;
 
             if (item.className) {
                 elLi.addClass(item.className);
             }
 
             if (item.title !== '-') {
-                elA.set('innerHTML', item.title);
-                elA.setAttribute('data-id', item.id);
-
                 if (item.icon) {
-                    var icon = Y.Node.create('<i></i>');
-
-                    icon.addClass('icon icon-' + item.icon);
-
-                    elA.prepend(icon);
+                    html = '<i class"icon icon-' + item.icon + '"></i> ' + html;
                 }
+
+                elA.set('innerHTML', html);
+                elA.setAttribute('data-id', item.id);
 
                 elLi.append(elA);
 
