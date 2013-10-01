@@ -175,9 +175,9 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
                     self.fire(target.getAttribute('data-id'), args);
 
-                    // contextMenu.destroy();
+                    contextMenu.destroy();
                 } else {
-                    // target.blur();
+                    target.blur();
                 }
             });
         });
