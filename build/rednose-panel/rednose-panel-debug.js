@@ -61,6 +61,7 @@ Panel = Y.Base.create('panel', Y.Panel, [], {
         }
 
         container.setStyle('top', STYLE_POSITION_TOP);
+        container.setStyle('position', 'fixed');
     }
 });
 
