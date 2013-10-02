@@ -181,6 +181,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         });
 
         node.one('a').plug(Y.Bootstrap.Dropdown);
+
+        node.on('click', function (e) {
+            e.preventDefault();
+        });
     },
 
     // -- Protected Methods ----------------------------------------------------
@@ -289,18 +293,16 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             }
         }
 
-        if (url) {
-            document.location.href = url;
-
-            return;
-        }
-
         if (id) {
             this.fire(id);
         }
 
         if (node.ancestor('.dropdown')) {
             node.ancestor('.dropdown').one('.dropdown-toggle').simulate('click');
+        }
+
+        if (url) {
+            document.location.href = url;
         }
     },
 
