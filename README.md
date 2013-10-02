@@ -16,7 +16,7 @@
 * To build a module, run from it's `src` dir:
 
     ```
-    yogi test
+    yogi build
 
 * Running the unit tests:
 
