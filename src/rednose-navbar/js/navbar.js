@@ -64,7 +64,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
         // Bind the handler for clicking on the brand.
         container.delegate('click', this._handleClick, 'a.brand', this);
-
     },
 
     /**
@@ -158,6 +157,30 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         node.setHTML(title);
     },
 
+    /**
+    Append a dropdown to an item in a prerendered navbar.
+
+    @method createDropdown
+    @param {Node} node Menu dropdown node
+    @param {Array} items The menu items
+    @public
+    **/
+    createDropdown: function (node, items) {
+        var self = this;
+
+        Y.Array.each(items, function (i) {
+            var li = self._createLi(i, node);
+
+            node.one('.dropdown-menu').append(li);
+        });
+
+        node.all('.dropdown-menu a').on('click', function (e) {
+            self._handleClick(e);
+        });
+
+        node.one('a').plug(Y.Bootstrap.Dropdown);
+    },
+
     // -- Protected Methods ----------------------------------------------------
 
     /**
@@ -217,7 +240,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             li.addClass('divider');
 
         } else if (typeof(i.items) === 'object') {
-            self._appendMenu(Array(i), null, dropdown);
+            self._appendMenu(new Array(i), null, dropdown);
 
             return;
         } else {
