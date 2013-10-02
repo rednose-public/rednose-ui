@@ -9,7 +9,7 @@
 2. Install global dependencies:
 
     ```
-    [sudo] npm install -g shifter yogi recess
+    [sudo] npm install -g shifter yogi
 
 ### Yogi
 
