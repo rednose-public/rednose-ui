@@ -920,6 +920,7 @@ Y.namespace('Rednose').ControlForm = ControlForm;
         "node",
         "model-list",
         "model",
+        "base",
         "rednose-dialog",
         "rednose-contextmenu"
     ]
