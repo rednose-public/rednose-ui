@@ -913,13 +913,13 @@ Y.namespace('Rednose').ControlForm = ControlForm;
 
 }, '1.1.0-DEV', {
     "requires": [
+        "io",
         "calendar",
         "dd-proxy",
         "dd-constrain",
         "node",
         "model-list",
         "model",
-        "base",
         "rednose-dialog",
         "rednose-contextmenu"
     ]
