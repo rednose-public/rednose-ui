@@ -91,7 +91,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     _addFieldGroup: function(formElement, fieldGroup) {
         var self = this;
-        var list = Y.Node.create('<ol />');
+        var list = Y.Node.create('<ul />');
         var fieldGroupItems;
 
         if (typeof(fieldGroup.fieldGroupItems) === 'undefined') {
@@ -194,7 +194,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
         // If your mousecursor hovers over a fieldGroup (ol element) while dragging, prepend
         // the dragNode before that element.
-        formElement.all('ol').each(function(group) {
+        formElement.all('ul').each(function(group) {
             if (sender.get('id') !== group.get('id')) { // Is this myself?
                 var groupTop = group.getY();
                 var groupBottom = (groupTop + parseInt(group.getComputedStyle('height')));
@@ -218,7 +218,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         var formId = formElement.get('name');
         var fieldGroupOrder = [];
 
-        formElement.all('ol').each(function() {
+        formElement.all('ul').each(function() {
             fieldGroupOrder.push(this.get('id'));
         });
 
@@ -391,7 +391,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     getFieldContent: function() {
         var buffer = [];
-        var listCollection = this.get('srcNode').all('ol');
+        var listCollection = this.get('srcNode').all('ul');
 
         listCollection.each(function(list) {
             list.all('li').each(function(control) {
