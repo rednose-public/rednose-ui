@@ -2,8 +2,6 @@ var FieldContent;
 
 FieldContent = Y.Base.create('fieldContent', Y.Model, [], {
 
-
-
 }, {
     ATTRS: {
         field: { value: null },

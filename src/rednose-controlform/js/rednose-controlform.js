@@ -389,6 +389,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         );
     },
 
+
+    // TODO: Implement setter for control elements instead of using a node selector ;P
     getFieldContent: function() {
         var buffer = [];
         var listCollection = this.get('srcNode').all('ul');
@@ -405,6 +407,21 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         return buffer;
+    },
+
+    setFieldContent: function(fieldContents) {
+        var liCollection = this.get('srcNode').all('li');
+
+        for (var i in fieldContents) {
+            liCollection.each(function(li) {
+                if (li.getData().field.id === fieldContents[i].get('field').id) {
+                    li.one('input, textarea, select').set(
+                        'value',
+                        fieldContents[i].get('content')
+                    );
+                }
+            });
+        }
     }
 
 }, {
