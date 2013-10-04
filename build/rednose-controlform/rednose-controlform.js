@@ -495,9 +495,9 @@ var ControlForm;
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     viewTemplate:
-        '<div class="formContainer">' +
-        '   <div class="formContainer_left">&nbsp;</div>' +
-        '   <div class="formContainer_right">&nbsp;</div>' +
+        '<div class="formContainer row">' +
+        '   <div class="formContainer_left span6">&nbsp;</div>' +
+        '   <div class="formContainer_right span6">&nbsp;</div>' +
         '   <div class="formContainer_proxy">' +
         '   </div>' +
         '</div>',
@@ -574,8 +574,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
             });
         });
 
-        var directionClassName = container.getAttribute('class') + '_' + formItem.get('direction');
-
+        var directionClassName = this.get('className') + '_' + formItem.get('direction');
+console.log(directionClassName);
         container.one('.' + directionClassName).append(formElement);
     },
 
