@@ -575,7 +575,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         var directionClassName = this.get('className') + '_' + formItem.get('direction');
-console.log(directionClassName);
+
         container.one('.' + directionClassName).append(formElement);
     },
 
