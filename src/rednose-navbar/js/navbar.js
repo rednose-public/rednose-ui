@@ -5,9 +5,7 @@ Provides a navigation bar.
 
 @module rednose-navbar
 **/
-var Navbar,
-
-    DEFAULT_TITLE = 'No title';
+var Navbar;
 
 /**
 Provides a navigation bar.
@@ -180,8 +178,8 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
         node.one('a').plug(Y.Bootstrap.Dropdown);
 
-        node.on('click', function (e) {
-            e.preventDefault();
+        node.all('a').on('click', function (e) {
+            self._prevent(e);
         });
     },
 
@@ -229,44 +227,62 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         });
     },
 
-    // -- Protected Event Handlers ---------------------------------------------
-
     /**
     @method _createLi
     @param {Object} item
     @protected
     **/
-    _createLi: function(i, dropdown) {
+    _createLi: function(item, dropdown) {
         var self =  this;
         var li = Y.Node.create ('<li tabindex="-1"></li>');
 
-        if (i.title === '-') {
+        if (item.title === '-') {
             li.addClass('divider');
 
-        } else if (typeof(i.items) === 'object') {
-            self._appendMenu(new Array(i), null, dropdown);
-
-            return;
-        } else {
-            var a = Y.Node.create('<a tabindex="-1" href="#">' + i.title + '</a>');
-
-            if (typeof(i.disabled) !== 'undefined') {
-                li.addClass('disabled');
-            }
-
-            li.append(a);
-
-            if (typeof(i.id) !== 'undefined') {
-                a.setAttribute('data-id', i.id);
-            }
-
-            if (typeof(i.url) !== 'undefined') {
-                a.setAttribute('data-url', i.url);
-            }
+            return li;
         }
+
+        if (typeof(item.items) === 'object') {
+            return self._appendMenu(new Array(i), null, dropdown);
+        }
+
+        if (item.node instanceof Y.Node && item.node.test('a')) {
+            li.append(item.node);
+
+            return li;
+        }
+
+        li.append(this._createListItem(item));
 
         return li;
     },
+
+    /**
+    @method _createListItem
+    @param {Object} item
+    @protected
+    **/
+    _createListItem: function (item) {
+        var a = Y.Node.create('<a tabindex="-1" href="#"></a>');
+
+        a.append(item.node || item.title);
+
+        if (typeof(item.disabled) !== 'undefined') {
+            li.addClass('disabled');
+        }
+
+        if (typeof(item.id) !== 'undefined') {
+            a.setAttribute('data-id', item.id);
+        }
+
+        if (typeof(item.url) !== 'undefined') {
+            a.setAttribute('data-url', item.url);
+        }
+
+        return a;
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
 
     /**
     @method _handleClick
@@ -310,7 +326,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @protected
     **/
     _prevent: function (e) {
-        e.preventDefault();
+        e.currentTarget.getAttribute('href') === '#' && e.preventDefault();
     }
 }, {
     ATTRS: {
@@ -319,7 +335,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         @type String
         **/
         title: {
-            value: DEFAULT_TITLE,
+            value: null,
         },
 
         /**
