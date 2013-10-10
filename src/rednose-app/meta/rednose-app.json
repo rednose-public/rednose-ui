@@ -20,6 +20,8 @@
                 "skinnable": true
             },
 
+            "rednose-app-templates": {},
+
             "rednose-model-undo" : {
                 "requires": [
                     "model"
