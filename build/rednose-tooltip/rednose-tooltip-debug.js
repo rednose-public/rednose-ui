@@ -8,7 +8,7 @@ Provides a tooltip manager.
 @module rednose-tooltip
 **/
 
-var ATTR_STYLE_BOOTSTRAP_ZINDEX_TOOLTIP = '1030';
+var ATTR_STYLE_ZINDEX_TOOLTIP = '1070';
 
 /**
 Provides a tooltip manager.
@@ -27,8 +27,7 @@ var Tooltip = Y.Base.create('tooltip', Y.Bootstrap.Tooltip, [], {
     **/
     initializer: function () {
         // Correct the z-index because the superclass set's it to 0.
-        // Value is taken from Bootstrap's '@zindexTooltip' variable.
-        this.set('zIndex', ATTR_STYLE_BOOTSTRAP_ZINDEX_TOOLTIP);
+        this.set('zIndex', ATTR_STYLE_ZINDEX_TOOLTIP);
     },
 
     /**
