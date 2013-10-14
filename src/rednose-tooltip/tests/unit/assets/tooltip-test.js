@@ -20,7 +20,7 @@ suite.add(new Y.Test.Case({
 
         var tooltipManager = new Y.Rednose.Tooltip({ selector : '*[rel=tooltip]' });
 
-        Assert.areEqual('1030', Y.one('.yui3-bootstraptooltip').getStyle('zIndex'));
+        Assert.areEqual('1070', Y.one('.yui3-bootstraptooltip').getStyle('zIndex'));
 
         tooltipManager.destroy();
         button.remove();
