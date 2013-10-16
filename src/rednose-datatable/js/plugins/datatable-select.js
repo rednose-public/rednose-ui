@@ -61,6 +61,11 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         var target = e.target,
             host   = this.get('host');
 
+        if (target.test('a')) {
+            // Don't trigger selection for URL clicks.
+            return false;
+        }
+
         if (target.ancestor('.' + host.getClassName(CSS_DATA) + ' tr')) {
             // This is a table row, update the selection.
             this.set('selectedRow', target.ancestor('.' + host.getClassName(CSS_DATA) +  ' tr'));
