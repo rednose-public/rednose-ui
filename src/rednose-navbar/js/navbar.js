@@ -263,9 +263,14 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @protected
     **/
     _createListItem: function (item) {
-        var a = Y.Node.create('<a tabindex="-1" href="#"></a>');
+        var a    = Y.Node.create('<a tabindex="-1" href="#"></a>'),
+            html = item.node || item.title;
 
-        a.append(item.node || item.title);
+        if (item.icon) {
+            html = '<i class="icon icon-' + item.icon + '"></i> ' + html;
+        }
+
+        a.set('innerHTML', html);
 
         if (typeof(item.disabled) !== 'undefined') {
             li.addClass('disabled');
