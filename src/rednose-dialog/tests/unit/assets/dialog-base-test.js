@@ -54,7 +54,8 @@ suite.add(new Y.Test.Case({
             confirm: confirmVal
         });
 
-        var titleNode   = Y.one('.rednose-dialog').one('.yui3-widget-hd');
+        // Get the last child, the first could be the potential close icon.
+        var titleNode   = Y.one('.rednose-dialog').one('.yui3-widget-hd').one('div').one('div:last-child');
         var messageNode = Y.one('.rednose-dialog').one('.yui3-widget-bd').one('p');
         var primaryNode = Y.one('.rednose-dialog').one('.yui3-widget-ft').one('.btn-primary');
 
@@ -76,7 +77,8 @@ suite.add(new Y.Test.Case({
             text: message
         });
 
-        var titleNode   = Y.one('.rednose-dialog').one('.yui3-widget-hd');
+        // Get the last child, the first could be the potential close icon.
+        var titleNode   = Y.one('.rednose-dialog').one('.yui3-widget-hd').one('div').one('div:last-child');
         var messageNode = Y.one('.rednose-dialog').one('.yui3-widget-bd').one('p');
 
         Assert.areEqual(titleNode.get('text'), title);
