@@ -15,6 +15,7 @@ var CSS_WIDGET = 'rednose-widget',
     CSS_BOOTSTRAP_BTN_DANGER  = 'btn-danger',
     CSS_BOOTSTRAP_BTN_INFO    = 'btn-info',
     CSS_BOOTSTRAP_BTN_SUCCESS = 'btn-success',
+    CSS_BOOTSTRAP_CLOSE       = 'close',
 
     TEXT_CONFIRM = 'OK',
     TEXT_CANCEL  = 'Cancel',
@@ -89,7 +90,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         panel = new Y.Rednose.Panel({
             bodyContent: node,
-            headerContent: options.title,
+            headerContent: this._getHeaderContent(options.title),
             zIndex: Y.all('*').size(),
             width: this.get('width'),
             buttons: [
@@ -141,7 +142,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         panel = new Y.Rednose.Panel({
             bodyContent: node,
-            headerContent: options.title,
+            headerContent: this._getHeaderContent(options.title),
             zIndex: Y.all('*').size(),
             width: this.get('width'),
             buttons: [
@@ -231,7 +232,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         panel = new Y.Rednose.Panel({
             bodyContent: node,
-            headerContent: options.title,
+            headerContent: this._getHeaderContent(options.title),
             zIndex: Y.all('*').size(),
             width: this.get('width'),
             buttons: [
@@ -262,8 +263,16 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             ]
         }).render();
 
-        node.one('input,textarea,select').focus().select();
-        node.one('input,textarea,select').on('keyup', function(e) {
+        node.one('input, textarea, select').focus().select();
+
+        // Prevent default on keydown and keyup due to browser differences.
+        node.one('input, textarea, select').on('keydown', function (e) {
+            e.preventDefault();
+        });
+
+        node.one('input, textarea, select').on('keyup', function (e) {
+            e.preventDefault();
+
             if (e.button === 13) {
                 var buttons = panel.get('buttons');
 
@@ -324,6 +333,23 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             default:
                 return CSS_BOOTSTRAP_BTN_PRIMARY;
         }
+    },
+
+    /**
+    @method _getHeaderContent
+    @protected
+    **/
+    _getHeaderContent: function (title) {
+        var header = Y.Node.create('<div>' + title + '</div>'),
+            self   = this;
+
+        header.append(Y.Node.create('<button class="' + CSS_BOOTSTRAP_CLOSE + '">×</button>'));
+
+        header.one('.' + CSS_BOOTSTRAP_CLOSE).on('click', function () {
+            self.destroy();
+        });
+
+        return header;
     },
 
     // -- Protected Event Handlers ---------------------------------------------
