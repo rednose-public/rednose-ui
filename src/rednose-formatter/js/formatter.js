@@ -20,7 +20,7 @@ function Formatter() {
 /**
 Formats a size string from bytes.
 
-@method slideInY
+@method size
 @param {Mixed} size The size to format
 @return {String} The formatted string
 @static
@@ -39,7 +39,7 @@ Formatter.size = function (size) {
                     size = size.toString() + ' bytes';
                     break;
                 case 1:
-                    size = size.toString() + ' kB';
+                    size = size.toString() + ' KB';
                     break;
                 case 2:
                     size = size.toString() + ' MB';
