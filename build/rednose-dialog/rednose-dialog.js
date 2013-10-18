@@ -269,13 +269,15 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         // Prevent default on keydown and keyup due to browser differences.
         node.one('input, textarea, select').on('keydown', function (e) {
-            e.preventDefault();
+            if (e.button === 13) {
+                e.preventDefault();
+            }
         });
 
         node.one('input, textarea, select').on('keyup', function (e) {
-            e.preventDefault();
-
             if (e.button === 13) {
+                e.preventDefault();
+
                 var buttons = panel.get('buttons');
 
                 Y.Array.each(buttons.footer, function (button) {
@@ -342,10 +344,21 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @protected
     **/
     _getHeaderContent: function (title) {
-        var header = Y.Node.create('<div>' + title + '</div>'),
-            self   = this;
+        var self = this,
+            header;
 
-        header.append(Y.Node.create('<button class="' + CSS_BOOTSTRAP_CLOSE + '">×</button>'));
+        // Keep the close button fixed and let the header fill the rest of the line.
+        header = Y.Node.create('<div style="width: 100%;">' +
+                                   '<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' +
+                                       title +
+                                   '</div>' +
+                               '</div>'
+        );
+
+        header.prepend(Y.Node.create('<div style="float: right; white-space: nowrap;">' +
+                                        '<button class="' + CSS_BOOTSTRAP_CLOSE + '">&times;</button>' +
+                                    '</div>'
+        ));
 
         header.one('.' + CSS_BOOTSTRAP_CLOSE).on('click', function () {
             self.destroy();

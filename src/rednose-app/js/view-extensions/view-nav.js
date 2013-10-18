@@ -294,10 +294,19 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         });
 
         if (title !== null) {
-            var header = Y.Node.create('<div>' + title + '</div>');
+            // Keep the close button fixed and let the header fill the rest of the line.
+            var header = Y.Node.create('<div style="width: 100%;">' +
+                                       '<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' +
+                                           title +
+                                       '</div>' +
+                                   '</div>'
+            );
 
             if (close) {
-                header.append(Y.Node.create('<button class="' + CSS_BOOTSTRAP_CLOSE + '">×</button>'));
+                header.prepend(Y.Node.create('<div style="float: right; white-space: nowrap;">' +
+                                                '<button class="' + CSS_BOOTSTRAP_CLOSE + '">&times;</button>' +
+                                            '</div>'
+                ));
 
                 header.one('.' + CSS_BOOTSTRAP_CLOSE).on('click', function () {
                     self.fire(EVT_BUTTON_CLOSE);
