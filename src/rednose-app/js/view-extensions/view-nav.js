@@ -296,10 +296,10 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         if (title !== null) {
             // Keep the close button fixed and let the header fill the rest of the line.
             var header = Y.Node.create('<div style="width: 100%;">' +
-                                       '<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' +
-                                           title +
-                                       '</div>' +
-                                   '</div>'
+                                           '<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' +
+                                               title +
+                                           '</div>' +
+                                       '</div>'
             );
 
             if (close) {
