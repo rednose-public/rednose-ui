@@ -1,6 +1,6 @@
 var DataProvider;
 
-DataProvider = Y.Base.create('dataProvider', Y.Base, [], {
+DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
     ac: null,
 
     template:
@@ -25,11 +25,11 @@ DataProvider = Y.Base.create('dataProvider', Y.Base, [], {
 
     initializer: function() {
         var self         = this,
-            senderInput  = this.get('srcNode'),
+            container    = this.get('contentBox'),
             route        = 'rednose_dataprovider_data_list',
-            id           = senderInput.getAttribute('data-provider-id'), // TODO
-            parameterBag = senderInput.getAttribute('data-json-parameterbag'), // TODO
-            placeHolder  = senderInput.getAttribute('placeholder'); // TODO
+            id           = this.get('dataProviderId'),
+            parameterBag = this.get('parameterBag'),
+            placeHolder  = this.get('placeholder')
 
         var defaultFormatter = function(query, raw) {
             return Y.Array.map(raw, function (result) {
@@ -44,8 +44,6 @@ DataProvider = Y.Base.create('dataProvider', Y.Base, [], {
             });
         };
 
-        var container = senderInput.ancestor();
-
         container.append(Y.Lang.sub(this.template, { placeholder: placeHolder }));
         container.one('.dataprovider-button').on('click', function(e) {
             self._handleComboButton(e);
@@ -53,10 +51,8 @@ DataProvider = Y.Base.create('dataProvider', Y.Base, [], {
 
         route =
             Routing.generate(route) + '?id=' + id +
-            '&parameterbag=' + parameterBag +
+            '&parameterbag=' + Y.JSON.stringify(parameterBag) +
             '&q={query}&callback={callback}';
-
-        senderInput.hide();
 
         this.ac = new Y.AutoCompleteList({
             inputNode        : container.one('.dataprovider-search'),
@@ -71,7 +67,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Base, [], {
         });
 
         this.ac.after('select', function (e) {
-            this.fire('selected', e.result);
+            self.fire('selected', e.result);
         });
     },
 
@@ -89,7 +85,9 @@ DataProvider = Y.Base.create('dataProvider', Y.Base, [], {
     },
 }, {
     ATTRS: {
-        srcNode: { value: null },
+        placeholder: { value: 'Type here to search…' },
+        parameterBag: { value: {} },
+        dataProviderId: { value: 'unknown.id' },
         display_handle: { value: 'display_name' },
     }
 });
