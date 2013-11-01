@@ -9,6 +9,6 @@
             "autocomplete-highlighters"
         ],
 
-        "skinnable": false
+        "skinnable": true
     }
 }

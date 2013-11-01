@@ -7,7 +7,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
         '<div class="dataprovider-form">' +
             '<div class="input-append">' +
                 '<input type="text" class="dataprovider-search" placeholder="{placeholder}" />' +
-                '<button class="btn btn dataprovider-button" type="button">...</button>' +
+                '<button class="btn btn dataprovider-button" type="button">{caption}</button>' +
             '</div>' +
             '<div class="ac"></div>' +
         '</div>',
@@ -24,12 +24,13 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
             '</div>',
 
     initializer: function() {
-        var self         = this,
-            container    = this.get('contentBox'),
-            route        = 'rednose_dataprovider_data_list',
-            id           = this.get('dataProviderId'),
-            parameterBag = this.get('parameterBag'),
-            placeHolder  = this.get('placeholder')
+        var self          = this,
+            container     = this.get('contentBox'),
+            route         = 'rednose_dataprovider_data_list',
+            id            = this.get('dataProviderId'),
+            parameterBag  = this.get('parameterBag'),
+            placeHolder   = this.get('placeholder'),
+            buttonCaption = this.get('buttonCaption');
 
         var defaultFormatter = function(query, raw) {
             return Y.Array.map(raw, function (result) {
@@ -44,7 +45,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
             });
         };
 
-        container.append(Y.Lang.sub(this.template, { placeholder: placeHolder }));
+        container.append(Y.Lang.sub(this.template, { placeholder: placeHolder, caption: buttonCaption }));
         container.one('.dataprovider-button').on('click', function(e) {
             self._handleComboButton(e);
         });
@@ -69,6 +70,22 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
         this.ac.after('select', function (e) {
             self.fire('selected', e.result);
         });
+
+        this.ac.on(
+            "query",
+            function (e) {
+                container.one('.dataprovider-button').addClass('dataprovider-spinner');
+                container.one('.dataprovider-button').setHTML('&nbsp;');
+            }
+        );
+
+        this.ac.after(
+            "results",
+            function (e) {
+                container.one('.dataprovider-button').removeClass('dataprovider-spinner');
+                container.one('.dataprovider-button').setHTML(self.get('buttonCaption'));
+            }
+        );
     },
 
     _handleComboButton: function (e) {
@@ -79,6 +96,10 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
         if (ac.get('visible')) {
             ac.hide();
         } else {
+            if (ac.get('results').length === 0) {
+                ac.fire('query');
+            }
+
             ac.sendRequest();
             ac.show();
         }
@@ -86,6 +107,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
 }, {
     ATTRS: {
         placeholder: { value: 'Type here to search…' },
+        buttonCaption: { value: '…' },
         parameterBag: { value: {} },
         dataProviderId: { value: 'unknown.id' },
         display_handle: { value: 'display_name' },
