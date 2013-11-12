@@ -181,6 +181,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @param {Object} [options] The following options can be specified:
         @param {String} [options.title] The dialog title.
         @param {String} [options.text] The dialog body text.
+        @param {String} [options.dataPath] The field data-path for error reporting.
         @param {String} [options.type] The dialog type ('default', 'info', 'warning', success', 'danger', 'error').
         @param {String} [options.confirm] The confirm button value.
         @param {String} [options.cancel] The cancel button value.
@@ -197,13 +198,14 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             panel;
 
         options = Y.mix(options, {
-            title  : '',
-            text   : '',
-            type   : TYPE_DEFAULT,
-            confirm: TEXT_CONFIRM,
-            cancel : TEXT_CANCEL,
-            value  : '',
-            html   : null
+            title   : '',
+            text    : '',
+            dataPath: 'input',
+            type    : TYPE_DEFAULT,
+            confirm : TEXT_CONFIRM,
+            cancel  : TEXT_CANCEL,
+            value   : '',
+            html    : null
         });
 
         if (options.html) {
@@ -216,7 +218,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             node = Y.Node.create('<form class="form-horizontal"></form>');
             node.append(input);
         } else {
-            input = Y.Node.create('<input type="text" value="' + options.value + '" data-path="input" id="input">');
+            input = Y.Node.create('<input type="text" value="' + options.value + '" data-path="' + options.dataPath + '" id="input">');
 
             node = Y.Node.create(
                 '<form class="form-horizontal">' +
