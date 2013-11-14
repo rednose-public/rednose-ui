@@ -256,6 +256,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
         li.append(this._createListItem(item));
 
+        if (typeof(item.disabled) !== 'undefined') {
+            li.addClass('disabled');
+        }
+
         return li;
     },
 
@@ -273,10 +277,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         }
 
         a.set('innerHTML', html);
-
-        if (typeof(item.disabled) !== 'undefined') {
-            li.addClass('disabled');
-        }
 
         if (typeof(item.id) !== 'undefined') {
             a.setAttribute('data-id', item.id);
