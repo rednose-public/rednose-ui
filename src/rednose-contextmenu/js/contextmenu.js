@@ -90,7 +90,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
             bodyContent: content,
             visible: false,
             constrain: true,
-            zIndex: Y.all('*').size(),
+            zIndex: this._getHighzIndex(),
             render: true
         });
 
@@ -215,6 +215,19 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         e.preventDefault();
 
         this.open(x, y);
+    },
+
+    _getHighzIndex: function() {
+        var elements = document.getElementsByTagName('*');
+        var highIndex = 0;
+
+        for (var i = 0; i < elements.length - 1; i++) {
+            if (parseInt(elements[i].style.zIndex) > highIndex) {
+                highIndex = parseInt(elements[i].style.zIndex)
+            }
+        }
+
+        return (highIndex + 1);
     }
 }, {
     NS : 'contextMenu',

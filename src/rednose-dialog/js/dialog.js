@@ -91,7 +91,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         panel = new Y.Rednose.Panel({
             bodyContent: node,
             headerContent: this._getHeaderContent(options.title),
-            zIndex: Y.all('*').size(),
+            zIndex: this._getHighzIndex(),
             width: this.get('width'),
             buttons: [
                  {
@@ -143,7 +143,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         panel = new Y.Rednose.Panel({
             bodyContent: node,
             headerContent: this._getHeaderContent(options.title),
-            zIndex: Y.all('*').size(),
+            zIndex: this._getHighzIndex(),
             width: this.get('width'),
             buttons: [
                  {
@@ -235,7 +235,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         panel = new Y.Rednose.Panel({
             bodyContent: node,
             headerContent: this._getHeaderContent(options.title),
-            zIndex: Y.all('*').size(),
+            zIndex: this._getHighzIndex(),
             width: this.get('width'),
             buttons: [
                  {
@@ -400,6 +400,19 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         }
 
         input.focus();
+    },
+
+    _getHighzIndex: function() {
+        var elements = document.getElementsByTagName('*');
+        var highIndex = 0;
+
+        for (var i = 0; i < elements.length - 1; i++) {
+            if (parseInt(elements[i].style.zIndex) > highIndex) {
+                highIndex = parseInt(elements[i].style.zIndex)
+            }
+        }
+
+        return (highIndex + 1);
     }
 }, {
     ATTRS: {
