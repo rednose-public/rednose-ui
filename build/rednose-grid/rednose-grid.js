@@ -16,7 +16,7 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '        {{#if thumbnail}}' +
         '            <img alt="{{ name }}" src="{{ thumbnail }}" style="width: 110px; height: 156px;"/>' +
         '        {{else}}' +
-        '            <div class="model-grid-icon" />' +
+        '            <div class="model-grid-icon"></div>' +
         '        {{/if}}' +
         '    </div>' +
         '    <div class="model-grid-footer">' +
