@@ -106,7 +106,7 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
 
             if (item.title !== '-') {
                 if (item.icon) {
-                    html = '<i class"icon icon-' + item.icon + '"></i> ' + html;
+                    html = '<i class="icon icon-' + item.icon + '"></i> ' + html;
                 }
 
                 elA.set('innerHTML', html);
