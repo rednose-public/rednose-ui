@@ -1,5 +1,7 @@
 YUI.add('rednose-grid', function (Y, NAME) {
 
+/*jshint boss:true, expr:true, onevar:false */
+
 var Grid,
     GridView;
 
@@ -12,7 +14,7 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '    <div class="model-grid-icon-container">' +
         '        <div class="model-grid-icon-wrapper">' +
         '        {{#if thumbnail}}' +
-        '            <img alt="{{ name }}" src="data:image/png;base64,{{ thumbnail }}" style="width: 110px; height: 156px;"/>' +
+        '            <img alt="{{ name }}" src="{{ thumbnail }}" style="width: 110px; height: 156px;"/>' +
         '        {{else}}' +
         '            <div class="model-grid-icon" />' +
         '        {{/if}}' +
@@ -114,7 +116,6 @@ GridView = Y.Base.create('gridView', Y.View, [], {
 
 // TODO: Y.Rednose.Grid.Message
 Grid = Y.Base.create('grid', Y.Widget, [ Y.Rednose.Grid.Selectable ], {
-
     targets: null,
 
     views: [],
@@ -125,19 +126,20 @@ Grid = Y.Base.create('grid', Y.Widget, [ Y.Rednose.Grid.Selectable ], {
     },
 
     _renderGridItems : function() {
-        var contentBox = this.get("contentBox"),
+        var contentBox  = this.get('contentBox'),
             contextMenu = this.get('contextMenu'),
-            self = this,
-            list = this.get('data');
+            self        = this,
+            list        = this.get('data');
 
         Y.each(list, function (model) {
             var view = new GridView({ model: model, contextMenu: contextMenu }),
                 node = view.render().get('container');
 
             self.views.push(view);
-            for (var i in self.targets) {
-                view.addTarget(self.targets[i]);
-            }
+
+            Y.Array.each(self.targets, function (target) {
+                view.addTarget(target);
+            });
 
             contentBox.append(node);
         });
@@ -159,8 +161,6 @@ Grid = Y.Base.create('grid', Y.Widget, [ Y.Rednose.Grid.Selectable ], {
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose').Grid = Grid;
-Y.namespace('TB').GridView = GridView;
-
 
 
 }, '1.1.0-DEV', {

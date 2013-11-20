@@ -11,13 +11,6 @@
     outline-style: solid;
 }
 
-.model-grid-icon-wrapper {
-    /* Inner hover-border helper attributes */
-    border: 2px solid;
-    border-color: #ffffff;
-    border-color: rgba(255,0,0,0.0);
-}
-
 .model-grid-footer .edit {
     display: none;
 }
