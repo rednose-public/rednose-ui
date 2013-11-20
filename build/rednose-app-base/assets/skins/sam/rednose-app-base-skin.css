@@ -55,6 +55,22 @@
     font-smoothing: antialiased;
 }
 
+/* FIXME */
+.rednose-app-detail-view {
+    left: 228px;
+    right: 0;
+    position: absolute;
+}
+
+.rednose-app-master-detail-container {
+    padding-left: 228px;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 /* Master-detail grid template */
 .rednose-grid-master-view {
     width: 180px;
@@ -63,7 +79,7 @@
 
 .rednose-grid-detail-view {
     overflow: auto;
-    width: 800px;
+    width: 778px;
     height: 443px;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
@@ -87,18 +103,18 @@
 }
 
 /* YUI Overrides. */
-.yui3-skin-sam .rednose-app-master-view .yui3-widget-stdmod {
+.rednose-app-master-view .yui3-widget-stdmod {
     position: absolute;
     width: 228px;
 }
 
-.yui3-skin-sam .rednose-app-master-view .yui3-widget-hd {
+.rednose-app-master-view .yui3-widget-hd {
     position: absolute;
     width: 228px;
     padding: 0;
 }
 
-.yui3-skin-sam .rednose-app-master-view .yui3-widget-bd {
+.rednose-app-master-view .yui3-widget-bd {
     position: absolute;
     top: 0;
     width: 228px;
@@ -106,7 +122,7 @@
     padding: 0;
 }
 
-.yui3-skin-sam .rednose-app-master-view .yui3-widget-ft {
+.rednose-app-master-view .yui3-widget-ft {
     position: absolute;
     bottom: 0;
     width: 198px;

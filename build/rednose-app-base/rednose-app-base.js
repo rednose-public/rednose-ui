@@ -192,7 +192,7 @@ var App = Y.Base.create('app', Y.App, [], {
 
         if (viewInfo.modal) {
             // Only render the panel if the view does not provide his own (dialogs).
-            if (typeof(viewInfo.instance.get('panel')) == 'undefined') {
+            if (typeof(viewInfo.instance.get('panel')) === 'undefined') {
                 this._activePanel = new Y.Rednose.Panel({
                     srcNode: view.get('container'),
                     width  : viewInfo.width || STYLE_MODAL_WIDTH

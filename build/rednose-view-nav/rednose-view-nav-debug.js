@@ -52,7 +52,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @property title
     @type String
     **/
-    title : null,
+    title: null,
 
     /**
     Buttons property, sets the panel's footer buttons.
@@ -60,7 +60,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @property buttons
     @type Object
     **/
-    buttons : null,
+    buttons: null,
 
     /**
     Optional close button in the header.
@@ -68,7 +68,15 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @property close
     @type Boolean
     **/
-    close : false,
+    close: false,
+
+    /**
+    Optionally disable padding.
+
+    @property padding
+    @type Boolean
+    **/
+    padding: true,
 
     // -- Protected Properties -------------------------------------------------
 
@@ -329,6 +337,10 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
         // Add a magic CSS handle to the widget-body.
         this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).addClass(CSS_MAGIC_PREFIX + '-' + this._camelCaseToDash(this.name));
+
+        if (this.padding === false) {
+            this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).setStyle('padding', 0);
+        }
     }
 }, {
     ATTRS: {
