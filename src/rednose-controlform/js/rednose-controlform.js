@@ -23,20 +23,15 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         this.after('stepChange', this._stepChange);
     },
 
-    render: function(formsModel) {
-        var self = this;
-        var container = this.get('srcNode');
+    render: function() {
+        var container  = this.get('srcNode'),
+            formsModel = this.get('formsModel'),
+            self       = this;
 
         container.setHTML(this.viewTemplate);
         container.one('.formContainer').removeClass('formContainer').addClass(this.get('className'));
         container.one('.formContainer_left').removeClass('formContainer_left').addClass(this.get('className') + '_left');
         container.one('.formContainer_right').removeClass('formContainer_right').addClass(this.get('className') + '_right');
-
-        if (formsModel === null) {
-            formsModel = this.get('formsModel');
-        } else {
-            this.set('formsModel', formsModel);
-        }
 
         formsModel.sort();
         formsModel.each(function(formItem) {
@@ -197,7 +192,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         formElement.all('ul').each(function(group) {
             if (sender.get('id') !== group.get('id')) { // Is this myself?
                 var groupTop = group.getY();
-                var groupBottom = (groupTop + parseInt(group.getComputedStyle('height')));
+                var groupBottom = (groupTop + parseInt(group.getComputedStyle('height'), 10));
 
                 if (y > groupTop && y < groupBottom) {
                     sender.insertBefore(sender, group);
@@ -208,7 +203,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         });
 
         // If you are dragging at the bottom of the form, append the dragNode to the bottom.
-        if (hit === false && y > (formElement.getY() + parseInt(formElement.getComputedStyle('height')))) {
+        if (hit === false && y > (formElement.getY() + parseInt(formElement.getComputedStyle('height'), 10))) {
             formElement.append(sender);
         }
     },
@@ -257,7 +252,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         container.all('*[data-step]').each(function(formElement) {
             var formStep = formElement.getAttribute('data-step');
 
-            if (parseInt(formStep) !== parseInt(self.get('step'))) {
+            if (parseInt(formStep, 10) !== parseInt(self.get('step'), 10)) {
                 formElement.hide();
             } else {
                 formElement.show();
