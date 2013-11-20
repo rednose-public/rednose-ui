@@ -18,6 +18,18 @@ function Templates() {
     Templates.superclass.constructor.apply(this);
 }
 
+
+/**
+Basic detail app view.
+
+@method detailApp
+@static
+**/
+Templates.detailApp =
+    '<div class="yui3-g rednose-app-detail-container">' +
+        '<div class="yui3-u rednose-app-detail-view"></div>' +
+    '</div>';
+
 /**
 Basic master-detail app view.
 
@@ -42,6 +54,17 @@ Templates.masterDetailGrid =
         '<div class="yui3-u rednose-grid-detail-view"></div>' +
     '</div>';
 
+/**
+Basic View message container
+
+@method detailApp
+@static
+**/
+Templates.viewMessage =
+    '<div class="rednose-app-message-container">' +
+        '<div class="rednose-app-message-title">{message}</div>' +
+        '<div class="rednose-app-message-body">{subMessage}</div>' +
+  '</div>';
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose').Templates = Templates;

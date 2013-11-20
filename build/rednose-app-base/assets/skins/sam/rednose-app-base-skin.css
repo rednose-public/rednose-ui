@@ -13,6 +13,15 @@
 }
 
 /* Master-detail app template */
+.rednose-app-detail-container {
+    padding-left: 0px;
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 .rednose-app-master-detail-container {
     padding-left: 228px;
     position: absolute;
@@ -32,6 +41,7 @@
 
 .rednose-app-detail-view {
     height:100%;
+    width: 99.9%;
     font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
     font-weight: 300;
@@ -43,22 +53,6 @@
     -ms-font-smoothing: antialiased;
     -o-font-smoothing: antialiased;
     font-smoothing: antialiased;
-}
-
-/* FIXME */
-.rednose-app-detail-view {
-    left: 228px;
-    right: 0px;
-    position: absolute;
-}
-
-.rednose-app-master-detail-container {
-    padding-left: 228px;
-    position: absolute;
-    top: 40px;
-    bottom: 0;
-    left: 0;
-    right: 0;
 }
 
 /* Master-detail grid template */
