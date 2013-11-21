@@ -5,9 +5,9 @@ var ControlForm;
 ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
     viewTemplate:
-        '<div class="formContainer row">' +
-        '   <div class="formContainer_left span6">&nbsp;</div>' +
-        '   <div class="formContainer_right span6">&nbsp;</div>' +
+        '<div class="formContainer">' +
+        '   <div class="formContainer_left">&nbsp;</div>' +
+        '   <div class="formContainer_right">&nbsp;</div>' +
         '   <div class="formContainer_proxy">' +
         '   </div>' +
         '</div>',

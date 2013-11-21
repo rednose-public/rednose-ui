@@ -72,8 +72,10 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
             node = container.one('[data-id=' + id + ']');
 
         if (node.ancestor('li').hasClass('disabled')) {
+            node.removeClass('disabled');
             node.ancestor('li').removeClass('disabled');
         } else {
+            node.addClass('disabled');
             node.ancestor('li').addClass('disabled');
         }
     },
