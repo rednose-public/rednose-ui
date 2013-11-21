@@ -173,6 +173,38 @@ FieldContent = Y.Base.create('fieldContent', Y.Model, [], {
 });
 
 Y.namespace('ControlForm').FieldContent = FieldContent;
+var WidgetFactory;
+
+WidgetFactory = Y.Base.create('widgetFactory', Y.Base, [], {
+
+    /**
+    Create a widget node based on the provided rule-set
+
+    @param properties
+    @method _createWidget
+    @protected
+    **/
+    _createWidget: function(properties) {
+        var node = Y.Node.create('<span />');
+
+        if (properties.is_date) {
+            new Y.Rednose.ControlFormDatepicker({ srcNode: node, properties: properties }).render();
+        } else if (properties.is_html) {
+            new Y.Rednose.ControlFormRichTextEditor({ srcNode: node, properties: properties }).render();
+        } else {
+            new Y.Rednose.ControlFormCommon({ srcNode: node, properties: properties }).render();
+
+            if (node.one('*')) {
+                node = node.one('*');
+            }
+        }
+
+        return node;
+    }
+
+});
+
+Y.namespace('Rednose').WidgetFactory = WidgetFactory;
 /*jshint boss:true, expr:true, onevar:false */
 
 var Datepicker;
@@ -215,9 +247,9 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
 
     showCalendar: function(sender) {
         var wrapper = this.get('wrapper');
-        var rules = this.get('rules');
+        var properties = this.get('properties');
 
-        if (typeof(rules.is_date.accepts_input) === 'undefined') {
+        if (typeof(properties.is_date.accepts_input) === 'undefined') {
             return;
         }
 
@@ -252,7 +284,7 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
 }, {
     ATTRS: {
         wrapper: { value: null },
-        rules: { value: {} },
+        properties: { value: {} },
     }
 });
 
@@ -264,7 +296,7 @@ var RichTextEditor;
 RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
 
     render: function() {
-        var inputProperties = this.get('rules').input_properties,
+        var inputProperties = this.get('properties').input_properties,
             toolbar         = [];
 
         if (inputProperties) {
@@ -339,7 +371,7 @@ RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
     }
 }, {
     ATTRS: {
-        rules: { value: {} }
+        properties: { value: {} }
     }
 });
 
@@ -354,15 +386,15 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     },
 
     render: function() {
-        var rules = this.get('rules');
+        var properties = this.get('properties');
 
-        if (typeof(rules.input_method) === 'undefined') {
+        if (typeof(properties.input_method) === 'undefined') {
             this._renderInput();
 
             return;
         }
 
-        switch (rules.input_method.inputElement) {
+        switch (properties.input_method.inputElement) {
             case 'input':
                 this._renderInput();
                 break;
@@ -398,12 +430,12 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderDropdown: function() {
         var select = Y.Node.create('<select />');
-        var rules = this.get('rules');
+        var properties = this.get('properties');
         var properties = this._getProperties();
 
-        if (typeof(rules.input_restrictions) !== 'undefined') {
-            for (var i in rules.input_restrictions) {
-                var restrictions = rules.input_restrictions[i];
+        if (typeof(properties.input_restrictions) !== 'undefined') {
+            for (var i in properties.input_restrictions) {
+                var restrictions = properties.input_restrictions[i];
                 var option = Y.Node.create('<option>' + restrictions.name + '</option>');
 
                 if (restrictions.value === '') {
@@ -438,13 +470,13 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderRadio: function() {
         var name = 'rand' + Math.floor(Math.random() * 1010101) + (new Date().getTime());
-        var rules = this.get('rules');
+        var properties = this.get('properties');
         var properties = this._getProperties();
         var container = Y.Node.create('<span class="radioGroup" id="' + name + '" />');
 
-        if (typeof(rules.input_restrictions) !== 'undefined') {
-            for (var i in rules.input_restrictions) {
-                var restrictions = rules.input_restrictions[i];
+        if (typeof(properties.input_restrictions) !== 'undefined') {
+            for (var i in properties.input_restrictions) {
+                var restrictions = properties.input_restrictions[i];
                 var radio = Y.Node.create('<input type="radio" name="' + name + '" />');
 
                 if (properties.defaultValue) {
@@ -469,10 +501,10 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     },
 
     _getProperties: function() {
-        var rules = this.get('rules');
+        var properties = this.get('properties');
 
-        if (rules.input_properties) {
-            var properties = rules.input_properties;
+        if (properties.input_properties) {
+            var properties = properties.input_properties;
 
             return properties;
         }
@@ -481,7 +513,7 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     }
 }, {
     ATTRS: {
-        rules: { value: {} },
+        properties: { value: {} },
     }
 });
 
@@ -490,7 +522,7 @@ Y.namespace('Rednose').ControlFormCommon = Common;
 
 var ControlForm;
 
-ControlForm = Y.Base.create('controlForm', Y.Base, [], {
+ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], {
 
     viewTemplate:
         '<div class="formContainer">' +
@@ -617,7 +649,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
             // Filter out fields that have a 'is_text_value' and 'is_header' property.
             if ((!control.rules.is_text_value) && (!control.rules.is_header)) {
-                controlElement = self._createInputElement(control.rules);
+                controlElement = self._createWidget(control.rules);
                 controlElement.data = control;
 
                 label.set('innerHTML', control.field.name);
@@ -651,24 +683,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         }
 
         formElement.append(list);
-    },
-
-    _createInputElement: function(rules) {
-        var node = Y.Node.create('<span />');
-
-        if (rules.is_date) {
-            new Y.Rednose.ControlFormDatepicker({ srcNode: node, rules: rules }).render();
-        } else if (rules.is_html) {
-            new Y.Rednose.ControlFormRichTextEditor({ srcNode: node, rules: rules }).render();
-        } else {
-            new Y.Rednose.ControlFormCommon({ srcNode: node, rules: rules }).render();
-
-            if (node.one('*')) {
-                node = node.one('*');
-            }
-        }
-
-        return node;
     },
 
     _reOrderFieldGroupDD: function(e, formElement, sender) {

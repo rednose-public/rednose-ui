@@ -2,7 +2,7 @@
 
 var ControlForm;
 
-ControlForm = Y.Base.create('controlForm', Y.Base, [], {
+ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], {
 
     viewTemplate:
         '<div class="formContainer">' +
@@ -129,7 +129,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
 
             // Filter out fields that have a 'is_text_value' and 'is_header' property.
             if ((!control.rules.is_text_value) && (!control.rules.is_header)) {
-                controlElement = self._createInputElement(control.rules);
+                controlElement = self._createWidget(control.rules);
                 controlElement.data = control;
 
                 label.set('innerHTML', control.field.name);
@@ -163,24 +163,6 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [], {
         }
 
         formElement.append(list);
-    },
-
-    _createInputElement: function(rules) {
-        var node = Y.Node.create('<span />');
-
-        if (rules.is_date) {
-            new Y.Rednose.ControlFormDatepicker({ srcNode: node, rules: rules }).render();
-        } else if (rules.is_html) {
-            new Y.Rednose.ControlFormRichTextEditor({ srcNode: node, rules: rules }).render();
-        } else {
-            new Y.Rednose.ControlFormCommon({ srcNode: node, rules: rules }).render();
-
-            if (node.one('*')) {
-                node = node.one('*');
-            }
-        }
-
-        return node;
     },
 
     _reOrderFieldGroupDD: function(e, formElement, sender) {

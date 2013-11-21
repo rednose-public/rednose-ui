@@ -5,7 +5,7 @@ var RichTextEditor;
 RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
 
     render: function() {
-        var inputProperties = this.get('rules').input_properties,
+        var inputProperties = this.get('properties').input_properties,
             toolbar         = [];
 
         if (inputProperties) {
@@ -80,7 +80,7 @@ RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
     }
 }, {
     ATTRS: {
-        rules: { value: {} }
+        properties: { value: {} }
     }
 });
 

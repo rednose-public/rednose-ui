@@ -40,9 +40,9 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
 
     showCalendar: function(sender) {
         var wrapper = this.get('wrapper');
-        var rules = this.get('rules');
+        var properties = this.get('properties');
 
-        if (typeof(rules.is_date.accepts_input) === 'undefined') {
+        if (typeof(properties.is_date.accepts_input) === 'undefined') {
             return;
         }
 
@@ -77,7 +77,7 @@ Datepicker = Y.Base.create('datepicker', Y.Calendar, [ ], {
 }, {
     ATTRS: {
         wrapper: { value: null },
-        rules: { value: {} },
+        properties: { value: {} },
     }
 });
 

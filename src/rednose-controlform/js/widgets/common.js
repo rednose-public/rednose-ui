@@ -8,15 +8,15 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     },
 
     render: function() {
-        var rules = this.get('rules');
+        var properties = this.get('properties');
 
-        if (typeof(rules.input_method) === 'undefined') {
+        if (typeof(properties.input_method) === 'undefined') {
             this._renderInput();
 
             return;
         }
 
-        switch (rules.input_method.inputElement) {
+        switch (properties.input_method.inputElement) {
             case 'input':
                 this._renderInput();
                 break;
@@ -52,12 +52,12 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderDropdown: function() {
         var select = Y.Node.create('<select />');
-        var rules = this.get('rules');
+        var properties = this.get('properties');
         var properties = this._getProperties();
 
-        if (typeof(rules.input_restrictions) !== 'undefined') {
-            for (var i in rules.input_restrictions) {
-                var restrictions = rules.input_restrictions[i];
+        if (typeof(properties.input_restrictions) !== 'undefined') {
+            for (var i in properties.input_restrictions) {
+                var restrictions = properties.input_restrictions[i];
                 var option = Y.Node.create('<option>' + restrictions.name + '</option>');
 
                 if (restrictions.value === '') {
@@ -92,13 +92,13 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderRadio: function() {
         var name = 'rand' + Math.floor(Math.random() * 1010101) + (new Date().getTime());
-        var rules = this.get('rules');
+        var properties = this.get('properties');
         var properties = this._getProperties();
         var container = Y.Node.create('<span class="radioGroup" id="' + name + '" />');
 
-        if (typeof(rules.input_restrictions) !== 'undefined') {
-            for (var i in rules.input_restrictions) {
-                var restrictions = rules.input_restrictions[i];
+        if (typeof(properties.input_restrictions) !== 'undefined') {
+            for (var i in properties.input_restrictions) {
+                var restrictions = properties.input_restrictions[i];
                 var radio = Y.Node.create('<input type="radio" name="' + name + '" />');
 
                 if (properties.defaultValue) {
@@ -123,10 +123,10 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     },
 
     _getProperties: function() {
-        var rules = this.get('rules');
+        var properties = this.get('properties');
 
-        if (rules.input_properties) {
-            var properties = rules.input_properties;
+        if (properties.input_properties) {
+            var properties = properties.input_properties;
 
             return properties;
         }
@@ -135,7 +135,7 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     }
 }, {
     ATTRS: {
-        rules: { value: {} },
+        properties: { value: {} },
     }
 });
 

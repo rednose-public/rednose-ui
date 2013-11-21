@@ -7,6 +7,7 @@
                 "models/form-item.js",
                 "models/form-items.js",
                 "models/field-content.js",
+                "widgets/widget-factory.js",
                 "widgets/datepicker.js",
                 "widgets/rich-text-editor.js",
                 "widgets/common.js",
