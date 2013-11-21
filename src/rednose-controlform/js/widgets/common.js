@@ -52,7 +52,6 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderDropdown: function() {
         var select = Y.Node.create('<select />');
-        var properties = this.get('properties');
         var properties = this._getProperties();
 
         if (typeof(properties.input_restrictions) !== 'undefined') {
@@ -92,7 +91,6 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderRadio: function() {
         var name = 'rand' + Math.floor(Math.random() * 1010101) + (new Date().getTime());
-        var properties = this.get('properties');
         var properties = this._getProperties();
         var container = Y.Node.create('<span class="radioGroup" id="' + name + '" />');
 
@@ -125,13 +123,7 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     _getProperties: function() {
         var properties = this.get('properties');
 
-        if (properties.input_properties) {
-            var properties = properties.input_properties;
-
-            return properties;
-        }
-
-        return {};
+        return properties;
     }
 }, {
     ATTRS: {

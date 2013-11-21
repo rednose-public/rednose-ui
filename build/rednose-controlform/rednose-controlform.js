@@ -178,7 +178,7 @@ var WidgetFactory;
 WidgetFactory = Y.Base.create('widgetFactory', Y.Base, [], {
 
     /**
-    Create a widget node based on the provided rule-set
+    Create a widget node based on the provided property-set
 
     @param properties
     @method _createWidget
@@ -430,7 +430,6 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderDropdown: function() {
         var select = Y.Node.create('<select />');
-        var properties = this.get('properties');
         var properties = this._getProperties();
 
         if (typeof(properties.input_restrictions) !== 'undefined') {
@@ -470,7 +469,6 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
 
     _renderRadio: function() {
         var name = 'rand' + Math.floor(Math.random() * 1010101) + (new Date().getTime());
-        var properties = this.get('properties');
         var properties = this._getProperties();
         var container = Y.Node.create('<span class="radioGroup" id="' + name + '" />');
 
@@ -503,13 +501,7 @@ Common = Y.Base.create('common', Y.Widget, [ ], {
     _getProperties: function() {
         var properties = this.get('properties');
 
-        if (properties.input_properties) {
-            var properties = properties.input_properties;
-
-            return properties;
-        }
-
-        return {};
+        return properties;
     }
 }, {
     ATTRS: {
@@ -723,8 +715,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
     },
 
     updateControl: function(control) {
-        var formsModel = this.get('formsModel');
-        var fieldGroup = formsModel.getFieldGroup(control.fieldGroup);
+        var formsModel = this.get('formsModel'),
+            fieldGroup = formsModel.getFieldGroup(control.get('fieldGroup'));
 
         if (fieldGroup.fieldGroupItems) {
             for (var item in fieldGroup.fieldGroupItems) {

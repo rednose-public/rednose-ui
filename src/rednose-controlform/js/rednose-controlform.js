@@ -203,8 +203,8 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
     },
 
     updateControl: function(control) {
-        var formsModel = this.get('formsModel');
-        var fieldGroup = formsModel.getFieldGroup(control.fieldGroup);
+        var formsModel = this.get('formsModel'),
+            fieldGroup = formsModel.getFieldGroup(control.get('fieldGroup'));
 
         if (fieldGroup.fieldGroupItems) {
             for (var item in fieldGroup.fieldGroupItems) {
