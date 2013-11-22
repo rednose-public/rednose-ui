@@ -265,28 +265,30 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             ]
         }).render();
 
-        node.one('input, textarea, select').focus().select();
+        if (node.one('input, textarea, select') !== null) {
+            node.one('input, textarea, select').focus().select();
 
-        // Prevent default on keydown and keyup due to browser differences.
-        node.one('input, textarea, select').on('keydown', function (e) {
-            if (e.button === 13) {
-                e.preventDefault();
-            }
-        });
+            // Prevent default on keydown and keyup due to browser differences.
+            node.one('input, textarea, select').on('keydown', function (e) {
+                if (e.button === 13) {
+                    e.preventDefault();
+                }
+            });
 
-        node.one('input, textarea, select').on('keyup', function (e) {
-            if (e.button === 13) {
-                e.preventDefault();
+            node.one('input, textarea, select').on('keyup', function (e) {
+                if (e.button === 13) {
+                    e.preventDefault();
 
-                var buttons = panel.get('buttons');
+                    var buttons = panel.get('buttons');
 
-                Y.Array.each(buttons.footer, function (button) {
-                    if (button.hasClass(CSS_BOOTSTRAP_BTN_PRIMARY)) {
-                        button.simulate('click');
-                    }
-                });
-            }
-        });
+                    Y.Array.each(buttons.footer, function (button) {
+                        if (button.hasClass(CSS_BOOTSTRAP_BTN_PRIMARY)) {
+                            button.simulate('click');
+                        }
+                    });
+                }
+            });
+        }
 
         this._setPanelStyle(panel);
         this.set('panel', panel);
