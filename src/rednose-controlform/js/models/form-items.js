@@ -83,7 +83,6 @@ FormItems = Y.Base.create('formItems', Y.ModelList, [], {
     },
 
     getFieldGroup: function(fgId) {
-        var fgId = parseInt(fgId);
         var fg = null;
 
         this.each(function(formItem) {
