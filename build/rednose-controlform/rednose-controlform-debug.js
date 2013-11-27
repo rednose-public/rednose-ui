@@ -18,18 +18,40 @@ Form = Y.Base.create('form', Y.Model, [], {
 
     getFieldGroup: function(fgId) {
         for (var i in this.get('fieldGroups')) {
-            if (this.get('fieldGroups')[i]['id'] == fgId) {
+            if (this.get('fieldGroups')[i].get('id') == fgId) {
                 return this.get('fieldGroups')[i];
             }
         }
 
         return false;
+    },
+
+    _setFieldGroups: function(value) {
+        var fgBuffer = Array();
+
+        Y.each(value, function(fg) {
+            var fgiBuffer = Array();
+
+            Y.each(fg.fieldGroupItems, function(fgi) {
+                fgiBuffer.push(new Y.ControlForm.FieldGroupItem(fgi));
+            });
+
+            fg = new Y.ControlForm.FieldGroup(fg);
+            fg.set('fieldGroupItems', fgiBuffer);
+
+            fgBuffer.push(fg);
+        });
+
+        return fgBuffer;
     }
 
 }, {
     ATTRS: {
         caption: { value: '' },
-        fieldGroups: { value: [] }
+        fieldGroups: {
+            value: [],
+            setter: '_setFieldGroups'
+        }
     }
 });
 
@@ -172,6 +194,38 @@ FieldContent = Y.Base.create('fieldContent', Y.Model, [], {
 });
 
 Y.namespace('ControlForm').FieldContent = FieldContent;
+/*jshint boss:true, expr:true, onevar:false */
+
+var FieldGroup;
+
+FieldGroup = Y.Base.create('fieldGroup', Y.Model, [], {
+
+}, {
+    ATTRS: {
+        name: { value: null },
+        category: { value: null },
+        fieldGroupItems: { value: [] }
+    }
+});
+
+Y.namespace('ControlForm').FieldGroup = FieldGroup;
+/*jshint boss:true, expr:true, onevar:false */
+
+var FieldGroupItem;
+
+FieldGroupItem = Y.Base.create('fieldGroupItem', Y.ModelList, [], {
+
+}, {
+    ATTRS: {
+        field: { value: null },
+        fieldGroup: { value: null },
+        position: { value: 0 },
+        rules: { value: {} },
+        sortOrder: { value: 0 },
+    }
+});
+
+Y.namespace('ControlForm').FieldGroupItem = FieldGroupItem;
 var WidgetFactory;
 
 WidgetFactory = Y.Base.create('widgetFactory', Y.Base, [], {
@@ -584,7 +638,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
 
         Y.Array.each(fieldGroupOrder, function(groupId) {
             Y.Array.each(fieldGroups, function(group) {
-                if (groupId === group.id) {
+                if (groupId === group.get('id')) {
                     self._addFieldGroup(formElement, group);
                 }
             });
@@ -600,11 +654,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
         var list = Y.Node.create('<ul />');
         var fieldGroupItems;
 
-        if (typeof(fieldGroup.fieldGroupItems) === 'undefined') {
-            fieldGroupItems = fieldGroup.get('fieldGroupItems');
-        } else {
-            fieldGroupItems = fieldGroup.fieldGroupItems;
-        }
+        fieldGroupItems = fieldGroup.get('fieldGroupItems');
 
         if (this.get('editMode')) {
             var fieldGroupDD = new Y.DD.Drag({
@@ -627,7 +677,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
             });
         }
 
-        list.set('id', fieldGroup.id);
+        list.set('id', fieldGroup.get('id'));
         list.setAttribute('name', fieldGroup.name);
         list.on(['mouseover', 'mouseout'], function() {
             list.toggleClass('fieldGroupHighlight');
@@ -639,21 +689,21 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
             var draft = self.get('draft');
 
             // Filter out fields that have a 'is_text_value' and 'is_header' property.
-            if ((!control.rules.is_text_value) && (!control.rules.is_header)) {
-                controlElement = self._createWidget(control.rules);
+            if ((!control.get('rules').is_text_value) && (!control.get('rules').is_header)) {
+                controlElement = self._createWidget(control.get('rules'));
                 controlElement.data = control;
 
-                label.set('innerHTML', control.field.name);
+                label.set('innerHTML', control.get('field').name);
 
                 if (draft !== null) {
-                    var content = draft.getValue(control.field.id);
+                    var content = draft.getValue(control.get('field').id);
 
                     controlElement.set('value', content);
                 }
 
                 controlContainer.append(label);
                 controlContainer.append(controlElement);
-                controlContainer.setData(control);
+                controlContainer.setData('model', control);
                 controlContainer.on('click', function() {
                     self.fire('controlSelected', { 'controlContainer': controlContainer });
                 });
@@ -720,7 +770,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
         if (fieldGroup.fieldGroupItems) {
             for (var item in fieldGroup.fieldGroupItems) {
                 if (fieldGroup.fieldGroupItems[item].id === control.id) {
-                    fieldGroup.fieldGroupItems[item].rules = control.rules;
+                    fieldGroup.fieldGroupItems[item].set('rules', control.rules);
                 }
             }
         }
