@@ -266,7 +266,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         }).render();
 
         if (node.one('input, textarea, select') !== null) {
-            node.one('input, textarea').focus().select();
+            // FIXME: Doesn't work for select
+            //node.one('input, textarea, select').focus().select();
 
             // Prevent default on keydown and keyup due to browser differences.
             node.one('input, textarea, select').on('keydown', function (e) {
