@@ -126,7 +126,6 @@ var App = Y.Base.create('app', Y.App, [], {
         }
 
         if (this.getViewInfo(this.get('activeView')).modal) {
-            // console.log(view);
             this._backgroundView = view;
             view.removeTarget(this);
 
@@ -201,8 +200,11 @@ var App = Y.Base.create('app', Y.App, [], {
                 this._activePanel.render();
             }
         } else {
-            // Insert view into the DOM.
-            viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
+            // Don't append nodes that aren't removed, for example a background view behind a modal panel.
+            if (view.get('container').inDoc() === false) {
+                // Insert view into the DOM.
+                viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
+            }
         }
     }
 }, {
