@@ -171,6 +171,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
                 disabled  = button.disabled,
                 className = button.className,
                 icon      = button.icon,
+                hidden    = button.hidden,
 
                 // Format the action event by prepending 'button', for example the event
                 // fired for 'cancel' will be 'buttonCancel'
@@ -195,6 +196,10 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
             if (className) {
                 node.addClass(className);
+            }
+
+            if (hidden) {
+                node.hide();
             }
 
             if (position === 'left') {
