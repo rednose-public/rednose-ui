@@ -148,6 +148,14 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @param {String} name The name of the button.
     **/
     getButton: function (name) {
+        if (!this._buttonMap) {
+            return false;
+        }
+
+        if (!this._buttonMap[name]) {
+            return false;
+        }
+
         return this._buttonMap[name];
     },
 
