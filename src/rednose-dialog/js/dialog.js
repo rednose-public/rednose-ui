@@ -108,6 +108,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         this._setPanelStyle(panel);
         this.set('panel', panel);
+
+        panel.set('zIndex', this._getHighzIndex());
     },
 
     /**
@@ -172,6 +174,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         this._setPanelStyle(panel);
         this.set('panel', panel);
+
+        panel.set('zIndex', this._getHighzIndex());
     },
 
     /**
@@ -293,6 +297,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         this._setPanelStyle(panel);
         this.set('panel', panel);
+
+        panel.set('zIndex', this._getHighzIndex());
     },
 
     // -- Protected Methods ----------------------------------------------------
