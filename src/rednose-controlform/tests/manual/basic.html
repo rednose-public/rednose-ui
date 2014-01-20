@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Y.Rednose.ControlForm plugin test</title>
+	<style>
+	</style>
+</head>
+<body class="yui3-skin-sam">
+	<div class="test"></div>
+	<script src="http://yui.yahooapis.com/3.6.0/build/yui/yui.js"></script>
+	<script>
+		YUI({
+			filter: 'raw',
+			modules: {
+				'rednose-controlform': {
+					fullpath: '../../../../build/rednose-controlform/rednose-controlform.js'
+				}
+			}
+		}).use('rednose-controlform', function (Y) {
+			var form = {
+				"name" : "SK",
+				"controls" : [
+					{
+						"handle" : "member",
+				        "properties" : [  ],
+				        "protected" : false,
+				        "readonly" : false,
+				        "required" : false,
+				        "type" : "text",
+				        "visible" : true,
+				        "weight" : 0
+				    }, {
+				    	"handle" : "fraction",
+				        "properties" : [  ],
+				        "protected" : false,
+				        "readonly" : false,
+				        "required" : false,
+				        "type" : "text",
+				        "visible" : true,
+				        "weight" : 0
+	     	        }, {
+	     	        	"handle" : "datetime",
+				        "properties" : [  ],
+				        "protected" : false,
+				        "readonly" : false,
+				        "required" : false,
+				        "type" : "datetime",
+				        "visible" : true,
+				        "weight" : 0
+		    	    }
+			    ]
+			}
+
+			Y.Array.each(form.controls, function (control) {
+				Y.one('.test').append(Y.Lang.sub(
+					'<div>' +
+					    '<label for="{id}">{label}</label>' +
+						'<input id="{id}" type="text" value="{value}"/>' +
+					'</div>',
+			    {
+			    	id   : control.handle,
+			    	label: control.handle,
+			    	value: control.type,
+			    }));
+			})
+		});
+	</script>
+</body>
+</html>
