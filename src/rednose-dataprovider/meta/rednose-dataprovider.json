@@ -1,12 +1,14 @@
 {
     "rednose-dataprovider" : {
         "requires": [
-            "base",
-            "json",
-            "widget",
             "autocomplete",
             "autocomplete-filters",
-            "autocomplete-highlighters"
+            "autocomplete-highlighters",
+            "base",
+            "json",
+            "model",
+            "model-list",
+            "widget"
         ],
 
         "skinnable": true

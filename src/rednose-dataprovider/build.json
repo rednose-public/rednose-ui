@@ -3,6 +3,7 @@
     "builds": {
         "rednose-dataprovider": {
             "jsfiles": [
+                "models/data-source.js",
                 "dataprovider.js"
             ]
         }

@@ -1,5 +1,40 @@
 YUI.add('rednose-dataprovider', function (Y, NAME) {
 
+/*jshint boss:true, expr:true, onevar:false */
+
+var DataSource, PdoSource, XmlSource, DataSourceList;
+
+DataSource = Y.Base.create('dataSource', Y.Model, [], {}, {
+    ATTRS: {
+        name    : { value: null },
+    }
+});
+
+PdoSource = Y.Base.create('pdoSource', DataSource, [], {}, {
+    ATTRS: {
+        dsn     : { value: null },
+        username: { value: null },
+        password: { value: null },
+        table   : { value: null }
+    }
+});
+
+XmlSource = Y.Base.create('xmlSource', DataSource, [], {}, {
+    ATTRS: {
+        xsd     : { value: null },
+        xslt    : { value: null },
+        xml     : { value: null },
+        root    : { value: null }
+    }
+});
+
+DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
+    model: DataSource
+});
+
+Y.namespace('Rednose.DataSource').PdoSource      = PdoSource;
+Y.namespace('Rednose.DataSource').XmlSource      = XmlSource;
+Y.namespace('Rednose.DataSource').DataSourceList = DataSourceList;
 var DataProvider;
 
 DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
@@ -121,12 +156,14 @@ Y.namespace('Rednose').DataProvider = DataProvider;
 
 }, '1.1.0-DEV', {
     "requires": [
-        "base",
-        "json",
-        "widget",
         "autocomplete",
         "autocomplete-filters",
-        "autocomplete-highlighters"
+        "autocomplete-highlighters",
+        "base",
+        "json",
+        "model",
+        "model-list",
+        "widget"
     ],
     "skinnable": true
 });
