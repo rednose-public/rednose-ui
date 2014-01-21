@@ -4,7 +4,8 @@ var DataSource, PdoSource, XmlSource, DataSourceList;
 
 DataSource = Y.Base.create('dataSource', Y.Model, [], {}, {
     ATTRS: {
-        name    : { value: null },
+        name      : { value: null },
+        attributes: { value: [] },
     }
 });
 
