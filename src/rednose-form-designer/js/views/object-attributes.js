@@ -1,5 +1,17 @@
 /*jshint boss:true, expr:true, onevar:false */
 
+var TXT_CONTROL_TYPES = {
+    'text'        : 'Text',
+    'textarea'    : 'Text Area',
+    'html'        : 'Rich Text',
+    'dropdown'    : 'Drop-down List',
+    'radio'       : 'Radio Button',
+    'checkbox'    : 'Checkbox',
+    'date'        : 'Date',
+    'autocomplete': 'Autocomplete',
+    'file'        : 'File'
+};
+
 var TXT_OBJECT_ATTRIBUTES = 'Object Attributes';
 
 var Micro = Y.Template.Micro,
@@ -36,7 +48,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 '<div class="control-group">' +
                     '<label class="control-label" for="type">Type</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="type" type="text" readonly value="<%= data.type %>"/>' +
+                        '<select class="input-block-level" id="type"></select>' +
                     '</div>' +
                 '</div>' +
                 '<hr/>' +
@@ -96,6 +108,26 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
         container.empty();
 
         container.append(this.formTemplate(model.getAttrs()));
+
+        this._renderTypeOptions();
+    },
+
+    _renderTypeOptions: function () {
+        var model       = this.get('model'),
+            selectNode  = this.get('container').one('#type');
+
+        Y.Object.each(TXT_CONTROL_TYPES, function (label, type) {
+            var optionNode = Y.Node.create(Y.Lang.sub('<option value="{value}">{label}</option>', {
+                value: type,
+                label: label
+            }));
+
+            if (model.get('type') === type) {
+                optionNode.setAttribute('selected', 'selected');
+            }
+
+            selectNode.append(optionNode);
+        });
     },
 
     _handleFormChange: function (e) {
