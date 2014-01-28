@@ -18,9 +18,9 @@ AppTemplateThreeColumn.prototype = {
 
         container.setHTML(template);
 
-        this.set('gridLeft', container.one('.rednose-unit-left'));
+        this.set('gridLeft'  , container.one('.rednose-unit-left'));
         this.set('gridCenter', container.one('.rednose-unit-center'));
-        this.set('gridRight', container.one('.rednose-unit-right'));
+        this.set('gridRight' , container.one('.rednose-unit-right'));
 
         this.set('viewContainer', this.get('gridCenter'));
     }
