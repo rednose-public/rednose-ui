@@ -480,24 +480,14 @@ var TXT_NAVBAR_CAPTION = 'Form Designer';
 
 var FormDesigner;
 
-FormDesigner = Y.Base.create('formDesigner', Y.App, [], {
+FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeColumn ], {
     views: {
         form: {
             type: Y.Rednose.FormDesigner.FormView
         }
     },
 
-    template: '<div class="rednose-grid">' +
-                  '<div class="rednose-unit-left"></div>' +
-                  '<div class="rednose-unit-center"></div>' +
-                  '<div class="rednose-unit-right"></div>' +
-              '</div>',
-
     _navbar: null,
-
-    _gridLeft: null,
-    _gridCenter: null,
-    _gridRight: null,
 
     _objectLibraryView: null,
     _hierarchyView: null,
@@ -505,15 +495,6 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [], {
     _dataSourcesView: null,
 
     initializer: function () {
-        var container = this.get('container'),
-            template  = this.template;
-
-        container.setHTML(template);
-
-        this._gridLeft   = container.one('.rednose-unit-left');
-        this._gridCenter = container.one('.rednose-unit-center');
-        this._gridRight  = container.one('.rednose-unit-right');
-
         this._objectLibraryView    = new Y.Rednose.FormDesigner.ObjectLibraryView();
         this._hierarchyView        = new Y.Rednose.FormDesigner.HierarchyView();
         this._objectAttributesView = new Y.Rednose.FormDesigner.ObjectAttributesView();
@@ -525,8 +506,6 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [], {
         this._dataSourcesView.addTarget(this);
 
         this.after('*:select', this._handleControlSelect, this);
-
-        this.set('viewContainer', this._gridCenter);
 
         this._initNavbar();
 
@@ -553,10 +532,6 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [], {
 
         this._objectAttributesView.destroy();
         this._objectAttributesView = null;
-
-        this._gridLeft   = null;
-        this._gridCenter = null;
-        this._gridRight  = null;
     },
 
     render: function () {
@@ -564,10 +539,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [], {
 
         this._navbar.render();
 
-        this._gridLeft.append(this._objectLibraryView.render().get('container'));
-        this._gridLeft.append(this._hierarchyView.render().get('container'));
-        this._gridLeft.append(this._dataSourcesView.render().get('container'));
-        this._gridRight.append(this._objectAttributesView.render().get('container'));
+        this.get('gridLeft').append(this._objectLibraryView.render().get('container'));
+        this.get('gridLeft').append(this._hierarchyView.render().get('container'));
+        this.get('gridLeft').append(this._dataSourcesView.render().get('container'));
+        this.get('gridRight').append(this._objectAttributesView.render().get('container'));
 
         return this;
     },
