@@ -12,6 +12,8 @@
     z-index: 1065;
 }
 
+/* DEPRECATED Use grid columns instead */
+
 /* Master-detail app template */
 .rednose-app-detail-container {
     padding-left: 0px;

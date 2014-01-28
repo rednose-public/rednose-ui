@@ -1,6 +1,7 @@
 {
     "rednose-app" : {
         "use": [
+            "app-transitions",
             "rednose-app-base",
             "rednose-model-undo",
             "rednose-model-spinner",
@@ -38,6 +39,7 @@
             "rednose-view-nav" : {
                 "requires": [
                     "event-custom",
+                    "rednose-panel",
                     "rednose-widget-nav-container",
                     "view"
                 ]

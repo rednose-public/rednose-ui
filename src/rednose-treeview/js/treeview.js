@@ -126,6 +126,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
 
     /**
      * Return a CSS class string, modified by the given tree node and it's associated model.
+     * If no icon is found on the model, the `icon` property of the node will be checked.
      *
      * @method icon
      * @param  {Y.Tree.Node} node Tee Node.
@@ -136,6 +137,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
             icons     = this.get('model').get('icons'),
             className = CSS_TREEVIEW_ICON;
 
+        // Check the model icon definitions.
         if (icons && model instanceof Y.Model  && icons[model.name]) {
             var icon = icons[model.name];
 
@@ -150,6 +152,11 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
             if (Y.Lang.isArray(icon)) {
                 return className + ' ' + (node.isOpen() ? icon[0] : icon[1]);
             }
+        }
+
+        // Check the icon property on the node.
+        if (Y.Lang.isString(node.icon)) {
+            return className + ' ' + node.icon;
         }
 
         return className;

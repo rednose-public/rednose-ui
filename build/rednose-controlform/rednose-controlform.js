@@ -350,6 +350,7 @@ RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
 
     render: function() {
         var inputProperties = this.get('properties').input_properties,
+            lang            = 'en_US',
             toolbar         = [];
 
         if (inputProperties) {
@@ -412,19 +413,28 @@ RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
             }
         }
 
-        CKEDITOR.appendTo(this.get('srcNode').getDOMNode(), {
-            toolbar: toolbar,
-            removePlugins: 'elementspath',
-            resize_enabled: false,
+        var config = {
+            toolbar                  : toolbar,
+            removePlugins            : 'elementspath',
+            resize_enabled           : false,
             disableNativeSpellChecker: false,
-            scayt_sLang: YUI_config.lang,
-            language: YUI_config.lang,
-            height: '100'
-        });
+            scayt_sLang              : lang,
+            language                 : lang,
+            height                   : '100'
+        };
+
+        if (this.get('replace')) {
+            CKEDITOR.replace(this.get('srcNode').getDOMNode(), config);
+        } else {
+            CKEDITOR.appendTo(this.get('srcNode').getDOMNode(), config);
+        }
+
+        return this;
     }
 }, {
     ATTRS: {
-        properties: { value: {} }
+        properties: { value: {} },
+        replace:    { value: false }
     }
 });
 

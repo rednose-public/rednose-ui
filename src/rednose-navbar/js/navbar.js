@@ -19,19 +19,36 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     // -- Public Properties ----------------------------------------------------
 
     /**
-    @property template
+    Default template.
+
+    @property templateContainer
     @type String
     @public
     **/
-    template: '<div class="navbar navbar-inverse navbar-fixed-top">' +
-                  '<div class="navbar-inner">' +
-                      '<div class="container">' +
-                          '<a class="brand brand-navbar" data-url="{url}" href="#">{title}</a>' +
-                          '<ul class="nav"></ul>' +
-                          '<ul class="nav pull-right"></ui>' +
-                      '</div>' +
-                  '</div>' +
-              '</div>',
+    templateContainer: '<div class="navbar navbar-inverse navbar-fixed-top">' +
+                           '<div class="navbar-inner">' +
+                               '<div class="container">' +
+                                   '<a class="brand brand-navbar" data-url="{url}" href="#">{title}</a>' +
+                                   '<ul class="nav"></ul>' +
+                                   '<ul class="nav pull-right"></ui>' +
+                               '</div>' +
+                           '</div>' +
+                       '</div>',
+
+    /**
+    Column template, used when attribute `columnLayout` is true.
+
+    @property templateColumn
+    @type String
+    @public
+    **/
+    templateColumn: '<div class="navbar navbar-inverse navbar-fixed-top rednose-navbar-column">' +
+                        '<div class="navbar-inner">' +
+                            '<a class="brand brand-navbar rednose-brand" data-url="{url}" href="#">{title}</a>' +
+                            '<ul class="nav rednose-menu-primary"></ul>' +
+                            '<ul class="nav pull-right rednose-menu-secondary"></ui>' +
+                        '</div>' +
+                    '</div>',
 
     /**
     @property dropdownTemplate
@@ -69,8 +86,9 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @protected
     **/
     destructor: function () {
-        this.template         = null;
-        this.dropdownTemplate = null;
+        this.templateContainer = null;
+        this.templateColumn    = null;
+        this.dropdownTemplate  = null;
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -82,7 +100,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     renderUI: function() {
         var menuLeft  = this.get('menu'),
             menuRight = this.get('menuSecondary'),
-            template  = this.template,
+            template  = this.get('columnLayout') ? this.templateColumn : this.templateContainer,
             title     = this.get('title'),
             url       = this.get('url');
 
@@ -365,6 +383,14 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         **/
         menuSecondary: {
             value: []
+        },
+
+        /**
+        @attribute columnLayout
+        @type Bool
+        **/
+        columnLayout: {
+            value: false,
         }
     }
 });

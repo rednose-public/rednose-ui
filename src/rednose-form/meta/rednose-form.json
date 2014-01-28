@@ -1,0 +1,15 @@
+{
+    "rednose-form": {
+        "requires": [
+            "autocomplete",
+            "autocomplete-filters",
+            "autocomplete-highlighters",
+            "template-micro",
+            "rednose-form-css"
+        ]
+    },
+
+    "rednose-form-css": {
+        "type": "css"
+    }
+}

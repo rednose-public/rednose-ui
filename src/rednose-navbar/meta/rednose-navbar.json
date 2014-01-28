@@ -2,12 +2,16 @@
     "rednose-navbar" : {
         "requires": [
             "base",
-            "node-pluginhost",
             "gallery-bootstrap-dropdown",
-            "widget",
-            "node-event-simulate"
-        ],
-        "skinnable": true
+            "node-event-simulate",
+            "node-pluginhost",
+            "rednose-navbar-css",
+            "widget"
+        ]
+    },
+
+    "rednose-navbar-css" : {
+        "type": "css"
     },
 
     "rednose-navbar-recent" : {

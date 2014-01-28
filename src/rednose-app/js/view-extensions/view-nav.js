@@ -61,6 +61,14 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     buttons: null,
 
     /**
+    Shows or hides the footer section.
+
+    @property footer
+    @type Boolean
+    **/
+    footer: true,
+
+    /**
     Optional close button in the header.
 
     @property close
@@ -77,6 +85,15 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     padding: true,
 
     // -- Protected Properties -------------------------------------------------
+
+    /**
+    Stores the current state.
+
+    @property _rendered
+    @type Boolean
+    @protected
+    **/
+    _rendered: false,
 
     /**
     References the footer DOM node.
@@ -118,7 +135,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
             Y.Do.after(this._afterRender, this, 'render', this)
         );
 
-        this._buildFooter();
+        this.footer && this._buildFooter();
     },
 
     /**
@@ -253,7 +270,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         // TODO: Update instead of rerendering.
         this._buildFooter();
 
-        footer.one('div').replace(this._footer);
+        this._rendered && footer.one('div').replace(this._footer);
     },
 
     /**
@@ -352,6 +369,8 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         if (this.padding === false) {
             this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).setStyle('padding', 0);
         }
+
+        this._rendered = true;
     }
 }, {
     ATTRS: {

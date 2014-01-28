@@ -1,0 +1,13 @@
+{
+    "rednose-form-designer" : {
+        "requires": [
+            "rednose-app",
+            "rednose-controlform",
+            "rednose-dataprovider",
+            "rednose-form",
+            "rednose-navbar",
+            "rednose-nodescroll",
+            "rednose-treeview"
+        ]
+    }
+}

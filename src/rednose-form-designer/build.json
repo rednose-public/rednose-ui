@@ -1,0 +1,15 @@
+{
+    "name": "rednose-form-designer",
+    "builds": {
+        "rednose-form-designer": {
+            "jsfiles": [
+                "views/object-library.js",
+                "views/hierarchy.js",
+                "views/data-sources.js",
+                "views/object-attributes.js",
+                "views/form.js",
+                "form-designer.js"
+            ]
+        }
+    }
+}

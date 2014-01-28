@@ -36,12 +36,22 @@ DataSource = Y.Base.create('dataSource', Y.Model, [], {
     }
 });
 
+DatagenSource = Y.Base.create('datagenSource', DataSource, [], {}, {
+    ATTRS: {
+        url     : { value: null },
+        username: { value: null },
+        password: { value: null },
+        section : { value: null }
+    }
+});
+
 PdoSource = Y.Base.create('pdoSource', DataSource, [], {}, {
     ATTRS: {
         dsn     : { value: null },
         username: { value: null },
         password: { value: null },
-        table   : { value: null }
+        table   : { value: null },
+        query   : { value: null }
     }
 });
 
@@ -80,6 +90,7 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
         return new TreeModel({
             items: items,
             icons: {
+                'datagenSource'      : 'icon-list-alt',
                 'pdoSource'          : 'icon-align-justify',
                 'xmlSource'          : 'icon-file',
                 'dataSourceAttribute': 'icon-minus'
@@ -92,6 +103,9 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
 
         Y.Array.each(Y.JSON.parse(response), function (item) {
             switch (item.type) {
+                case 'datagenSource':
+                    items.push(new DatagenSource(item));
+                    break;
                 case 'pdoSource':
                     items.push(new PdoSource(item));
                     break;
@@ -123,6 +137,7 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
 
 Y.namespace('Rednose.DataSource').DataSource          = DataSource;
 Y.namespace('Rednose.DataSource').DataSourceAttribute = DataSourceAttribute;
+Y.namespace('Rednose.DataSource').DatagenSource       = DatagenSource;
 Y.namespace('Rednose.DataSource').PdoSource           = PdoSource;
 Y.namespace('Rednose.DataSource').XmlSource           = XmlSource;
 Y.namespace('Rednose.DataSource').DataSourceList      = DataSourceList;

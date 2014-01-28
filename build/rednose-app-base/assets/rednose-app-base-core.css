@@ -1,3 +1,53 @@
+/* Disable window bouncing when scrolling */
+html {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+/* Grid columns */
+.rednose-grid {
+    margin-top: 41px;
+}
+
+.rednose-unit-left {
+    position: absolute;
+    top: 41px;
+    width: 280px;
+    bottom: 0;
+    left: 0;
+}
+
+.rednose-unit-center {
+    position: absolute;
+    top: 41px;
+    right: 280px;
+    bottom: 0;
+    left: 280px;
+}
+
+.rednose-unit-right {
+    position: absolute;
+    top: 41px;
+    right: 0;
+    width: 280px;
+    bottom: 0;
+}
+
+.rednose-unit-left, .rednose-unit-center .rednose-unit-right {
+    overflow: auto;
+}
+
+.rednose-unit-center {
+    background-color: #f5f5f5;
+}
+
 /* CSS FIX */
 .dropdown-menu .disabled > a:hover {
     background-image: none;

@@ -18,7 +18,6 @@ function Templates() {
     Templates.superclass.constructor.apply(this);
 }
 
-
 /**
 Basic detail app view.
 
