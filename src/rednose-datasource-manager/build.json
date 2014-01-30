@@ -1,0 +1,10 @@
+{
+    "name": "rednose-datasource-manager",
+    "builds": {
+        "rednose-datasource-manager": {
+            "jsfiles": [
+                "datasource-manager.js"
+            ]
+        }
+    }
+}
