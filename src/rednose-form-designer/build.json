@@ -10,6 +10,12 @@
                 "views/form.js",
                 "form-designer.js"
             ]
+        },
+
+        "rednose-form-designer-css": {
+            "cssfiles": [
+                "form-designer.css"
+            ]
         }
     }
 }

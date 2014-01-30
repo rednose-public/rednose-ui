@@ -4,6 +4,7 @@
             "autocomplete",
             "autocomplete-filters",
             "autocomplete-highlighters",
+            "uploader",
             "template-micro",
             "rednose-form-css"
         ]

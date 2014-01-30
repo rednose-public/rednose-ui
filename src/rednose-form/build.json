@@ -13,7 +13,8 @@
         "rednose-form-css": {
             "cssfiles": [
                 "autocomplete-control.css",
-                "form.css"
+                "form.css",
+                "upload-control.css"
             ]
         }
     }

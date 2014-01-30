@@ -32,6 +32,7 @@ DataSource = Y.Base.create('dataSource', Y.Model, [], {
 }, {
     ATTRS: {
         name      : { value: null },
+        type      : { value: 'pdo' },
         attributes: { value: [], setter: '_setAttributes' },
     }
 });
@@ -51,7 +52,8 @@ PdoSource = Y.Base.create('pdoSource', DataSource, [], {}, {
         username: { value: null },
         password: { value: null },
         table   : { value: null },
-        query   : { value: null }
+        query   : { value: null },
+        source  : { value: 'table' }
     }
 });
 

@@ -3,6 +3,10 @@
     "builds": {
         "rednose-datasource-manager": {
             "jsfiles": [
+                "views/choice-view.js",
+                "views/datagen-view.js",
+                "views/pdo-view.js",
+                "views/xml-view.js",
                 "datasource-manager.js"
             ]
         }

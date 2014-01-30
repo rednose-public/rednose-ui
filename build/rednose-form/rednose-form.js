@@ -632,6 +632,7 @@ Y.namespace('Rednose.Form').ControlViewFactory = ControlViewFactory;
         "autocomplete",
         "autocomplete-filters",
         "autocomplete-highlighters",
+        "uploader",
         "template-micro",
         "rednose-form-css"
     ]

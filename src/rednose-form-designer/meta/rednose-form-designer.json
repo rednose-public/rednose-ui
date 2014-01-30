@@ -4,10 +4,16 @@
             "rednose-app",
             "rednose-controlform",
             "rednose-dataprovider",
+            "rednose-datasource-manager",
             "rednose-form",
+            "rednose-form-designer-css",
             "rednose-navbar",
             "rednose-nodescroll",
             "rednose-treeview"
         ]
+    },
+
+    "rednose-form-designer-css" : {
+        "type": "css"
     }
 }

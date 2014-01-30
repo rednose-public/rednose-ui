@@ -622,6 +622,8 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     }
 });
 
+
+
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose.FormDesigner').FormDesigner = FormDesigner;
 
@@ -631,7 +633,9 @@ Y.namespace('Rednose.FormDesigner').FormDesigner = FormDesigner;
         "rednose-app",
         "rednose-controlform",
         "rednose-dataprovider",
+        "rednose-datasource-manager",
         "rednose-form",
+        "rednose-form-designer-css",
         "rednose-navbar",
         "rednose-nodescroll",
         "rednose-treeview"
