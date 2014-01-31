@@ -29,6 +29,26 @@
     width: 38px;
     height: 48px;
 }
+.rednose-date-day {
+    width: 92px;
+}
+
+.rednose-date-month {
+    width: 176px;
+}
+
+.rednose-date-year {
+    width: 120px;
+    margin-right: 20px;
+}
+
+.rednose-date-hour {
+    width: 92px;
+}
+
+.rednose-date-minute {
+    width: 92px;
+}
 /* Left label alignment */
 .form-horizontal .control-group .control-label{
     text-align: left;

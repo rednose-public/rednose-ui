@@ -28,6 +28,8 @@ TextAreaControlView = Y.Base.create('textAreaControlView', Y.Rednose.Form.BaseCo
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose.Form').TextAreaControlView = TextAreaControlView;
 
+var RichTextControlView;
+
 RichTextControlView = Y.Base.create('richTextControlView', Y.Rednose.Form.BaseControlView, [], {
 
     template: '<div class="control-group">' +

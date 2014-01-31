@@ -6,6 +6,7 @@
                 "models/form.js",
                 "views/control.js",
                 "views/autocomplete-control.js",
+                "views/date-time-control.js",
                 "views/rich-text-control.js",
                 "control-view-factory.js"
             ]
@@ -13,6 +14,7 @@
         "rednose-form-css": {
             "cssfiles": [
                 "autocomplete-control.css",
+                "date-time-control.css",
                 "form.css",
                 "upload-control.css"
             ]

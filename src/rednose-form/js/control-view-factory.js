@@ -4,6 +4,7 @@ var TYPE_TEXT          = 'text',
     TYPE_TEXTAREA      = 'textarea',
     TYPE_HTML          = 'html',
     TYPE_DATE          = 'date',
+    TYPE_DATETIME      = 'datetime',
     TYPE_DROPDOWN      = 'dropdown',
     TYPE_RADIO         = 'radio',
     TYPE_CHECKBOX      = 'checkbox',
@@ -25,6 +26,9 @@ ControlViewFactory.create = function (model) {
         case TYPE_HTML:
             return new Y.Rednose.Form.RichTextControlView({ model: model });
         case TYPE_DATE:
+            return null;
+        case TYPE_DATETIME:
+            return new Y.Rednose.Form.DateTimeControlView({ model: model });
         case TYPE_RADIO:
             return null;
         case TYPE_CHECKBOX:
