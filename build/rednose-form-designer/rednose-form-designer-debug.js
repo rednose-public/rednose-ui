@@ -160,13 +160,22 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 Y.namespace('Rednose.FormDesigner').HierarchyView = HierarchyView;
 /*jshint boss:true, expr:true, onevar:false */
 
-var TXT_DATA_SOURCES = 'Data Sources';
+var TXT_DATA_SOURCES       = 'Data Sources',
+    TXT_DATA_SOURCE_EDIT   = 'Edit Data Source',
+    TXT_DATA_SOURCE_DELETE = 'Delete Data Source';
 
-var DataSourcesView;
+var DataSource = Y.Rednose.DataSource.DataSource,
+    DataSourcesView;
 
 DataSourcesView = Y.Base.create('dataSourcesView', Y.View, [], {
 
     template: '<div class="rednose-data-sources></div>',
+
+    events: {
+        '.yui3-treeview-row': {
+            contextmenu: '_handleContextMenu'
+        }
+    },
 
     _treeView: null,
 
@@ -208,6 +217,33 @@ DataSourcesView = Y.Base.create('dataSourcesView', Y.View, [], {
         });
 
         return this;
+    },
+
+    _handleContextMenu: function (e) {
+        var node = e.currentTarget;
+
+        // Prevent default contextmenu behaviour.
+        e.preventDefault();
+
+        if (node.contextMenu) {
+            return false;
+        }
+
+        var model = this._treeView.getNodeById(node.getData('node-id')).data;
+
+        if (model instanceof DataSource) {
+            node.plug(Y.Rednose.ContextMenu, {
+                content     : [
+                    { title: TXT_DATA_SOURCE_EDIT, id: 'dataSourceEdit' },
+                    { title: '-' },
+                    { title: TXT_DATA_SOURCE_DELETE, id: 'dataSourceDelete' }
+                ],
+                data        : model,
+                bubbleTarget: this
+            });
+
+            node.contextMenu._handleContextMenu(e);
+        }
     }
 }, {
     ATTRS: {
@@ -498,10 +534,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
     _navbar: null,
 
-    _objectLibraryView: null,
-    _hierarchyView: null,
+    _objectLibraryView   : null,
+    _hierarchyView       : null,
     _objectAttributesView: null,
-    _dataSourcesView: null,
+    _dataSourcesView     : null,
 
     initializer: function () {
         this._objectLibraryView    = new Y.Rednose.FormDesigner.ObjectLibraryView();
@@ -519,6 +555,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._initNavbar();
 
         this.on('navbar:newDataSource', this._handleNewDataSource, this);
+
+        this.on('contextMenu:dataSourceEdit', this._handleDataSourceEdit, this);
+        this.on('contextMenu:dataSourceDelete', this._handleDataSourceDelete, this);
 
         if (this.hasRoute(this.getPath())) {
             this.dispatch();
@@ -622,7 +661,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     // XXX
-    _handleNewDataSource:function () {
+    _handleNewDataSource: function () {
         var dataSourceManagerView = new DataSourceManager(),
             self                  = this;
 
@@ -651,6 +690,45 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
                 self._dataSourcesView.render();
             });
         });
+    },
+
+    // XXX
+    _handleDataSourceEdit: function (e) {
+        var model = e.data;
+
+        var dataSourceManagerView = new DataSourceManager({ model: model }),
+            self                  = this;
+
+        dataSourceManagerView.render();
+        dataSourceManagerView.showChoicePage();
+
+        var dataSourceManagerPanel = new Y.Rednose.Panel({
+            srcNode: dataSourceManagerView.get('container'),
+            width  : 640
+        });
+
+        dataSourceManagerPanel.render();
+
+        dataSourceManagerView.on('close', function () {
+            dataSourceManagerView.destroy();
+            dataSourceManagerPanel.destroy();
+        });
+
+        dataSourceManagerView.on('create', function (e) {
+            var model = e.model;
+
+            model.save(function () {
+                dataSourceManagerView.destroy();
+                dataSourceManagerPanel.destroy();
+
+                self._dataSourcesView.render();
+            });
+        });
+    },
+
+    // XXX
+    _handleDataSourceDelete: function (e) {
+        console.log(e);
     }
 }, {
     ATTRS: {

@@ -62,25 +62,25 @@ var PdoSource = Y.Rednose.DataSource.PdoSource,
     Micro     = Y.Template.Micro;
 
 var PdoSourcePageView = Y.Base.create('pdoSourcePageView', Y.View, [], {
-    OPTION_TEMPLATE: '<option id="{id}">{value}</option>',
+    OPTION_TEMPLATE: Micro.compile('<option id="<%= data.id %>"<% if (data.selected) {%> selected<% }%>><%= data.value %></option>'),
 
     template: Micro.compile(
         '<form class="form-horizontal">' +
             '<fieldset>' +
                 '<div class="control-group">' +
                     '<label class="control-label radio inline">' +
-                        '<input type="radio" name="source" value="table" data-radio-group="source" <% if (data.source == "table") { %>checked<% } %>/> Table' +
+                        '<input type="radio" name="source" value="table" data-radio-group="source"<% if (data.source == "table") { %> checked<% } %>/> Table' +
                     '</label>' +
                     '<div class="controls">' +
-                        '<select class="input-block-level" id="table" data-radio="source"></select>' +
+                        '<select class="input-block-level" id="table" data-radio="source"<% if (data.source != "table") { %> disabled<% } %>></select>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
                     '<label class="control-label radio inline">' +
-                        '<input type="radio" name="source" value="query" data-radio-group="source" <% if (data.source == "query") { %>checked<% } %>/> Query' +
+                        '<input type="radio" name="source" value="query" data-radio-group="source"<% if (data.source == "query") { %> checked<% } %>/> Query' +
                     '</label>' +
                         '<div class="controls">' +
-                            '<textarea rows="3" class="input-block-level" id="query" data-radio="source" disabled></textarea >' +
+                            '<textarea rows="3" spellcheck="false" class="input-block-level" id="query" data-radio="source"<% if (data.source != "query") { %> disabled<% } %>><%= data.query %></textarea >' +
                         '</div>' +
                 '</div>' +
             '</fieldset>' +
@@ -118,14 +118,16 @@ var PdoSourcePageView = Y.Base.create('pdoSourcePageView', Y.View, [], {
     },
 
     updateSelectNode: function (node, data) {
-        var self = this;
+        var self  = this,
+            model = this.get('model');
 
         node.empty();
 
         Y.Array.each(data, function (value) {
-            node.append(Y.Lang.sub(self.OPTION_TEMPLATE, {
-                id   : value,
-                value: value
+            node.append(self.OPTION_TEMPLATE({
+                id      : value,
+                value   : value,
+                selected: model.get('table') === value
             }));
         });
     },

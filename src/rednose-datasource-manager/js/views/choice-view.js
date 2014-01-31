@@ -8,30 +8,30 @@ var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
         '<form class="form-horizontal">'+
             '<fieldset>' +
                 '<div class="control-group">' +
-                    '<label class="control-label" for="name">Name</label>' +
+                    '<label class="control-label" for="identifier">Identifier</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="name" type="text" value="<%= data.name %>"/>' +
+                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.get("identifier") %>"<% if (!data.isNew()) {%> disabled<% } %>/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
-                    '<label class="control-label" for="identifier">Identifier</label>' +
+                    '<label class="control-label" for="name">Name</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.identifier %>"/>' +
+                        '<input class="input-block-level" id="name" type="text" value="<%= data.get("name") %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
                     '<label class="control-label">Type</label>' +
                     '<div class="controls">' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="pdo" <% if (data.type == "pdo") { %>checked<% } %>>' +
+                            '<input type="radio" name="type" value="pdo" <% if (data.get("type") == "pdo") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'Database' +
                         '</label>' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="dataGen" <% if (data.type == "dataGen") { %>checked<% } %>>' +
+                            '<input type="radio" name="type" value="dataGen" <% if (data.get("type") == "dataGen") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'DataGen' +
                         '</label>' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="xml" <% if (data.type == "xml") { %>checked<% } %>>' +
+                            '<input type="radio" name="type" value="xml" <% if (data.get("type") == "xml") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'XML Data' +
                         '</label>' +
                     '</div>' +
@@ -51,7 +51,7 @@ var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
             template  = this.template,
             model     = this.get('model');
 
-        container.setHTML(template(model.getAttrs()));
+        container.setHTML(template(model));
 
         return this;
     },

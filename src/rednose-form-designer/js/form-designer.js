@@ -14,10 +14,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
     _navbar: null,
 
-    _objectLibraryView: null,
-    _hierarchyView: null,
+    _objectLibraryView   : null,
+    _hierarchyView       : null,
     _objectAttributesView: null,
-    _dataSourcesView: null,
+    _dataSourcesView     : null,
 
     initializer: function () {
         this._objectLibraryView    = new Y.Rednose.FormDesigner.ObjectLibraryView();
@@ -35,6 +35,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._initNavbar();
 
         this.on('navbar:newDataSource', this._handleNewDataSource, this);
+
+        this.on('contextMenu:dataSourceEdit', this._handleDataSourceEdit, this);
+        this.on('contextMenu:dataSourceDelete', this._handleDataSourceDelete, this);
 
         if (this.hasRoute(this.getPath())) {
             this.dispatch();
@@ -138,7 +141,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     // XXX
-    _handleNewDataSource:function () {
+    _handleNewDataSource: function () {
         var dataSourceManagerView = new DataSourceManager(),
             self                  = this;
 
@@ -167,6 +170,45 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
                 self._dataSourcesView.render();
             });
         });
+    },
+
+    // XXX
+    _handleDataSourceEdit: function (e) {
+        var model = e.data;
+
+        var dataSourceManagerView = new DataSourceManager({ model: model }),
+            self                  = this;
+
+        dataSourceManagerView.render();
+        dataSourceManagerView.showChoicePage();
+
+        var dataSourceManagerPanel = new Y.Rednose.Panel({
+            srcNode: dataSourceManagerView.get('container'),
+            width  : 640
+        });
+
+        dataSourceManagerPanel.render();
+
+        dataSourceManagerView.on('close', function () {
+            dataSourceManagerView.destroy();
+            dataSourceManagerPanel.destroy();
+        });
+
+        dataSourceManagerView.on('create', function (e) {
+            var model = e.model;
+
+            model.save(function () {
+                dataSourceManagerView.destroy();
+                dataSourceManagerPanel.destroy();
+
+                self._dataSourcesView.render();
+            });
+        });
+    },
+
+    // XXX
+    _handleDataSourceDelete: function (e) {
+        console.log(e);
     }
 }, {
     ATTRS: {

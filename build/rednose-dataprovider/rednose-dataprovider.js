@@ -10,8 +10,16 @@ var TreeModel = Y.Rednose.ModelTree,
 
 DataSourceAttribute = Y.Base.create('dataSourceAttribute', Y.Model, [], {}, {
     ATTRS: {
-        source  : { value: null },
-        name    : { value: null },
+        source: { value: null },
+        name  : { value: null }
+    }
+});
+
+DataSourceAttributeCollection = Y.Base.create('dataSourceAttributeCollection', Y.Model, [], {}, {
+    ATTRS: {
+        source    : { value: null },
+        name      : { value: null },
+        attributes: { value: [] }
     }
 });
 
@@ -38,23 +46,44 @@ DataSource = Y.Base.create('dataSource', Y.Model, [], {
 
     _setAttributes: function (attributes) {
         var self   = this,
-            models = [];
+            parsed = [];
 
-        Y.Array.each(attributes, function (attribute) {
-            models.push(new DataSourceAttribute({
-                source: self,
-                name  : attribute
-            }));
-        });
+        if (Y.Lang.isArray(attributes)) {
+            Y.Array.each(attributes, function (attribute) {
+                parsed.push(new DataSourceAttribute({
+                    source: self,
+                    name  : attribute
+                }));
+            });
+        } else {
+            Y.Object.each(attributes, function (subAttributes, key) {
+                var collection = [];
 
-        return models;
+                Y.Array.each(subAttributes, function (attribute) {
+                    collection.push(new DataSourceAttribute({
+                        source: self,
+                        name  : attribute
+                    }));
+                });
+
+                parsed.push(new DataSourceAttributeCollection({
+                    source    : self,
+                    name      : key,
+                    attributes: collection
+                }));
+
+                parsed.push(collection);
+            });
+        }
+
+        return parsed;
     }
 }, {
     ATTRS: {
         name      : { value: null },
         identifier: { value: null },
         type      : { value: 'pdo' },
-        attributes: { value: [], setter: '_setAttributes' },
+        attributes: { value: [], setter: '_setAttributes', lazyAdd: false }
     }
 });
 
@@ -101,10 +130,29 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
             };
 
             Y.Array.each(model.get('attributes'), function (attribute) {
-                node.children.push({
-                    label: attribute.get('name'),
-                    data : attribute
-                });
+                if (attribute instanceof DataSourceAttribute) {
+                    node.children.push({
+                        label: attribute.get('name'),
+                        data : attribute
+                    });
+                } else if (attribute instanceof DataSourceAttributeCollection) {
+                    var collection = {
+                        label   : attribute.get('name'),
+                        data    : attribute,
+                        children: []
+                    };
+
+                    Y.Array.each(attribute.get('attributes'), function (subAttribute) {
+                        if (subAttribute instanceof DataSourceAttribute) {
+                            collection.children.push({
+                                label: subAttribute.get('name'),
+                                data : subAttribute
+                            });
+                        }
+                    });
+
+                    node.children.push(collection);
+                }
             });
 
             items.push(node);
@@ -113,10 +161,11 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
         return new TreeModel({
             items: items,
             icons: {
-                'datagenSource'      : 'icon-list-alt',
-                'pdoSource'          : 'icon-align-justify',
-                'xmlSource'          : 'icon-file',
-                'dataSourceAttribute': 'icon-minus'
+                'datagenSource'                : 'icon-list-alt',
+                'pdoSource'                    : 'icon-align-justify',
+                'xmlSource'                    : 'icon-file',
+                'dataSourceAttribute'          : 'icon-minus',
+                'dataSourceAttributeCollection': 'icon-th-list'
             }
         });
     },

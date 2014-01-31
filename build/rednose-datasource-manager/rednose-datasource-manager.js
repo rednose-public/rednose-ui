@@ -10,30 +10,30 @@ var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
         '<form class="form-horizontal">'+
             '<fieldset>' +
                 '<div class="control-group">' +
-                    '<label class="control-label" for="name">Name</label>' +
+                    '<label class="control-label" for="identifier">Identifier</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="name" type="text" value="<%= data.name %>"/>' +
+                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.get("identifier") %>"<% if (!data.isNew()) {%> disabled<% } %>/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
-                    '<label class="control-label" for="identifier">Identifier</label>' +
+                    '<label class="control-label" for="name">Name</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.identifier %>"/>' +
+                        '<input class="input-block-level" id="name" type="text" value="<%= data.get("name") %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
                     '<label class="control-label">Type</label>' +
                     '<div class="controls">' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="pdo" <% if (data.type == "pdo") { %>checked<% } %>>' +
+                            '<input type="radio" name="type" value="pdo" <% if (data.get("type") == "pdo") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'Database' +
                         '</label>' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="dataGen" <% if (data.type == "dataGen") { %>checked<% } %>>' +
+                            '<input type="radio" name="type" value="dataGen" <% if (data.get("type") == "dataGen") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'DataGen' +
                         '</label>' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="xml" <% if (data.type == "xml") { %>checked<% } %>>' +
+                            '<input type="radio" name="type" value="xml" <% if (data.get("type") == "xml") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'XML Data' +
                         '</label>' +
                     '</div>' +
@@ -53,7 +53,7 @@ var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
             template  = this.template,
             model     = this.get('model');
 
-        container.setHTML(template(model.getAttrs()));
+        container.setHTML(template(model));
 
         return this;
     },
@@ -237,25 +237,25 @@ var PdoSource = Y.Rednose.DataSource.PdoSource,
     Micro     = Y.Template.Micro;
 
 var PdoSourcePageView = Y.Base.create('pdoSourcePageView', Y.View, [], {
-    OPTION_TEMPLATE: '<option id="{id}">{value}</option>',
+    OPTION_TEMPLATE: Micro.compile('<option id="<%= data.id %>"<% if (data.selected) {%> selected<% }%>><%= data.value %></option>'),
 
     template: Micro.compile(
         '<form class="form-horizontal">' +
             '<fieldset>' +
                 '<div class="control-group">' +
                     '<label class="control-label radio inline">' +
-                        '<input type="radio" name="source" value="table" data-radio-group="source" <% if (data.source == "table") { %>checked<% } %>/> Table' +
+                        '<input type="radio" name="source" value="table" data-radio-group="source"<% if (data.source == "table") { %> checked<% } %>/> Table' +
                     '</label>' +
                     '<div class="controls">' +
-                        '<select class="input-block-level" id="table" data-radio="source"></select>' +
+                        '<select class="input-block-level" id="table" data-radio="source"<% if (data.source != "table") { %> disabled<% } %>></select>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
                     '<label class="control-label radio inline">' +
-                        '<input type="radio" name="source" value="query" data-radio-group="source" <% if (data.source == "query") { %>checked<% } %>/> Query' +
+                        '<input type="radio" name="source" value="query" data-radio-group="source"<% if (data.source == "query") { %> checked<% } %>/> Query' +
                     '</label>' +
                         '<div class="controls">' +
-                            '<textarea rows="3" class="input-block-level" id="query" data-radio="source" disabled></textarea >' +
+                            '<textarea rows="3" spellcheck="false" class="input-block-level" id="query" data-radio="source"<% if (data.source != "query") { %> disabled<% } %>><%= data.query %></textarea >' +
                         '</div>' +
                 '</div>' +
             '</fieldset>' +
@@ -293,14 +293,16 @@ var PdoSourcePageView = Y.Base.create('pdoSourcePageView', Y.View, [], {
     },
 
     updateSelectNode: function (node, data) {
-        var self = this;
+        var self  = this,
+            model = this.get('model');
 
         node.empty();
 
         Y.Array.each(data, function (value) {
-            node.append(Y.Lang.sub(self.OPTION_TEMPLATE, {
-                id   : value,
-                value: value
+            node.append(self.OPTION_TEMPLATE({
+                id      : value,
+                value   : value,
+                selected: model.get('table') === value
             }));
         });
     },
