@@ -2,26 +2,41 @@
 
 var TXT_TYPE_TO_SEARCH = 'Type here to search...';
 
-var Micro = Y.Template.Micro,
+var Micro        = Y.Template.Micro,
+    AutoComplete = Y.Rednose.ControlFormAutoComplete,
     AutocompleteControlView;
 
 AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.Form.BaseControlView, [], {
 
     OPTION_TEMPLATE: '<option value="{value}">{label}</option>',
 
+    // OPTION_TEMPLATE: '<option value="{value}">{label}</option>',
+
+    // Basic
     AUTOCOMPLETE_TEMPLATE: Micro.compile(
-        '<div class="entry">' +
-            '<% if (data.image) { %>' +
-                '<div class="hd">' +
-                    '<img src="<%= data.image %>" class="photo">' +
-                '</div>' +
-            '<% } %>' +
-            '<div class="bd">' +
-                '<div class="autocomplete-title"><%= data.title %></div>' +
-                '<div class="autocomplete-subtitle"><%= data.subtitle %></div>' +
-            '</div>' +
+        '<div class="rednose-autocomplete-block">' +
+            '<div class="rednose-autocomplete-line"><%== data.title %></div>' +
         '</div>'
     ),
+
+    // Subtitle
+    // AUTOCOMPLETE_TEMPLATE: Micro.compile(
+    //     '<div><%= data.title %></div>'
+    // ),
+
+    // AUTOCOMPLETE_TEMPLATE: Micro.compile(
+    //     '<div class="entry">' +
+    //         '<% if (data.image) { %>' +
+    //             '<div class="hd">' +
+    //                 '<img src="<%= data.image %>" class="photo">' +
+    //             '</div>' +
+    //         '<% } %>' +
+    //         '<div class="bd">' +
+    //             '<div class="autocomplete-title"><%= data.title %></div>' +
+    //             '<div class="autocomplete-subtitle"><%= data.subtitle %></div>' +
+    //         '</div>' +
+    //     '</div>'
+    // ),
 
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
@@ -76,10 +91,8 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
             config;
 
         config = {
-            inputNode        : this._inputNode,
-            // FIXME: hightlighting doens't work.
-            resultHighlighter: 'phraseMatch',
-            maxResults       : 6
+            inputNode : this._inputNode,
+            maxResults: 6
         };
 
         if (datasource) {
@@ -87,7 +100,11 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
                 resultListLocator: 'results',
                 resultFormatter  : function (query, raw) {
                     return Y.Array.map(raw, function (result) {
-                        return template(self._mapDataProviderData(result.raw, datasource.map));
+                        var mapped = self._mapDataProviderData(result.raw, datasource.map);
+
+                        mapped.title = Y.Highlight.all(mapped.title, query);
+
+                        return template(mapped);
                     });
                 },
                 resultTextLocator: function (result) {
@@ -107,9 +124,7 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
             });
         }
 
-        this._inputNode.setAttribute('autocomplete', 'off');
-
-        this._autoComplete = new Y.AutoCompleteList(config).render();
+        this._autoComplete = new AutoComplete(config).render();
 
         // FIXME: We need to fire the events manually because the change on this._inputNode doens't fire when selecting an item
         // by pressing enter. On clicks however, both the select event and the this._inputNode change event get fired and we have

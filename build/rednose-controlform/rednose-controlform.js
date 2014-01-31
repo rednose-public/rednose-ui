@@ -226,6 +226,19 @@ FieldGroupItem = Y.Base.create('fieldGroupItem', Y.ModelList, [], {
 });
 
 Y.namespace('ControlForm').FieldGroupItem = FieldGroupItem;
+/*jshint boss:true, expr:true, onevar:false */
+
+var AutoComplete;
+
+AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
+    initializer: function () {
+        this.get('inputNode').setAttribute('autocomplete', 'off');
+    }
+}, {
+    CSS_PREFIX: 'rednose-autocomplete'
+});
+
+Y.namespace('Rednose').ControlFormAutoComplete = AutoComplete;
 var WidgetFactory;
 
 WidgetFactory = Y.Base.create('widgetFactory', Y.Base, [], {
@@ -988,15 +1001,18 @@ Y.namespace('Rednose').ControlForm = ControlForm;
 
 }, '1.1.0-DEV', {
     "requires": [
-        "io",
-        "calendar",
-        "dd-proxy",
-        "dd-constrain",
-        "node",
-        "model-list",
-        "model",
+        "autocomplete",
+        "autocomplete-filters",
+        "autocomplete-highlighters",
         "base",
-        "rednose-dialog",
-        "rednose-contextmenu"
+        "calendar",
+        "dd-constrain",
+        "dd-proxy",
+        "io",
+        "model",
+        "model-list",
+        "node",
+        "rednose-contextmenu",
+        "rednose-dialog"
     ]
 });

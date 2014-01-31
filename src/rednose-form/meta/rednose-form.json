@@ -1,12 +1,11 @@
 {
     "rednose-form": {
         "requires": [
-            "autocomplete",
-            "autocomplete-filters",
-            "autocomplete-highlighters",
-            "uploader",
+            "rednose-controlform",
+            "rednose-dataprovider",
+            "rednose-form-css",
             "template-micro",
-            "rednose-form-css"
+            "uploader"
         ]
     },
 

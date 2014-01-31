@@ -1,16 +1,19 @@
 {
     "rednose-controlform" : {
         "requires": [
-            "io",
-            "calendar",
-            "dd-proxy",
-            "dd-constrain",
-            "node",
-            "model-list",
-            "model",
+            "autocomplete",
+            "autocomplete-filters",
+            "autocomplete-highlighters",
             "base",
-            "rednose-dialog",
-            "rednose-contextmenu"
+            "calendar",
+            "dd-constrain",
+            "dd-proxy",
+            "io",
+            "model",
+            "model-list",
+            "node",
+            "rednose-contextmenu",
+            "rednose-dialog"
         ]
     }
 }

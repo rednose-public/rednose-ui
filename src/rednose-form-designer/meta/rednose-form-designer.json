@@ -2,8 +2,6 @@
     "rednose-form-designer" : {
         "requires": [
             "rednose-app",
-            "rednose-controlform",
-            "rednose-dataprovider",
             "rednose-datasource-manager",
             "rednose-form",
             "rednose-form-designer-css",
