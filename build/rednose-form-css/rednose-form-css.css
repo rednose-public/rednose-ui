@@ -17,7 +17,7 @@
 }
 
 .rednose-autocomplete-list {
-    min-width: 160px;
+    width: 316px;
     padding: 5px 0;
     margin: 2px 0 0;
     list-style: none;
@@ -26,10 +26,6 @@
     border: 1px solid #ccc;
     border: 1px solid rgba(0, 0, 0, 0.2);
 
-/*    -webkit-border-radius: 6px;
-       -moz-border-radius: 6px;
-            border-radius: 6px;
-*/
     -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
             box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
@@ -39,19 +35,8 @@
             background-clip: padding-box;
 }
 
-.rednose-autocomplete-item .rednose-autocomplete-line {
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    font-weight: normal;
-    line-height: 20px;
-    color: #333333;
-    white-space: nowrap;
-    cursor: pointer;
-}
-
-.rednose-autocomplete-item-hover .rednose-autocomplete-line,
-.rednose-autocomplete-item-active .rednose-autocomplete-line {
+.rednose-autocomplete-item-hover,
+.rednose-autocomplete-item-active {
     color: #ffffff;
     text-decoration: none;
     background-color: #0081c2;
@@ -66,38 +51,61 @@
 }
 
 /* Template */
-/*.yui3-aclist-content {
-    width: 100%;
-    overflow: auto;
+.rednose-autocomplete-list .rednose-autocomplete-item-hover span,
+.rednose-autocomplete-list .rednose-autocomplete-item-active span {
+    color: #ffffff;
 }
 
-.entry {
-    clear: both;
-    margin: 0;
-    padding: 2px 0;
+.rednose-autocomplete-item a {
+    line-height: 16px;
+    padding: 7px 15px 6px 10px;
+    cursor: pointer;
 }
 
-.entry .hd {
-    float: left;
-}
-
-.entry .bd {
-    float: left;
-    margin-left: 12px;
-}
-
-.entry .autocomplete-subtitle {
-    color: #cfcfcf;
-    font-size: 11px;
+.rednose-autocomplete-item a {
     display: block;
+    padding: 7px 15px 7px 10px;
+    text-decoration: none;
+    overflow: hidden;
+    color: #3272a2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
 }
 
-.entry .photo {
-    margin: 0;
-    width: 38px;
-    height: 48px;
+.rednose-autocomplete-item .title {
+    font-size: 14px;
+    line-height: 15px;
+    color: #333;
 }
-*/.rednose-date-day {
+
+.rednose-autocomplete-item .subtitle {
+    color: #999;
+    font-size: 12px;
+    font-weight: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.rednose-autocomplete-item .title-block {
+    height: 17px;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+.rednose-autocomplete-item .avatar {
+    float: left;
+    margin-right: 10px;
+}
+
+.rednose-autocomplete-item .size32 {
+    height: 32px;
+
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+}
+.rednose-date-day {
     width: 92px;
 }
 

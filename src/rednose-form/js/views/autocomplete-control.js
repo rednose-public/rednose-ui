@@ -10,33 +10,15 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
 
     OPTION_TEMPLATE: '<option value="{value}">{label}</option>',
 
-    // OPTION_TEMPLATE: '<option value="{value}">{label}</option>',
-
-    // Basic
     AUTOCOMPLETE_TEMPLATE: Micro.compile(
-        '<div class="rednose-autocomplete-block">' +
-            '<div class="rednose-autocomplete-line"><%== data.title %></div>' +
-        '</div>'
+        '<a role="menuitem">' +
+            '<img class="avatar size32" src="<%= data.image %>">' +
+            '<span class="title-block">' +
+                '<span class="title"><%== data.title %></span>' +
+            '</span>' +
+            '<span class="subtitle"><%= data.subtitle %></span>' +
+        '</a>'
     ),
-
-    // Subtitle
-    // AUTOCOMPLETE_TEMPLATE: Micro.compile(
-    //     '<div><%= data.title %></div>'
-    // ),
-
-    // AUTOCOMPLETE_TEMPLATE: Micro.compile(
-    //     '<div class="entry">' +
-    //         '<% if (data.image) { %>' +
-    //             '<div class="hd">' +
-    //                 '<img src="<%= data.image %>" class="photo">' +
-    //             '</div>' +
-    //         '<% } %>' +
-    //         '<div class="bd">' +
-    //             '<div class="autocomplete-title"><%= data.title %></div>' +
-    //             '<div class="autocomplete-subtitle"><%= data.subtitle %></div>' +
-    //         '</div>' +
-    //     '</div>'
-    // ),
 
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
@@ -51,8 +33,8 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
 
     events: {
         'input': {
-            change: '_handleInputChange'
             // TODO: Add keyup event for faster updating, but filter out the autocomplete keypresses.
+            change: '_handleInputChange'
         }
     },
 
