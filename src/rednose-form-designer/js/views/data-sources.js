@@ -10,6 +10,13 @@ DataSourcesView = Y.Base.create('dataSourcesView', Y.View, [], {
 
     _treeView: null,
 
+    initializer: function () {
+        var container = this.get('container'),
+            template  = this.template;
+
+        container.setHTML(template);
+    },
+
     destructor: function () {
         this._treeView.destroy();
 
@@ -19,14 +26,15 @@ DataSourcesView = Y.Base.create('dataSourcesView', Y.View, [], {
     render: function () {
         var self      = this,
             container = this.get('container'),
-            list      = this.get('modelList'),
-            template  = this.template;
+            list      = this.get('modelList');
 
-        container.setHTML(template);
+        this._treeView && this._treeView.destroy();
+
+        container.append('<div class="rednose-treeview"></div>');
 
         list.load(function () {
             self._treeView = new Y.Rednose.TreeView({
-                container : container,
+                container : container.one('.rednose-treeview'),
                 model     : list.getTree(),
                 selectable: false,
                 header    : TXT_DATA_SOURCES

@@ -14,9 +14,9 @@ var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
-                    '<label class="control-label" for="id">Identifier</label>' +
+                    '<label class="control-label" for="identifier">Identifier</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="id" type="text" value="<%= data.id %>"/>' +
+                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.identifier %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +

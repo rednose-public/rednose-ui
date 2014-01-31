@@ -252,7 +252,7 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
     _handleButtonChoose: function () {
         var choiceView = this._app.get('activeView'),
             model      = choiceView.get('model'),
-            baseAttrs  = ['id', 'name', 'type'];
+            baseAttrs  = ['id', 'identifier', 'name', 'type'];
 
         switch (model.get('type')) {
             case 'dataGen':
@@ -279,14 +279,16 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
         }
     },
 
+    // XXX
     _handleButtonClose: function () {
-        console.log('close!');
+        this.fire('close');
     },
 
+    // XXX
     _handleButtonCreate: function () {
         var model = this._app.get('activeView').get('model');
 
-        console.log(model.getAttrs());
+        this.fire('create', { model: model });
     }
 }, {
     ATTRS: {

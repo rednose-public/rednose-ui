@@ -8,7 +8,7 @@ var TreeModel = Y.Rednose.ModelTree,
     XmlSource,
     DataSourceList;
 
-DataSourceAttribute = Y.Base.create('dataSourceAttribute', Y.Model, [], {
+DataSourceAttribute = Y.Base.create('dataSourceAttribute', Y.Model, [], {}, {
     ATTRS: {
         source  : { value: null },
         name    : { value: null },
@@ -16,6 +16,26 @@ DataSourceAttribute = Y.Base.create('dataSourceAttribute', Y.Model, [], {
 });
 
 DataSource = Y.Base.create('dataSource', Y.Model, [], {
+    sync: function (action, options, callback) {
+        switch (action) {
+            case 'create':
+                Y.io(Routing.generate('rednose_dataprovider_post_data_sources'), {
+                    method: 'POST',
+                    data: Y.JSON.stringify(this.toJSON()),
+                    on : {
+                        success : function (tx, r) {
+                            callback(null, r.responseText);
+                        },
+                        failure: function (tx, r) {
+                            callback(Y.JSON.parse(r.responseText));
+                        }
+                    }
+                });
+
+            break;
+        }
+    },
+
     _setAttributes: function (attributes) {
         var self   = this,
             models = [];
@@ -32,6 +52,7 @@ DataSource = Y.Base.create('dataSource', Y.Model, [], {
 }, {
     ATTRS: {
         name      : { value: null },
+        identifier: { value: null },
         type      : { value: 'pdo' },
         attributes: { value: [], setter: '_setAttributes' },
     }
@@ -105,13 +126,13 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
 
         Y.Array.each(Y.JSON.parse(response), function (item) {
             switch (item.type) {
-                case 'datagenSource':
+                case 'dataGen':
                     items.push(new DatagenSource(item));
                     break;
-                case 'pdoSource':
+                case 'pdo':
                     items.push(new PdoSource(item));
                     break;
-                case 'xmlSource':
+                case 'xml':
                     items.push(new XmlSource(item));
                     break;
             }
