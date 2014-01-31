@@ -100,8 +100,4 @@
 
 .rednose-autocomplete-item .size32 {
     height: 32px;
-
-    -webkit-border-radius: 4px;
-       -moz-border-radius: 4px;
-            border-radius: 4px;
 }

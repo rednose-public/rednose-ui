@@ -35,9 +35,6 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         if (this.hasRoute(this.getPath())) {
             this.dispatch();
-        } else {
-            console.log('Show `empty` view');
-            // self.showView('empty');
         }
     },
 
@@ -77,12 +74,15 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             columnLayout : true,
             menu         : [
                 { id: 'file', title: 'File', items: [
-                    { id: 'save', title: 'Save' }
+                    { id: 'newDataSource', title: 'New Data Source...' }
                 ]}
             ],
             menuSecondary: [
-                { title: 'Settings', items: [
-                    { title: 'Log out' }
+                { title: YUI.Env.user.name, icon: 'user', items: [
+                    {
+                        url  : Routing.generate('_security_logout'),
+                        title: 'Sign out'
+                    }
                 ]}
             ]
         });

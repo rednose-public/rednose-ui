@@ -58,7 +58,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @public
     **/
     dropdownTemplate: '<li class="dropdown{submenu}">' +
-                          '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{title} <{caret}></a>' +
+                          '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{icon}{title} <{caret}></a>' +
                           '<ul class="dropdown-menu">' +
                           '</ul>' +
                       '</li>',
@@ -221,6 +221,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
                 var dropdown = Y.Node.create(
                     Y.Lang.sub(self.dropdownTemplate, {
                         title  : m.title,
+                        icon   : m.icon ? '<i class="icon icon-white icon-' + m.icon + '"></i> ' : '',
                         submenu: (typeof(parentMenu) !== 'undefined' ? '-submenu' : ''),
                         caret  : (typeof(parentMenu) === 'undefined' ? "b class=caret" : 'b')
                     })
