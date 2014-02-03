@@ -449,7 +449,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
                 // XXX: Binding.
                 controlView.after('*:change', function () {
                     // TODO: Propagate to this.change event.
-                    // self._evalutateExpressions();
+                    self._evalutateExpressions();
                 });
 
                 // XXX: Expresions.
@@ -465,7 +465,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
             }
         });
 
-        // this._evalutateExpressions();
+        this._evalutateExpressions();
 
         return this;
     },
