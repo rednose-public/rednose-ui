@@ -4,9 +4,9 @@ function AppTemplateTwoColumn() {}
 
 AppTemplateTwoColumn.prototype = {
 
-    template: '<div class="rednose-grid">' +
+    template: '<div class="rednose-grid rednose-three-column-grid">' +
                   '<div class="rednose-unit-left"></div>' +
-                  '<div class="rednose-unit-right"></div>' +
+                  '<div class="rednose-unit-main"></div>' +
               '</div>',
 
     initializer: function () {
@@ -16,15 +16,15 @@ AppTemplateTwoColumn.prototype = {
         container.setHTML(template);
 
         this.set('gridLeft' , container.one('.rednose-unit-left'));
-        this.set('gridRight', container.one('.rednose-unit-right'));
+        this.set('gridMain', container.one('.rednose-unit-main'));
 
-        this.set('viewContainer', this.get('gridRight'));
+        this.set('viewContainer', this.get('gridMain'));
     }
 };
 
 AppTemplateThreeColumn.ATTRS = {
-    gridLeft  : { value: null },
-    gridCenter: { value: null }
+    gridLeft: { value: null },
+    gridMain: { value: null }
 };
 
 // -- Namespace ----------------------------------------------------------------
