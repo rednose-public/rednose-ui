@@ -4,7 +4,7 @@ function AppTemplateTwoColumn() {}
 
 AppTemplateTwoColumn.prototype = {
 
-    template: '<div class="rednose-grid rednose-three-column-grid">' +
+    template: '<div class="rednose-grid rednose-two-column-grid">' +
                   '<div class="rednose-unit-left"></div>' +
                   '<div class="rednose-unit-main"></div>' +
               '</div>',

@@ -35,6 +35,10 @@ body {
     left: 280px;
 }
 
+.rednose-two-column-grid .rednose-unit-main {
+    right: 0;
+}
+
 .rednose-three-column-grid .rednose-unit-main {
     right: 280px;
 }
