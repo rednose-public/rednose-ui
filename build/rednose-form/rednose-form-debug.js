@@ -20,10 +20,10 @@ ControlModel = Y.Base.create('controlModel', Y.Model, [], {
         caption:    { value: null },
         type:       { value: null },
         properties: { value: {} },
-        required:   { value: null },
-        visible:    { value: null },
-        protected:  { value: null },
-        readonly:   { value: null },
+        required:   { value: false },
+        visible:    { value: true },
+        protected:  { value: false },
+        readonly:   { value: false },
         // XXX
         value   :   { value: null, getter: '_getValue' }
     }

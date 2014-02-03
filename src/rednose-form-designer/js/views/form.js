@@ -16,6 +16,13 @@ FormView = Y.Base.create('formView', Y.View, [], {
 
     _expressionMap: [],
 
+    initializer: function () {
+        var formModel   = this.get('model'),
+            controlList = formModel.get('controls');
+
+        controlList.after('add', this._handleAddControl, this);
+    },
+
     destructor: function () {
         this._expressionMap = null;
     },
@@ -34,38 +41,44 @@ FormView = Y.Base.create('formView', Y.View, [], {
         }));
 
         model.get('controls').each(function (control) {
-            var controlView  = Y.Rednose.Form.ControlViewFactory.create(control);
-
-            if (controlView) {
-                self._controlViewMap[control.get('id')] = controlView;
-                // XXX
-                control.view = controlView;
-
-                // Add bubble target.
-                controlView.addTarget(self);
-
-                // XXX: Binding.
-                controlView.after('*:change', function () {
-                    // TODO: Propagate to this.change event.
-                    self._evalutateExpressions();
-                });
-
-                // XXX: Expresions.
-                var expressions = control.get('properties').expressions;
-
-                if (expressions) {
-                    Y.Object.each(expressions, function (expression) {
-                        self._expressionMap.push(expression);
-                    });
-                }
-
-                container.one('fieldset').append(controlView.render().get('container'));
-            }
+            self._renderControl(control);
         });
 
         this._evalutateExpressions();
 
         return this;
+    },
+
+    _renderControl: function (control) {
+        var container   = this.get('container'),
+            controlView = Y.Rednose.Form.ControlViewFactory.create(control),
+            self        = this;
+
+        if (controlView) {
+            self._controlViewMap[control.get('id')] = controlView;
+            // XXX
+            control.view = controlView;
+
+            // Add bubble target.
+            controlView.addTarget(self);
+
+            // XXX: Binding.
+            controlView.after('*:change', function () {
+                // TODO: Propagate to this.change event.
+                self._evalutateExpressions();
+            });
+
+            // XXX: Expresions.
+            var expressions = control.get('properties').expressions;
+
+            if (expressions) {
+                Y.Object.each(expressions, function (expression) {
+                    self._expressionMap.push(expression);
+                });
+            }
+
+            container.one('fieldset').append(controlView.render().get('container'));
+        }
     },
 
     _evalutateExpressions: function () {
@@ -107,6 +120,10 @@ FormView = Y.Base.create('formView', Y.View, [], {
             // TODO: Only render changed views
             self._controlViewMap[id].render();
         });
+    },
+
+    _handleAddControl: function (e) {
+        this._renderControl(e.model);
     }
 }, {
     ATTRS: {

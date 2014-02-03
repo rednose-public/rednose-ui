@@ -2,6 +2,8 @@
 
 var TXT_OBJECT_LIBRARY = 'Object Library';
 
+var EVT_SELECT = 'select';
+
 var ObjectLibraryView;
 
 ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [], {
@@ -25,14 +27,25 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [], {
 
     render: function () {
         var container = this.get('container'),
-            model     = this.get('model');
+            model     = this.get('model'),
+            self      = this;
 
         this._treeView = new Y.Rednose.TreeView({
             container : container,
             model     : model,
-            selectable: false,
+            selectable: true,
             header    : TXT_OBJECT_LIBRARY
         }).render();
+
+        this._treeView.after('select', function (e) {
+            e.node.unselect();
+
+            var model = e.node.data;
+
+            if (model && model instanceof Y.Model) {
+                self.fire(EVT_SELECT, { model: model });
+            }
+        });
 
         return this;
     }

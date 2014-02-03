@@ -30,7 +30,8 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._objectAttributesView.addTarget(this);
         this._dataSourcesView.addTarget(this);
 
-        this.after('*:select', this._handleControlSelect, this);
+        this.after('hierarchyView:select', this._handleControlSelect, this);
+        this.after('objectLibraryView:select', this._handleObjectAdd, this);
 
         this._initNavbar();
 
@@ -62,7 +63,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     render: function () {
+        // We always need to call the parent's class `render` function first for the `App` object to function.
         FormDesigner.superclass.render.apply(this, arguments);
+
+        this.get('container').addClass('rednose-form-designer');
 
         this._navbar.render();
 
@@ -127,7 +131,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._hierarchyView.render();
     },
 
-    _handleControlSelect:function (e) {
+    _handleControlSelect: function (e) {
         var model  = e.model;
 
         if (model && model instanceof Y.Rednose.Form.ControlModel) {
@@ -138,6 +142,14 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             this._objectAttributesView.set('model', model);
             this._objectAttributesView.render();
         }
+    },
+
+    _handleObjectAdd: function () {
+        var formModel   = this.get('model'),
+            controlList = formModel.get('controls');
+
+        // For now, always add a text control.
+        controlList.add(new Y.Rednose.Form.ControlModel({ type: 'text' }));
     },
 
     // XXX
