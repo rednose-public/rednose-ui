@@ -4,6 +4,8 @@ YUI.add('rednose-form-designer', function (Y, NAME) {
 
 var TXT_OBJECT_LIBRARY = 'Object Library';
 
+var EVT_SELECT = 'select';
+
 var ObjectLibraryView;
 
 ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [], {
@@ -27,14 +29,25 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [], {
 
     render: function () {
         var container = this.get('container'),
-            model     = this.get('model');
+            model     = this.get('model'),
+            self      = this;
 
         this._treeView = new Y.Rednose.TreeView({
             container : container,
             model     : model,
-            selectable: false,
+            selectable: true,
             header    : TXT_OBJECT_LIBRARY
         }).render();
+
+        this._treeView.after('select', function (e) {
+            e.node.unselect();
+
+            var model = e.node.data;
+
+            if (model && model instanceof Y.Model) {
+                self.fire(EVT_SELECT, { model: model });
+            }
+        });
 
         return this;
     }
@@ -139,6 +152,7 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
         this._treeView.after('select', function (e) {
             e.node.unselect();
+
             var model = e.node.data;
 
             if (model && model instanceof Y.Rednose.Form.ControlModel) {
@@ -147,11 +161,19 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
         });
 
         return this;
+    },
+
+    // XXX
+    _setModel: function (model) {
+        var controlList = model.get('controls');
+
+        controlList.after('add', this.render, this);
     }
 }, {
     ATTRS: {
         model: {
-            value: new Y.Rednose.Form.FormModel()
+            value : new Y.Rednose.Form.FormModel(),
+            setter: '_setModel'
         }
     }
 });
@@ -418,6 +440,13 @@ FormView = Y.Base.create('formView', Y.View, [], {
 
     _expressionMap: [],
 
+    initializer: function () {
+        var formModel   = this.get('model'),
+            controlList = formModel.get('controls');
+
+        controlList.after('add', this._handleAddControl, this);
+    },
+
     destructor: function () {
         this._expressionMap = null;
     },
@@ -436,38 +465,44 @@ FormView = Y.Base.create('formView', Y.View, [], {
         }));
 
         model.get('controls').each(function (control) {
-            var controlView  = Y.Rednose.Form.ControlViewFactory.create(control);
-
-            if (controlView) {
-                self._controlViewMap[control.get('id')] = controlView;
-                // XXX
-                control.view = controlView;
-
-                // Add bubble target.
-                controlView.addTarget(self);
-
-                // XXX: Binding.
-                controlView.after('*:change', function () {
-                    // TODO: Propagate to this.change event.
-                    // self._evalutateExpressions();
-                });
-
-                // XXX: Expresions.
-                var expressions = control.get('properties').expressions;
-
-                if (expressions) {
-                    Y.Object.each(expressions, function (expression) {
-                        self._expressionMap.push(expression);
-                    });
-                }
-
-                container.one('fieldset').append(controlView.render().get('container'));
-            }
+            self._renderControl(control);
         });
 
-        // this._evalutateExpressions();
+        this._evalutateExpressions();
 
         return this;
+    },
+
+    _renderControl: function (control) {
+        var container   = this.get('container'),
+            controlView = Y.Rednose.Form.ControlViewFactory.create(control),
+            self        = this;
+
+        if (controlView) {
+            self._controlViewMap[control.get('id')] = controlView;
+            // XXX
+            control.view = controlView;
+
+            // Add bubble target.
+            controlView.addTarget(self);
+
+            // XXX: Binding.
+            controlView.after('*:change', function () {
+                // TODO: Propagate to this.change event.
+                self._evalutateExpressions();
+            });
+
+            // XXX: Expresions.
+            var expressions = control.get('properties').expressions;
+
+            if (expressions) {
+                Y.Object.each(expressions, function (expression) {
+                    self._expressionMap.push(expression);
+                });
+            }
+
+            container.one('fieldset').append(controlView.render().get('container'));
+        }
     },
 
     _evalutateExpressions: function () {
@@ -509,6 +544,10 @@ FormView = Y.Base.create('formView', Y.View, [], {
             // TODO: Only render changed views
             self._controlViewMap[id].render();
         });
+    },
+
+    _handleAddControl: function (e) {
+        this._renderControl(e.model);
     }
 }, {
     ATTRS: {
@@ -550,7 +589,8 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._objectAttributesView.addTarget(this);
         this._dataSourcesView.addTarget(this);
 
-        this.after('*:select', this._handleControlSelect, this);
+        this.after('hierarchyView:select', this._handleControlSelect, this);
+        this.after('objectLibraryView:select', this._handleObjectAdd, this);
 
         this._initNavbar();
 
@@ -582,7 +622,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     render: function () {
+        // We always need to call the parent's class `render` function first for the `App` object to function.
         FormDesigner.superclass.render.apply(this, arguments);
+
+        this.get('container').addClass('rednose-form-designer');
 
         this._navbar.render();
 
@@ -647,7 +690,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._hierarchyView.render();
     },
 
-    _handleControlSelect:function (e) {
+    _handleControlSelect: function (e) {
         var model  = e.model;
 
         if (model && model instanceof Y.Rednose.Form.ControlModel) {
@@ -658,6 +701,14 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             this._objectAttributesView.set('model', model);
             this._objectAttributesView.render();
         }
+    },
+
+    _handleObjectAdd: function () {
+        var formModel   = this.get('model'),
+            controlList = formModel.get('controls');
+
+        // For now, always add a text control.
+        controlList.add(new Y.Rednose.Form.ControlModel({ type: 'text' }));
     },
 
     // XXX

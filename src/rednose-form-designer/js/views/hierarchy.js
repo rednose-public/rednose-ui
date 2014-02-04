@@ -49,6 +49,7 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
         this._treeView.after('select', function (e) {
             e.node.unselect();
+
             var model = e.node.data;
 
             if (model && model instanceof Y.Rednose.Form.ControlModel) {
@@ -57,11 +58,19 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
         });
 
         return this;
+    },
+
+    // XXX
+    _setModel: function (model) {
+        var controlList = model.get('controls');
+
+        controlList.after('add', this.render, this);
     }
 }, {
     ATTRS: {
         model: {
-            value: new Y.Rednose.Form.FormModel()
+            value : new Y.Rednose.Form.FormModel(),
+            setter: '_setModel'
         }
     }
 });
