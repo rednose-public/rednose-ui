@@ -8,6 +8,7 @@
                 "views/autocomplete-control.js",
                 "views/date-time-control.js",
                 "views/rich-text-control.js",
+                "form.js",
                 "control-view-factory.js"
             ]
         },
