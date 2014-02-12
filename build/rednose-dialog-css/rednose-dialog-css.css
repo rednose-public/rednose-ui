@@ -2,14 +2,14 @@
     margin-left: 8px;
 }
 
-.rednose-dialog .yui3-widget-bd {
+.rednose-dialog .yui3-widget-bd,
+.rednose-dialog .form-horizontal {
     max-height: 400px;
     min-height: 48px;
 }
 
 .rednose-dialog .form-horizontal {
-    margin-top: 10px;
-    margin-bottom: 10px;
+    overflow-y: auto;
 }
 
 .rednose-dialog .icon_absolute {

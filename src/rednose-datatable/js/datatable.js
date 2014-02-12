@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var DataTable,
 
 	CSS_PREFIX_MODULE   = 'rednose-datatable',

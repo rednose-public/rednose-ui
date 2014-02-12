@@ -1,5 +1,7 @@
 YUI.add('rednose-datatable-select', function (Y, NAME) {
 
+/*jshint boss:true, expr:true, onevar:false */
+
 /**
  * Create a selection plugin for the RedNose DataTable widget.
  */
@@ -9,7 +11,14 @@ var CSS_SELECTED = 'selected',
 
     CSS_BOOTSTRAP_ICON_WHITE = 'icon-white',
 
-    DATA_RECORD = 'data-yui3-record';
+    DATA_RECORD = 'data-yui3-record',
+
+    /**
+    Fired when a row is selected.
+
+    @event select
+    **/
+    EVT_SELECT = 'select';
 
 function DataTableSelectPlugin () {
     DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
@@ -55,6 +64,25 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         contentBox.on('clickoutside', this._handleClickOutside, this);
     },
 
+    setSelection: function (selection) {
+        var host = this.get('host'),
+            row  = host.getRow(selection);
+
+        if (row) {
+            this.set('selectedRow', row);
+        }
+    },
+
+    getSelection: function () {
+        var row = this.get('selectedRow');
+
+        if (row === null) {
+            return null;
+        }
+
+        return this._getModelFromTableRow(row);
+    },
+
     /**
      * Handles the click event, and updates the selectedRow attribute,
      * which fires an event on change.
@@ -88,7 +116,8 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
      * Handles the click event outside of the content-box and clears the selection.
      */
     _handleClickOutside: function () {
-        this.set('selectedRow', null);
+        // FIXME: Deselect should only trigger when clicked inside the container but outside the table.
+        // this.set('selectedRow', null);
     },
 
     /**
@@ -131,7 +160,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         }
 
         // Fires the select event from the host and passes along the needed information.
-        table.fire('select', { model: model });
+        table.fire(EVT_SELECT, { model: model });
 
         return true;
     },

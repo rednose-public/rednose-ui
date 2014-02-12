@@ -1,5 +1,7 @@
 YUI.add('rednose-datatable', function (Y, NAME) {
 
+/*jshint boss:true, expr:true, onevar:false */
+
 var DataTable,
 
 	CSS_PREFIX_MODULE   = 'rednose-datatable',
