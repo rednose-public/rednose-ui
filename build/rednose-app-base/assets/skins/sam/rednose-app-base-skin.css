@@ -44,17 +44,7 @@
 .rednose-app-detail-view {
     height: 100%;
     width: 99.9%;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 1.5;
-    color: #4D4D4D;
     background: #EAEAEA url('bg.png');
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    -ms-font-smoothing: antialiased;
-    -o-font-smoothing: antialiased;
-    font-smoothing: antialiased;
 }
 
 /* Master-detail grid template */
@@ -67,17 +57,6 @@
     overflow: auto;
     width: 778px;
     height: 443px;
-    font-family: Helvetica, Arial, sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    line-height: 1.5;
-    color: #4D4D4D;
-    background: #EAEAEA url('bg.png');
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    -ms-font-smoothing: antialiased;
-    -o-font-smoothing: antialiased;
-    font-smoothing: antialiased;
 }
 
 /* Scrollable navigation view */
