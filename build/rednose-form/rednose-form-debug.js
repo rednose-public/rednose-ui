@@ -80,9 +80,9 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
 
         Y.Array.each(value, function (v) {
             if (typeof(v) === 'object') {
-                list.add(new Y.Rednose.Form.ControlModel(v.getAttrs()));
-            } else {
                 list.add(new Y.Rednose.Form.ControlModel(v));
+            } else {
+                list.add(new Y.Rednose.Form.ControlModel(v.getAttrs()));
             }
         });
 
@@ -754,48 +754,48 @@ FormView = Y.Base.create('formView', Y.View, [], {
         // this._evalutateExpressions();
 
         return this;
-    },
-
-    _evalutateExpressions: function () {
-        var self = this;
-
-        var objectDefinitions = [];
-
-        Y.Object.each(this._controlViewMap, function (view) {
-            var id    = view.get('model').get('id'),
-                attrs = Y.JSON.stringify(view.get('model').toJSON());
-
-            objectDefinitions.push(id + ' = ' + attrs);
-        });
-
-        var lines = [];
-
-        lines.push('var ' + objectDefinitions.join(', ') + ';');
-        lines.push(this._expressionMap.join(' '));
-
-        var objectMappings = [];
-
-        Y.Object.each(this._controlViewMap, function (view) {
-            var id    = view.get('model').get('id');
-
-            objectMappings.push('"' + id + '": ' + id);
-        });
-
-        lines.push('var objects = {' + objectMappings.join(', ') + '};');
-
-        var objects;
-
-        eval(lines.join(' '));
-
-        Y.Object.each(objects, function (attrs, id) {
-            var model = self._controlViewMap[id].get('model');
-
-            model.setAttrs(attrs);
-
-            // TODO: Only render changed views
-            self._controlViewMap[id].render();
-        });
     }
+
+    // _evalutateExpressions: function () {
+    //     var self = this;
+
+    //     var objectDefinitions = [];
+
+    //     Y.Object.each(this._controlViewMap, function (view) {
+    //         var id    = view.get('model').get('id'),
+    //             attrs = Y.JSON.stringify(view.get('model').toJSON());
+
+    //         objectDefinitions.push(id + ' = ' + attrs);
+    //     });
+
+    //     var lines = [];
+
+    //     lines.push('var ' + objectDefinitions.join(', ') + ';');
+    //     lines.push(this._expressionMap.join(' '));
+
+    //     var objectMappings = [];
+
+    //     Y.Object.each(this._controlViewMap, function (view) {
+    //         var id    = view.get('model').get('id');
+
+    //         objectMappings.push('"' + id + '": ' + id);
+    //     });
+
+    //     lines.push('var objects = {' + objectMappings.join(', ') + '};');
+
+    //     var objects;
+
+    //     eval(lines.join(' '));
+
+    //     Y.Object.each(objects, function (attrs, id) {
+    //         var model = self._controlViewMap[id].get('model');
+
+    //         model.setAttrs(attrs);
+
+    //         // TODO: Only render changed views
+    //         self._controlViewMap[id].render();
+    //     });
+    // }
 }, {
     ATTRS: {
         model: { value: new Y.Rednose.Form.FormModel() }

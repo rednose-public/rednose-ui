@@ -468,7 +468,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
             self._renderControl(control);
         });
 
-        this._evalutateExpressions();
+        // this._evalutateExpressions();
 
         return this;
     },
@@ -489,17 +489,17 @@ FormView = Y.Base.create('formView', Y.View, [], {
             // XXX: Binding.
             controlView.after('*:change', function () {
                 // TODO: Propagate to this.change event.
-                self._evalutateExpressions();
+                // self._evalutateExpressions();
             });
 
             // XXX: Expresions.
-            var expressions = control.get('properties').expressions;
+            // var expressions = control.get('properties').expressions;
 
-            if (expressions) {
-                Y.Object.each(expressions, function (expression) {
-                    self._expressionMap.push(expression);
-                });
-            }
+            // if (expressions) {
+            //     Y.Object.each(expressions, function (expression) {
+            //         self._expressionMap.push(expression);
+            //     });
+            // }
 
             container.one('fieldset').append(controlView.render().get('container'));
         }

@@ -78,9 +78,9 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
 
         Y.Array.each(value, function (v) {
             if (typeof(v) === 'object') {
-                list.add(new Y.Rednose.Form.ControlModel(v.getAttrs()));
-            } else {
                 list.add(new Y.Rednose.Form.ControlModel(v));
+            } else {
+                list.add(new Y.Rednose.Form.ControlModel(v.getAttrs()));
             }
         });
 
