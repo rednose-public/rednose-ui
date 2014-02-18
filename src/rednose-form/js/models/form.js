@@ -5,25 +5,17 @@ var TreeModel = Y.Rednose.ModelTree,
 
 ControlModel = Y.Base.create('controlModel', Y.Model, [], {
     view: {},
-
-    _getValue: function (value) {
-        if (value === null) {
-            return false;
-        }
-
-        return value;
-    }
 }, {
     ATTRS: {
-        caption:    { value: null },
-        type:       { value: null },
+        caption   : { value: null },
+        foreign_id: { value: null },
+        type      : { value: null },
         properties: { value: {} },
-        required:   { value: false },
-        visible:    { value: true },
-        protected:  { value: false },
-        readonly:   { value: false },
-        // XXX
-        value   :   { value: null, getter: '_getValue' }
+        required  : { value: false },
+        visible   : { value: true },
+        protected : { value: false },
+        readonly  : { value: false },
+        value     : { value: null }
     }
 });
 
@@ -59,7 +51,7 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
 
     sync: function (action, options, callback) {
         if (action === 'read') {
-            Y.io(Routing.generate('rednose_flowgen_process_form', {'id': this.get('id')}), {
+            Y.io(Routing.generate('rednose_framework_forms_read', {'id': this.get('id')}), {
                 method: 'GET',
                 on : {
                     success : function (tx, r) {
@@ -88,8 +80,9 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
     }
 }, {
     ATTRS: {
-        caption : { value: null },
-        controls: {
+        caption   : { value: null },
+        foreign_id: { value: null },
+        controls  : {
             value : new Y.ModelList(),
             setter: '_setControls'
         }

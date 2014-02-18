@@ -35,6 +35,8 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this._initNavbar();
 
+        this.on('navbar:preview', this._handlePreview, this);
+        this.on('navbar:save', this._handleSave, this);
         this.on('navbar:newDataSource', this._handleNewDataSource, this);
         this.on('navbar:closeDesigner', this._handleClose, this);
 
@@ -86,7 +88,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             menu         : [
                 { title: 'File', items: [
                     { id: 'newDataSource', title: 'New Data Source...' },
-                    { id: '-', title: '-' },
+                    { title: '-' },
+                    { id: 'preview', title: 'Preview' },
+                    { id: 'save', title: 'Save' },
+                    { title: '-' },
                     { id: 'closeDesigner', title: 'Close' }
                 ]}
             ],
@@ -153,6 +158,28 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         // For now, always add a text control.
         controlList.add(new Y.Rednose.Form.ControlModel({ type: 'text' }));
+    },
+
+    /**
+    Saves the current form.
+
+    @method _handleSave
+    @protected
+    **/
+    _handleSave: function () {
+        var form = this.get('model');
+
+        console.log(Y.JSON.stringify(form.toJSON()));
+    },
+
+    /**
+    Shows a preview of the current (saved) form.
+
+    @method _handlePreview
+    @protected
+    **/
+    _handlePreview: function () {
+        console.log('preview!');
     },
 
     // XXX
