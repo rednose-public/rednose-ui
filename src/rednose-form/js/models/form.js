@@ -48,7 +48,7 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
 
         this.get('controls').each(function (model) {
             items.children.push({
-                label   : model.get('id'),
+                label   : model.get('caption'),
                 data    : model,
                 icon    : 'icon-minus'
             });

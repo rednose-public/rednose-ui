@@ -36,6 +36,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._initNavbar();
 
         this.on('navbar:newDataSource', this._handleNewDataSource, this);
+        this.on('navbar:closeDesigner', this._handleClose, this);
 
         this.on('contextMenu:dataSourceEdit', this._handleDataSourceEdit, this);
         this.on('contextMenu:dataSourceDelete', this._handleDataSourceDelete, this);
@@ -84,7 +85,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             columnLayout : true,
             menu         : [
                 { title: 'File', items: [
-                    { id: 'newDataSource', title: 'New Data Source...' }
+                    { id: 'newDataSource', title: 'New Data Source...' },
+                    { id: '-', title: '-' },
+                    { id: 'closeDesigner', title: 'Close' }
                 ]}
             ],
             menuSecondary: [
@@ -216,6 +219,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
                 self._dataSourcesView.render();
             });
         });
+    },
+
+    _handleClose: function() {
+        this.destroy();
     },
 
     // XXX

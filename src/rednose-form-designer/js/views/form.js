@@ -87,7 +87,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
         var objectDefinitions = [];
 
         Y.Object.each(this._controlViewMap, function (view) {
-            var id    = view.get('model').get('id'),
+            var id    = view.get('model').get('foreignId'),
                 attrs = Y.JSON.stringify(view.get('model').toJSON());
 
             objectDefinitions.push(id + ' = ' + attrs);

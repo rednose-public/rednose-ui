@@ -35,7 +35,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 '<div class="control-group">' +
                     '<label class="control-label" for="id">Identifier</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="id" type="text" readonly value="<%= data.id %>"/>' +
+                        '<input class="input-block-level" id="id" type="text" readonly value="<%= data.foreignId %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
@@ -132,7 +132,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
     _handleFormChange: function (e) {
         var node  = e.target,
-            id    = node.get('id'),
+            id    = node.get('foreignId'),
             value = node.get('type') === 'checkbox' ? node.get('checked') : node.get('value');
 
         this.get('model').set(id, value);

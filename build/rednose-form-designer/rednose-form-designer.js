@@ -312,7 +312,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 '<div class="control-group">' +
                     '<label class="control-label" for="id">Identifier</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="id" type="text" readonly value="<%= data.id %>"/>' +
+                        '<input class="input-block-level" id="id" type="text" readonly value="<%= data.foreignId %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
@@ -409,7 +409,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
     _handleFormChange: function (e) {
         var node  = e.target,
-            id    = node.get('id'),
+            id    = node.get('foreignId'),
             value = node.get('type') === 'checkbox' ? node.get('checked') : node.get('value');
 
         this.get('model').set(id, value);
@@ -511,7 +511,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
         var objectDefinitions = [];
 
         Y.Object.each(this._controlViewMap, function (view) {
-            var id    = view.get('model').get('id'),
+            var id    = view.get('model').get('foreignId'),
                 attrs = Y.JSON.stringify(view.get('model').toJSON());
 
             objectDefinitions.push(id + ' = ' + attrs);
@@ -595,6 +595,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._initNavbar();
 
         this.on('navbar:newDataSource', this._handleNewDataSource, this);
+        this.on('navbar:closeDesigner', this._handleClose, this);
 
         this.on('contextMenu:dataSourceEdit', this._handleDataSourceEdit, this);
         this.on('contextMenu:dataSourceDelete', this._handleDataSourceDelete, this);
@@ -643,7 +644,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             columnLayout : true,
             menu         : [
                 { title: 'File', items: [
-                    { id: 'newDataSource', title: 'New Data Source...' }
+                    { id: 'newDataSource', title: 'New Data Source...' },
+                    { id: '-', title: '-' },
+                    { id: 'closeDesigner', title: 'Close' }
                 ]}
             ],
             menuSecondary: [
@@ -775,6 +778,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
                 self._dataSourcesView.render();
             });
         });
+    },
+
+    _handleClose: function() {
+        this.destroy();
     },
 
     // XXX
