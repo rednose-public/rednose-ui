@@ -738,7 +738,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     @protected
     **/
     _handlePreview: function () {
-        console.log('preview!');
+        var form = this.get('model');
+
+        window.open(Routing.generate('rednose_framework_forms_preview', { id: form.get('id') }), '_blank');
     },
 
     // XXX
