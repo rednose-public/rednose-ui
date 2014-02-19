@@ -412,7 +412,6 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
 
     _renderAutoComplete: function () {
         var self       = this,
-            template   = this.AUTOCOMPLETE_TEMPLATE,
             choices    = this.get('model').get('properties').choices,
             datasource = this.get('model').get('properties').datasource,
             config;
@@ -423,35 +422,6 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
             datasource: datasource
         };
 
-        if (datasource) {
-            config = Y.merge(config, {
-                resultListLocator: 'results',
-                resultFormatter  : function (query, raw) {
-                    return Y.Array.map(raw, function (result) {
-                        var mapped = self._mapDataProviderData(result.raw, datasource.map);
-
-                        mapped.title = Y.Highlight.all(mapped.title, query);
-
-                        return template(mapped);
-                    });
-                },
-                resultTextLocator: function (result) {
-                    return datasource.map && datasource.map.value ? result[datasource.map.value] : result.value;
-                },
-                source: this._getDataProviderRoute(datasource.id, datasource.map && datasource.map.title ? datasource.map.title : 'title')
-            });
-        } else if (choices) {
-            config = Y.merge(config, {
-                resultFormatter  : function (query, raw) {
-                    return Y.Array.map(raw, function (result) {
-                        return template(result.raw);
-                    });
-                },
-                resultTextLocator: 'value',
-                source           : choices
-            });
-        }
-
         this._autoComplete = new AutoComplete(config).render();
 
         // FIXME: We need to fire the events manually because the change on this._inputNode doens't fire when selecting an item
@@ -460,21 +430,6 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
         this._autoComplete.after('select', function () {
             self._handleInputChange();
         });
-    },
-
-    _getDataProviderRoute: function (id, key) {
-        return Routing.generate('rednose_dataprovider_data_list') + '?id=' + id + '&q={query}&key=' + key + '&callback={callback}';
-    },
-
-    _mapDataProviderData: function (data, map) {
-        map || (map = {});
-
-        return {
-            title   : map.title    ? data[map.title]    : data.title,
-            subtitle: map.subtitle ? data[map.subtitle] : data.subtitle,
-            image   : map.image    ? data[map.image]    : data.image,
-            value   : map.value    ? data[map.value]    : data.value
-        };
     },
 
     _handleInputChange: function () {

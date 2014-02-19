@@ -66,11 +66,11 @@
     display: block;
     padding: 7px 15px 7px 10px;
     text-decoration: none;
-    overflow: hidden;
     color: #3272a2;
-    text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .rednose-autocomplete-item .title {
@@ -91,6 +91,7 @@
     height: 17px;
     display: block;
     text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .rednose-autocomplete-item .avatar {
