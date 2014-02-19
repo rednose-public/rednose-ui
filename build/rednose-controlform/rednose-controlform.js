@@ -274,6 +274,13 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
             this.set('resultTextLocator', 'value');
             this.set('source', choices);
         }
+
+        // Handle keyboard press selection, the change event on the input-node only fires when clicking an item.
+        this.after('select', function (e) {
+            if (e.originEvent.charCode === 13) {
+                self.get('inputNode').simulate('change');
+            }
+        });
     },
 
     _getDataProviderRoute: function (id, key) {

@@ -64,8 +64,7 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
     },
 
     _renderAutoComplete: function () {
-        var self       = this,
-            choices    = this.get('model').get('properties').choices,
+        var choices    = this.get('model').get('properties').choices,
             datasource = this.get('model').get('properties').datasource,
             config;
 
@@ -76,13 +75,6 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
         };
 
         this._autoComplete = new AutoComplete(config).render();
-
-        // FIXME: We need to fire the events manually because the change on this._inputNode doens't fire when selecting an item
-        // by pressing enter. On clicks however, both the select event and the this._inputNode change event get fired and we have
-        // double events.
-        this._autoComplete.after('select', function () {
-            self._handleInputChange();
-        });
     },
 
     _handleInputChange: function () {
