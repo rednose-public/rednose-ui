@@ -17,7 +17,7 @@
 }
 
 .rednose-autocomplete-list {
-    width: 316px;
+    min-width: 316px;
     padding: 5px 0;
     margin: 2px 0 0;
     list-style: none;
@@ -69,8 +69,8 @@
     color: #3272a2;
     white-space: nowrap;
     font-size: 14px;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+    /*overflow: hidden;*/
 }
 
 .rednose-autocomplete-item .title {
@@ -83,15 +83,15 @@
     color: #999;
     font-size: 12px;
     font-weight: normal;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+    /*overflow: hidden;*/
 }
 
 .rednose-autocomplete-item .title-block {
     height: 17px;
     display: block;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    /*text-overflow: ellipsis;*/
+    /*overflow: hidden;*/
 }
 
 .rednose-autocomplete-item .avatar {

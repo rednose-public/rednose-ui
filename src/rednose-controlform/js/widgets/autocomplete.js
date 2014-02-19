@@ -14,15 +14,13 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
         '</a>'
     ),
 
-    initializer: function (config) {
-        config || (config = {});
-
-        this.get('inputNode').setAttribute('autocomplete', 'off');
-
+    initializer: function () {
         var template   = this.AUTOCOMPLETE_TEMPLATE,
             choices    = this.get('choices'),
             datasource = this.get('datasource'),
             self       = this;
+
+        this.get('inputNode').setAttribute('autocomplete', 'off');
 
         if (datasource) {
             this.set('resultListLocator', 'results');
@@ -68,6 +66,10 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
     CSS_PREFIX: 'rednose-autocomplete',
 
     ATTRS: {
+        width: {
+            value: true
+        },
+
         maxResults: {
             value: 6
         },
