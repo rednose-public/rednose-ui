@@ -355,8 +355,6 @@ var Micro        = Y.Template.Micro,
 
 AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.Form.BaseControlView, [], {
 
-    OPTION_TEMPLATE: '<option value="{value}">{label}</option>',
-
     AUTOCOMPLETE_TEMPLATE: Micro.compile(
         '<a role="menuitem">' +
             '<img class="avatar size32" src="<%= data.image %>">' +
@@ -421,7 +419,8 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
 
         config = {
             inputNode : this._inputNode,
-            maxResults: 6
+            choices   : choices,
+            datasource: datasource
         };
 
         if (datasource) {
