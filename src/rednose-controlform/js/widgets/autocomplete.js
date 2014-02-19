@@ -47,11 +47,19 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
             this.set('source', choices);
         }
 
-        // Handle keyboard press selection, the change event on the input-node only fires when clicking an item.
-        this.after('select', function (e) {
-            if (e.originEvent.charCode === 13) {
-                self.get('inputNode').simulate('change');
+        // Prevent default node change handler.
+        this.get('inputNode').on('change', function (e) {
+            // Don't stop propagation for our own `change` event simulation.
+            if (e.which !== 0) {
+                e.stopPropagation();
             }
+        });
+
+        // Store the selection before we fire a change event on the input node.
+        this.after('select', function (e) {
+            self.set('record', e.result.raw);
+
+            self.get('inputNode').simulate('change');
         });
     },
 
@@ -79,6 +87,10 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
 
         maxResults: {
             value: 6
+        },
+
+        record: {
+            value: null
         },
 
         choices: {
