@@ -264,7 +264,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         routes: {
             value: [{
-                path: '/:form', callbacks: [
+                path: '/:form/edit', callbacks: [
                     'handleForm',
                     'showForm'
                 ]}
