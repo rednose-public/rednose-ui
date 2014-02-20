@@ -637,6 +637,14 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this.get('gridLeft').append(this._dataSourcesView.render().get('container'));
         this.get('gridRight').append(this._objectAttributesView.render().get('container'));
 
+        // If the model contains controls render the form view
+        if (this.get('model').get('controls').size() > 0) {
+            this.showForm(
+                { form: this.get('model') },
+                { transition: false }
+            );
+        }
+
         return this;
     },
 
