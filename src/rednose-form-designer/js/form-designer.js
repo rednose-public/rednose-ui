@@ -71,7 +71,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this.get('container').addClass('rednose-form-designer');
 
-        this._navbar.render();
+        this._navbar.render(this.get('container'));
 
         this.get('gridLeft').append(this._objectLibraryView.render().get('container'));
         this.get('gridLeft').append(this._hierarchyView.render().get('container'));
