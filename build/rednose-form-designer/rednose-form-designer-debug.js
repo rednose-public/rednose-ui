@@ -59,39 +59,39 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [], {
                     {
                         label   : 'Text',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-text'
                     }, {
                         label   : 'Text Area',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-textarea'
                     }, {
                         label   : 'Rich Text',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-textarea'
                     }, {
                         label   : 'Drop-down List',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-dropdown'
                     }, {
                         label   : 'Radio Button',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-radio'
                     }, {
                         label   : 'Checkbox',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-checkbox'
                     }, {
                         label   : 'Date',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-date'
                     }, {
                         label   : 'Autocomplete',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-dropdown'
                     }, {
                         label   : 'File',
                         data    : new Y.Model(),
-                        icon    : 'icon-align-justify'
+                        icon    : 'rednose-icon-dropdown'
                     }
                 ]
             })
