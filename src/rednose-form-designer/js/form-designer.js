@@ -32,6 +32,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this.after('hierarchyView:select', this._handleControlSelect, this);
         this.after('objectLibraryView:select', this._handleObjectAdd, this);
+        this.after('objectAttributesView:typeChange', function() { this.showForm() }, this);
 
         this._initNavbar();
 
@@ -84,10 +85,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         // If the model contains controls render the form view
         if (this.get('model').get('controls').size() > 0) {
-            this.showForm(
-                { form: this.get('model') },
-                { transition: false }
-            );
+            this.showForm();
         }
 
         return this;
@@ -141,6 +139,15 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     showForm: function (req, res) {
+        if (this.get('activeView')) {
+            this.get('activeView').destroy();
+        }
+
+        if (!req) {
+            req = { form: this.get('model') };
+            res = { transition: false };
+        }
+
         this.showView('form', {
             model: req.form,
         }, {

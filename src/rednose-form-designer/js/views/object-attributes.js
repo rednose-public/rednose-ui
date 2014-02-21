@@ -102,11 +102,11 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     _renderForm: function () {
-        var model     = this.get('model'),
+        var self      = this,
+            model     = this.get('model'),
             container = this.get('container');
 
         container.empty();
-
         container.append(this.formTemplate(model.getAttrs()));
 
         this._renderTypeOptions();
@@ -132,10 +132,15 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
     _handleFormChange: function (e) {
         var node  = e.target,
-            id    = node.get('foreignId'),
+            id    = node.get('id'),
             value = node.get('type') === 'checkbox' ? node.get('checked') : node.get('value');
 
         this.get('model').set(id, value);
+
+        if (id == 'type') {
+            this.fire('typeChange');
+        }
+
     }
 }, {
     ATTRS: {

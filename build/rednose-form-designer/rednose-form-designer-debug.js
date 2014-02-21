@@ -379,11 +379,11 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     _renderForm: function () {
-        var model     = this.get('model'),
+        var self      = this,
+            model     = this.get('model'),
             container = this.get('container');
 
         container.empty();
-
         container.append(this.formTemplate(model.getAttrs()));
 
         this._renderTypeOptions();
@@ -409,10 +409,15 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
     _handleFormChange: function (e) {
         var node  = e.target,
-            id    = node.get('foreignId'),
+            id    = node.get('id'),
             value = node.get('type') === 'checkbox' ? node.get('checked') : node.get('value');
 
         this.get('model').set(id, value);
+
+        if (id == 'type') {
+            this.fire('typeChange');
+        }
+
     }
 }, {
     ATTRS: {
@@ -600,6 +605,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this.after('hierarchyView:select', this._handleControlSelect, this);
         this.after('objectLibraryView:select', this._handleObjectAdd, this);
+        this.after('objectAttributesView:typeChange', function() { this.showForm() }, this);
 
         this._initNavbar();
 
@@ -652,10 +658,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         // If the model contains controls render the form view
         if (this.get('model').get('controls').size() > 0) {
-            this.showForm(
-                { form: this.get('model') },
-                { transition: false }
-            );
+            this.showForm();
         }
 
         return this;
@@ -709,6 +712,15 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     showForm: function (req, res) {
+        if (this.get('activeView')) {
+            this.get('activeView').destroy();
+        }
+
+        if (!req) {
+            req = { form: this.get('model') };
+            res = { transition: false };
+        }
+
         this.showView('form', {
             model: req.form,
         }, {
