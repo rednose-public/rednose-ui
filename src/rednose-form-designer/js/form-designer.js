@@ -49,6 +49,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     destructor: function () {
+        if (this.get('activeView')) {
+            this.get('activeView').destroy();
+        }
+
         this._navbar.destroy();
         this._navbar = null;
 
@@ -114,6 +118,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         });
 
         this._navbar.addTarget(this);
+        this.set('navbar', this._navbar);
     },
 
     handleForm: function (req, res, next) {
@@ -269,6 +274,8 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 }, {
     ATTRS: {
         model: { value: new Y.Rednose.Form.FormModel() },
+
+        navbar: { value: null },
 
         routes: {
             value: [{

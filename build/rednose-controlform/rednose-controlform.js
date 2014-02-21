@@ -469,8 +469,7 @@ RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
 
             if (inputProperties.editing === 'true') {
                 toolbar.push({
-                    "name": "editing",
-                    "items": ["Find", "Replace", "-", "SelectAll"]
+                    "name": "editing",                    "items": ["Find", "Replace", "-", "SelectAll"]
                 });
             }
 
@@ -536,6 +535,10 @@ RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
         }
 
         return this;
+    },
+
+    destructor: function() {
+        CKEDITOR.instances[this.get('srcNode').get('id')].destroy();
     }
 }, {
     ATTRS: {

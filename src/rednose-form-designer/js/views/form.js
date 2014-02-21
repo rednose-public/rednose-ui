@@ -16,6 +16,8 @@ FormView = Y.Base.create('formView', Y.View, [], {
 
     _expressionMap: [],
 
+    _controlMap: [],
+
     initializer: function () {
         var formModel   = this.get('model'),
             controlList = formModel.get('controls');
@@ -24,6 +26,11 @@ FormView = Y.Base.create('formView', Y.View, [], {
     },
 
     destructor: function () {
+        Y.Array.each(this._controlMap, function(control) {
+            control.destroy();
+            control = null;
+        });
+
         this._expressionMap = null;
     },
 
@@ -78,6 +85,8 @@ FormView = Y.Base.create('formView', Y.View, [], {
             // }
 
             container.one('fieldset').append(controlView.render().get('container'));
+
+            this._controlMap.push(controlView);
         }
     },
 
