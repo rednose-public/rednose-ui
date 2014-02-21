@@ -17,6 +17,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
     _expressionMap: [],
 
     destructor: function () {
+        this.clear();
         this._expressionMap = null;
     },
 
@@ -66,6 +67,12 @@ FormView = Y.Base.create('formView', Y.View, [], {
         // this._evalutateExpressions();
 
         return this;
+    },
+
+    clear: function() {
+        Y.Object.each(this._controlViewMap, function (view) {
+            view.remove();
+        });
     },
 
     _evalutateExpressions: function () {
