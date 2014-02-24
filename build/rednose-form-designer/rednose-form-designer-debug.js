@@ -1,5 +1,33 @@
 YUI.add('rednose-form-designer', function (Y, NAME) {
 
+var ConfigureItems;
+
+ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ], {
+    template:
+        '<div>' +
+        '   <div class="control-group">' +
+        '   </div>' +
+        '</div>',
+
+    render: function () {
+        var self = this,
+            view = Y.Node.create(this.template);
+
+        this.prompt({
+            title: 'Configure items: ' + this.get('model').get('caption'),
+            html: view
+        }, function(form) {
+
+        });
+    },
+
+}, {
+    ATTRS: {
+        model: { value: null }
+    }
+});
+
+Y.namespace('Rednose.FormDesigner').ConfigureItems = ConfigureItems;
 /*jshint boss:true, expr:true, onevar:false */
 
 var TXT_OBJECT_LIBRARY = 'Object Library';
@@ -321,6 +349,12 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                         '<input class="input-block-level" id="caption" type="text" value="<%= data.caption %>"/>' +
                     '</div>' +
                 '</div>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="value">Value</label>' +
+                    '<div class="controls">' +
+                        '<input class="input-block-level" id="value" type="text" value="<%= data.value %>"/>' +
+                    '</div>' +
+                '</div>' +
                 '<hr/>' +
                 '<div class="control-group">' +
                     '<label class="control-label" for="type">Type</label>' +
@@ -328,6 +362,17 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                         '<select class="input-block-level" id="type"></select>' +
                     '</div>' +
                 '</div>' +
+
+                // Configure items button
+                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
+                    '<div class="control-group">' +
+                        '<label class="control-label" for="type"></label>' +
+                        '<div class="controls">' +
+                            '<input type="button" class="btn" value="Configure items" id="configureItems" />' +
+                        '</div>' +
+                    '</div>' +
+                '<% } %>' +
+
                 '<hr/>' +
                 '<div class="control-group">' +
                     '<div class="controls">' +
@@ -364,6 +409,10 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     events: {
         'form': {
             change: '_handleFormChange'
+        },
+
+        '#configureItems': {
+            click: '_handleConfigureItems'
         }
     },
 
@@ -417,8 +466,14 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
         if (id == 'type') {
             this.fire('typeChange');
         }
+    },
 
+    _handleConfigureItems: function() {
+        this.fire('configureItems', {
+            model: this.get('model')
+        });
     }
+
 }, {
     ATTRS: {
         model: { value: new Y.Rednose.Form.ControlModel() }
@@ -582,7 +637,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     views: {
         form: {
             type: Y.Rednose.FormDesigner.FormView
-        }
+        },
     },
 
     _navbar: null,
@@ -605,7 +660,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this.after('hierarchyView:select', this._handleControlSelect, this);
         this.after('objectLibraryView:select', this._handleObjectAdd, this);
-        this.after('objectAttributesView:typeChange', function() { this.showForm() }, this);
+
+        this.after('objectAttributesView:typeChange', this._handleObjectTypeChange, this);
+        this.after('objectAttributesView:configureItems', this._handleConfigureItems, this);
 
         this._initNavbar();
 
@@ -745,6 +802,21 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         }
     },
 
+    _handleObjectTypeChange: function() {
+        this.showForm();
+        this._handleControlSelect({
+            model: this._objectAttributesView.get('model')
+        });
+    },
+
+    _handleConfigureItems: function(config) {
+        var dialog = new Y.Rednose.FormDesigner.ConfigureItems({
+            model: config.model
+        });
+
+        dialog.render();
+    },
+
     _handleObjectAdd: function () {
         var formModel   = this.get('model'),
             controlList = formModel.get('controls');
@@ -878,6 +950,7 @@ Y.namespace('Rednose.FormDesigner').FormDesigner = FormDesigner;
     "requires": [
         "rednose-app",
         "rednose-datasource-manager",
+        "rednose-dialog",
         "rednose-form",
         "rednose-form-designer-css",
         "rednose-navbar",

@@ -3,6 +3,7 @@
         "requires": [
             "rednose-app",
             "rednose-datasource-manager",
+            "rednose-dialog",
             "rednose-form",
             "rednose-form-designer-css",
             "rednose-navbar",

@@ -44,6 +44,12 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                         '<input class="input-block-level" id="caption" type="text" value="<%= data.caption %>"/>' +
                     '</div>' +
                 '</div>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="value">Value</label>' +
+                    '<div class="controls">' +
+                        '<input class="input-block-level" id="value" type="text" value="<%= data.value %>"/>' +
+                    '</div>' +
+                '</div>' +
                 '<hr/>' +
                 '<div class="control-group">' +
                     '<label class="control-label" for="type">Type</label>' +
@@ -51,6 +57,17 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                         '<select class="input-block-level" id="type"></select>' +
                     '</div>' +
                 '</div>' +
+
+                // Configure items button
+                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
+                    '<div class="control-group">' +
+                        '<label class="control-label" for="type"></label>' +
+                        '<div class="controls">' +
+                            '<input type="button" class="btn" value="Configure items" id="configureItems" />' +
+                        '</div>' +
+                    '</div>' +
+                '<% } %>' +
+
                 '<hr/>' +
                 '<div class="control-group">' +
                     '<div class="controls">' +
@@ -87,6 +104,10 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     events: {
         'form': {
             change: '_handleFormChange'
+        },
+
+        '#configureItems': {
+            click: '_handleConfigureItems'
         }
     },
 
@@ -140,8 +161,14 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
         if (id == 'type') {
             this.fire('typeChange');
         }
+    },
 
+    _handleConfigureItems: function() {
+        this.fire('configureItems', {
+            model: this.get('model')
+        });
     }
+
 }, {
     ATTRS: {
         model: { value: new Y.Rednose.Form.ControlModel() }
