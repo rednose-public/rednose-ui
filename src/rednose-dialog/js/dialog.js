@@ -8,6 +8,7 @@ Provides several dialog windows.
 var CSS_WIDGET = 'rednose-widget',
     CSS_DIALOG = 'rednose-dialog',
 
+    CSS_BOOTSTRAP_PULL_LEFT   = 'pull-left',
     CSS_BOOTSTRAP_PULL_RIGHT  = 'pull-right',
     CSS_BOOTSTRAP_BTN         = 'btn',
     CSS_BOOTSTRAP_BTN_WARNING = 'btn-warning',
@@ -169,7 +170,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     },
                     classNames: CSS_BOOTSTRAP_BTN + ' ' + this._getButtonForType(options.type)
                  }
-            ]
+            ].reverse()
         }).render();
 
         this._setPanelStyle(panel);
@@ -188,7 +189,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         @param {String} [options.dataPath] The field data-path for error reporting.
         @param {String} [options.type] The dialog type ('default', 'info', 'warning', success', 'danger', 'error').
         @param {String} [options.confirm] The confirm button value.
-        @param {String} [options.cancel] The cancel button value.
+        @param {Mixed}  [options.cancel] The cancel button value or false.
         @param {String} [options.value] The default field value, optional.
         @param {String} [options.html] An HTML template to render, optional.
     @param {Function} callback Optional callback function, closes the the dialog when it returns `true`.
@@ -266,7 +267,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                     },
                     classNames: CSS_BOOTSTRAP_BTN + ' ' + this._getButtonForType(options.type)
                  }
-            ]
+            ].reverse()
         }).render();
 
         if (node.one('input, textarea, select') !== null) {
@@ -301,6 +302,60 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         panel.set('zIndex', this._getHighzIndex());
     },
 
+    /**
+    Add a button to the footer of the dialog (after the dialog is rendered)
+
+    @method addButton
+    @param {Array} [buttons] A collection of options, The following options can be specified:
+        @param {String} [options.value] The button caption.
+        @param {String} [options.classNames] Extra button classes
+        @param {String} [options.callback] Callback function
+        @param {String} [options.icon] The button icon class
+        @param {String} [options.position] Align the button left or right
+    @public
+    **/
+    addButtons: function(buttons) {
+        if (this.get('panel')) {
+            var buttonId = Y.guid();
+            var boundingBox = this.get('panel').get('boundingBox');
+            var classNames = 'btn';
+
+            for (var i in buttons) {
+                var options = buttons[i];
+
+                if (options.position && options.position == 'right') {
+                    classNames += ' ' + CSS_BOOTSTRAP_PULL_RIGHT;
+                } else {
+                    classNames += ' ' + CSS_BOOTSTRAP_PULL_LEFT;
+                }
+
+                if (options.classNames) {
+                    classNames += ' '  + options.classNames;
+                }
+
+                var button = {
+                    name: buttonId,
+                    title: options.value,
+                    classNames: classNames
+                }
+
+                this.get('panel').addButton(button);
+
+                if (options.icon) {
+                    var button = this.get('panel').getButton(buttonId);
+
+                    button.append(
+                        Y.Node.create('<li class="' + options.icon + '" />')
+                    );
+                }
+            }
+
+            boundingBox.all('.yui3-button').each(function (button) {
+                button.removeClass('yui3-button').removeClass('yui3-button-primary');
+            });
+        }
+    },
+
     // -- Protected Methods ----------------------------------------------------
 
     /**
@@ -314,10 +369,13 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         boundingBox.addClass(CSS_WIDGET);
         boundingBox.addClass(CSS_DIALOG);
 
-        boundingBox.one('.yui3-widget-buttons').addClass(CSS_BOOTSTRAP_PULL_RIGHT);
+        boundingBox.all('.yui3-widget-buttons').each(function(buttonContainer) {
+            buttonContainer.removeClass('yui3-widget-buttons');
+        });
 
         boundingBox.all('.yui3-button').each(function (button) {
             button.removeClass('yui3-button').removeClass('yui3-button-primary');
+            button.addClass(CSS_BOOTSTRAP_PULL_RIGHT);
         });
     },
 

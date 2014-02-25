@@ -8,7 +8,8 @@
         },
         "rednose-datatable-select": {
             "jsfiles": [
-                "plugins/datatable-select.js"
+                "plugins/datatable-select.js",
+                "plugins/datatable-editrow.js"
             ]
         }
     }
