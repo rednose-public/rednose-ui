@@ -183,22 +183,10 @@ Y.namespace('Rednose').DataTableSelectPlugin = DataTableSelectPlugin;
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
- * Create a selection plugin for the RedNose DataTable widget.
+ * Create a selection inline value edit plugin for the RedNose DataTable widget.
  */
-var CSS_SELECTED = 'selected',
-    CSS_DATA     = 'data',
-    CSS_COLUMNS  = 'columns',
-
-    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white',
-
-    DATA_RECORD = 'data-yui3-record',
-
-    /**
-    Fired when a row is selected.
-
-    @event select
-    **/
-    EVT_SELECT = 'select';
+var CSS_COLUMN = 'rednose-datatable-col-',
+    CSS_INPUTFIELD = 'rednose-datatable-input';
 
 function DataTableEditRowPlugin () {
     DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
@@ -225,8 +213,66 @@ DataTableEditRowPlugin.ATTRS = {
 };
 
 Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
+
     initializer: function() {
-        alert(this.get('rowsDeletable'));
+        var self  = this,
+            table = this.get('host'),
+            model = table.get('data');
+
+        this._renderFields();
+
+        model.after('add', function() {
+            self._renderFields();
+        });
+
+        table.after('render', function() {
+            alert('...');
+        });
+    },
+
+    _renderFields: function(activeNode) {
+        var self    = this,
+            table   = this.get('host'),
+            columns = table.get('columns');
+
+        Y.Array.each(columns, function(column) {
+            var className = CSS_COLUMN + column.key;
+
+            if (column.editable) {
+                Y.all('td.' + className).each(function(columnNode) {
+                    var rowModel = table.getRecord(
+                        columnNode.ancestor('tr').getAttribute('data-yui3-record')
+                    );
+
+                    self._addField(columnNode, rowModel, column.key);
+                });
+            }
+        });
+    },
+
+    _addField: function(node, row, property) {
+        var self      = this,
+            nodeValue = node.get('text'),
+            inputNode = Y.Node.create('<input />');
+
+        inputNode.set('value', nodeValue);
+        inputNode.addClass(CSS_INPUTFIELD);
+
+        inputNode.on(['change', 'keyup'], function() {
+            self._fieldChange(inputNode, row, property);
+        });
+
+        node.setHTML('');
+        node.append(inputNode);
+    },
+
+    _fieldChange: function(node, row, property) {
+        row.set(
+            property,
+            node.get('value')
+        );
+
+        this._renderFields(node);
     }
 });
 

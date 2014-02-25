@@ -7,6 +7,8 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
         '   </div>' +
         '</div>',
 
+    _table: null,
+
     render: function () {
         var self = this,
             view = Y.Node.create(this.template),
@@ -19,16 +21,16 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
             });
         }
 
-        var table = new Y.Rednose.DataTable({
+        this._table = new Y.Rednose.DataTable({
             columns: [
                 { key: 'label', label: 'Label', editable: true },
                 { key: 'value', label: 'Value', editable: true }
             ],
             data: data,
-        }).plug(new Y.Rednose.DataTableEditRowPlugin);
+        })
 
-        table.render(view.one('.control-group'));
-        view.one('.control-group').setStyle('width', '600px;');
+        this._table.render(view.one('.control-group'));
+        view.one('.control-group').setStyle('width', '630px;');
 
         this.prompt({
             title: 'Configure items: ' + this.get('model').get('caption'),
@@ -37,18 +39,36 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
             this.get('model').set('properties', properties);
         });
 
+        this._table.plug(Y.Rednose.DataTableEditRowPlugin);
+        this._table.plug(Y.Rednose.DataTableSelectPlugin);
+
         this.addButtons([
             {
                 value: '',
                 icon: 'icon-plus',
-                position: 'left'
-            },
-            {
+                position: 'left',
+                callback: function() {
+                    self._addItem();
+                }
+            }, {
                 value: '',
                 icon: 'icon-remove',
-                position: 'left'
+                position: 'left',
+                callback: function() {
+                    self._removeItem();
+                }
             }
         ]);
+    },
+
+    _addItem: function() {
+        var model = this._table.get('data');
+
+        model.add({ name: '', value: '' });
+    },
+
+    _removeItem: function() {
+        alert('delete');
     },
 
 }, {

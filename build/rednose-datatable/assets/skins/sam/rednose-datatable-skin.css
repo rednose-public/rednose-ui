@@ -7,3 +7,7 @@
 	background-color: #0088cc;
 	color: white;
 }
+
+input.rednose-datatable-input {
+    border: 0px solid white;
+}

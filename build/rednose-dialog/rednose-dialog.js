@@ -338,7 +338,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                 var button = {
                     name: buttonId,
                     title: options.value,
-                    classNames: classNames
+                    classNames: classNames,
+                    action: options.callback
                 }
 
                 this.get('panel').addButton(button);
