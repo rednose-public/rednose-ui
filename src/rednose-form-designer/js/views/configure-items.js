@@ -16,7 +16,6 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
             data = [];
 
         if (properties.choices) {
-            console.log(properties.choices);
             Y.Object.each(properties.choices, function (label, value) {
                 data.push({ label: label, value: value });
             });
@@ -81,7 +80,11 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
     },
 
     _removeItem: function() {
-        alert('delete');
+        var selectedRow = this._table.hasPlugin('selectable').getSelection();
+
+        if (selectedRow) {
+            selectedRow.destroy();
+        }
     },
 
 }, {

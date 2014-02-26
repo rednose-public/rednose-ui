@@ -213,13 +213,11 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
 
         this._renderFields();
 
-        console.log(table);
-
         model.before(['add', 'remove'], function() {
             self._updateModel();
         });
 
-        model.after('add', function() {
+        model.after(['add', 'remove'], function() {
             self._renderFields();
         });
     },
