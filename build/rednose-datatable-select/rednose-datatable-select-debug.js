@@ -199,20 +199,12 @@ DataTableEditRowPlugin.NAME = 'dataTableEditRowPlugin';
 
 /**
  * The namespace for the plugin.
- */
+0 */
 DataTableEditRowPlugin.NS = 'editable';
 
-/**
- * Static property used to define the default attribute configuration of the
- * plugin.
- */
-DataTableEditRowPlugin.ATTRS = {
-    rowsDeletable : {
-        value: false
-    }
-};
-
 Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
+
+    _activeInputNode: null,
 
     initializer: function() {
         var self  = this,
@@ -221,25 +213,34 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
 
         this._renderFields();
 
+        console.log(table);
+
+        model.before(['add', 'remove'], function() {
+            self._updateModel();
+        });
+
         model.after('add', function() {
             self._renderFields();
         });
+    },
 
-        table.after('render', function() {
-            alert('...');
-        });
+    getData: function() {
+        this._updateModel();
+
+        return this.get('host').get('data');
     },
 
     _renderFields: function(activeNode) {
-        var self    = this,
-            table   = this.get('host'),
-            columns = table.get('columns');
+        var self      = this,
+            table     = this.get('host'),
+            container = table.get('boundingBox'),
+            columns   = table.get('columns');
 
         Y.Array.each(columns, function(column) {
             var className = CSS_COLUMN + column.key;
 
             if (column.editable) {
-                Y.all('td.' + className).each(function(columnNode) {
+                container.all('td.' + className).each(function(columnNode) {
                     var rowModel = table.getRecord(
                         columnNode.ancestor('tr').getAttribute('data-yui3-record')
                     );
@@ -257,22 +258,31 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
 
         inputNode.set('value', nodeValue);
         inputNode.addClass(CSS_INPUTFIELD);
-
-        inputNode.on(['change', 'keyup'], function() {
-            self._fieldChange(inputNode, row, property);
-        });
+        inputNode.setAttribute('name', property);
+        inputNode.setData('model', row);
 
         node.setHTML('');
         node.append(inputNode);
     },
 
-    _fieldChange: function(node, row, property) {
-        row.set(
-            property,
-            node.get('value')
-        );
+    _updateModel: function() {
+        var table     = this.get('host'),
+            container = table.get('boundingBox'),
+            queue     = [];
 
-        this._renderFields(node);
+        container.all('input').each(function(node) {
+            queue.push({
+                model: node.getData('model'),
+                property: node.get('name'),
+                value: node.get('value')
+            });
+        });
+
+        Y.Array.each(queue, function(operation) {
+            operation.model.set(
+                operation.property, operation.value
+            );
+        });
     }
 });
 

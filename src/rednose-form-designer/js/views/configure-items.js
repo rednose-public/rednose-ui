@@ -16,8 +16,9 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
             data = [];
 
         if (properties.choices) {
-            Y.Array.each(properties.choices, function (choice) {
-                data.push(choice);
+            console.log(properties.choices);
+            Y.Object.each(properties.choices, function (label, value) {
+                data.push({ label: label, value: value });
             });
         }
 
@@ -36,7 +37,19 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
             title: 'Configure items: ' + this.get('model').get('caption'),
             html: view
         }, function(form) {
-            this.get('model').set('properties', properties);
+            var items = {},
+                properties = self.get('model').get('properties'),
+                modellist = self._table.hasPlugin('editable').getData()
+
+            modellist.each(function(model) {
+                items[model.get('value')] = model.get('label');
+            });
+
+            properties.choices = items;
+
+            self.get('model').set('properties', properties);
+
+            self.destroy();
         });
 
         this._table.plug(Y.Rednose.DataTableEditRowPlugin);
