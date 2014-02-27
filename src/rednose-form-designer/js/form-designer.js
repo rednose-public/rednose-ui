@@ -194,10 +194,17 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     _handleObjectAdd: function (e) {
+        var self = this;
         var dialog = new Y.Rednose.FormDesigner.ObjectLibraryView({
             model: this.get('model'),
             item: e.item
-        }).render();
+        });
+
+        dialog.on('destroy', function() {
+            self.showForm();
+        });
+
+        dialog.render();
     },
 
     /**

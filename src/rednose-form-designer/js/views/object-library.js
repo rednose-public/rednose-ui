@@ -18,7 +18,13 @@ ObjectLibrary = Y.Base.create('objectLibrary', Y.Widget, [], {
 
         for (var i in items) {
             navBar.on(items[i].id, function(e) {
-                self.fire('objectAdd', { item: items[i] });
+                var type = e.type.split(':')[1];
+
+                for (var y in items) {
+                    if (items[y].id == type) {
+                        self.fire('objectAdd', { item: items[y] });
+                    }
+                }
             });
         }
 
@@ -89,7 +95,8 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [ Y.Rednose.Dialo
 
     render: function() {
         var self      = this,
-            name      = '',
+            name      = this.get('item').title,
+            type      = this.get('item').id,
             view      = Y.Node.create(this.template),
             foreignId = view.one('#foreignId');
 
@@ -115,9 +122,13 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [ Y.Rednose.Dialo
                 caption: form.one('[data-path=name]').get('value'),
                 foreignId: form.one('[data-path=foreignId]').get('value'),
                 type: type
-             });
+            });
 
-            self.get('panel').destroy();
+            self.get('model').get('controls').add(
+                control
+            );
+
+            self.destroy();
         });
     },
 
@@ -147,7 +158,10 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [ Y.Rednose.Dialo
     }
 }, {
     ATTRS: {
+        /* The item from the objectLibrary */
         item: { value: {} },
+
+        /* The formModel */
         model: { value: null }
     }
 });
