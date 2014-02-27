@@ -25,74 +25,66 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [], {
         this._treeView = null;
     },
 
-    render: function () {
-        var container = this.get('container'),
-            model     = this.get('model'),
-            self      = this;
+    render: function (navBar, parentId) {
+        var self = this,
+            items = this.get('items'),
+            parentNode = navBar.getNode(parentId).get('parentNode');
 
-        this._treeView = new Y.Rednose.TreeView({
-            container : container,
-            model     : model,
-            selectable: true,
-            header    : TXT_OBJECT_LIBRARY
-        }).render();
+        navBar.createDropdown(parentNode, items);
 
-        this._treeView.after('select', function (e) {
-            e.node.unselect();
-
-            var model = e.node.data;
-
-            if (model && model instanceof Y.Model) {
-                self.fire(EVT_SELECT, { model: model });
-            }
-        });
+        for (var i in items) {
+            navBar.on(items[i].id, function() {
+                self._handleNewObject();
+            });
+        }
 
         return this;
+    },
+
+    _handleNewObject: function() {
+        alert('Clicked');
     }
 }, {
     ATTRS: {
-        model: {
-            value: new Y.Rednose.ModelTree({
-                items: [
-                    {
-                        label   : 'Text',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-text'
-                    }, {
-                        label   : 'Text Area',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-textarea'
-                    }, {
-                        label   : 'Rich Text',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-textarea'
-                    }, {
-                        label   : 'Drop-down List',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-dropdown'
-                    }, {
-                        label   : 'Radio Button',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-radio'
-                    }, {
-                        label   : 'Checkbox',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-checkbox'
-                    }, {
-                        label   : 'Date',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-date'
-                    }, {
-                        label   : 'Autocomplete',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-dropdown'
-                    }, {
-                        label   : 'File',
-                        data    : new Y.Model(),
-                        icon    : 'rednose-icon-dropdown'
-                    }
-                ]
-            })
+        items: {
+            value:
+                [{
+                    id    : 'text',
+                    title : 'Text',
+                    icon  : 'rednose-icon-text'
+                }, {
+                    id    : 'textarea',
+                    title : 'Text Area',
+                    icon  : 'rednose-icon-textarea'
+                }, {
+                    id    : 'richtext',
+                    title : 'Rich Text',
+                    icon  : 'rednose-icon-textarea'
+                }, {
+                    id    : 'dropdown',
+                    title : 'Drop-down List',
+                    icon  : 'rednose-icon-dropdown'
+                }, {
+                    id    : 'radio',
+                    title : 'Radio Button',
+                    icon  : 'rednose-icon-radio'
+                }, {
+                    id    : 'checkbox',
+                    title : 'Checkbox',
+                    icon  : 'rednose-icon-checkbox'
+                }, {
+                    id    : 'date',
+                    title : 'Date',
+                    icon  : 'rednose-icon-date'
+                }, {
+                    id    : 'autocomplete',
+                    title : 'Autocomplete',
+                    icon  : 'rednose-icon-dropdown'
+                }, {
+                    id    : 'file',
+                    title : 'File',
+                    icon  : 'rednose-icon-dropdown'
+                }]
         }
     }
 });

@@ -18,7 +18,7 @@ ControlModel = Y.Base.create('controlModel', Y.Model, [], {
 }, {
     ATTRS: {
         caption   : { value: null },
-        foreign_id: { value: null },
+        foreignId : { value: null },
         type      : { value: null },
         properties: {
             value : {},
@@ -98,7 +98,7 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
 }, {
     ATTRS: {
         caption   : { value: null },
-        foreign_id: { value: null },
+        foreignId : { value: null },
         controls  : {
             value : new Y.ModelList(),
             setter: '_setControls'

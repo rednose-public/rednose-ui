@@ -186,6 +186,18 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     createDropdown: function (node, items) {
         var self = this;
 
+        // Convert this node to a dropdown-toggle if it isn't one yet.
+        if (node.one('.dropdown-menu') === null) {
+            node.removeClass('nav-item');
+            node.addClass('dropdown');
+
+            node.one('a').addClass('dropdown-toggle');
+            node.one('a').append('&nbsp;');
+            node.one('a').append('<b class="caret"></b>');
+
+            node.append(Y.Node.create('<ul class="dropdown-menu"></ul>'));
+        }
+
         Y.Array.each(items, function (i) {
             var li = self._createLi(i, node);
 

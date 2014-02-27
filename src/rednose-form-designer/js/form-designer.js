@@ -31,7 +31,6 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._dataSourcesView.addTarget(this);
 
         this.after('hierarchyView:select', this._handleControlSelect, this);
-        this.after('objectLibraryView:select', this._handleObjectAdd, this);
 
         this.after('objectAttributesView:typeChange', this._handleObjectTypeChange, this);
         this.after('objectAttributesView:configureItems', this._handleConfigureItems, this);
@@ -80,7 +79,8 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this._navbar.render(this.get('container'));
 
-        this.get('gridLeft').append(this._objectLibraryView.render().get('container'));
+        this._objectLibraryView.render(this._navbar, 'insert');
+
         this.get('gridLeft').append(this._hierarchyView.render().get('container'));
         this.get('gridLeft').append(this._dataSourcesView.render().get('container'));
         this.get('gridRight').append(this._objectAttributesView.render().get('container'));
@@ -105,7 +105,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
                     { id: 'save', title: 'Save' },
                     { title: '-' },
                     { id: 'closeDesigner', title: 'Close' }
-                ]}
+                ]}, {
+                    id: 'insert', title: 'Insert'
+                }
             ],
             menuSecondary: [
                 { title: YUI.Env.user.name, icon: 'user', items: [
