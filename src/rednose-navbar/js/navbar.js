@@ -202,10 +202,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             node.one('.dropdown-menu').append(li);
         });
 
-        node.all('.dropdown-menu a').on('click', function (e) {
-            self._handleClick(e);
-        });
-
         node.one('a').plug(Y.Bootstrap.Dropdown);
 
         node.all('a').on('click', function (e) {

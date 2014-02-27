@@ -9,28 +9,30 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     views: {
         form: {
             type: Y.Rednose.FormDesigner.FormView
-        },
+        }
     },
 
     _navbar: null,
 
-    _objectLibraryView   : null,
+    _objectLibrary       : null,
     _hierarchyView       : null,
     _objectAttributesView: null,
     _dataSourcesView     : null,
 
     initializer: function () {
-        this._objectLibraryView    = new Y.Rednose.FormDesigner.ObjectLibraryView();
+        this._objectLibrary        = new Y.Rednose.FormDesigner.ObjectLibrary();
         this._hierarchyView        = new Y.Rednose.FormDesigner.HierarchyView();
         this._objectAttributesView = new Y.Rednose.FormDesigner.ObjectAttributesView();
         this._dataSourcesView      = new Y.Rednose.FormDesigner.DataSourcesView();
 
-        this._objectLibraryView.addTarget(this);
+        this._objectLibrary.addTarget(this);
         this._hierarchyView.addTarget(this);
         this._objectAttributesView.addTarget(this);
         this._dataSourcesView.addTarget(this);
 
         this.after('hierarchyView:select', this._handleControlSelect, this);
+
+        this.after('objectLibrary:objectAdd', this._handleObjectAdd, this);
 
         this.after('objectAttributesView:typeChange', this._handleObjectTypeChange, this);
         this.after('objectAttributesView:configureItems', this._handleConfigureItems, this);
@@ -58,8 +60,8 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this._navbar.destroy();
         this._navbar = null;
 
-        this._objectLibraryView.destroy();
-        this._objectLibraryView = null;
+        this._objectLibrary.destroy();
+        this._objectLibrary = null;
 
         this._hierarchyView.destroy();
         this._hierarchyView = null;
@@ -79,7 +81,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this._navbar.render(this.get('container'));
 
-        this._objectLibraryView.render(this._navbar, 'insert');
+        this._objectLibrary.render(this._navbar, 'insert');
 
         this.get('gridLeft').append(this._hierarchyView.render().get('container'));
         this.get('gridLeft').append(this._dataSourcesView.render().get('container'));
@@ -191,12 +193,11 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         dialog.render();
     },
 
-    _handleObjectAdd: function () {
-        var formModel   = this.get('model'),
-            controlList = formModel.get('controls');
-
-        // For now, always add a text control.
-        controlList.add(new Y.Rednose.Form.ControlModel({ type: 'text' }));
+    _handleObjectAdd: function (e) {
+        var dialog = new Y.Rednose.FormDesigner.ObjectLibraryView({
+            model: this.get('model'),
+            item: e.item
+        }).render();
     },
 
     /**
