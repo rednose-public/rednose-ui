@@ -5,12 +5,23 @@ var TreeModel = Y.Rednose.ModelTree,
 
 ControlModel = Y.Base.create('controlModel', Y.Model, [], {
     view: {},
+
+    _setProperty: function(value) {
+        if (Array.isArray(value)) {
+            return {};
+        } else {
+            return value;
+        }
+    },
 }, {
     ATTRS: {
         caption   : { value: null },
         foreign_id: { value: null },
         type      : { value: null },
-        properties: { value: {} },
+        properties: {
+            value : {},
+            setter: '_setProperty'
+        },
         required  : { value: false },
         visible   : { value: true },
         protected : { value: false },
