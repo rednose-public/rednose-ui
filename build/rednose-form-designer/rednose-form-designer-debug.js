@@ -310,19 +310,15 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
             header    : TXT_HIERARCHY
         });
 
-        // Y.Array.each(this._treeView.rootNode.children, function (node) {
-        //     node.open();
-        // });
-
         this._treeView.render();
 
         this._treeView.after('select', function (e) {
-            e.node.unselect();
-
             var model = e.node.data;
 
             if (model && model instanceof Y.Rednose.Form.ControlModel) {
                 self.fire(EVT_SELECT, { model: model });
+            } else {
+                self.fire(EVT_SELECT, { model: null });
             }
         });
 
@@ -544,6 +540,8 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
         '</form>'
     ),
 
+    emptyTemplate: '<div class="alert alert-info">No attributes available</div>',
+
     events: {
         'form': {
             change: '_handleFormChange'
@@ -555,11 +553,6 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     render: function () {
-        // var container = this.get('container'),
-        //     template  = this.template;
-
-        // container.setHTML(template);
-
         this._renderForm();
 
         return this;
@@ -571,9 +564,14 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
             container = this.get('container');
 
         container.empty();
-        container.append(this.formTemplate(model.getAttrs()));
 
-        this._renderTypeOptions();
+        if (model) {
+            container.append(this.formTemplate(model.getAttrs()));
+
+            this._renderTypeOptions();
+        } else {
+            container.append(this.emptyTemplate);
+        }
     },
 
     _renderTypeOptions: function () {
@@ -614,7 +612,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
 }, {
     ATTRS: {
-        model: { value: new Y.Rednose.Form.ControlModel() }
+        model: { value: null }
     }
 });
 
@@ -938,10 +936,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             if (model.view instanceof Y.Rednose.Form.BaseControlView) {
                 model.view.focus();
             }
-
-            this._objectAttributesView.set('model', model);
-            this._objectAttributesView.render();
         }
+
+        this._objectAttributesView.set('model', model);
+        this._objectAttributesView.render();
     },
 
     _handleObjectTypeChange: function() {

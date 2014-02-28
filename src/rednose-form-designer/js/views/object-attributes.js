@@ -101,6 +101,8 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
         '</form>'
     ),
 
+    emptyTemplate: '<div class="alert alert-info">No attributes available</div>',
+
     events: {
         'form': {
             change: '_handleFormChange'
@@ -112,11 +114,6 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     render: function () {
-        // var container = this.get('container'),
-        //     template  = this.template;
-
-        // container.setHTML(template);
-
         this._renderForm();
 
         return this;
@@ -128,9 +125,14 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
             container = this.get('container');
 
         container.empty();
-        container.append(this.formTemplate(model.getAttrs()));
 
-        this._renderTypeOptions();
+        if (model) {
+            container.append(this.formTemplate(model.getAttrs()));
+
+            this._renderTypeOptions();
+        } else {
+            container.append(this.emptyTemplate);
+        }
     },
 
     _renderTypeOptions: function () {
@@ -171,7 +173,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
 }, {
     ATTRS: {
-        model: { value: new Y.Rednose.Form.ControlModel() }
+        model: { value: null }
     }
 });
 

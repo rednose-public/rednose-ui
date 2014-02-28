@@ -41,19 +41,15 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
             header    : TXT_HIERARCHY
         });
 
-        // Y.Array.each(this._treeView.rootNode.children, function (node) {
-        //     node.open();
-        // });
-
         this._treeView.render();
 
         this._treeView.after('select', function (e) {
-            e.node.unselect();
-
             var model = e.node.data;
 
             if (model && model instanceof Y.Rednose.Form.ControlModel) {
                 self.fire(EVT_SELECT, { model: model });
+            } else {
+                self.fire(EVT_SELECT, { model: null });
             }
         });
 

@@ -172,10 +172,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             if (model.view instanceof Y.Rednose.Form.BaseControlView) {
                 model.view.focus();
             }
-
-            this._objectAttributesView.set('model', model);
-            this._objectAttributesView.render();
         }
+
+        this._objectAttributesView.set('model', model);
+        this._objectAttributesView.render();
     },
 
     _handleObjectTypeChange: function() {
