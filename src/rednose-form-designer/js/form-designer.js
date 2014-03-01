@@ -112,7 +112,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
                 }
             ],
             menuSecondary: [
-                { title: YUI.Env.user.name, icon: 'user', items: [
+                { title: YUI.Env.user.name, icon: 'icon-user', items: [
                     {
                         url  : Routing.generate('_security_logout'),
                         title: 'Sign out'

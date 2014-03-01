@@ -32,6 +32,16 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     formTemplate: Micro.compile(
         '<form class="form-vertical">'+
             '<fieldset>' +
+                // The form control type.
+                '<div class="control-group">' +
+                    '<label class="control-label" for="type">Type</label>' +
+                    '<div class="controls">' +
+                        '<select class="input-block-level" id="type"></select>' +
+                    '</div>' +
+                '</div>' +
+
+                // The form control identification.
+                '<hr/>' +
                 '<div class="control-group">' +
                     '<label class="control-label" for="id">Identifier</label>' +
                     '<div class="controls">' +
@@ -44,31 +54,15 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                         '<input class="input-block-level" id="caption" type="text" value="<%= data.caption %>"/>' +
                     '</div>' +
                 '</div>' +
+
+                // Attributes present on all control types.
+                '<hr/>' +
                 '<div class="control-group">' +
                     '<label class="control-label" for="value">Value</label>' +
                     '<div class="controls">' +
                         '<input class="input-block-level" id="value" type="text" value="<%= data.value %>"/>' +
                     '</div>' +
                 '</div>' +
-                '<hr/>' +
-                '<div class="control-group">' +
-                    '<label class="control-label" for="type">Type</label>' +
-                    '<div class="controls">' +
-                        '<select class="input-block-level" id="type"></select>' +
-                    '</div>' +
-                '</div>' +
-
-                // Configure items button
-                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
-                    '<div class="control-group">' +
-                        '<label class="control-label" for="type"></label>' +
-                        '<div class="controls">' +
-                            '<input type="button" class="btn" value="Configure items" id="configureItems" />' +
-                        '</div>' +
-                    '</div>' +
-                '<% } %>' +
-
-                '<hr/>' +
                 '<div class="control-group">' +
                     '<div class="controls">' +
                         '<label class="checkbox">' +
@@ -97,6 +91,29 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                         '</label>' +
                     '</div>' +
                 '</div>' +
+
+                // Add a spacer if this section has specific attributes.
+                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
+                    '<hr/>' +
+                '<% } %>' +
+
+                // Attributes that are specific to this control type.
+                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
+                    '<div class="control-group">' +
+                        '<label class="control-label" for="configureItems">Items</label>' +
+                        '<div class="controls">' +
+                            '<div class="input-append">' +
+                                '<input type="text" id="items" readonly ' +
+                                    'value="<%= data.properties.choices ? Y.Object.keys(data.properties.choices).length : 0 %> items"' +
+                                '>' +
+                                '<button class="btn" id="configureItems" type="button" title="Configure Items"><i class="icon-cog"></i></button>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '<% } %>' +
+
+                // TODO: Data binding options.
+                // TODO: Form connections.
             '<fieldset>' +
         '</form>'
     ),
@@ -120,8 +137,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     _renderForm: function () {
-        var self      = this,
-            model     = this.get('model'),
+        var model     = this.get('model'),
             container = this.get('container');
 
         container.empty();
@@ -160,7 +176,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
         this.get('model').set(id, value);
 
-        if (id == 'type') {
+        if (id === 'type') {
             this.fire('typeChange');
         }
     },

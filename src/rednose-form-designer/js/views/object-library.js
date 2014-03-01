@@ -80,7 +80,7 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [ Y.Rednose.Dialo
     template:
         '<div>' +
         '   <div class="control-group">' +
-        '       <label for="input" class="control-label">Name</label>' +
+        '       <label for="input" class="control-label">Caption</label>' +
         '       <div class="controls">' +
         '           <input type="text" data-path="name" value="" id="name">' +
         '       </div>' +
