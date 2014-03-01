@@ -49,10 +49,6 @@ DataSourcesView = Y.Base.create('dataSourcesView', Y.View, [], {
                 header    : TXT_DATA_SOURCES
             });
 
-            // Y.Array.each(self._treeView.rootNode.children, function (node) {
-            //     node.open();
-            // });
-
             self._treeView.render();
         });
 
