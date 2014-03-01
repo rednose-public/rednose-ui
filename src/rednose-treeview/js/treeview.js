@@ -329,6 +329,11 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
             htmlNode  = this.getHTMLNode(e.node);
 
         htmlNode.one('.' + CSS_TREEVIEW_ICON).set('className', this.icon(node));
+
+        // Invert icon if this node is selected.
+        if (htmlNode.hasClass('yui3-treeview-selected')) {
+            htmlNode.one('.' + CSS_TREEVIEW_ICON).addClass(CSS_BOOTSTRAP_ICON_WHITE);
+        }
     },
 
     _handleExpand: function (e) {
