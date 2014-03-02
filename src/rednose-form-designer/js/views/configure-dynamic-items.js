@@ -176,6 +176,7 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
         this._subtitleSelect   = null;
         this._imageSelect      = null;
         this._valueSelect      = null;
+        this._identifierMap    = null;
     },
 
     render: function () {
@@ -219,6 +220,7 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
             properties.datasource = undefined;
         } else {
             properties.datasource || (properties.datasource = {});
+
             properties.datasource.id = this._dataSourceSelect.get('value');
 
             var map = {};
