@@ -2,7 +2,9 @@
 
 var TXT_NAVBAR_CAPTION = 'Form Designer';
 
-var DataSourceManager = Y.Rednose.DataSourceManager.DataSourceManager,
+var ConfigureDynamicItemsView = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
+    DataSourceManager         = Y.Rednose.DataSourceManager.DataSourceManager,
+    Panel                     = Y.Rednose.Panel,
     FormDesigner;
 
 FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeColumn ], {
@@ -36,6 +38,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this.after('objectAttributesView:typeChange', this._handleObjectTypeChange, this);
         this.after('objectAttributesView:configureItems', this._handleConfigureItems, this);
+        this.after('objectAttributesView:configureDynamicItems', this._handleConfigureDynamicItems, this);
 
         this._initNavbar();
 
@@ -185,12 +188,47 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         });
     },
 
-    _handleConfigureItems: function(config) {
+    _handleConfigureItems: function (e) {
         var dialog = new Y.Rednose.FormDesigner.ConfigureItems({
-            model: config.model
+            model: e.model
         });
 
         dialog.render();
+    },
+
+    /**
+    Shows a modal view where the items for this collection can be configured
+    dynamically, by specifying a mapping to data source attributes.
+
+    @method _handleConfigureDynamicItems
+    @param {EventFacade} e Event containing the control model.
+    @protected
+    **/
+    _handleConfigureDynamicItems: function (e) {
+        var model = e.model;
+
+        if (!model) {
+            return;
+        }
+
+        var dataSourceList = this._dataSourcesView.get('modelList'),
+            view,
+            panel;
+
+        view = new ConfigureDynamicItemsView({
+            model         : model,
+            dataSourceList: dataSourceList
+        }).render();
+
+        panel = new Panel({
+            srcNode: view.get('container'),
+            width  : 500
+        }).render();
+
+        view.on(['close', 'ok'], function () {
+            view.destroy();
+            panel.destroy();
+        });
     },
 
     _handleObjectAdd: function (e) {

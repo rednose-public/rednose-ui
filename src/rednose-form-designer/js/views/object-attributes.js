@@ -93,20 +93,22 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 '</div>' +
 
                 // Add a spacer if this section has specific attributes.
-                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
+                '<% if (data.type == \'dropdown\' || data.type == \'radio\' || data.type == \'autocomplete\') { %>' +
                     '<hr/>' +
                 '<% } %>' +
 
                 // Attributes that are specific to this control type.
-                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
+                '<% if (data.type == \'dropdown\' || data.type == \'radio\' || data.type == \'autocomplete\') { %>' +
                     '<div class="control-group">' +
                         '<label class="control-label" for="configureItems">Items</label>' +
                         '<div class="controls">' +
                             '<div class="input-append">' +
-                                '<input type="text" id="items" readonly ' +
+                                '<input class="rednose-combo-block-level" type="text" id="items" readonly ' +
                                     'value="<%= data.properties.choices ? Y.Object.keys(data.properties.choices).length : 0 %> items"' +
                                 '>' +
-                                '<button class="btn" id="configureItems" type="button" title="Configure Items"><i class="icon-cog"></i></button>' +
+                                '<button class="btn dropdown-toggle" id="configureItemsList" type="button" title="Configure Items">' +
+                                    '<i class="icon-cog"></i> <span class="caret"></span></button>' +
+                                '</button>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
@@ -123,11 +125,12 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     events: {
         'form': {
             change: '_handleFormChange'
-        },
-
-        '#configureItems': {
-            click: '_handleConfigureItems'
         }
+    },
+
+    initializer: function () {
+        this.on('dropdown:configureItems', this._handleConfigureItems, this);
+        this.on('dropdown:configureDynamicItems', this._handleConfigureDynamicItems, this);
     },
 
     render: function () {
@@ -144,6 +147,18 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
         if (model) {
             container.append(this.formTemplate(model.getAttrs()));
+
+            var configureItemsListButton = container.one('#configureItemsList');
+
+            if (configureItemsListButton) {
+                configureItemsListButton.plug(Y.Rednose.Dropdown, {
+                    content: [
+                        { id: 'configureItems', title: 'Items', icon: 'icon-align-justify' },
+                        { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' },
+                    ]
+                });
+                configureItemsListButton.dropdown.addTarget(this);
+            }
 
             this._renderTypeOptions();
         } else {
@@ -181,12 +196,17 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
         }
     },
 
-    _handleConfigureItems: function() {
+    _handleConfigureItems: function () {
         this.fire('configureItems', {
             model: this.get('model')
         });
-    }
+    },
 
+    _handleConfigureDynamicItems: function () {
+        this.fire('configureDynamicItems', {
+            model: this.get('model')
+        });
+    }
 }, {
     ATTRS: {
         model: { value: null }

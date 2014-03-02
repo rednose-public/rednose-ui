@@ -98,6 +98,345 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
 Y.namespace('Rednose.FormDesigner').ConfigureItems = ConfigureItems;
 /*jshint boss:true, expr:true, onevar:false */
 
+/**
+Shows a modal view where the items for this collection can be configured
+dynamically, by specifying a mapping to data source attributes.
+**/
+
+var FormModel      = Y.Rednose.Form.FormModel,
+    DataSourceList = Y.Rednose.DataSource.DataSourceList,
+
+    TXT_DYNAMIC_ITEMS_TITLE = 'Dynamic Items',
+    TXT_BUTTON_CANCEL       = 'Cancel',
+    TXT_BUTTON_OK           = 'OK',
+    TXT_OPTION_NONE         = 'None',
+
+    /**
+     * Fires when the dialog is closed and the changes should be purged.
+     * @event configureDynamicItemsView:close
+     * @type {CustomEvent}
+     */
+    EVT_CLOSE = 'close',
+
+    /**
+     * Fires when the dialog is closed and the changes should be persisted.
+     * @event configureDynamicItemsView:ok
+     * @type {CustomEvent}
+     */
+    EVT_OK = 'ok';
+
+/**
+Shows a modal view where the items for this collection can be configured
+dynamically, by specifying a mapping to data source attributes.
+**/
+var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.View, [ Y.Rednose.View.Nav ], {
+
+    /**
+    Property inherited from Rednose.View.Nav
+    **/
+    close: true,
+
+    /**
+    Property inherited from Rednose.View.Nav
+    **/
+    title: TXT_DYNAMIC_ITEMS_TITLE,
+
+    /**
+    Property inherited from Rednose.View.Nav
+    **/
+    buttons: {
+        ok: {
+            value:    TXT_BUTTON_OK,
+            position: 'right',
+            primary:   true
+        },
+
+        close: {
+            value:    TXT_BUTTON_CANCEL,
+            position: 'right'
+        }
+    },
+
+    /**
+    View event handlers
+    **/
+    events: {
+        '#dataSource': {
+            change: '_handleDataSourceSelectChange'
+        }
+    },
+
+    OPTION_TEMPLATE: '<option value="{value}">{label}</option>',
+
+    /**
+    Base Template.
+    **/
+    template:
+        '<form class="form-horizontal">' +
+            '<fieldset>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="dataSource">Data Source</label>' +
+                    '<div class="controls">' +
+                        '<select class="input-block-level" id="dataSource"></select>' +
+                    '</div>' +
+                '</div>' +
+                '<hr/>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="title">Title</label>' +
+                    '<div class="controls">' +
+                        '<select class="input-block-level" id="title"></select>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="subtitle">Subtitle</label>' +
+                    '<div class="controls">' +
+                        '<select class="input-block-level" id="subtitle"></select>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="image">Image</label>' +
+                    '<div class="controls">' +
+                        '<select class="input-block-level" id="image"></select>' +
+                    '</div>' +
+                '</div>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="value">Value</label>' +
+                    '<div class="controls">' +
+                        '<select class="input-block-level" id="value"></select>' +
+                    '</div>' +
+                '</div>' +
+            '</fieldset>' +
+        '</form>',
+
+    /**
+    @property _dataSourceSelect
+    @type Node
+    @protected
+    **/
+    _dataSourceSelect: null,
+
+    /**
+    @property _titleSelect
+    @type Node
+    @protected
+    **/
+    _titleSelect: null,
+
+    /**
+    @property _subtitleSelect
+    @type Node
+    @protected
+    **/
+    _subtitleSelect: null,
+
+    /**
+    @property _imageSelect
+    @type Node
+    @protected
+    **/
+    _imageSelect: null,
+
+    /**
+    @property _valueSelect
+    @type Node
+    @protected
+    **/
+    _valueSelect: null,
+
+    /**
+    Stores references to data sources to retrieve them by identifier (foreign ID)
+
+    @property _identifierMap
+    @type Object
+    @protected
+    **/
+    _identifierMap: {},
+
+    initializer: function () {
+        var container = this.get('container'),
+            template  = this.template;
+
+        container.setHTML(template);
+
+        this._dataSourceSelect = container.one('#dataSource');
+        this._titleSelect      = container.one('#title');
+        this._subtitleSelect   = container.one('#subtitle');
+        this._imageSelect      = container.one('#image');
+        this._valueSelect      = container.one('#value');
+
+        this.on('configureDynamicItemsView:buttonClose', this._handleButtonClose, this);
+        this.on('configureDynamicItemsView:buttonOk', this._handleButtonOk, this);
+    },
+
+    destructor: function () {
+        this._dataSourceSelect = null;
+        this._titleSelect      = null;
+        this._subtitleSelect   = null;
+        this._imageSelect      = null;
+        this._valueSelect      = null;
+    },
+
+    render: function () {
+        var properties     = this.get('model').get('properties'),
+            dataSourceList = this.get('dataSourceList'),
+            self           = this;
+
+        this._identifierMap = {};
+
+        this._updateSelectNode(this._dataSourceSelect, dataSourceList.map(function (dataSource) {
+            self._identifierMap[dataSource.get('identifier')] = dataSource;
+
+            return {
+                value: dataSource.get('identifier'),
+                label: dataSource.get('name')
+            };
+        }));
+
+        // Handle current model state.
+        if (properties.datasource) {
+            this._dataSourceSelect.set('value', properties.datasource.id);
+        }
+
+        this._handleDataSourceSelectChange();
+
+        return this;
+    },
+
+    /**
+    Binds the view data to the model.
+
+    @method _bindView
+    @protected
+    **/
+    _bindView: function () {
+        // Perform all changes on a clone of the properties object, so we don't trigger model changes for every update.
+        var model      = this.get('model'),
+            properties = Y.clone(model.get('properties'));
+
+        if (this._dataSourceSelect.get('value') === '0') {
+            properties.datasource = undefined;
+        } else {
+            properties.datasource || (properties.datasource = {});
+            properties.datasource.id = this._dataSourceSelect.get('value');
+
+            var map = {};
+
+            this._titleSelect.get('value')    !== '0' && (map.title    = this._titleSelect.get('value'));
+            this._subtitleSelect.get('value') !== '0' && (map.subtitle = this._subtitleSelect.get('value'));
+            this._imageSelect.get('value')    !== '0' && (map.image    = this._imageSelect.get('value'));
+            this._valueSelect.get('value')    !== '0' && (map.value    = this._valueSelect.get('value'));
+
+            Y.Object.isEmpty(map) ? properties.datasource.map = undefined : properties.datasource.map = map;
+        }
+
+        // Update the model, firing only a single change event.
+        model.set('properties', properties);
+    },
+
+    /**
+    @method _updateSelectNode
+    @param {Node} node Select node
+    @param {Array} data Option data
+    @protected
+    **/
+    _updateSelectNode: function (node, data) {
+        data || (data = []);
+
+        var self = this;
+
+        node.empty();
+
+        node.append(Y.Lang.sub(this.OPTION_TEMPLATE, {
+            value: 0,
+            label: TXT_OPTION_NONE
+        }));
+
+        Y.Array.each(data, function (result) {
+            node.append(Y.Lang.sub(self.OPTION_TEMPLATE, {
+                value: result.value,
+                label: result.label
+            }));
+        });
+    },
+
+    /**
+    @method _handleDataSourceSelectChange
+    @protected
+    **/
+    _handleDataSourceSelectChange: function () {
+        var value       = this._dataSourceSelect.get('value'),
+            optionData  = [];
+
+        if (value !== '0') {
+            var dataSource = this._identifierMap[value],
+                attributes = dataSource.get('attributes');
+
+            optionData = Y.Array.map(attributes, function (attribute) {
+                return {
+                    value: attribute.get('name'),
+                    label: attribute.get('name')
+                };
+            });
+        }
+
+        this._updateSelectNode(this._titleSelect, optionData);
+        this._updateSelectNode(this._subtitleSelect, optionData);
+        this._updateSelectNode(this._imageSelect, optionData);
+        this._updateSelectNode(this._valueSelect, optionData);
+
+        // Handle current model state.
+        var properties = this.get('model').get('properties'),
+            map;
+
+        if (!properties.datasource || !properties.datasource.map) {
+            return;
+        }
+
+        if (value === properties.datasource.id) {
+            map = properties.datasource.map;
+
+            this._titleSelect.set('value', map.title || '0');
+            this._subtitleSelect.set('value', map.subtitle || '0');
+            this._imageSelect.set('value', map.image || '0');
+            this._valueSelect.set('value', map.value || '0');
+        }
+    },
+
+    /**
+    @method _handleButtonClose
+    @protected
+    **/
+    _handleButtonClose: function () {
+        this.fire(EVT_CLOSE);
+    },
+
+    /**
+    @method _handleButtonOk
+    @protected
+    **/
+    _handleButtonOk: function () {
+        var model = this.get('model');
+
+        this._bindView();
+
+        this.fire(EVT_OK, { model: model });
+    }
+}, {
+    ATTRS: {
+        model: {
+            value: new FormModel()
+        },
+
+        dataSourceList: {
+            value: new DataSourceList()
+        }
+    }
+});
+
+// -- Namespace ----------------------------------------------------------------
+Y.namespace('Rednose.FormDesigner').ConfigureDynamicItemsView = ConfigureDynamicItemsView;
+/*jshint boss:true, expr:true, onevar:false */
+
 var TXT_OBJECT_LIBRARY = 'Object Library';
 
 var EVT_SELECT = 'select';
@@ -533,20 +872,22 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 '</div>' +
 
                 // Add a spacer if this section has specific attributes.
-                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
+                '<% if (data.type == \'dropdown\' || data.type == \'radio\' || data.type == \'autocomplete\') { %>' +
                     '<hr/>' +
                 '<% } %>' +
 
                 // Attributes that are specific to this control type.
-                '<% if (data.type == \'dropdown\' || data.type == \'radio\') { %>' +
+                '<% if (data.type == \'dropdown\' || data.type == \'radio\' || data.type == \'autocomplete\') { %>' +
                     '<div class="control-group">' +
                         '<label class="control-label" for="configureItems">Items</label>' +
                         '<div class="controls">' +
                             '<div class="input-append">' +
-                                '<input type="text" id="items" readonly ' +
+                                '<input class="rednose-combo-block-level" type="text" id="items" readonly ' +
                                     'value="<%= data.properties.choices ? Y.Object.keys(data.properties.choices).length : 0 %> items"' +
                                 '>' +
-                                '<button class="btn" id="configureItems" type="button" title="Configure Items"><i class="icon-cog"></i></button>' +
+                                '<button class="btn dropdown-toggle" id="configureItemsList" type="button" title="Configure Items">' +
+                                    '<i class="icon-cog"></i> <span class="caret"></span></button>' +
+                                '</button>' +
                             '</div>' +
                         '</div>' +
                     '</div>' +
@@ -563,11 +904,12 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     events: {
         'form': {
             change: '_handleFormChange'
-        },
-
-        '#configureItems': {
-            click: '_handleConfigureItems'
         }
+    },
+
+    initializer: function () {
+        this.on('dropdown:configureItems', this._handleConfigureItems, this);
+        this.on('dropdown:configureDynamicItems', this._handleConfigureDynamicItems, this);
     },
 
     render: function () {
@@ -584,6 +926,18 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
         if (model) {
             container.append(this.formTemplate(model.getAttrs()));
+
+            var configureItemsListButton = container.one('#configureItemsList');
+
+            if (configureItemsListButton) {
+                configureItemsListButton.plug(Y.Rednose.Dropdown, {
+                    content: [
+                        { id: 'configureItems', title: 'Items', icon: 'icon-align-justify' },
+                        { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' },
+                    ]
+                });
+                configureItemsListButton.dropdown.addTarget(this);
+            }
 
             this._renderTypeOptions();
         } else {
@@ -621,12 +975,17 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
         }
     },
 
-    _handleConfigureItems: function() {
+    _handleConfigureItems: function () {
         this.fire('configureItems', {
             model: this.get('model')
         });
-    }
+    },
 
+    _handleConfigureDynamicItems: function () {
+        this.fire('configureDynamicItems', {
+            model: this.get('model')
+        });
+    }
 }, {
     ATTRS: {
         model: { value: null }
@@ -783,7 +1142,9 @@ Y.namespace('Rednose.FormDesigner').FormView = FormView;
 
 var TXT_NAVBAR_CAPTION = 'Form Designer';
 
-var DataSourceManager = Y.Rednose.DataSourceManager.DataSourceManager,
+var ConfigureDynamicItemsView = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
+    DataSourceManager         = Y.Rednose.DataSourceManager.DataSourceManager,
+    Panel                     = Y.Rednose.Panel,
     FormDesigner;
 
 FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeColumn ], {
@@ -817,6 +1178,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this.after('objectAttributesView:typeChange', this._handleObjectTypeChange, this);
         this.after('objectAttributesView:configureItems', this._handleConfigureItems, this);
+        this.after('objectAttributesView:configureDynamicItems', this._handleConfigureDynamicItems, this);
 
         this._initNavbar();
 
@@ -966,12 +1328,47 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         });
     },
 
-    _handleConfigureItems: function(config) {
+    _handleConfigureItems: function (e) {
         var dialog = new Y.Rednose.FormDesigner.ConfigureItems({
-            model: config.model
+            model: e.model
         });
 
         dialog.render();
+    },
+
+    /**
+    Shows a modal view where the items for this collection can be configured
+    dynamically, by specifying a mapping to data source attributes.
+
+    @method _handleConfigureDynamicItems
+    @param {EventFacade} e Event containing the control model.
+    @protected
+    **/
+    _handleConfigureDynamicItems: function (e) {
+        var model = e.model;
+
+        if (!model) {
+            return;
+        }
+
+        var dataSourceList = this._dataSourcesView.get('modelList'),
+            view,
+            panel;
+
+        view = new ConfigureDynamicItemsView({
+            model         : model,
+            dataSourceList: dataSourceList
+        }).render();
+
+        panel = new Panel({
+            srcNode: view.get('container'),
+            width  : 500
+        }).render();
+
+        view.on(['close', 'ok'], function () {
+            view.destroy();
+            panel.destroy();
+        });
     },
 
     _handleObjectAdd: function (e) {
@@ -1115,6 +1512,7 @@ Y.namespace('Rednose.FormDesigner').FormDesigner = FormDesigner;
         "rednose-datatable-select",
         "rednose-datasource-manager",
         "rednose-dialog",
+        "rednose-dropdown",
         "rednose-form",
         "rednose-form-designer-css",
         "rednose-navbar",
