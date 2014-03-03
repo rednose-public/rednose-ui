@@ -57,9 +57,10 @@ FormView = Y.Base.create('formView', Y.View, [], {
     },
 
     _renderControl: function (control) {
-        var container   = this.get('container'),
-            controlView = Y.Rednose.Form.ControlViewFactory.create(control),
-            self        = this;
+        var container        = this.get('container'),
+            controlView      = Y.Rednose.Form.ControlViewFactory.create(control),
+            controlContainer = controlView.render().get('container'),
+            self             = this;
 
         if (controlView) {
             self._controlViewMap[control.get('id')] = controlView;
@@ -84,10 +85,64 @@ FormView = Y.Base.create('formView', Y.View, [], {
             //     });
             // }
 
-            container.one('fieldset').append(controlView.render().get('container'));
+
+            var dd = new Y.DD.Drag({
+                node: controlContainer,
+                group: ['rednose-form-designer-form']
+            }).plug(Y.Plugin.DDProxy, {
+                moveOnEnd: false
+            });
+
+            dd.on('drag:start', function(e) {
+                e.target.get('dragNode').setHTML('');
+            });
+            dd.on('drag:drag', function(e) {
+                self._dragging(e, container.one('fieldset'), controlContainer);
+            });
+            dd.on('drag:end', function() {
+                self._setSortOrder(container.one('fieldset'));
+            });
+
+            controlContainer.setData('model', control);
+
+            container.one('fieldset').append(controlContainer);
 
             this._controlMap.push(controlView);
         }
+    },
+
+    _dragging: function(e, container, sender) {
+        var y = e.currentTarget.mouseXY[1];
+        var hit = false;
+
+        container.all('> div').each(function(control) {
+            if (sender.get('id') !== control.get('id')) {
+                var top = control.getY();
+                var bottom = (top + parseInt(control.getComputedStyle('height'), 10));
+
+                if (y > top && y < bottom) {
+                    sender.insertBefore(sender, control);
+
+                    hit = true;
+                }
+            }
+        });
+
+        if (hit === false && y > (container.getY() + parseInt(container.getComputedStyle('height'), 10))) {
+            container.append(sender);
+        }
+    },
+
+    _setSortOrder: function(container) {
+        var counter = 0;
+
+        container.all('> div').each(function(node) {
+            var control = node.getData('model');
+
+            control.set('sortOrder', counter);
+
+            counter++;
+        });
     },
 
     _evalutateExpressions: function () {

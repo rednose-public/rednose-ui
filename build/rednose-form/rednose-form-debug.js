@@ -28,7 +28,7 @@ ControlModel = Y.Base.create('controlModel', Y.Model, [], {
         visible   : { value: true },
         protected : { value: false },
         readonly  : { value: false },
-        weight    : { value: 0 },
+        sortOrder : { value: 0 },
         help      : { value: null },
         value     : { value: null }
     }
