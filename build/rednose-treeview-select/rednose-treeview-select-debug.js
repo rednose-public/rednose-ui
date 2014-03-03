@@ -74,12 +74,19 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     // -- Protected Event Handlers ---------------------------------------------
 
     _handleSelect: function (e) {
-        var htmlNode = this.getHTMLNode(e.node),
-            model    = e.node.data,
+        var node     = e.node,
+            htmlNode = this.getHTMLNode(node),
+            model    = node.data,
             icons    = this.get('model').get('icons');
 
+        // Check the model icon definitions.
         if (icons && model instanceof Y.Model  && icons[model.name]) {
             // Only add helper class if this node has an icon.
+            htmlNode.one('.' + CSS_TREEVIEW_ICON).addClass(CSS_BOOTSTRAP_ICON_WHITE);
+        }
+
+        // Check the icon property on the node.
+        if (Y.Lang.isString(node.icon)) {
             htmlNode.one('.' + CSS_TREEVIEW_ICON).addClass(CSS_BOOTSTRAP_ICON_WHITE);
         }
     },

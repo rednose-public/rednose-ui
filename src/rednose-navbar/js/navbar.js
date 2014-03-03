@@ -227,7 +227,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
                 var dropdown = Y.Node.create(
                     Y.Lang.sub(self.dropdownTemplate, {
                         title  : m.title,
-                        icon   : m.icon ? '<i class="icon icon-white icon-' + m.icon + '"></i> ' : '',
+                        icon   : m.icon ? '<i class="icon icon-white ' + m.icon + '"></i> ' : '',
                         submenu: (typeof(parentMenu) !== 'undefined' ? '-submenu' : ''),
                         caret  : (typeof(parentMenu) === 'undefined' ? "b class=caret" : 'b')
                     })
@@ -298,7 +298,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             html = item.node || item.title;
 
         if (item.icon) {
-            html = '<i class="icon icon-' + item.icon + '"></i> ' + html;
+            html = '<i class="icon ' + item.icon + '"></i> ' + html;
         }
 
         a.set('innerHTML', html);

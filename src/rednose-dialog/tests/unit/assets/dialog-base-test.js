@@ -102,7 +102,7 @@ suite.add(new Y.Test.Case({
             text: message
         });
 
-        Y.one('.yui3-widget-buttons').one('.btn').simulate('click');
+        Y.one('.yui3-widget-ft').one('.btn').simulate('click');
 
         Assert.isNull(Y.one('.rednose-dialog'));
     },
@@ -121,7 +121,7 @@ suite.add(new Y.Test.Case({
             text : message
         }, mock.callback);
 
-        Y.one('.yui3-widget-buttons').one('.btn-primary').simulate('click');
+        Y.one('.yui3-widget-ft').one('.btn-primary').simulate('click');
 
         Y.Mock.verify(mock);
         Assert.isNull(Y.one('.rednose-dialog'));
@@ -139,7 +139,7 @@ suite.add(new Y.Test.Case({
             text : 'Test message body.'
         });
 
-        Y.Assert.areSame(Y.one('.yui3-widget-buttons').one('.btn').getDOMNode(), document.activeElement);
+        Y.Assert.areSame(Y.one('.yui3-widget-ft').one('.btn').getDOMNode(), document.activeElement);
         dialog.destroy();
 
         dialog = Y.Rednose.Dialog.confirm({
@@ -147,7 +147,7 @@ suite.add(new Y.Test.Case({
             text : 'Test message body.'
         });
 
-        Y.Assert.areSame(Y.one('.yui3-widget-buttons').one('.btn-primary').getDOMNode(), document.activeElement);
+        Y.Assert.areSame(Y.one('.yui3-widget-ft').one('.btn-primary').getDOMNode(), document.activeElement);
         dialog.destroy();
     }
 }));

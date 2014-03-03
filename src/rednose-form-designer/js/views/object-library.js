@@ -80,13 +80,13 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [ Y.Rednose.Dialo
     template:
         '<div>' +
         '   <div class="control-group">' +
-        '       <label for="input" class="control-label">Provide a name:</label>' +
+        '       <label for="input" class="control-label">Caption</label>' +
         '       <div class="controls">' +
         '           <input type="text" data-path="name" value="" id="name">' +
         '       </div>' +
         '   </div>' +
         '   <div class="control-group">' +
-        '       <label for="input" class="control-label">Foreign id:</label>' +
+        '       <label for="input" class="control-label">Identifier</label>' +
         '       <div class="controls">' +
         '           <input type="text" data-path="foreignId" id="foreignId" />' +
         '       </div>' +
@@ -115,7 +115,7 @@ ObjectLibraryView = Y.Base.create('objectLibraryView', Y.View, [ Y.Rednose.Dialo
         );
 
         this.prompt({
-            title: 'Add new ' + name,
+            title: 'Add a new ' + name,
             html: view
         }, function(form) {
              var control = new Y.Rednose.Form.ControlModel({

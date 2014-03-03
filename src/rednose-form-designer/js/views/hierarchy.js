@@ -41,6 +41,11 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
             header    : TXT_HIERARCHY
         });
 
+        // Open all nodes by default since this is our main navigation tool.
+        Y.Array.each(self._treeView.rootNode.children, function (node) {
+            node.open();
+        });
+
         this._treeView.render();
 
         this._treeView.after('select', function (e) {
