@@ -298,8 +298,8 @@ DropDownControlView = Y.Base.create('dropDownControlView', Y.Rednose.Form.BaseCo
             template   = this.template;
 
         container.setHTML(Y.Lang.sub(template, {
-            label  : model.get('id'),
-            caption: model.get('caption')
+            id     : model.get('id'),
+            label  : model.get('caption'),
         }));
 
         if (properties.datasource) {
