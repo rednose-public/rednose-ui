@@ -18,16 +18,19 @@ Provides a navigation bar plugin to show a list of recent entries.
 Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
+    _scope: null,
+
     /**
     @method initializer
     @protected
     **/
     initializer: function (config) {
-        // TODO: Remove dependency on docgenadmin.
         this._host = config.host;
 
         var node = this._host.getNode(config.node);
+
         this.node = node;
+        this._scope = config.scope;
 
         var parent = node.get('parentNode');
 
@@ -56,7 +59,7 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
     addEntry: function (id, label) {
         // TODO: Unique cookie.
         // TODO: Specify the number of items as config param.
-        var cookie   = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),
+        var cookie   = Y.Cookie.getSub('navbar-recent', this._scope),
             attrs    = { id: id, label: label },
             obj      = Y.JSON.parse(cookie) || [];
 
@@ -79,7 +82,7 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
         cookie = Y.JSON.stringify(obj);
 
         // Set the sub-cookie.
-        Y.Cookie.setSub('docgenadmin', 'templatebuilder', cookie);
+        Y.Cookie.setSub('navbar-recent', this._scope, cookie);
 
         this._updateMenuEntries(this.node);
     },
@@ -92,9 +95,10 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
     _updateMenuEntries: function (node) {
         // XXX: WIP
         var self   = this,
-            cookie = Y.Cookie.getSub('docgenadmin', 'templatebuilder'),
+            cookie = Y.Cookie.getSub('navbar-recent', this._scope),
             ul     = node.ancestor('li').one('ul'),
             obj;
+
 
         ul.empty();
 
@@ -116,6 +120,7 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
                 ul.append(Y.Node.create('<li class="divider"></li>'));
             }
 
+            // TODO: Remove dependency on docgenadmin.
             var clear = Y.Node.create(
                 '<li>' +
                     '<a class="menu-clearitems" tabindex="-1" href="#">' + Y.Intl.get('docgenadmin-core').clearitems + '</a>' +
@@ -142,7 +147,7 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
                 }
 
                 // Reset cookie and update.
-                Y.Cookie.setSub('docgenadmin', 'templatebuilder', null);
+                Y.Cookie.setSub('navbar-recent', self._scope, null);
                 self._updateMenuEntries(node);
             });
         }
