@@ -1132,15 +1132,19 @@ FormView = Y.Base.create('formView', Y.View, [], {
     },
 
     _setSortOrder: function(container) {
-        var counter = 0;
+        var counter = 0,
+            controls = [];
 
         container.all('> div').each(function(node) {
             var control = node.getData('model');
 
             control.set('sortOrder', counter);
+            controls.push(control);
 
             counter++;
         });
+
+        this.get('model').set('controls', controls);
     },
 
     _evalutateExpressions: function () {
