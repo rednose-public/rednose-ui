@@ -1,6 +1,7 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var TXT_HIERARCHY = 'Hierarchy';
+var TXT_HIERARCHY = 'Hierarchy',
+    TXT_REMOVE_CONTROL = 'Remove';
 
 var HierarchyView;
 
@@ -9,6 +10,12 @@ var EVT_SELECT = 'select';
 HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
     template: '<div class="rednose-hierarchy></div>',
+
+    events: {
+        '.yui3-treeview-row': {
+            contextmenu: '_handleContextMenu'
+        }
+    },
 
     _treeView: null,
 
@@ -59,6 +66,31 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
         });
 
         return this;
+    },
+
+    _handleContextMenu: function (e) {
+        var node = e.currentTarget;
+
+        // Prevent default contextmenu behaviour.
+        e.preventDefault();
+
+        if (node.contextMenu) {
+            return false;
+        }
+
+        var model = this._treeView.getNodeById(node.getData('node-id')).data;
+
+        if (model && model instanceof Y.Rednose.Form.ControlModel) {
+            node.plug(Y.Rednose.ContextMenu, {
+                content     : [
+                    { title: TXT_REMOVE_CONTROL, id: 'removeControl' },
+                ],
+                data        : model,
+                bubbleTarget: this
+            });
+
+            node.contextMenu._handleContextMenu(e);
+        }
     },
 
     // XXX

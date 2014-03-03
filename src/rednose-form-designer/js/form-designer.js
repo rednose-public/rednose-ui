@@ -47,6 +47,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this.on('navbar:newDataSource', this._handleNewDataSource, this);
         this.on('navbar:closeDesigner', this._handleClose, this);
 
+        this.on('contextMenu:removeControl', this._handleRemoveControl, this);
         this.on('contextMenu:dataSourceEdit', this._handleDataSourceEdit, this);
         this.on('contextMenu:dataSourceDelete', this._handleDataSourceDelete, this);
 
@@ -179,6 +180,26 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this._objectAttributesView.set('model', model);
         this._objectAttributesView.render();
+    },
+
+    _handleRemoveControl: function(e) {
+        var self = this,
+            model = e.data,
+            dialog = new Y.Rednose.Dialog();
+
+        dialog.confirm({
+            title: 'Remove control: ' + model.get('caption') + '?',
+            text: 'Are you sure you want to remove the control' + model.get('caption') + ' connected data may possibly be lost!',
+            type: 'warning',
+            confirm: 'DELETE'
+        }, function() {
+            self.get('model').get('controls').remove(model);
+
+            self.showForm();
+            self._handleControlSelect({
+                model: self._objectAttributesView.get('model')
+            });
+        });
     },
 
     _handleObjectTypeChange: function() {

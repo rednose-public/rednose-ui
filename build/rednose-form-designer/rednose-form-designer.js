@@ -610,7 +610,8 @@ Y.namespace('Rednose.FormDesigner').ObjectLibrary = ObjectLibrary;
 Y.namespace('Rednose.FormDesigner').ObjectLibraryView = ObjectLibraryView;
 /*jshint boss:true, expr:true, onevar:false */
 
-var TXT_HIERARCHY = 'Hierarchy';
+var TXT_HIERARCHY = 'Hierarchy',
+    TXT_REMOVE_CONTROL = 'Remove';
 
 var HierarchyView;
 
@@ -619,6 +620,12 @@ var EVT_SELECT = 'select';
 HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
     template: '<div class="rednose-hierarchy></div>',
+
+    events: {
+        '.yui3-treeview-row': {
+            contextmenu: '_handleContextMenu'
+        }
+    },
 
     _treeView: null,
 
@@ -669,6 +676,31 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
         });
 
         return this;
+    },
+
+    _handleContextMenu: function (e) {
+        var node = e.currentTarget;
+
+        // Prevent default contextmenu behaviour.
+        e.preventDefault();
+
+        if (node.contextMenu) {
+            return false;
+        }
+
+        var model = this._treeView.getNodeById(node.getData('node-id')).data;
+
+        if (model && model instanceof Y.Rednose.Form.ControlModel) {
+            node.plug(Y.Rednose.ContextMenu, {
+                content     : [
+                    { title: TXT_REMOVE_CONTROL, id: 'removeControl' },
+                ],
+                data        : model,
+                bubbleTarget: this
+            });
+
+            node.contextMenu._handleContextMenu(e);
+        }
     },
 
     // XXX
@@ -1248,6 +1280,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         this.on('navbar:newDataSource', this._handleNewDataSource, this);
         this.on('navbar:closeDesigner', this._handleClose, this);
 
+        this.on('contextMenu:removeControl', this._handleRemoveControl, this);
         this.on('contextMenu:dataSourceEdit', this._handleDataSourceEdit, this);
         this.on('contextMenu:dataSourceDelete', this._handleDataSourceDelete, this);
 
@@ -1380,6 +1413,26 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this._objectAttributesView.set('model', model);
         this._objectAttributesView.render();
+    },
+
+    _handleRemoveControl: function(e) {
+        var self = this,
+            model = e.data,
+            dialog = new Y.Rednose.Dialog();
+
+        dialog.confirm({
+            title: 'Remove control: ' + model.get('caption') + '?',
+            text: 'Are you sure you want to remove the control' + model.get('caption') + ' connected data may possibly be lost!',
+            type: 'warning',
+            confirm: 'DELETE'
+        }, function() {
+            self.get('model').get('controls').remove(model);
+
+            self.showForm();
+            self._handleControlSelect({
+                model: self._objectAttributesView.get('model')
+            });
+        });
     },
 
     _handleObjectTypeChange: function() {
