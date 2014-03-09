@@ -6,7 +6,9 @@ var Micro = Y.Template.Micro,
 AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
     AUTOCOMPLETE_TEMPLATE: Micro.compile(
         '<a role="menuitem">' +
-            '<img class="avatar size32" src="<%= data.image %>">' +
+            '<% if (data.image) { %>' +
+                '<img class="avatar size32" src="<%= data.image %>">' +
+            '<% } %>' +
             '<span class="title-block">' +
                 '<span class="title"><%== data.title %></span>' +
             '</span>' +
