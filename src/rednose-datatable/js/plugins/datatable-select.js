@@ -16,7 +16,7 @@ var CSS_SELECTED = 'selected',
 
      @event select
      **/
-    EVT_SELECT = 'select';
+    EVT_SELECT = 'select',
 
     /**
      Fired when a row is doubleclicked.
