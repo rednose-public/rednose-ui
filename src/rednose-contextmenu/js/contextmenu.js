@@ -67,13 +67,16 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
     },
 
     destructor: function () {
+        var node = this.get('host');
+
         if (this._contextMenu) {
             this._contextMenu.destroy();
         }
 
         this.data         = null;
         this._contextMenu = null;
-        this.get('host').detach('contextmenu');
+
+        node.detach('contextmenu');
     },
 
     // -- Public Methods -------------------------------------------------------
