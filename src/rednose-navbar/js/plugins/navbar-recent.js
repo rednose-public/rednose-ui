@@ -5,6 +5,16 @@ Provides a navigation bar plugin to show a list of recent entries.
 
 @module rednose-navbar-recent
 **/
+var TXT_CLEAR_ITEMS = 'Clear Items',
+
+    COOKIE_NAME = 'recent',
+
+    MAX_MENU_SIZE = 5,
+
+    CSS_BOOTSTRAP_DISABLED = 'disabled',
+    CSS_BOOTSTRAP_DIVIDER  = 'divider',
+    CSS_BOOTSTRAP_MENU     = 'dropdown-menu',
+    CSS_BOOTSTRAP_SUBMENU  = 'dropdown-submenu';
 
 /**
 Provides a navigation bar plugin to show a list of recent entries.
@@ -15,9 +25,23 @@ Provides a navigation bar plugin to show a list of recent entries.
 @extends Plugin.Base
 @extensionfor Rednose.NavBar
 **/
-Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
+var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
+    /**
+    Stores a references to the top level <li> node for this item.
+
+    @property {Node} _itemNode
+    @protected
+    **/
+    _itemNode: null,
+
+    /**
+    The unique identifier for this recent items set.
+
+    @property {String} _scope
+    @protected
+    **/
     _scope: null,
 
     /**
@@ -25,19 +49,12 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
     @protected
     **/
     initializer: function (config) {
-        this._host = config.host;
+        this._itemNode = config.host.getNode(config.node).get('parentNode');
+        this._scope    = config.scope;
 
-        var node = this._host.getNode(config.node);
+        this._itemNode.delegate('click', this._handleClick, 'a', this);
 
-        this.node = node;
-        this._scope = config.scope;
-
-        var parent = node.get('parentNode');
-
-        parent.addClass('dropdown-submenu');
-        parent.append(Y.Node.create('<ul class="dropdown-menu"></ul>'));
-
-        this._updateMenuEntries(node);
+        this._renderMenu();
     },
 
     /**
@@ -45,7 +62,8 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
     @protected
     **/
     destructor: function () {
-        this.node = null;
+        this._itemNode = null;
+        this._scope    = null;
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -57,101 +75,123 @@ Y.namespace('Rednose.Navbar').Recent = Y.Base.create('recentNavbarPlugin', Y.Plu
     @public
     **/
     addEntry: function (id, label) {
-        // TODO: Unique cookie.
-        // TODO: Specify the number of items as config param.
-        var cookie   = Y.Cookie.getSub('navbar-recent', this._scope),
-            attrs    = { id: id, label: label },
-            obj      = Y.JSON.parse(cookie) || [];
+        var cookie     = Y.Cookie.getSub(COOKIE_NAME, this._scope),
+            attrs      = { id: id, label: label },
+            cookieData = Y.JSON.parse(cookie) || [];
 
         // Remove duplicate elements.
-        Y.each(obj, function (el, key) {
+        Y.each(cookieData, function (el, key) {
             if (el.id === attrs.id) {
-                obj.splice(key, 1);
+                cookieData.splice(key, 1);
             }
         });
 
         // Prepend.
-        obj.unshift(attrs);
+        cookieData.unshift(attrs);
 
-        // Keep the size.
-        if (obj.length > 5) {
-            obj.pop();
+        // Keep the maximum size.
+        if (cookieData.length > MAX_MENU_SIZE) {
+            cookieData.pop();
         }
 
         // JSON encode the cookie data.
-        cookie = Y.JSON.stringify(obj);
+        cookie = Y.JSON.stringify(cookieData);
 
-        // Set the sub-cookie.
-        Y.Cookie.setSub('navbar-recent', this._scope, cookie);
+        Y.Cookie.setSub(COOKIE_NAME, this._scope, cookie);
 
-        this._updateMenuEntries(this.node);
+        this._renderMenu();
     },
 
     /**
-    @method _updateMenuEntries
-    @param {Node} node Parent node
+     @method clearEntries
+     @public
+     **/
+    clearEntries: function () {
+        Y.Cookie.setSub(COOKIE_NAME, this._scope, null);
+
+        this._renderMenu();
+    },
+
+    /**
+    @method _renderMenu
     @protected
     **/
-    _updateMenuEntries: function (node) {
-        // XXX: WIP
-        var self   = this,
-            cookie = Y.Cookie.getSub('navbar-recent', this._scope),
-            ul     = node.ancestor('li').one('ul'),
-            obj;
+    _renderMenu: function () {
+        var cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope));
 
+        if (!cookieData || !Y.Object.size(cookieData)) {
+            this._itemNode.addClass(CSS_BOOTSTRAP_DISABLED);
+            this._itemNode.one('ul') && this._itemNode.one('ul').remove(true);
 
-        ul.empty();
-
-        if (cookie) {
-            obj = Y.JSON.parse(cookie);
-
-            Y.each(obj, function (item) {
-                var li = Y.Node.create('<li><a tabindex="-1" href="#"></a></li>');
-
-                li.one('a').setContent(item.label);
-                ul.append(li);
-
-                li.one('a').on('click', function () {
-                    self._host.fire(self.node.getAttribute('data-id'), { id: item.id });
-                });
-            });
-
-            if (obj) {
-                ul.append(Y.Node.create('<li class="divider"></li>'));
+            if (this._itemNode.hasClass(CSS_BOOTSTRAP_SUBMENU)) {
+                this._itemNode.removeClass(CSS_BOOTSTRAP_SUBMENU);
             }
 
-            // TODO: Remove dependency on docgenadmin.
-            var clear = Y.Node.create(
-                '<li>' +
-                    '<a class="menu-clearitems" tabindex="-1" href="#">' + Y.Intl.get('docgenadmin-core').clearitems + '</a>' +
-                '</li>'
-            );
-
-            if (!Y.Object.size(obj)) {
-                clear.addClass('disabled');
-            }
-
-            ul.append(clear);
-
-            ul.one('.menu-clearitems').on('click', function (e) {
-                // Disable the default URL behaviour.
-                e.preventDefault();
-
-                var target = e.currentTarget;
-
-                // Ignore clicking on a disabled node.
-                if (target.ancestor('li').hasClass('disabled')) {
-                    node.blur();
-
-                    return;
-                }
-
-                // Reset cookie and update.
-                Y.Cookie.setSub('navbar-recent', self._scope, null);
-                self._updateMenuEntries(node);
-            });
+            return;
         }
+
+        if (this._itemNode.hasClass(CSS_BOOTSTRAP_DISABLED)) {
+            this._itemNode.removeClass(CSS_BOOTSTRAP_DISABLED);
+        }
+
+        if (!this._itemNode.hasClass(CSS_BOOTSTRAP_SUBMENU)) {
+            this._itemNode.addClass(CSS_BOOTSTRAP_SUBMENU);
+        }
+
+        if (!this._itemNode.one('ul')) {
+            this._itemNode.append(Y.Node.create('<ul class="' + CSS_BOOTSTRAP_MENU + '"></ul>'));
+        }
+
+        var subMenuNode = this._itemNode.one('ul');
+
+        subMenuNode.empty();
+
+        // Append entries.
+        Y.each(cookieData, function (item) {
+            var entryNode = Y.Node.create('<li><a tabindex="-1" href="#"></a></li>');
+
+            entryNode.one('a').setAttribute('data-id', item.id);
+            entryNode.one('a').setContent(item.label);
+            subMenuNode.append(entryNode);
+        });
+
+        // Append divider.
+        subMenuNode.append(Y.Node.create('<li class="' + CSS_BOOTSTRAP_DIVIDER + '"></li>'));
+
+        // Append 'Clear Items' entry.
+        subMenuNode.append(Y.Node.create(Y.Lang.sub(
+            '<li>' +
+                '<a class="menu-clearitems" tabindex="-1" href="#">{clearItems}</a>' +
+            '</li>',
+            { clearItems: TXT_CLEAR_ITEMS }
+        )));
+    },
+
+    /**
+     @method _handleClick
+     @param {EventFacade} e Click event.
+     @protected
+     **/
+    _handleClick: function (e) {
+        e.preventDefault();
+
+        var host  = this.get('host'),
+            aNode = e.currentTarget;
+
+        if (aNode.hasClass('menu-clearitems')) {
+            this.clearEntries();
+
+            return;
+        }
+
+        var entryId = this._itemNode.one('a').getAttribute('data-id'),
+            itemId  = aNode.getAttribute('data-id');
+
+       host.fire(entryId, { id: itemId });
     }
 }, {
     NS: 'recent'
 });
+
+// -- Namespace ----------------------------------------------------------------
+Y.namespace('Rednose.Navbar').Recent = Recent;
