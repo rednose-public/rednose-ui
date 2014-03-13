@@ -73,6 +73,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
         this.data         = null;
         this._contextMenu = null;
+        this.get('host').detach('contextmenu');
     },
 
     // -- Public Methods -------------------------------------------------------
