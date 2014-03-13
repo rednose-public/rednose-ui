@@ -18,7 +18,18 @@ var CSS_SELECTED = 'selected',
 
      @event select
      **/
+<<<<<<< HEAD
     EVT_SELECT = 'select',
+
+    /**
+     Fired when a row is doubleclicked.
+
+     @event dblclick
+     **/
+    EVT_DBLCLICK = 'dblclick';
+=======
+    EVT_SELECT = 'select';
+>>>>>>> Added rulers, contextmenu's and a beginning to delete regions.
 
     /**
      Fired when a row is doubleclicked.
