@@ -57,10 +57,6 @@ var App = Y.Base.create('app', Y.App, [], {
         this._activePanel = null;
     },
 
-//    render: function () {
-//        App.superclass.render.apply(this, arguments);
-//    },
-
     // -- Public Methods -------------------------------------------------------
 
     /**
