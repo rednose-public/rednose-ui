@@ -12,13 +12,10 @@
             "rednose-app-base" : {
                 "requires": [
                     "app-base",
-                    "cssgrids",
                     "event-custom",
-                    "handlebars-base",
                     "rednose-app-templates",
                     "rednose-panel"
-                ],
-                "skinnable": true
+                ]
             },
 
             "rednose-app-templates": {},

@@ -31,7 +31,7 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
-    Stores a references to the top level <li> node for this item.
+    Stores a reference to the top level <li> node for this item.
 
     @property {Node} _itemNode
     @protected

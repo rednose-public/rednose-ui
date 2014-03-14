@@ -57,9 +57,9 @@ var App = Y.Base.create('app', Y.App, [], {
         this._activePanel = null;
     },
 
-    render: function () {
-        App.superclass.render.apply(this, arguments);
-    },
+//    render: function () {
+//        App.superclass.render.apply(this, arguments);
+//    },
 
     // -- Public Methods -------------------------------------------------------
 
@@ -248,14 +248,4 @@ App.hideSpinner = function () {
 Y.namespace('Rednose').App = App;
 
 
-}, '1.1.0-DEV', {
-    "requires": [
-        "app-base",
-        "cssgrids",
-        "event-custom",
-        "handlebars-base",
-        "rednose-app-templates",
-        "rednose-panel"
-    ],
-    "skinnable": true
-});
+}, '1.1.0-DEV', {"requires": ["app-base", "event-custom", "rednose-app-templates", "rednose-panel"]});
