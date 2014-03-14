@@ -159,7 +159,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         }
 
         this.showView('form', {
-            model: req.form,
+            model: req.form
         }, {
             // Overrides the default transition with the preferred one, if set.
             transition: res.transition
