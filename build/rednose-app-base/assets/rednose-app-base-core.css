@@ -69,47 +69,32 @@ body, html, .rednose-grid, .rednose-unit-container {
 }
 
 .rednose-grid-message-container {
+    position: absolute;
+    width: 640px;
+    left: 50%;
+    top: 300px;
+    margin: 0 0 0 -320px;
+}
+
+.rednose-grid-message-container {
     color: #B3B3B3;
     font-weight: bold;
-    text-align: center;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
     -webkit-text-rendering: optimizeLegibility;
-    -moz-text-rendering: optimizeLegibility;
-    -ms-text-rendering: optimizeLegibility;
-    -o-text-rendering: optimizeLegibility;
-    text-rendering: optimizeLegibility;
-    margin-top: 150px;
+       -moz-text-rendering: optimizeLegibility;
+        -ms-text-rendering: optimizeLegibility;
+         -o-text-rendering: optimizeLegibility;
+            text-rendering: optimizeLegibility;
 }
 
 .rednose-grid-message-title {
     font-size: 42px;
     line-height: 50px;
+    text-align: center;
 }
 
 .rednose-grid-message-body {
     font-size: 16px;
     line-height: 19px;
-}
-
-.rednose-app-message-container {
-    color: #B3B3B3;
-    font-weight: bold;
     text-align: center;
-    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.35);
-    -webkit-text-rendering: optimizeLegibility;
-    -moz-text-rendering: optimizeLegibility;
-    -ms-text-rendering: optimizeLegibility;
-    -o-text-rendering: optimizeLegibility;
-    text-rendering: optimizeLegibility;
-    margin-top: 300px;
-}
-
-.rednose-app-message-title {
-    font-size: 42px;
-    line-height: 50px;
-}
-
-.rednose-app-message-body {
-    font-size: 16px;
-    line-height: 19px;
 }
