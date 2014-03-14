@@ -11,44 +11,48 @@ body {
   overflow: auto;
 }
 
-/* Grid columns */
-.rednose-grid {
-    margin-top: 41px;
+.rednose-navbar {
+    height: 41px;
 }
 
+body, html, .rednose-grid, .rednose-unit-container {
+    width:100%;
+    height:100%;
+    padding:0;
+    margin:0;
+}
+
+/* Grid columns */
 .rednose-unit-left {
-    position: absolute;
-    top: 41px;
+    height:100%;
+    position:absolute;
+    left:0;
     width: 280px;
-    bottom: 0;
-    left: 0;
+}
+
+.rednose-unit-right {
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    width: 280px;
+}
+
+.rednose-navbar-grid .rednose-unit-right {
+    top: 41px;
 }
 
 .rednose-unit-main {
-    position: absolute;
-    top: 41px;
-    bottom: 0;
+    height:100%;
 }
 
 .rednose-two-column-grid .rednose-unit-main,
 .rednose-three-column-grid .rednose-unit-main {
-    left: 280px;
-}
-
-.rednose-two-column-grid .rednose-unit-main {
-    right: 0;
+    margin-left: 280px;
 }
 
 .rednose-three-column-grid .rednose-unit-main {
-    right: 280px;
-}
-
-.rednose-unit-right {
-    position: absolute;
-    top: 41px;
-    right: 0;
-    width: 280px;
-    bottom: 0;
+    margin-right: 280px;
 }
 
 .rednose-unit-left, .rednose-unit-center .rednose-unit-right {

@@ -4,10 +4,13 @@ function AppTemplateThreeColumn() {}
 
 AppTemplateThreeColumn.prototype = {
 
-    template: '<div class="rednose-grid rednose-three-column-grid">' +
-                  '<div class="rednose-unit-left"></div>' +
-                  '<div class="rednose-unit-main"></div>' +
-                  '<div class="rednose-unit-right"></div>' +
+    template: '<div class="rednose-grid rednose-navbar-grid rednose-three-column-grid">' +
+                  '<div class="rednose-navbar"></div>' +
+                  '<div class="rednose-unit-container">' +
+                      '<div class="rednose-unit-left"></div>' +
+                      '<div class="rednose-unit-main"></div>' +
+                      '<div class="rednose-unit-right"></div>' +
+                  '</div>' +
               '</div>',
 
     initializer: function () {
