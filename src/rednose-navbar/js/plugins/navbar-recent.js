@@ -175,6 +175,11 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     _handleClick: function (e) {
         e.preventDefault();
 
+        // Ignore clicks on the rootnode.
+        if (e.currentTarget.get('parentNode') === this._itemNode) {
+            return;
+        }
+
         var host  = this.get('host'),
             aNode = e.currentTarget;
 
