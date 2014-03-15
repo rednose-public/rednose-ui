@@ -28,6 +28,109 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
     },
 
     /**
+     * Get the index path of a given model
+     *
+     * @param model
+     * @param path
+     *
+     * @returns {String}
+     */
+    getIndexPath: function (model, path) {
+        path = path || [];
+
+        var node   = this._treeFind(model.get('clientId'), this._items),
+            parent = this._getParentNode(node),
+            root;
+
+        root = parent ? parent.children : this._items;
+
+        if (!node) {
+            return null;
+        }
+
+        path.unshift(root.indexOf(node));
+
+        if (parent) {
+            return this.getIndexPath(parent.data, path);
+        }
+
+        return String(path.join('/'));
+    },
+
+    /**
+     * Compares the index paths for two given models.
+     *
+     * a > b = 1
+     * a < b = -1
+     * a === b = 0
+     *
+     * @param a
+     * @param b
+     *
+     * return {integer}
+     */
+    compareIndexPath: function (a, b) {
+        if (!a || !b) {
+            return !a && !b ? 0 : (!a ? -1 : 1);
+        }
+
+        var indexPathA = this.getIndexPath(a),
+            indexPathB = this.getIndexPath(b);
+
+        if (indexPathA === indexPathB) {
+            return 0;
+        }
+
+        var partsA = indexPathA.split('/'),
+            partsB = indexPathB.split('/');
+
+        // Normalize arrays.
+        var length = Math.min(partsA.length, partsB.length);
+
+        partsA = partsA.splice(0, length + 1);
+        partsB = partsB.splice(0, length + 1);
+
+        partsA[length] === undefined && (partsA[length] = -1);
+        partsB[length] === undefined && (partsB[length] = -1);
+
+        partsA.reverse();
+        partsB.reverse();
+
+        var result = 0;
+
+        for (var i = 0; i <= length; i++) {
+            if (partsA[i] === partsB[i]) {
+                continue;
+            }
+
+            result = partsA[i] > partsB[i] ? 1 : -1;
+        }
+
+        return result;
+    },
+
+    /**
+     * Return all children with a given type for a given parent.
+     *
+     * @param parent
+     * @param type
+     *
+     * @returns Array
+     */
+    getChildren: function (parent, type) {
+        var tree = this._items,
+            node = this._treeFind(parent.get('clientId'), tree);
+
+        if (!node || !node.children) {
+            return [];
+        }
+
+        return Y.Array.filter(node.children, (function (child) {
+            return child.data.name === type;
+        }));
+    },
+
+    /**
      * Get a model from the tree by client ID.
      */
     getByClientId: function (clientID) {
@@ -65,6 +168,41 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         return branches;
     },
 
+    _getParentNode: function (node, tree) {
+        tree = tree || this._items;
+
+        var self   = this,
+            result = null;
+
+        Y.Array.each(tree, function (item) {
+            if (!result) {
+                if (self._containsNode(item, node)) {
+                    result = item;
+                } else if (item.children) {
+                    result = self._getParentNode(node, item.children);
+                }
+            }
+        });
+
+        return result;
+    },
+
+    _containsNode: function (parentNode, childNode) {
+        var result = false;
+
+        if (!parentNode.children) {
+            return false;
+        }
+
+        Y.Array.each(parentNode.children, function (node) {
+            if (childNode === node) {
+                result = true;
+            }
+        });
+
+        return result;
+    },
+
     /**
      * Return all (potential) sub-branches of a given branch.
      */
@@ -75,7 +213,7 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         Y.Array.each(branch, function (item) {
             var obj = {};
 
-            // TODO: Make the instance to compare to a config attribute for the Treeview,
+            // TODO: Make the instance compare to a config attribute for the Treeview,
             // and get this data by calling getBranches(Y.TB.Category).
             if (Y.instanceOf(item.data, Y.TB.Category)) {
                 obj.label = item.label;
@@ -172,8 +310,8 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         return this._items;
     }
 }, {
-	ATTRS: {
-		items: {
+    ATTRS: {
+        items: {
             setter: '_setItems',
             getter: '_getItems'
         },

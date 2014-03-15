@@ -3,9 +3,9 @@
 function AppTemplateThreeColumn() {}
 
 AppTemplateThreeColumn.prototype = {
+    navigationBar: true,
 
-    template: '<div class="rednose-grid rednose-navbar-grid rednose-three-column-grid">' +
-                  '<div class="rednose-navbar"></div>' +
+    template: '<div class="rednose-grid rednose-three-column-grid">' +
                   '<div class="rednose-unit-container">' +
                       '<div class="rednose-unit-left"></div>' +
                       '<div class="rednose-unit-main"></div>' +
@@ -18,6 +18,13 @@ AppTemplateThreeColumn.prototype = {
             template  = this.template;
 
         container.setHTML(template);
+
+        if (this.navigationBar) {
+            container.addClass('rednose-navbar-grid');
+            container.prepend('<div class="rednose-navbar"></div>');
+
+            this.set('navBar', container.one('.rednose-navbar'));
+        }
 
         this.set('gridLeft' , container.one('.rednose-unit-left'));
         this.set('gridMain' , container.one('.rednose-unit-main'));

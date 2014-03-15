@@ -23,7 +23,7 @@ var ViewNav,
 
     // Bird's-eye view of the YUI3 CSS classes used.
     CSS_YUI3_WIDGET_BD = 'yui3-widget-bd',
-    CSS_YUI3_WIDGET_FT = 'yui3-widget-ft';
+    CSS_YUI3_WIDGET_FT = 'yui3-widget-ft',
 
     /**
     Fired when the optional close button is clicked.
@@ -83,6 +83,14 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @type Boolean
     **/
     padding: true,
+
+    /**
+    Height property for the main section
+
+    @property title
+    @type String
+    **/
+    height: '480px',
 
     // -- Protected Properties -------------------------------------------------
 
@@ -186,7 +194,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     **/
     _buildFooter: function () {
         var self    = this,
-            buttons = this.buttons;
+            buttons = this.buttons,
             footer  = Y.Node.create('<div></div>');
 
         Y.Object.each(buttons, function (button, key) {
@@ -322,9 +330,12 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
             footer    = this._footer,
             config    = { bodyContent: body },
             close     = this.close,
+            height    = this.height,
             self      = this;
 
         container.addClass(CSS_VIEW_NAV);
+
+        height && body.setStyle('height', height);
 
         // Transfer the child nodes from the view container to the new body container.
         container.get('children').each(function (c) {
