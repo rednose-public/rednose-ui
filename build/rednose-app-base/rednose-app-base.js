@@ -76,16 +76,13 @@ var App = Y.Base.create('app', Y.App, [], {
     Pops a modal view from the navigation stack.
 
     @method popModalView
-    @deprecated Use showView()
     **/
     popModalView: function () {
         var view     = this.get('activeView'),
             viewInfo = this.getViewInfo(view);
 
-        if (viewInfo && viewInfo.parent) {
-            this._set('activeView', this._backgroundView);
-
-            this._backgroundView = null;
+        if (viewInfo.modal && this._backgroundView) {
+            this.showView(this._backgroundView);
         }
     },
 
