@@ -7,7 +7,8 @@ Extension of the original Y.App, to provide support for modal views.
 **/
 var CSS_SPINNER = 'rednose-spinner',
 
-    STYLE_MODAL_WIDTH = 640;
+    STYLE_MODAL_WIDTH  = 1088,
+    STYLE_MODAL_HEIGHT = 640;
 
 /**
 Extension of the original Y.App, to provide support for modal views.
@@ -185,11 +186,6 @@ var App = Y.Base.create('app', Y.App, [], {
         // TODO: Actually render the view here so that it gets "attached" before
         // it gets rendered?
 
-        // Size the view if needed (check for method inherited from Y.Rednose.View.Nav).
-        if (typeof view.sizeView === 'function') {
-            view.sizeView(viewContainer);
-        }
-
         if (this._activePanel) {
             this._activePanel.destroy();
         }
@@ -199,12 +195,22 @@ var App = Y.Base.create('app', Y.App, [], {
             if (typeof(viewInfo.instance.get('panel')) === 'undefined') {
                 this._activePanel = new Y.Rednose.Panel({
                     srcNode: view.get('container'),
-                    width  : viewInfo.width || STYLE_MODAL_WIDTH
+                    width  : viewInfo.width || STYLE_MODAL_WIDTH,
+                    height : viewInfo.height || STYLE_MODAL_HEIGHT
                 });
 
                 this._activePanel.render();
+
+                if (typeof view.sizeView === 'function') {
+                    view.sizeView(this._activePanel.get('boundingBox'));
+                }
             }
         } else {
+            // Size the view if needed (check for method inherited from Y.Rednose.View.Nav).
+            if (typeof view.sizeView === 'function') {
+                view.sizeView(viewContainer);
+            }
+
             // Don't append nodes that aren't removed, for example a background view behind a modal panel.
             if (view.get('container').inDoc() === false) {
                 // Insert view into the DOM.
