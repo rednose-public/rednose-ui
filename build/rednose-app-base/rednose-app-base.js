@@ -19,6 +19,10 @@ Extension of the original Y.App, to provide support for modal views.
 @extends App
 **/
 var App = Y.Base.create('app', Y.App, [], {
+    // -- Public Properties ----------------------------------------------------
+
+    DEBUG: false,
+
     // -- Protected Properties -------------------------------------------------
 
     /**
@@ -39,6 +43,14 @@ var App = Y.Base.create('app', Y.App, [], {
     @protected
     **/
     initializer: function () {
+        // Slow down transitions so we see what's happening
+        if (this.DEBUG) {
+            Y.Transition.fx['app:fadeIn'].duration     = 1;
+            Y.Transition.fx['app:fadeOut'].duration    = 1;
+            Y.Transition.fx['app:slideRight'].duration = 1;
+            Y.Transition.fx['app:slideLeft'].duration  = 1;
+        }
+
         Y.Do.after(function () {
             if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {
                 window.parent.openApp();
