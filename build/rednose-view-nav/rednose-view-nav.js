@@ -192,9 +192,6 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
         parentHeight = parseInt(parent.getComputedStyle('height'), 10);
 
-        console.log(parent);
-        console.log(parentHeight);
-
         // Parent - header - footer.
         bodyHeight = parentHeight - 46 - 56;
 

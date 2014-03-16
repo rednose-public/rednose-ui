@@ -64,6 +64,7 @@ var App = Y.Base.create('app', Y.App, [], {
     Helper method, to inform a potential higher level window that this app has been closed.
 
     @method closeApp
+    @deprecated Don't use iframes, it is incompatible with routing
     **/
     closeApp: function () {
         if ((window.self !== window.top) && typeof (window.parent.closeApp() === 'function')) {
@@ -75,6 +76,7 @@ var App = Y.Base.create('app', Y.App, [], {
     Pops a modal view from the navigation stack.
 
     @method popModalView
+    @deprecated Use showView()
     **/
     popModalView: function () {
         var view     = this.get('activeView'),
@@ -126,11 +128,17 @@ var App = Y.Base.create('app', Y.App, [], {
             return;
         }
 
+        // Parent-view is detached after modal segue.
         if (this.getViewInfo(this.get('activeView')).modal) {
             this._backgroundView = view;
             view.removeTarget(this);
 
             return;
+        } else {
+            // Modal-view is detached after modal->parent segue.
+            if (this._activePanel) {
+                this._activePanel.destroy();
+            }
         }
 
         var viewInfo = this.getViewInfo(view) || {};
@@ -186,10 +194,7 @@ var App = Y.Base.create('app', Y.App, [], {
         // TODO: Actually render the view here so that it gets "attached" before
         // it gets rendered?
 
-        if (this._activePanel) {
-            this._activePanel.destroy();
-        }
-
+        // Modal view is attached from modal segue.
         if (viewInfo.modal) {
             // Only render the panel if the view does not provide his own (dialogs).
             if (typeof(viewInfo.instance.get('panel')) === 'undefined') {
@@ -206,6 +211,13 @@ var App = Y.Base.create('app', Y.App, [], {
                 }
             }
         } else {
+            // Return if this is a backwards modal segue, the view is still preserved.
+            if (this._backgroundView) {
+                this._backgroundView = null;
+
+                return;
+            }
+
             // Size the view if needed (check for method inherited from Y.Rednose.View.Nav).
             if (typeof view.sizeView === 'function') {
                 view.sizeView(viewContainer);
