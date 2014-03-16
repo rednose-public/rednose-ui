@@ -5,6 +5,41 @@ Extension of the original Y.App, to provide support for modal views.
 
 @module rednose-app
 **/
+var AppView = Y.Base.create('appView', Y.View, [], {
+    _app: null,
+
+    destructor: function () {
+        this._app.destroy();
+        this._app = null;
+    },
+
+    render: function () {
+        var Constructor = this.get('constructor'),
+            container   = this.get('container');
+
+        this._app = new Constructor({
+            container  : container,
+            transitions: true
+        }).render();
+
+        this._app.addTarget(this);
+
+        return this;
+    },
+
+    sizeView: function (parent) {
+        if (this._app && typeof this._app.sizeView === 'function') {
+            this._app.sizeView(parent);
+        }
+    }
+}, {
+    ATTRS: {
+        constructor: {
+            value: null
+        }
+    }
+});
+
 var CSS_SPINNER = 'rednose-spinner',
 
     STYLE_MODAL_WIDTH  = 1088,
@@ -71,6 +106,34 @@ var App = Y.Base.create('app', Y.App, [], {
     },
 
     // -- Public Methods -------------------------------------------------------
+
+    /**
+     * Adds support for app views.
+     *
+     * @param name
+     * @param config
+     * @returns {ViewConstructor}
+     */
+    createView: function (name, config) {
+        var viewInfo = this.getViewInfo(name),
+            type     = (viewInfo && viewInfo.type) || Y.View,
+            ViewConstructor, view;
+
+        // Looks for a namespaced constructor function on `Y`.
+        ViewConstructor = Y.Lang.isString(type) ?
+            Y.Object.getValue(Y, type.split('.')) : type;
+
+        // Create the view instance and map it with its metadata.
+        if (ViewConstructor.superclass.constructor.NAME === 'app') {
+            view = new AppView({ constructor: ViewConstructor });
+        } else {
+            view = new ViewConstructor(config);
+        }
+
+        this._viewInfoMap[Y.stamp(view, true)] = viewInfo;
+
+        return view;
+    },
 
     /**
     Helper method, to inform a potential higher level window that this app has been closed.
