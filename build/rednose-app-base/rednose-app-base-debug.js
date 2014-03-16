@@ -185,6 +185,11 @@ var App = Y.Base.create('app', Y.App, [], {
         // TODO: Actually render the view here so that it gets "attached" before
         // it gets rendered?
 
+        // Size the view if needed (check for method inherited from Y.Rednose.View.Nav).
+        if (typeof view.sizeView === 'function') {
+            view.sizeView(viewContainer);
+        }
+
         if (this._activePanel) {
             this._activePanel.destroy();
         }

@@ -84,14 +84,6 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     **/
     padding: true,
 
-    /**
-    Height property for the main section
-
-    @property title
-    @type String
-    **/
-    height: '480px',
-
     // -- Protected Properties -------------------------------------------------
 
     /**
@@ -102,6 +94,15 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @protected
     **/
     _rendered: false,
+
+    /**
+     References the body DOM node.
+
+     @property _body
+     @type Node
+     @protected
+     **/
+    _body: null,
 
     /**
     References the footer DOM node.
@@ -182,6 +183,23 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         }
 
         return this._buttonMap[name];
+    },
+
+    sizeView: function (parent) {
+        var bodyHeight, parentHeight;
+
+        parentHeight = parseInt(parent.getComputedStyle('height'), 10);
+
+        console.log(parent);
+        console.log(parentHeight);
+
+        // Parent - header - footer.
+        bodyHeight = parentHeight - 46 - 56;
+
+        this._body.setStyle('height', bodyHeight);
+
+        this._body.one('.rednose-unit-left') && this._body.one('.rednose-unit-left').setStyle('height', bodyHeight);
+        this._body.one('.rednose-unit-right') && this._body.one('.rednose-unit-right').setStyle('height', bodyHeight);
     },
 
     // -- Protected Methods ----------------------------------------------------
@@ -330,12 +348,9 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
             footer    = this._footer,
             config    = { bodyContent: body },
             close     = this.close,
-            height    = this.height,
             self      = this;
 
         container.addClass(CSS_VIEW_NAV);
-
-        height && body.setStyle('height', height);
 
         // Transfer the child nodes from the view container to the new body container.
         container.get('children').each(function (c) {
@@ -380,6 +395,13 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         if (this.padding === false) {
             this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).setStyle('padding', 0);
         }
+
+        this._body = body;
+
+        // Adjust position.
+        var parent = container.get('parentNode');
+
+        parent && this.sizeView(parent);
 
         this._rendered = true;
     }
