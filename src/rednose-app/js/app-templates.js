@@ -21,6 +21,7 @@ Basic detail app view.
 
 @method detailApp
 @static
+@deprecated Use app extensions
 **/
 Templates.detailApp =
     '<div class="yui3-g rednose-app-detail-container">' +
@@ -32,6 +33,7 @@ Basic master-detail app view.
 
 @method masterDetailApp
 @static
+@deprecated Use app extensions
 **/
 Templates.masterDetailApp =
     '<div class="yui3-g rednose-app-master-detail-container">' +
@@ -44,6 +46,7 @@ Basic master-detail grid subview.
 
 @method masterDetailGrid
 @static
+@deprecated Use app extensions
  */
 Templates.masterDetailGrid =
     '<div class="yui3-g rednose-grid-master-detail-container">' +
@@ -56,6 +59,7 @@ Basic View message container
 
 @method detailApp
 @static
+@deprecated Use app extensions
 **/
 Templates.viewMessage =
     '<div class="rednose-app-message-container">' +

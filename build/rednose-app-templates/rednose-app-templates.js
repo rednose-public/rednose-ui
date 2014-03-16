@@ -2,6 +2,44 @@ YUI.add('rednose-app-templates', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
+function AppTemplateSingleView() {}
+
+AppTemplateSingleView.prototype = {
+    navigationBar: true,
+
+    template: '<div class="rednose-grid">' +
+                  '<div class="rednose-unit-container">' +
+                      '<div class="rednose-unit-main"></div>' +
+                  '</div>' +
+              '</div>',
+
+    initializer: function () {
+        var container = this.get('container'),
+            template  = this.template;
+
+        container.setHTML(template);
+
+        if (this.navigationBar) {
+            container.addClass('rednose-navbar-grid');
+            container.prepend('<div class="rednose-navbar"></div>');
+
+            this.set('navBar', container.one('.rednose-navbar'));
+        }
+
+        this.set('gridMain', container.one('.rednose-unit-main'));
+
+        this.set('viewContainer', this.get('gridMain'));
+    }
+};
+
+AppTemplateSingleView.ATTRS = {
+    gridMain : { value: null }
+};
+
+// -- Namespace ----------------------------------------------------------------
+Y.namespace('Rednose.Template').SingleView = AppTemplateSingleView;
+/*jshint boss:true, expr:true, onevar:false */
+
 function AppTemplateThreeColumn() {}
 
 AppTemplateThreeColumn.prototype = {
@@ -108,6 +146,7 @@ Basic detail app view.
 
 @method detailApp
 @static
+@deprecated Use app extensions
 **/
 Templates.detailApp =
     '<div class="yui3-g rednose-app-detail-container">' +
@@ -119,6 +158,7 @@ Basic master-detail app view.
 
 @method masterDetailApp
 @static
+@deprecated Use app extensions
 **/
 Templates.masterDetailApp =
     '<div class="yui3-g rednose-app-master-detail-container">' +
@@ -131,6 +171,7 @@ Basic master-detail grid subview.
 
 @method masterDetailGrid
 @static
+@deprecated Use app extensions
  */
 Templates.masterDetailGrid =
     '<div class="yui3-g rednose-grid-master-detail-container">' +
@@ -143,6 +184,7 @@ Basic View message container
 
 @method detailApp
 @static
+@deprecated Use app extensions
 **/
 Templates.viewMessage =
     '<div class="rednose-app-message-container">' +
