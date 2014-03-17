@@ -37,6 +37,14 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     _itemNode: null,
 
     /**
+    The node identifier for this recent items set.
+
+    @property {String} _node
+    @protected
+    **/
+    _node: null,
+
+    /**
     The unique identifier for this recent items set.
 
     @property {String} _scope
@@ -49,12 +57,12 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     @protected
     **/
     initializer: function (config) {
-        this._itemNode = config.host.getNode(config.node).get('parentNode');
-        this._scope    = config.scope;
+        var host = this.get('host');
 
-        this._itemNode.delegate('click', this._handleClick, 'a', this);
+        this._scope = config.scope;
+        this._node  = config.node;
 
-        this._renderMenu();
+        host.after('render', this._afterRender, this);
     },
 
     /**
@@ -117,7 +125,9 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     @protected
     **/
     _renderMenu: function () {
-        var cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope));
+        var host       = this.get('host'),
+            cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope));
+
 
         if (!cookieData || !Y.Object.size(cookieData)) {
             this._itemNode.addClass(CSS_BOOTSTRAP_DISABLED);
@@ -193,6 +203,20 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
             itemId  = aNode.getAttribute('data-id');
 
        host.fire(entryId, { id: itemId });
+    },
+
+    /**
+     @method _afterRender
+     @param {EventFacade} e Click event.
+     @protected
+     **/
+    _afterRender: function (e) {
+        var host = this.get('host');
+
+        this._itemNode = host.getNode(this._node).get('parentNode');
+        this._itemNode.delegate('click', this._handleClick, 'a', this);
+
+        this._renderMenu();
     }
 }, {
     NS: 'recent'

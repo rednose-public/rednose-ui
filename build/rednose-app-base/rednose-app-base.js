@@ -8,19 +8,27 @@ Extension of the original Y.App, to provide support for modal views.
 var AppView = Y.Base.create('appView', Y.View, [], {
     _app: null,
 
+    _config: null,
+
     destructor: function () {
         this._app.destroy();
         this._app = null;
+    },
+
+    initializer: function (config) {
+        config || (config = {});
+
+        this._config = config;
     },
 
     render: function () {
         var Constructor = this.get('constructor'),
             container   = this.get('container');
 
-        this._app = new Constructor({
+        this._app = new Constructor(Y.merge(this._config, {
             container  : container,
             transitions: true
-        }).render();
+        }, true)).render();
 
         this._app.addTarget(this);
 
@@ -125,7 +133,7 @@ var App = Y.Base.create('app', Y.App, [], {
 
         // Create the view instance and map it with its metadata.
         if (ViewConstructor.superclass.constructor.NAME === 'app') {
-            view = new AppView({ constructor: ViewConstructor });
+            view = new AppView(Y.merge(config, { constructor: ViewConstructor }));
         } else {
             view = new ViewConstructor(config);
         }

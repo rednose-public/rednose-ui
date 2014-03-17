@@ -3,7 +3,6 @@
 var Grid,
     GridView;
 
-// TODO: Abstract to separate view file
 GridView = Y.Base.create('gridView', Y.View, [], {
 
     // Compile our template using Handlebars.
@@ -45,6 +44,7 @@ GridView = Y.Base.create('gridView', Y.View, [], {
             // contextMenu = this.get('contextMenu'),
             content;
 
+//        console.log(model.getAttrs());
         content = this.template(model.getAttrs());
 
         container.setContent(content);
@@ -112,7 +112,6 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     }
 });
 
-// TODO: Y.Rednose.Grid.Message
 Grid = Y.Base.create('grid', Y.Widget, [ Y.Rednose.Grid.Selectable ], {
     targets: null,
 

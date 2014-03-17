@@ -88,7 +88,7 @@ Selectable.prototype = {
 
         // Cancel if the selection did not change.
         if (node === oldNode) {
-            return false;
+            return;
         }
 
         // Remove earlier selections.
