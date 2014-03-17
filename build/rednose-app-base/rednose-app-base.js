@@ -348,6 +348,8 @@ App.MESSAGE_TEMPLATE = '<div class="rednose-grid-message-container">' +
 @static
 **/
 App.createMessage = function (title, subtitle) {
+    subitle = subtitle || '';
+
     return Y.Node.create(Y.Lang.sub(this.MESSAGE_TEMPLATE, { title: title, subtitle: subtitle }));
 };
 
