@@ -335,6 +335,22 @@ App.hideSpinner = function () {
     Y.all('.' + CSS_SPINNER).remove();
 };
 
+App.MESSAGE_TEMPLATE = '<div class="rednose-grid-message-container">' +
+                           '<div class="rednose-grid-message-title">{title}</div>' +
+                           '<div class="rednose-grid-message-body">{subtitle}</div>' +
+                       '</div>';
+
+/**
+@method createMessage
+@param {String} title
+@param {String} subtitle
+@return {Node}
+@static
+**/
+App.createMessage = function (title, subtitle) {
+    return Y.Node.create(Y.Lang.sub(this.MESSAGE_TEMPLATE, { title: title, subtitle: subtitle }));
+};
+
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose').App = App;
 
