@@ -554,12 +554,13 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
 
     render: function () {
         var container = this.get('container');
-            template  = this.template;
 
         this._app = new App({
             container  : container,
             transitions: true
         }).render();
+
+        return this;
     },
 
     showChoicePage: function () {

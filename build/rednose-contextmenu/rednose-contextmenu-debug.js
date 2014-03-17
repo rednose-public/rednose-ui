@@ -77,12 +77,8 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
         this.data         = null;
         this._contextMenu = null;
-<<<<<<< HEAD
 
         node.detach('contextmenu');
-=======
-        this.get('host').detach('contextmenu');
->>>>>>> Added rulers, contextmenu's and a beginning to delete regions.
     },
 
     // -- Public Methods -------------------------------------------------------
