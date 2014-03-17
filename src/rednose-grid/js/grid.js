@@ -8,20 +8,20 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     // Compile our template using Handlebars.
     template: Y.Handlebars.compile(
         '<div class="model-grid-container" title="{{ name }}" data-yui3-record="{{ clientId }}">' +
-        '    <div class="model-grid-icon-container">' +
-        '        <div class="model-grid-icon-wrapper">' +
-        '        {{#if thumbnail}}' +
-        '            <img class="model-grid-icon" alt="{{ name }}" src="{{ thumbnail }}" style="width: 110px; height: 156px;"/>' +
-        '        {{else}}' +
-        '            <div class="model-grid-icon"></div>' +
-        '        {{/if}}' +
-        '    </div>' +
-        '    <div class="model-grid-footer">' +
-        '        <div class="model-grid-name">{{ name }}</div>' +
-        // FIXME
-        // '        <input class="edit" type="text" value="{{ name }}" style="visibility: hidden;"/>' +
-        '        <div class="model-grid-date">{{ dateCreated }}</div>' +
-        '    </div>' +
+            '<div class="model-grid-icon-container">' +
+                '<div class="model-grid-icon-wrapper">' +
+                    '{{#if thumbnail}}' +
+                        '<img class="model-grid-icon" alt="{{ name }}" src="{{ thumbnail }}" style="width: 110px; height: 156px;"/>' +
+                    '{{else}}' +
+                        '<div class="model-grid-icon"></div>' +
+                    '{{/if}}' +
+                '</div>' +
+                '<div class="model-grid-footer">' +
+                    '<div class="model-grid-name">{{ label }}</div>' +
+                    '<input class="edit" type="text" value="{{ name }}" style="visibility: hidden;"/>' +
+                    '<div class="model-grid-date">{{ dateModified }}</div>' +
+                '</div>' +
+            '</div>' +
         '</div>'
     ),
 
@@ -46,10 +46,11 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         container.setStyle('float', 'left');
 
         container.setHTML(this.template({
-            clientId   : model.get('clientId'),
-            name       : this._formatLabel(model.get('name')),
-            thumbnail  : model.get('thumbnail'),
-            dateCreated: model.get('date_created')
+            clientId    : model.get('clientId'),
+            label       : Y.Rednose.Util.formatLabel(model.get('name')),
+            name        : model.get('name'),
+            thumbnail   : model.get('thumbnail'),
+            dateModified: model.get('date_created')
         }));
 
         // if (contextMenu !== false) {
@@ -102,14 +103,6 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         if (e.keyCode === ENTER_KEY) {
             this.close();
         }
-    },
-
-    _formatLabel: function (label) {
-        if (label.length > 24) {
-            return label.substr(0, 12) + '…' + label.substr(label.length - 12, label.length);
-        }
-
-        return label;
     }
 }, {
     ATTRS: {
