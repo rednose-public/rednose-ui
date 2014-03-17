@@ -1,3 +1,7 @@
 {
-    "rednose-util" : {}
+    "rednose-util" : {
+        "requires": [
+            "datatype-date"
+        ]
+    }
 }

@@ -49,16 +49,10 @@ Selectable.prototype = {
         // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),
         // for example 'image_1'.
         var id        = node.ancestor('.model-grid-container').getAttribute('data-yui3-record'),
-            data      = this.get('data'),
+            list      = this.get('data'),
             found     = null;
 
-        Y.Array.each(data, function (model) {
-            if (model.get('clientId') === id) {
-                found = model;
-            }
-        });
-
-        return found;
+        return list.getByClientId(id);
     },
 
     /**

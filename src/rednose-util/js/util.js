@@ -1,5 +1,7 @@
 /*jshint boss:true, expr:true, onevar:false */
 
+var ELLIPSIS = '…';
+
 function Util() {}
 
 /**
@@ -11,10 +13,21 @@ function Util() {}
  */
 Util.formatLabel = function (label) {
     if (label.length > 24) {
-        return label.substr(0, 12) + '…' + label.substr(label.length - 12, label.length);
+        return label.substr(0, 12) + ELLIPSIS + label.substr(label.length - 12, label.length);
     }
 
     return label;
+};
+
+/**
+ * Formats a date.
+ *
+ * @param {Date} date
+ * @returns {String}
+ * @static
+ */
+Util.formatDateTime = function (date) {
+    return Y.Date.format(date, {format: '%x %R' });
 };
 
 // -- Namespace ----------------------------------------------------------------
