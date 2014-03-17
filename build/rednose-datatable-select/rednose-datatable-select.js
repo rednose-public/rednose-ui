@@ -69,7 +69,8 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
 
         contentBox.on('click', this._handleClick, this);
         contentBox.on('dblclick', this._handleDblClick, this);
-        contentBox.on('clickoutside', this._handleClickOutside, this);
+
+//        contentBox.on('clickoutside', this._handleClickOutside, this);
     },
 
     setSelection: function (selection) {

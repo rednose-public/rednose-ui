@@ -11,7 +11,7 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '    <div class="model-grid-icon-container">' +
         '        <div class="model-grid-icon-wrapper">' +
         '        {{#if thumbnail}}' +
-        '            <img alt="{{ name }}" src="{{ thumbnail }}" style="width: 110px; height: 156px;"/>' +
+        '            <img class="model-grid-icon" alt="{{ name }}" src="{{ thumbnail }}" style="width: 110px; height: 156px;"/>' +
         '        {{else}}' +
         '            <div class="model-grid-icon"></div>' +
         '        {{/if}}' +
@@ -39,15 +39,18 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     // Render this view in our <li> container, and fill it with the
     // data in our Model.
     render: function () {
-        var container = this.get('container'),
-            model = this.get('model'),
-            // contextMenu = this.get('contextMenu'),
-            content;
+        var container   = this.get('container'),
+//            contextMenu = this.get('contextMenu'),
+            model       = this.get('model');
 
-//        console.log(model.getAttrs());
-        content = this.template(model.getAttrs());
+        container.setStyle('float', 'left');
 
-        container.setContent(content);
+        container.setHTML(this.template({
+            clientId   : model.get('clientId'),
+            name       : this._formatLabel(model.get('name')),
+            thumbnail  : model.get('thumbnail'),
+            dateCreated: model.get('date_created')
+        }));
 
         // if (contextMenu !== false) {
         //     container.one('.model-grid-icon-container').plug(Y.Rednose.ContextMenu, {
@@ -99,6 +102,14 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         if (e.keyCode === ENTER_KEY) {
             this.close();
         }
+    },
+
+    _formatLabel: function (label) {
+        if (label.length > 24) {
+            return label.substr(0, 12) + '…' + label.substr(label.length - 12, label.length);
+        }
+
+        return label;
     }
 }, {
     ATTRS: {
@@ -112,33 +123,20 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     }
 });
 
-Grid = Y.Base.create('grid', Y.Widget, [ Y.Rednose.Grid.Selectable ], {
-    targets: null,
-
-    views: [],
-
-    renderUI : function () {
-        this.targets = this.getTargets();
-        this._renderGridItems();
-    },
-
-    _renderGridItems : function() {
-        var contentBox  = this.get('contentBox'),
+Grid = Y.Base.create('grid', Y.View, [ Y.Rednose.Grid.Selectable ], {
+    render: function () {
+        var container   = this.get('container'),
             contextMenu = this.get('contextMenu'),
             self        = this,
             list        = this.get('data');
 
+        container.addClass('rednose-grid-view');
+
         Y.each(list, function (model) {
-            var view = new GridView({ model: model, contextMenu: contextMenu }),
-                node = view.render().get('container');
+            var view = new GridView({ model: model, contextMenu: contextMenu });
+            view.addTarget(this);
 
-            self.views.push(view);
-
-            Y.Array.each(self.targets, function (target) {
-                view.addTarget(target);
-            });
-
-            contentBox.append(node);
+            container.append(view.render().get('container'));
         });
     }
 }, {

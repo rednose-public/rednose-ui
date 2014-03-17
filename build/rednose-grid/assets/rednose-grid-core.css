@@ -1,3 +1,7 @@
+.rednose-grid-view {
+    cursor: pointer;
+}
+
 .model-grid-container {
     float: left;
     display: block;
@@ -16,7 +20,11 @@
     height: 156px;
     margin-left: 46px;
     margin-right: 46px;
-    box-shadow: 0 3px 3px #888888;
+
+    -webkit-box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+       -moz-box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+         -o-box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+            box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
 }
 
 .model-grid-icon-container {
