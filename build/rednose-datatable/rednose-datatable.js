@@ -7,7 +7,7 @@ var DataTable,
 	CSS_PREFIX_MODULE   = 'rednose-datatable',
 	CSS_BOOTSTRAP_TABLE = 'table';
 
-DataTable = Y.Base.create('dataTable', Y.DataTable.Base, [ Y.DataTable.Scrollable, Y.DataTable.Sortable ], {
+DataTable = Y.Base.create('dataTable', Y.DataTable.Base, [ Y.DataTable.Scrollable, Y.DataTable.Sortable, Y.DataTable.ColumnWidths ], {
 
 	initializer: function () {
         var boundingBox = this.get('boundingBox');
