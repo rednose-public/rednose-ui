@@ -68,7 +68,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         contentBox.on('click', this._handleClick, this);
         contentBox.on('dblclick', this._handleDblClick, this);
 
-//        contentBox.on('clickoutside', this._handleClickOutside, this);
+        contentBox.on('clickoutside', this._handleClickOutside, this);
     },
 
     setSelection: function (selection) {
@@ -129,9 +129,11 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
     /**
      * Handles the click event outside of the content-box and clears the selection.
      */
-    _handleClickOutside: function () {
-        // FIXME: Deselect should only trigger when clicked inside the container but outside the table.
-        // this.set('selectedRow', null);
+    _handleClickOutside: function (e) {
+        // Clear the selection, only if the click outside target is an ancestor of the current target.
+        if (Y.Rednose.Util.isAncestor(e.target, e.currentTarget)) {
+            this.set('selectedRow', null);
+        }
     },
 
     /**

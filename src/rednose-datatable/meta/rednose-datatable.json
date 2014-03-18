@@ -3,7 +3,8 @@
         "requires": [
             "datatable-base",
             "datatable-scroll",
-            "datatable-sort"
+            "datatable-sort",
+            "rednose-util"
         ],
 
         "supersedes": [

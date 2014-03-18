@@ -91,7 +91,7 @@ Selectable.prototype = {
 
     _handleClickOutside: function (e) {
         // Clear the selection, only if the click outside target is an ancestor of the current target.
-        if (e.currentTarget.ancestor('#' + e.target.get('id'))) {
+        if (Y.Rednose.Util.isAncestor(e.target, e.currentTarget)) {
             this.set('selectedItem', null);
         }
     },

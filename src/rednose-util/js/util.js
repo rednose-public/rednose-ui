@@ -30,5 +30,17 @@ Util.formatDateTime = function (date) {
     return Y.Date.format(date, {format: '%x %R' });
 };
 
+/**
+ * Checks if a given node is the ancestor of another.
+ *
+ * @param {Node} ancestor
+ * @param {Node} descendant
+ * @returns {Boolean}
+ * @static
+ */
+Util.isAncestor = function (ancestor, descendant) {
+    return descendant.ancestor('#' + ancestor.get('id'));
+};
+
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose').Util = Util;
