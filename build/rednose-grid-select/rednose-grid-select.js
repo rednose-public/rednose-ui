@@ -1,5 +1,7 @@
 YUI.add('rednose-grid-select', function (Y, NAME) {
 
+/*jshint boss:true, expr:true, onevar:false */
+
 var Selectable;
 
 /**

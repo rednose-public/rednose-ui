@@ -27,22 +27,14 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '</div>'
     ),
 
-    // FIXME
-    // events: {
-    //     '.model-grid-name': {
-    //         click: 'edit'
-    //     },
-    //     '.edit': {
-    //         blur: 'close',
-    //         keypress: 'enterUpdate'
-    //     }
-    // },
+    destructor: function () {
+        console.log('destruct!');
+    },
 
     // Render this view in our <li> container, and fill it with the
     // data in our Model.
     render: function () {
         var container   = this.get('container'),
-//            contextMenu = this.get('contextMenu'),
             model       = this.get('model');
 
         container.setStyle('float', 'left');
@@ -54,14 +46,6 @@ GridView = Y.Base.create('gridView', Y.View, [], {
             thumbnail   : model.get('thumbnail'),
             dateModified: model.get('date_modified')
         }));
-
-        // if (contextMenu !== false) {
-        //     container.one('.model-grid-icon-container').plug(Y.Rednose.ContextMenu, {
-        //         content: contextMenu,
-        //         data: model,
-        //         bubbleTarget: this
-        //     });
-        // }
 
         this.set('inputNode', container.one('.edit'));
         this.set('footerNode', container.one('.model-grid-footer'));
@@ -141,10 +125,6 @@ Grid = Y.Base.create('grid', Y.View, [ Y.Rednose.Grid.Selectable ], {
          */
         data: {
             value: []
-        },
-
-        contextMenu: {
-            value: false
         }
     }
 });

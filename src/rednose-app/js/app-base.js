@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 /**
 Extension of the original Y.App, to provide support for modal views.
 
@@ -104,10 +106,7 @@ var App = Y.Base.create('app', Y.App, [], {
     @protected
     **/
     destructor: function () {
-        if (this._activePanel) {
-            this._activePanel.destroy();
-        }
-
+        this._activePanel && this._activePanel.destroy();
         this._activePanel = null;
     },
 
