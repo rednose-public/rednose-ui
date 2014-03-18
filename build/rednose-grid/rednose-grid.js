@@ -52,7 +52,7 @@ GridView = Y.Base.create('gridView', Y.View, [], {
             label       : Y.Rednose.Util.formatLabel(model.get('name')),
             name        : model.get('name'),
             thumbnail   : model.get('thumbnail'),
-            dateModified: Y.Rednose.Util.formatDateTime(Y.Date.parse(model.get('date_modified')))
+            dateModified: model.get('date_modified')
         }));
 
         // if (contextMenu !== false) {
