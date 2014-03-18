@@ -225,7 +225,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
             var node, action;
 
-            // TODO: Refacotr, DRY
+            // TODO: Refactor, DRY
             if (button.type === 'toggle') {
                 node = Y.Node.create('<div class="' + CSS_BOOTSTRAP_BTN_GROUP + '"></div>');
 
