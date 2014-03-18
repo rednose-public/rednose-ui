@@ -17,6 +17,8 @@ var ViewNav,
 
     // Bird's-eye view of the Bootstrap CSS classes used.
     CSS_BOOTSTRAP_BTN         = 'btn',
+    CSS_BOOTSTRAP_BTN_GROUP   = 'btn-group',
+    CSS_BOOTSTRAP_ACTIVE      = 'active',
     CSS_BOOTSTRAP_BTN_PRIMARY = 'btn-primary',
     CSS_BOOTSTRAP_DISABLED    = 'disabled',
     CSS_BOOTSTRAP_FLOAT_LEFT  = 'float-left',
@@ -32,7 +34,7 @@ var ViewNav,
 
     @event buttonClose
     **/
-    EVT_BUTTON_CLOSE = 'buttonClose',
+    EVT_BUTTON_CLOSE = 'buttonClose';
 
 /**
 View extension, adds a title section to an instance of View, and a footer section with a
@@ -221,52 +223,111 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
                 disabled  = button.disabled,
                 className = button.className,
                 icon      = button.icon,
-                hidden    = button.hidden,
+                hidden    = button.hidden;
 
+            var node, action;
+
+            // TODO: Refacotr, DRY
+            if (button.type === 'toggle') {
+                node = Y.Node.create('<div class="' + CSS_BOOTSTRAP_BTN_GROUP + '"></div>');
+
+                if (disabled) {
+                    node.addClass(CSS_BOOTSTRAP_DISABLED);
+                }
+
+                if (className) {
+                    node.addClass(className);
+                }
+
+                if (hidden) {
+                    node.hide();
+                }
+
+                if (position === 'left') {
+                    node.addClass(CSS_BOOTSTRAP_FLOAT_LEFT);
+                }
+
+                if (position === 'right') {
+                    node.addClass(CSS_BOOTSTRAP_FLOAT_RIGHT);
+                }
+
+                Y.Object.each(button.choices, function (choice, key) {
+                    var buttonNode = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
+
+                    if (choice.icon) {
+                        buttonNode.append(Y.Node.create('<i class="' + choice.icon + '"></i>'));
+                    }
+
+                    if (value === key) {
+                        buttonNode.addClass(CSS_BOOTSTRAP_ACTIVE);
+                    }
+
+                    action = 'button' + self._capitalizeFirstLetter(key);
+
+                    buttonNode.on('click', function (e) {
+                        var btn = e.currentTarget;
+
+                        if (btn.hasClass(CSS_BOOTSTRAP_ACTIVE) === false) {
+                            btn.get('parentNode').get('children').each(function (child) {
+                                if (child.hasClass(CSS_BOOTSTRAP_ACTIVE)) {
+                                    child.removeClass(CSS_BOOTSTRAP_ACTIVE);
+                                }
+                            });
+
+                            btn.addClass(CSS_BOOTSTRAP_ACTIVE);
+
+                            self.fire(action);
+                        }
+                    });
+
+                    node.append(buttonNode);
+                });
+            } else {
                 // Format the action event by prepending 'button', for example the event
                 // fired for 'cancel' will be 'buttonCancel'
-                action = 'button' + self._capitalizeFirstLetter(key),
+                action = 'button' + self._capitalizeFirstLetter(key);
                 node   = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
 
-            if (value) {
-                node.set('text', value);
-            }
-
-            if (icon) {
-                node.append(Y.Node.create('<i class="' + icon + '"></i>'));
-            }
-
-            if (primary) {
-                node.addClass(CSS_BOOTSTRAP_BTN_PRIMARY);
-            }
-
-            if (disabled) {
-                node.addClass(CSS_BOOTSTRAP_DISABLED);
-            }
-
-            if (className) {
-                node.addClass(className);
-            }
-
-            if (hidden) {
-                node.hide();
-            }
-
-            if (position === 'left') {
-                node.addClass(CSS_BOOTSTRAP_FLOAT_LEFT);
-            }
-
-            if (position === 'right') {
-                node.addClass(CSS_BOOTSTRAP_FLOAT_RIGHT);
-            }
-
-            node.on('click', function (e) {
-                var btn = e.target;
-
-                if (btn.hasClass(CSS_BOOTSTRAP_DISABLED) === false) {
-                    self.fire(action);
+                if (primary) {
+                    node.addClass(CSS_BOOTSTRAP_BTN_PRIMARY);
                 }
-            });
+
+                if (disabled) {
+                    node.addClass(CSS_BOOTSTRAP_DISABLED);
+                }
+
+                if (className) {
+                    node.addClass(className);
+                }
+
+                if (hidden) {
+                    node.hide();
+                }
+
+                if (position === 'left') {
+                    node.addClass(CSS_BOOTSTRAP_FLOAT_LEFT);
+                }
+
+                if (position === 'right') {
+                    node.addClass(CSS_BOOTSTRAP_FLOAT_RIGHT);
+                }
+
+                if (value) {
+                    node.set('text', value);
+                }
+
+                if (icon) {
+                    node.append(Y.Node.create('<i class="' + icon + '"></i>'));
+                }
+
+                node.on('click', function (e) {
+                    var btn = e.currentTarget;
+
+                    if (btn.hasClass(CSS_BOOTSTRAP_DISABLED) === false) {
+                        self.fire(action);
+                    }
+                });
+            }
 
             footer.append(node);
 
