@@ -104,10 +104,10 @@ Selectable.prototype = {
         var container = this.get('container'),
             node       = e.newVal,
             oldNode    = e.prevVal,
-            model;
+            model      = null;
 
         // Cancel if the selection did not change.
-        if (node === oldNode) {
+        if (node && node === oldNode) {
             return;
         }
 
@@ -119,10 +119,10 @@ Selectable.prototype = {
             node.addClass('model-grid-item-selected');
 
             model = this._getModelFromGridItem(node);
-
-            // Fires the select event and passes along the needed information.
-            this.fire('select', { model: model });
         }
+
+        // Fires the select event and passes along the needed information.
+        this.fire('select', { model: model });
     }
 };
 

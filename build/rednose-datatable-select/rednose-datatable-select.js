@@ -24,8 +24,16 @@ var CSS_SELECTED = 'selected',
      Fired when a row is doubleclicked.
 
      @event dblclick
+     @deprecated use open
      **/
-    EVT_DBLCLICK = 'dblclick';
+    EVT_DBLCLICK = 'dblclick',
+
+    /**
+     Fired when a row is 'openened'.
+
+     @event open
+     **/
+    EVT_OPEN = 'open';
 
 function DataTableSelectPlugin () {
     DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
@@ -121,11 +129,13 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         return true;
     },
 
-    _handleDblClick: function(e) {
+    _handleDblClick: function (e) {
         var table = this.get('host');
 
         // Fires the double click event from the host
         table.fire(EVT_DBLCLICK);
+
+        table.fire(EVT_OPEN, { model: this._getModelFromTableRow(this.get('selectedRow')) });
     },
 
     /**
@@ -143,7 +153,6 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
      * the model that was selected.
      */
     _afterSelectedRowChange: function (e) {
-        // TODO: Keep selection after sorting
         var table   = this.get('host'),
             node    = e.newVal,
             oldNode = e.prevVal,
