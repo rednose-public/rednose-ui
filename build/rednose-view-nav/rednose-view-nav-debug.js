@@ -227,7 +227,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
             var node, action;
 
-            // TODO: Refacotr, DRY
+            // TODO: Refactor, DRY
             if (button.type === 'toggle') {
                 node = Y.Node.create('<div class="' + CSS_BOOTSTRAP_BTN_GROUP + '"></div>');
 
@@ -262,10 +262,10 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
                         buttonNode.addClass(CSS_BOOTSTRAP_ACTIVE);
                     }
 
-                    action = 'button' + self._capitalizeFirstLetter(key);
-
                     buttonNode.on('click', function (e) {
                         var btn = e.currentTarget;
+
+                        action = 'button' + self._capitalizeFirstLetter(key);
 
                         if (btn.hasClass(CSS_BOOTSTRAP_ACTIVE) === false) {
                             btn.get('parentNode').get('children').each(function (child) {
