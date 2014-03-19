@@ -206,9 +206,16 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
         node.one('a').plug(Y.Bootstrap.Dropdown);
 
-        node.all('a').on('click', function (e) {
-            self._prevent(e);
-        });
+        // Prevent default URL behaviour.
+        node.delegate('click', this._prevent, 'a', this);
+
+        // Bind the handler for clicking on menu items.
+        node.delegate('click', this._handleClick, '.dropdown-menu a', this);
+        node.delegate('click', this._handleClick, 'ul.nav > li.nav-item > a', this);
+
+//        node.all('a').on('click', function (e) {
+//            self._prevent(e);
+//        });
     },
 
     // -- Protected Methods ----------------------------------------------------
@@ -328,7 +335,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             id   = node.getAttribute('data-id'),
             url  = node.getAttribute('data-url');
 
-        console.log('click!');
         if (node.hasClass('dropdown')) {
             return;
         }
