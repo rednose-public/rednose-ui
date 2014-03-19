@@ -328,6 +328,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             id   = node.getAttribute('data-id'),
             url  = node.getAttribute('data-url');
 
+        console.log('click!');
         if (node.hasClass('dropdown')) {
             return;
         }
