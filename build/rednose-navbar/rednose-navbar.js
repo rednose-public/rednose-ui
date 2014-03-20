@@ -212,10 +212,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         // Bind the handler for clicking on menu items.
         node.delegate('click', this._handleClick, '.dropdown-menu a', this);
         node.delegate('click', this._handleClick, 'ul.nav > li.nav-item > a', this);
-
-//        node.all('a').on('click', function (e) {
-//            self._prevent(e);
-//        });
     },
 
     // -- Protected Methods ----------------------------------------------------
