@@ -180,7 +180,7 @@ DD = Y.Base.create('dd', Y.View, [], {
      */
     _dropEnter: function (e) {
         if (!e.drag || !e.drop || (e.drop !== e.target)) {
-            return false;
+            return;
         }
         if (e.drop.get('node').get('tagName').toLowerCase() === 'li') {
             this._moveItem(e.drag, e.drop);
@@ -291,11 +291,11 @@ DD = Y.Base.create('dd', Y.View, [], {
                 drag.on('drag:end', this._handleEnd, this);
 
                 // Render the item
-                templateItem = new Y.TB.TemplateItem({
+                templateItem = new Y.Docgen.Core.TemplateItem({
                     asset: obj
                 });
 
-                var tiView = new Y.TB.TemplateItemView({
+                var tiView = new Y.Docgen.TemplateBuilder.TemplateItemView({
                     model: templateItem
                 });
 
