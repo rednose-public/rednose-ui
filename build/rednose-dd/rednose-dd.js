@@ -286,6 +286,7 @@ DD = Y.Base.create('dd', Y.View, [], {
                 container,
                 templateItem;
 
+            console.log(obj);
             if (obj.name === 'fieldGroup' || obj.name === 'image' || obj.name === 'table') {
                 // Bind to the document's end drag handler
                 drag.on('drag:end', this._handleEnd, this);
