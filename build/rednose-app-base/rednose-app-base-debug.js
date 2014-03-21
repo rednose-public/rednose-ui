@@ -297,15 +297,15 @@ var App = Y.Base.create('app', Y.App, [], {
                 return;
             }
 
-            // Size the view if needed (check for method inherited from Y.Rednose.View.Nav).
-            if (typeof view.sizeView === 'function') {
-                view.sizeView(viewContainer);
-            }
-
             // Don't append nodes that aren't removed, for example a background view behind a modal panel.
             if (view.get('container').inDoc() === false) {
                 // Insert view into the DOM.
                 viewContainer[prepend ? 'prepend' : 'append'](view.get('container'));
+            }
+
+            // Size the view if needed (check for method inherited from Y.Rednose.View.Nav).
+            if (typeof view.sizeView === 'function') {
+                view.sizeView(viewContainer);
             }
         }
     }
