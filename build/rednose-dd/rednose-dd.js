@@ -34,11 +34,9 @@ DD = Y.Base.create('dd', Y.View, [], {
     },
 
     destructor: function () {
-        for (var i in this._ddMap) {
-            if (this._ddMap[i]) {
-                this._ddMap[i].destroy();
-            }
-        }
+        Y.Array.each(this._ddMap, function (dd) {
+            dd.destroy();
+        });
 
         this._ddMap = [];
     },
