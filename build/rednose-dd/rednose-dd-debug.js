@@ -117,7 +117,6 @@ DD = Y.Base.create('dd', Y.View, [], {
     // -- Event handlers -----------------------------------------------------------
 
     _handleStart: function (e) {
-        console.log('Handle start rednose-dd');
         var drag = e.target;
         var proxy = drag.get('node').cloneNode(true).addClass('rednose-dd-drag-proxy');
 

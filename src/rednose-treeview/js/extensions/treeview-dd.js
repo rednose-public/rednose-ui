@@ -214,7 +214,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
             container,
             origin;
 
-        console.log('Handle start treeview-dd');
         model = drag.get('data');
 
         drag.get('dragNode').setContent(
