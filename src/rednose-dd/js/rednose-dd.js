@@ -121,9 +121,10 @@ DD = Y.Base.create('dd', Y.View, [], {
         var proxy = drag.get('node').cloneNode(true).addClass('rednose-dd-drag-proxy');
 
         drag.get('dragNode').set('innerHTML', proxy.get('outerHTML'));
+
         drag.get('node').addClass('rednose-dd-drag-placeholder');
 
-        drag.get('node').setStyle('visibility', 'hidden');
+        drag.get('node').one('div').setStyle('visibility', 'hidden');
     },
 
     /**
@@ -151,7 +152,7 @@ DD = Y.Base.create('dd', Y.View, [], {
         drag.get('node').removeClass('rednose-dd-drag-placeholder');
         drag.get('dragNode').set('innerHTML', '');
 
-        drag.get('node').setStyle('visibility', '');
+        drag.get('node').one('div').setStyle('visibility', '');
     },
 
     /**
@@ -278,39 +279,24 @@ DD = Y.Base.create('dd', Y.View, [], {
 
     _dropEnterGlobal: function () {
         if (Y.DD.DDM.activeDrag) {
-            var drag = Y.DD.DDM.activeDrag,
+            var drag     = Y.DD.DDM.activeDrag,
                 dragNode = drag.get('dragNode'),
-                obj  = drag.get('data'),
-                container,
-                templateItem;
+                asset    = drag.get('data');
 
-            console.log(obj);
-            if (obj.name === 'fieldGroup' || obj.name === 'image' || obj.name === 'table') {
-                // Bind to the document's end drag handler
-                drag.on('drag:end', this._handleEnd, this);
+            // Bind to the document's end drag handler
+            drag.on('drag:end', this._handleEnd, this);
 
-                // Render the item
-                templateItem = new Y.Docgen.Core.TemplateItem({
-                    asset: obj
+            // Render the item
+            asset.load(function () {
+                var templateItem = new Y.Docgen.Core.TemplateItem({
+                    asset: asset
                 });
 
                 var tiView = new Y.Docgen.TemplateBuilder.TemplateItemView({
                     model: templateItem
                 });
 
-                tiView.templateModel = this.get('model');
-
-                container = tiView.render().get('container');
-
-                // FIXME: The context menu doesn't get bound from tiView.render() for some reason
-                container.plug(Y.Rednose.ContextMenu, {
-                    content: [
-                        { title: 'Remove from template', id: 'removeTemplateItem' },
-                        { title: '-' },
-                        { title: 'Properties', id: 'templateItemProperties', disabled: true }
-                    ],
-                    bubbleTarget: tiView
-                });
+                var container = tiView.render().get('container');
 
                 var proxy = container.cloneNode(true).addClass('rednose-dd-drag-proxy');
 
@@ -326,7 +312,7 @@ DD = Y.Base.create('dd', Y.View, [], {
 
                 // Update the dragNode
                 Y.Rednose.Anim.morph(dragNode, proxy, Y.Rednose.Anim.fadeOut, Y.Rednose.Anim.slideIn);
-            }
+            });
         }
     },
 
