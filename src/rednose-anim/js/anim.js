@@ -50,7 +50,7 @@ Anim.slideOutY = function (node) {
     // calculated.
     node.setStyle('display', 'block');
 
-    var height = node.getComputedStyle('height');
+    var height = node.getOffsetHeight('height');
 
     node.setStyle('height', 0);
 

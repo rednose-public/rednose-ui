@@ -183,7 +183,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
     // FIXME: Handle padding.
     sizeView: function (parent) {
-        var bodyHeight = parseInt(parent.getComputedStyle('height'), 10);
+        var bodyHeight = parseInt(parent.get('offsetHeight'), 10);
 
         if (isNaN(bodyHeight)) {
             return;
