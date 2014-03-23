@@ -3,9 +3,9 @@
 function AppTemplateTwoColumn() {}
 
 AppTemplateTwoColumn.prototype = {
-    navigationBar: true,
+    showNavbar: true,
 
-    toolbar: false,
+    showToolbar: false,
 
     template: '<div class="rednose-grid rednose-two-column-grid">' +
                   '<div class="rednose-unit-container">' +
@@ -22,14 +22,14 @@ AppTemplateTwoColumn.prototype = {
 
         this.set('gridLeft', container.one('.rednose-unit-left'));
 
-        if (this.navigationBar) {
+        if (this.showNavbar) {
             container.addClass('rednose-navbar-grid');
             container.prepend('<div class="rednose-navbar"></div>');
 
             this.set('navBar', container.one('.rednose-navbar'));
         }
 
-        if (this.toolbar) {
+        if (this.showToolbar) {
             container.one('.rednose-unit-main').append(
                 '<div class="rednose-toolbar"></div>' +
                 '<div class="rednose-viewport"></div>'
