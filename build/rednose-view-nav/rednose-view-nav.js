@@ -269,7 +269,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
                     buttonNode.on('click', function (e) {
                         var btn = e.currentTarget;
 
-                        action = 'button' + self._capitalizeFirstLetter(key);
+                        action = 'button' + Y.Rednose.Util.capitalizeFirstLetter(key);
 
                         if (btn.hasClass(CSS_BOOTSTRAP_ACTIVE) === false) {
                             btn.get('parentNode').get('children').each(function (child) {
@@ -289,7 +289,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
             } else {
                 // Format the action event by prepending 'button', for example the event
                 // fired for 'cancel' will be 'buttonCancel'
-                action = 'button' + self._capitalizeFirstLetter(key);
+                action = 'button' + Y.Rednose.Util.capitalizeFirstLetter(key);
                 node   = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
 
                 if (primary) {
@@ -373,30 +373,6 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         return this.buttons;
     },
 
-    /**
-    Formatting helper method to capitalize the first letter of a given string
-
-    @method _getButtons
-    @param {String} value The string to capitalize.
-    @protected
-    **/
-    _capitalizeFirstLetter: function (value) {
-        return value.charAt(0).toUpperCase() + value.slice(1);
-    },
-
-    /**
-    Formatting helper method.
-
-    @method _camelCaseToDash
-    @param {String} string The string to convert.
-    @protected
-    **/
-    _camelCaseToDash: function (string) {
-        return string.replace(/([A-Z])/g, function ($1) {
-            return '-' + $1.toLowerCase();
-        });
-    },
-
     // -- Protected Event Handlers ---------------------------------------------
 
     /**
@@ -454,7 +430,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         this._panel.render(container);
 
         // Add a magic CSS handle to the widget-body.
-        this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).addClass(CSS_MAGIC_PREFIX + '-' + this._camelCaseToDash(this.name));
+        this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).addClass(CSS_MAGIC_PREFIX + '-' + Y.Rednose.Util.camelCaseToDash(this.name));
 
         if (this.padding === false) {
             this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).setStyle('padding', 0);
@@ -488,4 +464,4 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 Y.namespace('Rednose.View').Nav = ViewNav;
 
 
-}, '1.1.0-DEV', {"requires": ["event-custom", "rednose-panel", "rednose-widget-nav-container", "view"]});
+}, '1.1.0-DEV', {"requires": ["event-custom", "rednose-panel", "rednose-util", "rednose-widget-nav-container", "view"]});

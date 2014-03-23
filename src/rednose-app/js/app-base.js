@@ -10,15 +10,17 @@ var AppView = Y.Base.create('appView', Y.View, [], {
 
     _config: null,
 
-    destructor: function () {
-        this._app.destroy();
-        this._app = null;
-    },
-
     initializer: function (config) {
         config || (config = {});
 
+        var container = this.get('container');
+
         this._config = config;
+    },
+
+    destructor: function () {
+        this._app.destroy();
+        this._app = null;
     },
 
     render: function () {
@@ -53,6 +55,8 @@ var CSS_SPINNER = 'rednose-spinner',
     STYLE_MODAL_WIDTH  = 1088,
     STYLE_MODAL_HEIGHT = 640;
 
+var CSS_MAGIC_PREFIX = 'rednose';
+
 /**
 Extension of the original Y.App, to provide support for modal views.
 
@@ -86,6 +90,8 @@ var App = Y.Base.create('app', Y.App, [], {
     @protected
     **/
     initializer: function () {
+        var container = this.get('container');
+
         // Slow down transitions so we see what's happening
         if (this.DEBUG) {
             Y.Transition.fx['app:fadeIn'].duration     = 1;
@@ -93,6 +99,9 @@ var App = Y.Base.create('app', Y.App, [], {
             Y.Transition.fx['app:slideRight'].duration = 1;
             Y.Transition.fx['app:slideLeft'].duration  = 1;
         }
+
+        // Add a magic CSS handle to the app container.
+        container.addClass(CSS_MAGIC_PREFIX + '-' + Y.Rednose.Util.camelCaseToDash(this.name));
 
         Y.Do.after(function () {
             if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {
