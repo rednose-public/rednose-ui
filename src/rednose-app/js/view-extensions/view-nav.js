@@ -316,6 +316,12 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
         this._body = body;
 
+        if (this.footer) {
+            container.one('.yui3-widget-ft') && container.one('.yui3-widget-ft').show();
+        } else {
+            container.one('.yui3-widget-ft') && container.one('.yui3-widget-ft').hide();
+        }
+
         // Adjust position.
         var parent = container.get('parentNode');
 
