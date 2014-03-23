@@ -10,7 +10,6 @@ configuration of buttons.
 @submodule rednose-view-nav
 **/
 var ViewNav,
-
     // Bird's-eye view of the CSS classes used.
     CSS_MAGIC_PREFIX = 'rednose',
     CSS_VIEW_NAV     = 'rednose-view-nav',
@@ -118,15 +117,6 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     _footer: null,
 
     /**
-    Stores references to the created nodes.
-
-    @property _buttonMap
-    @type Object
-    @protected
-    **/
-    _buttonMap: {},
-
-    /**
     Stores references to an active panel.
 
     @property _pabel
@@ -134,6 +124,8 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @protected
     **/
     _panel: null,
+
+    toolbar: null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
@@ -165,8 +157,10 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         this.title      = null;
         this.buttons    = null;
         this._footer    = null;
-        this._buttonMap = null;
         this._panel     = null;
+
+        this._toolbar && this._toolbar.destroy();
+        this._toolbar = null;
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -178,15 +172,15 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @param {String} name The name of the button.
     **/
     getButton: function (name) {
-        if (!this._buttonMap) {
+        if (!this.toolbar._buttonMap) {
             return false;
         }
 
-        if (!this._buttonMap[name]) {
+        if (!this.toolbar._buttonMap[name]) {
             return false;
         }
 
-        return this._buttonMap[name];
+        return this.toolbar._buttonMap[name];
     },
 
     // FIXME: Handle padding.
@@ -216,129 +210,15 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @protected
     **/
     _buildFooter: function () {
-        var self    = this,
-            buttons = this.buttons,
-            footer  = Y.Node.create('<div></div>');
+        this._footer = Y.Node.create('<div></div>');
 
-        Y.Object.each(buttons, function (button, key) {
-            var value     = button.value,
-                primary   = button.primary,
-                position  = button.position ? button.position : 'left',
-                disabled  = button.disabled,
-                className = button.className,
-                icon      = button.icon,
-                hidden    = button.hidden;
+        this.toolbar = new Y.Rednose.Toolbar({
+            container: this._footer,
+            buttons  : this.buttons,
+            evtPrefix: this.name
+        }).render();
 
-            var node, action;
-
-            // TODO: Refactor, DRY
-            if (button.type === 'toggle') {
-                node = Y.Node.create('<div class="' + CSS_BOOTSTRAP_BTN_GROUP + '"></div>');
-
-                if (disabled) {
-                    node.addClass(CSS_BOOTSTRAP_DISABLED);
-                }
-
-                if (className) {
-                    node.addClass(className);
-                }
-
-                if (hidden) {
-                    node.hide();
-                }
-
-                if (position === 'left') {
-                    node.addClass(CSS_BOOTSTRAP_FLOAT_LEFT);
-                }
-
-                if (position === 'right') {
-                    node.addClass(CSS_BOOTSTRAP_FLOAT_RIGHT);
-                }
-
-                Y.Object.each(button.choices, function (choice, key) {
-                    var buttonNode = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
-
-                    if (choice.icon) {
-                        buttonNode.append(Y.Node.create('<i class="' + choice.icon + '"></i>'));
-                    }
-
-                    if (value === key) {
-                        buttonNode.addClass(CSS_BOOTSTRAP_ACTIVE);
-                    }
-
-                    buttonNode.on('click', function (e) {
-                        var btn = e.currentTarget;
-
-                        action = 'button' + Y.Rednose.Util.capitalizeFirstLetter(key);
-
-                        if (btn.hasClass(CSS_BOOTSTRAP_ACTIVE) === false) {
-                            btn.get('parentNode').get('children').each(function (child) {
-                                if (child.hasClass(CSS_BOOTSTRAP_ACTIVE)) {
-                                    child.removeClass(CSS_BOOTSTRAP_ACTIVE);
-                                }
-                            });
-
-                            btn.addClass(CSS_BOOTSTRAP_ACTIVE);
-
-                            self.fire(action);
-                        }
-                    });
-
-                    node.append(buttonNode);
-                });
-            } else {
-                // Format the action event by prepending 'button', for example the event
-                // fired for 'cancel' will be 'buttonCancel'
-                action = 'button' + Y.Rednose.Util.capitalizeFirstLetter(key);
-                node   = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
-
-                if (primary) {
-                    node.addClass(CSS_BOOTSTRAP_BTN_PRIMARY);
-                }
-
-                if (disabled) {
-                    node.addClass(CSS_BOOTSTRAP_DISABLED);
-                }
-
-                if (className) {
-                    node.addClass(className);
-                }
-
-                if (hidden) {
-                    node.hide();
-                }
-
-                if (position === 'left') {
-                    node.addClass(CSS_BOOTSTRAP_FLOAT_LEFT);
-                }
-
-                if (position === 'right') {
-                    node.addClass(CSS_BOOTSTRAP_FLOAT_RIGHT);
-                }
-
-                if (value) {
-                    node.set('text', value);
-                }
-
-                if (icon) {
-                    node.append(Y.Node.create('<i class="' + icon + '"></i>'));
-                }
-
-                node.on('click', function (e) {
-                    var btn = e.currentTarget;
-
-                    if (btn.hasClass(CSS_BOOTSTRAP_DISABLED) === false) {
-                        self.fire(action);
-                    }
-                });
-            }
-
-            footer.append(node);
-
-            self._buttonMap[key] = node;
-        });
-
-        this._footer = footer;
+        this.toolbar.addTarget(this);
     },
 
     /**
@@ -464,4 +344,13 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
 Y.namespace('Rednose.View').Nav = ViewNav;
 
 
-}, '1.1.0-DEV', {"requires": ["event-custom", "rednose-panel", "rednose-util", "rednose-widget-nav-container", "view"]});
+}, '1.1.0-DEV', {
+    "requires": [
+        "event-custom",
+        "rednose-navbar",
+        "rednose-panel",
+        "rednose-util",
+        "rednose-widget-nav-container",
+        "view"
+    ]
+});

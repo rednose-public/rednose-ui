@@ -93,7 +93,7 @@ var App = Y.Base.create('app', Y.App, [], {
     **/
     initializer: function () {
         var container = this.get('container');
-        
+
         // Slow down transitions so we see what's happening
         if (this.DEBUG) {
             Y.Transition.fx['app:fadeIn'].duration     = 1;

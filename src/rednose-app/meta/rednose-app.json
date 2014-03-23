@@ -38,6 +38,7 @@
             "rednose-view-nav" : {
                 "requires": [
                     "event-custom",
+                    "rednose-navbar",
                     "rednose-panel",
                     "rednose-util",
                     "rednose-widget-nav-container",

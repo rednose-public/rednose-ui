@@ -6,6 +6,7 @@
             "node-event-simulate",
             "node-pluginhost",
             "rednose-navbar-css",
+            "rednose-util",
             "widget"
         ]
     },
