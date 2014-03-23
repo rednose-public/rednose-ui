@@ -183,9 +183,8 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         return this.toolbar._buttonMap[name];
     },
 
-    // FIXME: Handle padding.
     sizeView: function (parent) {
-        var bodyHeight = parseInt(parent.getComputedStyle('height'), 10);
+        var bodyHeight = parseInt(parent.get('offsetHeight'), 10);
 
         if (isNaN(bodyHeight)) {
             return;
@@ -194,7 +193,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         this.title && (bodyHeight -= 46);
         this.buttons && (bodyHeight -= 56);
 
-        this._body.setStyle('height', bodyHeight);
+        this._body.get('parentNode').set('offsetHeight', bodyHeight);
 
         // Check for Y.Rednose.App templates.
         this._body.one('.rednose-unit-left') && this._body.one('.rednose-unit-left').setStyle('height', bodyHeight);
