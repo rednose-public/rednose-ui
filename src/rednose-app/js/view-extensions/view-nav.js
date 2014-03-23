@@ -235,7 +235,6 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
             self.buttons[key] = Y.merge(buttons[key], properties);
         });
 
-        // TODO: Update instead of rerendering.
         this._buildFooter();
 
         this._rendered && footer.one('div').replace(this._footer);
