@@ -367,5 +367,16 @@ App.createMessage = function (title, subtitle) {
     return Y.Node.create(Y.Lang.sub(this.MESSAGE_TEMPLATE, { title: title, subtitle: subtitle }));
 };
 
+/**
+ * Sets the application title
+ *
+ * @param {String} title
+ * @static
+ */
+App.setTitle = function (title) {
+    Y.one('title').setHTML(title);
+};
+
+
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose').App = App;
