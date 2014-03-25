@@ -22,7 +22,7 @@ Provides a context menu plugin with custom event binding.
 @namespace Rednose
 @param {Object} [config] Config properties.
     @param {Object} [config.content] Contextmenu configuration object.
-    @param {Oject} [config.data] Optional object to pass with fired events.
+    @param {Object} [config.data] Optional object to pass with fired events.
     @param {Object} [config.bubbleTarget] Optional bubble target.
 @constructor
 @extends Plugin.Base
@@ -87,7 +87,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 
         // Remove a previous context menu if it exists, ideally we prolly wanna toggle it.
         Y.all('.' + CSS_CONTEXT_OPEN).each(function (node) {
-            node.contextMenu._contextMenu.destroy();
+            node.contextMenu._contextMenu && node.contextMenu._contextMenu.destroy();
         });
 
         contextMenu = new Y.Overlay({
