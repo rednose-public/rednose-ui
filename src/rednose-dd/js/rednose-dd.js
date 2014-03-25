@@ -269,50 +269,11 @@ DD = Y.Base.create('dd', Y.View, [], {
                     dropNode.get('parentNode').appendChild(dragNode);
                 }
 
-                //Resync all the targets because something moved.
+                // Resync all the targets because something moved.
                 Y.DD.DDM.syncActiveShims(true);
             }
         }
     },
-
-//    _dropEnterGlobal: function () {
-//        if (Y.DD.DDM.activeDrag) {
-//            var drag     = Y.DD.DDM.activeDrag,
-//                dragNode = drag.get('dragNode'),
-//                asset    = drag.get('data');
-//
-//            // Bind to the document's end drag handler
-//            drag.on('drag:end', this._handleEnd, this);
-//
-//            // Render the item
-//            asset.load(function () {
-//                var templateItem = new Y.Docgen.Core.TemplateItem({
-//                    asset: asset
-//                });
-//
-//                var tiView = new Y.Docgen.TemplateBuilder.TemplateItemView({
-//                    model: templateItem
-//                });
-//
-//                var container = tiView.render().get('container');
-//
-//                var proxy = container.cloneNode(true).addClass('rednose-dd-drag-proxy');
-//
-//                container.addClass('rednose-dd-drag-placeholder');
-//
-//                // Store a reference to the model so we can access it from the DOM
-//                container.setData({ model: templateItem });
-//
-//                // Cleanup the old node to prevent orphans in the DOM
-//                drag.get('node').remove();
-//                // Insert it in the dragNode (we need to reprep after dropping to keep the drag node working)
-//                drag.set('node', container);
-//
-//                // Update the dragNode
-//                Y.Rednose.Anim.morph(dragNode, proxy, Y.Rednose.Anim.fadeOut, Y.Rednose.Anim.slideIn);
-//            });
-//        }
-//    },
 
     // -- Hover Event handlers -----------------------------------------------------------
 
