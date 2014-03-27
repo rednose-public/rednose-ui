@@ -43,12 +43,13 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
                 disabled  = button.disabled,
                 className = button.className,
                 icon      = button.icon,
+                title     = button.title,
                 hidden    = button.hidden;
 
             var node, action;
 
             // TODO: Refactor, DRY
-            if (button.type === 'toggle') {
+            if (button.type === 'choice') {
                 node = Y.Node.create('<div class="' + CSS_BOOTSTRAP_BTN_GROUP + '"></div>');
 
                 if (disabled) {
@@ -80,6 +81,10 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
 
                     if (value === key) {
                         buttonNode.addClass(CSS_BOOTSTRAP_ACTIVE);
+                    }
+
+                    if (choice.title) {
+                        buttonNode.set('title', choice.title);
                     }
 
                     buttonNode.on('click', function (e) {
@@ -118,6 +123,10 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
 
                 if (className) {
                     node.addClass(className);
+                }
+
+                if (title) {
+                    node.set('title', title);
                 }
 
                 if (hidden) {
