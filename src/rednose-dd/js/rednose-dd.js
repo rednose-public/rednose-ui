@@ -83,6 +83,14 @@ DD = Y.Base.create('dd', Y.View, [], {
         return dd;
     },
 
+    destroyDrag: function (node) {
+        var dd = Y.DD.DDM.getDrag(node);
+
+        dd.destroy();
+
+        node.hasClass('rednose-dd-drag') && node.removeClass('rednose-dd-drag');
+    },
+
 //    bindGlobalDrop: function (groups, container) {
 //        container = container || this.get('container');
 //
