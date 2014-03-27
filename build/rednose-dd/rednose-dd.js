@@ -93,26 +93,6 @@ DD = Y.Base.create('dd', Y.View, [], {
         node.hasClass('rednose-dd-drag') && node.removeClass('rednose-dd-drag');
     },
 
-//    bindGlobalDrop: function (groups, container) {
-//        container = container || this.get('container');
-//
-//        var dd;
-//
-//        container.addClass('rednose-global-drop');
-//
-//        // Global drop object.
-//        dd = new Y.DD.Drop({
-//            node   : container,
-//            groups: groups,
-//            bubbleTargets: this.bubbleTarget
-//        });
-//
-//        this._ddMap.push(dd);
-//
-        // Bind the global drop object.
-//        dd.on('drop:enter', this._dropEnterGlobal, this);
-//    },
-
     _rednoseDropHit: function (e) {
         // Workaround: We can't detect the rednose-global-drop node from e.drop.get('node'), because it doesn't bubble
         // properly. We can however block this node in the 'drop:over' and 'drop:enter' events, resulting in the parentNode
