@@ -112,7 +112,7 @@ DD = Y.Base.create('dd', Y.View, [], {
 
         drag.get('node').addClass('rednose-dd-drag-placeholder');
 
-        drag.get('node').one('div').setStyle('visibility', 'hidden');
+        drag.get('node').get('childNodes').setStyle('visibility', 'hidden');
     },
 
     /**
@@ -140,7 +140,7 @@ DD = Y.Base.create('dd', Y.View, [], {
         drag.get('node').removeClass('rednose-dd-drag-placeholder');
         drag.get('dragNode').set('innerHTML', '');
 
-        drag.get('node').one('div').setStyle('visibility', '');
+        drag.get('node').get('childNodes').setStyle('visibility', '');
     },
 
     /**
