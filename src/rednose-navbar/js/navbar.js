@@ -168,7 +168,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     **/
     rename: function (id, title) {
         var container = this.get('contentBox'),
-            node = container.one('[data-id=' + id + ']');
+            node      = container.one('[data-id=' + id + ']');
 
         node.setHTML(title);
     },
@@ -218,7 +218,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @method _appendMenu
     @param {Array} menu Menu config
     @param {Array} secondary Secondary menu config
-    @param {Node} Parent node
+    @param {Node} parentMenu node
     @protected
     **/
     _appendMenu: function (menu, secondary, parentMenu) {
@@ -260,10 +260,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     /**
     @method _createLi
     @param {Object} item
+    @param {Object} dropdown
     @protected
     **/
     _createLi: function(item, dropdown) {
-        var self =  this;
         var li = Y.Node.create ('<li tabindex="-1"></li>');
 
         if (item.title === '-') {
@@ -273,7 +273,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         }
 
         if (typeof(item.items) === 'object') {
-            return self._appendMenu(new Array(i), null, dropdown);
+            return this._appendMenu([ item ], null, dropdown);
         }
 
         if (item.node instanceof Y.Node && item.node.test('a')) {
@@ -314,6 +314,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             a.setAttribute('data-url', item.url);
         }
 
+        if (typeof(item.value) !== 'undefined') {
+            a.setAttribute('data-value', item.value);
+        }
+
         return a;
     },
 
@@ -325,9 +329,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @protected
     **/
     _handleClick: function (e) {
-        var node = e.currentTarget,
-            id   = node.getAttribute('data-id'),
-            url  = node.getAttribute('data-url');
+        var node   = e.currentTarget,
+            id     = node.getAttribute('data-id'),
+            url    = node.getAttribute('data-url'),
+            value  = node.getAttribute('data-value');
 
         if (node.hasClass('dropdown')) {
             return;
@@ -343,7 +348,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         }
 
         if (id) {
-            this.fire(id);
+            this.fire(id, { value: value });
         }
 
         if (node.ancestor('.dropdown')) {
@@ -370,7 +375,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         @type String
         **/
         title: {
-            value: null,
+            value: null
         },
 
         /**
@@ -378,7 +383,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         @type String
         **/
         url: {
-            value: '',
+            value: ''
         },
 
         /**
@@ -399,10 +404,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
         /**
         @attribute columnLayout
-        @type Bool
+        @type Boolean
         **/
         columnLayout: {
-            value: false,
+            value: false
         }
     }
 });
