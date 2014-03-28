@@ -100,7 +100,7 @@ Y.namespace('Rednose.Template').SingleView = AppTemplateSingleView;
 function AppTemplateThreeColumn() {}
 
 AppTemplateThreeColumn.prototype = {
-    navigationBar: true,
+    showNavbar: true,
 
     template: '<div class="rednose-grid rednose-three-column-grid">' +
                   '<div class="rednose-unit-container">' +
@@ -116,7 +116,7 @@ AppTemplateThreeColumn.prototype = {
 
         container.setHTML(template);
 
-        if (this.navigationBar) {
+        if (this.showNavbar) {
             container.addClass('rednose-navbar-grid');
             container.prepend('<div class="rednose-navbar"></div>');
 
