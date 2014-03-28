@@ -196,6 +196,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         // Check for Y.Rednose.App templates.
         this._body.one('.rednose-unit-left') && this._body.one('.rednose-unit-left').setStyle('height', bodyHeight);
         this._body.one('.rednose-unit-right') && this._body.one('.rednose-unit-right').setStyle('height', bodyHeight);
+        this._body.one('.rednose-unit-right') && this._body.one('.rednose-unit-right').setStyle('top', 46);
     },
 
     // -- Protected Methods ----------------------------------------------------
