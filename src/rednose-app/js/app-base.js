@@ -290,6 +290,10 @@ var App = Y.Base.create('app', Y.App, [], {
                     height : viewInfo.height || STYLE_MODAL_HEIGHT
                 });
 
+                if (viewInfo.top) {
+                    this._activePanel.set('top', viewInfo.top);
+                }
+
                 this._activePanel.render();
 
                 if (typeof view.sizeView === 'function') {
