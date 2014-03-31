@@ -76,7 +76,7 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         this.data         = null;
         this._contextMenu = null;
 
-        node.detach('contextmenu');
+        node.detach('contextmenu', this._handleContextMenu);
     },
 
     // -- Public Methods -------------------------------------------------------
