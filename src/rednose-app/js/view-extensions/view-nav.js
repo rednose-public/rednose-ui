@@ -31,7 +31,14 @@ var ViewNav,
 
     @event buttonClose
     **/
-    EVT_BUTTON_CLOSE = 'buttonClose';
+    EVT_BUTTON_CLOSE = 'buttonClose',
+
+    /**
+    Fired after the view is rendered and sized.
+
+    @event buttonClose
+    **/
+    EVT_LOAD = 'load';
 
 /**
 View extension, adds a title section to an instance of View, and a footer section with a
@@ -197,6 +204,8 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         this._body.one('.rednose-unit-left') && this._body.one('.rednose-unit-left').setStyle('height', bodyHeight);
         this._body.one('.rednose-unit-right') && this._body.one('.rednose-unit-right').setStyle('height', bodyHeight);
         this._body.one('.rednose-unit-right') && this._body.one('.rednose-unit-right').setStyle('top', 46);
+
+        this.fire(EVT_LOAD);
     },
 
     // -- Protected Methods ----------------------------------------------------
