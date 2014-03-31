@@ -373,8 +373,6 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
             this._correctChildrenMargin(self.getHTMLNode(treeNode));
 
             Y.Array.each(treeNode.children, function (child) {
-                htmlNode = self.getHTMLNode(child);
-
                 self._correctMargin(self.getHTMLNode(child));
             });
         }
