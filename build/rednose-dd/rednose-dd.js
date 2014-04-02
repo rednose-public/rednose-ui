@@ -88,7 +88,6 @@ DD = Y.Base.create('dd', Y.View, [], {
     destroyDrag: function (node) {
         var dd = Y.DD.DDM.getDrag(node);
 
-        console.log(dd);
         dd.destroy();
 
         node.hasClass('rednose-dd-drag') && node.removeClass('rednose-dd-drag');
