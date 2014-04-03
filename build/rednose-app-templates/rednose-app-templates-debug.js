@@ -138,7 +138,6 @@ AppTemplateThreeColumn.prototype = {
         }
 
         this.set('gridLeft' , container.one('.rednose-unit-left'));
-        this.set('gridMain' , container.one('.rednose-unit-main'));
         this.set('gridRight', container.one('.rednose-unit-right'));
 
         this.set('viewContainer', this.get('gridMain'));
