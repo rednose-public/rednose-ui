@@ -6,8 +6,8 @@ var DD, BubbleTarget;
 
 BubbleTarget = Y.Base.create('bubbleTarget', Y.Base, [], {});
 
-// NOT GENERIC YET: Dropenterglobal morphing
 DD = Y.Base.create('dd', Y.View, [], {
+    DEBUG: false,
 
     dropHighlight: false,
 
@@ -31,6 +31,8 @@ DD = Y.Base.create('dd', Y.View, [], {
         this.bubbleTarget = new BubbleTarget();
         this.bubbleTarget.addTarget(this);
         this.bubbleTarget.on('drop:hit', this._rednoseDropHit, this);
+
+        Y.DD.DDM._debugShim = this.DEBUG;
     },
 
     destructor: function () {
