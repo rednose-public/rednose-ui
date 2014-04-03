@@ -467,7 +467,7 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
             var node, action;
 
             // TODO: Refactor, DRY
-            if (button.type === 'choice') {
+            if (button.type === 'choice' || button.type === 'group') {
                 node = Y.Node.create('<div class="' + CSS_BOOTSTRAP_BTN_GROUP + '"></div>');
 
                 if (disabled) {
@@ -505,23 +505,39 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
                         buttonNode.set('title', choice.title);
                     }
 
-                    buttonNode.on('click', function (e) {
-                        var btn = e.currentTarget;
+                    if (button.type === 'choice') {
+                        buttonNode.on('click', function (e) {
+                            var btn = e.currentTarget;
 
-                        action = 'button' + Y.Rednose.Util.capitalizeFirstLetter(key);
+                            action = 'button' + Y.Rednose.Util.capitalizeFirstLetter(key);
 
-                        if (btn.hasClass(CSS_BOOTSTRAP_ACTIVE) === false) {
-                            btn.get('parentNode').get('children').each(function (child) {
-                                if (child.hasClass(CSS_BOOTSTRAP_ACTIVE)) {
-                                    child.removeClass(CSS_BOOTSTRAP_ACTIVE);
-                                }
-                            });
+                            if (btn.hasClass(CSS_BOOTSTRAP_ACTIVE) === false) {
+                                btn.get('parentNode').get('children').each(function (child) {
+                                    if (child.hasClass(CSS_BOOTSTRAP_ACTIVE)) {
+                                        child.removeClass(CSS_BOOTSTRAP_ACTIVE);
+                                    }
+                                });
 
-                            btn.addClass(CSS_BOOTSTRAP_ACTIVE);
+                                btn.addClass(CSS_BOOTSTRAP_ACTIVE);
 
-                            self.fire(self._evtPrefix + ':' + action);
-                        }
-                    });
+                                self.fire(self._evtPrefix + ':' + action);
+                            }
+                        });
+                    }
+
+                    if (button.type === 'group') {
+                        buttonNode.on('click', function (e) {
+                            var btn = e.currentTarget;
+
+                            action = 'button' + Y.Rednose.Util.capitalizeFirstLetter(key);
+
+                            btn.blur();
+
+                            if (btn.hasClass(CSS_BOOTSTRAP_DISABLED) === false) {
+                                self.fire(self._evtPrefix + ':' + action);
+                            }
+                        });
+                    }
 
                     node.append(buttonNode);
                 });
@@ -569,6 +585,8 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
 
                 node.on('click', function (e) {
                     var btn = e.currentTarget;
+
+                    btn.blur();
 
                     if (btn.hasClass(CSS_BOOTSTRAP_DISABLED) === false) {
                         self.fire(self._evtPrefix + ':' + action);
