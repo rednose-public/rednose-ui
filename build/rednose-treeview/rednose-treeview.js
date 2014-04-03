@@ -156,6 +156,11 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
             }
         }
 
+        // Check the icon property on the model.
+        if (Y.Lang.isString(model.get('icon'))) {
+            return className + ' ' + model.get('icon');
+        }
+
         // Check the icon property on the node.
         if (Y.Lang.isString(node.icon)) {
             return className + ' ' + node.icon;
