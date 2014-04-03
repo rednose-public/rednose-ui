@@ -102,6 +102,8 @@ function AppTemplateThreeColumn() {}
 AppTemplateThreeColumn.prototype = {
     showNavbar: true,
 
+    showToolbar: false,
+
     template: '<div class="rednose-grid rednose-three-column-grid">' +
                   '<div class="rednose-unit-container">' +
                       '<div class="rednose-unit-left"></div>' +
@@ -123,6 +125,18 @@ AppTemplateThreeColumn.prototype = {
             this.set('navBar', container.one('.rednose-navbar'));
         }
 
+        if (this.showToolbar) {
+            container.one('.rednose-unit-main').append(
+                '<div class="rednose-toolbar"></div>' +
+                '<div class="rednose-viewport"></div>'
+            );
+
+            this.set('toolbar', container.one('.rednose-toolbar'));
+            this.set('gridMain', container.one('.rednose-viewport'));
+        } else {
+            this.set('gridMain', container.one('.rednose-unit-main'));
+        }
+
         this.set('gridLeft' , container.one('.rednose-unit-left'));
         this.set('gridMain' , container.one('.rednose-unit-main'));
         this.set('gridRight', container.one('.rednose-unit-right'));
@@ -132,6 +146,9 @@ AppTemplateThreeColumn.prototype = {
 };
 
 AppTemplateThreeColumn.ATTRS = {
+    toolbar : { value: null },
+    navBar  : { value: null },
+
     gridLeft : { value: null },
     gridMain : { value: null },
     gridRight: { value: null }
@@ -190,6 +207,9 @@ AppTemplateTwoColumn.prototype = {
 };
 
 AppTemplateTwoColumn.ATTRS = {
+    toolbar : { value: null },
+    navBar  : { value: null },
+
     gridLeft: { value: null },
     gridMain: { value: null }
 };

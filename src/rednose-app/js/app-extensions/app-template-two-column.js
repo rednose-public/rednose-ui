@@ -49,6 +49,9 @@ AppTemplateTwoColumn.prototype = {
 };
 
 AppTemplateTwoColumn.ATTRS = {
+    toolbar : { value: null },
+    navBar  : { value: null },
+
     gridLeft: { value: null },
     gridMain: { value: null }
 };
