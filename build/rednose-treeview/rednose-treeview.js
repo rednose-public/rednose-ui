@@ -140,7 +140,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
             className = CSS_TREEVIEW_ICON;
 
         // Check the model icon definitions.
-        if (icons && model instanceof Y.Model && icons[model.name] && Y.Lang.isString(node.icon) === false) {
+        if (icons && model instanceof Y.Model && icons[model.name] && Y.Lang.isString(node.icon) === false && Y.Lang.isString(model.get('icon')) === false) {
             var icon = icons[model.name];
 
             if (this.get('selectable') && node.isSelected()) {
