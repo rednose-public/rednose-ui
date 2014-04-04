@@ -85,12 +85,13 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     close: false,
 
     /**
-    Optionally disable padding.
+    Optionally enable padding.
 
+    @depracated
     @property padding
     @type Boolean
     **/
-    padding: true,
+    padding: false,
 
     // -- Protected Properties -------------------------------------------------
 
