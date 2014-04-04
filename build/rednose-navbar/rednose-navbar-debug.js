@@ -493,6 +493,10 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
                 Y.Object.each(button.choices, function (choice, key) {
                     var buttonNode = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
 
+                    if (disabled) {
+                        buttonNode.addClass(CSS_BOOTSTRAP_DISABLED);
+                    }
+
                     if (choice.icon) {
                         buttonNode.append(Y.Node.create('<i class="' + choice.icon + '"></i>'));
                     }
