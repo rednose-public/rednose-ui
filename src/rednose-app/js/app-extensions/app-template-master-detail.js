@@ -49,6 +49,8 @@ AppTemplateMasterDetail.prototype = {
 };
 
 AppTemplateMasterDetail.ATTRS = {
+    toolbar  : { value: null },
+    navBar   : { value: null },
     gridMain : { value: null },
     gridRight: { value: null }
 };
