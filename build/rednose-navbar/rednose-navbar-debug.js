@@ -149,7 +149,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @method disable
     @param {String} id Menu entry id
     @param {Boolean} _enable Toggle the enabled state
-    @public
     **/
     disable: function (id, _enable) {
         var container = this.get('contentBox'),
@@ -166,7 +165,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @method rename
     @param {String} id Menu entry id
     @param {Array} title The new name
-    @public
     **/
     rename: function (id, title) {
         var container = this.get('contentBox'),
@@ -493,6 +491,8 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
                 Y.Object.each(button.choices, function (choice, key) {
                     var buttonNode = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
 
+                    buttonNode.setAttribute('data-id', key);
+
                     if (disabled) {
                         buttonNode.addClass(CSS_BOOTSTRAP_DISABLED);
                     }
@@ -550,6 +550,8 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
                 // fired for 'cancel' will be 'buttonCancel'
                 action = 'button' + Y.Rednose.Util.capitalizeFirstLetter(key);
                 node   = Y.Node.create('<button class="' + CSS_BOOTSTRAP_BTN + '"></button>');
+
+                node.setAttribute('data-id', key);
 
                 if (primary) {
                     node.addClass(CSS_BOOTSTRAP_BTN_PRIMARY);
@@ -622,6 +624,38 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
         }
 
         return this._buttonMap[name];
+    },
+
+    /**
+     * @param {String} id Menu entry id
+     */
+    enable: function (id) {
+        this.disable(id, true);
+    },
+
+    /**
+     * @param {String} id Menu entry id
+     * @param {Boolean} _enable Toggle the enabled state
+     */
+    disable: function (id, _enable) {
+        var container = this.get('container'),
+            node      = container.one('[data-id=' + id + ']');
+
+        if (_enable) {
+            node.removeClass('disabled');
+        } else {
+            node.addClass('disabled');
+        }
+    },
+
+    /**
+     * @param {String} id Menu entry id
+     */
+    reset: function (id) {
+        var container = this.get('container'),
+            node      = container.one('[data-id=' + id + ']');
+
+        node.hasClass(CSS_BOOTSTRAP_ACTIVE) && node.removeClass(CSS_BOOTSTRAP_ACTIVE);
     },
 
     /**

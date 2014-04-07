@@ -147,7 +147,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @method disable
     @param {String} id Menu entry id
     @param {Boolean} _enable Toggle the enabled state
-    @public
     **/
     disable: function (id, _enable) {
         var container = this.get('contentBox'),
@@ -164,7 +163,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @method rename
     @param {String} id Menu entry id
     @param {Array} title The new name
-    @public
     **/
     rename: function (id, title) {
         var container = this.get('contentBox'),
