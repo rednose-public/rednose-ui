@@ -11,16 +11,6 @@ DD = Y.Base.create('dd', Y.View, [], {
 
     dropHighlight: false,
 
-    /**
-     * Hover events, handling complex, stacked hovers
-     */
-    events: {
-        '.rednose-dd-drag': {
-            mouseenter: '_handleMouseEnter',
-            mouseleave: '_handleMouseLeave'
-        }
-    },
-
     initializer: function() {
         this._ddMap || (this._ddMap = []);
 

@@ -37,7 +37,7 @@ var TreeView,
  *     @param {Boolean} [config.dragdrop] Enable standalone drag and drop for this instance.
  *     @param {Boolean} [config.selectable] Enables selection of tree nodes. Only single selection
  *         is supported for now
- *     @param {Y.Rednose.ModelTree} [config.model] A RedNose Tree model. Change events are bound to update
+ *     @param {Rednose.ModelTree} [config.model] A RedNose Tree model. Change events are bound to update
  *         the view when the model changes.
  *     @param {Array} [config.groups] The DD groups that can interact with this
  *         TreeView instance.
@@ -97,7 +97,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
      *
      * @method render
      * @chainable
-     * @see Y.TreeView.render()
+     * @see TreeView.render()
      */
     render: function () {
         var container     = this.get('container'),
@@ -131,7 +131,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
      * If no icon is found on the model, the `icon` property of the node will be checked.
      *
      * @method icon
-     * @param  {Y.Tree.Node} node Tee Node.
+     * @param  {Tree.Node} node Tee Node.
      * @return {String} A composed CSS string.
      */
     icon: function (node) {
@@ -173,7 +173,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
      * Generate a unique RedNose record ID, composed of the class type and the model ID.
      *
      * @method generateRednoseRecordID
-     * @param  {Y.Model} model A model instance.
+     * @param  {Model} model A model instance.
      * @return {String} A unique ID.
      */
     generateRednoseRecordId: function (model) {
