@@ -111,7 +111,6 @@ DD = Y.Base.create('dd', Y.View, [], {
         drag.get('dragNode').set('innerHTML', proxy.get('outerHTML'));
 
         drag.get('node').addClass('rednose-dd-drag-placeholder');
-
         drag.get('node').get('childNodes').setStyle('visibility', 'hidden');
     },
 
