@@ -93,6 +93,10 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
                         buttonNode.set('title', choice.title);
                     }
 
+                    if (choice.value) {
+                        buttonNode.set('text', choice.value);
+                    }
+
                     if (button.type === 'choice') {
                         buttonNode.on('click', function (e) {
                             var btn = e.currentTarget;
