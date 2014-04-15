@@ -3,16 +3,26 @@
 function AppTemplateTwoColumn() {}
 
 AppTemplateTwoColumn.prototype = {
+
     showNavbar: true,
 
     showToolbar: false,
 
-    template: '<div class="rednose-grid rednose-two-column-grid">' +
-                  '<div class="rednose-unit-container">' +
-                      '<div class="rednose-unit-left"></div>' +
-                      '<div class="rednose-unit-main"></div>' +
-                  '</div>' +
-              '</div>',
+    splitView: false,
+
+    template:
+        '<div class="rednose-grid rednose-two-column-grid">' +
+            '<div class="rednose-unit-container">' +
+                '<div class="rednose-unit-left"></div>' +
+                '<div class="rednose-unit-main"></div>' +
+            '</div>' +
+        '</div>',
+
+    splitTemplate:
+        '<div>' +
+            '<div class="rednose-unit-main-top"></div>' +
+            '<div class="rednose-unit-main-bottom"></div>' +
+        '</div>',
 
     initializer: function () {
         var container = this.get('container'),
@@ -44,6 +54,13 @@ AppTemplateTwoColumn.prototype = {
         this.get('gridMain').setStyle('overflow', 'auto');
         this.get('gridMain').setStyle('height', '100%');
 
+        if (this.splitView) {
+            this.get('gridMain').append(this.splitTemplate);
+
+            this.set('gridMainTop', container.one('.rednose-unit-main-top'));
+            this.set('gridMainBottom', container.one('.rednose-unit-main-bottom'));
+        }
+
         this.set('viewContainer', this.get('gridMain'));
     }
 };
@@ -53,7 +70,10 @@ AppTemplateTwoColumn.ATTRS = {
     navBar  : { value: null },
 
     gridLeft: { value: null },
-    gridMain: { value: null }
+    gridMain: { value: null },
+
+    gridMainTop: { value: null },
+    gridMainBottom: { value: null }
 };
 
 // -- Namespace ----------------------------------------------------------------
