@@ -8,7 +8,7 @@ Provides a context menu plugin with custom event binding.
 var ContextMenu,
 
     CSS_CONTEXT_MENU = 'rednose-context-menu',
-    CSS_CONTEXT_OPEN = 'rednose-context-open';
+    CSS_CONTEXT_OPEN = 'rednose-context-open',
 
     CSS_BOOTSTRAP_ICON_WHITE    = 'icon-white',
     CSS_BOOTSTRAP_DROPDOWN      = 'dropdown',
@@ -226,8 +226,8 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
         var highIndex = 0;
 
         for (var i = 0; i < elements.length - 1; i++) {
-            if (parseInt(elements[i].style.zIndex) > highIndex) {
-                highIndex = parseInt(elements[i].style.zIndex)
+            if (parseInt(elements[i].style.zIndex, 10) > highIndex) {
+                highIndex = parseInt(elements[i].style.zIndex, 10);
             }
         }
 

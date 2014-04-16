@@ -1,0 +1,364 @@
+{
+    "gallery-sm-tree": {
+        "requires": [
+            "base-build",
+            "gallery-sm-tree-node"
+        ]
+    },
+    "gallery-sm-tree-lazy": {
+        "requires": [
+            "base-pluginhost",
+            "plugin",
+            "gallery-sm-tree"
+        ]
+    },
+    "gallery-sm-tree-node": {},
+    "gallery-sm-tree-node-openable": {
+        "requires": [
+            "gallery-sm-tree-node"
+        ]
+    },
+    "gallery-sm-tree-node-selectable": {
+        "requires": [
+            "gallery-sm-tree-node",
+            "oop"
+        ]
+    },
+    "gallery-sm-tree-openable": {
+        "requires": [
+            "gallery-sm-tree",
+            "gallery-sm-tree-node-openable"
+        ]
+    },
+    "gallery-sm-tree-selectable": {
+        "requires": [
+            "gallery-sm-tree",
+            "gallery-sm-tree-node-selectable"
+        ]
+    },
+    "gallery-sm-treeview": {
+        "requires": [
+            "base-build",
+            "classnamemanager",
+            "gallery-sm-tree",
+            "gallery-sm-tree-openable",
+            "gallery-sm-tree-selectable",
+            "gallery-sm-treeview-templates",
+            "view"
+        ],
+        "skinnable": true
+    },
+    "gallery-sm-treeview-templates": {
+        "requires": [
+            "template-micro"
+        ]
+    },
+    "rednose-anim": {
+        "requires": [
+            "anim"
+        ]
+    },
+    "rednose-app": {
+        "use": [
+            "app-transitions",
+            "rednose-app-base",
+            "rednose-model-undo",
+            "rednose-model-spinner",
+            "rednose-view-nav"
+        ]
+    },
+    "rednose-app-base": {
+        "requires": [
+            "app-base",
+            "event-custom",
+            "rednose-app-templates",
+            "rednose-panel",
+            "rednose-tooltip",
+            "rednose-util"
+        ]
+    },
+    "rednose-app-templates": {},
+    "rednose-breadcrumb": {
+        "requires": [
+            "base",
+            "view"
+        ]
+    },
+    "rednose-contextmenu": {
+        "requires": [
+            "base",
+            "overlay",
+            "panel",
+            "plugin",
+            "rednose-contextmenu-css",
+            "widget"
+        ]
+    },
+    "rednose-contextmenu-css": {
+        "type": "css"
+    },
+    "rednose-controlform": {
+        "requires": [
+            "autocomplete",
+            "autocomplete-filters",
+            "autocomplete-highlighters",
+            "base",
+            "calendar",
+            "dd-constrain",
+            "dd-proxy",
+            "io",
+            "model",
+            "model-list",
+            "node",
+            "rednose-contextmenu",
+            "rednose-dialog"
+        ]
+    },
+    "rednose-dataprovider": {
+        "requires": [
+            "autocomplete",
+            "autocomplete-filters",
+            "autocomplete-highlighters",
+            "base",
+            "json",
+            "model",
+            "model-list",
+            "rednose-treeview",
+            "widget"
+        ],
+        "skinnable": true
+    },
+    "rednose-datasource-manager": {
+        "requires": [
+            "rednose-app",
+            "rednose-dataprovider"
+        ]
+    },
+    "rednose-datatable": {
+        "requires": [
+            "datatable-base",
+            "datatable-scroll",
+            "datatable-sort",
+            "rednose-util"
+        ],
+        "skinnable": true,
+        "supersedes": [
+            "skin-sam-datatable-base"
+        ]
+    },
+    "rednose-datatable-select": {
+        "requires": [
+            "rednose-datatable",
+            "plugin"
+        ]
+    },
+    "rednose-dd": {
+        "requires": [
+            "rednose-anim",
+            "rednose-dd-css",
+            "view"
+        ]
+    },
+    "rednose-dd-css": {
+        "type": "css"
+    },
+    "rednose-dialog": {
+        "requires": [
+            "dd",
+            "dd-plugin",
+            "json-parse",
+            "rednose-dialog-css",
+            "rednose-panel",
+            "node",
+            "node-event-simulate",
+            "widget"
+        ]
+    },
+    "rednose-dialog-css": {
+        "type": "css"
+    },
+    "rednose-dropdown": {
+        "requires": [
+            "base",
+            "node",
+            "gallery-bootstrap-dropdown"
+        ]
+    },
+    "rednose-form": {
+        "requires": [
+            "rednose-controlform",
+            "rednose-dataprovider",
+            "rednose-form-css",
+            "template-micro",
+            "uploader"
+        ]
+    },
+    "rednose-form-css": {
+        "type": "css"
+    },
+    "rednose-form-designer": {
+        "requires": [
+            "rednose-app",
+            "rednose-datatable-select",
+            "rednose-datasource-manager",
+            "rednose-dialog",
+            "rednose-dropdown",
+            "rednose-form",
+            "rednose-form-designer-css",
+            "rednose-navbar",
+            "rednose-nodescroll",
+            "rednose-treeview"
+        ]
+    },
+    "rednose-form-designer-css": {
+        "type": "css"
+    },
+    "rednose-formatter": {},
+    "rednose-grid": {
+        "requires": [
+            "handlebars",
+            "model-list",
+            "rednose-contextmenu",
+            "rednose-grid-select",
+            "rednose-util",
+            "view"
+        ],
+        "skinnable": true
+    },
+    "rednose-grid-select": {},
+    "rednose-jquery": {},
+    "rednose-model-spinner": {
+        "requires": [
+            "rednose-app-base",
+            "model"
+        ]
+    },
+    "rednose-model-tree": {
+        "requires": [
+            "model",
+            "io"
+        ]
+    },
+    "rednose-model-undo": {
+        "requires": [
+            "model"
+        ]
+    },
+    "rednose-navbar": {
+        "requires": [
+            "base",
+            "gallery-bootstrap-dropdown",
+            "node-event-simulate",
+            "node-pluginhost",
+            "rednose-navbar-css",
+            "rednose-util",
+            "widget"
+        ]
+    },
+    "rednose-navbar-css": {
+        "type": "css"
+    },
+    "rednose-navbar-recent": {
+        "requires": [
+            "cookie",
+            "plugin",
+            "rednose-navbar"
+        ]
+    },
+    "rednose-nodescroll": {
+        "requires": [
+            "node",
+            "event",
+            "dd",
+            "anim"
+        ]
+    },
+    "rednose-notifier": {
+        "requires": [
+            "rednose-jquery",
+            "rednose-notifier-css"
+        ]
+    },
+    "rednose-notifier-css": {
+        "type": "css"
+    },
+    "rednose-panel": {
+        "requires": [
+            "panel",
+            "rednose-panel-css"
+        ],
+        "supersedes": [
+            "skin-sam-widget-base",
+            "skin-sam-panel"
+        ]
+    },
+    "rednose-panel-css": {
+        "type": "css"
+    },
+    "rednose-tooltip": {
+        "requires": [
+            "gallery-bootstrap-tooltip"
+        ]
+    },
+    "rednose-treeview": {
+        "requires": [
+            "gallery-sm-treeview",
+            "rednose-model-tree",
+            "rednose-treeview-anim",
+            "rednose-treeview-dd",
+            "rednose-treeview-templates",
+            "rednose-treeview-select",
+            "node"
+        ],
+        "rollup": 1,
+        "skinnable": true,
+        "supersedes": [
+            "gallery-sm-treeview-templates"
+        ]
+    },
+    "rednose-treeview-anim": {
+        "requires": [
+            "rednose-anim",
+            "rednose-treeview",
+            "transition"
+        ]
+    },
+    "rednose-treeview-dd": {
+        "requires": [
+            "rednose-dd",
+            "rednose-treeview"
+        ]
+    },
+    "rednose-treeview-select": {
+        "requires": [
+            "rednose-treeview"
+        ]
+    },
+    "rednose-treeview-templates": {
+        "requires": [
+            "template-micro"
+        ]
+    },
+    "rednose-util": {
+        "requires": [
+            "datatype-date"
+        ]
+    },
+    "rednose-view-nav": {
+        "requires": [
+            "event-custom",
+            "rednose-navbar",
+            "rednose-panel",
+            "rednose-util",
+            "rednose-widget-nav-container",
+            "view"
+        ]
+    },
+    "rednose-widget-nav-container": {
+        "requires": [
+            "widget",
+            "widget-buttons",
+            "widget-stdmod"
+        ]
+    }
+}
