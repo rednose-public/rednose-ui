@@ -39,31 +39,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('loader', 'Build YUI loader metadata', function() {
-        var exec = require('child_process').spawn,
-            path = require('path');
-
-        var yogi = path.join(process.cwd(), 'node_modules/yogi/bin/yogi.js'),
-            done = this.async();
-
-        var child = exec(process.execPath, [
-            yogi,
-            'loader',
-            '--mix',
-            '--yes'
-        ], {
-            cwd: path.join(process.cwd(), 'src'),
-            stdio: 'inherit',
-            env: process.env
-        });
-
-        child.on('exit', function(code) {
-            if (code) {
-                grunt.fail.fatal('Yogi loader build exited with code: ' + code);
-            }
-            done();
-        });
-    });
-
-    grunt.registerTask('default', ['less', 'copy', 'loader']);
+    grunt.registerTask('default', ['less', 'copy']);
 };
