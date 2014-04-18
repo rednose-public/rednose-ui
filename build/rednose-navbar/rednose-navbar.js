@@ -713,10 +713,12 @@ Y.namespace('Rednose').Toolbar = Toolbar;
     "requires": [
         "base",
         "gallery-bootstrap-dropdown",
+        "json",
         "node-event-simulate",
         "node-pluginhost",
         "rednose-navbar-css",
         "rednose-util",
+        "view",
         "widget"
     ]
 });

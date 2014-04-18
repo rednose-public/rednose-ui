@@ -1111,6 +1111,7 @@ Y.namespace('Rednose').ControlForm = ControlForm;
         "model-list",
         "node",
         "rednose-contextmenu",
-        "rednose-dialog"
+        "rednose-dialog",
+        "template-micro"
     ]
 });
