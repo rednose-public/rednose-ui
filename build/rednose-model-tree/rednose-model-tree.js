@@ -347,4 +347,4 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
 Y.namespace('Rednose').ModelTree = ModelTree;
 
 
-}, '1.1.0-DEV', {"requires": ["model", "io"]});
+}, '1.4.0', {"requires": ["model", "io"]});

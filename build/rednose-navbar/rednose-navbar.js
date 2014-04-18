@@ -709,7 +709,7 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
 Y.namespace('Rednose').Toolbar = Toolbar;
 
 
-}, '1.1.0-DEV', {
+}, '1.4.0', {
     "requires": [
         "base",
         "gallery-bootstrap-dropdown",
