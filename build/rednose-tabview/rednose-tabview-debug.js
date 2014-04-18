@@ -75,6 +75,8 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
 
         a.get('parentNode').addClass('active');
         container.one('div' + id).addClass('active');
+
+        this.fire('click', { tabNode: a.get('parentNode') });
     }
 
 }, {
