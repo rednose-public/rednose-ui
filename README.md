@@ -5,10 +5,10 @@ The RedNose UI framework.
 ## Usage 
 
     <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="path/to/rednose-ui/build/rednose-ui/redose-ui.css" rel="stylesheet"/>
+    <link href="path/to/rednose-ui/build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
     
     <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui.js"></script>
-    <script src="path/to/rednose-ui/build/rednose-loader/redose-loader.js"></script>
+    <script src="path/to/rednose-ui/build/rednose-loader/rednose-loader.js"></script>
     
     <script>
     	YUI.Env.core.push('rednose-loader');
