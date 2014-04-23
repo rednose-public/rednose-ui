@@ -27,7 +27,7 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
         '<div class="tab-content">' +
         '</div>',
 
-    itemTemplate: '<li><a href="#"></a></li>',
+    itemTemplate: '<li><a></a></li>',
 
     paneTemplate: '<div class="tab-pane"></div>',
 
@@ -48,7 +48,7 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
                 pane = Y.Node.create(self.paneTemplate);
 
             a.on('click', self._handleTabClick, self);
-            a.setAttribute('href', '#' + tab.id);
+            a.setAttribute('id', tab.id);
             a.setHTML(tab.title);
 
             pane.append(tab.container);
@@ -68,13 +68,13 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
 
     _handleTabClick: function (e) {
         var a         = e.currentTarget,
-            id        = a.getAttribute('href'),
+            id        = a.getAttribute('id'),
             container = this.get('contentBox');
 
         container.all('.active').removeClass('active');
 
         a.get('parentNode').addClass('active');
-        container.one('div' + id).addClass('active');
+        container.one('div#' + id).addClass('active');
 
         this.fire('click', { tabNode: a.get('parentNode') });
     }
