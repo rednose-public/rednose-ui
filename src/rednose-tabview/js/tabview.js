@@ -29,6 +29,10 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
 
     paneTemplate: '<div class="tab-pane"></div>',
 
+    initializer: function () {
+        this.after('errorChange', this._setError, this);
+    },
+
     // -- Lifecycle Methods ----------------------------------------------------
 
     renderUI: function (container) {
@@ -75,11 +79,27 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
         container.one('div#' + id).addClass('active');
 
         this.fire('click', { tabNode: a.get('parentNode') });
-    }
+    },
 
+    /**
+     * Fired when the `error` property changes.
+     *
+     * @private
+     */
+    _setError: function (e) {
+        var errors = e.newVal,
+            container = this.get('contentBox');
+
+        container.all('.text-error').removeClass('text-error');
+
+        Y.each(errors, function(error) {
+            container.one('a#' + error).addClass('text-error');
+        });
+    }
 }, {
     ATTRS: {
-        tabs: { value: {} }
+        tabs: { value: {} },
+        error: { value: [] }
     }
 });
 
