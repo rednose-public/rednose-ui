@@ -15,54 +15,76 @@ Provides a context menu plugin with custom event binding.
 @class Dropdown
 @namespace Rednose
 @constructor
-@extends Bootstrap.Dropdown
+@extends Widget
 **/
-Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
+Dropdown = Y.Base.create('dropdown', Y.Widget, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
-    initializer: function () {
-        var node      = this._node,
-            menuNode  = null,
-            direction = this.config.dropup ? 'dropup' : 'dropdown';
+    initializer: function (config) {
+        var sourceNode = this.get('sourceNode');
+//        var node      = this._node;
+//            menuNode  = null,
+//            direction = this.config.dropup ? 'dropup' : 'dropdown';
 
-        node.wrap('<div class="dropdown-wrapper ' + direction + '"></div>');
-        node.addClass('dropdown-toggle');
-        node.setAttribute('data-toggle', 'dropdown');
-        this.node = node;
+//        this.node = node;
 
-        menuNode = node.get('parentNode');
-        menuNode.append(this._buildHTML(
-            this.get('content')
-        ));
+//        node.wrap('<div class="dropdown-wrapper ' + direction + '"></div>');
 
-        // Close the dropdown on click.
-        menuNode.delegate('click', function(e) {
-            e.preventDefault();
+//        parentNode.addClass('dropdown');
+//
+//        this._node.addClass('dropdown-toggle');
+//        this._node.setAttribute('data-toggle', 'dropdown');
 
-            if (e.target.hasClass('disabled') !== true) {
-                if (e.target.getAttribute('data-id')) {
-                    node.dropdown.fire(e.target.getAttribute('data-id'));
-                }
+        // From markup
+        var parentNode = sourceNode.get('parentNode');
 
-                node.dropdown.toggle();
-            } else {
-                e.target.blur();
-            }
-        }, 'a');
+        sourceNode.on('click', this._handleAnchorClick, this);
 
-        this.set('node', menuNode);
+        parentNode.delegate('click', this._handleItemClick, '.dropdown-menu a', this);
+
+//        menuNode = node.get('parentNode');
+//        menuNode.append(this._buildHTML(
+//            this.get('content')
+//        ));
+//
+//        // Close the dropdown on click.
+//        menuNode.delegate('click', function(e) {
+//            e.preventDefault();
+//
+//            if (e.target.hasClass('disabled') !== true) {
+//                if (e.target.getAttribute('data-id')) {
+//                    node.dropdown.fire(e.target.getAttribute('data-id'));
+//                }
+//
+//                node.dropdown.toggle();
+//            } else {
+//                e.target.blur();
+//            }
+//        }, 'a');
+//
+//        this.set('node', menuNode);
     },
 
     destructor: function () {
-        this.get('node').replace(this.node);
+//        this.get('node').replace(this._node);
 
-        this.node.removeClass('dropdown-toggle');
-        this.node.removeAttribute('data-toggle');
-
-        delete this.node;
+//        this._node.removeClass('dropdown-toggle');
+//        this._node.removeAttribute('data-toggle');
+//
+//        delete this._node;
     },
 
     // -- Public methods -------------------------------------------------------
+
+    toggle: function() {
+        var target = this.get('sourceNode').get('parentNode');
+
+        target.toggleClass('open');
+
+        target.once('clickoutside', function(e) {
+            target.toggleClass('open');
+        });
+    },
 
     enable: function (id) {
         // FIXME: Shouldn't we rename this to toggle?
@@ -130,12 +152,62 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
         });
 
         return node.get('outerHTML');
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
+
+    /**
+     * @param e {EventFacade}
+     * @private
+     */
+    _handleAnchorClick: function (e) {
+        e.preventDefault();
+
+        this.toggle();
+    },
+
+    /**
+     * @param e {EventFacade}
+     * @private
+     */
+    _handleItemClick: function (e) {
+        e.preventDefault();
+
+        var target = e.target;
+
+        if (target.get('parentNode').hasClass('disabled') || !target.hasAttribute('data-id')) {
+            return;
+        }
+
+        this.fire('select', { id: target.getAttribute('data-id') });
     }
 }, {
-    NS : 'dropdown',
-    ATTRS : {
-        content: { value: [] },
-        node: { value: null }
+    NS: 'dropdown',
+
+    ATTRS: {
+        /**
+         * @attribute sourceNode
+         * @type Node|HTMLElement|String
+         * @initOnly
+         */
+        sourceNode: {
+            setter: Y.one,
+            writeOnce: 'initOnly'
+        },
+
+        /**
+         * @type Array
+         */
+        content: {
+            value: null
+        },
+
+        /**
+         * @type Node
+         */
+        node: {
+            value: null
+        }
     }
 });
 
@@ -143,4 +215,4 @@ Dropdown = Y.Base.create('dropdown', Y.Bootstrap.Dropdown, [], {
 Y.namespace('Rednose').Dropdown = Dropdown;
 
 
-}, '1.4.0', {"requires": ["base", "node", "gallery-bootstrap-dropdown"]});
+}, '1.4.0', {"requires": ["base", "node", "widget"]});
