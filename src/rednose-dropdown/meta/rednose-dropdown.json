@@ -3,7 +3,7 @@
         "requires": [
             "base",
             "node",
-            "widget"
+            "view"
         ]
     }
 }

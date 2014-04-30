@@ -1,21 +1,33 @@
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
-Provides a dropdown plugin with custom event binding.
-
-@module rednose-dropdown
-**/
-var Dropdown;
+ * Provides the Y.Rednose.Dropdown widget.
+ *
+ * @module rednose-dropdown
+ */
 
 /**
-Provides a context menu plugin with custom event binding.
+ * Dropdown widget.
+ *
+ * @class Menu
+ * @constructor
+ * @param {Object} [config] Config options.
+ * @param {HTMLElement|Node|String} [config.sourceNode] Source node.
+ * @extends View
+ */
 
-@class Dropdown
-@namespace Rednose
-@constructor
-@extends Widget
-**/
-Dropdown = Y.Base.create('dropdown', Y.Widget, [], {
+/**
+ * Fired when a menu item is clicked.
+ *
+ * You can subscribe to specific menu item through the following event: "select#id".
+ *
+ * @event select
+ * @param {id} the item id that was clicked.
+ * @param {EventFacade} originEvent Original click event.
+ */
+var EVT_SELECT = 'select';
+
+var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function (config) {
@@ -173,11 +185,23 @@ Dropdown = Y.Base.create('dropdown', Y.Widget, [], {
 
         var target = e.target;
 
-        if (target.get('parentNode').hasClass('disabled') || !target.hasAttribute('data-id')) {
+        if (target.get('parentNode').hasClass('disabled')) {
             return;
         }
 
-        this.fire('select', { id: target.getAttribute('data-id') });
+        this.toggle();
+
+        this.fire(EVT_SELECT, {
+            originEvent: e.originEvent,
+            id         : target.hasAttribute('data-id') ? target.getAttribute('data-id') : null
+        });
+
+        if (target.hasAttribute('data-id')) {
+            this.fire(EVT_SELECT + '#' + target.getAttribute('data-id'), {
+                originEvent: e.originEvent,
+                id         : target.getAttribute('data-id')
+            });
+        }
     }
 }, {
     NS: 'dropdown',

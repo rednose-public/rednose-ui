@@ -65,13 +65,17 @@
                 base: "../../../../build/"
             }
         }
-    }).use('rednose-navbar', function (Y) {
+    }).use('rednose-dropdown', function (Y) {
         Y.all('.dropdown-toggle').each(function (node) {
             var dropdown = new Y.Rednose.Dropdown({
                 sourceNode: node
             });
 
             dropdown.on('select', function (e) {
+                console.log(e);
+            });
+
+            dropdown.on('select#action1', function (e) {
                 console.log(e);
             });
         });
