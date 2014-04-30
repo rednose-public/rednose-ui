@@ -43,6 +43,32 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
         caret: Micro.compile(
             '<%== data.content %> <span class="<%= data.classNames.caret %>"></span>'
+        ),
+
+        menu: Micro.compile(
+            '<ul class="<%= data.classNames.menu %>"></ul>'
+        ),
+
+        item: Micro.compile(
+            '<% if (data.item.type === "divider") { %>' +
+                '<li class="<%= data.classNames.divider %>"></li>' +
+            '<% } else { %>' +
+                    '<li class="' +
+                        '<% if (data.item.disabled) { %>' +
+                            '<%= data.classNames.disabled %> ' +
+                        '<% } %>' +
+                        '<% if (data.item.children) { %>' +
+                            '<%= data.classNames.submenu %>' +
+                        '<% } %>' +
+                    '">' +
+                    '<a href="#" data-id="<%= data.item.id %>">' +
+                        '<% if (data.item.icon) { %>' +
+                            '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
+                        '<% } %>' +
+                        '<%= data.item.title %>' +
+                    '</a>' +
+                '</li>' +
+            '<% } %>'
         )
     },
 
@@ -60,7 +86,9 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
         open    : 'open',
         divider : 'divider',
         dropdown: 'dropdown',
-        dropup  : 'dropup'
+        dropup  : 'dropup',
+        icon    : 'icon',
+        submenu : 'dropdown-submenu',
     },
 
     /**
@@ -83,18 +111,18 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
         // From markup
         if (srcNode) {
-            this.parentnode = srcNode.get('parentNode');
+            this.parentNode = srcNode.get('parentNode');
 
             this.set('anchorNode', srcNode);
         } else {
             if (this.get('showOnContext')) {
-                this.parentnode = Y.Node.create(templates.wrapper({
+                this.parentNode = Y.Node.create(templates.wrapper({
                     classNames: classNames
                 }));
 
-                Y.one('body').append(this.parentnode);
+                Y.one('body').append(this.parentNode);
             } else {
-                this.parentnode = anchorNode.get('parentNode');
+                this.parentNode = anchorNode.get('parentNode');
 
                 anchorNode.addClass(classNames.toggle);
                 anchorNode.setAttribute('data-toggle', 'dropdown');
@@ -107,7 +135,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
                 }
             }
 
-            this.parentnode.addClass(dropup ? classNames.dropup : classNames.dropdown);
+            this.parentNode.addClass(dropup ? classNames.dropup : classNames.dropdown);
         }
 
         if (this.get('showOnContext')) {
@@ -116,36 +144,39 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
             this.get('anchorNode').on('click', this._handleAnchorClick, this);
         }
 
-        this.parentnode.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
+        this.parentNode.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
     },
 
     destructor: function () {
-//        this.get('node').replace(this._node);
-
-//        this._node.removeClass('dropdown-toggle');
-//        this._node.removeAttribute('data-toggle');
-//
-//        delete this._node;
+        this.parentNode = null;
     },
 
     // -- Public methods -------------------------------------------------------
 
+    /**
+     * @chainable
+     */
     render: function () {
         var items = this.get('items');
 
-        this.parentnode.append(this._buildHTML(items));
+        if (items) {
+            this.parentNode.append(this._renderMenu(items));
+        }
 
         this.rendered = true;
 
         return this;
     },
 
+    /**
+     * @param {Object} [point] X / Y anchor point, optional.
+     */
     toggle: function (point) {
         if (!this.rendered) {
             this.render();
         }
 
-        var target     = this.parentnode,
+        var target     = this.parentNode,
             classNames = this.classNames;
 
         target.toggleClass(classNames.open);
@@ -189,41 +220,39 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
     // -- Protected methods ----------------------------------------------------
 
-    _buildHTML: function (items) {
-        var template = '<ul class="dropdown-menu"></ul>';
-        var node = Y.Node.create(template);
+    /**
+     * @param {Array} items
+     * @return {Node}
+     * @private
+     */
+    _renderMenu: function (items) {
+        var menuNode = Y.Node.create(this.templates.menu({
+            classNames: this.classNames
+        }));
 
-        Y.Array.each(items, function (item) {
-            var elLi = Y.Node.create('<li>');
-            var elA = Y.Node.create('<a href="#">');
-            var html = item.title;
+        for (var i = 0, len = items.length; i < len; i++) {
+            menuNode.append(this._renderItem(items[i]));
+        }
 
-            if (item.className) {
-                elLi.addClass(item.className);
-            }
+        return menuNode;
+    },
 
-            if (item.title !== '-') {
-                if (item.icon) {
-                    html = '<i class="icon ' + item.icon + '"></i> ' + html;
-                }
+    /**
+     * @param {Object} item
+     * @return {Node}
+     * @private
+     */
+    _renderItem: function (item) {
+        var itemNode = Y.Node.create(this.templates.item({
+            classNames: this.classNames,
+            item      : item
+        }));
 
-                elA.set('innerHTML', html);
-                elA.setAttribute('data-id', item.id);
+        if (item.children) {
+            itemNode.append(this._renderMenu(item.children));
+        }
 
-                elLi.append(elA);
-
-                if (item.disabled === true) {
-                    elLi.addClass('disabled');
-                    elA.addClass('disabled');
-                }
-            } else {
-                elLi.addClass('divider');
-            }
-
-            node.append(elLi);
-        });
-
-        return node.get('outerHTML');
+        return itemNode;
     },
 
     // -- Protected Event Handlers ---------------------------------------------
@@ -273,7 +302,9 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
         });
 
         if (target.hasAttribute('data-id')) {
-            this.fire(EVT_SELECT + '#' + target.getAttribute('data-id'), {
+            var event = EVT_SELECT + '#' + target.getAttribute('data-id');
+            
+            this.fire(event, {
                 originEvent: e.originEvent,
                 id         : target.getAttribute('data-id')
             });
