@@ -8,6 +8,8 @@ YUI.add('rednose-dropdown', function (Y, NAME) {
  * @module rednose-dropdown
  */
 
+var Micro = Y.Template.Micro;
+
 /**
  * Dropdown widget.
  *
@@ -30,76 +32,93 @@ YUI.add('rednose-dropdown', function (Y, NAME) {
 var EVT_SELECT = 'select';
 
 var Dropdown = Y.Base.create('dropdown', Y.View, [], {
+
+    /**
+     * Templates used by this dropdown.
+     *
+     * @property {Object} templates
+     */
+    templates: {
+        wrapper: Micro.compile(
+            '<div class="<%= data.classNames.wrapper %>"></div>'
+        ),
+
+        caret: Micro.compile(
+            '<%== data.content %> <span class="<%= data.classNames.caret %>"></span>'
+        )
+    },
+
+    /**
+     * CSS class names used by this dropdown.
+     *
+     * @property {Object} classNames
+     */
+    classNames: {
+        wrapper : 'rednose-dropdown-wrapper',
+        disabled: 'disabled',
+        caret   : 'caret',
+        menu    : 'dropdown-menu',
+        toggle  : 'dropdown-toggle',
+        open    : 'open',
+        divider : 'divider',
+        dropdown: 'dropdown',
+        dropup  : 'dropup'
+    },
+
+    /**
+     * Whether or not this dropdown has been rendered.
+     *
+     * @property {Boolean} rendered
+     * @default false
+     */
+    rendered: false,
+
     // -- Lifecycle methods ----------------------------------------------------
 
-    initializer: function (config) {
-        var srcNode = this.get('srcNode'),
+    initializer: function () {
+        var srcNode    = this.get('srcNode'),
             anchorNode = this.get('anchorNode'),
-            items = this.get('items'),
-            dropup = this.get('dropup'),
-            parentNode;
-//        var node      = this._node;
-//            menuNode  = null,
-//            direction = this.config.dropup ? 'dropup' : 'dropdown';
+            dropup     = this.get('dropup'),
 
-//        this.node = node;
-
-//        node.wrap('<div class="dropdown-wrapper ' + direction + '"></div>');
-
-//        parentNode.addClass('dropdown');
-//
-//        this._node.addClass('dropdown-toggle');
-//        this._node.setAttribute('data-toggle', 'dropdown');
+            classNames = this.classNames,
+            templates  = this.templates;
 
         // From markup
         if (srcNode) {
-            parentNode = srcNode.get('parentNode');
-
-            srcNode.on('click', this._handleAnchorClick, this);
-
-            parentNode.delegate('click', this._handleItemClick, '.dropdown-menu a', this);
+            this.parentnode = srcNode.get('parentNode');
 
             this.set('anchorNode', srcNode);
         } else {
-            parentNode = anchorNode.get('parentNode');
+            if (this.get('showOnContext')) {
+                this.parentnode = Y.Node.create(templates.wrapper({
+                    classNames: classNames
+                }));
 
-            parentNode.addClass(dropup ? 'dropup' : 'dropdown');
+                Y.one('body').append(this.parentnode);
+            } else {
+                this.parentnode = anchorNode.get('parentNode');
 
-            anchorNode.addClass('dropdown-toggle');
-            anchorNode.setAttribute('data-toggle', 'dropdown');
+                anchorNode.addClass(classNames.toggle);
+                anchorNode.setAttribute('data-toggle', 'dropdown');
 
-            if (this.get('showCaret')) {
-                anchorNode.setContent(anchorNode.getContent() + ' <span class="caret"></span>');
+                if (this.get('showCaret')) {
+                    anchorNode.setHTML(templates.caret({
+                        classNames: classNames,
+                        content   : anchorNode.getHTML()
+                    }));
+                }
             }
 
-            parentNode.append(this._buildHTML(items));
-
-            anchorNode.on('click', this._handleAnchorClick, this);
-
-            parentNode.delegate('click', this._handleItemClick, '.dropdown-menu a', this);
+            this.parentnode.addClass(dropup ? classNames.dropup : classNames.dropdown);
         }
 
-//        menuNode = node.get('parentNode');
-//        menuNode.append(this._buildHTML(
-//            this.get('content')
-//        ));
-//
-//        // Close the dropdown on click.
-//        menuNode.delegate('click', function(e) {
-//            e.preventDefault();
-//
-//            if (e.target.hasClass('disabled') !== true) {
-//                if (e.target.getAttribute('data-id')) {
-//                    node.dropdown.fire(e.target.getAttribute('data-id'));
-//                }
-//
-//                node.dropdown.toggle();
-//            } else {
-//                e.target.blur();
-//            }
-//        }, 'a');
-//
-//        this.set('node', menuNode);
+        if (this.get('showOnContext')) {
+            this.get('anchorNode').on('contextmenu', this._handleAnchorContextMenu, this);
+        } else {
+            this.get('anchorNode').on('click', this._handleAnchorClick, this);
+        }
+
+        this.parentnode.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
     },
 
     destructor: function () {
@@ -113,18 +132,40 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
     // -- Public methods -------------------------------------------------------
 
-    toggle: function() {
-        var target = this.get('anchorNode').get('parentNode');
+    render: function () {
+        var items = this.get('items');
 
-        target.toggleClass('open');
+        this.parentnode.append(this._buildHTML(items));
+
+        this.rendered = true;
+
+        return this;
+    },
+
+    toggle: function (point) {
+        if (!this.rendered) {
+            this.render();
+        }
+
+        var target     = this.parentnode,
+            classNames = this.classNames;
+
+        target.toggleClass(classNames.open);
+
+        if (Y.Lang.isArray(point)) {
+            target.setStyles({
+                position: 'absolute',
+                left    : point[0],
+                top     : point[1]
+            });
+        }
 
         target.once('clickoutside', function(e) {
-            target.toggleClass('open');
+            target.toggleClass(classNames.open);
         });
     },
 
     enable: function (id) {
-        // FIXME: Shouldn't we rename this to toggle?
         this.disable(id);
     },
 
@@ -132,12 +173,12 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
         var container = this.get('node'),
             node = container.one('[data-id=' + id + ']');
 
-        if (node.ancestor('li').hasClass('disabled')) {
-            node.removeClass('disabled');
-            node.ancestor('li').removeClass('disabled');
+        if (node.ancestor('li').hasClass(this.classNames.disabled)) {
+            node.removeClass(this.classNames.disabled);
+            node.ancestor('li').removeClass(this.classNames.disabled);
         } else {
-            node.addClass('disabled');
-            node.ancestor('li').addClass('disabled');
+            node.addClass(this.classNames.disabled);
+            node.ancestor('li').addClass(this.classNames.disabled);
         }
     },
 
@@ -193,6 +234,20 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
      * @param e {EventFacade}
      * @private
      */
+    _handleAnchorContextMenu: function (e) {
+        if (e.shiftKey) {
+            return;
+        }
+
+        e.preventDefault();
+
+        this.toggle([ e.pageX, e.pageY ]);
+    },
+
+    /**
+     * @param e {EventFacade}
+     * @private
+     */
     _handleAnchorClick: function (e) {
         e.preventDefault();
 
@@ -208,7 +263,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
         var target = e.target;
 
-        if (target.get('parentNode').hasClass('disabled')) {
+        if (target.get('parentNode').hasClass(this.classNames.disabled)) {
             return;
         }
 
@@ -267,6 +322,18 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
         },
 
         /**
+         * If `true`, this menu will be triggered and rendered on the contextmenu event.
+         *
+         * @attribute {Boolean} showOnContext
+         * @default false
+         * @initOnly
+         */
+        showOnContext: {
+            value: false,
+            writeOnce: 'initOnly'
+        },
+
+        /**
          * If `true`, the menu will be rendered upwards.
          *
          * @attribute {Boolean} dropup
@@ -282,4 +349,4 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 Y.namespace('Rednose').Dropdown = Dropdown;
 
 
-}, '1.4.0', {"requires": ["base", "node", "view"]});
+}, '1.4.0', {"requires": ["base", "node", "template-micro", "view"]});

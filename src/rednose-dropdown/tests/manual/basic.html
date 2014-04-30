@@ -11,55 +11,39 @@
 <body>
 
 <!--Navbar from markup-->
-<!--<div class="navbar navbar-inverse navbar-fixed-top">-->
-    <!--<div class="navbar-inner">-->
-        <!--<div class="container">-->
-            <!--<a class="brand brand-navbar" href="#">Navbar</a>-->
-            <!--<ul class="nav" role="navigation">-->
-                <!--<li class="dropdown">-->
-                    <!--<a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a href="http://google.com" data-id="action1">Action</a></li>-->
-                        <!--<li class="disabled"><a href="#anotherAction" data-id="action2">Another action</a></li>-->
-                        <!--<li><a href="#" data-id="action3">Something else here</a></li>-->
-                        <!--<li class="divider"></li>-->
-                        <!--<li><a href="#" data-id="action4">Separated link</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a href="#" id="drop2" class="dropdown-toggle" data-toggle="dropdown">Dropdown 2 <b class="caret"></b></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                        <!--<li><a role="menuitem" href="#">Action</a></li>-->
-                        <!--<li><a role="menuitem" href="#">Another action</a></li>-->
-                        <!--<li><a role="menuitem" href="#">Something else here</a></li>-->
-                        <!--<li class="divider"></li>-->
-                        <!--<li><a role="menuitem" href="#">Separated link</a></li>-->
-                    <!--</ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-            <!--<ul class="nav pull-right">-->
-                <!--<li id="notifications-dropdown" class="dropdown">-->
-                    <!--<a href="#" id="notifications" class="dropdown-toggle" data-toggle="dropdown">-->
-                        <!--<span>Notifications </span>-->
-                        <!--<span id="badge-notifications" class="badge badge-important"></span>-->
-                        <!--<b class="caret"></b>-->
-                    <!--</a>-->
-                    <!--<ul class="dropdown-menu"></ul>-->
-                <!--</li>-->
-                <!--<li id="user-dropdown" class="dropdown">-->
-                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> User <b class="caret"></b></a>-->
-                    <!--<ul class="dropdown-menu"></ul>-->
-                <!--</li>-->
-            <!--</ul>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="brand brand-navbar" href="#">Navbar</a>
+            <ul class="nav" role="navigation">
+                <li class="dropdown">
+                    <a id="drop1" href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" id="drop2" class="dropdown-toggle" data-toggle="dropdown">Dropdown 2</a>
+                </li>
+            </ul>
+            <ul class="nav pull-right">
+                <li id="notifications-dropdown" class="dropdown">
+                    <a href="#" id="notifications" class="dropdown-toggle" data-toggle="dropdown">
+                        <span>Notifications </span>
+                        <span id="badge-notifications" class="badge badge-important"></span>
+                    </a>
+                </li>
+                <li id="user-dropdown" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user icon-white"></i> User</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 
-<div class="container" style="margin-top: 41px;">
+<div id="test-container" class="container" style="margin-top: 41px;">
     <div class="row">
         <div class="span12">
             <section>
                 <h1>Dropdown menus</h1>
+                <p>Right click the container for a context menu.</p>
                 <div class="btn-toolbar" style="margin-top: 150px;">
                     <div class="btn-group">
                         <button id="button1" class="btn">Dropdown</button>
@@ -91,6 +75,13 @@
             { id: 'action3', title: 'Action 3' }
         ];
 
+        Y.all('.dropdown-toggle').each(function (node) {
+            var dropdown = new Y.Rednose.Dropdown({
+                anchorNode: node,
+                items: items
+            });
+        });
+
         var dropdown1 = new Y.Rednose.Dropdown({
             anchorNode: Y.one('#button1'),
             items: items
@@ -107,6 +98,16 @@
         });
 
         dropdown2.on('select', function (e) {
+            console.log(e);
+        });
+
+        var dropdown3 = new Y.Rednose.Dropdown({
+            anchorNode: Y.one('#test-container'),
+            items: items,
+            showOnContext: true
+        });
+
+        dropdown3.on('select', function (e) {
             console.log(e);
         });
 
