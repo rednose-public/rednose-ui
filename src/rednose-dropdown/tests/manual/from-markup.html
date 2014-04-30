@@ -100,7 +100,7 @@
     }).use('rednose-dropdown', function (Y) {
         Y.all('.dropdown-toggle').each(function (node) {
             var dropdown = new Y.Rednose.Dropdown({
-                sourceNode: node
+                srcNode: node
             });
 
             dropdown.on('select', function (e) {

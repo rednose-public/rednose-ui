@@ -14,7 +14,7 @@ YUI.add('rednose-dropdown', function (Y, NAME) {
  * @class Menu
  * @constructor
  * @param {Object} [config] Config options.
- * @param {HTMLElement|Node|String} [config.sourceNode] Source node.
+ * @param {HTMLElement|Node|String} [config.srcNode] Source node.
  * @extends View
  */
 
@@ -26,7 +26,6 @@ YUI.add('rednose-dropdown', function (Y, NAME) {
  * @event select
  * @param {id} the item id that was clicked.
  * @param {EventFacade} originEvent Original click event.
- * @preventable _defItemClickFn
  */
 var EVT_SELECT = 'select';
 
@@ -34,7 +33,11 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function (config) {
-        var sourceNode = this.get('sourceNode');
+        var srcNode = this.get('srcNode'),
+            anchorNode = this.get('anchorNode'),
+            items = this.get('items'),
+            dropup = this.get('dropup'),
+            parentNode;
 //        var node      = this._node;
 //            menuNode  = null,
 //            direction = this.config.dropup ? 'dropup' : 'dropdown';
@@ -49,11 +52,32 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 //        this._node.setAttribute('data-toggle', 'dropdown');
 
         // From markup
-        var parentNode = sourceNode.get('parentNode');
+        if (srcNode) {
+            parentNode = srcNode.get('parentNode');
 
-        sourceNode.on('click', this._handleAnchorClick, this);
+            srcNode.on('click', this._handleAnchorClick, this);
 
-        parentNode.delegate('click', this._handleItemClick, '.dropdown-menu a', this);
+            parentNode.delegate('click', this._handleItemClick, '.dropdown-menu a', this);
+
+            this.set('anchorNode', srcNode);
+        } else {
+            parentNode = anchorNode.get('parentNode');
+
+            parentNode.addClass(dropup ? 'dropup' : 'dropdown');
+
+            anchorNode.addClass('dropdown-toggle');
+            anchorNode.setAttribute('data-toggle', 'dropdown');
+
+            if (this.get('showCaret')) {
+                anchorNode.setContent(anchorNode.getContent() + ' <span class="caret"></span>');
+            }
+
+            parentNode.append(this._buildHTML(items));
+
+            anchorNode.on('click', this._handleAnchorClick, this);
+
+            parentNode.delegate('click', this._handleItemClick, '.dropdown-menu a', this);
+        }
 
 //        menuNode = node.get('parentNode');
 //        menuNode.append(this._buildHTML(
@@ -90,7 +114,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     // -- Public methods -------------------------------------------------------
 
     toggle: function() {
-        var target = this.get('sourceNode').get('parentNode');
+        var target = this.get('anchorNode').get('parentNode');
 
         target.toggleClass('open');
 
@@ -126,15 +150,11 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
     // -- Protected methods ----------------------------------------------------
 
-    _buildHTML: function (content) {
+    _buildHTML: function (items) {
         var template = '<ul class="dropdown-menu"></ul>';
         var node = Y.Node.create(template);
 
-        if (content === '') {
-            return content;
-        }
-
-        Y.Array.each(content, function (item) {
+        Y.Array.each(items, function (item) {
             var elLi = Y.Node.create('<li>');
             var elA = Y.Node.create('<a href="#">');
             var html = item.title;
@@ -211,27 +231,49 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
     ATTRS: {
         /**
-         * @attribute sourceNode
+         * @attribute srcNode
          * @type Node|HTMLElement|String
          * @initOnly
          */
-        sourceNode: {
+        srcNode: {
             setter: Y.one,
             writeOnce: 'initOnly'
         },
 
         /**
+         * @attribute anchorNode
+         * @type Node|HTMLElement|String
+         */
+        anchorNode: {
+            setter: Y.one
+        },
+
+        /**
+         * @attribute items
          * @type Array
          */
-        content: {
+        items: {
             value: null
         },
 
         /**
-         * @type Node
+         * If `true`, a caret will be rendered within the anchor node.
+         *
+         * @attribute {Boolean} showCaret
+         * @default true
          */
-        node: {
-            value: null
+        showCaret: {
+            value: true
+        },
+
+        /**
+         * If `true`, the menu will be rendered upwards.
+         *
+         * @attribute {Boolean} dropup
+         * @default false
+         */
+        dropup: {
+            value: false
         }
     }
 });
