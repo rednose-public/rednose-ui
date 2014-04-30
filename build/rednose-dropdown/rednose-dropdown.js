@@ -292,6 +292,10 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
         var target = e.target;
 
+        if (target.get('parentNode').hasClass(this.classNames.submenu)) {
+            return;
+        }
+
         if (target.get('parentNode').hasClass(this.classNames.disabled)) {
             return;
         }
