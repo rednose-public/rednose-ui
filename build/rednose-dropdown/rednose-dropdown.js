@@ -181,10 +181,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     },
 
     rename: function (id, title) {
-        var container = this.get('node'),
-            node = container.one('[data-id=' + id + ']');
-
-        node.setHTML(title);
+        // TODO: Implement method.
     },
 
     // -- Protected methods ----------------------------------------------------
@@ -299,16 +296,6 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
     ATTRS: {
         /**
-         * @attribute srcNode
-         * @type Node|HTMLElement|String
-         * @initOnly
-         */
-        srcNode: {
-            setter: Y.one,
-            writeOnce: 'initOnly'
-        },
-
-        /**
          * @attribute items
          * @type Array
          */
@@ -348,26 +335,26 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
 
         dropup && container.addClass(classNames.dropup);
 
-        if (!this.get('showOnContext')) {
-            host.addClass(classNames.toggle);
-
-            this.set('dropdownContainer', container);
-
-            if (this.get('showCaret')) {
-                host.setHTML(this.templates.caret({
-                    classNames: classNames,
-                    content   : host.getHTML()
-                }));
-            }
-
-            container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
-        }
-
         if (this.get('showOnContext')) {
             host.on('contextmenu', this._handleAnchorContextMenu, this);
-        } else {
-            host.on('click', this._handleAnchorClick, this);
+
+            return;
         }
+
+        host.addClass(classNames.toggle);
+
+        this.set('dropdownContainer', container);
+
+        if (this.get('showCaret')) {
+            host.setHTML(this.templates.caret({
+                classNames: classNames,
+                content   : host.getHTML()
+            }));
+        }
+
+        container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
+
+        host.on('click', this._handleAnchorClick, this);
     }
 }, {
     NS: 'dropdown',
@@ -399,7 +386,7 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         },
 
         /**
-         * If `true`, the menu will be rendered upwards.
+         * If `true`, the menu will be rendered upwards from the anchor node.
          *
          * @attribute {Boolean} dropup
          * @default false

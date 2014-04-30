@@ -179,10 +179,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     },
 
     rename: function (id, title) {
-        var container = this.get('node'),
-            node = container.one('[data-id=' + id + ']');
-
-        node.setHTML(title);
+        // TODO: Implement method.
     },
 
     // -- Protected methods ----------------------------------------------------
@@ -296,16 +293,6 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     NS: 'dropdown',
 
     ATTRS: {
-        /**
-         * @attribute srcNode
-         * @type Node|HTMLElement|String
-         * @initOnly
-         */
-        srcNode: {
-            setter: Y.one,
-            writeOnce: 'initOnly'
-        },
-
         /**
          * @attribute items
          * @type Array
