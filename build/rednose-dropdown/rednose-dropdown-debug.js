@@ -90,7 +90,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
         dropdown: 'dropdown',
         dropup  : 'dropup',
         icon    : 'icon',
-        submenu : 'dropdown-submenu',
+        submenu : 'dropdown-submenu'
     },
 
     /**
@@ -161,7 +161,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
             });
         }
 
-        container.once('clickoutside', function(e) {
+        container.once('clickoutside', function() {
             container.toggleClass(classNames.open);
         });
     },
