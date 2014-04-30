@@ -104,53 +104,18 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function () {
-        var srcNode    = this.get('srcNode'),
-            anchorNode = this.get('anchorNode'),
-            dropup     = this.get('dropup'),
+        var container  = this.get('container'),
+            classNames = this.classNames;
 
-            classNames = this.classNames,
-            templates  = this.templates;
+        container.addClass(classNames.dropdown);
 
-        // From markup
-        if (srcNode) {
-            this.parentNode = srcNode.get('parentNode');
+        container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
 
-            this.set('anchorNode', srcNode);
-        } else {
-            if (this.get('showOnContext')) {
-                this.parentNode = Y.Node.create(templates.wrapper({
-                    classNames: classNames
-                }));
-
-                Y.one('body').append(this.parentNode);
-            } else {
-                this.parentNode = anchorNode.get('parentNode');
-
-                anchorNode.addClass(classNames.toggle);
-                anchorNode.setAttribute('data-toggle', 'dropdown');
-
-                if (this.get('showCaret')) {
-                    anchorNode.setHTML(templates.caret({
-                        classNames: classNames,
-                        content   : anchorNode.getHTML()
-                    }));
-                }
-            }
-
-            this.parentNode.addClass(dropup ? classNames.dropup : classNames.dropdown);
-        }
-
-        if (this.get('showOnContext')) {
-            this.get('anchorNode').on('contextmenu', this._handleAnchorContextMenu, this);
-        } else {
-            this.get('anchorNode').on('click', this._handleAnchorClick, this);
-        }
-
-        this.parentNode.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
+        this.set('dropdownContainer', container);
     },
 
     destructor: function () {
-        this.parentNode = null;
+        // TODO: Detach events.
     },
 
     // -- Public methods -------------------------------------------------------
@@ -159,10 +124,15 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
      * @chainable
      */
     render: function () {
-        var items = this.get('items');
+        var container  = this.get('dropdownContainer'),
+            items      = this.get('items');
 
         if (items) {
-            this.parentNode.append(this._renderMenu(items));
+            container.append(this._renderMenu(items));
+        }
+
+        if (!container.inDoc()) {
+            Y.one('body').append(container);
         }
 
         this.rendered = true;
@@ -178,39 +148,36 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
             this.render();
         }
 
-        var target     = this.parentNode,
+        var container  = this.get('dropdownContainer'),
             classNames = this.classNames;
 
-        target.toggleClass(classNames.open);
+        container.toggleClass(classNames.open);
 
         if (Y.Lang.isArray(point)) {
-            target.setStyles({
+            container.setStyles({
                 position: 'absolute',
                 left    : point[0],
                 top     : point[1]
             });
         }
 
-        target.once('clickoutside', function(e) {
-            target.toggleClass(classNames.open);
+        container.once('clickoutside', function(e) {
+            container.toggleClass(classNames.open);
         });
     },
 
     enable: function (id) {
-        this.disable(id);
+        var node = this._getNodeByID(id);
+
+        if (node.hasClass(this.classNames.disabled)) {
+            node.removeClass(this.classNames.disabled);
+        }
     },
 
     disable: function (id) {
-        var container = this.get('node'),
-            node = container.one('[data-id=' + id + ']');
+        var node = this._getNodeByID(id);
 
-        if (node.ancestor('li').hasClass(this.classNames.disabled)) {
-            node.removeClass(this.classNames.disabled);
-            node.ancestor('li').removeClass(this.classNames.disabled);
-        } else {
-            node.addClass(this.classNames.disabled);
-            node.ancestor('li').addClass(this.classNames.disabled);
-        }
+        node.addClass(this.classNames.disabled);
     },
 
     rename: function (id, title) {
@@ -221,6 +188,17 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     },
 
     // -- Protected methods ----------------------------------------------------
+
+    /**
+     * @param {String} id
+     * @return {Node}
+     * @private
+     */
+    _getNodeByID: function (id) {
+        var container = this.get('dropdownContainer');
+
+        return container.one('[data-id=' + id + ']').get('parentNode');
+    },
 
     /**
      * @param {Array} items
@@ -331,29 +309,81 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
         },
 
         /**
-         * @attribute anchorNode
-         * @type Node|HTMLElement|String
-         */
-        anchorNode: {
-            setter: Y.one
-        },
-
-        /**
          * @attribute items
          * @type Array
          */
         items: {
             value: null
-        },
+        }
+    }
+});
+
+// -- Namespace ----------------------------------------------------------------
+Y.namespace('Rednose').Dropdown = Dropdown;
+/*jshint boss:true, expr:true, onevar:false */
+
+/**
+ * Provides the `Y.Rednose.Plugin.Dropdown` Node plugin.
+ *
+ * @module rednose-dropdown
+ */
+
+/**
+ * @class Rednose.Plugin.Dropdown
+ * @constructor
+ * @extends Rednose.Dropdown
+ * @uses Plugin.Base
+ */
+Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown, [Y.Plugin.Base], {
+
+    // -- Life Cycle Methods ---------------------------------------------------
+
+    initializer: function (config) {
+        var host       = config.host,
+            container  = host.get('parentNode'),
+            dropup     = this.get('dropup'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.dropdown);
+
+        dropup && container.addClass(classNames.dropup);
+
+        if (!this.get('showOnContext')) {
+            host.addClass(classNames.toggle);
+
+            this.set('dropdownContainer', container);
+
+            if (this.get('showCaret')) {
+                host.setHTML(this.templates.caret({
+                    classNames: classNames,
+                    content   : host.getHTML()
+                }));
+            }
+
+            container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
+        }
+
+        if (this.get('showOnContext')) {
+            host.on('contextmenu', this._handleAnchorContextMenu, this);
+        } else {
+            host.on('click', this._handleAnchorClick, this);
+        }
+    }
+}, {
+    NS: 'dropdown',
+
+    ATTRS: {
 
         /**
          * If `true`, a caret will be rendered within the anchor node.
          *
          * @attribute {Boolean} showCaret
          * @default true
+         * @initOnly
          */
         showCaret: {
-            value: true
+            value: true,
+            writeOnce: 'initOnly'
         },
 
         /**
@@ -380,8 +410,5 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     }
 });
 
-// -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').Dropdown = Dropdown;
 
-
-}, '1.4.0', {"requires": ["base", "node", "template-micro", "view"]});
+}, '1.4.0', {"requires": ["base", "node", "template-micro", "view", "node-pluginhost", "plugin"]});

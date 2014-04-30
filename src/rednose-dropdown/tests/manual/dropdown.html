@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.Navbar module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<body>
+
+<div id="test-container" class="container">
+    <div class="row">
+        <div class="span12">
+            <section>
+                <h1>Dropdown menu</h1>
+                <div id="dropdown"></div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-dropdown', function (Y) {
+        var items = [
+            { id: 'action1', title: 'Action 1', icon: 'icon-tag' },
+            { id: 'action2', title: 'Action 2', disabled: true },
+            { type: 'divider' },
+            { id: 'action3', title: 'Action 3' },
+            { title: 'Submenu', children: [
+                { id: 'action1', title: 'Action 1' },
+                { id: 'action2', title: 'Action 2', disabled: true },
+                { type: 'divider' },
+                { id: 'action3', title: 'Action 3' }
+            ]}
+        ];
+
+        var dropdown = new Y.Rednose.Dropdown({
+            container: Y.one('#dropdown'),
+            items    : items
+        });
+
+        dropdown.render();
+        dropdown.toggle();
+
+        dropdown.enable('action2');
+        dropdown.disable('action3');
+
+        dropdown.on('select', function (e) {
+            console.log(e);
+        });
+    });
+</script>
+</body>
+</html>

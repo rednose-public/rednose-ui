@@ -81,50 +81,41 @@
             ]}
         ];
 
-        Y.all('.dropdown-toggle').each(function (node) {
-            var dropdown = new Y.Rednose.Dropdown({
-                anchorNode: node,
-                items: items
-            });
-        });
-
-        var dropdown1 = new Y.Rednose.Dropdown({
-            anchorNode: Y.one('#button1'),
+        Y.all('.dropdown-toggle').plug(Y.Rednose.Plugin.Dropdown, {
             items: items
         });
 
-        dropdown1.on('select', function (e) {
-            console.log(e);
-        });
+        var button1 = Y.one('#button1');
 
-        var dropdown2 = new Y.Rednose.Dropdown({
-            anchorNode: Y.one('#button2'),
-            dropup: true,
+        button1.plug(Y.Rednose.Plugin.Dropdown, {
             items: items
         });
 
-        dropdown2.on('select', function (e) {
+        button1.dropdown.on('select', function (e) {
             console.log(e);
         });
 
-        var dropdown3 = new Y.Rednose.Dropdown({
-            anchorNode: Y.one('#test-container'),
+        var button2 = Y.one('#button2');
+
+        button2.plug(Y.Rednose.Plugin.Dropdown, {
+            items: items,
+            dropup: true
+        });
+
+        button2.dropdown.on('select', function (e) {
+            console.log(e);
+        });
+
+        var button3 = Y.one('#test-container');
+
+        button3.plug(Y.Rednose.Plugin.Dropdown, {
             items: items,
             showOnContext: true
         });
 
-        dropdown3.on('select', function (e) {
+        button3.dropdown.on('select', function (e) {
             console.log(e);
         });
-
-//        Y.one('#button1').plug(Y.Rednose.Plugin.Dropdown, {
-//            items: items
-//        });
-//
-//        Y.one('#button2').plug(Y.Rednose.Plugin.Dropdown, {
-//            dropup: true,
-//            items: items
-//        });
     });
 </script>
 </body>
