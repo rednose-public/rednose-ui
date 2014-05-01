@@ -428,18 +428,16 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function (config) {
-        var container  = this.get('container'),
-            classNames = this.classNames;
+        // Allow all extensions to initialize in case they provide custom getters for the container.
+        this.onceAfter('initializedChange', function () {
+            this.get('container').addClass(this.classNames.dropdown);
 
-        container.addClass(classNames.dropdown);
-
-        this.set('dropdownContainer', container);
-
-        this._attachEvents();
+            this._attachDropdownEvents();
+        });
     },
 
     destructor: function () {
-        this._detachEvents();
+        this._detachDropdownEvents();
     },
 
     // -- Public methods -------------------------------------------------------
@@ -450,7 +448,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
      * @private
      */
     getHTMLNode: function (item) {
-        var container = this.get('dropdownContainer');
+        var container = this.get('container');
 
         return container.one('[data-id="' + item.id + '"]');
     },
@@ -459,10 +457,9 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
      * @chainable
      */
     render: function () {
-        var container  = this.get('dropdownContainer'),
-            items      = this.get('items');
+        var container = this.get('container');
 
-        if (items) {
+        if (this._rootItems) {
             container.append(this._renderMenu(this._rootItems));
         }
 
@@ -483,7 +480,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
             this.render();
         }
 
-        var container  = this.get('dropdownContainer'),
+        var container  = this.get('container'),
             classNames = this.classNames;
 
         container.toggleClass(classNames.open);
@@ -503,10 +500,10 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
 
     // -- Protected methods ----------------------------------------------------
 
-    _attachEvents: function () {
+    _attachDropdownEvents: function () {
         this._events || (this._events = []);
 
-        var container  = this.get('dropdownContainer'),
+        var container  = this.get('container'),
             classNames = this.classNames;
 
         this._events.push(
@@ -520,7 +517,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
         );
     },
 
-    _detachEvents: function () {
+    _detachDropdownEvents: function () {
         (new Y.EventHandle(this._events)).detach();
     },
 
@@ -681,17 +678,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
         });
     }
 }, {
-    NS: 'dropdown',
-
-    ATTRS: {
-        /**
-         * @attribute dropdownContainer
-         * @type {Node}
-         */
-        dropdownContainer: {
-            value: null
-        }
-    }
+    NS: 'dropdown'
 });
 
 // -- Namespace ----------------------------------------------------------------
@@ -715,8 +702,9 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
     // -- Life Cycle Methods ---------------------------------------------------
 
     initializer: function (config) {
-        var host       = config.host,
-            container  = host.get('parentNode'),
+        this._host = config.host;
+
+        var container  = this.get('container'),
             dropup     = this.get('dropup'),
             classNames = this.classNames;
 
@@ -725,25 +713,25 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         dropup && container.addClass(classNames.dropup);
 
         if (this.get('showOnContext')) {
-            host.on('contextmenu', this._handleAnchorContextMenu, this);
+            this._host.on('contextmenu', this._handleAnchorContextMenu, this);
 
             return;
         }
 
-        host.addClass(classNames.toggle);
-
-        this.set('dropdownContainer', container);
+        this._host.addClass(classNames.toggle);
 
         if (this.get('showCaret')) {
-            host.setHTML(this.templates.caret({
+            this._host.setHTML(this.templates.caret({
                 classNames: classNames,
-                content   : host.getHTML()
+                content   : this._host.getHTML()
             }));
         }
 
-        container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
+        this._host.on('click', this._handleAnchorClick, this);
+    },
 
-        host.on('click', this._handleAnchorClick, this);
+    destructor: function () {
+        this._host = null;
     }
 }, {
     NS: 'dropdown',
@@ -782,6 +770,24 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
          */
         dropup: {
             value: false
+        },
+
+        /**
+         * Overrides the container, in case a button plug-in the parent node acts
+         * as container.
+         *
+         * The getter should only be called once all extensions have been initialized.
+         *
+         * @attribute {Node} container
+         */
+        container: {
+            getter: function (value) {
+                if (this.get('showOnContext')) {
+                    return this._getContainer(value);
+                }
+
+                return this._host.get('parentNode');
+            }
         }
     }
 });

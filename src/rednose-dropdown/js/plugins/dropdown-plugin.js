@@ -17,8 +17,9 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
     // -- Life Cycle Methods ---------------------------------------------------
 
     initializer: function (config) {
-        var host       = config.host,
-            container  = host.get('parentNode'),
+        this._host = config.host;
+
+        var container  = this.get('container'),
             dropup     = this.get('dropup'),
             classNames = this.classNames;
 
@@ -27,25 +28,25 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         dropup && container.addClass(classNames.dropup);
 
         if (this.get('showOnContext')) {
-            host.on('contextmenu', this._handleAnchorContextMenu, this);
+            this._host.on('contextmenu', this._handleAnchorContextMenu, this);
 
             return;
         }
 
-        host.addClass(classNames.toggle);
-
-        this.set('dropdownContainer', container);
+        this._host.addClass(classNames.toggle);
 
         if (this.get('showCaret')) {
-            host.setHTML(this.templates.caret({
+            this._host.setHTML(this.templates.caret({
                 classNames: classNames,
-                content   : host.getHTML()
+                content   : this._host.getHTML()
             }));
         }
 
-        container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
+        this._host.on('click', this._handleAnchorClick, this);
+    },
 
-        host.on('click', this._handleAnchorClick, this);
+    destructor: function () {
+        this._host = null;
     }
 }, {
     NS: 'dropdown',
@@ -84,6 +85,24 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
          */
         dropup: {
             value: false
+        },
+
+        /**
+         * Overrides the container, in case a button plug-in the parent node acts
+         * as container.
+         *
+         * The getter should only be called once all extensions have been initialized.
+         *
+         * @attribute {Node} container
+         */
+        container: {
+            getter: function (value) {
+                if (this.get('showOnContext')) {
+                    return this._getContainer(value);
+                }
+
+                return this._host.get('parentNode');
+            }
         }
     }
 });
