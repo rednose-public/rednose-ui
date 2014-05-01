@@ -11,11 +11,12 @@ var Micro = Y.Template.Micro;
 /**
  * Dropdown widget.
  *
- * @class Menu
+ * @class Dropdown
  * @constructor
  * @param {Object} [config] Config options.
- * @param {HTMLElement|Node|String} [config.srcNode] Source node.
- * @extends View
+ * @param {Array} [config.items] Dropdown items.
+ * @extends Rednose.DropdownBase
+ * @uses View
  */
 
 /**
@@ -24,12 +25,13 @@ var Micro = Y.Template.Micro;
  * You can subscribe to specific menu item through the following event: "select#id".
  *
  * @event select
- * @param {id} the item id that was clicked.
+ * @param {Rednose.DropdownItem} item The item that was clicked.
  * @param {EventFacade} originEvent Original click event.
+ * @preventable _defSelectFn
  */
 var EVT_SELECT = 'select';
 
-var Dropdown = Y.Base.create('dropdown', Y.View, [], {
+var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
 
     /**
      * Templates used by this dropdown.
@@ -54,10 +56,10 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
                 '<li class="<%= data.classNames.divider %>"></li>' +
             '<% } else { %>' +
                     '<li class="' +
-                        '<% if (data.item.disabled) { %>' +
+                        '<% if (data.item.isDisabled()) { %>' +
                             '<%= data.classNames.disabled %> ' +
                         '<% } %>' +
-                        '<% if (data.item.children) { %>' +
+                        '<% if (data.item.hasChildren()) { %>' +
                             '<%= data.classNames.submenu %>' +
                         '<% } %>' +
                     '">' +
@@ -69,6 +71,13 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
                     '</a>' +
                 '</li>' +
             '<% } %>'
+        ),
+
+        content: Micro.compile(
+            '<% if (data.item.icon) { %>' +
+                '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
+                '<% } %>' +
+            '<%= data.item.title %>'
         )
     },
 
@@ -101,22 +110,33 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
     // -- Lifecycle methods ----------------------------------------------------
 
-    initializer: function () {
+    initializer: function (config) {
         var container  = this.get('container'),
             classNames = this.classNames;
 
         container.addClass(classNames.dropdown);
 
-        container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
-
         this.set('dropdownContainer', container);
+
+        this._attachEvents();
     },
 
     destructor: function () {
-        // TODO: Detach events.
+        this._detachEvents();
     },
 
     // -- Public methods -------------------------------------------------------
+
+    /**
+     * @param {Rednose.DropdownItem} item
+     * @return {Node}
+     * @private
+     */
+    getHTMLNode: function (item) {
+        var container = this.get('dropdownContainer');
+
+        return container.one('[data-id="' + item.id + '"]');
+    },
 
     /**
      * @chainable
@@ -126,7 +146,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
             items      = this.get('items');
 
         if (items) {
-            container.append(this._renderMenu(items));
+            container.append(this._renderMenu(this._rootItems));
         }
 
         if (!container.inDoc()) {
@@ -164,35 +184,27 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
         });
     },
 
-    enable: function (id) {
-        var node = this._getNodeByID(id);
-
-        if (node.hasClass(this.classNames.disabled)) {
-            node.removeClass(this.classNames.disabled);
-        }
-    },
-
-    disable: function (id) {
-        var node = this._getNodeByID(id);
-
-        node.addClass(this.classNames.disabled);
-    },
-
-    rename: function (id, title) {
-        // TODO: Implement method.
-    },
-
     // -- Protected methods ----------------------------------------------------
 
-    /**
-     * @param {String} id
-     * @return {Node}
-     * @private
-     */
-    _getNodeByID: function (id) {
-        var container = this.get('dropdownContainer');
+    _attachEvents: function () {
+        this._events || (this._events = []);
 
-        return container.one('[data-id=' + id + ']').get('parentNode');
+        var container  = this.get('dropdownContainer'),
+            classNames = this.classNames;
+
+        this._events.push(
+            this.after({
+                enable : this._afterEnable,
+                disable: this._afterDisable,
+                rename : this._afterRename
+            }),
+
+            container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this)
+        );
+    },
+
+    _detachEvents: function () {
+        (new Y.EventHandle(this._events)).detach();
     },
 
     /**
@@ -213,7 +225,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     },
 
     /**
-     * @param {Object} item
+     * @param {Rednose.DropdownItem} item
      * @return {Node}
      * @private
      */
@@ -263,41 +275,103 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     _handleItemClick: function (e) {
         e.preventDefault();
 
-        var target = e.target;
+        var target      = e.target,
+            originEvent = e.originEvent,
+            item        = this.getItemById(target.getAttribute('data-id')),
+            itemEvent   = EVT_SELECT + '#' + item.id;
 
-        if (target.get('parentNode').hasClass(this.classNames.submenu)) {
+        if (item.isDisabled() || item.hasChildren()) {
             return;
         }
 
-        if (target.get('parentNode').hasClass(this.classNames.disabled)) {
-            return;
-        }
-
-        this.toggle();
-
-        this.fire(EVT_SELECT, {
-            originEvent: e.originEvent,
-            id         : target.hasAttribute('data-id') ? target.getAttribute('data-id') : null
-        });
-
-        if (target.hasAttribute('data-id')) {
-            var event = EVT_SELECT + '#' + target.getAttribute('data-id');
-            
-            this.fire(event, {
-                originEvent: e.originEvent,
-                id         : target.getAttribute('data-id')
+        if (!this._published[itemEvent]) {
+            this._published[itemEvent] = this.publish(itemEvent, {
+                defaultFn: this._defItemSelectFn
             });
         }
+
+        if (!this._published[EVT_SELECT]) {
+            this._published[EVT_SELECT] = this.publish(EVT_SELECT, {
+                defaultFn: this._defSelectFn
+            });
+        }
+
+        this.fire(itemEvent, {
+            originEvent: originEvent,
+            item       : item
+        });
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterEnable: function (e) {
+        var node = this.getHTMLNode(e.item);
+
+        if (node) {
+            node.get('parentNode').removeClass(this.classNames.disabled);
+        }
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterDisable: function (e) {
+        var node = this.getHTMLNode(e.item);
+
+        if (node) {
+            node.get('parentNode').addClass(this.classNames.disabled);
+        }
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterRename: function (e) {
+        var node = this.getHTMLNode(e.item);
+
+        if (node) {
+            node.setContent(this.templates.content({
+                classNames: this.classNames,
+                item      : e.item
+            }));
+        }
+    },
+
+    // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defSelectFn: function (e) {
+        e.item.dropdown.toggle();
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defItemSelectFn: function (e) {
+        this.fire(EVT_SELECT, {
+            originEvent: e.originEvent,
+            item       : e.item
+        });
     }
 }, {
     NS: 'dropdown',
 
     ATTRS: {
         /**
-         * @attribute items
-         * @type Array
+         * @attribute dropdownContainer
+         * @type {Node}
          */
-        items: {
+        dropdownContainer: {
             value: null
         }
     }

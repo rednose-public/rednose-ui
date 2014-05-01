@@ -53,10 +53,16 @@
         dropdown.render();
         dropdown.toggle();
 
-        dropdown.enable('action2');
-        dropdown.disable('action3');
+        dropdown.getItemById('action1').disable();
+        dropdown.getItemById('action2').enable();
+
+        dropdown.getItemById('action1').rename('Renamed item');
 
         dropdown.on('select', function (e) {
+            console.log(e);
+        });
+
+        dropdown.on('select#action3', function (e) {
             console.log(e);
         });
     });

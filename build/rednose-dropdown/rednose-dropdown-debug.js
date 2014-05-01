@@ -1,5 +1,320 @@
 YUI.add('rednose-dropdown', function (Y, NAME) {
 
+/*jshint expr:true, onevar:false */
+
+/**
+ * @class Rednose.DropdownItem
+ * @param {Rednose.Dropdown} dropdown
+ * @param {Object} [config]
+ * @constructor
+ */
+function DropdownItem(dropdown, config) {
+    config || (config = {});
+
+    this.dropdown = dropdown;
+    this.id       = config.id || Y.stamp(this);
+    this.children = [];
+
+    Y.mix(this, config);
+}
+
+DropdownItem.prototype = {
+    /**
+     * The id for this node.
+     *
+     * @property {string} title
+     * @readOnly
+     */
+
+    /**
+     * The dropdown instance.
+     *
+     * @property {Rednose.Dropdown} dropdown
+     * @readOnly
+     */
+
+    /**
+     * This node's children.
+     *
+     * @property {Array} children
+     * @readOnly
+     */
+
+    /**
+     * This node's type.
+     *
+     * @property {String} type
+     * @readOnly
+     */
+
+    /**
+     * Whether this node is disabled or not.
+     *
+     * @property {Boolean} disabled
+     * @readOnly
+     */
+
+    /**
+     * The icon for this node.
+     *
+     * @property {Boolean} disabled
+     * @readOnly
+     */
+
+    /**
+     * The title for this node.
+     *
+     * @property {String} title
+     * @readOnly
+     */
+
+    // -- Public Methods -------------------------------------------------------
+
+    /**
+     * Enables this item.
+     */
+    enable: function () {
+        this.dropdown.enableItem(this);
+
+        return this;
+    },
+
+    /**
+     * Disables this item.
+     *
+     * @chainable
+     */
+    disable: function () {
+        this.dropdown.disableItem(this);
+
+        return this;
+    },
+
+    /**
+     * Renames this item.
+     *
+     * @param {String} title
+     */
+    rename: function (title) {
+        this.dropdown.renameItem(this, title);
+
+        return this;
+    },
+
+    /**
+     * Whether this node is disabled or not.
+     */
+    isDisabled: function () {
+        return this.disabled;
+    },
+
+    /**
+     * Whether this node has children or not.
+     */
+    hasChildren: function () {
+        return this.children && this.children.length > 0;
+    },
+
+    /**
+     * Adds a child to this node.
+     *
+     * @param {Rednose.DropdownItem} child
+     */
+    addChild: function (child) {
+        this.children.push(child);
+    }
+};
+
+// -- Namespace ----------------------------------------------------------------
+Y.namespace('Rednose').DropdownItem = DropdownItem;
+/*jshint boss:true, expr:true, onevar:false */
+
+/**
+ * @event enable
+ * @param {Rednose.DropdownItem}
+ * @preventable _defEnableFn
+ */
+var EVT_ENABLE = 'enable';
+
+/**
+ * @event disable
+ * @param {Rednose.DropdownItem}
+ * @preventable _defDisableFn
+ */
+var EVT_DISABLE = 'disable';
+
+/**
+ * @event rename
+ * @param {Rednose.DropdownItem}
+ * @preventable _defRenameFn
+ */
+var EVT_RENAME = 'rename';
+
+var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
+
+    /**
+     * Root items for this dropdown.
+     *
+     * @property {Array} _rootItems
+     * @protected
+     */
+
+    /**
+     * Mapping of item ids to item instances.
+     *
+     * @property {Object} _itemMap
+     * @protected
+     */
+
+    // -- Lifecycle methods ----------------------------------------------------
+
+    initializer: function (config) {
+        this._rootItems = [];
+        this._itemMap   = {};
+        this._published = {};
+
+        if (config.items) {
+            for (var i = 0, len = config.items.length; i < len; i++) {
+                this._rootItems.push(this._createItem(config.items[i]));
+            }
+        }
+    },
+
+    destructor: function () {
+        this._rootItems = null;
+        this._itemMap   = null;
+        this._published = null;
+    },
+
+    // -- Public methods -------------------------------------------------------
+
+    /**
+     * @param {String} id
+     * @return {Rednose.DropdownItem}
+     * @private
+     */
+    getItemById: function (id) {
+        return this._itemMap[id];
+    },
+
+    /**
+     * @param {Rednose.DropdownItem} item
+     * @chainable
+     */
+    enableItem: function (item) {
+        if (item.isDisabled()) {
+            this._fireDropdownEvent(EVT_ENABLE, {item: item}, {
+                defaultFn: this._defEnableFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * @param {Rednose.DropdownItem} item
+     * @chainable
+     */
+    disableItem: function (item) {
+        if (!item.isDisabled()) {
+            this._fireDropdownEvent(EVT_DISABLE, {item: item}, {
+                defaultFn: this._defDisableFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * @param {Rednose.DropdownItem} item
+     * @param {String} title
+     * @chainable
+     */
+    renameItem: function (item, title) {
+        this._fireDropdownEvent(EVT_RENAME, {item: item, title: title}, {
+            defaultFn: this._defRenameFn
+        });
+
+        return this;
+    },
+
+    // -- Protected methods ----------------------------------------------------
+
+    /**
+     * Create a dropdown item.
+     *
+     * @param {Object} config
+     * @return {Rednose.DropdownItem}
+     * @private
+     */
+    _createItem: function (config) {
+        var dropdownItem = new Y.Rednose.DropdownItem(this, config);
+
+        if (config.children) {
+            for (var i = 0, len = config.children.length; i < len; i++) {
+                dropdownItem.addChild(this._createItem(config.children[i]));
+            }
+        }
+
+        if (dropdownItem.id in this._itemMap) {
+            dropdownItem.id = Y.stamp(dropdownItem);
+        }
+
+        this._itemMap[dropdownItem.id] = dropdownItem;
+
+        return dropdownItem;
+    },
+
+    /**
+     * Utility method for lazily publishing events,
+     *
+     * @param {String} name
+     * @param {Object} facade
+     * @param {Object} options
+     * @chainable
+     * @private
+     */
+    _fireDropdownEvent: function (name, facade, options) {
+        if (options && options.defaultFn && !this._published[name]) {
+            this._published[name] = this.publish(name, {
+                defaultFn: options.defaultFn
+            });
+        }
+
+        this.fire(name, facade);
+
+        return this;
+    },
+
+    // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defDisableFn: function (e) {
+        e.item.disabled = true;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defEnableFn: function (e) {
+        e.item.disabled = false;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defRenameFn: function (e) {
+        e.item.title = e.title;
+    }
+});
+
+// -- Namespace ----------------------------------------------------------------
+Y.namespace('Rednose').DropdownBase = DropdownBase;
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
@@ -13,11 +328,12 @@ var Micro = Y.Template.Micro;
 /**
  * Dropdown widget.
  *
- * @class Menu
+ * @class Dropdown
  * @constructor
  * @param {Object} [config] Config options.
- * @param {HTMLElement|Node|String} [config.srcNode] Source node.
- * @extends View
+ * @param {Array} [config.items] Dropdown items.
+ * @extends Rednose.DropdownBase
+ * @uses View
  */
 
 /**
@@ -26,12 +342,13 @@ var Micro = Y.Template.Micro;
  * You can subscribe to specific menu item through the following event: "select#id".
  *
  * @event select
- * @param {id} the item id that was clicked.
+ * @param {Rednose.DropdownItem} item The item that was clicked.
  * @param {EventFacade} originEvent Original click event.
+ * @preventable _defSelectFn
  */
 var EVT_SELECT = 'select';
 
-var Dropdown = Y.Base.create('dropdown', Y.View, [], {
+var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
 
     /**
      * Templates used by this dropdown.
@@ -56,10 +373,10 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
                 '<li class="<%= data.classNames.divider %>"></li>' +
             '<% } else { %>' +
                     '<li class="' +
-                        '<% if (data.item.disabled) { %>' +
+                        '<% if (data.item.isDisabled()) { %>' +
                             '<%= data.classNames.disabled %> ' +
                         '<% } %>' +
-                        '<% if (data.item.children) { %>' +
+                        '<% if (data.item.hasChildren()) { %>' +
                             '<%= data.classNames.submenu %>' +
                         '<% } %>' +
                     '">' +
@@ -71,6 +388,13 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
                     '</a>' +
                 '</li>' +
             '<% } %>'
+        ),
+
+        content: Micro.compile(
+            '<% if (data.item.icon) { %>' +
+                '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
+                '<% } %>' +
+            '<%= data.item.title %>'
         )
     },
 
@@ -103,22 +427,33 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
 
     // -- Lifecycle methods ----------------------------------------------------
 
-    initializer: function () {
+    initializer: function (config) {
         var container  = this.get('container'),
             classNames = this.classNames;
 
         container.addClass(classNames.dropdown);
 
-        container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this);
-
         this.set('dropdownContainer', container);
+
+        this._attachEvents();
     },
 
     destructor: function () {
-        // TODO: Detach events.
+        this._detachEvents();
     },
 
     // -- Public methods -------------------------------------------------------
+
+    /**
+     * @param {Rednose.DropdownItem} item
+     * @return {Node}
+     * @private
+     */
+    getHTMLNode: function (item) {
+        var container = this.get('dropdownContainer');
+
+        return container.one('[data-id="' + item.id + '"]');
+    },
 
     /**
      * @chainable
@@ -128,7 +463,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
             items      = this.get('items');
 
         if (items) {
-            container.append(this._renderMenu(items));
+            container.append(this._renderMenu(this._rootItems));
         }
 
         if (!container.inDoc()) {
@@ -166,35 +501,27 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
         });
     },
 
-    enable: function (id) {
-        var node = this._getNodeByID(id);
-
-        if (node.hasClass(this.classNames.disabled)) {
-            node.removeClass(this.classNames.disabled);
-        }
-    },
-
-    disable: function (id) {
-        var node = this._getNodeByID(id);
-
-        node.addClass(this.classNames.disabled);
-    },
-
-    rename: function (id, title) {
-        // TODO: Implement method.
-    },
-
     // -- Protected methods ----------------------------------------------------
 
-    /**
-     * @param {String} id
-     * @return {Node}
-     * @private
-     */
-    _getNodeByID: function (id) {
-        var container = this.get('dropdownContainer');
+    _attachEvents: function () {
+        this._events || (this._events = []);
 
-        return container.one('[data-id=' + id + ']').get('parentNode');
+        var container  = this.get('dropdownContainer'),
+            classNames = this.classNames;
+
+        this._events.push(
+            this.after({
+                enable : this._afterEnable,
+                disable: this._afterDisable,
+                rename : this._afterRename
+            }),
+
+            container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this)
+        );
+    },
+
+    _detachEvents: function () {
+        (new Y.EventHandle(this._events)).detach();
     },
 
     /**
@@ -215,7 +542,7 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     },
 
     /**
-     * @param {Object} item
+     * @param {Rednose.DropdownItem} item
      * @return {Node}
      * @private
      */
@@ -265,41 +592,103 @@ var Dropdown = Y.Base.create('dropdown', Y.View, [], {
     _handleItemClick: function (e) {
         e.preventDefault();
 
-        var target = e.target;
+        var target      = e.target,
+            originEvent = e.originEvent,
+            item        = this.getItemById(target.getAttribute('data-id')),
+            itemEvent   = EVT_SELECT + '#' + item.id;
 
-        if (target.get('parentNode').hasClass(this.classNames.submenu)) {
+        if (item.isDisabled() || item.hasChildren()) {
             return;
         }
 
-        if (target.get('parentNode').hasClass(this.classNames.disabled)) {
-            return;
-        }
-
-        this.toggle();
-
-        this.fire(EVT_SELECT, {
-            originEvent: e.originEvent,
-            id         : target.hasAttribute('data-id') ? target.getAttribute('data-id') : null
-        });
-
-        if (target.hasAttribute('data-id')) {
-            var event = EVT_SELECT + '#' + target.getAttribute('data-id');
-            
-            this.fire(event, {
-                originEvent: e.originEvent,
-                id         : target.getAttribute('data-id')
+        if (!this._published[itemEvent]) {
+            this._published[itemEvent] = this.publish(itemEvent, {
+                defaultFn: this._defItemSelectFn
             });
         }
+
+        if (!this._published[EVT_SELECT]) {
+            this._published[EVT_SELECT] = this.publish(EVT_SELECT, {
+                defaultFn: this._defSelectFn
+            });
+        }
+
+        this.fire(itemEvent, {
+            originEvent: originEvent,
+            item       : item
+        });
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterEnable: function (e) {
+        var node = this.getHTMLNode(e.item);
+
+        if (node) {
+            node.get('parentNode').removeClass(this.classNames.disabled);
+        }
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterDisable: function (e) {
+        var node = this.getHTMLNode(e.item);
+
+        if (node) {
+            node.get('parentNode').addClass(this.classNames.disabled);
+        }
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterRename: function (e) {
+        var node = this.getHTMLNode(e.item);
+
+        if (node) {
+            node.setContent(this.templates.content({
+                classNames: this.classNames,
+                item      : e.item
+            }));
+        }
+    },
+
+    // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defSelectFn: function (e) {
+        e.item.dropdown.toggle();
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defItemSelectFn: function (e) {
+        this.fire(EVT_SELECT, {
+            originEvent: e.originEvent,
+            item       : e.item
+        });
     }
 }, {
     NS: 'dropdown',
 
     ATTRS: {
         /**
-         * @attribute items
-         * @type Array
+         * @attribute dropdownContainer
+         * @type {Node}
          */
-        items: {
+        dropdownContainer: {
             value: null
         }
     }
