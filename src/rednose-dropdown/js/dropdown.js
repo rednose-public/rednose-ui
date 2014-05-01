@@ -157,6 +157,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
 
     /**
      * @param {Object} [point] X / Y anchor point, optional.
+     * @chainable
      */
     toggle: function (point) {
         if (!this.rendered) {
@@ -179,6 +180,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
         container.once('clickoutside', function() {
             container.toggleClass(classNames.open);
         });
+
+        return this;
     },
 
     // -- Protected methods ----------------------------------------------------
@@ -196,7 +199,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
                 rename : this._afterRename
             }),
 
-            container.delegate('click', this._handleItemClick, '.' + classNames.menu + ' a', this)
+            container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this)
         );
     },
 
@@ -245,31 +248,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
      * @param e {EventFacade}
      * @private
      */
-    _handleAnchorContextMenu: function (e) {
-        if (e.shiftKey) {
-            return;
-        }
-
-        e.preventDefault();
-
-        this.toggle([ e.pageX, e.pageY ]);
-    },
-
-    /**
-     * @param e {EventFacade}
-     * @private
-     */
-    _handleAnchorClick: function (e) {
-        e.preventDefault();
-
-        this.toggle();
-    },
-
-    /**
-     * @param e {EventFacade}
-     * @private
-     */
-    _handleItemClick: function (e) {
+    _afterItemClick: function (e) {
         e.preventDefault();
 
         var target      = e.target,

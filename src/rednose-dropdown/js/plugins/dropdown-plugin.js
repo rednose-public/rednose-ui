@@ -28,7 +28,7 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         dropup && container.addClass(classNames.dropup);
 
         if (this.get('showOnContext')) {
-            this._host.on('contextmenu', this._handleAnchorContextMenu, this);
+            this._host.on('contextmenu', this._afterAnchorContextMenu, this);
 
             return;
         }
@@ -42,11 +42,33 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
             }));
         }
 
-        this._host.on('click', this._handleAnchorClick, this);
+        this._host.on('click', this._afterAnchorClick, this);
     },
 
-    destructor: function () {
-        this._host = null;
+    // -- Protected Event Handlers ---------------------------------------------
+
+    /**
+     * @param e {EventFacade}
+     * @private
+     */
+    _afterAnchorContextMenu: function (e) {
+        if (e.shiftKey) {
+            return;
+        }
+
+        e.preventDefault();
+
+        this.toggle([ e.pageX, e.pageY ]);
+    },
+
+    /**
+     * @param e {EventFacade}
+     * @private
+     */
+    _afterAnchorClick: function (e) {
+        e.preventDefault();
+
+        this.toggle();
     }
 }, {
     NS: 'dropdown',
