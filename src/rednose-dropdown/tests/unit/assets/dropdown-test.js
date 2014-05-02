@@ -40,6 +40,20 @@ YUI.add('dropdown-test', function (Y) {
             }).render().toggle();
 
             Assert.areEqual('http://wwww.rednose.nl', menu.one('a').getAttribute('href'));
+        },
+
+        '`html` property should render custom HTML': function () {
+            var menu = Y.one('.menu'),
+                html = '<a href="http://www.rednose.nl"><div>You joined the folder <strong>Demo user\'s shared folder</strong></div><div><small class="muted">39 minutes ago</small></div></a>';
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { html: html }
+                ]
+            }).render().toggle();
+
+            Assert.areEqual(html, menu.one('a').get('outerHTML'));
         }
     }));
 

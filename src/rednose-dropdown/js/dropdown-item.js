@@ -75,6 +75,13 @@ DropdownItem.prototype = {
      * @readOnly
      */
 
+    /**
+     * Custom HTML for this node.
+     *
+     * @property {String} html
+     * @readOnly
+     */
+
     // -- Public Methods -------------------------------------------------------
 
     /**

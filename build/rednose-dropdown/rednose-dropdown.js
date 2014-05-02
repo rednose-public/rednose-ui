@@ -77,6 +77,13 @@ DropdownItem.prototype = {
      * @readOnly
      */
 
+    /**
+     * Custom HTML for this node.
+     *
+     * @property {String} html
+     * @readOnly
+     */
+
     // -- Public Methods -------------------------------------------------------
 
     /**
@@ -389,12 +396,18 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
                             '<%= data.classNames.submenu %>' +
                         '<% } %>' +
                     '">' +
-                    '<a href="<%= data.item.url %>" data-id="<%= data.item.id %>">' +
-                        '<% if (data.item.icon) { %>' +
-                            '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
-                        '<% } %>' +
-                        '<%= data.item.title %>' +
-                    '</a>' +
+
+                    '<% if (data.item.html) { %>' +
+                        '<%== data.item.html %>' +
+                    '<% } else { %>' +
+                        '<a href="<%= data.item.url %>" data-id="<%= data.item.id %>">' +
+                            '<% if (data.item.icon) { %>' +
+                                '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
+                            '<% } %>' +
+                            '<%= data.item.title %>' +
+                        '</a>' +
+                    '<% } %>' +
+
                 '</li>' +
             '<% } %>'
         ),
@@ -605,8 +618,6 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
             item       : item
         });
     },
-
-    // -- Protected Event Handlers ---------------------------------------------
 
     /**
      * @param {EventFacade} e

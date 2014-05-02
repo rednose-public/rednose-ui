@@ -104,9 +104,11 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
          *
          * @attribute {Boolean} dropup
          * @default false
+         * @initOnly
          */
         dropup: {
-            value: false
+            value: false,
+            writeOnce: 'initOnly'
         },
 
         /**

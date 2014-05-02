@@ -88,6 +88,39 @@ YUI.add('dropdown-plugin-test', function (Y) {
             Assert.isTrue(button.get('parentNode').hasClass('dropup'));
 
             button.unplug('dropdown');
+        },
+
+        '`showCaret` should render a caret by default': function () {
+            var button = Y.one('#button'),
+                menu   = Y.one('.menu');
+
+            button.plug(Y.Rednose.Plugin.Dropdown, {
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' },
+                    { id: 'testItem2', title: 'Test Item 2' }
+                ]
+            });
+
+            Assert.isInstanceOf(Y.Node, menu.one('.caret'));
+
+            button.unplug('dropdown');
+        },
+
+        '`showCaret` set to false should not render a caret': function () {
+            var button = Y.one('#button'),
+                menu   = Y.one('.menu');
+
+            button.plug(Y.Rednose.Plugin.Dropdown, {
+                showCaret: false,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' },
+                    { id: 'testItem2', title: 'Test Item 2' }
+                ]
+            });
+
+            Assert.isNull(menu.one('.caret'));
+
+            button.unplug('dropdown');
         }
     }));
 
@@ -157,6 +190,44 @@ YUI.add('dropdown-plugin-test', function (Y) {
             Assert.isTrue(button.get('parentNode').hasClass('open'));
 
             button.unplug('dropdown');
+        },
+
+        '`showOnContext` should not show the menu when initialized': function () {
+            var menu = Y.one('.menu');
+
+            menu.plug(Y.Rednose.Plugin.Dropdown, {
+                showOnContext: true,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' },
+                    { id: 'testItem2', title: 'Test Item 2' }
+                ]
+            });
+
+            var dropdown = Y.one('.dropdown');
+
+            Assert.isNull(dropdown);
+        },
+
+        '`showOnContext` should render the menu on right-clicking': function () {
+            var menu = Y.one('.menu');
+
+            menu.plug(Y.Rednose.Plugin.Dropdown, {
+                showOnContext: true,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' },
+                    { id: 'testItem2', title: 'Test Item 2' }
+                ]
+            });
+
+            menu.simulate('contextmenu');
+
+            var dropdown = Y.one('.dropdown');
+
+            Assert.isTrue(dropdown.hasClass('open'));
+
+            menu.unplug('dropdown');
+
+            Y.all('.dropdown').remove();
         }
     }));
 
