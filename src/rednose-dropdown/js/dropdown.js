@@ -39,16 +39,12 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
      * @property {Object} templates
      */
     templates: {
-        wrapper: Micro.compile(
-            '<div class="<%= data.classNames.wrapper %>"></div>'
+        menu: Micro.compile(
+            '<ul class="<%= data.classNames.menu %>"></ul>'
         ),
 
         caret: Micro.compile(
             '<%== data.content %> <span class="<%= data.classNames.caret %>"></span>'
-        ),
-
-        menu: Micro.compile(
-            '<ul class="<%= data.classNames.menu %>"></ul>'
         ),
 
         item: Micro.compile(
@@ -93,7 +89,6 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
      * @property {Object} classNames
      */
     classNames: {
-        wrapper : 'rednose-dropdown-wrapper',
         disabled: 'disabled',
         caret   : 'caret',
         menu    : 'dropdown-menu',
@@ -175,7 +170,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
                 close  : this._afterClose,
                 enable : this._afterEnable,
                 disable: this._afterDisable,
-                rename : this._afterRename
+                rename : this._afterRename,
+                reset  : this._afterReset
             }),
 
             container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this),
@@ -331,6 +327,23 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
                 item      : e.item
             }));
         }
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterReset: function (e) {
+        if (!this.rendered) {
+            return;
+        }
+
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.one('.' + classNames.menu).remove();
+
+        this.render();
     },
 
     // -- Default Event Handlers -----------------------------------------------

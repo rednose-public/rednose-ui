@@ -105,6 +105,22 @@ YUI.add('dropdown-test', function (Y) {
             Assert.isFalse(menu.hasClass('open'));
 
             dropdown.destroy();
+        },
+
+        'Dropdown should update when `reset` is called after it\'s rendered': function () {
+            var menu = Y.one('.menu');
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' },
+                    { id: 'testItem2', title: 'Test Item 2' }
+                ]
+            }).render().open();
+
+            dropdown.reset([{ id: 'testItem3', title: 'Test Item 3' }]);
+
+            Assert.areEqual('testItem3', menu.one('a').getAttribute('data-id'));
         }
     }));
 

@@ -37,6 +37,15 @@ var EVT_CLOSE = 'close';
  */
 var EVT_OPEN = 'open';
 
+/**
+ * Fired when the menu items are rest.
+ *
+ * @event reset
+ * @param {Array} items New menu items
+ * @preventable _defResetFn
+ **/
+EVT_RESET = 'reset';
+
 var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
 
     /**
@@ -65,14 +74,10 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function (config) {
-        this._rootItems = [];
-        this._itemMap   = {};
         this._published = {};
 
         if (config.items) {
-            for (var i = 0, len = config.items.length; i < len; i++) {
-                this._rootItems.push(this._createItem(config.items[i]));
-            }
+            this.reset(config.items);
         }
     },
 
@@ -83,6 +88,20 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     },
 
     // -- Public methods -------------------------------------------------------
+
+    /**
+     * Resets the items in this dropdown.
+     *
+     * @param {Array} items
+     * @chainable
+     */
+    reset: function (items) {
+        return this._fireDropdownEvent(EVT_RESET, {
+            items: items
+        }, {
+            defaultFn: this._defResetFn
+        });
+    },
 
     /**
      * Opens the dropdown.
@@ -210,6 +229,25 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     },
 
     /**
+     * Create a dropdown item.
+     *
+     * @param {Rednose.DropdownItem} item
+     * @private
+     */
+    _destroyItem: function (item) {
+        if (item.hasChildren()) {
+            for (var i = 0, len = item.children.length; i < len; i++) {
+                this._destroyItem(item.children[i]);
+            }
+        }
+
+        item.dropdown = null;
+        item.children = null;
+
+        delete this._itemMap[item.id];
+    },
+
+    /**
      * Utility method for lazily publishing events,
      *
      * @param {String} name
@@ -231,6 +269,29 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     },
 
     // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defResetFn: function (e) {
+        var items = e.items;
+
+        if (this._rootItems && this._rootItems.length > 0) {
+            for (var i = 0; i < this._rootItems.length; i++) {
+                this._destroyItem(this._rootItems[i]);
+            }
+        }
+
+        this._rootItems = [];
+        this._itemMap   = {};
+
+        if (items) {
+            for (var j = 0; j < items.length; j++) {
+                this._rootItems.push(this._createItem(items[j]));
+            }
+        }
+    },
 
     /**
      * @param {EventFacade} e

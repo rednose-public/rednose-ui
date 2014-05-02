@@ -88,6 +88,17 @@ YUI.add('dropdown-base-test', function (Y) {
             item.rename('Renamed Item');
 
             Assert.areEqual('Renamed Item', item.title);
+        },
+
+        '`reset` should reset the dropdown items': function () {
+            var dropdown = this.dropdown;
+
+            dropdown.reset([
+                { id: 'testItem3', title: 'Test Item 3' },
+                { id: 'testItem4', title: 'Test Item 4', disabled: true }
+            ]);
+
+            Assert.isInstanceOf(Y.Rednose.DropdownItem, dropdown.getItemById('testItem3'));
         }
     }));
 
