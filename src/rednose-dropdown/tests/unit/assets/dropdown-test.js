@@ -6,6 +6,44 @@ YUI.add('dropdown-test', function (Y) {
     suite = new Y.Test.Suite('Dropdown');
 
     suite.add(new Y.Test.Case({
+        name: 'Config',
+
+        setUp: function () {
+            Y.one('#container').append(Y.Node.create('<div class="menu"></div>'));
+        },
+
+        tearDown: function () {
+            Y.one('.menu').remove();
+        },
+
+        'Default `href` attribute should be hash': function () {
+            var menu = Y.one('.menu');
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' }
+                ]
+            }).render().toggle();
+
+            Assert.areEqual('#', menu.one('a').getAttribute('href'));
+        },
+
+        '`url` should set the `href` attribute': function () {
+            var menu = Y.one('.menu');
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1', url: 'http://wwww.rednose.nl' }
+                ]
+            }).render().toggle();
+
+            Assert.areEqual('http://wwww.rednose.nl', menu.one('a').getAttribute('href'));
+        }
+    }));
+
+    suite.add(new Y.Test.Case({
         name: 'Events',
 
         setUp: function () {

@@ -63,7 +63,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
                             '<%= data.classNames.submenu %>' +
                         '<% } %>' +
                     '">' +
-                    '<a href="#" data-id="<%= data.item.id %>">' +
+                    '<a href="<%= data.item.url %>" data-id="<%= data.item.id %>">' +
                         '<% if (data.item.icon) { %>' +
                             '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
                         '<% } %>' +
@@ -249,12 +249,14 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
      * @private
      */
     _afterItemClick: function (e) {
-        e.preventDefault();
-
         var target      = e.target,
             originEvent = e.originEvent,
             item        = this.getItemById(target.getAttribute('data-id')),
             itemEvent   = EVT_SELECT + '#' + item.id;
+
+        if (item.isDisabled() ||  item.url === '#') {
+            e.preventDefault();
+        }
 
         if (item.isDisabled() || item.hasChildren()) {
             return;

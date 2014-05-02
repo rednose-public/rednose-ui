@@ -11,6 +11,8 @@ function DropdownItem(dropdown, config) {
 
     this.dropdown = dropdown;
     this.id       = config.id || Y.stamp(this);
+    this.type     = config.type || 'item';
+    this.url      = config.url || '#';
     this.children = [];
 
     Y.mix(this, config);
@@ -63,6 +65,13 @@ DropdownItem.prototype = {
      * The title for this node.
      *
      * @property {String} title
+     * @readOnly
+     */
+
+    /**
+     * The URL for this node.
+     *
+     * @property {String} url
      * @readOnly
      */
 
