@@ -117,13 +117,17 @@ DropdownItem.prototype = {
 
     /**
      * Whether this node is disabled or not.
+     *
+     * @return {Boolean}
      */
     isDisabled: function () {
-        return this.disabled;
+        return this.disabled === true;
     },
 
     /**
      * Whether this node has children or not.
+     *
+     * @return {Boolean}
      */
     hasChildren: function () {
         return this.children && this.children.length > 0;

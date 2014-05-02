@@ -12,7 +12,7 @@ YUI.add('dropdown-base-test', function (Y) {
             this.dropdown = new Y.Rednose.DropdownBase({
                 items: [
                     { id: 'testItem1', title: 'Test Item 1' },
-                    { id: 'testItem2', title: 'Test Item 2' }
+                    { id: 'testItem2', title: 'Test Item 2', disabled: true }
                 ]
             });
         },
@@ -55,6 +55,39 @@ YUI.add('dropdown-base-test', function (Y) {
             dropdown.toggle();
 
             Assert.isFalse(dropdown.isOpen());
+        },
+
+        '`disable` should disable an item': function () {
+            var dropdown = this.dropdown,
+                item     = dropdown.getItemById('testItem1');
+
+            Assert.isFalse(item.isDisabled());
+
+            item.disable();
+
+            Assert.isTrue(item.isDisabled());
+        },
+
+        '`enable` should enable an item': function () {
+            var dropdown = this.dropdown,
+                item     = dropdown.getItemById('testItem2');
+
+            Assert.isTrue(item.isDisabled());
+
+            item.enable();
+
+            Assert.isFalse(item.isDisabled());
+        },
+
+        '`rename` should rename an item': function () {
+            var dropdown = this.dropdown,
+                item     = dropdown.getItemById('testItem1');
+
+            Assert.areEqual('Test Item 1', item.title);
+
+            item.rename('Renamed Item');
+
+            Assert.areEqual('Renamed Item', item.title);
         }
     }));
 
