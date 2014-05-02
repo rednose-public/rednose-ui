@@ -158,7 +158,10 @@ Y.mix(YUI.Env[Y.version].modules, {
         "requires": [
             "base",
             "node",
-            "gallery-bootstrap-dropdown"
+            "template-micro",
+            "view",
+            "node-pluginhost",
+            "plugin"
         ]
     },
     "rednose-form": {
@@ -243,6 +246,7 @@ Y.mix(YUI.Env[Y.version].modules, {
             "json",
             "node-event-simulate",
             "node-pluginhost",
+            "rednose-dropdown",
             "rednose-navbar-css",
             "rednose-util",
             "view",
@@ -378,7 +382,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '67703f1c7de0df5a1b98dede67c36788';
+YUI.Env[Y.version].md5 = 'c5495e6d9e1e539b67b22886bb23a961';
 
 
 }, '1.4.0');
