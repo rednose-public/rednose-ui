@@ -161,35 +161,6 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
         return this;
     },
 
-//    /**
-//     * @param {Object} [point] X / Y anchor point, optional.
-//     * @chainable
-//     */
-//    toggle: function (point) {
-//        if (!this.rendered) {
-//            this.render();
-//        }
-//
-//        var container  = this.get('container'),
-//            classNames = this.classNames;
-//
-//        container.toggleClass(classNames.open);
-//
-//        if (Y.Lang.isArray(point)) {
-//            container.setStyles({
-//                position: 'absolute',
-//                left    : point[0],
-//                top     : point[1]
-//            });
-//        }
-//
-//        container.once('clickoutside', function() {
-//            container.toggleClass(classNames.open);
-//        });
-//
-//        return this;
-//    },
-
     // -- Protected methods ----------------------------------------------------
 
     _attachDropdownEvents: function () {

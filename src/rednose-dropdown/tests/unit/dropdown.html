@@ -15,6 +15,7 @@
         <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
 
         <script src="./assets/dropdown-test.js"></script>
+        <script src="./assets/dropdown-base-test.js"></script>
         <script src="./assets/dropdown-plugin-test.js"></script>
         <script>
             YUI.Env.core.push('rednose-loader');
@@ -27,7 +28,7 @@
                         base: "../../../../build/"
                     }
                 }
-            }).use('dropdown-test', 'dropdown-plugin-test', 'test-console', function (Y) {
+            }).use('dropdown-test', 'dropdown-base-test', 'dropdown-plugin-test', 'test-console', function (Y) {
                 new Y.Test.Console().render('#log');
 
                 Y.Test.Runner.setName('Dropdown');
