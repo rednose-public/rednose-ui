@@ -21,7 +21,32 @@ var EVT_DISABLE = 'disable';
  */
 var EVT_RENAME = 'rename';
 
+/**
+ * Fired when the dropdown is closed.
+ *
+ * @event close
+ * @preventable _defCloseFn
+ */
+var EVT_CLOSE = 'close';
+
+/**
+ * Fired the dropdown is opened.
+ *
+ * @event open
+ * @preventable _defOpenFn
+ */
+var EVT_OPEN = 'open';
+
 var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
+
+    /**
+     * Whether the dropdown is currenty open or not.
+     *
+     * @property {Boolean} open
+     * @default false
+     * @protected
+     */
+    _open: false,
 
     /**
      * Root items for this dropdown.
@@ -58,6 +83,54 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     },
 
     // -- Public methods -------------------------------------------------------
+
+    /**
+     * Opens the dropdown.
+     *
+     * @chainable
+     */
+    open: function () {
+        if (!this.isOpen()) {
+            this._fireDropdownEvent(EVT_OPEN, {}, {
+                defaultFn: this._defOpenFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * Closes the dropdown.
+     *
+     * @chainable
+     */
+    close: function () {
+        if (this.isOpen()) {
+            this._fireDropdownEvent(EVT_CLOSE, {}, {
+                defaultFn: this._defCloseFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * Toggles the dropdown.
+     *
+     * @chainable
+     */
+    toggle: function () {
+        return this[this.isOpen() ? 'close' : 'open']();
+    },
+
+    /**
+     * Whether the dropdown is currenty open or not.
+     *
+     * @return {Boolean}
+     */
+    isOpen: function () {
+        return this._open;
+    },
 
     /**
      * @param {String} id
@@ -181,6 +254,22 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
      */
     _defRenameFn: function (e) {
         e.item.title = e.title;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defOpenFn: function (e) {
+        this._open = true;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defCloseFn: function (e) {
+        this._open = false;
     }
 });
 

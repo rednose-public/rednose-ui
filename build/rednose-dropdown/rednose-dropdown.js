@@ -166,7 +166,32 @@ var EVT_DISABLE = 'disable';
  */
 var EVT_RENAME = 'rename';
 
+/**
+ * Fired when the dropdown is closed.
+ *
+ * @event close
+ * @preventable _defCloseFn
+ */
+var EVT_CLOSE = 'close';
+
+/**
+ * Fired the dropdown is opened.
+ *
+ * @event open
+ * @preventable _defOpenFn
+ */
+var EVT_OPEN = 'open';
+
 var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
+
+    /**
+     * Whether the dropdown is currenty open or not.
+     *
+     * @property {Boolean} open
+     * @default false
+     * @protected
+     */
+    _open: false,
 
     /**
      * Root items for this dropdown.
@@ -203,6 +228,54 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     },
 
     // -- Public methods -------------------------------------------------------
+
+    /**
+     * Opens the dropdown.
+     *
+     * @chainable
+     */
+    open: function () {
+        if (!this.isOpen()) {
+            this._fireDropdownEvent(EVT_OPEN, {}, {
+                defaultFn: this._defOpenFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * Closes the dropdown.
+     *
+     * @chainable
+     */
+    close: function () {
+        if (this.isOpen()) {
+            this._fireDropdownEvent(EVT_CLOSE, {}, {
+                defaultFn: this._defCloseFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * Toggles the dropdown.
+     *
+     * @chainable
+     */
+    toggle: function () {
+        return this[this.isOpen() ? 'close' : 'open']();
+    },
+
+    /**
+     * Whether the dropdown is currenty open or not.
+     *
+     * @return {Boolean}
+     */
+    isOpen: function () {
+        return this._open;
+    },
 
     /**
      * @param {String} id
@@ -326,6 +399,22 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
      */
     _defRenameFn: function (e) {
         e.item.title = e.title;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defOpenFn: function (e) {
+        this._open = true;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defCloseFn: function (e) {
+        this._open = false;
     }
 });
 
@@ -494,34 +583,34 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
         return this;
     },
 
-    /**
-     * @param {Object} [point] X / Y anchor point, optional.
-     * @chainable
-     */
-    toggle: function (point) {
-        if (!this.rendered) {
-            this.render();
-        }
-
-        var container  = this.get('container'),
-            classNames = this.classNames;
-
-        container.toggleClass(classNames.open);
-
-        if (Y.Lang.isArray(point)) {
-            container.setStyles({
-                position: 'absolute',
-                left    : point[0],
-                top     : point[1]
-            });
-        }
-
-        container.once('clickoutside', function() {
-            container.toggleClass(classNames.open);
-        });
-
-        return this;
-    },
+//    /**
+//     * @param {Object} [point] X / Y anchor point, optional.
+//     * @chainable
+//     */
+//    toggle: function (point) {
+//        if (!this.rendered) {
+//            this.render();
+//        }
+//
+//        var container  = this.get('container'),
+//            classNames = this.classNames;
+//
+//        container.toggleClass(classNames.open);
+//
+//        if (Y.Lang.isArray(point)) {
+//            container.setStyles({
+//                position: 'absolute',
+//                left    : point[0],
+//                top     : point[1]
+//            });
+//        }
+//
+//        container.once('clickoutside', function() {
+//            container.toggleClass(classNames.open);
+//        });
+//
+//        return this;
+//    },
 
     // -- Protected methods ----------------------------------------------------
 
@@ -533,12 +622,15 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
 
         this._events.push(
             this.after({
+                open   : this._afterOpen,
+                close  : this._afterClose,
                 enable : this._afterEnable,
                 disable: this._afterDisable,
                 rename : this._afterRename
             }),
 
-            container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this)
+            container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this),
+            container.on('clickoutside', this._onClickOutside, this)
         );
     },
 
@@ -587,6 +679,14 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
      * @param e {EventFacade}
      * @private
      */
+    _onClickOutside: function (e) {
+        this.close();
+    },
+
+    /**
+     * @param e {EventFacade}
+     * @private
+     */
     _afterItemClick: function (e) {
         var target      = e.target,
             originEvent = e.originEvent,
@@ -617,6 +717,32 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
             originEvent: originEvent,
             item       : item
         });
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterOpen: function (e) {
+        if (!this.rendered) {
+            this.render();
+        }
+
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.open);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterClose: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.removeClass(classNames.open);
     },
 
     /**
@@ -731,6 +857,23 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         this._host.on('click', this._afterAnchorClick, this);
     },
 
+    // -- Protected Methods ----------------------------------------------------
+
+    /**
+     * @param {Integer} x
+     * @param {Integer} y
+     * @private
+     */
+    _positionContainer: function (x, y) {
+        var container = this.get('container');
+
+        container.setStyles({
+            position: 'absolute',
+            left    : x,
+            top     : y
+        });
+    },
+
     // -- Protected Event Handlers ---------------------------------------------
 
     /**
@@ -744,7 +887,9 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
 
         e.preventDefault();
 
-        this.toggle([ e.pageX, e.pageY ]);
+        this._positionContainer(e.pageX, e.pageY);
+
+        this.open();
     },
 
     /**
@@ -790,9 +935,11 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
          *
          * @attribute {Boolean} dropup
          * @default false
+         * @initOnly
          */
         dropup: {
-            value: false
+            value: false,
+            writeOnce: 'initOnly'
         },
 
         /**

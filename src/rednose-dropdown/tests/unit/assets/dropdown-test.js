@@ -24,7 +24,7 @@ YUI.add('dropdown-test', function (Y) {
                 items: [
                     { id: 'testItem1', title: 'Test Item 1' }
                 ]
-            }).render().toggle();
+            }).render().open();
 
             Assert.areEqual('#', menu.one('a').getAttribute('href'));
         },
@@ -37,7 +37,7 @@ YUI.add('dropdown-test', function (Y) {
                 items: [
                     { id: 'testItem1', title: 'Test Item 1', url: 'http://wwww.rednose.nl' }
                 ]
-            }).render().toggle();
+            }).render().open();
 
             Assert.areEqual('http://wwww.rednose.nl', menu.one('a').getAttribute('href'));
         },
@@ -51,7 +51,7 @@ YUI.add('dropdown-test', function (Y) {
                 items: [
                     { html: html }
                 ]
-            }).render().toggle();
+            }).render().open();
 
             Assert.areEqual(html, menu.one('a').get('outerHTML'));
         }
@@ -77,7 +77,7 @@ YUI.add('dropdown-test', function (Y) {
                     { id: 'testItem1', title: 'Test Item 1' },
                     { id: 'testItem2', title: 'Test Item 2' }
                 ]
-            }).render().toggle();
+            }).render().open();
 
             Assert.isTrue(menu.hasClass('open'));
 
@@ -96,7 +96,7 @@ YUI.add('dropdown-test', function (Y) {
                     { id: 'testItem1', title: 'Test Item 1' },
                     { id: 'testItem2', title: 'Test Item 2' }
                 ]
-            }).render().toggle();
+            }).render().open();
 
             Assert.isTrue(menu.hasClass('open'));
 

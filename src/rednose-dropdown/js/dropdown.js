@@ -161,34 +161,34 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
         return this;
     },
 
-    /**
-     * @param {Object} [point] X / Y anchor point, optional.
-     * @chainable
-     */
-    toggle: function (point) {
-        if (!this.rendered) {
-            this.render();
-        }
-
-        var container  = this.get('container'),
-            classNames = this.classNames;
-
-        container.toggleClass(classNames.open);
-
-        if (Y.Lang.isArray(point)) {
-            container.setStyles({
-                position: 'absolute',
-                left    : point[0],
-                top     : point[1]
-            });
-        }
-
-        container.once('clickoutside', function() {
-            container.toggleClass(classNames.open);
-        });
-
-        return this;
-    },
+//    /**
+//     * @param {Object} [point] X / Y anchor point, optional.
+//     * @chainable
+//     */
+//    toggle: function (point) {
+//        if (!this.rendered) {
+//            this.render();
+//        }
+//
+//        var container  = this.get('container'),
+//            classNames = this.classNames;
+//
+//        container.toggleClass(classNames.open);
+//
+//        if (Y.Lang.isArray(point)) {
+//            container.setStyles({
+//                position: 'absolute',
+//                left    : point[0],
+//                top     : point[1]
+//            });
+//        }
+//
+//        container.once('clickoutside', function() {
+//            container.toggleClass(classNames.open);
+//        });
+//
+//        return this;
+//    },
 
     // -- Protected methods ----------------------------------------------------
 
@@ -200,12 +200,15 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
 
         this._events.push(
             this.after({
+                open   : this._afterOpen,
+                close  : this._afterClose,
                 enable : this._afterEnable,
                 disable: this._afterDisable,
                 rename : this._afterRename
             }),
 
-            container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this)
+            container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this),
+            container.on('clickoutside', this._onClickOutside, this)
         );
     },
 
@@ -254,6 +257,14 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
      * @param e {EventFacade}
      * @private
      */
+    _onClickOutside: function (e) {
+        this.close();
+    },
+
+    /**
+     * @param e {EventFacade}
+     * @private
+     */
     _afterItemClick: function (e) {
         var target      = e.target,
             originEvent = e.originEvent,
@@ -284,6 +295,32 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.DropdownBase, [Y.View], {
             originEvent: originEvent,
             item       : item
         });
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterOpen: function (e) {
+        if (!this.rendered) {
+            this.render();
+        }
+
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.open);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterClose: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.removeClass(classNames.open);
     },
 
     /**

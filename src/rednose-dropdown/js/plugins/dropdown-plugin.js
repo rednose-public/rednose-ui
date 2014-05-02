@@ -45,6 +45,23 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         this._host.on('click', this._afterAnchorClick, this);
     },
 
+    // -- Protected Methods ----------------------------------------------------
+
+    /**
+     * @param {Integer} x
+     * @param {Integer} y
+     * @private
+     */
+    _positionContainer: function (x, y) {
+        var container = this.get('container');
+
+        container.setStyles({
+            position: 'absolute',
+            left    : x,
+            top     : y
+        });
+    },
+
     // -- Protected Event Handlers ---------------------------------------------
 
     /**
@@ -58,7 +75,9 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
 
         e.preventDefault();
 
-        this.toggle([ e.pageX, e.pageY ]);
+        this._positionContainer(e.pageX, e.pageY);
+
+        this.open();
     },
 
     /**
