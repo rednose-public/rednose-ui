@@ -187,7 +187,7 @@ var EVT_CLOSE = 'close';
 var EVT_OPEN = 'open';
 
 /**
- * Fired when the menu items are rest.
+ * Fired when the menu items are reset.
  *
  * @event reset
  * @param {Array} items New menu items

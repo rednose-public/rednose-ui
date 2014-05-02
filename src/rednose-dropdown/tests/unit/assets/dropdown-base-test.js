@@ -135,7 +135,7 @@ YUI.add('dropdown-base-test', function (Y) {
             var calls    = 0,
                 dropdown = this.dropdown;
 
-            dropdown.on('open', function (e) {
+            dropdown.on('close', function (e) {
                 calls++;
             });
 
