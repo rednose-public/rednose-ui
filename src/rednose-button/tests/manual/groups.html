@@ -31,58 +31,59 @@
                 base: "../../../../build/"
             }
         }
-    }).use('rednose-button', function (Y) {
-        var btn = new Y.Rednose.Button({
-            id   : 'button-align',
-            icon : 'icon-align-justify',
-            title: 'Align'
-        });
-
-        Y.one('#button-container').append(btn.render().get('container'));
-
-        btn.on('click', function (e) {
-            console.log(e.button.get('id'));
-        });
-
-        var btn = new Y.Rednose.Button({
-            value: 'Button',
-            title: 'Button Title'
-        });
-
-        Y.one('#button-container').append(btn.render().get('container'));
-
-        btn.disable();
-        console.log(btn.isDisabled());
-
-        var btn = new Y.Rednose.Button({
-            value: 'Link',
-            title: 'Link Title',
-            type : 'link'
-        });
-
-        Y.one('#button-container').append(btn.render().get('container'));
-
-        btn.rename('Renamed Link');
-        console.log(btn.value);
-
-        var btn = new Y.Rednose.Button({
-            value   : 'Disabled',
-            title   : 'Button Title',
-            disabled: true
-        });
-
-        Y.one('#button-container').append(btn.render().get('container'));
-
-        btn.enable();
-        console.log(btn.isDisabled());
-
-        var btn = new Y.Rednose.Button({
-            value: 'Primary',
-            title: 'Button Title',
-            type : 'primary'
-        });
-
-        Y.one('#button-container').append(btn.render().get('container'));
+    }).use('rednose-button-group', function (Y) {
+        console.log(Y.Rednose.ButtonGroup);
+//        var btn = new Y.Rednose.Button({
+//            id   : 'button-align',
+//            icon : 'icon-align-justify',
+//            title: 'Align'
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        btn.on('click', function (e) {
+//            console.log(e.button.get('id'));
+//        });
+//
+//        var btn = new Y.Rednose.Button({
+//            value: 'Button',
+//            title: 'Button Title'
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        btn.disable();
+//        console.log(btn.isDisabled());
+//
+//        var btn = new Y.Rednose.Button({
+//            value: 'Link',
+//            title: 'Link Title',
+//            type : 'link'
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        btn.rename('Renamed Link');
+//        console.log(btn.value);
+//
+//        var btn = new Y.Rednose.Button({
+//            value   : 'Disabled',
+//            title   : 'Button Title',
+//            disabled: true
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        btn.enable();
+//        console.log(btn.isDisabled());
+//
+//        var btn = new Y.Rednose.Button({
+//            value: 'Primary',
+//            title: 'Button Title',
+//            type : 'primary'
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
     });
 </script>
 </body>
