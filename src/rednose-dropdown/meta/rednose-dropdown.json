@@ -2,6 +2,7 @@
     "rednose-dropdown" : {
         "requires": [
             "base",
+            "event-outside",
             "node",
             "template-micro",
             "view",

@@ -1012,4 +1012,4 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
 });
 
 
-}, '1.4.0', {"requires": ["base", "node", "template-micro", "view", "node-pluginhost", "plugin"]});
+}, '1.4.0', {"requires": ["base", "event-outside", "node", "template-micro", "view", "node-pluginhost", "plugin"]});
