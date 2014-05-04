@@ -1,7 +1,9 @@
 {
     "rednose-button" : {
         "requires": [
-            "base"
+            "base",
+            "template",
+            "view"
         ]
     }
 }
