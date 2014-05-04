@@ -1,0 +1,11 @@
+{
+    "name": "rednose-button",
+
+    "builds": {
+        "rednose-button": {
+            "jsfiles": [
+                "js/button-base.js"
+            ]
+        }
+    }
+}
