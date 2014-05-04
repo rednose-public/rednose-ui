@@ -5,7 +5,9 @@
         "rednose-button": {
             "jsfiles": [
                 "js/button-base.js",
-                "js/button.js"
+                "js/button.js",
+                "js/button-base.js",
+                "js/button-group.js"
             ]
         }
     }

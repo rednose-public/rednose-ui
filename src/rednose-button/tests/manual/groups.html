@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.Navbar module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="../../../../../yui3/build/yui/yui.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<body>
+
+<div id="test-container" class="container">
+    <div class="row">
+        <div class="span12">
+            <section>
+                <h1>Button Groups</h1>
+                <div id="button-container"></div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-button', function (Y) {
+        var btn = new Y.Rednose.Button({
+            id   : 'button-align',
+            icon : 'icon-align-justify',
+            title: 'Align'
+        });
+
+        Y.one('#button-container').append(btn.render().get('container'));
+
+        btn.on('click', function (e) {
+            console.log(e.button.get('id'));
+        });
+
+        var btn = new Y.Rednose.Button({
+            value: 'Button',
+            title: 'Button Title'
+        });
+
+        Y.one('#button-container').append(btn.render().get('container'));
+
+        btn.disable();
+        console.log(btn.isDisabled());
+
+        var btn = new Y.Rednose.Button({
+            value: 'Link',
+            title: 'Link Title',
+            type : 'link'
+        });
+
+        Y.one('#button-container').append(btn.render().get('container'));
+
+        btn.rename('Renamed Link');
+        console.log(btn.value);
+
+        var btn = new Y.Rednose.Button({
+            value   : 'Disabled',
+            title   : 'Button Title',
+            disabled: true
+        });
+
+        Y.one('#button-container').append(btn.render().get('container'));
+
+        btn.enable();
+        console.log(btn.isDisabled());
+
+        var btn = new Y.Rednose.Button({
+            value: 'Primary',
+            title: 'Button Title',
+            type : 'primary'
+        });
+
+        Y.one('#button-container').append(btn.render().get('container'));
+    });
+</script>
+</body>
+</html>
