@@ -33,12 +33,15 @@
         }
     }).use('rednose-button', function (Y) {
         var btn = new Y.Rednose.Button({
-            id   : 'button-align',
-            icon : 'icon-align-justify',
-            title: 'Align'
+            id    : 'button-align',
+            icon  : 'icon-align-justify',
+            title : 'Align',
+            active: true
         });
 
         Y.one('#button-container').append(btn.render().get('container'));
+
+        btn.deactivate();
 
         btn.on('click', function (e) {
             console.log(e.button.get('id'));
@@ -75,6 +78,8 @@
 
         btn.enable();
         console.log(btn.isDisabled());
+
+        btn.activate();
 
         var btn = new Y.Rednose.Button({
             value: 'Primary',

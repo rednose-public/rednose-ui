@@ -15,7 +15,14 @@
         <div class="span12">
             <section>
                 <h1>Button Groups</h1>
-                <div id="button-container"></div>
+                <h2>Default</h2>
+                <div id="button-group-default"></div>
+                <h2>Radio</h2>
+                <div id="button-group-radio"></div>
+                <h2>Checkbox</h2>
+                <div id="button-group-checkbox"></div>
+                <h2>Vertical</h2>
+                <div id="button-group-vertical"></div>
             </section>
         </div>
     </div>
@@ -32,58 +39,84 @@
             }
         }
     }).use('rednose-button-group', function (Y) {
-        console.log(Y.Rednose.ButtonGroup);
-//        var btn = new Y.Rednose.Button({
-//            id   : 'button-align',
-//            icon : 'icon-align-justify',
-//            title: 'Align'
-//        });
-//
-//        Y.one('#button-container').append(btn.render().get('container'));
-//
-//        btn.on('click', function (e) {
-//            console.log(e.button.get('id'));
-//        });
-//
-//        var btn = new Y.Rednose.Button({
-//            value: 'Button',
-//            title: 'Button Title'
-//        });
-//
-//        Y.one('#button-container').append(btn.render().get('container'));
-//
-//        btn.disable();
-//        console.log(btn.isDisabled());
-//
-//        var btn = new Y.Rednose.Button({
-//            value: 'Link',
-//            title: 'Link Title',
-//            type : 'link'
-//        });
-//
-//        Y.one('#button-container').append(btn.render().get('container'));
-//
-//        btn.rename('Renamed Link');
-//        console.log(btn.value);
-//
-//        var btn = new Y.Rednose.Button({
-//            value   : 'Disabled',
-//            title   : 'Button Title',
-//            disabled: true
-//        });
-//
-//        Y.one('#button-container').append(btn.render().get('container'));
-//
-//        btn.enable();
-//        console.log(btn.isDisabled());
-//
-//        var btn = new Y.Rednose.Button({
-//            value: 'Primary',
-//            title: 'Button Title',
-//            type : 'primary'
-//        });
-//
-//        Y.one('#button-container').append(btn.render().get('container'));
+        var btnGroup = new Y.Rednose.ButtonGroup({
+            buttons: [
+                {
+                    id   : 'button1',
+                    value: 'Button 1'
+                },
+                {
+                    id   : 'button2',
+                    value: 'Button 2'
+                },
+                {
+                    id   : 'button3',
+                    value: 'Button 3'
+                }
+            ]
+        });
+
+        Y.one('#button-group-default').append(btnGroup.render().get('container'));
+
+        var btnGroup = new Y.Rednose.ButtonGroup({
+            type: 'radio',
+            buttons: [
+                {
+                    id   : 'button1',
+                    value: 'Button 1'
+                },
+                {
+                    id   : 'button2',
+                    value: 'Button 2'
+                },
+                {
+                    id   : 'button3',
+                    value: 'Button 3'
+                }
+            ]
+        });
+
+        Y.one('#button-group-radio').append(btnGroup.render().get('container'));
+
+        var btnGroup = new Y.Rednose.ButtonGroup({
+            type: 'checkbox',
+            buttons: [
+                {
+                    id   : 'button1',
+                    value: 'Button 1'
+                },
+                {
+                    id   : 'button2',
+                    value: 'Button 2'
+                },
+                {
+                    id   : 'button3',
+                    value: 'Button 3'
+                }
+            ]
+        });
+
+        Y.one('#button-group-checkbox').append(btnGroup.render().get('container'));
+
+        var btnGroup = new Y.Rednose.ButtonGroup({
+            vertical: true,
+            buttons: [
+                {
+                    id   : 'button1',
+                    value: 'Button 1'
+                },
+                {
+                    id   : 'button2',
+                    value: 'Button 2'
+                },
+                {
+                    id   : 'button3',
+                    value: 'Button 3'
+                }
+            ]
+        });
+
+        Y.one('#button-group-vertical').append(btnGroup.render().get('container'));
     });
 </script>
 </body>

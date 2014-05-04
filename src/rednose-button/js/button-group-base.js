@@ -10,6 +10,14 @@ var EVT_RESET = 'reset';
 var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
 
     /**
+     * Button group type: `default`, `radio`, `checkbox`.
+     *
+     * @property {String} type
+     * @default 'default'
+     * @readOnly
+     */
+
+    /**
      * Mapping of button ids to button instances.
      *
      * @property {Object} _buttonMap
@@ -20,6 +28,8 @@ var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
 
     initializer: function (config) {
         this._published = {};
+
+        this.type = config.type || 'default';
 
         if (config.buttons) {
             this.reset(config.buttons);
@@ -40,11 +50,17 @@ var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
      * @chainable
      */
     reset: function (buttons) {
-        return this._fireDropdownEvent(EVT_RESET, {
+        if (!this._published[EVT_RESET]) {
+            this._published[EVT_RESET] = this.publish(EVT_RESET, {
+                defaultFn: this._defResetFn
+            });
+        }
+
+        this.fire(EVT_RESET, {
             buttons: buttons
-        }, {
-            defaultFn: this._defResetFn
         });
+
+        return this;
     },
 
     /**
@@ -100,7 +116,7 @@ var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
 
         if (buttons) {
             for (i = 0; i < buttons.length; i++) {
-                this._buttomMap.push(this._createButton(buttons[i]));
+                this._createButton(buttons[i]);
             }
         }
     }

@@ -24,6 +24,20 @@ var EVT_DISABLE = 'disable';
  */
 var EVT_RENAME = 'rename';
 
+/**
+ * @event activate
+ * @param {Rednose.Button}
+ * @preventable _defActivateFn
+ */
+var EVT_ACTIVATE = 'activate';
+
+/**
+ * @event deactivate
+ * @param {Rednose.Button}
+ * @preventable _defDeactivateFn
+ */
+var EVT_DEACTIVATE = 'deactivate';
+
 var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     /**
      * The id for this node.
@@ -36,6 +50,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      * Button type: `default`, `primary`, `info`, `success`, `warning`, `danger`, `inverse` or `link`.
      *
      * @property {String} type
+     * @default 'default'
      * @readOnly
      */
 
@@ -64,6 +79,10 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     initializer: function (config) {
         this._published = {};
 
+        this.type     = config.type || 'default';
+        this.disabled = config.disabled || false;
+        this.active   = config.active || false;
+
         Y.mix(this, config);
     },
 
@@ -80,14 +99,8 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      */
     enable: function () {
         if (this.isDisabled()) {
-            if (!this._published[EVT_ENABLE]) {
-                this._published[EVT_ENABLE] = this.publish(EVT_ENABLE, {
-                    defaultFn: this._defEnableFn
-                });
-            }
-
-            this.fire(EVT_ENABLE, {
-                item: this
+            this._fireButtonEvent(EVT_ENABLE, {button: this}, {
+                defaultFn: this._defEnableFn
             });
         }
 
@@ -101,14 +114,39 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      */
     disable: function () {
         if (!this.isDisabled()) {
-            if (!this._published[EVT_DISABLE]) {
-                this._published[EVT_DISABLE] = this.publish(EVT_DISABLE, {
-                    defaultFn: this._defDisableFn
-                });
-            }
+            this._fireButtonEvent(EVT_DISABLE, {button: this}, {
+                defaultFn: this._defDisableFn
+            });
+        }
 
-            this.fire(EVT_DISABLE, {
-                item: this
+        return this;
+    },
+
+
+    /**
+     * Activates this button.
+     *
+     * @chainable
+     */
+    activate: function () {
+        if (!this.isActive()) {
+            this._fireButtonEvent(EVT_ACTIVATE, {button: this}, {
+                defaultFn: this._defActivateFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * Deativates this button.
+     *
+     * @chainable
+     */
+    deactivate: function () {
+        if (this.isActive()) {
+            this._fireButtonEvent(EVT_DEACTIVATE, {button: this}, {
+                defaultFn: this._defDeactivateFn
             });
         }
 
@@ -123,18 +161,9 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      * @chainable
      */
     rename: function (value) {
-        if (!this._published[EVT_RENAME]) {
-            this._published[EVT_RENAME] = this.publish(EVT_RENAME, {
-                defaultFn: this._defRenameFn
-            });
-        }
-
-        this.fire(EVT_RENAME, {
-            item : this,
-            value: value
+        return this._fireButtonEvent(EVT_RENAME, {button: this, value: value}, {
+            defaultFn: this._defRenameFn
         });
-
-        return this;
     },
 
     /**
@@ -144,6 +173,38 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      */
     isDisabled: function () {
         return this.disabled === true;
+    },
+
+    /**
+     * Whether this node is activated or not.
+     *
+     * @return {Boolean}
+     */
+    isActive: function () {
+        return this.active === true;
+    },
+
+    // -- Protected Methods ----------------------------------------------------
+
+    /**
+     * Utility method for lazily publishing events,
+     *
+     * @param {String} name
+     * @param {Object} facade
+     * @param {Object} options
+     * @chainable
+     * @private
+     */
+    _fireButtonEvent: function (name, facade, options) {
+        if (options && options.defaultFn && !this._published[name]) {
+            this._published[name] = this.publish(name, {
+                defaultFn: options.defaultFn
+            });
+        }
+
+        this.fire(name, facade);
+
+        return this;
     },
 
     // -- Default Event Handlers -----------------------------------------------
@@ -162,6 +223,22 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      */
     _defEnableFn: function (e) {
         this.disabled = false;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defActivateFn: function (e) {
+        this.active = true;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defDeactivateFn: function (e) {
+        this.active = false;
     },
 
     /**
@@ -203,7 +280,8 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
     classNames: {
         btn     : 'btn',
         icon    : 'icon',
-        disabled: 'disabled'
+        disabled: 'disabled',
+        active  : 'active'
     },
 
     // -- Life Cycle Methods ---------------------------------------------------
@@ -235,6 +313,10 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
             container.addClass(classNames.disabled);
         }
 
+        if (this.active) {
+            container.addClass(classNames.active);
+        }
+
         if (this.type !== 'default') {
             container.addClass(classNames.btn + '-' + this.type);
         }
@@ -256,9 +338,11 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
 
         this._buttonEvents.push(
             this.after({
-                enable : this._afterEnable,
-                disable: this._afterDisable,
-                rename : this._afterRename
+                enable    : this._afterEnable,
+                disable   : this._afterDisable,
+                rename    : this._afterRename,
+                activate  : this._afterActivate,
+                deactivate: this._afterDeactivate
             }),
 
             container.on('click', this._onButtonClick, this)
@@ -302,6 +386,28 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
             classNames = this.classNames;
 
         container.addClass(classNames.disabled);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterActivate: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.active);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterDeactivate: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.removeClass(classNames.active);
     },
 
     /**

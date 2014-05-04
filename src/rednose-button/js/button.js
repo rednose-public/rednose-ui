@@ -26,7 +26,8 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
     classNames: {
         btn     : 'btn',
         icon    : 'icon',
-        disabled: 'disabled'
+        disabled: 'disabled',
+        active  : 'active'
     },
 
     // -- Life Cycle Methods ---------------------------------------------------
@@ -58,6 +59,10 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
             container.addClass(classNames.disabled);
         }
 
+        if (this.active) {
+            container.addClass(classNames.active);
+        }
+
         if (this.type !== 'default') {
             container.addClass(classNames.btn + '-' + this.type);
         }
@@ -79,9 +84,11 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
 
         this._buttonEvents.push(
             this.after({
-                enable : this._afterEnable,
-                disable: this._afterDisable,
-                rename : this._afterRename
+                enable    : this._afterEnable,
+                disable   : this._afterDisable,
+                rename    : this._afterRename,
+                activate  : this._afterActivate,
+                deactivate: this._afterDeactivate
             }),
 
             container.on('click', this._onButtonClick, this)
@@ -125,6 +132,28 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
             classNames = this.classNames;
 
         container.addClass(classNames.disabled);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterActivate: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.active);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterDeactivate: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.removeClass(classNames.active);
     },
 
     /**
