@@ -4,18 +4,10 @@
  * @event reset
  * @param {Array} buttons
  * @preventable _defResetFn
- **/
+ */
 var EVT_RESET = 'reset';
 
 var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
-
-    /**
-     * Button group type: `default`, `radio`, `checkbox`.
-     *
-     * @property {String} type
-     * @default 'default'
-     * @readOnly
-     */
 
     /**
      * Mapping of button ids to button instances.
@@ -29,14 +21,18 @@ var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
     initializer: function (config) {
         this._published = {};
 
-        this.type = config.type || 'default';
-
         if (config.buttons) {
             this.reset(config.buttons);
         }
     },
 
     destructor: function () {
+        if (this._buttonMap && this._buttonMap.length > 0) {
+            for (var i = 0; i < this._buttonMap.length; i++) {
+                this._destroyButton(this._buttonMap[i]);
+            }
+        }
+
         this._buttonMap = null;
         this._published = null;
     },
@@ -84,6 +80,8 @@ var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
 
         this._buttonMap[button.id] = button;
 
+        button.addTarget(this);
+
         return button;
     },
 
@@ -93,6 +91,8 @@ var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
      */
     _destroyButton: function (button) {
         button.destroy();
+
+        button.removeTarget(this);
 
         delete this._buttonMap[button.id];
     },
@@ -123,4 +123,4 @@ var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').ButtonGroupBase = ButtonGroupBase;
+Y.namespace('Rednose.ButtonGroup').Base = ButtonGroupBase;

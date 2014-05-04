@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Y.Rednose.Navbar module test</title>
+    <title>Y.Rednose.ButtonGroup module test</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
 
@@ -76,6 +76,10 @@
             ]
         });
 
+        btnGroup.on('change', function (e) {
+            console.log(e.value);
+        });
+
         Y.one('#button-group-radio').append(btnGroup.render().get('container'));
 
         var btnGroup = new Y.Rednose.ButtonGroup({
@@ -94,6 +98,10 @@
                     value: 'Button 3'
                 }
             ]
+        });
+
+        btnGroup.on('change', function (e) {
+            console.log(e.value);
         });
 
         Y.one('#button-group-checkbox').append(btnGroup.render().get('container'));

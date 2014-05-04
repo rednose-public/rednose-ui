@@ -11,7 +11,7 @@ var Micro = Y.Template.Micro;
  */
 var EVT_CLICK = 'click';
 
-var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
+var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     containerTemplate: '<button />',
 
     templates: {

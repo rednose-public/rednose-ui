@@ -151,6 +151,16 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
         return this;
     },
 
+
+    /**
+     * Toggles the active state.
+     *
+     * @chainable
+     */
+    toggle: function () {
+        return this[this.isActive() ? 'deactivate' : 'activate']();
+    },
+
     /**
      * Renames this button.
      *
@@ -249,4 +259,4 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').ButtonBase = ButtonBase;
+Y.namespace('Rednose.Button').Base = ButtonBase;

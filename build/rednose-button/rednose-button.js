@@ -153,6 +153,16 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
         return this;
     },
 
+
+    /**
+     * Toggles the active state.
+     *
+     * @chainable
+     */
+    toggle: function () {
+        return this[this.isActive() ? 'deactivate' : 'activate']();
+    },
+
     /**
      * Renames this button.
      *
@@ -251,7 +261,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').ButtonBase = ButtonBase;
+Y.namespace('Rednose.Button').Base = ButtonBase;
 /*jshint boss:true, expr:true, onevar:false */
 
 var Micro = Y.Template.Micro;
@@ -265,7 +275,7 @@ var Micro = Y.Template.Micro;
  */
 var EVT_CLICK = 'click';
 
-var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
+var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     containerTemplate: '<button />',
 
     templates: {
