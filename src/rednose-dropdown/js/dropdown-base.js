@@ -44,12 +44,12 @@ var EVT_OPEN = 'open';
  * @param {Array} items New menu items
  * @preventable _defResetFn
  **/
-EVT_RESET = 'reset';
+var EVT_RESET = 'reset';
 
 var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
 
     /**
-     * Whether the dropdown is currenty open or not.
+     * Whether the dropdown is currently open or not.
      *
      * @property {Boolean} open
      * @default false
