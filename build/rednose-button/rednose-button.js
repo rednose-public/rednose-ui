@@ -2,79 +2,174 @@ YUI.add('rednose-button', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
+/**
+ * @event enable
+ * @param {Rednose.Button}
+ * @preventable _defEnableFn
+ */
+var EVT_ENABLE = 'enable';
+
+/**
+ * @event disable
+ * @param {Rednose.Button}
+ * @preventable _defDisableFn
+ */
+var EVT_DISABLE = 'disable';
+
+/**
+ * @event rename
+ * @param {Rednose.Button}
+ * @param {String value}
+ * @preventable _defRenameFn
+ */
+var EVT_RENAME = 'rename';
+
 var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
+    /**
+     * The id for this node.
+     *
+     * @property {string} id
+     * @readOnly
+     */
+
+    /**
+     * Button type: `default`, `primary`, `info`, `success`, `warning`, `danger`, `inverse` or `link`.
+     *
+     * @property {String} type
+     * @readOnly
+     */
+
+    /**
+     * @property {String} icon
+     * @readOnly
+     */
+
+    /**
+     * @property {Boolean} disabled
+     * @readOnly
+     */
+
+    /**
+     * @property {String} value
+     * @readOnly
+     */
+
+    /**
+     * @property {String} disabled
+     * @readOnly
+     */
+
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function (config) {
         this._published = {};
+
+        Y.mix(this, config);
     },
 
     destructor: function () {
         this._published = null;
-    }
-}, {
-    ATTRS: {
-        /**
-         * @attribute {String} id
-         * @default null
-         * @initOnly
-         */
-        id: {
-            value: null,
-            writeOnce: 'initOnly'
-        },
+    },
 
-        /**
-         * Button type: `button` or `link`.
-         *
-         * @attribute {String} type
-         * @default 'button'
-         * @initOnly
-         */
-        type: {
-            value: 'button',
-            writeOnce: 'initOnly'
-        },
+    // -- Public Methods -------------------------------------------------------
 
-        /**
-         * @attribute {String} icon
-         * @default null
-         * @initOnly
-         */
-        icon: {
-            value: null,
-            writeOnce: 'initOnly'
-        },
+    /**
+     * Enables this button.
+     *
+     * @chainable
+     */
+    enable: function () {
+        if (this.isDisabled()) {
+            if (!this._published[EVT_ENABLE]) {
+                this._published[EVT_ENABLE] = this.publish(EVT_ENABLE, {
+                    defaultFn: this._defEnableFn
+                });
+            }
 
-        /**
-         * @attribute {Boolean} disabled
-         * @default false
-         * @initOnly
-         */
-        disabled: {
-            value: false,
-            writeOnce: 'initOnly'
-        },
-
-        /**
-         * @attribute {String} value
-         * @default null
-         * @initOnly
-         */
-        value: {
-            value: null,
-            writeOnce: 'initOnly'
-        },
-
-        /**
-         * @attribute {String} disabled
-         * @default null
-         * @initOnly
-         */
-        title: {
-            value: null,
-            writeOnce: 'initOnly'
+            this.fire(EVT_ENABLE, {
+                item: this
+            });
         }
+
+        return this;
+    },
+
+    /**
+     * Disables this button.
+     *
+     * @chainable
+     */
+    disable: function () {
+        if (!this.isDisabled()) {
+            if (!this._published[EVT_DISABLE]) {
+                this._published[EVT_DISABLE] = this.publish(EVT_DISABLE, {
+                    defaultFn: this._defDisableFn
+                });
+            }
+
+            this.fire(EVT_DISABLE, {
+                item: this
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * Renames this button.
+     *
+     * @param {String} title
+     *
+     * @chainable
+     */
+    rename: function (value) {
+        if (!this._published[EVT_RENAME]) {
+            this._published[EVT_RENAME] = this.publish(EVT_RENAME, {
+                defaultFn: this._defRenameFn
+            });
+        }
+
+        this.fire(EVT_RENAME, {
+            item : this,
+            value: value
+        });
+
+        return this;
+    },
+
+    /**
+     * Whether this node is disabled or not.
+     *
+     * @return {Boolean}
+     */
+    isDisabled: function () {
+        return this.disabled === true;
+    },
+
+    // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defDisableFn: function (e) {
+        this.disabled = true;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defEnableFn: function (e) {
+        this.disabled = false;
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defRenameFn: function (e) {
+        this.value = e.value;
     }
 });
 
@@ -98,16 +193,15 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
 
     templates: {
         content: Micro.compile(
-            '<% if (data.icon) { %>' +
-                '<i class="<%= data.classNames.icon %> <%= data.icon %>"></i> ' +
+            '<% if (data.button.icon) { %>' +
+                '<i class="<%= data.classNames.icon %> <%= data.button.icon %>"></i> ' +
             '<% } %>' +
-            '<%= data.value %>'
+            '<%= data.button.value %>'
         )
     },
 
     classNames: {
         btn     : 'btn',
-        btnLink : 'btn-link',
         icon    : 'icon',
         disabled: 'disabled'
     },
@@ -133,18 +227,21 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
 
         container.addClass(this.classNames.btn);
 
-        if (this.get('title')) {
-            container.setAttribute('title', this.get('title'));
+        if (this.title) {
+            container.setAttribute('title', this.title);
         }
 
-        if (this.get('type') === 'link') {
-            container.addClass(classNames.btnLink);
+        if (this.disabled) {
+            container.addClass(classNames.disabled);
+        }
+
+        if (this.type !== 'default') {
+            container.addClass(classNames.btn + '-' + this.type);
         }
 
         container.setContent(this.templates.content({
             classNames: this.classNames,
-            icon      : this.get('icon'),
-            value     : this.get('value')
+            button    : this
         }));
 
         return this;
@@ -158,6 +255,12 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
         var container  = this.get('container');
 
         this._buttonEvents.push(
+            this.after({
+                enable : this._afterEnable,
+                disable: this._afterDisable,
+                rename : this._afterRename
+            }),
+
             container.on('click', this._onButtonClick, this)
         );
     },
@@ -177,9 +280,43 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
             originEvent: e.originEvent,
             button     : this
         });
-    }
+    },
 
-    // -- Default Event Handlers -----------------------------------------------
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterEnable: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.removeClass(classNames.disabled);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterDisable: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.disabled);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterRename: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.setContent(this.templates.content({
+            classNames: classNames,
+            button    : this
+        }));
+    }
 });
 
 // -- Namespace ----------------------------------------------------------------

@@ -16,16 +16,15 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
 
     templates: {
         content: Micro.compile(
-            '<% if (data.icon) { %>' +
-                '<i class="<%= data.classNames.icon %> <%= data.icon %>"></i> ' +
+            '<% if (data.button.icon) { %>' +
+                '<i class="<%= data.classNames.icon %> <%= data.button.icon %>"></i> ' +
             '<% } %>' +
-            '<%= data.value %>'
+            '<%= data.button.value %>'
         )
     },
 
     classNames: {
         btn     : 'btn',
-        btnLink : 'btn-link',
         icon    : 'icon',
         disabled: 'disabled'
     },
@@ -51,18 +50,21 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
 
         container.addClass(this.classNames.btn);
 
-        if (this.get('title')) {
-            container.setAttribute('title', this.get('title'));
+        if (this.title) {
+            container.setAttribute('title', this.title);
         }
 
-        if (this.get('type') === 'link') {
-            container.addClass(classNames.btnLink);
+        if (this.disabled) {
+            container.addClass(classNames.disabled);
+        }
+
+        if (this.type !== 'default') {
+            container.addClass(classNames.btn + '-' + this.type);
         }
 
         container.setContent(this.templates.content({
             classNames: this.classNames,
-            icon      : this.get('icon'),
-            value     : this.get('value')
+            button    : this
         }));
 
         return this;
@@ -76,6 +78,12 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
         var container  = this.get('container');
 
         this._buttonEvents.push(
+            this.after({
+                enable : this._afterEnable,
+                disable: this._afterDisable,
+                rename : this._afterRename
+            }),
+
             container.on('click', this._onButtonClick, this)
         );
     },
@@ -95,9 +103,43 @@ var Button = Y.Base.create('button', Y.Rednose.ButtonBase, [Y.View], {
             originEvent: e.originEvent,
             button     : this
         });
-    }
+    },
 
-    // -- Default Event Handlers -----------------------------------------------
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterEnable: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.removeClass(classNames.disabled);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterDisable: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.disabled);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterRename: function (e) {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.setContent(this.templates.content({
+            classNames: classNames,
+            button    : this
+        }));
+    }
 });
 
 // -- Namespace ----------------------------------------------------------------
