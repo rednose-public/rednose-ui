@@ -16,7 +16,7 @@
         <div class="span12">
             <section>
                 <h1>Datepicker</h1>
-                <div id="datetimepicker4" class="input-append">
+                <div id="datepicker" class="input-append">
                     <input data-format="yyyy-MM-dd" type="text"></input>
     <span class="add-on">
       <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -24,7 +24,7 @@
     </span>
                 </div>
                 <h1>Timepicker</h1>
-                    <div id="datetimepicker3" class="input-append">
+                    <div id="timepicker" class="input-append">
                         <input data-format="hh:mm:ss" type="text"></input>
     <span class="add-on">
       <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -47,15 +47,20 @@
             }
         }
     }).use('rednose-datetimepicker', function (Y) {
-        $('#datetimepicker3').datetimepicker({
-            pickDate: false,
-            language: 'nl-NL'
-        });
+        var datepicker = Y.one('#datepicker').plug(Y.Rednose.Plugin.Datepicker);
 
-        $('#datetimepicker4').datetimepicker({
-            pickTime: false,
-            language: 'nl'
-        });
+        var timepicker = Y.one('#timepicker').plug(Y.Rednose.Plugin.Timepicker);
+
+
+//        $('#datetimepicker3').datetimepicker({
+//            pickDate: false,
+//            language: 'nl-NL'
+//        });
+//
+//        $('#datetimepicker4').datetimepicker({
+//            pickTime: false,
+//            language: 'nl'
+//        });
     });
 </script>
 </body>

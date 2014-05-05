@@ -13,7 +13,10 @@
         },
         "rednose-datetimepicker-base": {
             "jsfiles": [
-                "bootstrap-datetimepicker.min.js"
+                "bootstrap-datetimepicker.min.js",
+                "locales/bootstrap-datetimepicker.de.js",
+                "locales/bootstrap-datetimepicker.fr.js",
+                "locales/bootstrap-datetimepicker.nl.js"
             ]
         },
         "rednose-datetimepicker-base-css": {
