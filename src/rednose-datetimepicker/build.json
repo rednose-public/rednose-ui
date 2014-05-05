@@ -1,0 +1,15 @@
+{
+    "name": "rednose-datetimepicker",
+    "builds": {
+        "rednose-datetimepicker-base": {
+            "jsfiles": [
+                "bootstrap-datetimepicker.min.js"
+            ]
+        },
+        "rednose-datetimepicker-base-css": {
+            "cssfiles": [
+                "bootstrap-datetimepicker.min.css"
+            ]
+        }
+    }
+}

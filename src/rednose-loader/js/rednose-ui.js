@@ -122,14 +122,14 @@ Y.mix(YUI.Env[Y.version].modules, {
             "plugin"
         ]
     },
-    "rednose-datepicker": {
+    "rednose-datetimepicker-base": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-datepicker-css",
+            "rednose-datetimepicker-base-css",
             "rednose-jquery"
         ]
     },
-    "rednose-datepicker-css": {
+    "rednose-datetimepicker-base-css": {
         "group": "rednose-ui",
         "type": "css"
     },
@@ -166,6 +166,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "base",
+            "event-outside",
             "node",
             "template-micro",
             "view",
@@ -391,4 +392,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '8cee113ae2c1b2d05293d9d3234f0df5';
+YUI.Env[Y.version].md5 = 'f256802bd0eff6cc76f328ba02a26825';

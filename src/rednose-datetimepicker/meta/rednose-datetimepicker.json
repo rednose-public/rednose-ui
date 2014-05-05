@@ -1,0 +1,11 @@
+{
+    "rednose-datetimepicker-base-css" : {
+        "type": "css"
+    },
+    "rednose-datetimepicker-base" : {
+        "requires": [
+            "rednose-datetimepicker-base-css",
+            "rednose-jquery"
+        ]
+    }
+}
