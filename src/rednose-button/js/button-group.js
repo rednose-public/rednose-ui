@@ -183,5 +183,4 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
     }
 });
 
-// -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').ButtonGroup = ButtonGroup;
+Y.Rednose.ButtonGroup = Y.mix(ButtonGroup, Y.Rednose.ButtonGroup);

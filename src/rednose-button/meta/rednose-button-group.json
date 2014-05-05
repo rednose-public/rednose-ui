@@ -1,7 +1,0 @@
-{
-    "rednose-button-group" : {
-        "requires": [
-            "rednose-button"
-        ]
-    }
-}

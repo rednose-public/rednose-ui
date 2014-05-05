@@ -1,9 +1,34 @@
 {
     "rednose-button" : {
         "requires": [
-            "base",
+            "rednose-button-base",
             "template",
             "view"
+        ]
+    },
+
+    "rednose-button-base" : {
+        "requires": [
+            "base"
+        ]
+    },
+
+    "rednose-button-dropdown" : {
+        "requires": [
+            "rednose-button",
+            "rednose-dropdown-plugin"
+        ]
+    },
+
+    "rednose-button-group" : {
+        "requires": [
+            "rednose-button-group-base"
+        ]
+    },
+
+    "rednose-button-group-base" : {
+        "requires": [
+            "rednose-button"
         ]
     }
 }

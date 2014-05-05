@@ -171,5 +171,4 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     }
 });
 
-// -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').Button = Button;
+Y.Rednose.Button = Y.mix(Button, Y.Rednose.Button);

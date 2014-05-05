@@ -4,15 +4,31 @@
     "builds": {
         "rednose-button": {
             "jsfiles": [
-                "js/button-base.js",
                 "js/button.js"
+            ]
+        },
+
+        "rednose-button-base": {
+            "jsfiles": [
+                "js/button-base.js"
+            ]
+        },
+
+        "rednose-button-dropdown": {
+            "jsfiles": [
+                "js/plugins/button-dropdown.js"
             ]
         },
 
         "rednose-button-group": {
             "jsfiles": [
-                "js/button-group-base.js",
                 "js/button-group.js"
+            ]
+        },
+
+        "rednose-button-group-base": {
+            "jsfiles": [
+                "js/button-group-base.js"
             ]
         }
     }
