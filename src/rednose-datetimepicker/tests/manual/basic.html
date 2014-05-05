@@ -7,7 +7,6 @@
 
     <script src="../../../../../yui3/build/yui/yui.js"></script>
     <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
-    <!--<script src="../../locales/bootstrap-datetimepicker.nl.js"></script>-->
 </head>
 <body>
 
@@ -45,22 +44,12 @@
             "rednose-ui": {
                 base: "../../../../build/"
             }
-        }
-    }).use('rednose-datetimepicker', function (Y) {
+        },
+        lang: 'nl'
+    }).use('rednose-datetimepicker', 'intl', function (Y) {
         var datepicker = Y.one('#datepicker').plug(Y.Rednose.Plugin.Datepicker);
 
         var timepicker = Y.one('#timepicker').plug(Y.Rednose.Plugin.Timepicker);
-
-
-//        $('#datetimepicker3').datetimepicker({
-//            pickDate: false,
-//            language: 'nl-NL'
-//        });
-//
-//        $('#datetimepicker4').datetimepicker({
-//            pickTime: false,
-//            language: 'nl'
-//        });
     });
 </script>
 </body>
