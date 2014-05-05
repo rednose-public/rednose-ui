@@ -1,6 +1,16 @@
 {
     "name": "rednose-datetimepicker",
     "builds": {
+        "rednose-datepicker-plugin": {
+            "jsfiles": [
+                "plugins/datepicker-plugin.js"
+            ]
+        },
+        "rednose-timepicker-plugin": {
+            "jsfiles": [
+                "plugins/timepicker-plugin.js"
+            ]
+        },
         "rednose-datetimepicker-base": {
             "jsfiles": [
                 "bootstrap-datetimepicker.min.js"
