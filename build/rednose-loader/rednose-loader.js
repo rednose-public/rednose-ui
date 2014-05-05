@@ -141,6 +141,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "base",
+            "node",
             "plugin",
             "rednose-datetimepicker-base-css",
             "rednose-jquery"
@@ -182,11 +183,29 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-dropdown": {
         "group": "rednose-ui",
         "requires": [
-            "base",
             "event-outside",
             "node",
+            "rednose-dropdown-base",
             "template-micro",
-            "view",
+            "view"
+        ]
+    },
+    "rednose-dropdown-base": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-dropdown-item"
+        ]
+    },
+    "rednose-dropdown-item": {
+        "group": "rednose-ui",
+        "requires": [
+            "base"
+        ]
+    },
+    "rednose-dropdown-plugin": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-dropdown",
             "node-pluginhost",
             "plugin"
         ]
@@ -415,7 +434,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'a4398df8551bcbcfb80ee75049e7d75f';
+YUI.Env[Y.version].md5 = '011781d380c4349585f0c0441c87831d';
 
 
 }, '1.4.0');
