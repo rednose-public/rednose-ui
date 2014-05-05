@@ -138,6 +138,33 @@ Y.mix(YUI.Env[Y.version].modules, {
             "plugin"
         ]
     },
+    "rednose-datepicker-plugin": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-datetimepicker-base"
+        ]
+    },
+    "rednose-datetimepicker": {
+        "group": "rednose-ui",
+        "use": [
+            "rednose-datepicker-plugin",
+            "rednose-timepicker-plugin"
+        ]
+    },
+    "rednose-datetimepicker-base": {
+        "group": "rednose-ui",
+        "requires": [
+            "base",
+            "node",
+            "plugin",
+            "rednose-datetimepicker-base-css",
+            "rednose-jquery"
+        ]
+    },
+    "rednose-datetimepicker-base-css": {
+        "group": "rednose-ui",
+        "type": "css"
+    },
     "rednose-dd": {
         "group": "rednose-ui",
         "requires": [
@@ -170,11 +197,29 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-dropdown": {
         "group": "rednose-ui",
         "requires": [
-            "base",
             "event-outside",
             "node",
+            "rednose-dropdown-base",
             "template-micro",
-            "view",
+            "view"
+        ]
+    },
+    "rednose-dropdown-base": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-dropdown-item"
+        ]
+    },
+    "rednose-dropdown-item": {
+        "group": "rednose-ui",
+        "requires": [
+            "base"
+        ]
+    },
+    "rednose-dropdown-plugin": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-dropdown",
             "node-pluginhost",
             "plugin"
         ]
@@ -321,6 +366,12 @@ Y.mix(YUI.Env[Y.version].modules, {
             "node"
         ]
     },
+    "rednose-timepicker-plugin": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-datetimepicker-base"
+        ]
+    },
     "rednose-tooltip": {
         "group": "rednose-ui",
         "requires": [
@@ -397,7 +448,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'cfcb6422c01638618ab115871a97e9a3';
+YUI.Env[Y.version].md5 = 'accdfff2db968be1285e692e2f41285a';
 
 
 }, '1.4.0');
