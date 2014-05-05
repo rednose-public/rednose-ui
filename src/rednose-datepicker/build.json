@@ -1,0 +1,16 @@
+{
+    "name": "rednose-datepicker",
+    "builds": {
+        "rednose-datepicker": {
+            "jsfiles": [
+                "bootstrap-datepicker.js",
+                "datepicker.js"
+            ]
+        },
+        "rednose-datepicker-css": {
+            "cssfiles": [
+                "datepicker.css"
+            ]
+        }
+    }
+}

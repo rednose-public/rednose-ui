@@ -124,6 +124,17 @@ Y.mix(YUI.Env[Y.version].modules, {
             "plugin"
         ]
     },
+    "rednose-datepicker": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-datepicker-css",
+            "rednose-jquery"
+        ]
+    },
+    "rednose-datepicker-css": {
+        "group": "rednose-ui",
+        "type": "css"
+    },
     "rednose-dd": {
         "group": "rednose-ui",
         "requires": [
@@ -382,7 +393,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'c5495e6d9e1e539b67b22886bb23a961';
+YUI.Env[Y.version].md5 = '8cee113ae2c1b2d05293d9d3234f0df5';
 
 
 }, '1.4.0');
