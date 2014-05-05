@@ -68,7 +68,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      */
 
     /**
-     * @property {String} disabled
+     * @property {String} title
      * @readOnly
      */
 
