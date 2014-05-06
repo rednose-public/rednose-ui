@@ -22,7 +22,9 @@
 
         coverage: [
             'rednose-button-base',
-            'rednose-button'
+            'rednose-button',
+            'rednose-button-group-base',
+            'rednose-button-group'
         ],
 
         modules: {
@@ -34,6 +36,16 @@
             'rednose-button-test': {
                 fullpath: 'assets/button-test.js',
                 requires: ['rednose-button', 'test']
+            },
+
+            'rednose-button-group-base-test': {
+                fullpath: 'assets/button-group-base-test.js',
+                requires: ['rednose-button-group-base', 'test']
+            },
+
+            'rednose-button-group-test': {
+                fullpath: 'assets/button-group-test.js',
+                requires: ['rednose-button-group', 'test']
             }
         },
 
@@ -42,7 +54,7 @@
                 base: "../../../../build/"
             }
         }
-    }).use('rednose-button-base-test', 'rednose-button-test', 'test-console', function (Y) {
+    }).use('rednose-button-base-test', 'rednose-button-test', 'rednose-button-group-base-test', 'rednose-button-group-test', 'test-console', function (Y) {
         new Y.Test.Console().render('#log');
 
         Y.Test.Runner.setName('Button');
