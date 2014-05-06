@@ -42,6 +42,21 @@ YUI.add('dropdown-test', function (Y) {
             Assert.areEqual('http://wwww.rednose.nl', menu.one('a').getAttribute('href'));
         },
 
+        '`html` property should assign an id if none is provided': function () {
+            var menu = Y.one('.menu'),
+                html = '<a href="http://www.rednose.nl"><div>You joined the folder <strong>Demo user\'s shared folder</strong></div><div><small class="muted">39 minutes ago</small></div></a>';
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { html: html }
+                ]
+            }).render().open();
+
+            Assert.isTrue(menu.one('a').hasAttribute('data-id'));
+            Assert.isInstanceOf(Y.Rednose.Dropdown.Item, dropdown.getItemById(menu.one('a').getAttribute('data-id')));
+        },
+
         '`html` property should render custom HTML': function () {
             var menu = Y.one('.menu'),
                 html = '<a href="http://www.rednose.nl"><div>You joined the folder <strong>Demo user\'s shared folder</strong></div><div><small class="muted">39 minutes ago</small></div></a>';
@@ -53,6 +68,7 @@ YUI.add('dropdown-test', function (Y) {
                 ]
             }).render().open();
 
+            menu.one('a').removeAttribute('data-id');
             Assert.areEqual(html, menu.one('a').get('outerHTML'));
         }
     }));
@@ -107,8 +123,9 @@ YUI.add('dropdown-test', function (Y) {
             dropdown.destroy();
         },
 
-        'Dropdown should update when `reset` is called after it\'s rendered': function () {
-            var menu = Y.one('.menu');
+        'Dropdown should fire `select` when an item is clicked': function () {
+            var calls = 0,
+                menu  = Y.one('.menu');
 
             var dropdown = new Y.Rednose.Dropdown({
                 container: menu,
@@ -118,9 +135,86 @@ YUI.add('dropdown-test', function (Y) {
                 ]
             }).render().open();
 
-            dropdown.reset([{ id: 'testItem3', title: 'Test Item 3' }]);
+            dropdown.on('select', function (e) {
+                calls++;
+            });
 
-            Assert.areEqual('testItem3', menu.one('a').getAttribute('data-id'));
+            menu.one('a').simulate('click');
+
+            Assert.areEqual(1, calls);
+        },
+
+        'Dropdown should fire `select#id` when an item is clicked': function () {
+            var calls = 0,
+                menu  = Y.one('.menu');
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' },
+                    { id: 'testItem2', title: 'Test Item 2' }
+                ]
+            }).render().open();
+
+            dropdown.on('select#testItem1', function (e) {
+                calls++;
+            });
+
+            menu.one('a').simulate('click');
+
+            Assert.areEqual(1, calls);
+        },
+
+        'The `select` event payload should contain the origin event': function () {
+            var menu = Y.one('.menu'),
+                event,
+                originEvent;
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' },
+                    { id: 'testItem2', title: 'Test Item 2' }
+                ]
+            }).render().open();
+
+            menu.one('a').on('click', function (e) {
+                originEvent = e;
+            });
+
+            dropdown.on('select', function (e) {
+                event = e;
+            });
+
+            menu.one('a').simulate('click');
+
+            Assert.areSame(originEvent.target, event.originEvent.target);
+        },
+
+        'The `select#id` event payload should contain the origin event': function () {
+            var menu = Y.one('.menu'),
+                event,
+                originEvent;
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1' },
+                    { id: 'testItem2', title: 'Test Item 2' }
+                ]
+            }).render().open();
+
+            menu.one('a').on('click', function (e) {
+                originEvent = e;
+            });
+
+            dropdown.on('select#testItem1', function (e) {
+                event = e;
+            });
+
+            menu.one('a').simulate('click');
+
+            Assert.areSame(originEvent.target, event.originEvent.target);
         }
     }));
 

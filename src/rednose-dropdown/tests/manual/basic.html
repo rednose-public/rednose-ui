@@ -64,7 +64,11 @@
         dropdown.getItemById('action1').rename('Renamed item');
 
         dropdown.on('select', function (e) {
-            console.log(e);
+            console.log(e.originEvent);
+        });
+
+        dropdown.on('select#action2', function (e) {
+            console.log(e.originEvent);
         });
 
         dropdown.on('select#action3', function (e) {
