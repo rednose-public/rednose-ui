@@ -16,8 +16,10 @@
             <section>
                 <h1>Buttons</h1>
                 <div id="button-container"></div>
-                <h1>Dropdown</h1>
+                <h1>Dropdown button</h1>
                 <div id="button-dropdown"></div>
+                <h1>Toggle button</h1>
+                <div id="button-toggle"></div>
             </section>
         </div>
     </div>
@@ -86,7 +88,7 @@
         var btn = new Y.Rednose.Button({
             value: 'Primary',
             title: 'Button Title',
-            type : 'primary'
+            type: 'primary'
         });
 
         Y.one('#button-container').append(btn.render().get('container'));
@@ -109,6 +111,18 @@
 
         btn.dropdown.on('select', function (e) {
             console.log(e);
+        });
+
+        var btn = new Y.Rednose.Button({
+            value : 'Toggle',
+            title : 'Toggle Title',
+            toggle: true
+        });
+
+        Y.one('#button-toggle').append(btn.render().get('container'));
+
+        btn.after('click', function (e) {
+            console.log(e.button.isActive());
         });
     });
 </script>

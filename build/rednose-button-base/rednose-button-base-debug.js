@@ -139,7 +139,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     },
 
     /**
-     * Deativates this button.
+     * Deactivates this button.
      *
      * @chainable
      */
@@ -159,7 +159,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      *
      * @chainable
      */
-    toggle: function () {
+    toggleActive: function () {
         return this[this.isActive() ? 'deactivate' : 'activate']();
     },
 

@@ -57,16 +57,16 @@ YUI.add('rednose-button-base-test', function (Y) {
             Assert.isFalse(button.isActive());
         },
 
-        '`toggle` should toggle the button active state': function () {
+        '`toggleActive` should toggle the button active state': function () {
             var button = this.button;
 
             Assert.isFalse(button.isActive());
 
-            button.toggle();
+            button.toggleActive();
 
             Assert.isTrue(button.isActive());
 
-            button.toggle();
+            button.toggleActive();
 
             Assert.isFalse(button.isActive());
         },

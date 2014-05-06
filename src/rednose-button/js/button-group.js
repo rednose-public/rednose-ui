@@ -131,7 +131,7 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
 
                 break;
             case 'checkbox':
-                button.toggle();
+                button.toggleActive();
 
                 break;
         }

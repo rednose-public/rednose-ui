@@ -10,10 +10,19 @@ var Micro = Y.Template.Micro;
  * @event click
  * @param {Rednose.Button} button The button that was clicked.
  * @param {EventFacade} originEvent Original click event.
+ * @preventable _defClickFn
  */
 var EVT_CLICK = 'click';
 
 var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
+    /**
+     * Button toggle.
+     *
+     * @property {Boolean} toggle
+     * @default false
+     * @readOnly
+     */
+
     containerTemplate: '<button />',
 
     templates: {
@@ -34,7 +43,9 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
 
     // -- Life Cycle Methods ---------------------------------------------------
 
-    initializer: function () {
+    initializer: function (config) {
+        this.toggle = config.toggle || false;
+
         this._attachButtonEvents();
     },
 
@@ -108,9 +119,8 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
      * @private
      */
     _onButtonClick: function (e) {
-        this.fire(EVT_CLICK, {
-            originEvent: e,
-            button     : this
+        this._fireButtonEvent(EVT_CLICK, {button: this, originEvent: e}, {
+            defaultFn: this._defClickFn
         });
     },
 
@@ -170,6 +180,16 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
             classNames: classNames,
             button    : this
         }));
+    },
+
+    // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defClickFn: function (e) {
+        this.toggle && this.toggleActive();
     }
 });
 
