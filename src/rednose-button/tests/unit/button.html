@@ -21,13 +21,19 @@
         filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
 
         coverage: [
-            'rednose-button-base'
+            'rednose-button-base',
+            'rednose-button'
         ],
 
         modules: {
             'rednose-button-base-test': {
                 fullpath: 'assets/button-base-test.js',
                 requires: ['rednose-button-base', 'test']
+            },
+
+            'rednose-button-test': {
+                fullpath: 'assets/button-test.js',
+                requires: ['rednose-button', 'test']
             }
         },
 
@@ -36,7 +42,7 @@
                 base: "../../../../build/"
             }
         }
-    }).use('rednose-button-base-test', 'test-console', function (Y) {
+    }).use('rednose-button-base-test', 'rednose-button-test', 'test-console', function (Y) {
         new Y.Test.Console().render('#log');
 
         Y.Test.Runner.setName('Button');

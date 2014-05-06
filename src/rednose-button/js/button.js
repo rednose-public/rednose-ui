@@ -107,7 +107,7 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
      */
     _onButtonClick: function (e) {
         this.fire(EVT_CLICK, {
-            originEvent: e.originEvent,
+            originEvent: e,
             button     : this
         });
     },
