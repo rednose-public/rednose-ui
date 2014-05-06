@@ -26,7 +26,7 @@ var Micro = Y.Template.Micro;
  * You can subscribe to specific menu item through the following event: "select#id".
  *
  * @event select
- * @param {Rednose.DropdownItem} item The item that was clicked.
+ * @param {Rednose.Dropdown.Item} item The item that was clicked.
  * @param {EventFacade} originEvent Original click event.
  * @preventable _defSelectFn
  */
@@ -128,7 +128,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
     // -- Public methods -------------------------------------------------------
 
     /**
-     * @param {Rednose.DropdownItem} item
+     * @param {Rednose.Dropdown.Item} item
      * @return {Node}
      * @private
      */
@@ -202,7 +202,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
     },
 
     /**
-     * @param {Rednose.DropdownItem} item
+     * @param {Rednose.Dropdown.Item} item
      * @return {Node}
      * @private
      */
@@ -211,6 +211,10 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
             classNames: this.classNames,
             item      : item
         }));
+
+        if (item.html) {
+            itemNode.one('a') && itemNode.one('a').setAttribute('data-id', item.id);
+        }
 
         if (item.children) {
             itemNode.append(this._renderMenu(item.children));
@@ -235,7 +239,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      */
     _afterItemClick: function (e) {
         var target      = e.target,
-            originEvent = e.originEvent,
+            originEvent = e,
             item        = this.getItemById(target.getAttribute('data-id')),
             itemEvent   = EVT_SELECT + '#' + item.id;
 
