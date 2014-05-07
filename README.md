@@ -1,6 +1,6 @@
 # RedNoseUI
 
-RedNoseUI is a JavaScript framework, providing core features used across several RedNose products. RednoseUI is provided under the MIT license.
+RedNoseUI is a JavaScript framework, providing core features used across several RedNose products. RedNoseUI is provided under the MIT license.
 
 ## Usage 
 
