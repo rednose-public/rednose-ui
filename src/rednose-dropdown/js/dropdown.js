@@ -176,7 +176,9 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
             }),
 
             container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this),
+
             container.on('clickoutside', this._onClickOutside, this),
+            container.on('mouseupoutside', this._onMouseUpOutside, this),
 
             Y.one('body').on('contextmenu', this._onBodyContextMenu, this)
         );
@@ -232,10 +234,22 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _onClickOutside: function (e) {
-        // Dont allow the rightclick mousebutton to hide the contextMenu
+        // Don't allow the right mouse button to hide the dropdown.
         // In some cases a browser (tested on FF17) will fire false positives and
-        // immediately hide the contextmenu again.
+        // immediately hide the drodpown again.
         if (e.button !== 3) {
+            this.close();
+        }
+    },
+
+    /**
+     * @param e {EventFacade}
+     * @private
+     */
+    _onBodyContextMenu: function (e) {
+        var node = this._host || this.get('container');
+
+        if (!node.contains(e.target)) {
             this.close();
         }
     },

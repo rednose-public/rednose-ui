@@ -57,6 +57,16 @@
     </div>
 </div>
 
+<div id="test-container2" class="container">
+    <div class="row">
+        <div class="span12">
+            <section>
+                <p>Right click the container for a context menu.</p>
+            </section>
+        </div>
+    </div>
+</div>
+
 <script>
     YUI.Env.core.push('rednose-loader');
 
@@ -114,6 +124,17 @@
         });
 
         button3.dropdown.on('select', function (e) {
+            console.log(e);
+        });
+
+        var button4 = Y.one('#test-container2');
+
+        button4.plug(Y.Rednose.Plugin.Dropdown, {
+            items: items,
+            showOnContext: true
+        });
+
+        button4.dropdown.on('select', function (e) {
             console.log(e);
         });
     });
