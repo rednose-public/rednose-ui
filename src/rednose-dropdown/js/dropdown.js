@@ -176,7 +176,9 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
             }),
 
             container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this),
-            container.on('clickoutside', this._onClickOutside, this)
+            container.on('clickoutside', this._onClickOutside, this),
+
+            Y.one('body').on('contextmenu', this._onBodyContextMenu, this)
         );
     },
 
@@ -230,7 +232,12 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _onClickOutside: function (e) {
-        this.close();
+        // Dont allow the rightclick mousebutton to hide the contextMenu
+        // In some cases a browser (tested on FF17) will fire false positives and
+        // immediately hide the contextmenu again.
+        if (e.button !== 3) {
+            this.close();
+        }
     },
 
     /**
@@ -238,10 +245,9 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _afterItemClick: function (e) {
-        var target      = e.target,
-            originEvent = e,
-            item        = this.getItemById(target.getAttribute('data-id')),
-            itemEvent   = EVT_SELECT + '#' + item.id;
+        var target    = e.target,
+            item      = this.getItemById(target.getAttribute('data-id')),
+            itemEvent = EVT_SELECT + '#' + item.id;
 
         if (item.isDisabled() ||  item.url === '#') {
             e.preventDefault();
@@ -264,7 +270,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         }
 
         this.fire(itemEvent, {
-            originEvent: originEvent,
+            originEvent: e,
             item       : item
         });
     },

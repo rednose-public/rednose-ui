@@ -52,8 +52,8 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
     // -- Protected Methods ----------------------------------------------------
 
     /**
-     * @param {Integer} x
-     * @param {Integer} y
+     * @param {Number} x
+     * @param {Number} y
      * @private
      */
     _positionContainer: function (x, y) {
