@@ -71,8 +71,6 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
      * @private
      */
     _onAnchorContextMenu: function (e) {
-        console.log('anchor-context');
-
         if (e.shiftKey) {
             return;
         }
