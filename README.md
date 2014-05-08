@@ -1,7 +1,5 @@
 # RedNoseUI
 
-#testcommit
-
 The RedNose UI framework.
 
 ## Usage 
