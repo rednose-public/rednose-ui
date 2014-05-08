@@ -68,6 +68,19 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
         });
     },
 
+    hideTab: function (id) {
+        var container = this.get('contentBox'),
+            tab       = container.one('#' + id);
+
+        if (tab) {
+            tab.hide();
+
+            return true;
+        }
+
+        return false;
+    },
+
     // -- Protected Methods ----------------------------------------------------
 
     _handleTabClick: function (e) {
