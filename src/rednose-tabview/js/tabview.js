@@ -66,12 +66,20 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
         });
     },
 
-    hideTab: function (id) {
+    showTab: function (id) {
+        return this.hideTab(id, false);
+    },
+
+    hideTab: function (id, _hide) {
         var container = this.get('contentBox'),
             tab       = container.one('#' + id);
 
         if (tab) {
-            tab.hide();
+            if (_hide) {
+                tab.show();
+            } else {
+                tab.hide();
+            }
 
             return true;
         }
