@@ -18,9 +18,6 @@ var CSS_WIDGET = 'rednose-widget',
     CSS_BOOTSTRAP_BTN_SUCCESS = 'btn-success',
     CSS_BOOTSTRAP_CLOSE       = 'close',
 
-    TEXT_CONFIRM = 'OK',
-    TEXT_CANCEL  = 'Cancel',
-
     TYPE_DEFAULT = 'default',
     TYPE_INFO    = 'info',
     TYPE_SUCCESS = 'success',
@@ -84,7 +81,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             title  : '',
             text   : '',
             type   : TYPE_DEFAULT,
-            confirm: TEXT_CONFIRM
+            confirm: this.get('strings.confirm')
         });
 
         node = Y.Node.create('<div><p>' + options.text + '</p></div>');
@@ -137,8 +134,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             title  : '',
             text   : '',
             type   : TYPE_DEFAULT,
-            confirm: TEXT_CONFIRM,
-            cancel : TEXT_CANCEL,
+            confirm: this.get('strings.confirm'),
+            cancel : this.get('strings.cancel')
         });
 
         node = Y.Node.create('<div><p>' + options.text + '</p></div>');
@@ -189,7 +186,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         @param {String} [options.dataPath] The field data-path for error reporting.
         @param {String} [options.type] The dialog type ('default', 'info', 'warning', success', 'danger', 'error').
         @param {String} [options.confirm] The confirm button value.
-        @param {Mixed}  [options.cancel] The cancel button value or false.
+        @param {*} [options.cancel] The cancel button value or false.
         @param {String} [options.value] The default field value, optional.
         @param {String} [options.html] An HTML template to render, optional.
     @param {Function} callback Optional callback function, closes the the dialog when it returns `true`.
@@ -207,8 +204,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             text    : '',
             dataPath: 'input',
             type    : TYPE_DEFAULT,
-            confirm : TEXT_CONFIRM,
-            cancel  : TEXT_CANCEL,
+            confirm : this.get('strings.confirm'),
+            cancel  : this.get('strings.cancel'),
             value   : '',
             html    : null
         });
@@ -306,55 +303,49 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     Add a button to the footer of the dialog (after the dialog is rendered)
 
     @method addButton
-    @param {Array} [buttons] A collection of options, The following options can be specified:
-        @param {String} [options.value] The button caption.
-        @param {String} [options.classNames] Extra button classes
-        @param {String} [options.callback] Callback function
-        @param {String} [options.icon] The button icon class
-        @param {String} [options.position] Align the button left or right
+    @param {Array} [buttons] A collection of options
     @public
     **/
-    addButtons: function(buttons) {
-        if (this.get('panel')) {
-            var buttonId = Y.guid();
-            var boundingBox = this.get('panel').get('boundingBox');
-            var classNames = 'btn';
+    addButtons: function (buttons) {
+        if (!this.get('panel')) {
+            return;
+        }
 
-            for (var i in buttons) {
-                var options = buttons[i];
+        var buttonId    = Y.guid(),
+            boundingBox = this.get('panel').get('boundingBox'),
+            classNames  = CSS_BOOTSTRAP_BTN,
+            self        = this;
 
-                if (options.position && options.position == 'right') {
-                    classNames += ' ' + CSS_BOOTSTRAP_PULL_RIGHT;
-                } else {
-                    classNames += ' ' + CSS_BOOTSTRAP_PULL_LEFT;
-                }
-
-                if (options.classNames) {
-                    classNames += ' '  + options.classNames;
-                }
-
-                var button = {
-                    name: buttonId,
-                    title: options.value,
-                    classNames: classNames,
-                    action: options.callback
-                }
-
-                this.get('panel').addButton(button);
-
-                if (options.icon) {
-                    var button = this.get('panel').getButton(buttonId);
-
-                    button.append(
-                        Y.Node.create('<li class="' + options.icon + '" />')
-                    );
-                }
+        Y.Array.each(buttons, function (option) {
+            if (options.position && options.position == 'right') {
+                classNames += ' ' + CSS_BOOTSTRAP_PULL_RIGHT;
+            } else {
+                classNames += ' ' + CSS_BOOTSTRAP_PULL_LEFT;
             }
 
-            boundingBox.all('.yui3-button').each(function (button) {
-                button.removeClass('yui3-button').removeClass('yui3-button-primary');
+            if (options.classNames) {
+                classNames += ' '  + options.classNames;
+            }
+
+            self.get('panel').addButton({
+                name      : buttonId,
+                title     : options.value,
+                classNames: classNames,
+                action    : options.callback
             });
-        }
+
+            if (options.icon) {
+                var button = self.get('panel').getButton(buttonId);
+
+                button.append(
+                    Y.Node.create('<li class="' + options.icon + '" />')
+                );
+            }
+        });
+
+        boundingBox.all('.yui3-button').each(function (button) {
+            button.removeClass('yui3-button').removeClass('yui3-button-primary');
+        });
     },
 
     // -- Protected Methods ----------------------------------------------------
@@ -474,7 +465,6 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         });
 
         bb.one('.error').focus();
-
     },
 
     _getHighzIndex: function() {
@@ -491,9 +481,29 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     }
 }, {
     ATTRS: {
-        error: { value: {} },
-        panel: { value: null },
-        width: { value: 500 }
+        /**
+         * Translation dictionary used by the Rednose.Dialog module.
+         *
+         * @attribute strings
+         * @type Object
+         */
+        strings: {
+            valueFn: function () {
+                return Y.Intl.get('rednose-dialog');
+            }
+        },
+
+        error: {
+            value: {}
+        },
+
+        panel: {
+            value: null
+        },
+
+        width: {
+            value: 500
+        }
     }
 });
 

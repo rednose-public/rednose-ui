@@ -1,0 +1,21 @@
+{
+  "name": "rednose/rednose-ui",
+  "description": "RedNoseUI JavaScript framework.",
+  "keywords": [
+    "js",
+    "framework",
+    "web"
+  ],
+  "homepage": "http://www.rednose.nl",
+  "authors": [
+    {
+      "name": "Marc Bontje",
+      "email": "marc@rednose.nl"
+    },
+    {
+      "name": "Sven Hagemann",
+      "email": "sven@rednose.nl"
+    }
+  ],
+  "license": "MIT"
+}
