@@ -22,7 +22,7 @@ Y.namespace('Rednose.Plugin').Timepicker = Y.Base.create('timepicker', Y.Base, [
         var element = $(this._host.getDOMNode());
 
         element.datetimepicker({
-            pickTime: true,
+            pickDate: false,
             language: lang
         });
 
