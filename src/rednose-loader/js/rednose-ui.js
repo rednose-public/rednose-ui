@@ -196,6 +196,10 @@ Y.mix(YUI.Env[Y.version].modules, {
     },
     "rednose-dialog": {
         "group": "rednose-ui",
+        "lang": [
+            "en",
+            "nl"
+        ],
         "requires": [
             "dd",
             "dd-plugin",
@@ -465,4 +469,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '834f8fca97c8262b2fc2f5bcb43b3fb7';
+YUI.Env[Y.version].md5 = '4edc6eb0b00cf269e8b63e0f1c0c29b2';

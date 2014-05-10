@@ -1,6 +1,6 @@
 # RedNoseUI
 
-The RedNose UI framework.
+RedNoseUI is a JavaScript framework, providing core features used across several RedNose products. RedNoseUI is provided under the MIT license.
 
 ## Usage 
 
@@ -39,6 +39,8 @@ The RedNose UI framework.
 Run from `src/` to build the entire library, or from a module folder:
 
     yogi build
+
+After adding new modules or updating existing module meta data, the `rednose-loader` module needs to be rebuilt.
 
 ### Testing
 

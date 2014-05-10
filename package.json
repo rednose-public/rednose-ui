@@ -1,0 +1,34 @@
+{
+  "name": "rednose-ui",
+  "description": "RedNoseUI JavaScript framework.",
+  "keywords": [
+    "js",
+    "framework",
+    "web"
+  ],
+  "homepage": "http://www.rednose.nl",
+  "version": "1.4.0",
+  "author": {
+    "name": "Marc Bontje",
+    "email": "marc@rednose.nl",
+    "web": "http://www.rednose.nl"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:rednose-public/rednose-ui.git"
+  },
+  "engines": [
+    "node >=0.8"
+  ],
+  "devDependencies": {
+     "yogi": "0.1.12",
+     "recess": "1.1.9",
+     "phantomjs": "~1.9.7"
+  },
+  "scripts": {
+      "pretest": "cd src/ && yogi build",
+      "test": "cd src && yogi test"
+   },
+  "private": true
+}

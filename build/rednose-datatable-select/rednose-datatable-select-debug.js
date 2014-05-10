@@ -212,11 +212,11 @@ Y.namespace('Rednose').DataTableSelectPlugin = DataTableSelectPlugin;
 /**
  * Create a selection inline value edit plugin for the RedNose DataTable widget.
  */
-var CSS_COLUMN = 'rednose-datatable-col-',
+var CSS_COLUMN     = 'rednose-datatable-col-',
     CSS_INPUTFIELD = 'rednose-datatable-input';
 
 function DataTableEditRowPlugin () {
-    DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
+    DataTableEditRowPlugin.superclass.constructor.apply(this, arguments);
 }
 
 /**
@@ -226,7 +226,7 @@ DataTableEditRowPlugin.NAME = 'dataTableEditRowPlugin';
 
 /**
  * The namespace for the plugin.
-0 */
+ */
 DataTableEditRowPlugin.NS = 'editable';
 
 Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {

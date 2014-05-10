@@ -9,6 +9,9 @@ YUI.add('rednose-timepicker-plugin', function (Y, NAME) {
  */
 
 Y.namespace('Rednose.Plugin').Timepicker = Y.Base.create('timepicker', Y.Base, [Y.Plugin.Base], {
+    // -- Protected Properties--------------------------------------------------
+
+    _element: null,
 
     // -- Life Cycle Methods ---------------------------------------------------
 
@@ -16,14 +19,40 @@ Y.namespace('Rednose.Plugin').Timepicker = Y.Base.create('timepicker', Y.Base, [
         this._host = config.host;
 
         var lang = Y.config.lang || null;
+        var element = $(this._host.getDOMNode());
 
-        $(this._host.getDOMNode()).datetimepicker({
+        element.datetimepicker({
             pickDate: false,
             language: lang
         });
+
+        this._element = element.data('datetimepicker');
+
+        // Force a refresh
+        this._element.setDate(
+            this._element.getDate()
+        );
+    },
+
+    _getDate: function () {
+        return this._element.getDate();
+    },
+
+    _setDate: function (date) {
+        this._element.setDate(date);
+
+        return date;
     }
 }, {
-    NS: 'timepicker'
+    NS: 'timepicker',
+
+    ATTRS: {
+        date: {
+            value: null,
+            getter: '_getDate',
+            setter: '_setDate'
+        }
+    }
 });
 
 

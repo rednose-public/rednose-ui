@@ -1,0 +1,4 @@
+{
+    confirm: "OK",
+    cancel: "Cancel"
+}

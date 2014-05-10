@@ -9,6 +9,10 @@
             "node",
             "node-event-simulate",
             "widget"
+        ],
+        "lang": [
+            "en",
+            "nl"
         ]
     },
     "rednose-dialog-css" : {
