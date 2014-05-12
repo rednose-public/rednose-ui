@@ -259,8 +259,14 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _afterItemClick: function (e) {
-        var target    = e.target,
-            item      = this.getItemById(target.getAttribute('data-id')),
+        var target = e.target;
+
+        // Scan the DomTree for the right node.
+        while (!target.getAttribute('data-id')) {
+            target = target.get('parentNode');
+        }
+
+        var item      = this.getItemById(target.getAttribute('data-id')),
             itemEvent = EVT_SELECT + '#' + item.id;
 
         if (item.isDisabled() ||  item.url === '#') {
