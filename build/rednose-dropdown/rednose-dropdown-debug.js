@@ -264,7 +264,6 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         var target = e.target;
 
         // Scan the DomTree for the right node.
-        console.log(target.getAttribute('data-id'));
         while (!target.getAttribute('data-id')) {
             target = target.get('parentNode');
         }
