@@ -47,6 +47,16 @@ var TreeView,
  * @extends TreeView
  */
 TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Rednose.TreeView.DD, Y.Rednose.TreeView.Selectable], {
+
+    // -- Public Properties -------------------------------------------------
+
+    /**
+    Overwrite the default templates used to render this TreeView.
+
+    @property {Object} templates
+    **/
+    templates: Y.TreeView.Templates,
+
     // -- Protected Properties -------------------------------------------------
 
     /**
