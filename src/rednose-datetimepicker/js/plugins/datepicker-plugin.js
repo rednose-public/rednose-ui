@@ -34,7 +34,7 @@ Y.namespace('Rednose.Plugin').Datepicker = Y.Base.create('datepicker', Y.Base, [
     },
 
     _getDate: function () {
-        return this._element.getDate();
+        return this._element._date;
     },
 
     _setDate: function (date) {

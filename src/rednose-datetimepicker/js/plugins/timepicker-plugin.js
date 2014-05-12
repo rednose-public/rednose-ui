@@ -33,7 +33,7 @@ Y.namespace('Rednose.Plugin').Timepicker = Y.Base.create('timepicker', Y.Base, [
     },
 
     _getDate: function () {
-        return this._element.getDate();
+        return this._element._date;
     },
 
     _setDate: function (date) {
