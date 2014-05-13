@@ -165,7 +165,7 @@ YUI.add('dropdown-test', function (Y) {
             Assert.areEqual(1, calls);
         },
 
-        'Dropdown should fire `select` when an a child item is clicked': function () {
+        'Dropdown should fire `select` when a child item is clicked': function () {
             var calls = 0,
                 menu  = Y.one('.menu');
 
