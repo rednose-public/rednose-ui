@@ -12,10 +12,15 @@
 ## rednose-navbar
 
  * Method `createDropdown` has been removed. Use module `Rednose.Dropdown` instead.
+ * Class `Rednose.Toolbar` was moved to a separate module, see `rednose-toolbar`.
 
 ## rednose-controlform
 
 * Module `Rednose.ControlForm` was removed and was replaced by the `rednose-form` module.
+
+## rednose-toolbar
+
+ * Class `Rednose.Toolbar` was refactored and now uses instances of `rednose-button-group`.
 
 ## rednose-ui
 
