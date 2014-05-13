@@ -2,6 +2,9 @@
 
 var ControlForm;
 
+/**
+ * @deprecated This module will be removed in version 1.5
+ */
 ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], {
 
     viewTemplate:

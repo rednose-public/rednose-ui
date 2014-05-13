@@ -26,7 +26,7 @@ Provides a context menu plugin with custom event binding.
     @param {Object} [config.bubbleTarget] Optional bubble target.
 @constructor
 @extends Plugin.Base
-@deprecated Use Rednose.Dropdown
+@deprecated Use Rednose.Dropdown. This module will be removed in version 1.5.
 **/
 ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
     // -- Public Properties ----------------------------------------------------

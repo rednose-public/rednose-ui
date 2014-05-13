@@ -1,0 +1,22 @@
+# UPGRADE FROM 1.4 to 1.5
+
+## rednose-app
+
+ * Loading app within iFrames is no longer supported in its current form.
+ * Module `Rednose.Templates` was removed and has been replaced by App/View extensions.
+
+## rednose-contextmenu
+
+ * Module `Rednose.ContextMenu` was removed in favor of `Rednose.Dropdown`.
+
+## rednose-navbar
+
+ * Method `createDropdown` has been removed. Use module `Rednose.Dropdown` instead.
+
+## rednose-controlform
+
+* Module `Rednose.ControlForm` was removed and was replaced by the `rednose-form` module.
+
+## rednose-ui
+
+* **All CSS** is now handled by `LESS` templates within the `rednose-ui` module.
