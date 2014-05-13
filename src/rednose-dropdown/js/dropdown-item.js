@@ -41,6 +41,12 @@ function DropdownItem(dropdown, config) {
     this.url      = config.url || '#';
     this.children = [];
 
+    if (config.html && !config.url) {
+        var html = Y.Node.create(config.html);
+
+        html.hasAttribute('href') && (this.url = html.getAttribute('href'));
+    }
+
     Y.mix(this, config);
 }
 
