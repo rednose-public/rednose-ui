@@ -1,5 +1,7 @@
 # UPGRADE FROM 1.4 to 1.5
 
+Version 1.5 is compatible with YUI 3.16.0.
+
 ## rednose-app
 
  * Loading app within iFrames is no longer supported in its current form.
