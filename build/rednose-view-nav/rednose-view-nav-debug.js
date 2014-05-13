@@ -362,7 +362,7 @@ Y.namespace('Rednose.View').Nav = ViewNav;
 }, '1.4.0', {
     "requires": [
         "event-custom",
-        "rednose-navbar",
+        "rednose-toolbar",
         "rednose-panel",
         "rednose-util",
         "rednose-widget-nav-container",
