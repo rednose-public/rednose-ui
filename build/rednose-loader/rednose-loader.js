@@ -395,6 +395,12 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-datetimepicker-base"
         ]
     },
+    "rednose-toolbar": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-button-group"
+        ]
+    },
     "rednose-tooltip": {
         "group": "rednose-ui",
         "requires": [
@@ -471,7 +477,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '4edc6eb0b00cf269e8b63e0f1c0c29b2';
+YUI.Env[Y.version].md5 = '62be26a9a30d804b4d18f70b85d5df56';
 
 
 }, '1.4.0');

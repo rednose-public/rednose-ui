@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.Button module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<body>
+
+<div id="test-container" class="container">
+    <div class="row">
+        <div class="span12">
+            <section>
+                <h1>Toolbar</h1>
+                <div id="toolbar-container"></div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-toolbar', function (Y) {
+        console.log(Y.Rednose.Toolbar);
+
+        var toolbar = new Y.Rednose.Toolbar();
+
+        Y.one('#toolbar-container').append(toolbar.render().get('container'));
+
+//        var btn = new Y.Rednose.Button({
+//            id    : 'button-align',
+//            icon  : 'icon-align-justify',
+//            title : 'Align',
+//            active: true
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        btn.deactivate();
+//
+//        btn.on('click', function (e) {
+//            console.log(e.button.get('id'));
+//        });
+//
+//        var btn = new Y.Rednose.Button({
+//            value: 'Button',
+//            title: 'Button Title'
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        btn.disable();
+//        console.log(btn.isDisabled());
+//
+//        var btn = new Y.Rednose.Button({
+//            value: 'Link',
+//            title: 'Link Title',
+//            type : 'link'
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        btn.rename('Renamed Link');
+//        console.log(btn.value);
+//
+//        var btn = new Y.Rednose.Button({
+//            value   : 'Disabled',
+//            title   : 'Button Title',
+//            disabled: true
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        btn.enable();
+//        console.log(btn.isDisabled());
+//
+//        btn.activate();
+//
+//        var btn = new Y.Rednose.Button({
+//            value: 'Primary',
+//            title: 'Button Title',
+//            type: 'primary'
+//        });
+//
+//        Y.one('#button-container').append(btn.render().get('container'));
+//
+//        var btn = new Y.Rednose.Button({
+//            value: 'Dropdown',
+//            title: 'Dropdown Title'
+//        });
+//
+//        Y.one('#button-dropdown').append(btn.render().get('container'));
+//
+//        btn.plug(Y.Rednose.Plugin.ButtonDropdown, {
+//            items: [
+//                { id: 'action1', title: 'Action 1' },
+//                { id: 'action2', title: 'Action 2', disabled: true },
+//                { type: 'divider' },
+//                { id: 'action3', title: 'Action 3' }
+//            ]
+//        });
+//
+//        btn.dropdown.on('select', function (e) {
+//            console.log(e);
+//        });
+//
+//        var btn = new Y.Rednose.Button({
+//            value : 'Toggle',
+//            title : 'Toggle Title',
+//            toggle: true
+//        });
+//
+//        Y.one('#button-toggle').append(btn.render().get('container'));
+//
+//        btn.after('click', function (e) {
+//            console.log(e.button.isActive());
+//        });
+    });
+</script>
+</body>
+</html>

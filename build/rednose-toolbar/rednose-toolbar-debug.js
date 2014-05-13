@@ -1,3 +1,5 @@
+YUI.add('rednose-toolbar', function (Y, NAME) {
+
 /*jshint boss:true, expr:true, onevar:false */
 
 var CSS_BOOTSTRAP_BTN         = 'btn',
@@ -280,9 +282,9 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
 }, {
     ATTRS: {
         /**
-        @attribute buttons
-        @type Object
-        **/
+         @attribute buttons
+         @type Object
+         **/
         buttons: {
             value: {}
         }
@@ -291,3 +293,6 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose').Toolbar = Toolbar;
+
+
+}, '1.4.0', {"requires": ["rednose-button-group"]});

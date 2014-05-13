@@ -17,7 +17,7 @@ var EVT_DISABLE = 'disable';
 /**
  * @event rename
  * @param {Rednose.Button}
- * @param {String value}
+ * @param {String} value
  * @preventable _defRenameFn
  */
 var EVT_RENAME = 'rename';

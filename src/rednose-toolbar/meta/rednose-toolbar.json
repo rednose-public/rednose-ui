@@ -1,0 +1,7 @@
+{
+    "rednose-toolbar" : {
+        "requires": [
+            "rednose-button-group"
+        ]
+    }
+}
