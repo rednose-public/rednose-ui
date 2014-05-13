@@ -1,7 +1,14 @@
 {
     "rednose-toolbar" : {
         "requires": [
-            "rednose-button-group"
+            "rednose-button-group",
+            "rednose-toolbar-base"
+        ]
+    },
+
+    "rednose-toolbar-base" : {
+        "requires": [
+            "base"
         ]
     }
 }

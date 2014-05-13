@@ -398,7 +398,14 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-toolbar": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-button-group"
+            "rednose-button-group",
+            "rednose-toolbar-base"
+        ]
+    },
+    "rednose-toolbar-base": {
+        "group": "rednose-ui",
+        "requires": [
+            "base"
         ]
     },
     "rednose-tooltip": {
@@ -477,7 +484,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '62be26a9a30d804b4d18f70b85d5df56';
+YUI.Env[Y.version].md5 = 'a215de7820725ca970531821280338cd';
 
 
 }, '1.4.0');

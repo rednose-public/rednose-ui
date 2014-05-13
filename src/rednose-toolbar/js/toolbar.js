@@ -11,6 +11,15 @@ var CSS_BOOTSTRAP_BTN         = 'btn',
 
 var Toolbar = Y.Base.create('toolbar', Y.View, [], {
     /**
+     * CSS class names used by this toolbar.
+     *
+     * @property {Object} classNames
+     */
+    classNames: {
+        toolbar: 'btn-toolbar'
+    },
+
+    /**
      Stores references to the created nodes.
 
      @property _buttonMap
@@ -20,6 +29,8 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
     _buttonMap: {},
 
     _evtPrefix: null,
+
+    // -- Life Cycle Methods  --------------------------------------------------
 
     initializer: function (config) {
         config || (config = {});
@@ -31,7 +42,21 @@ var Toolbar = Y.Base.create('toolbar', Y.View, [], {
         this._buttonMap = null;
     },
 
+    // -- Public Methods -------------------------------------------------------
+
+    /**
+     * @chainable
+     */
     render: function () {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.toolbar);
+
+        container.setHTML('<div>test</div>');
+
+        return this;
+
         var self      = this,
             buttons   = this.get('buttons'),
             container = this.get('container');
