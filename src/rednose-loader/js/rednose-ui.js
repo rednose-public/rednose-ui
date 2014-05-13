@@ -46,6 +46,39 @@ Y.mix(YUI.Env[Y.version].modules, {
             "view"
         ]
     },
+    "rednose-button": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-button-base",
+            "template",
+            "view"
+        ]
+    },
+    "rednose-button-base": {
+        "group": "rednose-ui",
+        "requires": [
+            "base"
+        ]
+    },
+    "rednose-button-dropdown": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-button",
+            "rednose-dropdown-plugin"
+        ]
+    },
+    "rednose-button-group": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-button-group-base"
+        ]
+    },
+    "rednose-button-group-base": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-button"
+        ]
+    },
     "rednose-contextmenu": {
         "group": "rednose-ui",
         "requires": [
@@ -436,4 +469,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '05c735f5a188079817c27e9521dc437c';
+YUI.Env[Y.version].md5 = '4edc6eb0b00cf269e8b63e0f1c0c29b2';
