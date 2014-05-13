@@ -27,7 +27,7 @@ toolbarBaseSuite.add(new Y.Test.Case({
         var toolbarBase = new ToolbarBase();
         toolbarBase.destroy();
 
-        Assert.isNull(toolbarBase._buttonGroupMap, '_nodeMap should be null');
+        Assert.isNull(toolbarBase._buttonGroupMap, '_buttonGroupMap should be null');
         Assert.isNull(toolbarBase._published, '_published should be null');
     }
 }));
