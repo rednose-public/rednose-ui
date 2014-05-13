@@ -133,7 +133,7 @@ Grid = Y.Base.create('grid', Y.View, [ Y.Rednose.Grid.Selectable ], {
 Y.namespace('Rednose').Grid = Grid;
 
 
-}, '1.4.0', {
+}, '1.4.1', {
     "requires": [
         "handlebars",
         "model-list",

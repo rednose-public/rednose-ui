@@ -563,7 +563,7 @@ Dialog.prompt = function (options, callback) {
 Y.namespace('Rednose').Dialog = Dialog;
 
 
-}, '1.4.0', {
+}, '1.4.1', {
     "requires": [
         "dd",
         "dd-plugin",

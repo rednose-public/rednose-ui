@@ -474,4 +474,4 @@ Y.mix(YUI.Env[Y.version].modules, {
 YUI.Env[Y.version].md5 = '4edc6eb0b00cf269e8b63e0f1c0c29b2';
 
 
-}, '1.4.0');
+}, '1.4.1');
