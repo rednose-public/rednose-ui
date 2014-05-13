@@ -57,11 +57,13 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @protected
      */
 
-    // -- LifeCycle Methods ----------------------------------------------------
+    // -- Life Cycle Methods ---------------------------------------------------
 
     initializer: function (config) {
+        config || (config = {});
+
         this._buttonGroupMap = [];
-        this._published || (this._published = {});
+        this._published      = {};
 
         if (config.groups) {
             for (var i = 0, len = config.groups.length; i < len; i++) {
@@ -76,6 +78,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         }
 
         this._buttonGroupMap = null;
+        this._published      = null;
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -87,7 +90,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @chainable
      */
     add: function (group) {
-        return this._fireDropdownEvent(EVT_ADD, {group: group, index: index}, {
+        return this._fireToolbarEvent(EVT_ADD, {group: group}, {
             defaultFn: this._defAddFn
         });
     },
@@ -99,7 +102,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @chainable
      */
     remove: function (index) {
-        return this._fireDropdownEvent(EVT_REMOVE, {index: index}, {
+        return this._fireToolbarEvent(EVT_REMOVE, {index: index}, {
             defaultFn: this._defRemoveFn
         });
     },
@@ -179,7 +182,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
     _defRemoveFn: function (e) {
         var group = this._buttonGroupMap[e.index];
 
-        this._destroyButtonGroup(group)
+        this._destroyButtonGroup(group);
     }
 });
 
@@ -187,4 +190,4 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
 Y.namespace('Rednose.Toolbar').Base = ToolbarBase;
 
 
-}, '1.4.0', {"requires": ["base"]});
+}, '1.4.0', {"requires": ["rednose-button-group", "base"]});
