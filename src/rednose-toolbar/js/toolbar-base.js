@@ -14,6 +14,7 @@
  * @constructor
  * @param {Object} [config] Config object.
  *     @param {Object[]} [config.groups] Array of group config objects.
+ *     @param {Object[]} [config.buttons] Array of button config objects.
  * @extends Base
  */
 
@@ -146,6 +147,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (button) {
             button.enable();
         }
+         return this;
     },
 
     /**
@@ -158,6 +160,8 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (button) {
             button.disable();
         }
+
+        return this;
     },
 
     /**
@@ -170,6 +174,8 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (button) {
             button.activate();
         }
+
+        return this;
     },
 
     /**
@@ -182,6 +188,8 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (button) {
             button.deactivate();
         }
+
+        return this;
     },
 
     /**
@@ -194,6 +202,8 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (button) {
             button.toggleActive();
         }
+
+        return this;
     },
 
     /**
@@ -207,6 +217,8 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (button) {
             button.rename(value);
         }
+
+        return this;
     },
 
     // -- Protected Event Handlers ---------------------------------------------
