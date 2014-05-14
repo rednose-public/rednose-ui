@@ -164,7 +164,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     /**
      * Renames this button.
      *
-     * @param {String} title
+     * @param {String} value
      *
      * @chainable
      */

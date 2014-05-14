@@ -107,6 +107,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         });
     },
 
+
     /**
      * Returns a button group by index.
      *
@@ -115,6 +116,99 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      */
     getButtonGroup: function (index) {
         return this._buttonGroupMap[index];
+    },
+
+    /**
+     * Returns a button by ID.
+     *
+     * @param id
+     * @return {Rednose.ButtonGroup}
+     */
+    getButtonById: function (id) {
+        for (var i = 0, len = this._buttonGroupMap.length; i < len; i++) {
+            var group = this._buttonGroupMap[i];
+
+            if (group.getButtonById(id)) {
+                return group.getButtonById(id);
+            }
+        }
+
+        return null;
+    },
+
+    // -- Button Wrapper Methods -----------------------------------------------
+
+    /**
+     * @param {String} id
+     * @chainable
+     */
+    enable: function (id) {
+        var button = this.getButtonById(id);
+
+        if (button) {
+            button.enable();
+        }
+    },
+
+    /**
+     * @param {String} id
+     * @chainable
+     */
+    disable: function (id) {
+        var button = this.getButtonById(id);
+
+        if (button) {
+            button.disable();
+        }
+    },
+
+    /**
+     * @param {String} id
+     * @chainable
+     */
+    activate: function (id) {
+        var button = this.getButtonById(id);
+
+        if (button) {
+            button.activate();
+        }
+    },
+
+    /**
+     * @param {String} id
+     * @chainable
+     */
+    deactivate: function (id) {
+        var button = this.getButtonById(id);
+
+        if (button) {
+            button.deactivate();
+        }
+    },
+
+    /**
+     * @param {String} id
+     * @chainable
+     */
+    toggleActive: function (id) {
+        var button = this.getButtonById(id);
+
+        if (button) {
+            button.toggleActive();
+        }
+    },
+
+    /**
+     * @param {String} id
+     * @param {String} value
+     * @chainable
+     */
+    rename: function (id, value) {
+        var button = this.getButtonById(id);
+
+        if (button) {
+            button.rename(value);
+        }
     },
 
     // -- Protected Event Handlers ---------------------------------------------
