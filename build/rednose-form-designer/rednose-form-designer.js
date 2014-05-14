@@ -1620,7 +1620,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 Y.namespace('Rednose.FormDesigner').FormDesigner = FormDesigner;
 
 
-}, '1.4.1', {
+}, '1.4.2', {
     "requires": [
         "rednose-app",
         "rednose-datatable-select",

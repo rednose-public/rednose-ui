@@ -1,1 +1,1 @@
-YUI.add("lang/rednose-dialog_en",function(e){e.Intl.add("rednose-dialog","en",{confirm:"OK",cancel:"Cancel"})},"1.4.1");
+YUI.add("lang/rednose-dialog_en",function(e){e.Intl.add("rednose-dialog","en",{confirm:"OK",cancel:"Cancel"})},"1.4.2");
