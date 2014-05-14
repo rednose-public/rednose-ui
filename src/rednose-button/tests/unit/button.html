@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Button Test Page</title>
+</head>
+
+<body class="yui3-skin-sam">
+
+<div id="log"></div>
+<div id="container"></div>
+
+<script src="http://yui.yahooapis.com/3.11.0/build/yui/yui.js"></script>
+<script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
+
+        coverage: [
+            'rednose-button-base',
+            'rednose-button',
+            'rednose-button-group-base',
+            'rednose-button-group'
+        ],
+
+        modules: {
+            'rednose-button-base-test': {
+                fullpath: 'assets/button-base-test.js',
+                requires: ['rednose-button-base', 'test']
+            },
+
+            'rednose-button-test': {
+                fullpath: 'assets/button-test.js',
+                requires: ['rednose-button', 'test']
+            },
+
+            'rednose-button-group-base-test': {
+                fullpath: 'assets/button-group-base-test.js',
+                requires: ['rednose-button-group-base', 'test']
+            },
+
+            'rednose-button-group-test': {
+                fullpath: 'assets/button-group-test.js',
+                requires: ['rednose-button-group', 'test']
+            }
+        },
+
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-button-base-test', 'rednose-button-test', 'rednose-button-group-base-test', 'rednose-button-group-test', 'test-console', function (Y) {
+        new Y.Test.Console().render('#log');
+
+        Y.Test.Runner.setName('Button');
+        Y.Test.Runner.run();
+    });
+</script>
+
+</body>
+
+</html>

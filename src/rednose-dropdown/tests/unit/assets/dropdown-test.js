@@ -165,6 +165,53 @@ YUI.add('dropdown-test', function (Y) {
             Assert.areEqual(1, calls);
         },
 
+        'Dropdown should fire `select` when a child item is clicked': function () {
+            var calls = 0,
+                menu  = Y.one('.menu');
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', title: 'Test Item 1', icon: 'icon-test' },
+                    { id: 'testItem2', title: 'Test Item 2', icon: 'icon-test' }
+                ]
+            }).render().open();
+
+            dropdown.on('select', function (e) {
+                calls++;
+            });
+
+            menu.one('i').simulate('click');
+
+            Assert.areEqual(1, calls);
+        },
+
+        'Dropdown should set `url` for items with custom HTML': function () {
+            var menu = Y.one('.menu');
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', html: '<a href="testUrl"></a>' }
+                ]
+            }).render().open();
+
+            Assert.areEqual('testUrl', dropdown.getItemById('testItem1').url);
+        },
+
+        'Dropdown should preserve explicit `url` for items with custom HTML': function () {
+            var menu = Y.one('.menu');
+
+            var dropdown = new Y.Rednose.Dropdown({
+                container: menu,
+                items: [
+                    { id: 'testItem1', html: '<a href="testUrl"></a>', url: 'explicitUrl' }
+                ]
+            }).render().open();
+
+            Assert.areEqual('explicitUrl', dropdown.getItemById('testItem1').url);
+        },
+
         'The `select` event payload should contain the origin event': function () {
             var menu = Y.one('.menu'),
                 event,

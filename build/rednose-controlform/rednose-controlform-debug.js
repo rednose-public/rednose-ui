@@ -1097,7 +1097,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
 Y.namespace('Rednose').ControlForm = ControlForm;
 
 
-}, '1.4.0', {
+}, '1.4.1', {
     "requires": [
         "autocomplete",
         "autocomplete-filters",

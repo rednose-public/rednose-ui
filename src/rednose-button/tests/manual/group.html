@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.ButtonGroup module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="../../../../../yui3/build/yui/yui.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<body>
+
+<div id="test-container" class="container">
+    <div class="row">
+        <div class="span12">
+            <section>
+                <h1>Button Groups</h1>
+                <h2>Default</h2>
+                <div id="button-group-default"></div>
+                <h2>Radio</h2>
+                <div id="button-group-radio"></div>
+                <h2>Checkbox</h2>
+                <div id="button-group-checkbox"></div>
+                <h2>Vertical</h2>
+                <div id="button-group-vertical"></div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-button-group', function (Y) {
+        var btnGroup = new Y.Rednose.ButtonGroup({
+            buttons: [
+                {
+                    id   : 'button1',
+                    value: 'Button 1'
+                },
+                {
+                    id   : 'button2',
+                    value: 'Button 2'
+                },
+                {
+                    id   : 'button3',
+                    value: 'Button 3'
+                }
+            ]
+        });
+
+        Y.one('#button-group-default').append(btnGroup.render().get('container'));
+
+        var btnGroup = new Y.Rednose.ButtonGroup({
+            type: 'radio',
+            buttons: [
+                {
+                    id   : 'button1',
+                    value: 'Button 1'
+                },
+                {
+                    id   : 'button2',
+                    value: 'Button 2'
+                },
+                {
+                    id   : 'button3',
+                    value: 'Button 3'
+                }
+            ]
+        });
+
+        btnGroup.on('change', function (e) {
+            console.log(e.value);
+        });
+
+        Y.one('#button-group-radio').append(btnGroup.render().get('container'));
+
+        var btnGroup = new Y.Rednose.ButtonGroup({
+            type: 'checkbox',
+            buttons: [
+                {
+                    id   : 'button1',
+                    value: 'Button 1'
+                },
+                {
+                    id   : 'button2',
+                    value: 'Button 2'
+                },
+                {
+                    id   : 'button3',
+                    value: 'Button 3'
+                }
+            ]
+        });
+
+        btnGroup.on('change', function (e) {
+            console.log(e.value);
+        });
+
+        Y.one('#button-group-checkbox').append(btnGroup.render().get('container'));
+
+        var btnGroup = new Y.Rednose.ButtonGroup({
+            vertical: true,
+            buttons: [
+                {
+                    id   : 'button1',
+                    value: 'Button 1'
+                },
+                {
+                    id   : 'button2',
+                    value: 'Button 2'
+                },
+                {
+                    id   : 'button3',
+                    value: 'Button 3'
+                }
+            ]
+        });
+
+        Y.one('#button-group-vertical').append(btnGroup.render().get('container'));
+    });
+</script>
+</body>
+</html>

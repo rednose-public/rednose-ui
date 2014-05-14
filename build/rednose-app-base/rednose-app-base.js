@@ -388,7 +388,7 @@ App.setTitle = function (title) {
 Y.namespace('Rednose').App = App;
 
 
-}, '1.4.0', {
+}, '1.4.1', {
     "requires": [
         "app-base",
         "event-custom",

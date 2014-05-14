@@ -332,7 +332,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
 Y.namespace('Rednose').DataProvider = DataProvider;
 
 
-}, '1.4.0', {
+}, '1.4.1', {
     "requires": [
         "autocomplete",
         "autocomplete-filters",

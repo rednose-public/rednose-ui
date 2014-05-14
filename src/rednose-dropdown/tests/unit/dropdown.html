@@ -21,7 +21,13 @@
             YUI.Env.core.push('rednose-loader');
 
             YUI({
-                coverage: ['rednose-dropdown'],
+                coverage: [
+                    'rednose-dropdown',
+                    'rednose-dropdown-base',
+                    'rednose-dropdown-item',
+                    'rednose-dropdown-plugin'
+                ],
+
                 filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
                 "groups": {
                     "rednose-ui": {

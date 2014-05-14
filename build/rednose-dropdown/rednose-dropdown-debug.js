@@ -261,12 +261,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _afterItemClick: function (e) {
-        var target = e.target;
-
-        // Scan the DomTree for the right node.
-        while (!target.getAttribute('data-id')) {
-            target = target.get('parentNode');
-        }
+        var target = e.currentTarget;
 
         var item      = this.getItemById(target.getAttribute('data-id')),
             itemEvent = EVT_SELECT + '#' + item.id;
@@ -406,4 +401,4 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 Y.Rednose.Dropdown = Y.mix(Dropdown, Y.Rednose.Dropdown);
 
 
-}, '1.4.0', {"requires": ["event-outside", "node", "rednose-dropdown-base", "template-micro", "view"]});
+}, '1.4.1', {"requires": ["event-outside", "node", "rednose-dropdown-base", "template-micro", "view"]});

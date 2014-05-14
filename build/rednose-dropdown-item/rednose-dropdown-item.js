@@ -43,6 +43,12 @@ function DropdownItem(dropdown, config) {
     this.url      = config.url || '#';
     this.children = [];
 
+    if (config.html && !config.url) {
+        var html = Y.Node.create(config.html);
+
+        html.hasAttribute('href') && (this.url = html.getAttribute('href'));
+    }
+
     Y.mix(this, config);
 }
 
@@ -175,4 +181,4 @@ DropdownItem.prototype = {
 Y.namespace('Rednose.Dropdown').Item = DropdownItem;
 
 
-}, '1.4.0', {"requires": ["base"]});
+}, '1.4.1', {"requires": ["base"]});

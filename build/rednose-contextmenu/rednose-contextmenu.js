@@ -244,4 +244,4 @@ ContextMenu = Y.Base.create('contextMenu', Y.Plugin.Base, [], {
 Y.namespace('Rednose').ContextMenu = ContextMenu;
 
 
-}, '1.4.0', {"requires": ["base", "overlay", "panel", "plugin", "rednose-contextmenu-css", "widget"]});
+}, '1.4.1', {"requires": ["base", "overlay", "panel", "plugin", "rednose-contextmenu-css", "widget"]});

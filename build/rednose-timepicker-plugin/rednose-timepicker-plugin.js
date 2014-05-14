@@ -56,4 +56,4 @@ Y.namespace('Rednose.Plugin').Timepicker = Y.Base.create('timepicker', Y.Base, [
 });
 
 
-}, '1.4.0', {"requires": ["rednose-datetimepicker-base"]});
+}, '1.4.1', {"requires": ["rednose-datetimepicker-base"]});

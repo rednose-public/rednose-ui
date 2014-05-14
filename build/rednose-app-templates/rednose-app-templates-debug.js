@@ -322,4 +322,4 @@ Templates.viewMessage =
 Y.namespace('Rednose').Templates = Templates;
 
 
-}, '1.4.0');
+}, '1.4.1');
