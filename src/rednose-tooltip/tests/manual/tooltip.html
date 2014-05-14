@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.Tooltip module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui-min.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<style>
+
+ body {
+    padding: 50px;
+ }
+
+ .tooltip-element-container {
+    list-style: none outside none;
+    padding: 50px;
+ }
+
+ .random {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px;
+    max-width: 1200px;
+    word-wrap: break-word;
+ }
+
+</style>
+<body>
+
+<h1>Tooltips test</h1>
+
+<ul class="tooltip-element-container">
+  <li><a title="Tooltip on top" data-placement="top" href="#">Tooltip on top</a></li>
+  <li><a title="Tooltip on right" data-placement="right" href="#">Tooltip on right</a></li>
+  <li><a title="Tooltip on bottom" data-placement="bottom" href="#">Tooltip on bottom</a></li>
+  <li><a title="Tooltip on left" data-placement="left" href="#">Tooltip on left</a></li>
+</ul>
+
+<button class="btn">Generate random</button>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-tooltip', function (Y) {
+        new Y.Rednose.Tooltip({ selector : '*[data-placement=top]', selectorContainer: Y.one('ul') });
+        new Y.Rednose.Tooltip({ selector : '*[data-placement=right]', selectorContainer: Y.one('ul'), placement: 'right' });
+        new Y.Rednose.Tooltip({ selector : '*[data-placement=bottom]', selectorContainer: Y.one('ul'), placement: 'bottom' });
+        new Y.Rednose.Tooltip({ selector : '*[data-placement=left]', selectorContainer: Y.one('ul'), placement: 'left' });
+
+        Y.one('button').on('click', function() {
+            var directions = ['TOP', 'LEFT', 'RIGHT', 'BOTTOM'];
+
+            if (Y.one('.random')) {
+                return;
+            }
+
+            var randomnessContainer = Y.Node.create('<div class="random"></div>');
+
+            var randomWord = function() {
+                var word  = '',
+                    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+                for (i = 0; i < Math.floor(Math.random() * 10); i++) {
+                    word += chars.charAt(Math.floor(Math.random() * chars.length))
+                }
+
+                if (word === '') {
+                    return randomWord();
+                }
+
+                return word;
+            }
+
+            Y.one('body').append(randomnessContainer);
+
+            for (var x = 0; x < 2000; x++) {
+                if (Math.floor(Math.random() * 10) === 5) {
+                    var direction = directions[Math.floor(Math.random() * 4)];
+
+                    randomnessContainer.append('<a title="' + randomWord() + '" data-placement="' + direction + '">TOOLTIP' + direction +'</a>&nbsp;');
+                } else {
+                    randomnessContainer.append(randomWord() + '&nbsp;');
+                }
+            }
+
+            new Y.Rednose.Tooltip({ selector : 'a[data-placement=TOP]', selectorContainer: randomnessContainer });
+            new Y.Rednose.Tooltip({ selector : 'a[data-placement=RIGHT]', selectorContainer: randomnessContainer, placement: 'right' });
+            new Y.Rednose.Tooltip({ selector : 'a[data-placement=BOTTOM]', selectorContainer: randomnessContainer, placement: 'bottom' });
+            new Y.Rednose.Tooltip({ selector : 'a[data-placement=LEFT]', selectorContainer: randomnessContainer, placement: 'left' });
+        });
+    });
+</script>
+</body>
+</html>
