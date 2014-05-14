@@ -27,5 +27,11 @@
             "node-pluginhost",
             "plugin"
         ]
+    },
+
+    "rednose-dropdown-delegate" : {
+        "requires": [
+            "rednose-dropdown-plugin"
+        ]
     }
 }

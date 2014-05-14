@@ -6,6 +6,7 @@ YUI.add('rednose-dropdown-plugin', function (Y, NAME) {
  * Provides the `Y.Rednose.Plugin.Dropdown` Node plugin.
  *
  * @module rednose-dropdown
+ * @submodule rednose-dropdown-plugin
  */
 
 /**
