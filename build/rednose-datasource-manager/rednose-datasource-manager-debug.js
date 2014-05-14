@@ -784,4 +784,4 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
 Y.namespace('Rednose.DataSourceManager').DataSourceManager = DataSourceManager;
 
 
-}, '1.4.1', {"requires": ["rednose-app", "rednose-dataprovider"]});
+}, '1.4.2', {"requires": ["rednose-app", "rednose-dataprovider"]});

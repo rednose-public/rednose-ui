@@ -155,7 +155,7 @@ var App = Y.Base.create('app', Y.App, [], {
     Helper method, to inform a potential higher level window that this app has been closed.
 
     @method closeApp
-    @deprecated Don't use iframes, it is incompatible with routing
+    @deprecated Don't use iframes, it is incompatible with routing. This feature will be removed in version 1.5.
     **/
     closeApp: function () {
         if ((window.self !== window.top) && typeof (window.parent.closeApp() === 'function')) {
@@ -388,7 +388,7 @@ App.setTitle = function (title) {
 Y.namespace('Rednose').App = App;
 
 
-}, '1.4.1', {
+}, '1.4.2', {
     "requires": [
         "app-base",
         "event-custom",
