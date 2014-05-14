@@ -241,14 +241,28 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
         var button = e.button,
             event  = EVT_CLICK + '#' + button.id;
 
-        this.fire(EVT_CLICK, {
-            originEvent: e,
-            button     : button
-        });
+        if (!this._published[event]) {
+            this._published[event] = this.publish(event, {
+                defaultFn: this._defButtonClickFn
+            });
+        }
 
         this.fire(event, {
             originEvent: e,
             button     : button
+        });
+    },
+
+    // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defButtonClickFn: function (e) {
+        this.fire(EVT_CLICK, {
+            originEvent: e.originEvent,
+            button     : e.button
         });
     }
 });
