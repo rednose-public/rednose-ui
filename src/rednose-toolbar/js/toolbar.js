@@ -17,6 +17,18 @@
  * @extends Rednose.Toolbar.Base
  * @uses View
  */
+
+/**
+ * Fired when a button in the toolbar is clicked.
+ *
+ * You can subscribe to specific buttons through the following event: "click#id".
+ *
+ * @event click
+ * @param {Rednose.Button} item The button that was clicked.
+ * @param {EventFacade} originEvent Original button event.
+ */
+var EVT_CLICK = 'click';
+
 var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
 
     /**
@@ -147,7 +159,9 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
         this._toolbarEvents.push(
             this.after({
                 open : this._afterAdd,
-                close: this._afterRemove
+                close: this._afterRemove,
+
+                'button:click': this._afterButtonClick
             })
         );
     },
@@ -215,6 +229,25 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
         }
 
         console.log(e.index);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterButtonClick: function (e) {
+        var button = e.button,
+            event  = EVT_CLICK + '#' + button.id;
+
+        this.fire(EVT_CLICK, {
+            originEvent: e,
+            button     : button
+        });
+
+        this.fire(event, {
+            originEvent: e,
+            button     : button
+        });
     }
 });
 

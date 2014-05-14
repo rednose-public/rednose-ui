@@ -233,6 +233,8 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
     _createButtonGroup: function (config) {
         var group = new ButtonGroup(config);
 
+        group.addTarget(this);
+
         this._buttonGroupMap.push(group);
 
         return group;
@@ -246,6 +248,8 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         var index = this._buttonGroupMap.indexOf(group);
 
         group.destroy();
+
+        group.removeTarget(this);
 
         delete this._buttonGroupMap[index];
     },
