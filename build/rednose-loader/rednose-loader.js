@@ -233,6 +233,12 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-dropdown-item"
         ]
     },
+    "rednose-dropdown-delegate": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-dropdown-plugin"
+        ]
+    },
     "rednose-dropdown-item": {
         "group": "rednose-ui",
         "requires": [
@@ -411,7 +417,8 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-tooltip": {
         "group": "rednose-ui",
         "requires": [
-            "gallery-bootstrap-tooltip"
+            "node",
+            "anim"
         ]
     },
     "rednose-treeview": {
@@ -484,7 +491,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '2a3d18367350ee5ef3474e5868e830ec';
+YUI.Env[Y.version].md5 = '6086b6d5ae07bc1d4c0ad6f056b50c8d';
 
 
-}, '1.4.0');
+}, '1.4.2');

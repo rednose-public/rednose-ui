@@ -223,4 +223,4 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
 Y.Rednose.Toolbar = Y.mix(Toolbar, Y.Rednose.Toolbar);
 
 
-}, '1.4.0', {"requires": ["rednose-toolbar-base"]});
+}, '1.4.2', {"requires": ["rednose-toolbar-base"]});

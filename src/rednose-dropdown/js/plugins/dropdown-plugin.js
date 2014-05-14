@@ -4,6 +4,7 @@
  * Provides the `Y.Rednose.Plugin.Dropdown` Node plugin.
  *
  * @module rednose-dropdown
+ * @submodule rednose-dropdown-plugin
  */
 
 /**

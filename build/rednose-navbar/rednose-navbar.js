@@ -180,7 +180,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @param {Node} node Menu dropdown node
     @param {Array} items The menu items
     @public
-    @deprecated Use Rednose.Dropdown
+    @deprecated Use Rednose.Dropdown. This method will be removed in version 1.5.
     **/
     createDropdown: function (node, items) {
         var self = this;
@@ -417,7 +417,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 Y.namespace('Rednose').Navbar = Navbar;
 
 
-}, '1.4.0', {
+}, '1.4.2', {
     "requires": [
         "base",
         "gallery-bootstrap-dropdown",

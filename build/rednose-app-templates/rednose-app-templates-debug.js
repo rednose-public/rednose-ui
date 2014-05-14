@@ -262,6 +262,7 @@ RedNose framework app/view templates.
 @class Templates
 @namespace Rednose
 @constructor
+@deprecated This module will be removed in version 1.5.
 **/
 function Templates() {
     Templates.superclass.constructor.apply(this);
@@ -322,4 +323,4 @@ Templates.viewMessage =
 Y.namespace('Rednose').Templates = Templates;
 
 
-}, '1.4.0');
+}, '1.4.2');

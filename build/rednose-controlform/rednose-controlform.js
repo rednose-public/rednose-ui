@@ -688,6 +688,9 @@ Y.namespace('Rednose').ControlFormCommon = Common;
 
 var ControlForm;
 
+/**
+ * @deprecated This module will be removed in version 1.5
+ */
 ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], {
 
     viewTemplate:
@@ -1097,7 +1100,7 @@ ControlForm = Y.Base.create('controlForm', Y.Base, [ Y.Rednose.WidgetFactory ], 
 Y.namespace('Rednose').ControlForm = ControlForm;
 
 
-}, '1.4.0', {
+}, '1.4.2', {
     "requires": [
         "autocomplete",
         "autocomplete-filters",

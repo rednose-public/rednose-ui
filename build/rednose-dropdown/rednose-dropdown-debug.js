@@ -401,4 +401,4 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 Y.Rednose.Dropdown = Y.mix(Dropdown, Y.Rednose.Dropdown);
 
 
-}, '1.4.0', {"requires": ["event-outside", "node", "rednose-dropdown-base", "template-micro", "view"]});
+}, '1.4.2', {"requires": ["event-outside", "node", "rednose-dropdown-base", "template-micro", "view"]});
