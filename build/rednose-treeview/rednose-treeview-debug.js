@@ -7,9 +7,7 @@ YUI.add('rednose-treeview', function (Y, NAME) {
  *
  * @module rednose-treeview
  */
-var TreeView,
-
-    CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',
+var CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',
     CSS_INNER_CONTAINER = 'rednose-treeview-inner-container',
     CSS_TREEVIEW_ICON   = 'rednose-treeview-icon',
 
@@ -46,7 +44,7 @@ var TreeView,
  * @constructor
  * @extends TreeView
  */
-TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Rednose.TreeView.DD, Y.Rednose.TreeView.Selectable], {
+var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.Rednose.TreeView.Selectable], {
 
     // -- Public Properties -------------------------------------------------
 
@@ -395,7 +393,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').TreeView = TreeView;
+Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
 
 
 }, '1.5.0-DEV', {

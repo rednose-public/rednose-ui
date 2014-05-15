@@ -64,7 +64,7 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
         this._scope = config.scope;
         this._node  = config.node;
 
-        host.after('render', this._afterRender, this);
+//        host.after('render', this._afterRender, this);
     },
 
     /**

@@ -31,9 +31,9 @@ suite.add(new Y.Test.Case({
         });
 
         this.navbar.render();
-        this.navbar.plug(Y.Rednose.Navbar.Recent, { node: 'open-recent' });
+        this.navbar.plug(Y.Rednose.Plugin.NavbarRecent, { node: 'open-recent' });
 
-        Assert.isInstanceOf(Y.Rednose.Navbar.Recent, this.navbar.hasPlugin('recent'));
+        Assert.isInstanceOf(Y.Rednose.Plugin.NavbarRecent, this.navbar.hasPlugin('recent'));
 
         this.navbar.unplug('recent');
     },
@@ -56,7 +56,7 @@ suite.add(new Y.Test.Case({
         });
 
         this.navbar.render();
-        this.navbar.plug(Y.Rednose.Navbar.Recent, { node: 'open-recent' });
+        this.navbar.plug(Y.Rednose.Plugin.NavbarRecent, { node: 'open-recent' });
 
         this.navbar.unplug('recent');
 
