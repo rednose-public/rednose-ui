@@ -1,6 +1,7 @@
 {
     "rednose-tooltip" : {
         "requires": [
+            "base",
             "node",
             "anim"
         ]
