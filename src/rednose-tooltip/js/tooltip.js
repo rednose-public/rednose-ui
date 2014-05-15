@@ -62,11 +62,13 @@ var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
     },
 
     _showTooltip: function (node) {
-        var tooltip           = node.getData('tooltipElement'),
-            tooltipDimensions = this._getDimensions(tooltip);
-            nodeDimensions    = this._getDimensions(node);
+        var tooltip        = node.getData('tooltipElement'),
+            nodeDimensions = this._getDimensions(node),
+            tooltipDimensions;
 
         Y.one('body').append(tooltip);
+
+        tooltipDimensions = this._getDimensions(tooltip);
 
         switch (this.get('placement').toLowerCase()) {
             case 'top':
