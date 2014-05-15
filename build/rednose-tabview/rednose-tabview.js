@@ -130,4 +130,4 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
 Y.namespace('Rednose').TabView = TabView;
 
 
-}, '1.4.2', {"requires": ["node"]});
+}, '1.5.0-DEV', {"requires": ["node"]});

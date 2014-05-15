@@ -33,6 +33,10 @@ Version 1.5 is compatible with YUI 3.16.0.
  * The `buttons` **attribute** was removed. Use `reset` on the toolbar property to reset the buttons.
  * The `buttons` **property** was removed. Use the `buttonGroups` properties, both accept an array of button-groups configurations.
 
+## rednose-view-nav
+
+ * Event `buttonClose` was renamed to `close`.
+
 ## rednose-ui
 
 * **All CSS** is now handled by `LESS` templates within the `rednose-ui` module.

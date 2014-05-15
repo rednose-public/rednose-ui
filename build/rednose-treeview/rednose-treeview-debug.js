@@ -398,7 +398,7 @@ TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Red
 Y.namespace('Rednose').TreeView = TreeView;
 
 
-}, '1.4.2', {
+}, '1.5.0-DEV', {
     "requires": [
         "gallery-sm-treeview",
         "rednose-model-tree",

@@ -40,6 +40,15 @@ var EVT_ADD = 'add';
  */
 var EVT_REMOVE = 'remove';
 
+/**
+ * Fired when the button groups are reset.
+ *
+ * @event reset
+ * @param {Array} items Array of new button group config objects
+ * @preventable _defResetFn
+ **/
+var EVT_RESET = 'reset';
+
 var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
 
     // -- Protected Properties -------------------------------------------------
@@ -108,6 +117,15 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         });
     },
 
+    /**
+     * Resets the button groups.
+     *
+     * @param {Array} groups Array of new button group config objects
+     * @chainable
+     */
+    reset: function (groups) {
+        // TODO: Implement
+    },
 
     /**
      * Returns a button group by index.
@@ -300,4 +318,4 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
 Y.namespace('Rednose.Toolbar').Base = ToolbarBase;
 
 
-}, '1.4.2', {"requires": ["rednose-button-group", "base"]});
+}, '1.5.0-DEV', {"requires": ["rednose-button-group", "base"]});

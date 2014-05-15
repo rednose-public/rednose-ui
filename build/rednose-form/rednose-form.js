@@ -824,7 +824,7 @@ ControlViewFactory.create = function (model) {
 Y.namespace('Rednose.Form').ControlViewFactory = ControlViewFactory;
 
 
-}, '1.4.2', {
+}, '1.5.0-DEV', {
     "requires": [
         "rednose-controlform",
         "rednose-dataprovider",

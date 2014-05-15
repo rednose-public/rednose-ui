@@ -415,6 +415,7 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-tooltip": {
         "group": "rednose-ui",
         "requires": [
+            "base",
             "node",
             "anim"
         ]
@@ -490,4 +491,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '205c99541f2f9b59ae0e03c0898c6da8';
+YUI.Env[Y.version].md5 = '28554d6404694f484feef9a38f05445a';
