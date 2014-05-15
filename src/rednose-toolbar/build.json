@@ -1,0 +1,17 @@
+{
+    "name": "rednose-toolbar",
+
+    "builds": {
+        "rednose-toolbar": {
+            "jsfiles": [
+                "js/toolbar.js"
+            ]
+        },
+
+        "rednose-toolbar-base": {
+            "jsfiles": [
+                "js/toolbar-base.js"
+            ]
+        }
+    }
+}

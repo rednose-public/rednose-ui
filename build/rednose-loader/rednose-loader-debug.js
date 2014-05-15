@@ -81,21 +81,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-button"
         ]
     },
-    "rednose-contextmenu": {
-        "group": "rednose-ui",
-        "requires": [
-            "base",
-            "overlay",
-            "panel",
-            "plugin",
-            "rednose-contextmenu-css",
-            "widget"
-        ]
-    },
-    "rednose-contextmenu-css": {
-        "group": "rednose-ui",
-        "type": "css"
-    },
     "rednose-controlform": {
         "group": "rednose-ui",
         "requires": [
@@ -401,6 +386,19 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-datetimepicker-base"
         ]
     },
+    "rednose-toolbar": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-toolbar-base"
+        ]
+    },
+    "rednose-toolbar-base": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-button-group",
+            "base"
+        ]
+    },
     "rednose-tooltip": {
         "group": "rednose-ui",
         "requires": [
@@ -463,10 +461,11 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "event-custom",
-            "rednose-navbar",
+            "rednose-toolbar",
             "rednose-panel",
             "rednose-util",
             "rednose-widget-nav-container",
+            "template-micro",
             "view"
         ]
     },
@@ -479,7 +478,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'f0be278da55fb03cc3ef1cf7f96d2549';
+YUI.Env[Y.version].md5 = 'f34736c3fe63be69a8f8d66aa44b1aaf';
 
 
 }, '1.5.0-DEV');

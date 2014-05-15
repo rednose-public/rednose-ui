@@ -284,6 +284,10 @@ html,
   outline: none;
 }
 
+div .btn-toolbar {
+  margin: 0;
+}
+
 .rednose-navbar {
   height: 41px;
 }

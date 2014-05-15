@@ -19,7 +19,7 @@ var EVT_DISABLE = 'disable';
 /**
  * @event rename
  * @param {Rednose.Button}
- * @param {String value}
+ * @param {String} value
  * @preventable _defRenameFn
  */
 var EVT_RENAME = 'rename';
@@ -166,7 +166,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     /**
      * Renames this button.
      *
-     * @param {String} title
+     * @param {String} value
      *
      * @chainable
      */

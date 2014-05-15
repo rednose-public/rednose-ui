@@ -38,10 +38,11 @@
             "rednose-view-nav" : {
                 "requires": [
                     "event-custom",
-                    "rednose-navbar",
+                    "rednose-toolbar",
                     "rednose-panel",
                     "rednose-util",
                     "rednose-widget-nav-container",
+                    "template-micro",
                     "view"
                 ]
             }
