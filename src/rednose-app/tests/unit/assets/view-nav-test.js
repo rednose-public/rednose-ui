@@ -12,16 +12,17 @@ suite.add(new Y.Test.Case({
         var nav = new Y.Rednose.View.Nav();
 
         nav.title = 'Title';
-        nav.buttons = {};
+        nav.buttonGroups = {};
 
         nav.destroy();
 
         Assert.isNull(nav.title);
-        Assert.isNull(nav.buttons);
+        Assert.isNull(nav.buttonGroups);
+        Assert.isNull(nav.toolbar);
 
+        Assert.isNull(nav._body);
         Assert.isNull(nav._footer);
         Assert.isNull(nav._panel);
-        Assert.isNull(nav._toolbar);
     }
 }));
 

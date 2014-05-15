@@ -36,7 +36,9 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
      * Title property, sets the panel's header content.
      *
      * @property {String} title
+     * @default null
      */
+    title: null,
 
     /**
      * Button groups property, sets the panel's left footer buttons.
@@ -44,7 +46,17 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
      * Accepts an array of button-group configurations.
      *
      * @property {Object[]} buttonGroups
+     * @default null
      */
+    buttonGroups: null,
+
+    /**
+     * Reference to the views toolbar.
+     *
+     * @property {Rednose.Toolbar} toolbar
+     * @default null
+     */
+    toolbar: null,
 
     /**
      * Whether the footer section will be rendered or not.
@@ -103,12 +115,6 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         close: 'close'
     },
 
-    /**
-     * Reference to the views toolbar.
-     *
-     * @property {Rednose.Toolbar} toolbar
-     */
-
     // -- Protected Properties -------------------------------------------------
 
     /**
@@ -165,14 +171,16 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     destructor: function () {
         (new Y.EventHandle(this._viewNavEventHandles)).detach();
 
+        this.title        = null;
+        this.buttonGroups = null;
+        this._body        = null;
+        this._footer      = null;
+
         if (this._panel) {
             this._panel.destroy();
-        }
 
-        this.title   = null;
-        this.buttons = null;
-        this._footer = null;
-        this._panel  = null;
+            this._panel = null;
+        }
 
         if (this.toolbar) {
             this.toolbar.removeTarget(this);

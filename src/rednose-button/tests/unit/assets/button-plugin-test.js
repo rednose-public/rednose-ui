@@ -16,20 +16,20 @@ YUI.add('rednose-button-plugin-test', function (Y) {
             Y.one('#button').remove();
         },
 
-        '`plug()` should bind the menu': function () {
+        '`plug()` should bind the dropdown': function () {
             var button = Y.one('#button');
 
-            button.plug(Y.Rednose.ContextMenu);
+            button.plug(Y.Rednose.Plugin.Dropdown);
 
-            Assert.isInstanceOf(Y.Rednose.ContextMenu, button.hasPlugin('dropdown'));
+            Assert.isInstanceOf(Y.Rednose.Plugin.Dropdown, button.hasPlugin('dropdown'));
 
             button.unplug('dropdown');
         },
 
-        '`unplug()` should purge the menu': function () {
+        '`unplug()` should purge the dropdown': function () {
             var button = Y.one('#button');
 
-            button.plug(Y.Rednose.ContextMenu);
+            button.plug(Y.Rednose.Plugin.Dropdown);
 
             button.unplug('dropdown');
 
