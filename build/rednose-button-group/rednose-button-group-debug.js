@@ -22,10 +22,18 @@ var EVT_CHANGE = 'change';
 var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.View], {
 
     /**
-     * Button group type: `default`, `radio`, `checkbox`.
+     * Button group type: `default`, `radio` or `checkbox`.
      *
      * @property {String} type
      * @default 'default'
+     * @readOnly
+     */
+
+    /**
+     * Button group position: `left` or `right`.
+     *
+     * @property {String} position
+     * @default 'right'
      * @readOnly
      */
 
@@ -41,14 +49,17 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
 
     classNames: {
         group   : 'btn-group',
-        vertical: 'btn-group-vertical'
+        vertical: 'btn-group-vertical',
+        left    : 'pull-left',
+        right   : 'pull-right'
     },
 
     // -- Life Cycle Methods ---------------------------------------------------
 
     initializer: function (config) {
-        this.type   = config.type || 'default';
-        this._value = null;
+        this.type     = config.type || 'default';
+        this.position = config.position || 'left';
+        this._value   = null;
 
         this._attachButtonGroupEvents();
     },
@@ -87,6 +98,8 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
         if (this.get('vertical')) {
             container.addClass(classNames.vertical);
         }
+
+        container.addClass(this.position === 'right' ? classNames.right : classNames.left);
 
         Y.Object.each(this._buttonMap, function (button) {
             container.append(button.render().get('container'));

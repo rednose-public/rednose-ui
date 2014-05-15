@@ -284,7 +284,7 @@ html,
   outline: none;
 }
 
-.rednose-toolbar.btn-toolbar {
+div .btn-toolbar {
   margin: 0;
 }
 

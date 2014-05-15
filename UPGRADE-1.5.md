@@ -23,12 +23,16 @@ Version 1.5 is compatible with YUI 3.16.0.
 ## rednose-toolbar
 
  * Class `Rednose.Toolbar` was refactored and now uses instances of `rednose-button-group`.
+ * Config property `evtPrefix` for backwards compatibility was removed in this version.
 
 ## rednose-view-nav
 
  * Event `buttonClose` was renamed to `close`.
+ * Event `load` was removed.
+ * Method `getButton` was removed. Use  `getButtonById` on the `toolbar` property.
+ * The `buttons` **attribute** was removed. Use `reset` on the toolbar property to reset the buttons.
+ * The `buttons` **property** was removed. Use the `buttonGroups` properties, both accept an array of button-groups configurations.
 
 ## rednose-ui
 
 * **All CSS** is now handled by `LESS` templates within the `rednose-ui` module.
-

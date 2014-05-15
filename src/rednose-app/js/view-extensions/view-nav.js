@@ -10,34 +10,6 @@
 
 var Micro = Y.Template.Micro;
 
-// Bird's-eye view of the CSS classes used.
-var CSS_MAGIC_PREFIX = 'rednose',
-    CSS_VIEW_NAV     = 'rednose-view-nav',
-
-    // Bird's-eye view of the Bootstrap CSS classes used.
-    CSS_BOOTSTRAP_BTN         = 'btn',
-    CSS_BOOTSTRAP_BTN_GROUP   = 'btn-group',
-    CSS_BOOTSTRAP_ACTIVE      = 'active',
-    CSS_BOOTSTRAP_BTN_PRIMARY = 'btn-primary',
-    CSS_BOOTSTRAP_DISABLED    = 'disabled',
-    CSS_BOOTSTRAP_FLOAT_LEFT  = 'float-left',
-    CSS_BOOTSTRAP_FLOAT_RIGHT = 'float-right',
-    CSS_BOOTSTRAP_CLOSE       = 'close',
-
-    /**
-    Fired when the optional close button is clicked.
-
-    @event buttonClose
-    **/
-    EVT_BUTTON_CLOSE = 'buttonClose',
-
-    /**
-    Fired after the view is rendered and sized.
-
-    @event buttonClose
-    **/
-    EVT_LOAD = 'load';
-
 /**
  * Fired when the close button is clicked.
  *
@@ -59,44 +31,41 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     // -- Public Properties ----------------------------------------------------
 
     /**
-    Title property, sets the panel's header content.
-
-    @property title
-    @type String
-    **/
-    title: null,
+     * Title property, sets the panel's header content.
+     *
+     * @property {String} title
+     */
 
     /**
-    Buttons property, sets the panel's footer buttons.
-
-    @property buttons
-    @type Object
-    **/
-    buttons: null,
+     * Button groups property, sets the panel's left footer buttons.
+     *
+     * Accepts an array of button-group configurations.
+     *
+     * @property {Object[]} buttonGroups
+     */
 
     /**
-    Shows or hides the footer section.
-
-    @property footer
-    @type Boolean
-    **/
+     * Whether the footer section will be rendered or not.
+     *
+     * @property {Boolean} footer
+     * @default true
+     */
     footer: true,
 
     /**
-    Optional close button in the header.
-
-    @property close
-    @type Boolean
-    **/
+     * Whether the close button will be rendered in the header or not.
+     *
+     * @property {Boolean} close
+     * @default false
+     */
     close: false,
 
     /**
-    Optionally enable padding.
-
-    @depracated
-    @property padding
-    @type Boolean
-    **/
+     * Optionally enable padding for the body view.
+     *
+     * @property {Boolean} padding
+     * @default false
+     */
     padding: false,
 
     /**
@@ -128,19 +97,17 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
      * @property {Object} classNames
      */
     classNames: {
+        nav  : 'rednose-view-nav',
         close: 'close'
     },
 
-    // -- Protected Properties -------------------------------------------------
-
     /**
-    Stores the current state.
+     * Reference to the views toolbar.
+     *
+     * @property {Rednose.Toolbar} toolbar
+     */
 
-    @property _rendered
-    @type Boolean
-    @protected
-    **/
-    _rendered: false,
+    // -- Protected Properties -------------------------------------------------
 
     /**
      References the body DOM node.
@@ -169,8 +136,6 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     **/
     _panel: null,
 
-    toolbar: null,
-
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
@@ -180,8 +145,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     initializer: function () {
         this._viewNavEventHandles || (this._viewNavEventHandles = []);
 
-        var container  = this.get('container'),
-            classNames = this.classNames;
+        var container = this.get('container');
 
         this._viewNavEventHandles.push(
             Y.Do.after(this._afterRender, this, 'render', this),
@@ -208,29 +172,15 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         this._footer = null;
         this._panel  = null;
 
-        this._toolbar && this._toolbar.destroy();
-        this._toolbar = null;
+        if (this.toolbar) {
+            this.toolbar.removeTarget(this);
+            this.toolbar.destroy();
+
+            this.toolbar = null;
+        }
     },
 
     // -- Public Methods -------------------------------------------------------
-
-    /**
-    Get a button node by name.
-
-    @method getButton
-    @param {String} name The name of the button.
-    **/
-    getButton: function (name) {
-        if (!this.toolbar._buttonMap) {
-            return false;
-        }
-
-        if (!this.toolbar._buttonMap[name]) {
-            return false;
-        }
-
-        return this.toolbar._buttonMap[name];
-    },
 
     /**
      * Called by Rednose.App when the view dimensions change.
@@ -244,15 +194,28 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
             return;
         }
 
-        this.title && (bodyHeight -= 46);
-        this.buttons && (bodyHeight -= 56);
+        if (this.title) {
+            bodyHeight -= 46;
+        }
+
+        if (this.buttons) {
+            bodyHeight -= 56;
+        }
 
         this._body.set('offsetHeight', bodyHeight);
 
         // Check for Y.Rednose.App templates.
-        this._body.one('.rednose-unit-left') && this._body.one('.rednose-unit-left').setStyle('height', bodyHeight);
-        this._body.one('.rednose-unit-right') && this._body.one('.rednose-unit-right').setStyle('height', bodyHeight);
-        this._body.one('.rednose-unit-right') && this._body.one('.rednose-unit-right').setStyle('top', 46);
+        if (this._body.one('.rednose-unit-left')) {
+            this._body.one('.rednose-unit-left').setStyle('height', bodyHeight);
+        }
+
+        if (this._body.one('.rednose-unit-right')) {
+            this._body.one('.rednose-unit-right').setStyle('height', bodyHeight);
+        }
+
+        if (this._body.one('.rednose-unit-right')) {
+            this._body.one('.rednose-unit-right').setStyle('top', 46);
+        }
 
         this.fire(EVT_LOAD);
     },
@@ -260,52 +223,33 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     // -- Protected Methods ----------------------------------------------------
 
     /**
-    Build the footer buttons and bind them to fire events.
-
-    @method _buildFooter
-    @protected
-    **/
+     * Build the footer buttons and bind them to fire events.
+     *
+     * @method _buildFooter
+     * @protected
+     */
     _buildFooter: function () {
         this._footer = Y.Node.create('<div></div>');
 
-        this.toolbar = new Y.Rednose.Toolbar({
-            container: this._footer,
-            buttons  : this.buttons,
-            evtPrefix: this.name
-        }).render();
+        if (this.buttonGroups) {
+            this.toolbar = new Y.Rednose.Toolbar({
+                container: this._footer,
+                groups   : this.buttonGroups
+            }).render();
 
-        this.toolbar.addTarget(this);
+            this.toolbar.addTarget(this);
+        }
     },
 
     /**
-    Setter to update the buttons properties.
-
-    @method _setButtons
-    @param {Object} value The button config object
-    @protected
-    **/
-    _setButtons: function (value) {
-        var self    = this,
-            footer  = this.get('container').one('.yui3-widget-ft'),
-            buttons = this.buttons;
-
-        Y.Object.each(value, function (properties, key) {
-            self.buttons[key] = Y.merge(buttons[key], properties);
-        });
-
-        this._buildFooter();
-
-        this._rendered && footer.one('div').replace(this._footer);
-    },
-
-    /**
-    Getter to get the current button properties.
-
-    @method _getButtons
-    @protected
-    **/
-     _getButtons: function () {
-        return this.buttons;
+     * Formats a magic CSS class for a component name.
+     *
+     * @param {String} name
+     * @return {String}
+     * @protected
+     */
+    _getMagicClassName: function (name) {
+        return ViewNav.CSS_PREFIX + '-' + Y.Rednose.Util.camelCaseToDash(name);
     },
 
     // -- Protected Event Handlers ---------------------------------------------
@@ -335,7 +279,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
             config     = { bodyContent: body },
             close      = this.close;
 
-        container.addClass(CSS_VIEW_NAV);
+        container.addClass(classNames.nav);
 
         // Transfer the child nodes from the view container to the new body container.
         container.get('children').each(function (c) {
@@ -361,7 +305,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
 
         // Add a magic CSS handle to the widget-body.
         var panelBody = this._panel.get('boundingBox').one('.yui3-widget-bd'),
-            className = CSS_MAGIC_PREFIX + '-' + Y.Rednose.Util.camelCaseToDash(this.name);
+            className = this._getMagicClassName(this.name);
 
         panelBody.addClass(className);
 
@@ -381,27 +325,12 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         var parent = container.get('parentNode');
 
         parent && this.sizeView(parent);
-
-        this._rendered = true;
     }
 }, {
     /**
      * Prefix for the magic CSS classes.
      */
-    CSS_PREFIX: 'rednose',
-
-    ATTRS: {
-        /**
-        Button attribute, triggers a setter to update the DOM on setting.
-
-        @attribute buttons
-        @type Object
-        **/
-        buttons: {
-            setter: '_setButtons',
-            getter: '_getButtons'
-        }
-    }
+    CSS_PREFIX: 'rednose'
 });
 
 // -- Namespace ----------------------------------------------------------------
