@@ -314,20 +314,14 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "base",
-            "gallery-bootstrap-dropdown",
+            "rednose-dropdown-plugin",
             "json",
             "node-event-simulate",
             "node-pluginhost",
-            "rednose-dropdown",
-            "rednose-navbar-css",
             "rednose-util",
             "view",
             "widget"
         ]
-    },
-    "rednose-navbar-css": {
-        "group": "rednose-ui",
-        "type": "css"
     },
     "rednose-navbar-recent": {
         "group": "rednose-ui",
@@ -476,4 +470,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'f34736c3fe63be69a8f8d66aa44b1aaf';
+YUI.Env[Y.version].md5 = '6ff01045344f8ee638a0df1700ba60e8';

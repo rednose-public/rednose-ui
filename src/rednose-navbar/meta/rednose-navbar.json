@@ -2,20 +2,14 @@
     "rednose-navbar" : {
         "requires": [
             "base",
-            "gallery-bootstrap-dropdown",
+            "rednose-dropdown-plugin",
             "json",
             "node-event-simulate",
             "node-pluginhost",
-            "rednose-dropdown",
-            "rednose-navbar-css",
             "rednose-util",
             "view",
             "widget"
         ]
-    },
-
-    "rednose-navbar-css" : {
-        "type": "css"
     },
 
     "rednose-navbar-recent" : {

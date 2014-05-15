@@ -19,8 +19,8 @@ var TXT_CLEAR_ITEMS = 'Clear Items',
 /**
 Provides a navigation bar plugin to show a list of recent entries.
 
-@class Recent
-@namespace Rednose.NavBar
+@class NavbarRecent
+@namespace Rednose.Plugin
 @constructor
 @extends Plugin.Base
 @extensionfor Rednose.NavBar
@@ -77,12 +77,12 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     // -- Public Methods -------------------------------------------------------
 
     /**
-    @method addEntry
+    @method add
     @param {String} id Unique id
     @param {String} label Menu entry label
     @public
     **/
-    addEntry: function (id, label) {
+    add: function (id, label) {
         var cookie     = Y.Cookie.getSub(COOKIE_NAME, this._scope),
             attrs      = { id: id, label: label },
             cookieData = Y.JSON.parse(cookie) || [];
@@ -111,14 +111,16 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     },
 
     /**
-     @method clearEntries
+     @method clear
      @public
      **/
-    clearEntries: function () {
+    clear: function () {
         Y.Cookie.setSub(COOKIE_NAME, this._scope, null);
 
         this._renderMenu();
     },
+
+    // -- Protected Methods ----------------------------------------------------
 
     /**
     @method _renderMenu
@@ -127,7 +129,6 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     _renderMenu: function () {
         var host       = this.get('host'),
             cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope));
-
 
         if (!cookieData || !Y.Object.size(cookieData)) {
             this._itemNode.addClass(CSS_BOOTSTRAP_DISABLED);
@@ -177,6 +178,8 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
         )));
     },
 
+    // -- Protected Event Handlers ---------------------------------------------
+
     /**
      @method _handleClick
      @param {EventFacade} e Click event.
@@ -223,4 +226,4 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose.Navbar').Recent = Recent;
+Y.namespace('Rednose.Plugin').NavbarRecent = Recent;

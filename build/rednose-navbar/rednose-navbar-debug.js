@@ -31,8 +31,8 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
                            '<div class="navbar-inner">' +
                                '<div class="container">' +
                                    '<a class="brand brand-navbar" data-url="{url}" href="#">{title}</a>' +
-                                   '<ul class="nav"></ul>' +
-                                   '<ul class="nav pull-right"></ui>' +
+                                   '<ul class="nav rednose-menu-primary"></ul>' +
+                                   '<ul class="nav pull-right rednose-menu-secondary"></ui>' +
                                '</div>' +
                            '</div>' +
                        '</div>',
@@ -53,15 +53,13 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
                     '</div>',
 
     /**
-    @property dropdownTemplate
+    @property itemTemplate
     @type String
     @public
     **/
-    dropdownTemplate: '<li class="dropdown{submenu}">' +
-                          '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{icon}{title} <{caret}></a>' +
-                          '<ul class="dropdown-menu">' +
-                          '</ul>' +
-                      '</li>',
+    itemTemplate: '<li class="dropdown">' +
+                      '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{icon}{title} <b class="caret"></a>' +
+                  '</li>',
 
     // -- Lifecycle Methods ----------------------------------------------------
 
@@ -90,7 +88,6 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     destructor: function () {
         this.templateContainer = null;
         this.templateColumn    = null;
-        this.dropdownTemplate  = null;
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -104,12 +101,21 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             menuRight = this.get('menuSecondary'),
             template  = this.get('columnLayout') ? this.templateColumn : this.templateContainer,
             title     = this.get('title'),
-            url       = this.get('url');
+            url       = this.get('url'),
+            self      = this;
 
-        this.get('contentBox').setHTML(Y.Lang.sub(template, { title: title, url: url }));
+        this.get('contentBox').setHTML(Y.Lang.sub(template, {
+            title: title,
+            url  : url
+        }));
 
-        this._appendMenu(menuLeft, false);
-        this._appendMenu(menuRight, true);
+        Y.Array.each(menuLeft, function (menu) {
+            self._renderItem(menu);
+        });
+
+        Y.Array.each(menuRight, function (menu) {
+            self._renderItem(menu, 'right');
+        });
     },
 
     /**
@@ -117,11 +123,21 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @public
     **/
     bindUI: function() {
-        var container = this.get('contentBox');
+//        this._userDropdown.plug(Y.Rednose.Plugin.Dropdown, {
+//            showCaret: false,
+//
+//            items: [
+//                { title: this.get('strings.user_settings'), url: YUI.Env.routing.settings },
+//                { type: 'divider' },
+//                { title: this.get('strings.user_sign_out'), url: YUI.Env.routing.logout }
+//            ]
+//        });
 
-        container.all('.dropdown-toggle').each(function (node) {
-            node.plug(Y.Bootstrap.Dropdown);
-        });
+//        var container = this.get('contentBox');
+//
+//        container.all('.dropdown-toggle').each(function (node) {
+//            node.plug(Y.Bootstrap.Dropdown);
+//        });
     },
 
     /**
@@ -173,47 +189,39 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         node.setHTML(title);
     },
 
-    /**
-    Append a dropdown to an item in a prerendered navbar.
-
-    @method createDropdown
-    @param {Node} node Menu dropdown node
-    @param {Array} items The menu items
-    @public
-    @deprecated Use Rednose.Dropdown. This method will be removed in version 1.5.
-    **/
-    createDropdown: function (node, items) {
-        var self = this;
-
-        // Convert this node to a dropdown-toggle if it isn't one yet.
-        if (node.one('.dropdown-menu') === null) {
-            node.removeClass('nav-item');
-            node.addClass('dropdown');
-
-            node.one('a').addClass('dropdown-toggle');
-            node.one('a').append('&nbsp;');
-            node.one('a').append('<b class="caret"></b>');
-
-            node.append(Y.Node.create('<ul class="dropdown-menu"></ul>'));
-        }
-
-        Y.Array.each(items, function (i) {
-            var li = self._createLi(i, node);
-
-            node.one('.dropdown-menu').append(li);
-        });
-
-        node.one('a').plug(Y.Bootstrap.Dropdown);
-
-        // Prevent default URL behaviour.
-        node.delegate('click', this._prevent, 'a', this);
-
-        // Bind the handler for clicking on menu items.
-        node.delegate('click', this._handleClick, '.dropdown-menu a', this);
-        node.delegate('click', this._handleClick, 'ul.nav > li.nav-item > a', this);
-    },
-
     // -- Protected Methods ----------------------------------------------------
+
+    /**
+     * Renders a menu item.
+     *
+     * @param {Object} config
+     * @param {String} [position='left']
+     * @protected
+     */
+    _renderItem: function (config, position) {
+        position || (position = 'left');
+
+        var container = this.get('contentBox'),
+            parent    = container.one(position === 'left' ? '.rednose-menu-primary' : '.rednose-menu-secondary');
+
+        var item = Y.Node.create(Y.Lang.sub(this.itemTemplate, {
+            title: config.title,
+            icon : config.icon ? '<i class="icon icon-white ' + m.icon + '"></i> ' : ''
+        }));
+
+        parent.append(item);
+
+        if (config.items) {
+            var anchor = item.one('a');
+
+            anchor.plug(Y.Rednose.Plugin.Dropdown, {
+                showCaret: false,
+                items    : config.items
+            });
+
+            anchor.dropdown.addTarget(this);
+        }
+    },
 
     /**
     @method _appendMenu
@@ -420,12 +428,10 @@ Y.namespace('Rednose').Navbar = Navbar;
 }, '1.5.0-DEV', {
     "requires": [
         "base",
-        "gallery-bootstrap-dropdown",
+        "rednose-dropdown-plugin",
         "json",
         "node-event-simulate",
         "node-pluginhost",
-        "rednose-dropdown",
-        "rednose-navbar-css",
         "rednose-util",
         "view",
         "widget"

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Y.Rednose.ControlForm module test</title>
+    <title>Y.Rednose.Navbar module test</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
 
@@ -20,23 +20,28 @@
                 base: "../../../../build/"
             }
         }
-    }).use('rednose-navbar', function (Y) {
+    }).use('rednose-navbar-recent', function (Y) {
         var navbar = new Y.Rednose.Navbar({
-            title: 'App',
+            title: 'Test',
             columnLayout: true,
 
             menu: [
                 { id: 'dropdown1', title: 'Dropdown 1', items: [
                     { id: 'action1', title: 'Action 1' },
                     { id: 'action2', title: 'Action 2', disabled: true },
-                    { title: '-' },
-                    { id: 'action3', title: 'Action 3' }
+                    { type: 'divider' },
+                    { id: 'recent', title: 'Recent' }
                 ]},
                 { id: 'dropdown2', title: 'Dropdown 2', items: [
                     { id: 'action1', title: 'Action 1' },
                     { id: 'action2', title: 'Action 2', disabled: true },
-                    { title: '-' },
-                    { id: 'action3', title: 'Action 3' }
+                    { type: 'divider' },
+                    { title: 'Action 3', children: [
+                        { id: 'action1', title: 'Action 1' },
+                        { id: 'action2', title: 'Action 2', disabled: true },
+                        { type: 'divider' },
+                        { id: 'action3', title: 'Action 3' }
+                    ] }
                 ]}
             ],
 
@@ -44,7 +49,7 @@
                 { id: 'dropdown3', title: 'Dropdown 3', items: [
                     { id: 'action1', title: 'Action 1' },
                     { id: 'action2', title: 'Action 2', disabled: true },
-                    { title: '-' },
+                    { type: 'divider' },
                     { id: 'action3', title: 'Action 3' }
                 ]}
             ],
@@ -52,13 +57,18 @@
             srcNode: Y.one('.rednose-navbar')
         });
 
+//        navbar.plug(Y.Rednose.Plugin.NavbarRecent, { node: 'recent', scope: 'rednose-test' });
+
         navbar.render();
 
-        navbar.on('navbar:action1', function (e) {
+//        navbar.recent.clear();
+//        navbar.recent.add(1, 'Recent 1');
+//        navbar.recent.add(2, 'Recent 2');
+//        navbar.recent.add(3, 'Recent 3');
+
+        navbar.on('dropdown:select#action1', function (e) {
             console.log(e);
         });
-
-        console.log(Y.Rednose.Navbar);
     });
 </script>
 </body>

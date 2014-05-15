@@ -16,6 +16,12 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Method `createDropdown` has been removed. Use module `Rednose.Dropdown` instead.
  * Class `Rednose.Toolbar` was moved to a separate module, see `rednose-toolbar`.
 
+## rednose-navbar-recent
+
+ * Constructor `Rednose.Navbar.Recent` was renamed to `Rednose.Plugin.NavbarRecent`.
+ * Method `addEntry` was renamed to `add`.
+ * Method `clearEntries` was renamed to `clear`.
+
 ## rednose-controlform
 
 * Module `Rednose.ControlForm` was removed and was replaced by the `rednose-form` module.
@@ -31,7 +37,7 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Event `load` was removed.
  * Method `getButton` was removed. Use  `getButtonById` on the `toolbar` property.
  * The `buttons` **attribute** was removed. Use `reset` on the toolbar property to reset the buttons.
- * The `buttons` **property** was removed. Use the `buttonGroups` properties, both accept an array of button-group configurations.
+ * The `buttons` **property** was removed. Use the `buttonGroups` properties, it accepts an array of button-group configurations.
 
 ## rednose-ui
 
