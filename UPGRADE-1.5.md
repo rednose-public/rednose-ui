@@ -24,6 +24,10 @@ Version 1.5 is compatible with YUI 3.16.0.
 
  * Class `Rednose.Toolbar` was refactored and now uses instances of `rednose-button-group`.
 
+## rednose-view-nav
+
+ * Event `buttonClose` was renamed to `close`.
+
 ## rednose-ui
 
 * **All CSS** is now handled by `LESS` templates within the `rednose-ui` module.
