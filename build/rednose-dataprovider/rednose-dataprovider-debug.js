@@ -25,22 +25,19 @@ DataSourceAttributeCollection = Y.Base.create('dataSourceAttributeCollection', Y
 
 DataSource = Y.Base.create('dataSource', Y.Model, [], {
     sync: function (action, options, callback) {
-        switch (action) {
-            case 'create':
-                Y.io(Routing.generate('rednose_dataprovider_post_data_sources'), {
-                    method: 'POST',
-                    data: Y.JSON.stringify(this.toJSON()),
-                    on : {
-                        success : function (tx, r) {
-                            callback(null, r.responseText);
-                        },
-                        failure: function (tx, r) {
-                            callback(Y.JSON.parse(r.responseText));
-                        }
+        if (action === 'create') {
+            Y.io(Routing.generate('rednose_dataprovider_post_data_sources'), {
+                method: 'POST',
+                data: Y.JSON.stringify(this.toJSON()),
+                on : {
+                    success : function (tx, r) {
+                        callback(null, r.responseText);
+                    },
+                    failure: function (tx, r) {
+                        callback(Y.JSON.parse(r.responseText));
                     }
-                });
-
-            break;
+                }
+            });
         }
     },
 
@@ -288,7 +285,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
 
         this.ac.on(
             "query",
-            function (e) {
+            function () {
                 container.one('.dataprovider-button').addClass('dataprovider-spinner');
                 container.one('.dataprovider-button').setHTML('&nbsp;');
             }
@@ -296,7 +293,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
 
         this.ac.after(
             "results",
-            function (e) {
+            function () {
                 container.one('.dataprovider-button').removeClass('dataprovider-spinner');
                 container.one('.dataprovider-button').setHTML(self.get('buttonCaption'));
             }
@@ -318,14 +315,14 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
             ac.sendRequest();
             ac.show();
         }
-    },
+    }
 }, {
     ATTRS: {
         placeholder: { value: 'Type here to search…' },
         buttonCaption: { value: '…' },
         parameterBag: { value: {} },
         dataProviderId: { value: 'unknown.id' },
-        display_handle: { value: 'display_name' },
+        display_handle: { value: 'display_name' }
     }
 });
 

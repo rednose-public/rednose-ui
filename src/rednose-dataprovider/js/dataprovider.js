@@ -73,7 +73,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
 
         this.ac.on(
             "query",
-            function (e) {
+            function () {
                 container.one('.dataprovider-button').addClass('dataprovider-spinner');
                 container.one('.dataprovider-button').setHTML('&nbsp;');
             }
@@ -81,7 +81,7 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
 
         this.ac.after(
             "results",
-            function (e) {
+            function () {
                 container.one('.dataprovider-button').removeClass('dataprovider-spinner');
                 container.one('.dataprovider-button').setHTML(self.get('buttonCaption'));
             }
@@ -103,14 +103,14 @@ DataProvider = Y.Base.create('dataProvider', Y.Widget, [], {
             ac.sendRequest();
             ac.show();
         }
-    },
+    }
 }, {
     ATTRS: {
         placeholder: { value: 'Type here to search…' },
         buttonCaption: { value: '…' },
         parameterBag: { value: {} },
         dataProviderId: { value: 'unknown.id' },
-        display_handle: { value: 'display_name' },
+        display_handle: { value: 'display_name' }
     }
 });
 

@@ -218,34 +218,30 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     // -- Default Event Handlers -----------------------------------------------
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _defDisableFn: function (e) {
+    _defDisableFn: function () {
         this.disabled = true;
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _defEnableFn: function (e) {
+    _defEnableFn: function () {
         this.disabled = false;
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _defActivateFn: function (e) {
+    _defActivateFn: function () {
         this.active = true;
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _defDeactivateFn: function (e) {
+    _defDeactivateFn: function () {
         this.active = false;
     },
 

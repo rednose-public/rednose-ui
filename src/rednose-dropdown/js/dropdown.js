@@ -112,7 +112,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 
     // -- Lifecycle methods ----------------------------------------------------
 
-    initializer: function (config) {
+    initializer: function () {
         // Allow all extensions to initialize in case they provide custom getters for the container.
         this.onceAfter('initializedChange', function () {
             this.get('container').addClass(this.classNames.dropdown);
@@ -291,10 +291,9 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _afterOpen: function (e) {
+    _afterOpen: function () {
         if (!this.rendered) {
             this.render();
         }
@@ -306,10 +305,9 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _afterClose: function (e) {
+    _afterClose: function () {
         var container  = this.get('container'),
             classNames = this.classNames;
 
@@ -356,10 +354,9 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _afterReset: function (e) {
+    _afterReset: function () {
         if (!this.rendered) {
             return;
         }

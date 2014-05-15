@@ -316,8 +316,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             classNames  = CSS_BOOTSTRAP_BTN,
             self        = this;
 
-        Y.Array.each(buttons, function (option) {
-            if (options.position && options.position == 'right') {
+        Y.Array.each(buttons, function (options) {
+            if (options.position && options.position === 'right') {
                 classNames += ' ' + CSS_BOOTSTRAP_PULL_RIGHT;
             } else {
                 classNames += ' ' + CSS_BOOTSTRAP_PULL_LEFT;
@@ -472,8 +472,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         var highIndex = 0;
 
         for (var i = 0; i < elements.length - 1; i++) {
-            if (parseInt(elements[i].style.zIndex) > highIndex) {
-                highIndex = parseInt(elements[i].style.zIndex)
+            if (parseInt(elements[i].style.zIndex, 10) > highIndex) {
+                highIndex = parseInt(elements[i].style.zIndex, 10);
             }
         }
 

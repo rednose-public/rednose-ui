@@ -335,18 +335,16 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _defOpenFn: function (e) {
+    _defOpenFn: function () {
         this._open = true;
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _defCloseFn: function (e) {
+    _defCloseFn: function () {
         this._open = false;
     }
 });

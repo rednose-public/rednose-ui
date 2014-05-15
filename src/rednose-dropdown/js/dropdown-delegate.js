@@ -57,10 +57,9 @@ var Delegate = Y.Base.create('dropdown', Y.Base, [], {
 
         e.preventDefault();
 
-        var node         = e.currentTarget,
-            bubbleTarget = this.get('bubbleTarget'),
-            pageX        = e.pageX,
-            pageY        = e.pageY;
+        var node  = e.currentTarget,
+            pageX = e.pageX,
+            pageY = e.pageY;
 
         if (node.dropdown) {
             return;

@@ -167,17 +167,15 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
     // -- Default Event Handlers -----------------------------------------------
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _defClickFn: function (e) {
+    _defClickFn: function () {
         var value = this.getValue();
 
         if (value !== this._prevVal) {
             this.fire(EVT_CHANGE, {
                 value: this.getValue()
             });
-
         }
 
         this._prevVal = value;

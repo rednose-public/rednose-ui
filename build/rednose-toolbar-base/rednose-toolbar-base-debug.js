@@ -16,7 +16,6 @@ YUI.add('rednose-toolbar-base', function (Y, NAME) {
  * @constructor
  * @param {Object} [config] Config object.
  *     @param {Object[]} [config.groups] Array of group config objects.
- *     @param {Object[]} [config.buttons] Array of button config objects.
  * @extends Base
  */
 
@@ -124,7 +123,9 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @chainable
      */
     reset: function (groups) {
-        // TODO: Implement
+        return this._fireToolbarEvent(EVT_RESET, {groups: groups}, {
+            defaultFn: this._defResetFn
+        });
     },
 
     /**
@@ -311,6 +312,14 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         var group = this._buttonGroupMap[e.index];
 
         this._destroyButtonGroup(group);
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defResetFn: function (e) {
+        console.log(e.groups);
     }
 });
 

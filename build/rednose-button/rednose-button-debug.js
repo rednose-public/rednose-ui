@@ -125,10 +125,9 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _afterEnable: function (e) {
+    _afterEnable: function () {
         var container  = this.get('container'),
             classNames = this.classNames;
 
@@ -136,10 +135,9 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _afterDisable: function (e) {
+    _afterDisable: function () {
         var container  = this.get('container'),
             classNames = this.classNames;
 
@@ -147,10 +145,9 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _afterActivate: function (e) {
+    _afterActivate: function () {
         var container  = this.get('container'),
             classNames = this.classNames;
 
@@ -158,10 +155,9 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _afterDeactivate: function (e) {
+    _afterDeactivate: function () {
         var container  = this.get('container'),
             classNames = this.classNames;
 
@@ -169,10 +165,9 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     },
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _afterRename: function (e) {
+    _afterRename: function () {
         var container  = this.get('container'),
             classNames = this.classNames;
 
@@ -185,10 +180,9 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
     // -- Default Event Handlers -----------------------------------------------
 
     /**
-     * @param {EventFacade} e
      * @private
      */
-    _defClickFn: function (e) {
+    _defClickFn: function () {
         this.toggle && this.toggleActive();
     }
 });

@@ -14,7 +14,6 @@ Provides a tooltip manager.
 @class Tooltip
 @namespace Rednose
 @constructor
-@extends Bootstrap.Tooltip
 **/
 var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
 
@@ -33,8 +32,7 @@ var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
     @protected
     **/
     initializer: function () {
-        var self    = this,
-            context = this.get('selectorContainer');
+        var context = this.get('selectorContainer');
 
         if (!context) {
             context = document.body;
@@ -67,32 +65,30 @@ var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
 
     _showTooltip: function (node) {
         var tooltip           = node.getData('tooltipElement'),
-            tooltipDimensions = {},
+            tooltipDimensions = this._getDimensions(tooltip);
             nodeDimensions    = this._getDimensions(node);
 
         Y.one('body').append(tooltip);
 
-        tooltipDimensions = this._getDimensions(tooltip);
-
         switch (this.get('placement').toLowerCase()) {
             case 'top':
-                tooltip.setStyle('left', nodeDimensions.X + (nodeDimensions.W / 2) - (tooltipDimensions.W / 2));
-                tooltip.setStyle('top', nodeDimensions.Y - tooltipDimensions.H);
+                tooltip.setStyle('left', nodeDimensions.x + (nodeDimensions.width / 2) - (tooltipDimensions.width / 2));
+                tooltip.setStyle('top', nodeDimensions.y - tooltipDimensions.height);
                 break;
 
             case 'left':
-                tooltip.setStyle('left', nodeDimensions.X - tooltipDimensions.W);
-                tooltip.setStyle('top', nodeDimensions.Y - (nodeDimensions.H / 2));
+                tooltip.setStyle('left', nodeDimensions.x - tooltipDimensions.width);
+                tooltip.setStyle('top', nodeDimensions.y - (nodeDimensions.height / 2));
                 break;
 
             case 'right':
-                tooltip.setStyle('left', nodeDimensions.X + nodeDimensions.W);
-                tooltip.setStyle('top', nodeDimensions.Y - (nodeDimensions.H / 2));
+                tooltip.setStyle('left', nodeDimensions.x + nodeDimensions.width);
+                tooltip.setStyle('top', nodeDimensions.y - (nodeDimensions.height / 2));
                 break;
 
             case 'bottom':
-                tooltip.setStyle('left', nodeDimensions.X + (nodeDimensions.W / 2) - (tooltipDimensions.W / 2));
-                tooltip.setStyle('top', nodeDimensions.Y + nodeDimensions.H);
+                tooltip.setStyle('left', nodeDimensions.x + (nodeDimensions.width / 2) - (tooltipDimensions.width / 2));
+                tooltip.setStyle('top', nodeDimensions.y + nodeDimensions.height);
                 break;
         }
 
@@ -104,17 +100,18 @@ var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
     },
 
     _fade: function (node, fadeIn) {
-        var tooltip = node.getData('tooltipElement');
+        var tooltip = node.getData('tooltipElement'),
+            anim;
 
         if (fadeIn) {
-            var anim = new Y.Anim({
+            anim = new Y.Anim({
                 duration: 0.2,
                 node : tooltip,
                 from : { opacity: 0 },
                 to   : { opacity: 1 }
             });
         } else {
-            var anim = new Y.Anim({
+            anim = new Y.Anim({
                 duration: 0.2,
                 node : tooltip,
                 from : { opacity: 1 },
@@ -148,11 +145,11 @@ var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
 
     _getDimensions: function (node) {
         return {
-            X : node.getX(),
-            Y : node.getY(),
-            H : node.get('offsetHeight'),
-            W : node.get('offsetWidth')
-        }
+            x     : node.getX(),
+            y     : node.getY(),
+            width : node.get('offsetWidth'),
+            height: node.get('offsetHeight')
+        };
     }
 
 }, {

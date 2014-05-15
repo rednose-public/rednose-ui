@@ -1,5 +1,8 @@
 {
     "name": "rednose-datetimepicker",
+    "shifter": {
+        "lint": false
+    },
     "builds": {
         "rednose-datepicker-plugin": {
             "jsfiles": [

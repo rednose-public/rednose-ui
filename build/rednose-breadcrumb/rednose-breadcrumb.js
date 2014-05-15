@@ -1,6 +1,6 @@
 YUI.add('rednose-breadcrumb', function (Y, NAME) {
 
-/* jshint expr:true, onevar:false */
+/*jshint expr:true, onevar:false */
 
 /**
 Provides an interactive breadcrumb based on a path.

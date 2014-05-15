@@ -146,9 +146,9 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
             return [];
         }
 
-        return Y.Array.filter(node.children, (function (child) {
+        return Y.Array.filter(node.children, function (child) {
             return child.data.name === type;
-        }));
+        });
     },
 
     /**
