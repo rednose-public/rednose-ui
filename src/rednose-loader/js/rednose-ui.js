@@ -477,6 +477,7 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-panel",
             "rednose-util",
             "rednose-widget-nav-container",
+            "template-micro",
             "view"
         ]
     },
@@ -489,4 +490,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '6086b6d5ae07bc1d4c0ad6f056b50c8d';
+YUI.Env[Y.version].md5 = '205c99541f2f9b59ae0e03c0898c6da8';

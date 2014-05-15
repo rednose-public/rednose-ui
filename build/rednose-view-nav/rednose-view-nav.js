@@ -9,9 +9,11 @@ configuration of buttons.
 @module rednose-app
 @submodule rednose-view-nav
 **/
-var ViewNav,
-    // Bird's-eye view of the CSS classes used.
-    CSS_MAGIC_PREFIX = 'rednose',
+
+var Micro = Y.Template.Micro;
+
+// Bird's-eye view of the CSS classes used.
+var CSS_MAGIC_PREFIX = 'rednose',
     CSS_VIEW_NAV     = 'rednose-view-nav',
 
     // Bird's-eye view of the Bootstrap CSS classes used.
@@ -23,10 +25,6 @@ var ViewNav,
     CSS_BOOTSTRAP_FLOAT_LEFT  = 'float-left',
     CSS_BOOTSTRAP_FLOAT_RIGHT = 'float-right',
     CSS_BOOTSTRAP_CLOSE       = 'close',
-
-    // Bird's-eye view of the YUI3 CSS classes used.
-    CSS_YUI3_WIDGET_BD = 'yui3-widget-bd',
-    CSS_YUI3_WIDGET_FT = 'yui3-widget-ft',
 
     /**
     Fired when the optional close button is clicked.
@@ -51,7 +49,7 @@ configuration of buttons.
 @constructor
 @extensionfor View
 **/
-ViewNav = Y.Base.create('viewNav', Y.View, [], {
+var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     // -- Public Properties ----------------------------------------------------
 
     /**
@@ -94,6 +92,38 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @type Boolean
     **/
     padding: false,
+
+    /**
+     * Templates used by the extension.
+     *
+     * @property {Object} templates
+     */
+    templates: {
+        header: Micro.compile(
+            '<div style="width: 100%;">' +
+
+                '<% if (data.close) { %>' +
+                    '<div style="float: right; white-space: nowrap;">' +
+                        '<button class="<%= data.classNames.close %>">&times;</button>' +
+                    '</div>' +
+                '<% } %>' +
+
+                '<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' +
+                    '<%= data.title %>' +
+                '</div>' +
+
+            '</div>'
+        )
+    },
+
+    /**
+     * CSS class names used by this dropdown.
+     *
+     * @property {Object} classNames
+     */
+    classNames: {
+        close: 'close'
+    },
 
     // -- Protected Properties -------------------------------------------------
 
@@ -144,8 +174,13 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     initializer: function () {
         this._viewNavEventHandles || (this._viewNavEventHandles = []);
 
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
         this._viewNavEventHandles.push(
-            Y.Do.after(this._afterRender, this, 'render', this)
+            Y.Do.after(this._afterRender, this, 'render', this),
+
+            container.delegate('click', function (e) { console.log(e); }, '.close', this)
         );
 
         this.footer && this._buildFooter();
@@ -162,10 +197,10 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
             this._panel.destroy();
         }
 
-        this.title      = null;
-        this.buttons    = null;
-        this._footer    = null;
-        this._panel     = null;
+        this.title   = null;
+        this.buttons = null;
+        this._footer = null;
+        this._panel  = null;
 
         this._toolbar && this._toolbar.destroy();
         this._toolbar = null;
@@ -191,6 +226,11 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         return this.toolbar._buttonMap[name];
     },
 
+    /**
+     * Called by Rednose.App when the view dimensions change.
+     *
+     * @param {Node} parent
+     */
     sizeView: function (parent) {
         var bodyHeight = parseInt(parent.get('offsetHeight'), 10);
 
@@ -240,7 +280,7 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     **/
     _setButtons: function (value) {
         var self    = this,
-            footer  = this.get('container').one('.' + CSS_YUI3_WIDGET_FT),
+            footer  = this.get('container').one('.yui3-widget-ft'),
             buttons = this.buttons;
 
         Y.Object.each(value, function (properties, key) {
@@ -271,13 +311,13 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
     @protected
     **/
     _afterRender: function () {
-        var container = this.get('container'),
-            title     = this.title,
-            body      = Y.Node.create('<div></div>'),
-            footer    = this._footer,
-            config    = { bodyContent: body },
-            close     = this.close,
-            self      = this;
+        var container  = this.get('container'),
+            classNames = this.classNames,
+            title      = this.title,
+            body       = Y.Node.create('<div></div>'),
+            footer     = this._footer,
+            config     = { bodyContent: body },
+            close      = this.close;
 
         container.addClass(CSS_VIEW_NAV);
 
@@ -286,30 +326,37 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
             body.append(c);
         });
 
-        if (title !== null) {
-            // Keep the close button fixed and let the header fill the rest of the line.
-            var header = Y.Node.create('<div style="width: 100%;">' +
-                                           '<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' +
-                                               title +
-                                           '</div>' +
-                                       '</div>'
-            );
-
-            if (close) {
-                header.prepend(Y.Node.create('<div style="float: right; white-space: nowrap;">' +
-                                                '<button class="' + CSS_BOOTSTRAP_CLOSE + '">&times;</button>' +
-                                            '</div>'
-                ));
-
-                header.one('.' + CSS_BOOTSTRAP_CLOSE).on('click', function () {
-                    self.fire(EVT_BUTTON_CLOSE);
-                });
-            }
-
-            config.headerContent = header;
+        if (title) {
+            config.headerContent = this.templates.header({
+                classNames: classNames,
+                title     : title,
+                close     : close
+            });
         }
 
-        if (footer !== null) {
+//        if (title !== null) {
+//            // Keep the close button fixed and let the header fill the rest of the line.
+//            var header = Y.Node.create('<div style="width: 100%;">' +
+//                                           '<div style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">' +
+//                                               title +
+//                                           '</div>' +
+//                                       '</div>'
+//            );
+//
+//            if (close) {
+//                header.prepend(Y.Node.create('<div style="float: right; white-space: nowrap;">' +
+//                                                '<button class="' + CSS_BOOTSTRAP_CLOSE + '">&times;</button>' +
+//                                            '</div>'
+//                ));
+//
+////                header.one('.' + CSS_BOOTSTRAP_CLOSE).on('click', function () {
+////                    self.fire(EVT_BUTTON_CLOSE);
+////                });
+//            }
+//
+//        }
+//
+        if (footer) {
             config.footerContent = footer;
         }
 
@@ -319,10 +366,13 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         this._panel.render(container);
 
         // Add a magic CSS handle to the widget-body.
-        this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).addClass(CSS_MAGIC_PREFIX + '-' + Y.Rednose.Util.camelCaseToDash(this.name));
+        var panelBody = this._panel.get('boundingBox').one('.yui3-widget-bd'),
+            className = CSS_MAGIC_PREFIX + '-' + Y.Rednose.Util.camelCaseToDash(this.name);
+
+        panelBody.addClass(className);
 
         if (this.padding === false) {
-            this._panel.get('boundingBox').one('.' + CSS_YUI3_WIDGET_BD).setStyle('padding', 0);
+            panelBody.setStyle('padding', 0);
         }
 
         this._body = body;
@@ -341,6 +391,11 @@ ViewNav = Y.Base.create('viewNav', Y.View, [], {
         this._rendered = true;
     }
 }, {
+    /**
+     * Prefix for the magic CSS classes.
+     */
+    CSS_PREFIX: 'rednose',
+
     ATTRS: {
         /**
         Button attribute, triggers a setter to update the DOM on setting.
@@ -366,6 +421,7 @@ Y.namespace('Rednose.View').Nav = ViewNav;
         "rednose-panel",
         "rednose-util",
         "rednose-widget-nav-container",
+        "template-micro",
         "view"
     ]
 });

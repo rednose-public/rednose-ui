@@ -42,6 +42,7 @@
                     "rednose-panel",
                     "rednose-util",
                     "rednose-widget-nav-container",
+                    "template-micro",
                     "view"
                 ]
             }
