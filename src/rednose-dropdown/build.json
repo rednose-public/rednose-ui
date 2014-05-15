@@ -24,6 +24,12 @@
             "jsfiles": [
                 "js/plugins/dropdown-plugin.js"
             ]
+        },
+
+        "rednose-dropdown-delegate": {
+            "jsfiles": [
+                "js/dropdown-delegate.js"
+            ]
         }
     }
 }
