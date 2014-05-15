@@ -1,5 +1,8 @@
 {
     "name": "rednose-notifier",
+    "shifter": {
+        "lint": false
+    },
     "builds": {
         "rednose-notifier": {
             "jsfiles": [

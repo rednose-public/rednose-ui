@@ -1,5 +1,8 @@
 {
     "name": "rednose-ui",
+    "shifter": {
+        "lint": false
+    },
     "builds": {
         "rednose-ui": {
             "exec": [

@@ -1,5 +1,8 @@
 {
     "name": "rednose-jquery",
+    "shifter": {
+        "lint": false
+    },
     "builds": {
         "rednose-jquery": {
             "jsfiles": [

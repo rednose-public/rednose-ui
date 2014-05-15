@@ -1,5 +1,8 @@
 {
     "name": "rednose-bootstrap",
+    "shifter": {
+        "lint": false
+    },
     "builds": {
         "rednose-bootstrap": {
             "cssfiles": [
