@@ -30,4 +30,4 @@ Y.namespace('TreeView').Templates = {
 };
 
 
-}, '1.4.2', {"requires": ["template-micro"]});
+}, '1.5.0-DEV', {"requires": ["template-micro"]});

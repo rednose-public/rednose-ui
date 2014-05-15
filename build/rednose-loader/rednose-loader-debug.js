@@ -404,6 +404,7 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-tooltip": {
         "group": "rednose-ui",
         "requires": [
+            "base",
             "node",
             "anim"
         ]
@@ -478,7 +479,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'd8c097e4573c9058b49092ac014dd896';
+YUI.Env[Y.version].md5 = 'f0be278da55fb03cc3ef1cf7f96d2549';
 
 
-}, '1.4.2');
+}, '1.5.0-DEV');

@@ -156,4 +156,4 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
 });
 
 
-}, '1.4.2', {"requires": ["rednose-dropdown", "node-pluginhost", "plugin"]});
+}, '1.5.0-DEV', {"requires": ["rednose-dropdown", "node-pluginhost", "plugin"]});

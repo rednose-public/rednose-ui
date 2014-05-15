@@ -207,4 +207,4 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
 Y.namespace('Rednose').Breadcrumb = Breadcrumb;
 
 
-}, '1.4.2', {"requires": ["base", "view"]});
+}, '1.5.0-DEV', {"requires": ["base", "view"]});
