@@ -1,7 +1,6 @@
 {
     "rednose-form": {
         "requires": [
-            "rednose-controlform",
             "rednose-dataprovider",
             "rednose-form-css",
             "template-micro",

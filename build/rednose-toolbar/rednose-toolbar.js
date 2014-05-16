@@ -26,7 +26,7 @@ YUI.add('rednose-toolbar', function (Y, NAME) {
  * You can subscribe to specific buttons through the following event: "click#id".
  *
  * @event click
- * @param {Rednose.Button} item The button that was clicked.
+ * @param {Rednose.Button} button The button that was clicked.
  * @param {EventFacade} originEvent Original button event.
  */
 var EVT_CLICK = 'click';

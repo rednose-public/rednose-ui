@@ -3,6 +3,8 @@
     "builds": {
         "rednose-form": {
             "jsfiles": [
+                "widgets/autocomplete.js",
+                "widgets/rich-text-editor.js",
                 "models/form.js",
                 "views/control.js",
                 "views/autocomplete-control.js",
