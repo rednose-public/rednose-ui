@@ -1,11 +1,12 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var Micro = Y.Template.Micro,
-    DateTimeControlView;
+var DateTimeControlView;
 
 DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseControlView, [], {
 
-    OPTION_TEMPLATE: Micro.compile('<option value="<%= data.value %>"<% if (data.selected) { %> selected<% }%>><%= data.label %></option>'),
+    OPTION_TEMPLATE: Y.Template.Micro.compile(
+        '<option value="<%= data.value %>"<% if (data.selected) { %> selected<% }%>><%= data.label %></option>'
+    ),
 
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
@@ -25,14 +26,15 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
 
         var container = this.get('container'),
             model     = this.get('model'),
-            template  = this.template;
+            template  = this.template,
+            i;
 
         container.setHTML(Y.Lang.sub(template, {
             id:    model.get('id'),
             label: model.get('caption')
         }));
 
-        for (var i = 1; i <= 31; i++) {
+        for (i = 1; i <= 31; i++) {
             reflectionDate.setDate(i);
 
             container.one('.rednose-date-day').append(this.OPTION_TEMPLATE({
@@ -42,7 +44,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
             }));
         }
 
-        for (var i = 0; i <= 11; i++) {
+        for (i = 0; i <= 11; i++) {
             reflectionDate.setMonth(i);
 
             container.one('.rednose-date-month').append(this.OPTION_TEMPLATE({
@@ -52,7 +54,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
             }));
         }
 
-        for (var i = date.getFullYear() - 5; i <= date.getFullYear() + 5; i++) {
+        for (i = date.getFullYear() - 5; i <= date.getFullYear() + 5; i++) {
             reflectionDate.setFullYear(i);
 
             container.one('.rednose-date-year').append(this.OPTION_TEMPLATE({
@@ -62,7 +64,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
             }));
         }
 
-        for (var i = 0; i <= 23; i++) {
+        for (i = 0; i <= 23; i++) {
             reflectionDate.setHours(i);
 
             container.one('.rednose-date-hour').append(this.OPTION_TEMPLATE({
@@ -72,7 +74,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
             }));
         }
 
-        for (var i = 0; i <= 59; i++) {
+        for (i = 0; i <= 59; i++) {
             reflectionDate.setMinutes(i);
 
             container.one('.rednose-date-minute').append(this.OPTION_TEMPLATE({
@@ -92,8 +94,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
         if (node) {
             node.focus();
         }
-    },
-
+    }
 });
 
 // -- Namespace ----------------------------------------------------------------

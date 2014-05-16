@@ -1,10 +1,9 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var Micro = Y.Template.Micro,
-    AutoComplete;
+var AutoComplete;
 
 AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
-    AUTOCOMPLETE_TEMPLATE: Micro.compile(
+    AUTOCOMPLETE_TEMPLATE: Y.Template.Micro.compile(
         '<a role="menuitem">' +
             '<% if (data.image) { %>' +
                 '<img class="avatar size32" src="<%= data.image %>">' +

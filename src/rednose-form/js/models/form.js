@@ -1,4 +1,4 @@
-/*jshint boss:true, expr:true, onevar:false */
+/*jshint boss:true, expr:true,  es5:true, onevar:false */
 
 var TreeModel = Y.Rednose.ModelTree,
     ControlModel;
@@ -12,7 +12,7 @@ ControlModel = Y.Base.create('controlModel', Y.Model, [], {
         } else {
             return value;
         }
-    },
+    }
 }, {
     ATTRS: {
         caption   : { value: null },

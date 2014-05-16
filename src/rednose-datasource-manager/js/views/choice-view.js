@@ -1,16 +1,16 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var DataSource = Y.Rednose.DataSource.DataSource,
-    Micro      = Y.Template.Micro;
+var DataSource = Y.Rednose.DataSource.DataSource;
 
 var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
-    template: Micro.compile(
+    template: Y.Template.Micro.compile(
         '<form class="form-horizontal">'+
             '<fieldset>' +
                 '<div class="control-group">' +
                     '<label class="control-label" for="identifier">Identifier</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.get("identifier") %>"<% if (!data.isNew()) {%> disabled<% } %>/>' +
+                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.get("identifier") %>"' +
+                            '<% if (!data.isNew()) {%> disabled<% } %>/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
@@ -23,15 +23,18 @@ var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
                     '<label class="control-label">Type</label>' +
                     '<div class="controls">' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="pdo" <% if (data.get("type") == "pdo") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
+                            '<input type="radio" name="type" value="pdo" ' +
+                                '<% if (data.get("type") == "pdo") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'Database' +
                         '</label>' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="dataGen" <% if (data.get("type") == "dataGen") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
+                            '<input type="radio" name="type" value="dataGen" ' +
+                                '<% if (data.get("type") == "dataGen") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'DataGen' +
                         '</label>' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="xml" <% if (data.get("type") == "xml") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
+                            '<input type="radio" name="type" value="xml" ' +
+                                '<% if (data.get("type") == "xml") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'XML Data' +
                         '</label>' +
                     '</div>' +

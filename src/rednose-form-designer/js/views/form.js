@@ -1,4 +1,4 @@
-/*jshint boss:true, expr:true, onevar:false */
+/*jshint boss:true, expr:true, evil:true, onevar:false */
 
 var FormView;
 

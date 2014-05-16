@@ -82,15 +82,17 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
         if (model && model instanceof Y.Rednose.Form.ControlModel) {
             node.plug(Y.Rednose.ContextMenu, {
-                content     : [
-                    { title: TXT_REMOVE_CONTROL, id: 'removeControl' },
+                content: [
+                    { title: TXT_REMOVE_CONTROL, id: 'removeControl' }
                 ],
-                data        : model,
+                data: model,
                 bubbleTarget: this
             });
 
             node.contextMenu._handleContextMenu(e);
         }
+
+        return true;
     },
 
     // XXX

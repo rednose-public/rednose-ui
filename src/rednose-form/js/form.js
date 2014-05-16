@@ -123,7 +123,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
 }, {
     ATTRS: {
         horizontal: {
-            value: true,
+            value: true
         },
 
         model: {

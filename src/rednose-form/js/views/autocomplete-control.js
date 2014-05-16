@@ -2,13 +2,11 @@
 
 var TXT_TYPE_TO_SEARCH = 'Type here to search...';
 
-var Micro        = Y.Template.Micro,
-    AutoComplete = Y.Rednose.ControlFormAutoComplete,
-    AutocompleteControlView;
+var AutocompleteControlView;
 
 AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.Form.BaseControlView, [], {
 
-    AUTOCOMPLETE_TEMPLATE: Micro.compile(
+    AUTOCOMPLETE_TEMPLATE: Y.Template.Micro.compile(
         '<a role="menuitem">' +
             '<img class="avatar size32" src="<%= data.image %>">' +
             '<span class="title-block">' +
@@ -74,7 +72,7 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
             datasource: datasource
         };
 
-        this._autoComplete = new AutoComplete(config).render();
+        this._autoComplete = new Y.Rednose.ControlFormAutoComplete(config).render();
     },
 
     _handleInputChange: function () {

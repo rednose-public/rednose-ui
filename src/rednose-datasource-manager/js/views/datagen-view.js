@@ -41,8 +41,6 @@ var DataGenGenericPageView = Y.Base.create('dataGenGenericPageView', Y.View, [],
     }
 });
 
-var DatagenSource = Y.Rednose.DataSource.DatagenSource;
-
 var DataGenSourcePageView = Y.Base.create('dataGenSourcePageView', Y.View, [], {
     OPTION_TEMPLATE: '<option id="{id}">{value}</option>',
 

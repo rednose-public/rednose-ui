@@ -154,7 +154,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 configureItemsListButton.plug(Y.Rednose.Dropdown, {
                     content: [
                         { id: 'configureItems', title: 'Items', icon: 'icon-align-justify' },
-                        { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' },
+                        { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' }
                     ]
                 });
                 configureItemsListButton.dropdown.addTarget(this);

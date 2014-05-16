@@ -45,11 +45,6 @@ var TXT_NEW_DATA_SOURCE = 'New Data Source',
     TXT_CANCEL          = 'Cancel',
     TXT_CREATE          = 'Create';
 
-var DataSource    = Y.Rednose.DataSource.DataSource,
-    DatagenSource = Y.Rednose.DataSource.DatagenSource,
-    PdoSource     = Y.Rednose.DataSource.PdoSource,
-    XmlSource     = Y.Rednose.DataSource.XmlSource;
-
 var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.View.Nav ], {
     _app: null,
 
@@ -257,21 +252,24 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
 
         switch (model.get('type')) {
             case 'dataGen':
-                model instanceof DatagenSource || (model = new DatagenSource(model.getAttrs(baseAttrs)));
+                model instanceof Y.Rednose.DataSource.DatagenSource ||
+                    (model = new Y.Rednose.DataSource.DatagenSource(model.getAttrs(baseAttrs)));
 
                 choiceView.set('model', model);
 
                 this.showDataGenGenericPage();
                 break;
             case 'pdo':
-                model instanceof PdoSource || (model = new PdoSource(model.getAttrs(baseAttrs)));
+                model instanceof Y.Rednose.DataSource.PdoSource ||
+                    (model = new Y.Rednose.DataSource.PdoSource(model.getAttrs(baseAttrs)));
 
                 choiceView.set('model', model);
 
                 this.showPdoGenericPage();
                 break;
             case 'xml':
-                model instanceof XmlSource || (model = new XmlSource(model.getAttrs(baseAttrs)));
+                model instanceof Y.Rednose.DataSource.XmlSource ||
+                    (model = new Y.Rednose.DataSource.XmlSource(model.getAttrs(baseAttrs)));
 
                 choiceView.set('model', model);
 
@@ -293,7 +291,7 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
     }
 }, {
     ATTRS: {
-        model: { value: new DataSource() }
+        model: { value: new Y.Rednose.DataSource.DataSource() }
     }
 });
 

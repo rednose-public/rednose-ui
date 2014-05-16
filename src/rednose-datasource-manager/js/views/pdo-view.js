@@ -1,7 +1,7 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var PdoSource  = Y.Rednose.DataSource.PdoSource,
-    Micro      = Y.Template.Micro;
+var PdoSource = Y.Rednose.DataSource.PdoSource,
+    Micro     = Y.Template.Micro;
 
 var PdoGenericPageView = Y.Base.create('pdoGenericPageView', Y.View, [], {
     template: Micro.compile(
@@ -58,9 +58,6 @@ var PdoGenericPageView = Y.Base.create('pdoGenericPageView', Y.View, [], {
     }
 });
 
-var PdoSource = Y.Rednose.DataSource.PdoSource,
-    Micro     = Y.Template.Micro;
-
 var PdoSourcePageView = Y.Base.create('pdoSourcePageView', Y.View, [], {
     OPTION_TEMPLATE: Micro.compile('<option id="<%= data.id %>"<% if (data.selected) {%> selected<% }%>><%= data.value %></option>'),
 
@@ -69,18 +66,22 @@ var PdoSourcePageView = Y.Base.create('pdoSourcePageView', Y.View, [], {
             '<fieldset>' +
                 '<div class="control-group">' +
                     '<label class="control-label radio inline">' +
-                        '<input type="radio" name="source" value="table" data-radio-group="source"<% if (data.source == "table") { %> checked<% } %>/> Table' +
+                        '<input type="radio" name="source" value="table" data-radio-group="source"' +
+                            '<% if (data.source == "table") { %> checked<% } %>/> Table' +
                     '</label>' +
                     '<div class="controls">' +
-                        '<select class="input-block-level" id="table" data-radio="source"<% if (data.source != "table") { %> disabled<% } %>></select>' +
+                        '<select class="input-block-level" id="table" data-radio="source"' +
+                            '<% if (data.source != "table") { %> disabled<% } %>></select>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
                     '<label class="control-label radio inline">' +
-                        '<input type="radio" name="source" value="query" data-radio-group="source"<% if (data.source == "query") { %> checked<% } %>/> Query' +
+                        '<input type="radio" name="source" value="query" data-radio-group="source"' +
+                            '<% if (data.source == "query") { %> checked<% } %>/> Query' +
                     '</label>' +
                         '<div class="controls">' +
-                            '<textarea rows="3" spellcheck="false" class="input-block-level" id="query" data-radio="source"<% if (data.source != "query") { %> disabled<% } %>><%= data.query %></textarea >' +
+                            '<textarea rows="3" spellcheck="false" class="input-block-level" id="query" data-radio="source"' +
+                                '<% if (data.source != "query") { %> disabled<% } %>><%= data.query %></textarea >' +
                         '</div>' +
                 '</div>' +
             '</fieldset>' +

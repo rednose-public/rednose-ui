@@ -2,11 +2,10 @@ YUI.add('rednose-form', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
-var Micro = Y.Template.Micro,
-    AutoComplete;
+var AutoComplete;
 
 AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
-    AUTOCOMPLETE_TEMPLATE: Micro.compile(
+    AUTOCOMPLETE_TEMPLATE: Y.Template.Micro.compile(
         '<a role="menuitem">' +
             '<% if (data.image) { %>' +
                 '<img class="avatar size32" src="<%= data.image %>">' +
@@ -208,7 +207,7 @@ RichTextEditor = Y.Base.create('richTextEditor', Y.Widget, [], {
 });
 
 Y.namespace('Rednose').ControlFormRichTextEditor = RichTextEditor;
-/*jshint boss:true, expr:true, onevar:false */
+/*jshint boss:true, expr:true,  es5:true, onevar:false */
 
 var TreeModel = Y.Rednose.ModelTree,
     ControlModel;
@@ -222,7 +221,7 @@ ControlModel = Y.Base.create('controlModel', Y.Model, [], {
         } else {
             return value;
         }
-    },
+    }
 }, {
     ATTRS: {
         caption   : { value: null },
@@ -506,8 +505,8 @@ DropDownControlView = Y.Base.create('dropDownControlView', Y.Rednose.Form.BaseCo
             template   = this.template;
 
         container.setHTML(Y.Lang.sub(template, {
-            id     : model.get('id'),
-            label  : model.get('caption'),
+            id   : model.get('id'),
+            label: model.get('caption')
         }));
 
         if (properties.datasource) {
@@ -572,13 +571,11 @@ Y.namespace('Rednose.Form').DropDownControlView = DropDownControlView;
 
 var TXT_TYPE_TO_SEARCH = 'Type here to search...';
 
-var Micro        = Y.Template.Micro,
-    AutoComplete = Y.Rednose.ControlFormAutoComplete,
-    AutocompleteControlView;
+var AutocompleteControlView;
 
 AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.Form.BaseControlView, [], {
 
-    AUTOCOMPLETE_TEMPLATE: Micro.compile(
+    AUTOCOMPLETE_TEMPLATE: Y.Template.Micro.compile(
         '<a role="menuitem">' +
             '<img class="avatar size32" src="<%= data.image %>">' +
             '<span class="title-block">' +
@@ -644,7 +641,7 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
             datasource: datasource
         };
 
-        this._autoComplete = new AutoComplete(config).render();
+        this._autoComplete = new Y.Rednose.ControlFormAutoComplete(config).render();
     },
 
     _handleInputChange: function () {
@@ -664,12 +661,13 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
 Y.namespace('Rednose.Form').AutocompleteControlView = AutocompleteControlView;
 /*jshint boss:true, expr:true, onevar:false */
 
-var Micro = Y.Template.Micro,
-    DateTimeControlView;
+var DateTimeControlView;
 
 DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseControlView, [], {
 
-    OPTION_TEMPLATE: Micro.compile('<option value="<%= data.value %>"<% if (data.selected) { %> selected<% }%>><%= data.label %></option>'),
+    OPTION_TEMPLATE: Y.Template.Micro.compile(
+        '<option value="<%= data.value %>"<% if (data.selected) { %> selected<% }%>><%= data.label %></option>'
+    ),
 
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
@@ -689,14 +687,15 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
 
         var container = this.get('container'),
             model     = this.get('model'),
-            template  = this.template;
+            template  = this.template,
+            i;
 
         container.setHTML(Y.Lang.sub(template, {
             id:    model.get('id'),
             label: model.get('caption')
         }));
 
-        for (var i = 1; i <= 31; i++) {
+        for (i = 1; i <= 31; i++) {
             reflectionDate.setDate(i);
 
             container.one('.rednose-date-day').append(this.OPTION_TEMPLATE({
@@ -706,7 +705,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
             }));
         }
 
-        for (var i = 0; i <= 11; i++) {
+        for (i = 0; i <= 11; i++) {
             reflectionDate.setMonth(i);
 
             container.one('.rednose-date-month').append(this.OPTION_TEMPLATE({
@@ -716,7 +715,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
             }));
         }
 
-        for (var i = date.getFullYear() - 5; i <= date.getFullYear() + 5; i++) {
+        for (i = date.getFullYear() - 5; i <= date.getFullYear() + 5; i++) {
             reflectionDate.setFullYear(i);
 
             container.one('.rednose-date-year').append(this.OPTION_TEMPLATE({
@@ -726,7 +725,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
             }));
         }
 
-        for (var i = 0; i <= 23; i++) {
+        for (i = 0; i <= 23; i++) {
             reflectionDate.setHours(i);
 
             container.one('.rednose-date-hour').append(this.OPTION_TEMPLATE({
@@ -736,7 +735,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
             }));
         }
 
-        for (var i = 0; i <= 59; i++) {
+        for (i = 0; i <= 59; i++) {
             reflectionDate.setMinutes(i);
 
             container.one('.rednose-date-minute').append(this.OPTION_TEMPLATE({
@@ -756,8 +755,7 @@ DateTimeControlView = Y.Base.create('dateTimeControlView', Y.Rednose.Form.BaseCo
         if (node) {
             node.focus();
         }
-    },
-
+    }
 });
 
 // -- Namespace ----------------------------------------------------------------
@@ -973,7 +971,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
 }, {
     ATTRS: {
         horizontal: {
-            value: true,
+            value: true
         },
 
         model: {

@@ -1,5 +1,7 @@
 YUI.add('rednose-form-designer', function (Y, NAME) {
 
+/*jshint boss:true, expr:true, onevar:false */
+
 var ConfigureItems;
 
 ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ], {
@@ -28,8 +30,8 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
                 { key: 'label', label: 'Label', editable: true },
                 { key: 'value', label: 'Value', editable: true }
             ],
-            data: data,
-        })
+            data: data
+        });
 
         this._table.render(view.one('.control-group'));
         view.one('.control-group').setStyle('width', '630px;');
@@ -37,10 +39,10 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
         this.prompt({
             title: 'Configure items: ' + this.get('model').get('caption'),
             html: view
-        }, function(form) {
-            var items = {},
+        }, function () {
+            var items      = {},
                 properties = self.get('model').get('properties'),
-                modellist = self._table.hasPlugin('editable').getData()
+                modellist  = self._table.hasPlugin('editable').getData();
 
             modellist.each(function(model) {
                 items[model.get('value')] = model.get('label');
@@ -87,8 +89,7 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
         if (selectedRow) {
             selectedRow.destroy();
         }
-    },
-
+    }
 }, {
     ATTRS: {
         model: { value: null }
@@ -439,10 +440,6 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
 Y.namespace('Rednose.FormDesigner').ConfigureDynamicItemsView = ConfigureDynamicItemsView;
 /*jshint boss:true, expr:true, onevar:false */
 
-var TXT_OBJECT_LIBRARY = 'Object Library';
-
-var EVT_SELECT = 'select';
-
 var ObjectLibrary,
     ObjectLibraryView;
 
@@ -455,21 +452,20 @@ ObjectLibrary = Y.Base.create('objectLibrary', Y.Widget, [], {
 
         navBar.createDropdown(parentNode, items);
 
-        for (var i in items) {
-            navBar.on(items[i].id, function(e) {
+        Y.Array.each(items, function (item) {
+            navBar.on(item.id, function (e) {
                 var type = e.type.split(':')[1];
 
-                for (var y in items) {
-                    if (items[y].id == type) {
-                        self.fire('objectAdd', { item: items[y] });
+                Y.Array.each(items, function (item) {
+                    if (item.id === type) {
+                        self.fire('objectAdd', { item: item });
                     }
-                }
+                });
             });
-        }
+        });
 
         return this;
     }
-
 }, {
     ATTRS: {
         items: {
@@ -692,15 +688,17 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
         if (model && model instanceof Y.Rednose.Form.ControlModel) {
             node.plug(Y.Rednose.ContextMenu, {
-                content     : [
-                    { title: TXT_REMOVE_CONTROL, id: 'removeControl' },
+                content: [
+                    { title: TXT_REMOVE_CONTROL, id: 'removeControl' }
                 ],
-                data        : model,
+                data: model,
                 bubbleTarget: this
             });
 
             node.contextMenu._handleContextMenu(e);
         }
+
+        return true;
     },
 
     // XXX
@@ -967,7 +965,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 configureItemsListButton.plug(Y.Rednose.Dropdown, {
                     content: [
                         { id: 'configureItems', title: 'Items', icon: 'icon-align-justify' },
-                        { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' },
+                        { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' }
                     ]
                 });
                 configureItemsListButton.dropdown.addTarget(this);
@@ -1028,7 +1026,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose.FormDesigner').ObjectAttributesView = ObjectAttributesView;
-/*jshint boss:true, expr:true, onevar:false */
+/*jshint boss:true, expr:true, evil:true, onevar:false */
 
 var FormView;
 
@@ -1235,9 +1233,9 @@ Y.namespace('Rednose.FormDesigner').FormView = FormView;
 
 var TXT_NAVBAR_CAPTION = 'Form Designer';
 
-var ConfigureDynamicItemsView = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
-    DataSourceManager         = Y.Rednose.DataSourceManager.DataSourceManager,
-    Panel                     = Y.Rednose.Panel,
+var ConfigureDynamicItems = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
+    DataSourceManager     = Y.Rednose.DataSourceManager.DataSourceManager,
+    Panel                 = Y.Rednose.Panel,
     FormDesigner;
 
 FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeColumn ], {
@@ -1469,7 +1467,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             view,
             panel;
 
-        view = new ConfigureDynamicItemsView({
+        view = new ConfigureDynamicItems({
             model         : model,
             dataSourceList: dataSourceList
         }).render();

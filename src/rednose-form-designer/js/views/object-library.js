@@ -1,9 +1,5 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var TXT_OBJECT_LIBRARY = 'Object Library';
-
-var EVT_SELECT = 'select';
-
 var ObjectLibrary,
     ObjectLibraryView;
 
@@ -16,21 +12,20 @@ ObjectLibrary = Y.Base.create('objectLibrary', Y.Widget, [], {
 
         navBar.createDropdown(parentNode, items);
 
-        for (var i in items) {
-            navBar.on(items[i].id, function(e) {
+        Y.Array.each(items, function (item) {
+            navBar.on(item.id, function (e) {
                 var type = e.type.split(':')[1];
 
-                for (var y in items) {
-                    if (items[y].id == type) {
-                        self.fire('objectAdd', { item: items[y] });
+                Y.Array.each(items, function (item) {
+                    if (item.id === type) {
+                        self.fire('objectAdd', { item: item });
                     }
-                }
+                });
             });
-        }
+        });
 
         return this;
     }
-
 }, {
     ATTRS: {
         items: {

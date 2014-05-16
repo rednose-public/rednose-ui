@@ -1,3 +1,5 @@
+/*jshint boss:true, expr:true, onevar:false */
+
 var ConfigureItems;
 
 ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ], {
@@ -26,8 +28,8 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
                 { key: 'label', label: 'Label', editable: true },
                 { key: 'value', label: 'Value', editable: true }
             ],
-            data: data,
-        })
+            data: data
+        });
 
         this._table.render(view.one('.control-group'));
         view.one('.control-group').setStyle('width', '630px;');
@@ -35,10 +37,10 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
         this.prompt({
             title: 'Configure items: ' + this.get('model').get('caption'),
             html: view
-        }, function(form) {
-            var items = {},
+        }, function () {
+            var items      = {},
                 properties = self.get('model').get('properties'),
-                modellist = self._table.hasPlugin('editable').getData()
+                modellist  = self._table.hasPlugin('editable').getData();
 
             modellist.each(function(model) {
                 items[model.get('value')] = model.get('label');
@@ -85,8 +87,7 @@ ConfigureItems = Y.Base.create('configureItems', Y.Widget, [ Y.Rednose.Dialog ],
         if (selectedRow) {
             selectedRow.destroy();
         }
-    },
-
+    }
 }, {
     ATTRS: {
         model: { value: null }

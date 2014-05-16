@@ -2,17 +2,17 @@ YUI.add('rednose-datasource-manager', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
-var DataSource = Y.Rednose.DataSource.DataSource,
-    Micro      = Y.Template.Micro;
+var DataSource = Y.Rednose.DataSource.DataSource;
 
 var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
-    template: Micro.compile(
+    template: Y.Template.Micro.compile(
         '<form class="form-horizontal">'+
             '<fieldset>' +
                 '<div class="control-group">' +
                     '<label class="control-label" for="identifier">Identifier</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.get("identifier") %>"<% if (!data.isNew()) {%> disabled<% } %>/>' +
+                        '<input class="input-block-level" id="identifier" type="text" value="<%= data.get("identifier") %>"' +
+                            '<% if (!data.isNew()) {%> disabled<% } %>/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
@@ -25,15 +25,18 @@ var ChoicePageView = Y.Base.create('choicePageView', Y.View, [], {
                     '<label class="control-label">Type</label>' +
                     '<div class="controls">' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="pdo" <% if (data.get("type") == "pdo") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
+                            '<input type="radio" name="type" value="pdo" ' +
+                                '<% if (data.get("type") == "pdo") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'Database' +
                         '</label>' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="dataGen" <% if (data.get("type") == "dataGen") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
+                            '<input type="radio" name="type" value="dataGen" ' +
+                                '<% if (data.get("type") == "dataGen") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'DataGen' +
                         '</label>' +
                         '<label class="radio">' +
-                            '<input type="radio" name="type" value="xml" <% if (data.get("type") == "xml") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
+                            '<input type="radio" name="type" value="xml" ' +
+                                '<% if (data.get("type") == "xml") { %>checked<% } %><% if (!data.isNew()) {%> disabled<% } %>/>' +
                             'XML Data' +
                         '</label>' +
                     '</div>' +
@@ -113,8 +116,6 @@ var DataGenGenericPageView = Y.Base.create('dataGenGenericPageView', Y.View, [],
     }
 });
 
-var DatagenSource = Y.Rednose.DataSource.DatagenSource;
-
 var DataGenSourcePageView = Y.Base.create('dataGenSourcePageView', Y.View, [], {
     OPTION_TEMPLATE: '<option id="{id}">{value}</option>',
 
@@ -175,8 +176,8 @@ var DataGenSourcePageView = Y.Base.create('dataGenSourcePageView', Y.View, [], {
 });
 /*jshint boss:true, expr:true, onevar:false */
 
-var PdoSource  = Y.Rednose.DataSource.PdoSource,
-    Micro      = Y.Template.Micro;
+var PdoSource = Y.Rednose.DataSource.PdoSource,
+    Micro     = Y.Template.Micro;
 
 var PdoGenericPageView = Y.Base.create('pdoGenericPageView', Y.View, [], {
     template: Micro.compile(
@@ -233,9 +234,6 @@ var PdoGenericPageView = Y.Base.create('pdoGenericPageView', Y.View, [], {
     }
 });
 
-var PdoSource = Y.Rednose.DataSource.PdoSource,
-    Micro     = Y.Template.Micro;
-
 var PdoSourcePageView = Y.Base.create('pdoSourcePageView', Y.View, [], {
     OPTION_TEMPLATE: Micro.compile('<option id="<%= data.id %>"<% if (data.selected) {%> selected<% }%>><%= data.value %></option>'),
 
@@ -244,18 +242,22 @@ var PdoSourcePageView = Y.Base.create('pdoSourcePageView', Y.View, [], {
             '<fieldset>' +
                 '<div class="control-group">' +
                     '<label class="control-label radio inline">' +
-                        '<input type="radio" name="source" value="table" data-radio-group="source"<% if (data.source == "table") { %> checked<% } %>/> Table' +
+                        '<input type="radio" name="source" value="table" data-radio-group="source"' +
+                            '<% if (data.source == "table") { %> checked<% } %>/> Table' +
                     '</label>' +
                     '<div class="controls">' +
-                        '<select class="input-block-level" id="table" data-radio="source"<% if (data.source != "table") { %> disabled<% } %>></select>' +
+                        '<select class="input-block-level" id="table" data-radio="source"' +
+                            '<% if (data.source != "table") { %> disabled<% } %>></select>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
                     '<label class="control-label radio inline">' +
-                        '<input type="radio" name="source" value="query" data-radio-group="source"<% if (data.source == "query") { %> checked<% } %>/> Query' +
+                        '<input type="radio" name="source" value="query" data-radio-group="source"' +
+                            '<% if (data.source == "query") { %> checked<% } %>/> Query' +
                     '</label>' +
                         '<div class="controls">' +
-                            '<textarea rows="3" spellcheck="false" class="input-block-level" id="query" data-radio="source"<% if (data.source != "query") { %> disabled<% } %>><%= data.query %></textarea >' +
+                            '<textarea rows="3" spellcheck="false" class="input-block-level" id="query" data-radio="source"' +
+                                '<% if (data.source != "query") { %> disabled<% } %>><%= data.query %></textarea >' +
                         '</div>' +
                 '</div>' +
             '</fieldset>' +
@@ -529,11 +531,6 @@ var TXT_NEW_DATA_SOURCE = 'New Data Source',
     TXT_CANCEL          = 'Cancel',
     TXT_CREATE          = 'Create';
 
-var DataSource    = Y.Rednose.DataSource.DataSource,
-    DatagenSource = Y.Rednose.DataSource.DatagenSource,
-    PdoSource     = Y.Rednose.DataSource.PdoSource,
-    XmlSource     = Y.Rednose.DataSource.XmlSource;
-
 var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.View.Nav ], {
     _app: null,
 
@@ -741,21 +738,24 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
 
         switch (model.get('type')) {
             case 'dataGen':
-                model instanceof DatagenSource || (model = new DatagenSource(model.getAttrs(baseAttrs)));
+                model instanceof Y.Rednose.DataSource.DatagenSource ||
+                    (model = new Y.Rednose.DataSource.DatagenSource(model.getAttrs(baseAttrs)));
 
                 choiceView.set('model', model);
 
                 this.showDataGenGenericPage();
                 break;
             case 'pdo':
-                model instanceof PdoSource || (model = new PdoSource(model.getAttrs(baseAttrs)));
+                model instanceof Y.Rednose.DataSource.PdoSource ||
+                    (model = new Y.Rednose.DataSource.PdoSource(model.getAttrs(baseAttrs)));
 
                 choiceView.set('model', model);
 
                 this.showPdoGenericPage();
                 break;
             case 'xml':
-                model instanceof XmlSource || (model = new XmlSource(model.getAttrs(baseAttrs)));
+                model instanceof Y.Rednose.DataSource.XmlSource ||
+                    (model = new Y.Rednose.DataSource.XmlSource(model.getAttrs(baseAttrs)));
 
                 choiceView.set('model', model);
 
@@ -777,7 +777,7 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
     }
 }, {
     ATTRS: {
-        model: { value: new DataSource() }
+        model: { value: new Y.Rednose.DataSource.DataSource() }
     }
 });
 

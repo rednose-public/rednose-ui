@@ -2,9 +2,9 @@
 
 var TXT_NAVBAR_CAPTION = 'Form Designer';
 
-var ConfigureDynamicItemsView = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
-    DataSourceManager         = Y.Rednose.DataSourceManager.DataSourceManager,
-    Panel                     = Y.Rednose.Panel,
+var ConfigureDynamicItems = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
+    DataSourceManager     = Y.Rednose.DataSourceManager.DataSourceManager,
+    Panel                 = Y.Rednose.Panel,
     FormDesigner;
 
 FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeColumn ], {
@@ -236,7 +236,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
             view,
             panel;
 
-        view = new ConfigureDynamicItemsView({
+        view = new ConfigureDynamicItems({
             model         : model,
             dataSourceList: dataSourceList
         }).render();
