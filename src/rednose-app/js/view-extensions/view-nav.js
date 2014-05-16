@@ -224,8 +224,6 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         if (this._body.one('.rednose-unit-right')) {
             this._body.one('.rednose-unit-right').setStyle('top', 46);
         }
-
-        this.fire(EVT_LOAD);
     },
 
     // -- Protected Methods ----------------------------------------------------

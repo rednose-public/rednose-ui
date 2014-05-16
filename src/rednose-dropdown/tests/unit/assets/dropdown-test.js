@@ -123,7 +123,7 @@ YUI.add('dropdown-test', function (Y) {
             dropdown.destroy();
         },
 
-        'Dropdown should fire `select` when an item is clicked': function () {
+        'Dropdown should fire `click` when an item is clicked': function () {
             var calls = 0,
                 menu  = Y.one('.menu');
 
@@ -135,7 +135,7 @@ YUI.add('dropdown-test', function (Y) {
                 ]
             }).render().open();
 
-            dropdown.on('select', function (e) {
+            dropdown.on('click', function (e) {
                 calls++;
             });
 
@@ -144,7 +144,7 @@ YUI.add('dropdown-test', function (Y) {
             Assert.areEqual(1, calls);
         },
 
-        'Dropdown should fire `select#id` when an item is clicked': function () {
+        'Dropdown should fire `click#id` when an item is clicked': function () {
             var calls = 0,
                 menu  = Y.one('.menu');
 
@@ -156,7 +156,7 @@ YUI.add('dropdown-test', function (Y) {
                 ]
             }).render().open();
 
-            dropdown.on('select#testItem1', function (e) {
+            dropdown.on('click#testItem1', function (e) {
                 calls++;
             });
 
@@ -165,7 +165,7 @@ YUI.add('dropdown-test', function (Y) {
             Assert.areEqual(1, calls);
         },
 
-        'Dropdown should fire `select` when an icon is clicked': function () {
+        'Dropdown should fire `click` when an icon is clicked': function () {
             var calls = 0,
                 menu  = Y.one('.menu');
 
@@ -177,7 +177,7 @@ YUI.add('dropdown-test', function (Y) {
                 ]
             }).render().open();
 
-            dropdown.on('select', function (e) {
+            dropdown.on('click', function (e) {
                 calls++;
             });
 
@@ -212,7 +212,7 @@ YUI.add('dropdown-test', function (Y) {
             Assert.areEqual('explicitUrl', dropdown.getItemById('testItem1').url);
         },
 
-        'The `select` event payload should contain the origin event': function () {
+        'The `click` event payload should contain the origin event': function () {
             var menu = Y.one('.menu'),
                 event,
                 originEvent;
@@ -229,7 +229,7 @@ YUI.add('dropdown-test', function (Y) {
                 originEvent = e;
             });
 
-            dropdown.on('select', function (e) {
+            dropdown.on('click', function (e) {
                 event = e;
             });
 
@@ -238,7 +238,7 @@ YUI.add('dropdown-test', function (Y) {
             Assert.areSame(originEvent.target, event.originEvent.target);
         },
 
-        'The `select#id` event payload should contain the origin event': function () {
+        'The `click#id` event payload should contain the origin event': function () {
             var menu = Y.one('.menu'),
                 event,
                 originEvent;
@@ -255,7 +255,7 @@ YUI.add('dropdown-test', function (Y) {
                 originEvent = e;
             });
 
-            dropdown.on('select#testItem1', function (e) {
+            dropdown.on('click#testItem1', function (e) {
                 event = e;
             });
 

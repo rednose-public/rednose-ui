@@ -5,7 +5,7 @@
     <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
 
-    <script src="../../../../../yui3/build/yui/yui.js"></script>
+    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
     <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
 </head>
 <body>
@@ -63,15 +63,15 @@
 
         dropdown.getItemById('action1').rename('Renamed item');
 
-        dropdown.on('select', function (e) {
+        dropdown.on('click', function (e) {
             console.log(e.originEvent);
         });
 
-        dropdown.on('select#action2', function (e) {
+        dropdown.on('click#action2', function (e) {
             console.log(e.originEvent);
         });
 
-        dropdown.on('select#action3', function (e) {
+        dropdown.on('click#action3', function (e) {
             console.log(e);
         });
     });

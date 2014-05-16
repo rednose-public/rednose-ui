@@ -23,14 +23,14 @@ var Micro = Y.Template.Micro;
 /**
  * Fired when a menu item is clicked.
  *
- * You can subscribe to specific menu item through the following event: "select#id".
+ * You can subscribe to specific menu item through the following event: "click#id".
  *
- * @event select
+ * @event click
  * @param {Rednose.Dropdown.Item} item The item that was clicked.
  * @param {EventFacade} originEvent Original click event.
- * @preventable _defSelectFn
+ * @preventable _defClickFn
  */
-var EVT_SELECT = 'select';
+var EVT_CLICK = 'click';
 
 var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 
@@ -262,7 +262,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         var target = e.currentTarget;
 
         var item      = this.getItemById(target.getAttribute('data-id')),
-            itemEvent = EVT_SELECT + '#' + item.id;
+            itemEvent = EVT_CLICK + '#' + item.id;
 
         if (item.isDisabled() ||  item.url === '#') {
             e.preventDefault();
@@ -274,13 +274,13 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 
         if (!this._published[itemEvent]) {
             this._published[itemEvent] = this.publish(itemEvent, {
-                defaultFn: this._defItemSelectFn
+                defaultFn: this._defItemClickFn
             });
         }
 
-        if (!this._published[EVT_SELECT]) {
-            this._published[EVT_SELECT] = this.publish(EVT_SELECT, {
-                defaultFn: this._defSelectFn
+        if (!this._published[EVT_CLICK]) {
+            this._published[EVT_CLICK] = this.publish(EVT_CLICK, {
+                defaultFn: this._defClickFn
             });
         }
 
@@ -375,7 +375,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @param {EventFacade} e
      * @private
      */
-    _defSelectFn: function (e) {
+    _defClickFn: function (e) {
         e.item.dropdown.toggle();
     },
 
@@ -383,8 +383,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @param {EventFacade} e
      * @private
      */
-    _defItemSelectFn: function (e) {
-        this.fire(EVT_SELECT, {
+    _defItemClickFn: function (e) {
+        this.fire(EVT_CLICK, {
             originEvent: e.originEvent,
             item       : e.item
         });

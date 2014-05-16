@@ -14,9 +14,7 @@
             "gallery-sm-treeview-templates"
         ],
 
-        "rollup": 1,
-
-        "skinnable": true
+        "rollup": 1
     },
 
     "rednose-treeview-templates" : {

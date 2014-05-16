@@ -412,6 +412,5 @@ Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
     "supersedes": [
         "gallery-sm-treeview-templates"
     ],
-    "rollup": 1,
-    "skinnable": true
+    "rollup": 1
 });

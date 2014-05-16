@@ -15,6 +15,18 @@ Provides a navigation bar.
 @constructor
 @extends Widget
 **/
+
+/**
+ * Fired when a button in the toolbar is clicked.
+ *
+ * You can subscribe to specific items through the following event: "click#id".
+ *
+ * @event click
+ * @param {Rednose.Dropdown.Item} item The dropdown item that was clicked.
+ * @param {EventFacade} originEvent Original item event.
+ */
+var EVT_CLICK = 'click';
+
 Navbar = Y.Base.create('navbar', Y.Widget, [], {
     // -- Public Properties ----------------------------------------------------
 
@@ -59,6 +71,20 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
                       '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{icon}{title} <b class="caret"></a>' +
                   '</li>',
 
+    /**
+     * Hash of navbar events.
+     *
+     * @property {Object} _navbarEvents
+     * @protected
+     */
+
+    /**
+     * Hash of published custom events.
+     *
+     * @property {Object} _published
+     * @protected
+     */
+
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
@@ -66,17 +92,27 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @protected
     **/
     initializer: function () {
-        var container = this.get('contentBox');
+        this._navbarEvents || (this._navbarEvents = []);
+
+        this._published = {};
+
+        this._navbarEvents.push(
+            this.after({
+                'dropdown:click': this._afterDropdownClick
+            })
+        );
+
+//        var container = this.get('contentBox');
 
         // Prevent default URL behaviour.
-        container.delegate('click', this._prevent, 'a', this);
-
-        // Bind the handler for clicking on menu items.
-        container.delegate('click', this._handleClick, '.dropdown-menu a', this);
-        container.delegate('click', this._handleClick, 'ul.nav > li.nav-item > a', this);
-
-        // Bind the handler for clicking on the brand.
-        container.delegate('click', this._handleClick, 'a.brand', this);
+//        container.delegate('click', this._prevent, 'a', this);
+//
+//        // Bind the handler for clicking on menu items.
+//        container.delegate('click', this._handleClick, '.dropdown-menu a', this);
+//        container.delegate('click', this._handleClick, 'ul.nav > li.nav-item > a', this);
+//
+//        // Bind the handler for clicking on the brand.
+//        container.delegate('click', this._handleClick, 'a.brand', this);
     },
 
     /**
@@ -84,6 +120,8 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     @protected
     **/
     destructor: function () {
+        (new Y.EventHandle(this._navbarEvents)).detach();
+
         this.templateContainer = null;
         this.templateColumn    = null;
     },
@@ -204,7 +242,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 
         var item = Y.Node.create(Y.Lang.sub(this.itemTemplate, {
             title: config.title,
-            icon : config.icon ? '<i class="icon icon-white ' + m.icon + '"></i> ' : ''
+            icon : config.icon ? '<i class="icon icon-white ' + config.icon + '"></i> ' : ''
         }));
 
         parent.append(item);
@@ -374,6 +412,39 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     **/
     _prevent: function (e) {
         e.currentTarget.getAttribute('href') === '#' && e.preventDefault();
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterDropdownClick: function (e) {
+        var item  = e.item,
+            event = EVT_CLICK + '#' + item.id;
+
+        if (!this._published[event]) {
+            this._published[event] = this.publish(event, {
+                defaultFn: this._defItemClickFn
+            });
+        }
+
+        this.fire(event, {
+            originEvent: e,
+            item       : item
+        });
+    },
+
+    // -- Default Event Handlers -----------------------------------------------
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _defItemClickFn: function (e) {
+        this.fire(EVT_CLICK, {
+            originEvent: e.originEvent,
+            item       : e.item
+        });
     }
 }, {
     ATTRS: {

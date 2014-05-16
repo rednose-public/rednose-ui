@@ -413,7 +413,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "node"
         ],
         "rollup": 1,
-        "skinnable": true,
         "supersedes": [
             "gallery-sm-treeview-templates"
         ]
@@ -472,7 +471,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '6ff01045344f8ee638a0df1700ba60e8';
+YUI.Env[Y.version].md5 = '773aad605ad357493e36b5211140c64c';
 
 
 }, '1.5.0-DEV');

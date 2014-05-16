@@ -26,6 +26,10 @@ Version 1.5 is compatible with YUI 3.16.0.
 
 * Module `Rednose.ControlForm` was removed and was replaced by the `rednose-form` module.
 
+## rednose-dropdown
+
+ * Event `select` was renamed to `click`.
+
 ## rednose-toolbar
 
  * Class `Rednose.Toolbar` was refactored and now uses instances of `rednose-button-group`.
