@@ -48,9 +48,8 @@ Selectable.prototype = {
     _getModelFromGridItem: function (node) {
         // The model's ClientID is stored within an HTML5 data attribute ('data-yui3-record'),
         // for example 'image_1'.
-        var id        = node.ancestor('.model-grid-container').getAttribute('data-yui3-record'),
-            list      = this.get('data'),
-            found     = null;
+        var id   = node.ancestor('.model-grid-container').getAttribute('data-yui3-record'),
+            list = this.get('data');
 
         return list.getByClientId(id);
     },

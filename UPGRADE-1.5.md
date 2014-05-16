@@ -16,6 +16,10 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Method `createDropdown` has been removed. Use module `Rednose.Dropdown` instead.
  * Class `Rednose.Toolbar` was moved to a separate module, see `rednose-toolbar`.
 
+## rednose-datatable
+
+ * Deprecated event `dblclick` has been replaced by `open`.
+
 ## rednose-navbar-recent
 
  * Constructor `Rednose.Navbar.Recent` was renamed to `Rednose.Plugin.NavbarRecent`.

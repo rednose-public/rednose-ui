@@ -24,7 +24,7 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
 
     _activeInputNode: null,
 
-    initializer: function() {
+    initializer: function () {
         var self  = this,
             table = this.get('host'),
             model = table.get('data');
@@ -40,13 +40,13 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
         });
     },
 
-    getData: function() {
+    getData: function () {
         this._updateModel();
 
         return this.get('host').get('data');
     },
 
-    _renderFields: function(activeNode) {
+    _renderFields: function () {
         var self      = this,
             table     = this.get('host'),
             container = table.get('boundingBox'),
@@ -67,9 +67,8 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
         });
     },
 
-    _addField: function(node, row, property) {
-        var self      = this,
-            nodeValue = node.get('text'),
+    _addField: function (node, row, property) {
+        var nodeValue = node.get('text'),
             inputNode = Y.Node.create('<input />');
 
         inputNode.set('value', nodeValue);
@@ -81,7 +80,7 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
         node.append(inputNode);
     },
 
-    _updateModel: function() {
+    _updateModel: function () {
         var table     = this.get('host'),
             container = table.get('boundingBox'),
             queue     = [];

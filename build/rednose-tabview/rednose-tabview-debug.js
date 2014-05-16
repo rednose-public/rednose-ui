@@ -1,5 +1,6 @@
 YUI.add('rednose-tabview', function (Y, NAME) {
 
+/*jshint boss:true, expr:true, onevar:false */
 
 /**
 Provides a generic tabview.
@@ -37,10 +38,10 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
 
     // -- Lifecycle Methods ----------------------------------------------------
 
-    renderUI: function (container) {
-        var self          = this,
-            tabs          = this.get('tabs'),
-            container     = this.get('contentBox');
+    renderUI: function () {
+        var self      = this,
+            tabs      = this.get('tabs'),
+            container = this.get('contentBox');
 
         container.append(this.template);
 

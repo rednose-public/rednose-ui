@@ -32,8 +32,8 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     // Render this view in our <li> container, and fill it with the
     // data in our Model.
     render: function () {
-        var container   = this.get('container'),
-            model       = this.get('model');
+        var container = this.get('container'),
+            model     = this.get('model');
 
         container.setStyle('float', 'left');
 
@@ -60,10 +60,10 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     // Get the value from our input field while hiding it, and
     // save it to our Model (name attribute) when focus is lost from the field.
     close: function () {
-        var value = this.get('inputNode').get('value'),
-            self = this,
+        var value       = this.get('inputNode').get('value'),
+            self        = this,
             editedValue = Y.Escape.html(Y.Lang.trim(value)),
-            gridModel = this.get('model');
+            gridModel   = this.get('model');
 
         this.get('footerNode').removeClass('editing');
 
@@ -104,13 +104,13 @@ Grid = Y.Base.create('grid', Y.View, [ Y.Rednose.Grid.Selectable ], {
     render: function () {
         var container   = this.get('container'),
             contextMenu = this.get('contextMenu'),
-            self        = this,
             list        = this.get('data');
 
         container.addClass('rednose-grid-view');
 
         Y.each(list, function (model) {
             var view = new GridView({ model: model, contextMenu: contextMenu });
+
             view.addTarget(this);
 
             container.append(view.render().get('container'));

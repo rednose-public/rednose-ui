@@ -21,14 +21,6 @@ var CSS_SELECTED = 'selected',
     EVT_SELECT = 'select',
 
     /**
-     Fired when a row is doubleclicked.
-
-     @event dblclick
-     @deprecated use open
-     **/
-    EVT_DBLCLICK = 'dblclick',
-
-    /**
      Fired when a row is 'openened'.
 
      @event open
@@ -129,11 +121,8 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         return true;
     },
 
-    _handleDblClick: function (e) {
+    _handleDblClick: function () {
         var table = this.get('host');
-
-        // Fires the double click event from the host
-        table.fire(EVT_DBLCLICK);
 
         table.fire(EVT_OPEN, { model: this._getModelFromTableRow(this.get('selectedRow')) });
     },
@@ -233,7 +222,7 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
 
     _activeInputNode: null,
 
-    initializer: function() {
+    initializer: function () {
         var self  = this,
             table = this.get('host'),
             model = table.get('data');
@@ -249,13 +238,13 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
         });
     },
 
-    getData: function() {
+    getData: function () {
         this._updateModel();
 
         return this.get('host').get('data');
     },
 
-    _renderFields: function(activeNode) {
+    _renderFields: function () {
         var self      = this,
             table     = this.get('host'),
             container = table.get('boundingBox'),
@@ -276,9 +265,8 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
         });
     },
 
-    _addField: function(node, row, property) {
-        var self      = this,
-            nodeValue = node.get('text'),
+    _addField: function (node, row, property) {
+        var nodeValue = node.get('text'),
             inputNode = Y.Node.create('<input />');
 
         inputNode.set('value', nodeValue);
@@ -290,7 +278,7 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
         node.append(inputNode);
     },
 
-    _updateModel: function() {
+    _updateModel: function () {
         var table     = this.get('host'),
             container = table.get('boundingBox'),
             queue     = [];
