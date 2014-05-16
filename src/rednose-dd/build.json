@@ -5,11 +5,6 @@
             "jsfiles": [
                 "rednose-dd.js"
             ]
-        },
-        "rednose-dd-css": {
-            "cssfiles": [
-                "rednose-dd.css"
-            ]
         }
     }
 }

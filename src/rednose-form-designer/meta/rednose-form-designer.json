@@ -12,9 +12,5 @@
             "rednose-nodescroll",
             "rednose-treeview"
         ]
-    },
-
-    "rednose-form-designer-css" : {
-        "type": "css"
     }
 }

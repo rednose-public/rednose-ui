@@ -1032,4 +1032,4 @@ ControlViewFactory.create = function (model) {
 Y.namespace('Rednose.Form').ControlViewFactory = ControlViewFactory;
 
 
-}, '1.5.0-DEV', {"requires": ["rednose-dataprovider", "rednose-form-css", "template-micro", "uploader"]});
+}, '1.5.0-DEV', {"requires": ["rednose-dataprovider", "template-micro", "uploader"]});

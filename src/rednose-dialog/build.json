@@ -5,11 +5,6 @@
             "jsfiles": [
                 "dialog.js"
             ]
-        },
-        "rednose-dialog-css": {
-            "cssfiles": [
-                "dialog.css"
-            ]
         }
     }
 }

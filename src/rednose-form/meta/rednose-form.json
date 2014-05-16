@@ -2,13 +2,8 @@
     "rednose-form": {
         "requires": [
             "rednose-dataprovider",
-            "rednose-form-css",
             "template-micro",
             "uploader"
         ]
-    },
-
-    "rednose-form-css": {
-        "type": "css"
     }
 }

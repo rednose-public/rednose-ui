@@ -9,9 +9,7 @@
 
         "supersedes": [
             "skin-sam-datatable-base"
-        ],
-
-        "skinnable": true
+        ]
     },
     "rednose-datatable-select" : {
         "requires": [

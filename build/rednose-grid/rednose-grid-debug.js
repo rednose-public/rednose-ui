@@ -141,6 +141,5 @@ Y.namespace('Rednose').Grid = Grid;
         "rednose-grid-select",
         "rednose-util",
         "view"
-    ],
-    "skinnable": true
+    ]
 });

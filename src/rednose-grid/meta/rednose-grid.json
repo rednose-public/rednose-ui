@@ -7,8 +7,7 @@
             "rednose-grid-select",
             "rednose-util",
             "view"
-        ],
-        "skinnable": true
+        ]
     },
 
     "rednose-grid-select" : {}

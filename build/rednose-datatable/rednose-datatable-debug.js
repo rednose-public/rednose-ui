@@ -45,6 +45,5 @@ Y.namespace('Rednose').DataTable = DataTable;
     ],
     "supersedes": [
         "skin-sam-datatable-base"
-    ],
-    "skinnable": true
+    ]
 });

@@ -1,4 +1,12 @@
-/* Widget */
+// -- Base ---------------------------------------------------------------------
+
+/* Left label alignment */
+.form-horizontal .control-group .control-label{
+    text-align: left;
+}
+
+// -- AutoCompleteControl ------------------------------------------------------
+
 .rednose-autocomplete-aria {
     left: -9999px;
     position: absolute;
@@ -102,6 +110,9 @@
 .rednose-autocomplete-item .size32 {
     height: 32px;
 }
+
+// -- DateTimeControl ----------------------------------------------------------
+
 .rednose-date-day {
     width: 92px;
 }
@@ -122,10 +133,9 @@
 .rednose-date-minute {
     width: 92px;
 }
-/* Left label alignment */
-.form-horizontal .control-group .control-label{
-    text-align: left;
-}
+
+// -- RichTextControl ----------------------------------------------------------
+
 .rednose-form .cke_top {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -147,6 +157,9 @@
 .rednose-form .cke_chrome {
     border: 1px solid #cccccc;
 }
+
+// -- UploadControl ------------------------------------------------------------
+
 /* Append fix */
 .input-append.input-block-level > input {
     width: 375px;
@@ -163,6 +176,3 @@
        -moz-border-radius: 0 4px 4px 0;
             border-radius: 0 4px 4px 0;
 }
-
-/* YUI CSS Detection Stamp */
-#yui3-css-stamp.rednose-form-css { display: none; }

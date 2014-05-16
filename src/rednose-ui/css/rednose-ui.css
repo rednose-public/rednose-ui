@@ -272,6 +272,441 @@ html,
   background-image: url('img/spinner.gif');
 }
 
+.yui3-datatable-col-hidden {
+  display: none;
+}
+
+.yui3-datatable-sort-liner:focus {
+  outline: none;
+}
+
+.yui3-datatable td {
+  cursor: default;
+  -webkit-user-select: none;
+   -khtml-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -webkit-touch-callout: none;
+}
+
+.yui3-datatable tr:hover td {
+  background-color: #f5f5f5;
+}
+
+.yui3-datatable tr > td.rednose-datatable-selected,
+.yui3-datatable tr > td.rednose-datatable-selected:hover {
+  color: white;
+  background-color: #0088cc;
+}
+
+input.rednose-datatable-input {
+  border: 0 solid white;
+}
+
+.rednose-dd-drag,
+.rednose-dd-drop {
+  cursor: default;
+}
+
+.rednose-dd-drag-selected {
+  border: 1px solid #80C4E6 !important;
+}
+
+.rednose-dd-drag-hover {
+  background-color: #eeeeee !important;
+  border: 1px solid #eeeeee !important;
+}
+
+.rednose-dd-drag-hover.rednose-dd-drag-selected {
+  border: 1px solid #80C4E6 !important;
+}
+
+.rednose-dd-drag-placeholder {
+  margin: -1px;
+  background-color: #F9F9FC;
+  border: 1px solid #0088cc !important;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+       -o-border-radius: 3px;
+          border-radius: 3px;
+}
+
+.rednose-dd-drag-proxy {
+  margin: -1px;
+  overflow: hidden;
+  list-style-type: none;
+  background-color: #eeeeee;
+  border: 1px solid #eeeeee;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+       -o-border-radius: 5px;
+          border-radius: 5px;
+  opacity: 0.75;
+}
+
+.rednose-dialog .btn {
+  margin-left: 8px;
+}
+
+.rednose-dialog .yui3-widget-bd,
+.rednose-dialog .form-horizontal {
+  max-height: 400px;
+  min-height: 48px;
+}
+
+.rednose-dialog .form-horizontal {
+  overflow-y: auto;
+}
+
+.rednose-dialog .icon_absolute {
+  position: absolute;
+}
+
+.rednose-dialog .icon {
+  float: left;
+  width: 48px;
+  height: 48px;
+  margin-right: 15px;
+}
+
+.dialog_message {
+  min-height: 48px;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.dialog_path {
+  float: right;
+  padding-top: 4px;
+  font-size: 8pt;
+}
+
+.dialog_message > fieldset > legend {
+  width: 100%;
+  padding-bottom: 18px;
+  padding-left: 40px;
+  text-align: left;
+}
+
+.dialog_message > fieldset > label {
+  float: left;
+  margin-left: 40px;
+  font-weight: bold;
+}
+
+.dialog_message > fieldset > input {
+  float: left;
+  width: 80%;
+  margin-left: 40px;
+}
+
+.rednose-dialog-window-wrapper {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 47px 2px 57px 1px;
+}
+
+/* Left label alignment */
+
+.form-horizontal .control-group .control-label {
+  text-align: left;
+}
+
+.rednose-autocomplete-aria {
+  position: absolute;
+  left: -9999px;
+}
+
+.rednose-autocomplete-hidden {
+  display: none;
+}
+
+.rednose-autocomplete-list {
+  z-index: 1051;
+  margin-top: 2px;
+  -webkit-border-radius: 4px;
+     -moz-border-radius: 4px;
+          border-radius: 4px;
+}
+
+.rednose-autocomplete-list {
+  min-width: 316px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+     -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding;
+          background-clip: padding-box;
+}
+
+.rednose-autocomplete-item-hover,
+.rednose-autocomplete-item-active {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #0081c2;
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-repeat: repeat-x;
+  outline: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+
+/* Template */
+
+.rednose-autocomplete-list .rednose-autocomplete-item-hover span,
+.rednose-autocomplete-list .rednose-autocomplete-item-active span {
+  color: #ffffff;
+}
+
+.rednose-autocomplete-item a {
+  padding: 7px 15px 6px 10px;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.rednose-autocomplete-item a {
+  display: block;
+  padding: 7px 15px 7px 10px;
+  font-size: 14px;
+  color: #3272a2;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.rednose-autocomplete-item .title {
+  font-size: 14px;
+  line-height: 15px;
+  color: #333;
+}
+
+.rednose-autocomplete-item .subtitle {
+  font-size: 12px;
+  font-weight: normal;
+  color: #999;
+}
+
+.rednose-autocomplete-item .title-block {
+  display: block;
+  height: 17px;
+}
+
+.rednose-autocomplete-item .avatar {
+  float: left;
+  margin-right: 10px;
+}
+
+.rednose-autocomplete-item .size32 {
+  height: 32px;
+}
+
+.rednose-date-day {
+  width: 92px;
+}
+
+.rednose-date-month {
+  width: 176px;
+}
+
+.rednose-date-year {
+  width: 120px;
+  margin-right: 20px;
+}
+
+.rednose-date-hour {
+  width: 92px;
+}
+
+.rednose-date-minute {
+  width: 92px;
+}
+
+.rednose-form .cke_top {
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+}
+
+.rednose-form .cke_editor_source {
+  border-radius: 4px;
+}
+
+.rednose-form .cke_inner {
+  border-radius: 4px;
+}
+
+.rednose-form .cke_contents {
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.rednose-form .cke_chrome {
+  border: 1px solid #cccccc;
+}
+
+/* Append fix */
+
+.input-append.input-block-level > input {
+  width: 375px;
+}
+
+/* Uploader */
+
+.uploader-container {
+  float: right;
+  margin-left: -1px;
+}
+
+.yui3-uploader .btn {
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
+
+.rednose-form-designer .rednose-unit-main {
+  overflow: auto;
+}
+
+.rednose-form-designer .rednose-form-view {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+/* Fix for input block-level with combo button */
+
+.rednose-combo-block-level {
+  width: 185px;
+}
+
+/* Fix for dropdown left alignment */
+
+.input-append .dropdown-wrapper .dropdown-menu {
+  right: 0;
+  left: auto;
+}
+
+/* Fix for inline buttons within a rednose-dropdown wrapper */
+
+.dropdown-wrapper {
+  display: inline-block;
+}
+
+/* Fix for appended buttons within a rednose-dropdown wrapper */
+
+.input-append .dropdown-wrapper .btn {
+  -webkit-border-radius: 0 4px 4px 0;
+     -moz-border-radius: 0 4px 4px 0;
+          border-radius: 0 4px 4px 0;
+}
+
+.rednose-grid-view {
+  cursor: default;
+}
+
+.model-grid-container {
+  display: block;
+  float: left;
+  width: 192px;
+  height: 224px;
+}
+
+.model-grid-icon {
+  position: relative;
+  background-color: white;
+}
+
+.model-grid-icon-wrapper {
+  position: relative;
+  width: 110px;
+  height: 156px;
+  margin-right: 46px;
+  margin-left: 46px;
+  -webkit-box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+     -moz-box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+       -o-box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+          box-shadow: 0 0 0 1px #d1d1d1,0 0 4px 1px #ccc;
+}
+
+.model-grid-icon-container {
+  margin-top: 14px;
+  margin-bottom: 3px;
+}
+
+.model-grid-footer {
+  margin-top: 10px;
+}
+
+.model-grid-icon {
+  position: relative;
+  background-color: white;
+}
+
+.model-grid-footer .edit {
+  display: none;
+  width: 202px;
+  height: 20px;
+  margin-top: -1px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 12px;
+  text-align: center;
+  vertical-align: middle;
+  border: 0;
+}
+
+.model-grid-icon {
+  min-width: 100%;
+  min-height: 100%;
+  background-image: url('img/noimage.png');
+}
+
+.model-grid-item-selected > .model-grid-icon-wrapper {
+  outline-color: #4e81d3;
+  outline-width: 2px;
+  outline-style: solid;
+}
+
+.model-grid-footer .edit {
+  display: none;
+}
+
+.editing .edit {
+  display: block;
+}
+
+.editing .model-grid-name {
+  display: none;
+}
+
+.model-grid-name {
+  width: 202px;
+  height: 19px;
+  font-size: 14px;
+  font-weight: normal;
+  color: #000;
+  text-align: center;
+}
+
+.model-grid-date {
+  width: 202px;
+  height: 15px;
+  font-size: 12px;
+  font-weight: normal;
+  color: #808080;
+  text-align: center;
+}
+
 .rednose-navbar {
   height: 41px;
 }
@@ -292,6 +727,128 @@ html,
   padding-right: 15px;
   padding-left: 15px;
   margin-left: 0;
+}
+
+.yui3-panel {
+  position: absolute;
+}
+
+.yui3-panel-hidden {
+  visibility: hidden;
+}
+
+.yui3-widget-tmp-forcesize .yui3-panel-content {
+  overflow: hidden !important;
+}
+
+.yui3-panel .yui3-widget-hd {
+  position: relative;
+}
+
+.yui3-panel .yui3-widget-hd .yui3-widget-buttons {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.yui3-panel .yui3-widget-ft .yui3-widget-buttons {
+  display: inline-block;
+  *display: inline;
+  zoom: 1;
+}
+
+/* Panel body styling. */
+
+.yui3-widget-stdmod .yui3-widget-bd {
+  padding: 9px 15px;
+}
+
+/* Panel header styling. */
+
+.yui3-widget-stdmod .yui3-widget-hd div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.yui3-widget-stdmod .yui3-widget-hd {
+  padding: 9px 15px;
+  margin: 0;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 27px;
+  color: inherit;
+  text-rendering: optimizelegibility;
+  background-color: transparent;
+  background-image: none;
+  border-bottom: 1px solid #eee;
+}
+
+/* Panel footer styling. */
+
+.yui3-widget-stdmod .yui3-widget-ft {
+  height: 26px;
+  padding: 14px 15px 15px;
+  margin-bottom: 0;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+     -moz-box-shadow: inset 0 1px 0 #ffffff;
+          box-shadow: inset 0 1px 0 #ffffff;
+}
+
+/* Outer panel styling. */
+
+.yui3-panel-content {
+  background-color: #ffffff;
+  border: 1px solid #999;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  *border: 1px solid #999;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  outline: none;
+  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  -webkit-background-clip: padding-box;
+     -moz-background-clip: padding-box;
+          background-clip: padding-box;
+}
+
+/* Mask opacity */
+
+.yui3-widget-mask {
+  opacity: 0.8 !important;
+  filter: alpha(opacity=80) !important;
+}
+
+/* FIXME: Don't focus the panel to begin with. */
+
+.yui3-panel {
+  outline: none;
+}
+
+/* FIXME: Applies to nav panel in the main view, not the grid. */
+
+.yui3-widget-stdmod {
+  height: 100%;
+}
+
+/* FIXME: Helper classes for the buttons, should prolly move up to a higer level within the framework. */
+
+.float-left {
+  float: left;
+  margin-right: 10px;
+}
+
+.float-right {
+  float: right;
+  margin-left: 10px;
 }
 
 .rednose-toolbar {

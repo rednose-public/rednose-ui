@@ -1,15 +1,11 @@
 {
     "rednose-panel" : {
         "requires": [
-            "panel",
-            "rednose-panel-css"
+            "panel"
         ],
         "supersedes": [
             "skin-sam-widget-base",
             "skin-sam-panel"
         ]
-    },
-    "rednose-panel-css" : {
-        "type": "css"
     }
 }

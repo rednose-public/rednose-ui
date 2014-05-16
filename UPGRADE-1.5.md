@@ -50,4 +50,4 @@ Version 1.5 is compatible with YUI 3.16.0.
 
 ## rednose-ui
 
-* **All CSS** is now handled by `LESS` templates within the `rednose-ui` module.
+* **All CSS** except vendor CSS is now handled by `LESS` templates within the `rednose-ui` module.

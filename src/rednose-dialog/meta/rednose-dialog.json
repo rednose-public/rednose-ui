@@ -4,7 +4,6 @@
             "dd",
             "dd-plugin",
             "json-parse",
-            "rednose-dialog-css",
             "rednose-panel",
             "node",
             "node-event-simulate",
@@ -14,8 +13,5 @@
             "en",
             "nl"
         ]
-    },
-    "rednose-dialog-css" : {
-        "type": "css"
     }
 }

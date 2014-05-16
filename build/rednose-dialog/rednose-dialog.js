@@ -568,7 +568,6 @@ Y.namespace('Rednose').Dialog = Dialog;
         "dd",
         "dd-plugin",
         "json-parse",
-        "rednose-dialog-css",
         "rednose-panel",
         "node",
         "node-event-simulate",
