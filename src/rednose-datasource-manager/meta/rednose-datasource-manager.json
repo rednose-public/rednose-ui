@@ -2,7 +2,13 @@
     "rednose-datasource-manager" : {
         "requires": [
             "rednose-app",
-            "rednose-dataprovider"
+            "rednose-datasource"
+        ]
+    },
+
+    "rednose-datasource" : {
+        "requires": [
+            "rednose-treeview"
         ]
     }
 }

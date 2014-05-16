@@ -81,26 +81,17 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-button"
         ]
     },
-    "rednose-dataprovider": {
+    "rednose-datasource": {
         "group": "rednose-ui",
         "requires": [
-            "autocomplete",
-            "autocomplete-filters",
-            "autocomplete-highlighters",
-            "base",
-            "json",
-            "model",
-            "model-list",
-            "rednose-treeview",
-            "widget"
-        ],
-        "skinnable": true
+            "rednose-treeview"
+        ]
     },
     "rednose-datasource-manager": {
         "group": "rednose-ui",
         "requires": [
             "rednose-app",
-            "rednose-dataprovider"
+            "rednose-datasource"
         ]
     },
     "rednose-datatable": {
@@ -451,7 +442,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '862e037a6a48d30bd3e49220844af163';
+YUI.Env[Y.version].md5 = 'a99f50df431144475ac2253d7c02fdba';
 
 
 }, '1.5.0-DEV');

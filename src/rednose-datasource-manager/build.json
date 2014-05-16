@@ -1,6 +1,12 @@
 {
     "name": "rednose-datasource-manager",
     "builds": {
+        "rednose-datasource": {
+            "jsfiles": [
+                "models/data-source.js"
+            ]
+        },
+
         "rednose-datasource-manager": {
             "jsfiles": [
                 "views/choice-view.js",
