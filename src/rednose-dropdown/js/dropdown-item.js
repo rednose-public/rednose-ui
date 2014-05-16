@@ -114,6 +114,13 @@ DropdownItem.prototype = {
      * @readOnly
      */
 
+    /**
+     * Parent node for this item.
+     *
+     * @property {Rednose.Dropdown.Item} parent
+     * @readOnly
+     */
+
     // -- Public Methods -------------------------------------------------------
 
     /**
@@ -166,11 +173,22 @@ DropdownItem.prototype = {
     },
 
     /**
+     * @param {Object[]} children
+     */
+    resetChildren: function (children) {
+        this.dropdown.resetItemChildren(this, children);
+
+        return this;
+    },
+
+    /**
      * Adds a child to this node.
      *
-     * @param {Rednose.DropdownItem} child
+     * @param {Rednose.Dropdown.Item} child
      */
     addChild: function (child) {
+        child.parent = this;
+
         this.children.push(child);
     }
 };

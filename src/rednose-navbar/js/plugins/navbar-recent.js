@@ -6,15 +6,17 @@ Provides a navigation bar plugin to show a list of recent entries.
 @module rednose-navbar-recent
 **/
 var TXT_CLEAR_ITEMS = 'Clear Items',
+    COOKIE_NAME     = 'recent',
+    MAX_MENU_SIZE   = 5;
 
-    COOKIE_NAME = 'recent',
-
-    MAX_MENU_SIZE = 5,
-
-    CSS_BOOTSTRAP_DISABLED = 'disabled',
-    CSS_BOOTSTRAP_DIVIDER  = 'divider',
-    CSS_BOOTSTRAP_MENU     = 'dropdown-menu',
-    CSS_BOOTSTRAP_SUBMENU  = 'dropdown-submenu';
+/**
+ * Fired when a recent item is clicked.
+ *
+ * @event click
+ * @param {String} id
+ * @param {EventFacade} originEvent Original item event.
+ */
+var EVT_CLICK_RECENT = 'clickRecent';
 
 /**
 Provides a navigation bar plugin to show a list of recent entries.
@@ -25,66 +27,56 @@ Provides a navigation bar plugin to show a list of recent entries.
 @extends Plugin.Base
 @extensionfor Rednose.NavBar
 **/
-var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
+var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
+    /**
+     * The node identifier for this recent items set.
+     *
+     * @property {String} _node
+     * @protected
+     */
+
+    /**
+     * The unique identifier for this recent items set.
+     *
+     * @property {String} _scope
+     * @protected
+     */
+
     // -- Lifecycle Methods ----------------------------------------------------
 
-    /**
-    Stores a reference to the top level <li> node for this item.
-
-    @property {Node} _itemNode
-    @protected
-    **/
-    _itemNode: null,
-
-    /**
-    The node identifier for this recent items set.
-
-    @property {String} _node
-    @protected
-    **/
-    _node: null,
-
-    /**
-    The unique identifier for this recent items set.
-
-    @property {String} _scope
-    @protected
-    **/
-    _scope: null,
-
-    /**
-    @method initializer
-    @protected
-    **/
     initializer: function (config) {
+        this._scope   = config.scope;
+        this._node    = config.node;
+
         var host = this.get('host');
 
-        this._scope = config.scope;
-        this._node  = config.node;
+        host.after('click', this._afterItemClick, this);
+        host.after('click#clear-items', this._afterRecentClear, this);
+        host.after('render', this._renderMenu, this);
 
-//        host.after('render', this._afterRender, this);
+        this.addTarget(host);
     },
 
-    /**
-    @method destructor
-    @protected
-    **/
     destructor: function () {
-        this._itemNode = null;
-        this._scope    = null;
+        var host = this.get('host');
+
+        this.removeTarget(host);
+
+        this._scope = null;
+        this._node  = null;
     },
 
     // -- Public Methods -------------------------------------------------------
 
     /**
-    @method add
-    @param {String} id Unique id
-    @param {String} label Menu entry label
-    @public
-    **/
+     * @method add
+     * @param {String} id Unique id
+     * @param {String} label Menu entry label
+     * @public
+     */
     add: function (id, label) {
         var cookie     = Y.Cookie.getSub(COOKIE_NAME, this._scope),
-            attrs      = { id: id, label: label },
+            attrs      = { id: id, title: label },
             cookieData = Y.JSON.parse(cookie) || [];
 
         // Remove duplicate elements.
@@ -107,119 +99,65 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
 
         Y.Cookie.setSub(COOKIE_NAME, this._scope, cookie);
 
-        this._renderMenu();
+        if (this.get('host').rendered) {
+            this._renderMenu();
+        }
     },
 
     /**
-     @method clear
-     @public
-     **/
+     * @method clear
+     * @public
+     */
     clear: function () {
         Y.Cookie.setSub(COOKIE_NAME, this._scope, null);
 
-        this._renderMenu();
+        if (this.get('host').rendered) {
+            this._renderMenu();
+        }
     },
 
     // -- Protected Methods ----------------------------------------------------
 
     /**
-    @method _renderMenu
-    @protected
-    **/
+     * @method _renderMenu
+     * @protected
+     */
     _renderMenu: function () {
         var host       = this.get('host'),
+            item       = host.getItemById(this._node);
             cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope));
 
-        if (!cookieData || !Y.Object.size(cookieData)) {
-            this._itemNode.addClass(CSS_BOOTSTRAP_DISABLED);
-            this._itemNode.one('ul') && this._itemNode.one('ul').remove(true);
-
-            if (this._itemNode.hasClass(CSS_BOOTSTRAP_SUBMENU)) {
-                this._itemNode.removeClass(CSS_BOOTSTRAP_SUBMENU);
-            }
-
-            return;
+        if (cookieData && cookieData.length > 0) {
+            cookieData.push({ type: 'divider' }, { id: 'clear-items', title: TXT_CLEAR_ITEMS });
         }
 
-        if (this._itemNode.hasClass(CSS_BOOTSTRAP_DISABLED)) {
-            this._itemNode.removeClass(CSS_BOOTSTRAP_DISABLED);
-        }
+        item[cookieData ? 'enable' : 'disable']();
 
-        if (!this._itemNode.hasClass(CSS_BOOTSTRAP_SUBMENU)) {
-            this._itemNode.addClass(CSS_BOOTSTRAP_SUBMENU);
-        }
-
-        if (!this._itemNode.one('ul')) {
-            this._itemNode.append(Y.Node.create('<ul class="' + CSS_BOOTSTRAP_MENU + '"></ul>'));
-        }
-
-        var subMenuNode = this._itemNode.one('ul');
-
-        subMenuNode.empty();
-
-        // Append entries.
-        Y.each(cookieData, function (item) {
-            var entryNode = Y.Node.create('<li><a tabindex="-1" href="#"></a></li>');
-
-            entryNode.one('a').setAttribute('data-id', item.id);
-            entryNode.one('a').setContent(item.label);
-            subMenuNode.append(entryNode);
-        });
-
-        // Append divider.
-        subMenuNode.append(Y.Node.create('<li class="' + CSS_BOOTSTRAP_DIVIDER + '"></li>'));
-
-        // Append 'Clear Items' entry.
-        subMenuNode.append(Y.Node.create(Y.Lang.sub(
-            '<li>' +
-                '<a class="menu-clearitems" tabindex="-1" href="#">{clearItems}</a>' +
-            '</li>',
-            { clearItems: TXT_CLEAR_ITEMS }
-        )));
+        item.resetChildren(cookieData);
     },
 
     // -- Protected Event Handlers ---------------------------------------------
 
     /**
-     @method _handleClick
-     @param {EventFacade} e Click event.
-     @protected
-     **/
-    _handleClick: function (e) {
-        e.preventDefault();
+     * @protected
+     */
+    _afterItemClick: function (e) {
+        var item = e.item,
+            node = this._node;
 
-        // Ignore clicks on the rootnode.
-        if (e.currentTarget.get('parentNode') === this._itemNode) {
-            return;
+        if (item && item.parent && item.parent.id === node && item.id !== 'clear-items') {
+            this.fire(EVT_CLICK_RECENT, {
+                id         : item.id,
+                originEvent: e
+            });
         }
-
-        var host  = this.get('host'),
-            aNode = e.currentTarget;
-
-        if (aNode.hasClass('menu-clearitems')) {
-            this.clearEntries();
-
-            return;
-        }
-
-        var entryId = this._itemNode.one('a').getAttribute('data-id'),
-            itemId  = aNode.getAttribute('data-id');
-
-       host.fire(entryId, { id: itemId });
     },
 
     /**
-     @method _afterRender
-     @param {EventFacade} e Click event.
-     @protected
-     **/
-    _afterRender: function (e) {
-        var host = this.get('host');
-
-        this._itemNode = host.getNode(this._node).get('parentNode');
-        this._itemNode.delegate('click', this._handleClick, 'a', this);
-
-        this._renderMenu();
+     * @protected
+     */
+    _afterRecentClear: function () {
+        this.clear();
     }
 }, {
     NS: 'recent'

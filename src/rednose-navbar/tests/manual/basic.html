@@ -28,9 +28,9 @@
             menu: [
                 { id: 'dropdown1', title: 'Dropdown 1', items: [
                     { id: 'action1', title: 'Action 1' },
-                    { id: 'action2', title: 'Action 2', disabled: true },
+                    { id: 'action2', title: 'Action 2' },
                     { type: 'divider' },
-                    { id: 'recent', title: 'Recent' }
+                    { id: 'recent', title: 'Open recent', disabled: true }
                 ]},
                 { id: 'dropdown2', title: 'Dropdown 2', items: [
                     { id: 'action1', title: 'Action 1' },
@@ -57,18 +57,25 @@
             srcNode: Y.one('.rednose-navbar')
         });
 
-//        navbar.plug(Y.Rednose.Plugin.NavbarRecent, { node: 'recent', scope: 'rednose-test' });
+        navbar.plug(Y.Rednose.Plugin.NavbarRecent, { node: 'recent', scope: 'rednose-test' });
 
         navbar.render();
 
-//        navbar.recent.clear();
-//        navbar.recent.add(1, 'Recent 1');
-//        navbar.recent.add(2, 'Recent 2');
-//        navbar.recent.add(3, 'Recent 3');
+        navbar.recent.clear();
+        navbar.recent.add(1, 'Recent 1');
+        navbar.recent.add(2, 'Recent 2');
+        navbar.recent.add(3, 'Recent 3');
 
-        navbar.on('dropdown:select#action1', function (e) {
-            console.log(e);
+        navbar.on('click#action1', function () {
+            navbar.recent.clear();
         });
+
+        navbar.on('click#action2', function () {
+            navbar.recent.add(1, 'Recent 1');
+            navbar.recent.add(2, 'Recent 2');
+        });
+
+        navbar.after('clickRecent', function (e) { console.log(e); });
     });
 </script>
 </body>

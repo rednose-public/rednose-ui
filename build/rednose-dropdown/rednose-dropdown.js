@@ -169,12 +169,13 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 
         this._events.push(
             this.after({
-                open   : this._afterOpen,
-                close  : this._afterClose,
-                enable : this._afterEnable,
-                disable: this._afterDisable,
-                rename : this._afterRename,
-                reset  : this._afterReset
+                open         : this._afterOpen,
+                close        : this._afterClose,
+                enable       : this._afterEnable,
+                disable      : this._afterDisable,
+                rename       : this._afterRename,
+                reset        : this._afterReset,
+                resetChildren: this._afterReset
             }),
 
             container.delegate('click', this._afterItemClick, '.' + classNames.menu + ' a', this),

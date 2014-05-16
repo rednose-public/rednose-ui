@@ -58,10 +58,19 @@ var EVT_OPEN = 'open';
  * Fired when the dropdown items are reset.
  *
  * @event reset
+ * @param {Rednose.Dropdown.Item}
  * @param {Array} items Array of new dropdown config objects
  * @preventable _defResetFn
  **/
 var EVT_RESET = 'reset';
+
+/**
+ * @event resetChildren
+ * @param {Rednose.Dropdown.Item}
+ * @param {Array} items Array of new dropdown config objects
+ * @preventable _defResetChildrenFn
+ */
+var EVT_RESET_CHILDREN = 'resetChildren';
 
 var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
 
@@ -218,6 +227,19 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
         return this;
     },
 
+    /**
+     * @param {Rednose.Dropdown.Item} item
+     * @param {Object[]} children
+     * @chainable
+     */
+    resetItemChildren: function (item, children) {
+        this._fireDropdownEvent(EVT_RESET_CHILDREN, {item: item, children: children}, {
+            defaultFn: this._defResetChildrenFn
+        });
+
+        return this;
+    },
+
     // -- Protected methods ----------------------------------------------------
 
     /**
@@ -260,6 +282,7 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
 
         item.dropdown = null;
         item.children = null;
+        item.parent   = null;
 
         delete this._itemMap[item.id];
     },
@@ -346,6 +369,28 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
      */
     _defCloseFn: function () {
         this._open = false;
+    },
+
+    /**
+     * @private
+     */
+    _defResetChildrenFn: function (e) {
+        var item     = e.item,
+            children = e.children;
+
+        if (item.children && item.children.length > 0) {
+            for (var i = 0; i < item.children.length; i++) {
+                this._destroyItem(item.children[i]);
+            }
+        }
+
+        item.children = [];
+
+        if (children) {
+            for (var j = 0; j < children.length; j++) {
+                item.addChild(this._createItem(children[j]));
+            }
+        }
     }
 });
 

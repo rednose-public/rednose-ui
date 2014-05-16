@@ -21,6 +21,7 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Constructor `Rednose.Navbar.Recent` was renamed to `Rednose.Plugin.NavbarRecent`.
  * Method `addEntry` was renamed to `add`.
  * Method `clearEntries` was renamed to `clear`.
+ * Subscription now occurs through the `clickRecent` event, that bubbles to the plugin host.
 
 ## rednose-controlform
 
