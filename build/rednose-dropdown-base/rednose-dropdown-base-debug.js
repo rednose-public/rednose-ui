@@ -52,6 +52,8 @@ var EVT_CLOSE = 'close';
  * Fired when the dropdown is opened.
  *
  * @event open
+ * @param {Dropdown} dropdown The dropdown instance.
+ * @param {Node} node The node the dropdown is bound to.
  * @preventable _defOpenFn
  */
 var EVT_OPEN = 'open';
@@ -138,7 +140,7 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
      */
     open: function () {
         if (!this.isOpen()) {
-            this._fireDropdownEvent(EVT_OPEN, {}, {
+            this._fireDropdownEvent(EVT_OPEN, {dropdown: this, node: this.get('host')}, {
                 defaultFn: this._defOpenFn
             });
         }
