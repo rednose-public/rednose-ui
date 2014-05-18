@@ -190,7 +190,7 @@ DD = Y.Base.create('dd', Y.View, [], {
         }
 
         if (ul) {
-            // Set the width on a child of the proxy, as the width of proxy itself gets overriden constantly while dragging
+            // Set the width on a child of the proxy, as the width of proxy itself gets overridden constantly while dragging
             var node = Y.DD.DDM.activeDrag.get('dragNode');
             var width = ul.get('offsetWidth');
 
