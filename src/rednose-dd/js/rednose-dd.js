@@ -4,6 +4,9 @@ var DD, BubbleTarget;
 
 BubbleTarget = Y.Base.create('bubbleTarget', Y.Base, [], {});
 
+/**
+ * @deprecated This module will be removed in version 1.t
+ */
 DD = Y.Base.create('dd', Y.View, [], {
     DEBUG: false,
 
