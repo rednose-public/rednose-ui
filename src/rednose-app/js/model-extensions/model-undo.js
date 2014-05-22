@@ -1,46 +1,42 @@
 /**
-Extension for Model, allows moving forward or backward to a model's snapshot list.
-
-@module rednose-app
-@submodule rednose-model-undo
-**/
+ * Extension for Model, allows moving forward or backward to a model's snapshot list.
+ *
+ * @module rednose-app
+ * @submodule rednose-model-undo
+ */
 var Undo;
 
 /**
-Extension for Model, allows moving forward or backward to a model's snapshot list.
-
-@class Undo
-@namespace Rednose.Model
-@constructor
-@extensionfor Model
-**/
+ * Extension for Model, allows moving forward or backward to a model's snapshot list.
+ *
+ * @class Undo
+ * @namespace Rednose.Model
+ * @constructor
+ * @extensionfor Model
+ */
 Undo = Y.Base.create('undo', Y.Model, [], {
     // -- Protected Properties -------------------------------------------------
 
     /**
-    Stores the model revisions as JSON snapshots.
-
-    @property _revisions
-    @type Array
-    @protected
-    **/
+     * Stores the model revisions as JSON snapshots.
+     *
+     * @property _revisions
+     * @type Array
+     * @protected
+     */
     _revisions: [],
 
     /**
-    The current snapshot index.
-
-    @property _index
-    @type Integer
-    @protected
-    **/
+     * The current snapshot index.
+     *
+     * @property _index
+     * @type Integer
+     * @protected
+     */
     _index: 0,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
-    /**
-    @method initializer
-    @protected
-    **/
     initializer: function () {
         var self = this;
 
@@ -52,10 +48,6 @@ Undo = Y.Base.create('undo', Y.Model, [], {
         });
     },
 
-    /**
-    @method destructor
-    @protected
-    **/
     destructor: function () {
         this._revisions = null;
     },
@@ -63,17 +55,20 @@ Undo = Y.Base.create('undo', Y.Model, [], {
     // -- Public Methods -------------------------------------------------------
 
     /**
-    Push a snapshot of a model transaction onto the stack.
-
-    @method addAction
-    @param {String} label The label for the undo action.
-    @param {Function} action The model transaction to snapshot.
-    **/
+     * Push a snapshot of a model transaction onto the stack.
+     *
+     * @method addAction
+     * @param {String} label The label for the undo action.
+     * @param {Function} action The model transaction to snapshot.
+     */
     addAction: function (label, action) {
-        var undo = null,
-            redo = null;
+        var undo = Y.JSON.stringify(this.toJSON()),
+            redo;
 
-        undo = Y.JSON.stringify(this.toJSON());
+        // Allow the label to be omitted.
+        if (typeof label === 'function') {
+            action = label;
+        }
 
         if (typeof action === 'function') {
             action();
@@ -95,62 +90,56 @@ Undo = Y.Base.create('undo', Y.Model, [], {
     },
 
     /**
-    Reverts the model state to a previous snapshot.
-
-    @method undo
-    **/
+     * Reverts the model state to a previous snapshot.
+     *
+     * @method undo
+     */
     undo: function () {
-        if (this.canUndo()) {
-            this._index--;
-            this.setAttrs(Y.JSON.parse(this._revisions[this._index].undo));
-            this.fire('reset');
-
-            return true;
+        if (!this.canUndo()) {
+            return;
         }
 
-        return false;
+        this._index--;
+        this.setAttrs(Y.JSON.parse(this._revisions[this._index].undo));
     },
 
     /**
-    Reverts the model state to a next snapshot.
-
-    @method redo
-    **/
+     * Reverts the model state to a next snapshot.
+     *
+     * @method redo
+     */
     redo: function () {
-        if (this.canRedo()) {
-            this._index++;
-            this.setAttrs(Y.JSON.parse(this._revisions[this._index - 1].redo));
-            this.fire('reset');
-
-            return true;
+        if (!this.canRedo()) {
+            return;
         }
 
-        return false;
+        this._index++;
+        this.setAttrs(Y.JSON.parse(this._revisions[this._index - 1].redo));
     },
 
     /**
-    Returns whether there's a transaction to be undone.
-
-    @method canUndo
-    **/
+     * Returns whether there's a transaction to be undone or not.
+     *
+     * @method canUndo
+     */
     canUndo: function () {
         return this._index > 1;
     },
 
     /**
-    Returns whether there's a transaction to be redone.
-
-    @method canRedo
-    **/
+     * Returns whether there's a transaction to be redone or not.
+     *
+     * @method canRedo
+     */
     canRedo: function () {
         return (this._revisions[this._index] !== null) && this._index < this._revisions.length;
     },
 
     /**
-    Returns the label of the queued `undo` transaction.
-
-    @method getUndo
-    **/
+     * Returns the label of the queued `undo` transaction.
+     *
+     * @method getUndo
+     */
     getUndo: function () {
         if (this.canUndo()) {
             return this._revisions[this._index - 1].label;
@@ -160,10 +149,10 @@ Undo = Y.Base.create('undo', Y.Model, [], {
     },
 
     /**
-    Returns the label of the queued `redo` transaction.
-
-    @method getUndo
-    **/
+     * Returns the label of the queued `redo` transaction.
+     *
+     * @method getUndo
+     */
     getRedo: function () {
         if (this.canRedo()) {
             return this._revisions[this._index].label;

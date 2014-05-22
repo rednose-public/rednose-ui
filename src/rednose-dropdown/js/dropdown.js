@@ -27,6 +27,7 @@ var Micro = Y.Template.Micro;
  *
  * @event click
  * @param {Rednose.Dropdown.Item} item The item that was clicked.
+ * @param {Node} node The node the dropdown is bound to.
  * @param {EventFacade} originEvent Original click event.
  * @preventable _defClickFn
  */
@@ -287,7 +288,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 
         this.fire(itemEvent, {
             originEvent: e,
-            item       : item
+            item       : item,
+            node       : this.get('host')
         });
     },
 
@@ -387,7 +389,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
     _defItemClickFn: function (e) {
         this.fire(EVT_CLICK, {
             originEvent: e.originEvent,
-            item       : e.item
+            item       : e.item,
+            node       : this.get('host')
         });
     }
 }, {
