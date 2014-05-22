@@ -40,17 +40,6 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
         toolbar: 'btn-toolbar'
     },
 
-//    /**
-//     Stores references to the created nodes.
-//
-//     @property _buttonMap
-//     @type Object
-//     @protected
-//     **/
-//    _buttonMap: {},
-//
-//    _evtPrefix: null,
-
     /**
      * Hash of toolbar events.
      *
@@ -98,56 +87,6 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
         return this;
     },
 
-    /**
-     Get a button node by name.
-
-     @method getButton
-     @param {String} name The name of the button.
-     **/
-//    getButton: function (name) {
-//        if (!this._buttonMap) {
-//            return false;
-//        }
-//
-//        if (!this._buttonMap[name]) {
-//            return false;
-//        }
-//
-//        return this._buttonMap[name];
-//    },
-
-    /**
-     * @param {String} id Menu entry id
-     */
-//    enable: function (id) {
-//        this.disable(id, true);
-//    },
-
-    /**
-     * @param {String} id Menu entry id
-     * @param {Boolean} _enable Toggle the enabled state
-     */
-//    disable: function (id, _enable) {
-//        var container = this.get('container'),
-//            node      = container.one('[data-id=' + id + ']');
-//
-//        if (_enable) {
-//            node.removeClass('disabled');
-//        } else {
-//            node.addClass('disabled');
-//        }
-//    },
-
-    /**
-     * @param {String} id Menu entry id
-     */
-//    reset: function (id) {
-//        var container = this.get('container'),
-//            node      = container.one('[data-id=' + id + ']');
-//
-//        node.hasClass(CSS_BOOTSTRAP_ACTIVE) && node.removeClass(CSS_BOOTSTRAP_ACTIVE);
-//    },
-//
     // -- Protected methods ----------------------------------------------------
 
     /**
@@ -172,38 +111,6 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
     _detachToolbarEvents: function () {
         (new Y.EventHandle(this._toolbarEvents)).detach();
     },
-
-//    /**
-//     Setter to update the buttons properties.
-//
-//     @method _setButtons
-//     @param {Object} value The button config object
-//     @protected
-//     **/
-//    _setButtons: function (value) {
-//        var self    = this,
-//            footer  = this.get('container').one('.' + CSS_YUI3_WIDGET_FT),
-//            buttons = this.buttons;
-//
-//        Y.Object.each(value, function (properties, key) {
-//            self.buttons[key] = Y.merge(buttons[key], properties);
-//        });
-//
-//        // TODO: Update instead of rerendering.
-//        this._buildFooter();
-//
-//        this._rendered && footer.one('div').replace(this._footer);
-//    },
-//
-//    /**
-//     Getter to get the current button properties.
-//
-//     @method _getButtons
-//     @protected
-//     **/
-//    _getButtons: function () {
-//        return this.buttons;
-//    }
 
     // -- Protected Event Handlers ---------------------------------------------
 

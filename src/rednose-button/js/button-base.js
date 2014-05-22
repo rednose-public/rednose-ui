@@ -15,6 +15,20 @@ var EVT_ENABLE = 'enable';
 var EVT_DISABLE = 'disable';
 
 /**
+ * @event show
+ * @param {Rednose.Button}
+ * @preventable _defShowFn
+ */
+var EVT_SHOW = 'show';
+
+/**
+ * @event hide
+ * @param {Rednose.Button}
+ * @preventable _defHideFn
+ */
+var EVT_HIDE = 'hide';
+
+/**
  * @event rename
  * @param {Rednose.Button}
  * @param {String} value
@@ -63,6 +77,11 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      */
 
     /**
+     * @property {Boolean} hidden
+     * @readOnly
+     */
+
+    /**
      * @property {String} value
      * @readOnly
      */
@@ -79,6 +98,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
 
         this.type     = config.type || 'default';
         this.disabled = config.disabled || false;
+        this.hidden   = config.hidden || false;
         this.active   = config.active || false;
 
         Y.mix(this, config);
@@ -120,6 +140,31 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
         return this;
     },
 
+    /**
+     * Shows this button.
+     *
+     * @chainable
+     */
+    show: function () {
+        this._fireButtonEvent(EVT_SHOW, { button: this }, {
+            defaultFn: this._defShowFn
+        });
+
+        return this;
+    },
+
+    /**
+     * Hides this button.
+     *
+     * @chainable
+     */
+    hide: function () {
+        this._fireButtonEvent(EVT_HIDE, { button: this }, {
+            defaultFn: this._defHideFn
+        });
+
+        return this;
+    },
 
     /**
      * Activates this button.
@@ -229,6 +274,20 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
      */
     _defEnableFn: function () {
         this.disabled = false;
+    },
+
+    /**
+     * @private
+     */
+    _defShowFn: function (e) {
+        this.visible = false;
+    },
+
+    /**
+     * @private
+     */
+    _defShowFn: function (e) {
+        this.visible = true;
     },
 
     /**

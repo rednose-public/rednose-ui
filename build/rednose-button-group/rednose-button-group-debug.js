@@ -78,6 +78,10 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
                 this.after('button:click', this._afterButtonClick, this)
             );
         }
+
+        this._buttonGroupEvents.push(
+            this.after(['button:show', 'button:hide'], this._afterButtonVisibilityChange, this)
+        );
     },
 
     _detachButtonGroupEvents: function () {
@@ -179,6 +183,36 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
         }
 
         this._prevVal = value;
+    },
+
+    /**
+     * @private
+     */
+    _afterButtonVisibilityChange: function () {
+        var first = false,
+            last  = null;
+
+        Y.Object.each(this._buttonMap, function (button) {
+            var buttonContainer = button.get('container');
+
+            if (button.hidden === false && first === false) {
+                buttonContainer.addClass('first');
+
+                first = true;
+            } else {
+                buttonContainer.removeClass('first');
+            }
+
+            if (button.hidden === false) {
+                last =  buttonContainer;
+            }
+
+            buttonContainer.removeClass('last');
+        });
+
+        if (last) {
+            last.addClass('last');
+        }
     }
 }, {
     ATTRS: {

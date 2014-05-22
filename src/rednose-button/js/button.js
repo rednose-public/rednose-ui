@@ -36,6 +36,7 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
         btn     : 'btn',
         icon    : 'icon',
         disabled: 'disabled',
+        hidden  : 'hidden',
         active  : 'active'
     },
 
@@ -78,6 +79,10 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
             container.addClass(classNames.btn + '-' + this.type);
         }
 
+        if (this.hidden) {
+            this.hide();
+        }
+
         container.setContent(this.templates.content({
             classNames: this.classNames,
             button    : this
@@ -97,6 +102,8 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
             this.after({
                 enable    : this._afterEnable,
                 disable   : this._afterDisable,
+                show      : this._afterShow,
+                hide      : this._afterHide,
                 rename    : this._afterRename,
                 activate  : this._afterActivate,
                 deactivate: this._afterDeactivate
@@ -140,6 +147,26 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
             classNames = this.classNames;
 
         container.addClass(classNames.disabled);
+    },
+
+    /**
+     * @private
+     */
+    _afterShow: function () {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.removeClass(classNames.active);
+    },
+
+    /**
+     * @private
+     */
+    _afterHide: function () {
+        var container  = this.get('container'),
+            classNames = this.classNames;
+
+        container.addClass(classNames.hidden);
     },
 
     /**
