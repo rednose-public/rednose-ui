@@ -106,11 +106,11 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     },
 
     /**
-     * CSS class names used by this dropdown.
+     * CSS class names used by this extension.
      *
-     * @property {Object} classNames
+     * @property {Object} baseClassNames
      */
-    classNames: {
+    baseClassNames: {
         nav  : 'rednose-view-nav',
         close: 'close'
     },
@@ -212,7 +212,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
             bodyHeight -= 56;
         }
 
-        this._body.set('offsetHeight', bodyHeight);
+        this._body.setStyle('height', bodyHeight);
 
         // Check for Y.Rednose.App templates.
         if (this._body.one('.rednose-unit-left')) {
@@ -280,7 +280,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
      */
     _afterRender: function () {
         var container  = this.get('container'),
-            classNames = this.classNames,
+            classNames = this.baseClassNames,
             title      = this.title,
             body       = Y.Node.create('<div></div>'),
             footer     = this._footer,
