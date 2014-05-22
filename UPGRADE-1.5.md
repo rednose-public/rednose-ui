@@ -11,14 +11,19 @@ Version 1.5 is compatible with YUI 3.16.0.
 
  * Module `Rednose.ContextMenu` was removed in favor of `Rednose.Dropdown`.
 
-## rednose-navbar
+## rednose-dd
 
- * Method `createDropdown` has been removed. Use module `Rednose.Dropdown` instead.
- * Class `Rednose.Toolbar` was moved to a separate module, see `rednose-toolbar`.
+ * Module `Rednose.DD` was removed.
 
 ## rednose-datatable
 
  * Deprecated event `dblclick` has been replaced by `open`.
+
+## rednose-navbar
+
+ * Class now extends Y.View instead of Y.Widget.
+ * Method `createDropdown` has been removed. Use module `Rednose.Dropdown` instead.
+ * Class `Rednose.Toolbar` was moved to a separate module, see `rednose-toolbar`.
 
 ## rednose-navbar-recent
 
