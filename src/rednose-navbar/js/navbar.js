@@ -167,7 +167,7 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
         if (Y.Lang.isArray(id)) {
 
             Y.each(id, function (v) {
-                this.enable.call(this, v);
+                this.enable(v);
             }, this);
 
             return this;
@@ -189,7 +189,7 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
         if (Y.Lang.isArray(id)) {
 
             Y.each(id, function (v) {
-                this.disable.call(this, v);
+                this.disable(v);
             }, this);
 
             return this;
