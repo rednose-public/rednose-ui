@@ -103,6 +103,7 @@ Undo = Y.Base.create('undo', Y.Model, [], {
         if (this.canUndo()) {
             this._index--;
             this.setAttrs(Y.JSON.parse(this._revisions[this._index].undo));
+            this.fire('reset');
 
             return true;
         }
@@ -119,6 +120,7 @@ Undo = Y.Base.create('undo', Y.Model, [], {
         if (this.canRedo()) {
             this._index++;
             this.setAttrs(Y.JSON.parse(this._revisions[this._index - 1].redo));
+            this.fire('reset');
 
             return true;
         }
