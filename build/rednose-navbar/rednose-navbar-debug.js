@@ -156,7 +156,7 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
 
         this.rendered = true;
 
-        return;
+        return this;
     },
 
     /**
