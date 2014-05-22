@@ -161,12 +161,23 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @chainable
      */
     enable: function (id) {
+
+        if (Y.Lang.isArray(id)) {
+
+            Y.each(id, function (v) {
+                this.enable.call(this, v);
+            }, this);
+
+            return this;
+        }
+
         var button = this.getButtonById(id);
 
         if (button) {
             button.enable();
         }
-         return this;
+
+        return this;
     },
 
     /**
@@ -174,6 +185,16 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @chainable
      */
     disable: function (id) {
+
+        if (Y.Lang.isArray(id)) {
+
+            Y.each(id, function (v) {
+                this.disable.call(this, v);
+            }, this);
+
+            return this;
+        }
+
         var button = this.getButtonById(id);
 
         if (button) {
@@ -188,6 +209,16 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @chainable
      */
     activate: function (id) {
+
+        if (Y.Lang.isArray(id)) {
+
+            Y.each(id, function (v) {
+                this.activate.call(this, v);
+            }, this);
+
+            return this;
+        }
+
         var button = this.getButtonById(id);
 
         if (button) {
@@ -202,6 +233,16 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @chainable
      */
     deactivate: function (id) {
+
+        if (Y.Lang.isArray(id)) {
+
+            Y.each(id, function (v) {
+                this.deactivate.call(this, v);
+            }, this);
+
+            return this;
+        }
+
         var button = this.getButtonById(id);
 
         if (button) {
