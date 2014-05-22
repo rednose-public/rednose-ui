@@ -165,6 +165,16 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
      * @public
      */
     enable: function (id) {
+
+        if (Y.Lang.isArray(id)) {
+
+            Y.each(id, function (v) {
+                this.enable.call(this, v);
+            }, this);
+
+            return this;
+        }
+
         var item = this.getItemById(id);
 
         if (item) {
@@ -177,6 +187,16 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
      * @param {String} id Menu entry id
      */
     disable: function (id) {
+
+        if (Y.Lang.isArray(id)) {
+
+            Y.each(id, function (v) {
+                this.disable.call(this, v);
+            }, this);
+
+            return this;
+        }
+
         var item = this.getItemById(id);
 
         if (item) {
