@@ -281,7 +281,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     /**
      * @private
      */
-    _defShowFn: function (e) {
+    _defHideFn: function (e) {
         this.visible = false;
     },
 

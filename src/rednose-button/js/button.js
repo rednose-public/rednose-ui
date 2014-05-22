@@ -156,7 +156,7 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
         var container  = this.get('container'),
             classNames = this.classNames;
 
-        container.removeClass(classNames.active);
+        container.removeClass(classNames.hidden);
     },
 
     /**

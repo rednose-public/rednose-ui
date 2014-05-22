@@ -201,8 +201,8 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
                 buttonContainer.removeClass('first');
             }
 
-            if (button.hidden === false) {
-                last =  buttonContainer;
+            if (button.visible === true) {
+                last = buttonContainer;
             }
 
             buttonContainer.removeClass('last');
