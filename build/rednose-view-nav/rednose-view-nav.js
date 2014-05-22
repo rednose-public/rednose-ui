@@ -212,7 +212,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
             bodyHeight -= 56;
         }
 
-        this._body.setStyle('height', bodyHeight);
+        this._body.set('offsetHeight', bodyHeight);
 
         // Check for Y.Rednose.App templates.
         if (this._body.one('.rednose-unit-left')) {
