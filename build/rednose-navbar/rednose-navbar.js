@@ -16,7 +16,7 @@ var Navbar;
  * @class NavBar
  * @namespace Rednose
  * @constructor
- * @extends Widget
+ * @extends View
  */
 
 /**
@@ -30,7 +30,7 @@ var Navbar;
  */
 var EVT_CLICK = 'click';
 
-Navbar = Y.Base.create('navbar', Y.Widget, [], {
+Navbar = Y.Base.create('navbar', Y.View, [], {
     // -- Public Properties ----------------------------------------------------
 
     /**
@@ -109,7 +109,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         this._published   = {};
         this._dropdownMap = [];
 
-        var container = this.get('contentBox');
+        var container = this.get('container');
 
         this._navbarEvents.push(
             this.after({
@@ -130,10 +130,10 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     // -- Public Methods -------------------------------------------------------
 
     /**
-     * @method renderUI
+     * @chainable
      * @public
      */
-    renderUI: function() {
+    render: function() {
         var menuLeft  = this.get('menu'),
             menuRight = this.get('menuSecondary'),
             template  = this.get('columnLayout') ? this.templateColumn : this.templateContainer,
@@ -141,7 +141,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
             url       = this.get('url'),
             self      = this;
 
-        this.get('contentBox').setHTML(Y.Lang.sub(template, {
+        this.get('container').setHTML(Y.Lang.sub(template, {
             title: title,
             url  : url
         }));
@@ -155,6 +155,8 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
         });
 
         this.rendered = true;
+
+        return;
     },
 
     /**
@@ -207,7 +209,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
     _renderItem: function (config, position) {
         position || (position = 'left');
 
-        var container = this.get('contentBox'),
+        var container = this.get('container'),
             parent    = container.one(position === 'left' ? '.rednose-menu-primary' : '.rednose-menu-secondary');
 
         var item = Y.Node.create(Y.Lang.sub(this.itemTemplate, {
@@ -344,13 +346,11 @@ Y.namespace('Rednose').Navbar = Navbar;
 
 }, '1.5.0-DEV', {
     "requires": [
-        "base",
         "rednose-dropdown-plugin",
         "json",
         "node-event-simulate",
         "node-pluginhost",
         "rednose-util",
-        "view",
-        "widget"
+        "view"
     ]
 });
