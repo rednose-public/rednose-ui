@@ -86,6 +86,7 @@ Undo = Y.Base.create('undo', Y.Model, [], {
         });
 
         this._index = this._revisions.length;
+
         this.fire('change');
     },
 
