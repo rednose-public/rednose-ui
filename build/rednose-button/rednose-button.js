@@ -126,6 +126,10 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
      * @private
      */
     _onButtonClick: function (e) {
+        if (this.isDisabled()) {
+            return;
+        }
+
         this._fireButtonEvent(EVT_CLICK, {button: this, originEvent: e}, {
             defaultFn: this._defClickFn
         });
