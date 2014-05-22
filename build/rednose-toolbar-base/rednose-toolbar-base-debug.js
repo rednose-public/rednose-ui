@@ -167,7 +167,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (Y.Lang.isArray(id)) {
 
             Y.each(id, function (v) {
-                this.enable.call(this, v);
+                this.enable(v);
             }, this);
 
             return this;
@@ -191,7 +191,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (Y.Lang.isArray(id)) {
 
             Y.each(id, function (v) {
-                this.disable.call(this, v);
+                this.disable(v);
             }, this);
 
             return this;
@@ -215,7 +215,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (Y.Lang.isArray(id)) {
 
             Y.each(id, function (v) {
-                this.activate.call(this, v);
+                this.activate(v);
             }, this);
 
             return this;
@@ -239,7 +239,7 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
         if (Y.Lang.isArray(id)) {
 
             Y.each(id, function (v) {
-                this.deactivate.call(this, v);
+                this.deactivate(v);
             }, this);
 
             return this;
