@@ -125,13 +125,17 @@ var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
     _renderMenu: function () {
         var host       = this.get('host'),
             item       = host.getItemById(this._node);
-            cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope));
+            cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope)) || [];
 
-        if (cookieData && cookieData.length > 0) {
-            cookieData.push({ type: 'divider' }, { id: 'clear-items', title: TXT_CLEAR_ITEMS });
+        if (cookieData.length > 0) {
+            cookieData.push({ type: 'divider' });
         }
 
-        item[cookieData ? 'enable' : 'disable']();
+        cookieData.push({
+            id      : 'clear-items',
+            title   : TXT_CLEAR_ITEMS,
+            disabled: cookieData.length === 0
+        });
 
         item.resetChildren(cookieData);
     },
