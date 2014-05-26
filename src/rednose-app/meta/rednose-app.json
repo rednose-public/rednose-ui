@@ -5,8 +5,7 @@
             "rednose-app-base",
             "rednose-model-undo",
             "rednose-model-spinner",
-            "rednose-view-nav",
-            "rednose-app-view"
+            "rednose-view-nav"
         ],
 
         "submodules": {
@@ -17,7 +16,8 @@
                     "rednose-app-templates",
                     "rednose-panel",
                     "rednose-tooltip",
-                    "rednose-util"
+                    "rednose-util",
+                    "rednose-app-view"
                 ]
             },
 

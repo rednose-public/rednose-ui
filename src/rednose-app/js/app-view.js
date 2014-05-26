@@ -1,31 +1,32 @@
 /*jshint boss:true, expr:true, onevar:false */
 
 var AppView = Y.Base.create('appView', Y.View, [], {
-    // -- Protected Properties -------------------------------------------------
+    // -- Public Properties ----------------------------------------------------
 
     /**
-     * @property _app
+     * @property app
      * @type Rednose.App
      */
-    _app: null,
-
-    /**
-     * @property _config
-     * @type Object
-     */
-    _config: null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function (config) {
         config || (config = {});
 
-        this._config = config;
+        var AppConstructor = config.appConstructor,
+            container      = this.get('container');
+
+        delete config.appConstructor;
+
+        this.app = new AppConstructor(Y.merge(config, {
+            container  : container,
+            transitions: true
+        }));
     },
 
     destructor: function () {
-        this._app.destroy();
-        this._app = null;
+        this.app.destroy();
+        this.app = null;
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -34,15 +35,7 @@ var AppView = Y.Base.create('appView', Y.View, [], {
      * @see View.render()
      */
     render: function () {
-        var Constructor = this.get('constructor'),
-            container   = this.get('container');
-
-        this._app = new Constructor(Y.merge(this._config, {
-            container  : container,
-            transitions: true
-        }, true)).render();
-
-        this._app.addTarget(this);
+        this.app.render();
 
         return this;
     },
@@ -51,18 +44,8 @@ var AppView = Y.Base.create('appView', Y.View, [], {
      * @see Rednose.App.Base
      */
     sizeView: function (parent) {
-        if (this._app && typeof this._app.sizeView === 'function') {
-            this._app.sizeView(parent);
-        }
-    }
-}, {
-    ATTRS: {
-        /**
-         * @attribute constructor
-         * @type Rednose.App
-         */
-        constructor: {
-            value: null
+        if (this.app && typeof this.app.sizeView === 'function') {
+            this.app.sizeView(parent);
         }
     }
 });

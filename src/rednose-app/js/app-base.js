@@ -85,7 +85,7 @@ var App = Y.Base.create('app', Y.App, [], {
 
         // Create the view instance and map it with its metadata.
         if (ViewConstructor.superclass.constructor.NAME === 'app') {
-            view = new Y.Rednose.AppView(Y.merge(config, { constructor: ViewConstructor }));
+            view = new Y.Rednose.AppView(Y.merge(config, { appConstructor: ViewConstructor }));
         } else {
             view = new ViewConstructor(config);
         }
