@@ -24,9 +24,13 @@ var AppView = Y.Base.create('appView', Y.View, [], {
             container  : container,
             transitions: true
         }));
+
+        this.app.addTarget(this);
     },
 
     destructor: function () {
+        this.app.removeTarget(this);
+
         this.app.destroy();
         this.app = null;
     },
