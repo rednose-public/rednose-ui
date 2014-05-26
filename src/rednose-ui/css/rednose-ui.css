@@ -881,6 +881,10 @@ div .btn-toolbar {
   margin: 0;
 }
 
+div .btn-toolbar .btn-group.pull-right {
+  margin-left: 5px;
+}
+
 /* Set row height to match with Bootstrap's nav-list */
 
 .rednose-treeview-inner-container .yui3-treeview-row {
