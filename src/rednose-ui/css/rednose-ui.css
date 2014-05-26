@@ -304,47 +304,6 @@ input.rednose-datatable-input {
   border: 0 solid white;
 }
 
-.rednose-dd-drag,
-.rednose-dd-drop {
-  cursor: default;
-}
-
-.rednose-dd-drag-selected {
-  border: 1px solid #80C4E6 !important;
-}
-
-.rednose-dd-drag-hover {
-  background-color: #eeeeee !important;
-  border: 1px solid #eeeeee !important;
-}
-
-.rednose-dd-drag-hover.rednose-dd-drag-selected {
-  border: 1px solid #80C4E6 !important;
-}
-
-.rednose-dd-drag-placeholder {
-  margin: -1px;
-  background-color: #F9F9FC;
-  border: 1px solid #0088cc !important;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-       -o-border-radius: 3px;
-          border-radius: 3px;
-}
-
-.rednose-dd-drag-proxy {
-  margin: -1px;
-  overflow: hidden;
-  list-style-type: none;
-  background-color: #eeeeee;
-  border: 1px solid #eeeeee;
-  -webkit-border-radius: 5px;
-     -moz-border-radius: 5px;
-       -o-border-radius: 5px;
-          border-radius: 5px;
-  opacity: 0.75;
-}
-
 .rednose-dialog .btn {
   margin-left: 8px;
 }

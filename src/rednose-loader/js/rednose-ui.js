@@ -22,8 +22,7 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-app-base",
             "rednose-model-undo",
             "rednose-model-spinner",
-            "rednose-view-nav",
-            "rednose-app-view"
+            "rednose-view-nav"
         ]
     },
     "rednose-app-base": {
@@ -34,7 +33,8 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-app-templates",
             "rednose-panel",
             "rednose-tooltip",
-            "rednose-util"
+            "rednose-util",
+            "rednose-app-view"
         ]
     },
     "rednose-app-templates": {
@@ -144,13 +144,6 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-datetimepicker-base-css": {
         "group": "rednose-ui",
         "type": "css"
-    },
-    "rednose-dd": {
-        "group": "rednose-ui",
-        "requires": [
-            "rednose-anim",
-            "view"
-        ]
     },
     "rednose-dialog": {
         "group": "rednose-ui",
@@ -419,4 +412,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'f07324c3f30a29d4219faf815b862873';
+YUI.Env[Y.version].md5 = '4e42aafe2b2b19cac801b8784476eb4b';
