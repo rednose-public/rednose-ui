@@ -52,7 +52,6 @@ Version 1.5 is compatible with YUI 3.16.0.
 ## rednose-view-nav
 
  * Event `buttonClose` was renamed to `close`.
- * Event `load` was removed.
  * Method `getButton` was removed. Use  `getButtonById` on the `toolbar` property.
  * The `buttons` **attribute** was removed. Use `reset` on the toolbar property to reset the buttons.
  * The `buttons` **property** was removed. Use the `buttonGroups` properties, it accepts an array of button-group configurations.
