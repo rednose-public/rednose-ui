@@ -39,6 +39,7 @@ var AppView = Y.Base.create('appView', Y.View, [], {
         var Constructor = this.get('constructor'),
             container   = this.get('container');
 
+            console.log(Constructor);
         this._app = new Constructor(Y.merge(this._config, {
             container  : container,
             transitions: true
