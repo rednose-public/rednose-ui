@@ -1,0 +1,7 @@
+{
+    "rednose-undo-manager" : {
+        "requires": [
+            "base"
+        ]
+    }
+}

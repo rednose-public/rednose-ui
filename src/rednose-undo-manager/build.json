@@ -1,0 +1,11 @@
+{
+    "name": "rednose-undo-manager",
+
+    "builds": {
+        "rednose-undo-manager": {
+            "jsfiles": [
+                "js/undo-manager.js"
+            ]
+        }
+    }
+}
