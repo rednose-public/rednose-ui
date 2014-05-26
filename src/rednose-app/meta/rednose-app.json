@@ -5,7 +5,8 @@
             "rednose-app-base",
             "rednose-model-undo",
             "rednose-model-spinner",
-            "rednose-view-nav"
+            "rednose-view-nav",
+            "rednose-app-view"
         ],
 
         "submodules": {
@@ -21,6 +22,12 @@
             },
 
             "rednose-app-templates": {},
+
+            "rednose-app-view" : {
+                "requires": [
+                    "view"
+                ]
+            },
 
             "rednose-model-undo" : {
                 "requires": [

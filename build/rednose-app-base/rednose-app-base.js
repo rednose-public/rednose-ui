@@ -7,48 +7,6 @@ Extension of the original Y.App, to provide support for modal views.
 
 @module rednose-app
 **/
-var AppView = Y.Base.create('appView', Y.View, [], {
-    _app: null,
-
-    _config: null,
-
-    initializer: function (config) {
-        config || (config = {});
-
-        this._config = config;
-    },
-
-    destructor: function () {
-        this._app.destroy();
-        this._app = null;
-    },
-
-    render: function () {
-        var Constructor = this.get('constructor'),
-            container   = this.get('container');
-
-        this._app = new Constructor(Y.merge(this._config, {
-            container  : container,
-            transitions: true
-        }, true)).render();
-
-        this._app.addTarget(this);
-
-        return this;
-    },
-
-    sizeView: function (parent) {
-        if (this._app && typeof this._app.sizeView === 'function') {
-            this._app.sizeView(parent);
-        }
-    }
-}, {
-    ATTRS: {
-        constructor: {
-            value: null
-        }
-    }
-});
 
 var CSS_SPINNER = 'rednose-spinner',
 
@@ -66,10 +24,6 @@ Extension of the original Y.App, to provide support for modal views.
 @extends App
 **/
 var App = Y.Base.create('app', Y.App, [], {
-    // -- Public Properties ----------------------------------------------------
-
-    DEBUG: false,
-
     // -- Protected Properties -------------------------------------------------
 
     /**
@@ -89,11 +43,11 @@ var App = Y.Base.create('app', Y.App, [], {
     @method initializer
     @protected
     **/
-    initializer: function () {
+    initializer: function (config) {
         var container = this.get('container');
 
         // Slow down transitions so we see what's happening
-        if (this.DEBUG) {
+        if (config.debug) {
             Y.Transition.fx['app:fadeIn'].duration     = 1;
             Y.Transition.fx['app:fadeOut'].duration    = 1;
             Y.Transition.fx['app:slideRight'].duration = 1;
@@ -102,12 +56,6 @@ var App = Y.Base.create('app', Y.App, [], {
 
         // Add a magic CSS handle to the app container.
         container.addClass(CSS_MAGIC_PREFIX + '-' + Y.Rednose.Util.camelCaseToDash(this.name));
-
-        Y.Do.after(function () {
-            if ((window.self !== window.top) && typeof (window.parent.openApp() === 'function')) {
-                window.parent.openApp();
-            }
-        }, this, 'render', this);
     },
 
     /**
@@ -139,7 +87,7 @@ var App = Y.Base.create('app', Y.App, [], {
 
         // Create the view instance and map it with its metadata.
         if (ViewConstructor.superclass.constructor.NAME === 'app') {
-            view = new AppView(Y.merge(config, { constructor: ViewConstructor }));
+            view = new Y.Rednose.AppView(Y.merge(config, { constructor: ViewConstructor }));
         } else {
             view = new ViewConstructor(config);
         }

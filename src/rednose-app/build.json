@@ -17,6 +17,12 @@
             ]
         },
 
+        "rednose-app-view": {
+            "jsfiles": [
+                "js/app-view.js"
+            ]
+        },
+
         "rednose-model-undo": {
             "jsfiles": [
                 "js/model-extensions/model-undo.js"
