@@ -27,7 +27,6 @@
      "phantomjs": "~1.9.7"
   },
   "scripts": {
-      "pretest": "cd src/ && yogi build",
       "test": "cd src && yogi test"
    },
   "private": true
