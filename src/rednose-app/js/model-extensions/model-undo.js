@@ -13,6 +13,7 @@ var Undo;
  * @namespace Rednose.Model
  * @constructor
  * @extensionfor Model
+ * @deprecated Use Rednose.UndoManager for better performance and individual transactions. This module will be removed in version 1.5.
  */
 Undo = Y.Base.create('undo', Y.Model, [], {
     // -- Protected Properties -------------------------------------------------
