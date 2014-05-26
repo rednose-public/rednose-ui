@@ -215,7 +215,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
             bodyHeight -= 46;
         }
 
-        if (this.buttons) {
+        if (this.footer) {
             bodyHeight -= 56;
         }
 
