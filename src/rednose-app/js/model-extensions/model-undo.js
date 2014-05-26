@@ -124,7 +124,7 @@ Undo = Y.Base.create('undo', Y.Model, [], {
      * @method canUndo
      */
     canUndo: function () {
-        return this._index > 1;
+        return this._index > 0;
     },
 
     /**
