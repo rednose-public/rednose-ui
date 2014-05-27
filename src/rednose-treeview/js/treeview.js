@@ -179,6 +179,23 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.R
     },
 
     /**
+     * Renames a treenode
+     *
+     * @method rename
+     * @param  {Tree.Node} node Tree node.
+     * @return {String} label The new value.
+     */
+    renameNode: function (node, label) {
+        var labelNode;
+
+        node.label = label;
+
+        if (labelNode = node._htmlNode.one('.yui3-treeview-label')) {
+            labelNode.set('text', node.label);
+        }
+    },
+
+    /**
      * Generate a unique RedNose record ID, composed of the class type and the model ID.
      *
      * @method generateRednoseRecordID
