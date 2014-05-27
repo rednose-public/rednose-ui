@@ -12,6 +12,15 @@
  * @extends Base
  * @namespace Rednose
  */
+
+/**
+ * Fired when an action is executed, undone or redone.
+ *
+ * @event mutate
+ * @param {Rednose.UndoManager} manager
+ */
+var EVT_MUTATE = 'mutate';
+
 var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
     // -- Protected Properties -------------------------------------------------
 
@@ -70,6 +79,10 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         action.execute();
 
+        this.fire(EVT_MUTATE, {
+            manager: this
+        });
+
         return this;
     },
 
@@ -85,6 +98,10 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         this._index--;
         this._actions[this._index].undo();
+
+        this.fire(EVT_MUTATE, {
+            manager: this
+        });
     },
 
     /**
@@ -102,6 +119,10 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
         var action = this._actions[this._index - 1];
 
         action[typeof action.redo === 'function' ? 'redo' : 'execute']();
+
+        this.fire(EVT_MUTATE, {
+            manager: this
+        });
     },
 
     /**
