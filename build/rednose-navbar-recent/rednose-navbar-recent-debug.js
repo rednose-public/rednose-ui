@@ -54,7 +54,8 @@ var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
 
         host.after('click', this._afterItemClick, this);
         host.after('click#clear-items', this._afterRecentClear, this);
-        host.after('render', this._renderMenu, this);
+
+        Y.Do.after(this._renderMenu, host, 'render', this);
 
         this.addTarget(host);
     },
