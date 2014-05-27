@@ -30,7 +30,7 @@ Version 1.5 is compatible with YUI 3.16.0.
 ## rednose-dialog
 
  * Method `addButtons` was removed. Use the `toolbar` property instead.
- * Attribute `panel` was moved to a propertyless.
+ * Attribute `panel` was moved to a property.
 
 ## rednose-dropdown
 
