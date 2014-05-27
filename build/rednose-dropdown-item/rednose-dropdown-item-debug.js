@@ -110,9 +110,9 @@ DropdownItem.prototype = {
      */
 
     /**
-     * custom html for this node.
+     * Custom HTML for this node.
      *
-     * @property {string} html
+     * @property {String} html
      * @readonly
      */
 
