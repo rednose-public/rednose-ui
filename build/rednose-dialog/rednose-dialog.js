@@ -33,9 +33,9 @@ Provides several dialog windows.
 @class Dialog
 @namespace Rednose
 @constructor
-@extends Widget
+@extends Base
 **/
-var Dialog = Y.Base.create('dialog', Y.Widget, [], {
+var Dialog = Y.Base.create('dialog', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
@@ -56,7 +56,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @protected
     **/
     destructor : function() {
-        this.get('panel') && this.get('panel').destroy();
+        this.panel   && this.panel.destroy();
+        this.toolbar && this.toolbar.destroy();
     },
 
     // -- Public Methods -------------------------------------------------------
@@ -75,41 +76,41 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     alert: function (options) {
         options || (options = {});
 
-        var self = this,
-            node,
-            panel;
-
         options = Y.mix(options, {
             title  : '',
             text   : '',
-            type   : TYPE_DEFAULT,
+            type   : 'default',
             confirm: this.get('strings.confirm')
         });
 
-        node = Y.Node.create('<div><p>' + options.text + '</p></div>');
-
-        panel = new Y.Rednose.Panel({
-            bodyContent: node,
-            headerContent: this._getHeaderContent(options.title),
-            zIndex: this._getHighzIndex(),
-            width: this.get('width'),
-            buttons: [
-                 {
-                    value  : options.confirm,
-                    section: Y.WidgetStdMod.FOOTER,
-                    isDefault: true,
-                    action : function () {
-                        self.destroy();
-                    },
-                    classNames: CSS_BOOTSTRAP_BTN + ' ' + this._getButtonForType(options.type)
-                 }
+        this.toolbar = new Y.Rednose.Toolbar({
+            groups: [
+                {
+                    position: 'right',
+                    buttons: [
+                        {
+                            id   : 'confirm',
+                            value: options.confirm,
+                            type : options.type
+                        }
+                    ]
+                }
             ]
         }).render();
 
-        this._setPanelStyle(panel);
-        this.set('panel', panel);
+        this.toolbar.on('click#confirm', function () { this.destroy(); }, this);
 
-        panel.set('zIndex', this._getHighzIndex());
+        this.panel = new Y.Rednose.Panel({
+            bodyContent  : Y.Node.create('<div><p>' + options.text + '</p></div>'),
+            headerContent: this._getHeaderContent(options.title),
+            zIndex       : this._getHighzIndex(),
+            width        : this.get('width'),
+            footerContent: this.toolbar.get('container'),
+            buttons      : null
+        }).render();
+
+        this._setPanelStyle();
+        this.panel.set('zIndex', this._getHighzIndex());
     },
 
     /**
@@ -122,60 +123,93 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         @param {String} [options.type] The dialog type ('default', 'info', 'warning', success', 'danger', 'error').
         @param {String} [options.confirm] The confirm button value.
         @param {String} [options.cancel] The cancel button value.
+        @param {String} [options.alt] Alternative action.
     @param {Function} callback Optional callback function.
+    @param {Function} altCallback Optional callback function.
     @public
     **/
-    confirm: function (options, callback) {
+    confirm: function (options, callback, altCallback) {
         options || (options = {});
-
-        var self = this,
-            node,
-            panel;
 
         options = Y.mix(options, {
             title  : '',
             text   : '',
-            type   : TYPE_DEFAULT,
+            type   : 'default',
             confirm: this.get('strings.confirm'),
             cancel : this.get('strings.cancel')
         });
 
-        node = Y.Node.create('<div><p>' + options.text + '</p></div>');
+        var groups = [
+            {
+                position: 'right',
+                buttons: [
+                    {
+                        id   : 'confirm',
+                        value: options.confirm,
+                        type : options.type
+                    }
+                ]
+            },
+            {
+                position: 'right',
+                buttons: [
+                    {
+                        id   : 'cancel',
+                        value: options.cancel
+                    }
+                ]
+            }
+        ];
 
-        panel = new Y.Rednose.Panel({
-            bodyContent: node,
-            headerContent: this._getHeaderContent(options.title),
-            zIndex: this._getHighzIndex(),
-            width: this.get('width'),
-            buttons: [
-                 {
-                    value  : options.cancel,
-                    section: Y.WidgetStdMod.FOOTER,
-                    isDefault: false,
-                    action : function () {
-                        self.destroy();
-                    },
-                    classNames: CSS_BOOTSTRAP_BTN
-                 },
-                 {
-                    value  : options.confirm,
-                    section: Y.WidgetStdMod.FOOTER,
-                    isDefault: true,
-                    action : function () {
-                        if (typeof callback === 'function') {
-                            callback();
-                        }
-                        self.destroy();
-                    },
-                    classNames: CSS_BOOTSTRAP_BTN + ' ' + this._getButtonForType(options.type)
-                 }
-            ].reverse()
+        if (options.alt) {
+            groups.push({
+                position: 'left',
+                buttons: [
+                    {
+                        id   : 'alt',
+                        value: options.alt
+                    }
+                ]
+            });
+        }
+
+        this.toolbar = new Y.Rednose.Toolbar({
+            groups: groups
         }).render();
 
-        this._setPanelStyle(panel);
-        this.set('panel', panel);
+        this.toolbar.on('click#cancel', function () {
+            this.destroy();
+        }, this);
 
-        panel.set('zIndex', this._getHighzIndex());
+        this.toolbar.on('click#confirm', function () {
+            if (typeof callback === 'function') {
+                callback();
+            }
+
+            this.destroy();
+        }, this);
+
+        if (options.alt) {
+            this.toolbar.on('click#alt', function () {
+                if (typeof altCallback === 'function') {
+                    altCallback();
+                }
+
+                this.destroy();
+            }, this);
+        }
+
+        this.panel = new Y.Rednose.Panel({
+            bodyContent  : Y.Node.create('<div><p>' + options.text + '</p></div>'),
+            headerContent: this._getHeaderContent(options.title),
+            zIndex       : this._getHighzIndex(),
+            width        : this.get('width'),
+            footerContent: this.toolbar.get('container'),
+            buttons      : null
+        }).render();
+
+        this._setPanelStyle();
+        this.panel.set('zIndex', this._getHighzIndex());
     },
 
     /**
@@ -198,8 +232,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
         options || (options = {});
 
         var self = this,
-            node,
-            panel;
+            node;
 
         options = Y.mix(options, {
             title   : '',
@@ -236,7 +269,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             node.one('.controls').append(input);
         }
 
-        panel = new Y.Rednose.Panel({
+        this.panel = new Y.Rednose.Panel({
             bodyContent: node,
             headerContent: this._getHeaderContent(options.title),
             zIndex: this._getHighzIndex(),
@@ -295,10 +328,8 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             });
         }
 
-        this._setPanelStyle(panel);
-        this.set('panel', panel);
-
-        panel.set('zIndex', this._getHighzIndex());
+        this._setPanelStyle();
+        this.panel.set('zIndex', this._getHighzIndex());
     },
 
     /**
@@ -307,14 +338,15 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     @method addButton
     @param {Array} [buttons] A collection of options
     @public
+    @deprecated Use the toolbar property to add buttons. This method will be removed in version 1.5.
     **/
     addButtons: function (buttons) {
-        if (!this.get('panel')) {
+        if (!this.get.panel) {
             return;
         }
 
         var buttonId    = Y.guid(),
-            boundingBox = this.get('panel').get('boundingBox'),
+            boundingBox = this.panel.get('boundingBox'),
             classNames  = CSS_BOOTSTRAP_BTN,
             self        = this;
 
@@ -329,7 +361,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
                 classNames += ' '  + options.classNames;
             }
 
-            self.get('panel').addButton({
+            self.panel.addButton({
                 name      : buttonId,
                 title     : options.value,
                 classNames: classNames,
@@ -337,7 +369,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
             });
 
             if (options.icon) {
-                var button = self.get('panel').getButton(buttonId);
+                var button = self.panel.getButton(buttonId);
 
                 button.append(
                     Y.Node.create('<li class="' + options.icon + '" />')
@@ -354,11 +386,10 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
     /**
     @method _setPanelStyle
-    @param {Rednose.Panel} panel
     @protected
     **/
-    _setPanelStyle: function (panel) {
-        var boundingBox = panel.get('boundingBox');
+    _setPanelStyle: function () {
+        var boundingBox = this.panel.get('boundingBox');
 
         boundingBox.addClass(CSS_WIDGET);
         boundingBox.addClass(CSS_DIALOG);
@@ -440,7 +471,7 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
     **/
     _setError: function (e) {
         var errors = e.newVal,
-            bb    = this.get('panel').get('boundingBox'),
+            bb     = this.panel.get('boundingBox'),
             input;
 
         // Remove any previous error message
@@ -497,10 +528,6 @@ var Dialog = Y.Base.create('dialog', Y.Widget, [], {
 
         error: {
             value: {}
-        },
-
-        panel: {
-            value: null
         },
 
         width: {
@@ -563,18 +590,4 @@ Dialog.prompt = function (options, callback) {
 Y.namespace('Rednose').Dialog = Dialog;
 
 
-}, '1.5.0-DEV', {
-    "requires": [
-        "dd",
-        "dd-plugin",
-        "json-parse",
-        "rednose-panel",
-        "node",
-        "node-event-simulate",
-        "widget"
-    ],
-    "lang": [
-        "en",
-        "nl"
-    ]
-});
+}, '1.5.0-DEV', {"requires": ["base", "rednose-panel", "rednose-toolbar"], "lang": ["en", "nl"]});

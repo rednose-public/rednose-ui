@@ -152,13 +152,9 @@ Y.mix(YUI.Env[Y.version].modules, {
             "nl"
         ],
         "requires": [
-            "dd",
-            "dd-plugin",
-            "json-parse",
+            "base",
             "rednose-panel",
-            "node",
-            "node-event-simulate",
-            "widget"
+            "rednose-toolbar"
         ]
     },
     "rednose-dropdown": {
@@ -418,4 +414,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '3ac55cff38ed2209ba28e79c43f59873';
+YUI.Env[Y.version].md5 = 'e9a60f820d734902cd81f0908686062f';

@@ -1,13 +1,9 @@
 {
     "rednose-dialog" : {
         "requires": [
-            "dd",
-            "dd-plugin",
-            "json-parse",
+            "base",
             "rednose-panel",
-            "node",
-            "node-event-simulate",
-            "widget"
+            "rednose-toolbar"
         ],
         "lang": [
             "en",

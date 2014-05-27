@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.Dialog module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<body>
+
+<div id="test-container" class="container">
+    <div class="row">
+        <div class="span12">
+            <section>
+                <h1>Dialogs</h1>
+                <button id="alert" class="btn">Alert</button>
+                <button id="confirm" class="btn">Confirm</button>
+                <button id="prompt" class="btn">Prompt</button>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-dialog', function (Y) {
+        Y.one('#alert').on('click', function () {
+            var dialog = new Y.Rednose.Dialog();
+
+            dialog.alert({
+                title: 'Title',
+                text: 'Text',
+                type: 'danger',
+                confirm: 'Danger!'
+            })
+        });
+
+        Y.one('#confirm').on('click', function () {
+            var dialog = new Y.Rednose.Dialog();
+
+            dialog.confirm({
+                title: 'Title',
+                text: 'Are you sure?',
+                type: 'warning',
+                confirm: 'Yes',
+                cancel: 'No',
+                alt: 'Don\'t know'
+            }, function () {
+                console.log('click!');
+            }, function () {
+                console.log('clack!');
+            });
+        });
+
+        Y.one('#prompt').on('click', function () {
+            var dialog = new Y.Rednose.Dialog();
+
+            dialog.prompt({
+                title: 'Rename',
+                text: 'Name',
+                value: 'Test',
+            }, function (value) {
+                console.log(value);
+            });
+        });
+    });
+</script>
+</body>
+</html>
