@@ -110,16 +110,23 @@ DropdownItem.prototype = {
      */
 
     /**
-     * Custom HTML for this node.
+     * custom html for this node.
      *
-     * @property {String} html
-     * @readOnly
+     * @property {string} html
+     * @readonly
      */
 
     /**
      * Parent node for this item.
      *
      * @property {Rednose.Dropdown.Item} parent
+     * @readOnly
+     */
+
+    /**
+     * Custom data property.
+     *
+     * @property {Object} data
      * @readOnly
      */
 

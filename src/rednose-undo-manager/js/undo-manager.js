@@ -40,11 +40,20 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
      * @protected
      */
 
+    /**
+     * The saved action index.
+     *
+     * @property _savedIndex
+     * @type Integer
+     * @protected
+     */
+
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-        this._actions = [];
-        this._index   = 0;
+        this._actions    = [];
+        this._index      = 0;
+        this._savedIndex = 0;
     },
 
     destructor: function () {
@@ -64,7 +73,6 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
     /**
      * Executes an action and pushes it onto the stack.
      *
-     * @method execute
      * @param {Object} action
      * @chainable
      */
@@ -88,8 +96,6 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
     /**
      * Executes the previous action.
-     *
-     * @method undo
      */
     undo: function () {
         if (!this.canUndo()) {
@@ -106,8 +112,6 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
     /**
      * Executes the next action.
-     *
-     * @method redo
      */
     redo: function () {
         if (!this.canRedo()) {
@@ -128,7 +132,7 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
     /**
      * Returns whether there's a transaction to be undone or not.
      *
-     * @method canUndo
+     * @return {Boolean}
      */
     canUndo: function () {
         return this._index > 0;
@@ -137,10 +141,30 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
     /**
      * Returns whether there's a transaction to be redone or not.
      *
-     * @method canRedo
+     * @return {Boolean}
      */
     canRedo: function () {
         return (this._actions[this._index] !== null) && this._index < this._actions.length;
+    },
+
+    /**
+     * Mark the current stack position as saved.
+     */
+    save: function () {
+        this._savedIndex = this._index;
+
+        this.fire(EVT_MUTATE, {
+            manager: this
+        });
+    },
+
+    /**
+     * Returns whether the object in it's current state is modified or not.
+     *
+     * @return {Boolean}
+     */
+    isDirty: function () {
+        return this._savedIndex !== this._index;
     }
 });
 

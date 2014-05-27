@@ -311,9 +311,12 @@ App.createMessage = function (title, subtitle) {
  * Sets the application title
  *
  * @param {String} title
+ * @param {Boolean} dirty
  * @static
  */
-App.setTitle = function (title) {
+App.setTitle = function (title, dirty) {
+    dirty && (title = title.concat(' *'));
+
     Y.one('title').setHTML(title);
 };
 
