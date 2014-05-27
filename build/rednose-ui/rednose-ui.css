@@ -29,6 +29,11 @@ body {
   background-image: none;
 }
 
+.yui3-widget-bd {
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
 /* -- Custom icons, prefixed by 'rednose-' ---------------------------------- */
 
 [class^="rednose-icon-"],
