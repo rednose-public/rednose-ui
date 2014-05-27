@@ -181,7 +181,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.R
     /**
      * Renames a treenode
      *
-     * @method rename
+     * @method renameNode
      * @param  {Tree.Node} node Tree node.
      * @return {String} label The new value.
      */
