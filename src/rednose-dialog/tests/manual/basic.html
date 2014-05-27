@@ -35,42 +35,67 @@
         }
     }).use('rednose-dialog', function (Y) {
         Y.one('#alert').on('click', function () {
-            var dialog = new Y.Rednose.Dialog();
-
-            dialog.alert({
+            Y.Rednose.Dialog.alert({
                 title: 'Title',
                 text: 'Text',
                 type: 'danger',
-                confirm: 'Danger!'
-            })
+                confirm: 'Danger!',
+                on: {
+                    cancel: function () {
+                        console.log(arguments);
+                    },
+                    confirm: function () {
+                        console.log(arguments);
+                    }
+                }
+            }, function () {
+                console.log(arguments);
+            });
         });
 
         Y.one('#confirm').on('click', function () {
-            var dialog = new Y.Rednose.Dialog();
-
-            dialog.confirm({
+            Y.Rednose.Dialog.confirm({
                 title: 'Title',
                 text: 'Are you sure?',
                 type: 'warning',
                 confirm: 'Yes',
                 cancel: 'No',
-                alt: 'Don\'t know'
+                alternative: 'Don\'t know',
+                on: {
+                    alternative: function () {
+                        console.log(arguments);
+                    },
+                    cancel: function () {
+                        console.log(arguments);
+                    },
+                    confirm: function () {
+                        console.log(arguments);
+                    }
+                }
             }, function () {
-                console.log('click!');
-            }, function () {
-                console.log('clack!');
+                console.log(arguments);
             });
         });
 
         Y.one('#prompt').on('click', function () {
-            var dialog = new Y.Rednose.Dialog();
-
-            dialog.prompt({
+            Y.Rednose.Dialog.prompt({
                 title: 'Rename',
                 text: 'Name',
                 value: 'Test',
-            }, function (value) {
-                console.log(value);
+                alternative: 'Alternative',
+                on: {
+                    alternative: function () {
+                        console.log(arguments);
+                    },
+                    cancel: function () {
+                        console.log(arguments);
+                    },
+                    confirm: function () {
+                        console.log(arguments);
+                    }
+                }
+            }, function () {
+                console.log(arguments);
             });
         });
     });

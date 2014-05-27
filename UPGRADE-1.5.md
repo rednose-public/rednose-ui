@@ -11,13 +11,30 @@ Version 1.5 is compatible with YUI 3.16.0.
 
  * Module `Rednose.ContextMenu` was removed in favor of `Rednose.Dropdown`.
 
-## rednose-dd
+## rednose-controlform
 
- * Module `Rednose.DD` was removed.
+* Module `Rednose.ControlForm` was removed and was replaced by the `rednose-form` module.
+
+## rednose-dataprovider
+
+* Module `Rednose.DataProvider` was removed and was replaced by the `rednose-datasource-manager` module.
 
 ## rednose-datatable
 
  * Deprecated event `dblclick` has been replaced by `open`.
+
+## rednose-dd
+
+ * Module `Rednose.DD` was removed.
+
+## rednose-dialog
+
+ * Method `addButtons` was removed. Use the `toolbar` property instead.
+ * Attribute `panel` was moved to a propertyless.
+
+## rednose-dropdown
+
+ * Event `select` was renamed to `click`.
 
 ## rednose-navbar
 
@@ -32,22 +49,14 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Method `clearEntries` was renamed to `clear`.
  * Subscription now occurs through the `clickRecent` event, that bubbles to the plugin host.
 
-## rednose-controlform
-
-* Module `Rednose.ControlForm` was removed and was replaced by the `rednose-form` module.
-
-## rednose-dataprovider
-
-* Module `Rednose.DataProvider` was removed and was replaced by the `rednose-datasource-manager` module.
-
-## rednose-dropdown
-
- * Event `select` was renamed to `click`.
-
 ## rednose-toolbar
 
  * Class `Rednose.Toolbar` was refactored and now uses instances of `rednose-button-group`.
  * Config property `evtPrefix` for backwards compatibility was removed in this version.
+
+## rednose-ui
+
+* **All CSS** except vendor CSS is now handled by `LESS` templates within the `rednose-ui` module.
 
 ## rednose-view-nav
 
@@ -55,7 +64,3 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Method `getButton` was removed. Use  `getButtonById` on the `toolbar` property.
  * The `buttons` **attribute** was removed. Use `reset` on the toolbar property to reset the buttons.
  * The `buttons` **property** was removed. Use the `buttonGroups` properties, it accepts an array of button-group configurations.
-
-## rednose-ui
-
-* **All CSS** except vendor CSS is now handled by `LESS` templates within the `rednose-ui` module.

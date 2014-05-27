@@ -27,7 +27,7 @@ suite.add(new Y.Test.Case({
         Assert.isNull(Y.one('.rednose-dialog'));
     },
 
-    '`destroy()` shouldn\'t throw an error when called before the dialog is shown': function () {
+    '`destroy()` should not throw an error when called before the dialog is shown': function () {
         var dialog = new Y.Rednose.Dialog();
 
         Assert.isFalse(dialog.get('destroyed'));
@@ -102,7 +102,7 @@ suite.add(new Y.Test.Case({
             text: message
         });
 
-        Y.one('.yui3-widget-ft').one('.btn').simulate('click');
+        Y.one('#cancel').simulate('click');
 
         Assert.isNull(Y.one('.rednose-dialog'));
     },
@@ -114,7 +114,10 @@ suite.add(new Y.Test.Case({
         var title   = 'Test Title';
         var message = 'Test message body.';
 
-        Y.Mock.expect(mock, { method: 'callback', args: [] });
+        Y.Mock.expect(mock, {
+            method: 'callback',
+            args: [dialog]
+        });
 
         dialog.confirm({
             title: title,
@@ -131,7 +134,7 @@ suite.add(new Y.Test.Case({
 suite.add(new Y.Test.Case({
     name: 'Element focus',
 
-    'Default button should be focussed': function () {
+    'Confirmation button should be focussed in `alert` dialog': function () {
         var dialog;
 
         dialog = Y.Rednose.Dialog.alert({
@@ -139,15 +142,31 @@ suite.add(new Y.Test.Case({
             text : 'Test message body.'
         });
 
-        Y.Assert.areSame(Y.one('.yui3-widget-ft').one('.btn').getDOMNode(), document.activeElement);
+        Y.Assert.areSame(Y.one('#confirm').getDOMNode(), document.activeElement);
         dialog.destroy();
+    },
+
+    'Confirmation button should be focussed in `confirm` dialog': function () {
+        var dialog;
 
         dialog = Y.Rednose.Dialog.confirm({
             title: 'Test Title',
             text : 'Test message body.'
         });
 
-        Y.Assert.areSame(Y.one('.yui3-widget-ft').one('.btn-primary').getDOMNode(), document.activeElement);
+        Y.Assert.areSame(Y.one('#confirm').getDOMNode(), document.activeElement);
+        dialog.destroy();
+    },
+
+    'Confirmation button should be focussed in `prompt` dialog': function () {
+        var dialog;
+
+        dialog = Y.Rednose.Dialog.prompt({
+            title: 'Test Title',
+            text : 'Test message body.'
+        });
+
+        Y.Assert.areSame(Y.one('#confirm').getDOMNode(), document.activeElement);
         dialog.destroy();
     }
 }));
@@ -165,11 +184,23 @@ suite.add(new Y.Test.Case({
 
         Y.one('.yui3-panel-content').simulate('keydown', {keyCode: 27});
         Assert.isNull(Y.one('.rednose-dialog'));
+    },
+
+    '`enter` key in input field should close the `prompt` dialog': function () {
+        var dialog;
+
+        dialog = Y.Rednose.Dialog.prompt({
+            title: 'Test Title',
+            text: 'Test message body.'
+        });
+
+        Y.one('input').simulate('keyup', {keyCode: 13});
+        Assert.isNull(Y.one('.rednose-dialog'));
     }
 }));
 
 Y.Test.Runner.add(suite);
 
 }, '@VERSION@', {
-    requires: ['rednose-dialog', 'test']
+    requires: ['rednose-dialog', 'node-event-simulate', 'test']
 });

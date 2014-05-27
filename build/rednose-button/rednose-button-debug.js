@@ -63,6 +63,7 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
         var container  = this.get('container'),
             classNames = this.classNames;
 
+        container.set('id', this.id);
         container.addClass(this.classNames.btn);
 
         if (this.title) {
