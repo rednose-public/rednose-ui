@@ -41,7 +41,6 @@ AppTemplateMasterDetail.prototype = {
             this.set('gridMain', container.one('.rednose-unit-main'));
         }
 
-        this.get('gridMain').setStyle('overflow', 'auto');
         this.get('gridMain').setStyle('height', '100%');
 
         this.set('viewContainer', this.get('gridMain'));
