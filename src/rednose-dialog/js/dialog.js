@@ -464,8 +464,10 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
         var args = arguments;
 
         // If there is no custom HTML set, return the value in string form.
-        if (args[1].one('#dialog-input')) {
-            args[1] = args[1].one('#dialog-input').get('value');
+        if (typeof(args[1].one) === 'function') {
+            if (args[1].one('#dialog-input')) {
+                args[1] = args[1].one('#dialog-input').get('value');
+            }
         }
 
         args[0] = EVT_CONFIRM;
