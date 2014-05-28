@@ -343,10 +343,30 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
         this.panel.get('boundingBox').addClass(this.classNames.dialog);
         this.panel.set('zIndex', this._getHighzIndex());
 
-        this.panel.get('boundingBox').one('#confirm').focus();
+        this._focusInput();
     },
 
     // -- Protected Methods ----------------------------------------------------
+
+    /**
+     * @return void
+     * @protected
+     */
+    _focusInput: function(node) {
+        var inputField = this.panel.get('boundingBox').one('.controls').one('input, textarea, select');
+
+        if (inputField) {
+            var value = inputField.get('value');
+
+            inputField.focus();
+
+            // Re-set the value to move the cursor to the end of the input field.
+            if (inputField.get('type') === 'text' || inputField.get('type') === 'textarea') {
+                inputField.set('value', '');
+                inputField.set('value', value);
+            }
+        }
+    },
 
     /**
      * @param {String} title
@@ -379,6 +399,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
 
     /**
      * @return {Number}
+     * @protected
      */
     _getHighzIndex: function () {
         var elements = document.getElementsByTagName('*');
@@ -398,6 +419,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
      *
      * @param {String} eventName
      * @param {Any} [arg*] 0..n Arguments to pass to the subscribers.
+     * @protected
      */
     _evt: function() {
         if (this.fire.apply(this, arguments)) {
