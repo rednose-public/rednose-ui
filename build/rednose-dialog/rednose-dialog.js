@@ -352,7 +352,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
      * @return void
      * @protected
      */
-    _focusInput: function(node) {
+    _focusInput: function () {
         var inputField = this.panel.get('boundingBox').one('.controls').one('input, textarea, select');
 
         if (inputField) {

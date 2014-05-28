@@ -158,7 +158,7 @@ suite.add(new Y.Test.Case({
         dialog.destroy();
     },
 
-    'Confirmation button should be focussed in `prompt` dialog': function () {
+    'First input should be focussed in `prompt` dialog': function () {
         var dialog;
 
         dialog = Y.Rednose.Dialog.prompt({
@@ -166,7 +166,7 @@ suite.add(new Y.Test.Case({
             text : 'Test message body.'
         });
 
-        Y.Assert.areSame(Y.one('#confirm').getDOMNode(), document.activeElement);
+        Y.Assert.areSame(Y.one('input').getDOMNode(), document.activeElement);
         dialog.destroy();
     }
 }));
