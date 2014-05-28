@@ -208,23 +208,20 @@ var App = Y.Base.create('app', Y.App, [], {
             // Bind close event.
             view.after('close', this.popModalView, this);
 
-            // Only render the panel if the view does not provide his own (dialogs).
-            if (typeof(viewInfo.instance.get('panel')) === 'undefined') {
-                this._activePanel = new Y.Rednose.Panel({
-                    srcNode: view.get('container'),
-                    width  : viewInfo.width || STYLE_MODAL_WIDTH,
-                    height : viewInfo.height || STYLE_MODAL_HEIGHT
-                });
+            this._activePanel = new Y.Rednose.Panel({
+                srcNode: view.get('container'),
+                width  : viewInfo.width || STYLE_MODAL_WIDTH,
+                height : viewInfo.height || STYLE_MODAL_HEIGHT
+            });
 
-                if (viewInfo.top) {
-                    this._activePanel.set('top', viewInfo.top);
-                }
+            if (viewInfo.top) {
+                this._activePanel.set('top', viewInfo.top);
+            }
 
-                this._activePanel.render();
+            this._activePanel.render();
 
-                if (typeof view.sizeView === 'function') {
-                    view.sizeView(this._activePanel.get('boundingBox'));
-                }
+            if (typeof view.sizeView === 'function') {
+                view.sizeView(this._activePanel.get('boundingBox'));
             }
         } else {
             // Return if this is a backwards modal segue, the view is still preserved.

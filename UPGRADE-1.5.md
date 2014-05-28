@@ -6,6 +6,7 @@ Version 1.5 is compatible with YUI 3.16.0.
 
  * Loading app within iFrames is no longer supported in its current form.
  * Module `Rednose.Templates` was removed and has been replaced by App/View extensions.
+ * Support for dialog instances has been dropped, apps should only render views and dialogs should not be rendered by apps.
 
 ## rednose-contextmenu
 
