@@ -47,11 +47,13 @@ AppTemplateTwoColumn.prototype = {
 
             this.set('toolbar', container.one('.rednose-toolbar'));
             this.set('gridMain', container.one('.rednose-viewport'));
+
+            container.one('.rednose-unit-main').setStyle('height', '100%');
         } else {
             this.set('gridMain', container.one('.rednose-unit-main'));
-        }
 
-        this.get('gridMain').setStyle('height', '100%');
+            this.get('gridMain').setStyle('height', '100%');
+        }
 
         if (this.splitView) {
             this.get('gridMain').append(this.splitTemplate);
