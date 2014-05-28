@@ -334,7 +334,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             if (e.button === 13) {
                 e.preventDefault();
 
-                self._evt(EVT_CONFIRM, value, dialog);
+                self.toolbar.fire('click#confirm');
             }
         });
 
