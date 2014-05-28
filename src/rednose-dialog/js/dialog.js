@@ -261,7 +261,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             node = Y.Node.create('<form class="form-horizontal"></form>');
             node.append(input);
         } else {
-            input = Y.Node.create('<input type="text" value="' + options.value + '" data-path="' + options.dataPath + '" id="input">');
+            input = Y.Node.create('<input type="text" value="' + options.value + '" data-path="' + options.dataPath + '" id="dialog-input">');
 
             node = Y.Node.create(
                 '<form class="form-horizontal">' +
@@ -307,10 +307,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
 
         this.toolbar = new Y.Rednose.Toolbar({groups: groups}).render();
 
-        // If HTML is specified, return the complete node, else just return the value.
-        var value = options.html ? node : node.one('#input').get('value');
-
-        this.toolbar.on('click#confirm', this._onClickConfirm, this, value, dialog);
+        this.toolbar.on('click#confirm', this._onClickConfirm, this, node, dialog);
         this.toolbar.on('click#cancel', this._onClickCancel, this, dialog);
 
         if (options.alternative) {
@@ -465,6 +462,11 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
      */
     _onClickConfirm: function () {
         var args = arguments;
+
+        // If there is no custom HTML set, return the value in string form.
+        if (args[1].one('#dialog-input')) {
+            args[1] = args[1].one('#dialog-input').get('value');
+        }
 
         args[0] = EVT_CONFIRM;
         this._evt.apply(this, args);
