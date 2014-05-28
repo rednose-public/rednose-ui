@@ -125,42 +125,42 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     // -- Protected Properties -------------------------------------------------
 
     /**
-     References the body DOM node.
-
-     @property _body
-     @type Node
-     @protected
-     **/
+     * References the body DOM node.
+     *
+     * @property _body
+     * @type Node
+     * @protected
+     */
     _body: null,
 
     /**
-    References the footer DOM node.
-
-    @property _footer
-    @type Node
-    @protected
-    **/
+     * References the footer DOM node.
+     *
+     * @property _footer
+     * @type Node
+     * @protected
+     */
     _footer: null,
 
     /**
-    Stores references to an active panel.
-
-    @property _pabel
-    @type Object
-    @protected
-    **/
+     * Stores references to an active panel.
+     *
+     * @property _pabel
+     * @type Object
+     * @protected
+     */
     _panel: null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
-    @method initializer
-    @protected
-    **/
+     * @method initializer
+     */
     initializer: function () {
         this._viewNavEventHandles || (this._viewNavEventHandles = []);
 
-        var container = this.get('container');
+        var container = this.get('container'),
+            self      = this;
 
         this._viewNavEventHandles.push(
             Y.Do.after(this._afterRender, this, 'render', this),
@@ -169,12 +169,19 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         );
 
         this.footer && this._buildFooter();
+
+        if (this.close) {
+            Y.on('keydown', function (e) {
+                if (e.keyCode === 27) {
+                    self.fire(EVT_CLOSE);
+                }
+            });
+        }
     },
 
     /**
-    @method destructor
-    @protected
-    **/
+     * @method destructor
+     */
     destructor: function () {
         (new Y.EventHandle(this._viewNavEventHandles)).detach();
 

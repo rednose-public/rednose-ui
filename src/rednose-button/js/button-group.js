@@ -73,7 +73,8 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
 
         if (this.type !== 'default') {
             this._buttonGroupEvents.push(
-                this.after('button:click', this._afterButtonClick, this)
+                this.after('button:click', this._afterButtonClick, this),
+                this.after('button:activate', this._afterButtonActivate, this)
             );
         }
 
@@ -164,6 +165,10 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
         });
 
         this._prevButton = button;
+    },
+
+    _afterButtonActivate: function (e) {
+        this._prevButton = e.button;
     },
 
     // -- Default Event Handlers -----------------------------------------------

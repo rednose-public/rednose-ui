@@ -1,5 +1,10 @@
 /*jshint boss:true, expr:true, onevar:false */
 
+/**
+ * @event close
+ */
+var EVT_CLOSE = 'close';
+
 var AppView = Y.Base.create('appView', Y.View, [], {
     // -- Public Properties ----------------------------------------------------
 
@@ -14,7 +19,8 @@ var AppView = Y.Base.create('appView', Y.View, [], {
         config || (config = {});
 
         var AppConstructor = config.appConstructor,
-            container      = this.get('container');
+            container      = this.get('container'),
+            self           = this;
 
         delete config.appConstructor;
 
@@ -24,6 +30,10 @@ var AppView = Y.Base.create('appView', Y.View, [], {
         }));
 
         this.app.addTarget(this);
+
+        this.app.on('close', function () {
+            self.fire(EVT_CLOSE);
+        });
     },
 
     destructor: function () {

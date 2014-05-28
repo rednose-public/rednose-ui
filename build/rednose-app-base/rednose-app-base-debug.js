@@ -3,10 +3,10 @@ YUI.add('rednose-app-base', function (Y, NAME) {
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
-Extension of the original Y.App, to provide support for modal views.
-
-@module rednose-app
-**/
+ * Extension of the original Y.App, to provide support for modal views.
+ *
+ * @module rednose-app
+ */
 
 var CSS_SPINNER = 'rednose-spinner',
 
@@ -16,33 +16,38 @@ var CSS_SPINNER = 'rednose-spinner',
 var CSS_MAGIC_PREFIX = 'rednose';
 
 /**
-Extension of the original Y.App, to provide support for modal views.
-
-@class App
-@namespace Rednose
-@constructor
-@extends App
-**/
+ * Extension of the original Y.App, to provide support for modal views.
+ *
+ * @class App
+ * @namespace Rednose
+ * @constructor
+ * @extends App
+ */
 var App = Y.Base.create('app', Y.App, [], {
     // -- Protected Properties -------------------------------------------------
 
     /**
-    Stores the Panel instances to manage the active modal views.
-
-    @property containerTemplate
-    @type String
-    @protected
-    **/
+     * Stores the Panel instances to manage the active modal views.
+     *
+     * @property containerTemplate
+     * @type String
+     * @protected
+     */
     _activePanel: null,
 
+    /**
+     * @property _backgroundView
+     * @type {View}
+     * @protected
+     */
     _backgroundView: null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
-    @method initializer
-    @protected
-    **/
+     * @method initializer
+     * @protected
+     */
     initializer: function (config) {
         var container = this.get('container');
 
@@ -59,9 +64,9 @@ var App = Y.Base.create('app', Y.App, [], {
     },
 
     /**
-    @method detructor
-    @protected
-    **/
+     * @method detructor
+     * @protected
+     */
     destructor: function () {
         this._activePanel && this._activePanel.destroy();
         this._activePanel = null;
@@ -70,11 +75,23 @@ var App = Y.Base.create('app', Y.App, [], {
     // -- Public Methods -------------------------------------------------------
 
     /**
+     * Pops a modal view from the navigation stack.
+     *
+     * @method popModalView
+     */
+    popModalView: function () {
+        var view     = this.get('activeView'),
+            viewInfo = this.getViewInfo(view);
+
+        if (viewInfo.modal && this._backgroundView) {
+            this.showView(this._backgroundView);
+        }
+    },
+
+    /**
      * Adds support for app views.
      *
-     * @param name
-     * @param config
-     * @returns {ViewConstructor}
+     * @see App.createView()
      */
     createView: function (name, config) {
         var viewInfo = this.getViewInfo(name),
@@ -98,24 +115,10 @@ var App = Y.Base.create('app', Y.App, [], {
     },
 
     /**
-    Pops a modal view from the navigation stack.
-
-    @method popModalView
-    **/
-    popModalView: function () {
-        var view     = this.get('activeView'),
-            viewInfo = this.getViewInfo(view);
-
-        if (viewInfo.modal && this._backgroundView) {
-            this.showView(this._backgroundView);
-        }
-    },
-
-    /**
-    Override the superclass method to check if this view needs to be lazyloaded first.
-
-    @method showView
-    **/
+     * Override the superclass method to check if this view needs to be lazyloaded first.
+     *
+     * @see App.showView()
+     */
     showView: function (view, config, options, callback) {
         var self     = this,
             viewInfo = this.getViewInfo(view);
@@ -140,11 +143,10 @@ var App = Y.Base.create('app', Y.App, [], {
     // -- Protected Methods ----------------------------------------------------
 
     /**
-    Hook into the view change, to handle modal views.
-
-    @method _detachView
-    @protected
-    **/
+     * Hook into the view change, to handle modal views.
+     *
+     * @see App._detachView()
+     */
     _detachView: function (view) {
         if (!view) {
             return;
@@ -167,14 +169,8 @@ var App = Y.Base.create('app', Y.App, [], {
 
         if (viewInfo.preserve) {
             view.remove();
-            // TODO: Detach events here for preserved Views? It is possible that
-            // some event subscriptions are made on elements other than the
-            // View's `container`.
         } else {
             view.destroy({remove: true});
-
-            // TODO: The following should probably happen automagically from
-            // `destroy()` being called! Possibly `removeTarget()` as well.
 
             // Remove from view to view-info map.
             delete this._viewInfoMap[Y.stamp(view, true)];
@@ -189,11 +185,10 @@ var App = Y.Base.create('app', Y.App, [], {
     },
 
     /**
-    Hook into the view change, to handle modal views.
-
-    @method _attachView
-    @protected
-    **/
+     * Hook into the view change, to handle modal views.
+     *
+     * @see App._attachView()
+     */
     _attachView: function (view, prepend) {
         if (!view) {
             return;
@@ -210,14 +205,11 @@ var App = Y.Base.create('app', Y.App, [], {
             viewInfo.instance = view;
         }
 
-        // TODO: Attach events here for persevered Views?
-        // See related TODO in `_detachView`.
-
-        // TODO: Actually render the view here so that it gets "attached" before
-        // it gets rendered?
-
         // Modal view is attached from modal segue.
         if (viewInfo.modal) {
+            // Bind close event.
+            view.after('close', this.popModalView, this);
+
             // Only render the panel if the view does not provide his own (dialogs).
             if (typeof(viewInfo.instance.get('panel')) === 'undefined') {
                 this._activePanel = new Y.Rednose.Panel({
@@ -259,8 +251,8 @@ var App = Y.Base.create('app', Y.App, [], {
 }, {
     ATTRS: {
         /**
-        Overrides the linkSelector to disable pjax binding
-        **/
+         * Overrides the linkSelector to disable pjax binding
+         */
         linkSelector: {
             value: null
         }
@@ -270,21 +262,21 @@ var App = Y.Base.create('app', Y.App, [], {
 // -- Static methods -----------------------------------------------------------
 
 /**
-Show the spinner icon in the center of the screen.
-
-@method showSpinner
-@static
-**/
+ * Show the spinner icon in the center of the screen.
+ *
+ * @method showSpinner
+ * @static
+ */
 App.showSpinner = function () {
     Y.one('body').prepend(Y.Node.create('<div class="' + CSS_SPINNER + '"></div>'));
 };
 
 /**
-Hide all active spinner icon instances.
-
-@method hideSpinner
-@static
-**/
+ * Hide all active spinner icon instances.
+ *
+ * @method hideSpinner
+ * @static
+ */
 App.hideSpinner = function () {
     Y.all('.' + CSS_SPINNER).remove();
 };
@@ -295,12 +287,12 @@ App.MESSAGE_TEMPLATE = '<div class="rednose-grid-message-container">' +
                        '</div>';
 
 /**
-@method createMessage
-@param {String} title
-@param {String} subtitle
-@return {Node}
-@static
-**/
+ * @method createMessage
+ * @param {String} title
+ * @param {String} subtitle
+ * @return {Node}
+ * @static
+ */
 App.createMessage = function (title, subtitle) {
     subitle = subtitle || '';
 
