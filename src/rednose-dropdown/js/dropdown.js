@@ -36,74 +36,6 @@ var EVT_CLICK = 'click';
 var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 
     /**
-     * Templates used by this dropdown.
-     *
-     * @property {Object} templates
-     */
-    templates: {
-        menu: Micro.compile(
-            '<ul class="<%= data.classNames.menu %>"></ul>'
-        ),
-
-        caret: Micro.compile(
-            '<%== data.content %> <span class="<%= data.classNames.caret %>"></span>'
-        ),
-
-        item: Micro.compile(
-            '<% if (data.item.type === "divider") { %>' +
-                '<li class="<%= data.classNames.divider %>"></li>' +
-            '<% } else { %>' +
-                    '<li class="' +
-                        '<% if (data.item.isDisabled()) { %>' +
-                            '<%= data.classNames.disabled %> ' +
-                        '<% } %>' +
-                        '<% if (data.item.hasChildren()) { %>' +
-                            '<%= data.classNames.submenu %>' +
-                        '<% } %>' +
-                    '">' +
-
-                    '<% if (data.item.html) { %>' +
-                        '<%== data.item.html %>' +
-                    '<% } else { %>' +
-                        '<a href="<%= data.item.url %>" data-id="<%= data.item.id %>">' +
-                            '<% if (data.item.icon) { %>' +
-                                '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
-                            '<% } %>' +
-                            '<%= data.item.title %>' +
-                        '</a>' +
-                    '<% } %>' +
-
-                '</li>' +
-            '<% } %>'
-        ),
-
-        content: Micro.compile(
-            '<% if (data.item.icon) { %>' +
-                '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
-                '<% } %>' +
-            '<%= data.item.title %>'
-        )
-    },
-
-    /**
-     * CSS class names used by this dropdown.
-     *
-     * @property {Object} classNames
-     */
-    classNames: {
-        disabled: 'disabled',
-        caret   : 'caret',
-        menu    : 'dropdown-menu',
-        toggle  : 'dropdown-toggle',
-        open    : 'open',
-        divider : 'divider',
-        dropdown: 'dropdown',
-        dropup  : 'dropup',
-        icon    : 'icon',
-        submenu : 'dropdown-submenu'
-    },
-
-    /**
      * Whether or not this dropdown has been rendered.
      *
      * @property {Boolean} rendered
@@ -114,9 +46,11 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function () {
+        var classNames = Y.Rednose.Dropdown.ClassNames;
+
         // Allow all extensions to initialize in case they provide custom getters for the container.
         this.onceAfter('initializedChange', function () {
-            this.get('container').addClass(this.classNames.dropdown);
+            this.get('container').addClass(classNames.dropdown);
 
             this._attachDropdownEvents();
         });
@@ -164,7 +98,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         this._events || (this._events = []);
 
         var container  = this.get('container'),
-            classNames = this.classNames;
+            classNames = Y.Rednose.Dropdown.ClassNames;
 
         this._events.push(
             this.after({
@@ -172,6 +106,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
                 close        : this._afterClose,
                 enable       : this._afterEnable,
                 disable      : this._afterDisable,
+                activate     : this._afterActivate,
+                deactivate   : this._afterDeactivate,
                 rename       : this._afterRename,
                 reset        : this._afterReset,
                 resetChildren: this._afterReset
@@ -196,8 +132,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _renderMenu: function (items) {
-        var menuNode = Y.Node.create(this.templates.menu({
-            classNames: this.classNames
+        var menuNode = Y.Node.create(Y.Rednose.Dropdown.Templates.menu({
+            classNames: Y.Rednose.Dropdown.ClassNames
         }));
 
         for (var i = 0, len = items.length; i < len; i++) {
@@ -213,13 +149,20 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _renderItem: function (item) {
-        var itemNode = Y.Node.create(this.templates.item({
-            classNames: this.classNames,
-            item      : item
+        var itemNode = Y.Node.create(Y.Rednose.Dropdown.Templates.item({
+            classNames: Y.Rednose.Dropdown.ClassNames,
+            item      : item,
+            dropdown  : this
         }));
 
         if (item.html) {
             itemNode.one('a') && itemNode.one('a').setAttribute('data-id', item.id);
+
+            return itemNode;
+        }
+
+        if (item.type === 'item') {
+            itemNode.append(this._renderContent(item));
         }
 
         if (item.children) {
@@ -227,6 +170,21 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         }
 
         return itemNode;
+    },
+
+    /**
+     * @param {Rednose.Dropdown.Item} item
+     * @return {Node}
+     * @private
+     */
+    _renderContent: function (item) {
+        var templates  = Y.Rednose.Dropdown.Templates,
+            classNames = Y.Rednose.Dropdown.ClassNames;
+
+        return Y.Node.create(templates.content({
+            classNames: classNames,
+            item      : item
+        }));
     },
 
     // -- Protected Event Handlers ---------------------------------------------
@@ -266,13 +224,15 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         var item      = this.getItemById(target.getAttribute('data-id')),
             itemEvent = EVT_CLICK + '#' + item.id;
 
-        if (item.isDisabled() ||  item.url === '#') {
+        if (item.isDisabled() || item.url === '#') {
             e.preventDefault();
         }
 
         if (item.isDisabled() || item.hasChildren()) {
             return;
         }
+
+        item.toggle && item.toggleActive();
 
         if (!this._published[itemEvent]) {
             this._published[itemEvent] = this.publish(itemEvent, {
@@ -302,7 +262,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         }
 
         var container  = this.get('container'),
-            classNames = this.classNames;
+            classNames = Y.Rednose.Dropdown.ClassNames;
 
         container.addClass(classNames.open);
     },
@@ -312,7 +272,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      */
     _afterClose: function () {
         var container  = this.get('container'),
-            classNames = this.classNames;
+            classNames = Y.Rednose.Dropdown.ClassNames;
 
         container.removeClass(classNames.open);
     },
@@ -322,10 +282,11 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _afterEnable: function (e) {
-        var node = this.getHTMLNode(e.item);
+        var node       = this.getHTMLNode(e.item),
+            classNames = Y.Rednose.Dropdown.ClassNames;
 
         if (node) {
-            node.get('parentNode').removeClass(this.classNames.disabled);
+            node.get('parentNode').removeClass(classNames.disabled);
         }
     },
 
@@ -334,10 +295,35 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
      * @private
      */
     _afterDisable: function (e) {
+        var node       = this.getHTMLNode(e.item),
+            classNames = Y.Rednose.Dropdown.ClassNames;
+
+        if (node) {
+            node.get('parentNode').addClass(classNames.disabled);
+        }
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterActivate: function (e) {
         var node = this.getHTMLNode(e.item);
 
         if (node) {
-            node.get('parentNode').addClass(this.classNames.disabled);
+            node.replace(this._renderContent(e.item));
+        }
+    },
+
+    /**
+     * @param {EventFacade} e
+     * @private
+     */
+    _afterDeactivate: function (e) {
+        var node = this.getHTMLNode(e.item);
+
+        if (node) {
+            node.replace(this._renderContent(e.item));
         }
     },
 
@@ -349,10 +335,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         var node = this.getHTMLNode(e.item);
 
         if (node) {
-            node.setContent(this.templates.content({
-                classNames: this.classNames,
-                item      : e.item
-            }));
+            node.replace(this._renderContent(e.item));
         }
     },
 
@@ -365,7 +348,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         }
 
         var container  = this.get('container'),
-            classNames = this.classNames;
+            classNames = Y.Rednose.Dropdown.ClassNames;
 
         container.one('.' + classNames.menu).remove();
 
@@ -393,8 +376,70 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
             node       : this.get('host')
         });
     }
-}, {
-    NS: 'dropdown'
 });
 
+// -- Namespace ----------------------------------------------------------------
 Y.Rednose.Dropdown = Y.mix(Dropdown, Y.Rednose.Dropdown);
+
+/**
+ * CSS classes used by `Y.Rednose.Dropdown`
+ *
+ * @property ClassNames
+ * @type Object
+ * @static
+ */
+Y.Rednose.Dropdown.ClassNames = {
+    disabled  : 'disabled',
+    menu      : 'dropdown-menu',
+    toggle    : 'dropdown-toggle',
+    open      : 'open',
+    divider   : 'divider',
+    dropdown  : 'dropdown',
+    icon      : 'icon',
+    submenu   : 'dropdown-submenu',
+    iconToggle: 'icon-ok',
+    item      : 'rednose-menu-item'
+};
+
+/**
+ * Templates used by `Y.Rednose.Dropdown`.
+ *
+ * @property Templates
+ * @type Object
+ * @static
+ */
+Y.Rednose.Dropdown.Templates = {
+    menu: Micro.compile(
+        '<ul class="<%= data.classNames.menu %>"></ul>'
+    ),
+
+    item: Micro.compile(
+        '<% if (data.item.type === "divider") { %>' +
+            '<li class="<%= data.classNames.divider %>"></li>' +
+        '<% } else { %>' +
+            '<li class="' +
+                '<% if (data.item.isDisabled()) { %>' +
+                    '<%= data.classNames.disabled %> ' +
+                '<% } %>' +
+                '<% if (data.item.hasChildren()) { %>' +
+                    '<%= data.classNames.submenu %>' +
+                '<% } %>' +
+            '">' +
+                '<% if (data.item.html) { %>' +
+                    '<%== data.item.html %>' +
+                '<% } %>' +
+            '</li>' +
+        '<% } %>'
+    ),
+
+    content: Micro.compile(
+        '<a href="<%= data.item.url %>" data-id="<%= data.item.id %>">' +
+            '<% if (data.item.icon) { %>' +
+                '<i class="<%= data.classNames.icon %> <%= data.item.icon %>"></i> ' +
+            '<% } else if (data.item.isActive()) { %>' +
+                '<i class="<%= data.classNames.icon %> <%= data.classNames.iconToggle %>"></i> ' +
+            '<% } %>' +
+            '<span class="<%= data.classNames.item %>"><%= data.item.title %></span> ' +
+        '</a>'
+    )
+};

@@ -33,5 +33,19 @@
         "requires": [
             "rednose-dropdown-plugin"
         ]
+    },
+
+    "rednose-dropdown-keys" : {
+        "requires": [
+            "rednose-dropdown",
+            "rednose-util"
+        ]
+    },
+
+    "rednose-dropdown-keys-mac" : {
+        "condition": {
+            "trigger": "rednose-dropdown-keys",
+            "test": "rednose-dropdown-keys-test.js"
+        }
     }
 }

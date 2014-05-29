@@ -30,6 +30,18 @@
             "jsfiles": [
                 "js/dropdown-delegate.js"
             ]
+        },
+
+        "rednose-dropdown-keys": {
+            "jsfiles": [
+                "js/extensions/dropdown-keys.js"
+            ]
+        },
+
+        "rednose-dropdown-keys-mac": {
+            "jsfiles": [
+                "js/extensions/dropdown-keys-mac.js"
+            ]
         }
     }
 }

@@ -57,6 +57,20 @@ var EVT_CLOSE = 'close';
 var EVT_OPEN = 'open';
 
 /**
+ * @event activate
+ * @param {Rednose.Dropdown.Item}
+ * @preventable _defActivateFn
+ */
+var EVT_ACTIVATE = 'activate';
+
+/**
+ * @event deactivate
+ * @param {Rednose.Dropdown.Item}
+ * @preventable _defDeactivateFn
+ */
+var EVT_DEACTIVATE = 'deactivate';
+
+/**
  * Fired when the dropdown items are reset.
  *
  * @event reset
@@ -189,6 +203,14 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     },
 
     /**
+     * @return {Rednose.Dropdown.Item[]}
+     * @private
+     */
+    getItems: function () {
+        return Y.Object.values(this._itemMap);
+    },
+
+    /**
      * @param {Rednose.Dropdown.Item} item
      * @chainable
      */
@@ -210,6 +232,34 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
         if (!item.isDisabled()) {
             this._fireDropdownEvent(EVT_DISABLE, {item: item}, {
                 defaultFn: this._defDisableFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * @param {Rednose.Dropdown.Item} item
+     * @chainable
+     */
+    activateItem: function (item) {
+        if (!item.isActive()) {
+            this._fireDropdownEvent(EVT_ACTIVATE, {item: item}, {
+                defaultFn: this._defActivateFn
+            });
+        }
+
+        return this;
+    },
+
+    /**
+     * @param {Rednose.Dropdown.Item} item
+     * @chainable
+     */
+    deactivateItem: function (item) {
+        if (item.isActive()) {
+            this._fireDropdownEvent(EVT_DEACTIVATE, {item: item}, {
+                defaultFn: this._defDeactivateFn
             });
         }
 
@@ -371,6 +421,14 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
      */
     _defCloseFn: function () {
         this._open = false;
+    },
+
+    _defActivateFn: function (e) {
+        e.item.active = true;
+    },
+
+    _defDeactivateFn: function (e) {
+        delete e.item.active;
     },
 
     /**

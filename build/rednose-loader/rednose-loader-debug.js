@@ -187,6 +187,23 @@ Y.mix(YUI.Env[Y.version].modules, {
             "base"
         ]
     },
+    "rednose-dropdown-keys": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-dropdown",
+            "rednose-util"
+        ]
+    },
+    "rednose-dropdown-keys-mac": {
+        "condition": {
+            "name": "rednose-dropdown-keys-mac",
+            "test": function (Y) {
+    return (Y.UA.os === 'macintosh');
+},
+            "trigger": "rednose-dropdown-keys"
+        },
+        "group": "rednose-ui"
+    },
     "rednose-dropdown-plugin": {
         "group": "rednose-ui",
         "requires": [
@@ -261,10 +278,11 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-navbar": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-dropdown-plugin",
             "json",
             "node-event-simulate",
             "node-pluginhost",
+            "rednose-dropdown-keys",
+            "rednose-dropdown-plugin",
             "rednose-util",
             "view"
         ]
@@ -416,7 +434,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'e9a60f820d734902cd81f0908686062f';
+YUI.Env[Y.version].md5 = '96807c9d19e3ddb369c6c886abccdbbe';
 
 
 }, '1.5.0-DEV');

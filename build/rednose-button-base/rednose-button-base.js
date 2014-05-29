@@ -54,7 +54,7 @@ var EVT_DEACTIVATE = 'deactivate';
 
 var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     /**
-     * The id for this node.
+     * The id for this button.
      *
      * @property {string} id
      * @readOnly
@@ -75,6 +75,11 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
 
     /**
      * @property {Boolean} disabled
+     * @readOnly
+     */
+
+    /**
+     * @property {Boolean} active
      * @readOnly
      */
 
@@ -222,7 +227,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     },
 
     /**
-     * Whether this node is disabled or not.
+     * Whether this button is disabled or not.
      *
      * @return {Boolean}
      */
@@ -231,7 +236,7 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
     },
 
     /**
-     * Whether this node is activated or not.
+     * Whether this button is activated or not.
      *
      * @return {Boolean}
      */

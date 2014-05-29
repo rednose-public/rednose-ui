@@ -43,6 +43,8 @@ function DropdownItem(dropdown, config) {
     this.url      = config.url || '#';
     this.children = [];
 
+    config.toggle && delete config.icon;
+
     if (config.html && !config.url) {
         var html = Y.Node.create(config.html);
 
@@ -54,7 +56,7 @@ function DropdownItem(dropdown, config) {
 
 DropdownItem.prototype = {
     /**
-     * The id for this node.
+     * The id for this item.
      *
      * @property {string} title
      * @readOnly
@@ -68,56 +70,61 @@ DropdownItem.prototype = {
      */
 
     /**
-     * This node's children.
+     * This item's children.
      *
      * @property {Array} children
      * @readOnly
      */
 
     /**
-     * This node's type.
+     * This item's type.
      *
      * @property {String} type
      * @readOnly
      */
 
     /**
-     * Whether this node is disabled or not.
+     * Whether this item is disabled or not.
      *
      * @property {Boolean} disabled
      * @readOnly
      */
 
     /**
-     * The icon for this node.
+     * @property {Boolean} active
+     * @readOnly
+     */
+
+    /**
+     * The icon for this item.
      *
      * @property {String} icon
      * @readOnly
      */
 
     /**
-     * The title for this node.
+     * The title for this item.
      *
      * @property {String} title
      * @readOnly
      */
 
     /**
-     * The URL for this node.
+     * The URL for this item.
      *
      * @property {String} url
      * @readOnly
      */
 
     /**
-     * Custom HTML for this node.
+     * Custom HTML for this item.
      *
      * @property {String} html
      * @readonly
      */
 
     /**
-     * Parent node for this item.
+     * Parent item for this item.
      *
      * @property {Rednose.Dropdown.Item} parent
      * @readOnly
@@ -127,6 +134,14 @@ DropdownItem.prototype = {
      * Custom data property.
      *
      * @property {Object} data
+     * @readOnly
+     */
+
+    /**
+     * Item toggle.
+     *
+     * @property {Boolean} toggle
+     * @default false
      * @readOnly
      */
 
@@ -164,16 +179,56 @@ DropdownItem.prototype = {
     },
 
     /**
-     * Whether this node is disabled or not.
+     * Whether this item is disabled or not.
      *
      * @return {Boolean}
      */
     isDisabled: function () {
-        return this.disabled === true;
+        return !!this.disabled;
     },
 
     /**
-     * Whether this node has children or not.
+     * Activates this item.
+     *
+     * @chainable
+     */
+    activate: function () {
+        this.dropdown.activateItem(this);
+
+        return this;
+    },
+
+    /**
+     * Deactivates this item.
+     *
+     * @chainable
+     */
+    deactivate: function () {
+        this.dropdown.deactivateItem(this);
+
+        return this;
+    },
+
+    /**
+     * Whether this item is activated or not.
+     *
+     * @return {Boolean}
+     */
+    isActive: function () {
+        return !!this.active;
+    },
+
+    /**
+     * Toggles the active state.
+     *
+     * @chainable
+     */
+    toggleActive: function () {
+        return this[this.isActive() ? 'deactivate' : 'activate']();
+    },
+
+    /**
+     * Whether this item has children or not.
      *
      * @return {Boolean}
      */
@@ -191,7 +246,7 @@ DropdownItem.prototype = {
     },
 
     /**
-     * Adds a child to this node.
+     * Adds a child to this item.
      *
      * @param {Rednose.Dropdown.Item} child
      */

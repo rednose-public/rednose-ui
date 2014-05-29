@@ -9,6 +9,8 @@ YUI.add('rednose-dropdown-plugin', function (Y, NAME) {
  * @submodule rednose-dropdown-plugin
  */
 
+var Micro = Y.Template.Micro;
+
 /**
  * Node plugin that attaches a dropdown to the given node.
  *
@@ -26,7 +28,8 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
 
         var container  = this.get('container'),
             dropup     = this.get('dropup'),
-            classNames = this.classNames;
+            classNames = Y.Rednose.Dropdown.ClassNames,
+            templates  = Y.Rednose.Dropdown.Templates;
 
         container.addClass(classNames.dropdown);
 
@@ -41,7 +44,7 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         this._host.addClass(classNames.toggle);
 
         if (this.get('showCaret')) {
-            this._host.setHTML(this.templates.caret({
+            this._host.setHTML(templates.caret({
                 classNames: classNames,
                 content   : this._host.getHTML()
             }));
@@ -153,6 +156,17 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
             }
         }
     }
+});
+
+Y.mix(Y.Rednose.Dropdown.ClassNames, {
+    caret : 'caret',
+    dropup: 'dropup'
+});
+
+Y.mix(Y.Rednose.Dropdown.Templates, {
+    caret: Micro.compile(
+        '<%== data.content %> <span class="<%= data.classNames.caret %>"></span>'
+    )
 });
 
 

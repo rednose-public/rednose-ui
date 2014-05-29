@@ -1,10 +1,11 @@
 {
     "rednose-navbar" : {
         "requires": [
-            "rednose-dropdown-plugin",
             "json",
             "node-event-simulate",
             "node-pluginhost",
+            "rednose-dropdown-keys",
+            "rednose-dropdown-plugin",
             "rednose-util",
             "view"
         ]

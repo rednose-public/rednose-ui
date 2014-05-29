@@ -75,12 +75,6 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
                   '</li>',
 
     /**
-     * @property {Boolean} rendered
-     * @public
-     */
-    rendered: false,
-
-    /**
      * Hash of navbar events.
      *
      * @property {Object} _navbarEvents
@@ -154,7 +148,37 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
             self._renderItem(menu, 'right');
         });
 
-        this.rendered = true;
+
+        this._keyCodeMap || (this._keyCodeMap = {});
+
+        Y.Array.each(this._dropdownMap, function (dropdown) {
+            Y.Array.each(dropdown.getItems(), function (item) {
+                if (item.keyCode) {
+                    this._keyCodeMap[item.keyCode] = item;
+                }
+            }, this);
+        }, this);
+
+        Y.one('doc').on('keydown', function (e) {
+            var meta = e.metaKey || e.ctrlKey ? 'ctrl' : null;
+
+            var key = String.fromCharCode(e.keyCode).toLowerCase();
+
+            if (meta) {
+                key = meta.concat('+' + key);
+            }
+
+            var item = this._keyCodeMap[key];
+
+            if (item) {
+                e.preventDefault();
+                if (!item.isDisabled()) {
+
+                    e.item = item;
+                    this._afterDropdownClick(e);
+                }
+            }
+        }, this);
 
         return this;
     },
@@ -165,7 +189,6 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
      * @public
      */
     enable: function (id) {
-
         if (Y.Lang.isArray(id)) {
 
             Y.each(id, function (v) {
@@ -187,7 +210,6 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
      * @param {String} id Menu entry id
      */
     disable: function (id) {
-
         if (Y.Lang.isArray(id)) {
 
             Y.each(id, function (v) {
@@ -201,6 +223,48 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
 
         if (item) {
             item.disable();
+        }
+    },
+
+    /**
+     * @method activate
+     * @param {String} id Menu entry id
+     */
+    activate: function (id) {
+        if (Y.Lang.isArray(id)) {
+
+            Y.each(id, function (v) {
+                this.activate(v);
+            }, this);
+
+            return this;
+        }
+
+        var item = this.getItemById(id);
+
+        if (item) {
+            item.activate();
+        }
+    },
+
+    /**
+     * @method deactivate
+     * @param {String} id Menu entry id
+     */
+    deactivate: function (id) {
+        if (Y.Lang.isArray(id)) {
+
+            Y.each(id, function (v) {
+                this.deactivate(v);
+            }, this);
+
+            return this;
+        }
+
+        var item = this.getItemById(id);
+
+        if (item) {
+            item.deactivate();
         }
     },
 
@@ -236,6 +300,10 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
             title: config.title,
             icon : config.icon ? '<i class="icon icon-white ' + config.icon + '"></i> ' : ''
         }));
+
+        if (config.large) {
+            item.addClass('rednose-dropdown-large');
+        }
 
         parent.append(item);
 
@@ -289,16 +357,16 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
      * @private
      */
     _afterDropdownClick: function (e) {
-        var item  = e.item,
-            event = EVT_CLICK + '#' + item.id;
+        var item = e.item,
+            evt  = EVT_CLICK + '#' + item.id;
 
-        if (!this._published[event]) {
-            this._published[event] = this.publish(event, {
+        if (!this._published[evt]) {
+            this._published[evt] = this.publish(evt, {
                 defaultFn: this._defItemClickFn
             });
         }
 
-        this.fire(event, {
+        this.fire(evt, {
             originEvent: e,
             item       : item
         });
@@ -366,10 +434,11 @@ Y.namespace('Rednose').Navbar = Navbar;
 
 }, '1.5.0-DEV', {
     "requires": [
-        "rednose-dropdown-plugin",
         "json",
         "node-event-simulate",
         "node-pluginhost",
+        "rednose-dropdown-keys",
+        "rednose-dropdown-plugin",
         "rednose-util",
         "view"
     ]
