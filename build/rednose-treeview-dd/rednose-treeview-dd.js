@@ -2,14 +2,10 @@ YUI.add('rednose-treeview-dd', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
-var DD,
-
-    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white';
-
 /**
  * Drag and drop extension for the TreeView.
  */
-DD = Y.Base.create('dd', Y.Base, [], {
+var DD = Y.Base.create('dd', Y.Base, [], {
 
     // -- Protected Properties -------------------------------------------------
 
@@ -137,10 +133,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
             Y.Do.after(this._afterRender, this, 'render', this),
 
             this.on({
-//                'drop:enter': this._handleDdEnter,
-//                'drop:exit' : this._handleDdExit,
                 'drag:start': this._handleStart
-//                'drop:hit'  : this._handleDrop
             }),
 
             this.after('open', this._handleDdOpen)
@@ -197,19 +190,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
         this._handleBind(htmlNode);
     },
 
-//    _handleDdEnter: function (e) {
-//       if (e.drop.get('node').one('.rednose-treeview-icon')) {
-//            e.drop.get('node').one('.rednose-treeview-icon').addClass(CSS_BOOTSTRAP_ICON_WHITE);
-//        }
-//    },
-
-//    _handleDdExit: function (e) {
-//        // FIXME: Ignore selected nodes
-//        if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
-//            e.drop.get('node').all('.' + CSS_BOOTSTRAP_ICON_WHITE).removeClass(CSS_BOOTSTRAP_ICON_WHITE);
-//        }
-//    },
-
     _handleStart: function (e) {
         var drag = e.target,
             model,
@@ -222,9 +202,7 @@ DD = Y.Base.create('dd', Y.Base, [], {
             drag.get('node').get('outerHTML')
         );
 
-        drag.get('dragNode').all('.' + CSS_BOOTSTRAP_ICON_WHITE).removeClass(CSS_BOOTSTRAP_ICON_WHITE);
-
-        // Recreate the drag instance
+        // Recreate the drag instance.
         origin = drag.get('node');
 
         drag._prep();
@@ -239,49 +217,6 @@ DD = Y.Base.create('dd', Y.Base, [], {
 
         this._createDd(origin, model);
     }
-
-//    _handleDrop: function (e) {
-//        var model    = this.get('model'),
-//            obj      = e.drag.get('data'),
-//            dropNode = e.drop.get('node'),
-//            newCat   = dropNode.hasClass('nav-header') ? null: this.getNodeById(dropNode.getData('node-id')).data;
-//            callback = false,
-//            self     = this;
-//
-//        Y.all('.rednose-treeview-drop-over-global').removeClass('rednose-treeview-drop-over-global');
-//
-//        if (!e.drop.get('node').get('parentNode').hasClass('yui3-treeview-selected')) {
-//            e.drop.get('node').all('.' + CSS_BOOTSTRAP_ICON_WHITE).removeClass(CSS_BOOTSTRAP_ICON_WHITE);
-//        }
-//
-//        // Check for custom override callbacks
-//        Y.Array.each(e.drag.get('groups'), function (group) {
-//            if (group in self._callbacks) {
-//                var config = self._callbacks[group];
-//
-//                e.drop.set('data', newCat);
-//                config.callback.apply(config.context, [e]);
-//
-//                callback = true;
-//            }
-//        });
-//
-//        if (callback) {
-//            return true;
-//        }
-//
-//        if (obj) {
-//            var property      = obj instanceof Y.TB.Category ? 'parent' : 'category',
-//                oldCat        = obj.get(property),
-//                oldCatModelID = oldCat ? oldCat.id : null,
-//                newCatModelID = newCat ? newCat.get('id') : null;
-//
-//            if (oldCatModelID !== newCatModelID) {
-//                obj.set(property, newCat);
-//                obj.save(function () { model.load(); });
-//            }
-//        }
-//    }
 }, {
     ATTRS: {
         dragdrop: {

@@ -3,13 +3,7 @@
 /**
  * Selection extension for the RedNose TreeView widget.
  */
-var Selectable,
-
-    CSS_TREEVIEW_ICON = 'rednose-treeview-icon',
-
-    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white';
-
-Selectable = Y.Base.create('selectable', Y.Base, [], {
+var Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     // -- Protected Properties -------------------------------------------------
 
@@ -20,9 +14,6 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     initializer: function () {
         this.on('select', this._handleSelectState, this);
         this.on('unselect', this._handleUnSelectState, this);
-
-        this.after('select', this._handleSelect, this);
-        this.after('unselect', this._handleUnselect, this);
 
         this.after('selectableChange', this._afterChange, this);
 
@@ -70,32 +61,6 @@ Selectable = Y.Base.create('selectable', Y.Base, [], {
     },
 
     // -- Protected Event Handlers ---------------------------------------------
-
-    _handleSelect: function (e) {
-        var node     = e.node,
-            htmlNode = this.getHTMLNode(node),
-            model    = node.data,
-            icons    = this.get('model').get('icons');
-
-        // Check the model icon definitions.
-        if (icons && model instanceof Y.Model  && icons[model.name]) {
-            // Only add helper class if this node has an icon.
-            htmlNode.one('.' + CSS_TREEVIEW_ICON).addClass(CSS_BOOTSTRAP_ICON_WHITE);
-        }
-
-        // Check the icon property on the node.
-        if (Y.Lang.isString(node.icon)) {
-            htmlNode.one('.' + CSS_TREEVIEW_ICON).addClass(CSS_BOOTSTRAP_ICON_WHITE);
-        }
-    },
-
-    _handleUnselect: function (e) {
-        var htmlNode = this.getHTMLNode(e.node);
-
-        if (htmlNode.one('.' + CSS_TREEVIEW_ICON).hasClass(CSS_BOOTSTRAP_ICON_WHITE)) {
-            htmlNode.one('.' + CSS_TREEVIEW_ICON).removeClass(CSS_BOOTSTRAP_ICON_WHITE);
-        }
-    },
 
     _handleSelectState: function (e) {
         var id         = this.generateRednoseRecordId(e.node.data),

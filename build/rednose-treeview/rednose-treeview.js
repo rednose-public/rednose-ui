@@ -11,7 +11,6 @@ var CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',
     CSS_INNER_CONTAINER = 'rednose-treeview-inner-container',
     CSS_TREEVIEW_ICON   = 'rednose-treeview-icon',
 
-    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white',
     CSS_BOOTSTRAP_NAV_HEADER = 'nav-header';
 
 /**
@@ -153,10 +152,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.R
             && Y.Lang.isString(model.get('icon')) === false) {
 
             var icon = icons[model.name];
-
-            if (this.get('selectable') && node.isSelected()) {
-                className += (' ' + CSS_BOOTSTRAP_ICON_WHITE);
-            }
 
             if (Y.Lang.isString(icon)) {
                 return className + ' ' + icon;
@@ -325,15 +320,10 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.R
             return;
         }
 
-        var node      = e.node,
-            htmlNode  = this.getHTMLNode(e.node);
+        var node     = e.node,
+            htmlNode = this.getHTMLNode(e.node);
 
         htmlNode.one('.' + CSS_TREEVIEW_ICON).set('className', this.icon(node));
-
-        // Invert icon if this node is selected.
-        if (htmlNode.hasClass('yui3-treeview-selected')) {
-            htmlNode.one('.' + CSS_TREEVIEW_ICON).addClass(CSS_BOOTSTRAP_ICON_WHITE);
-        }
     },
 
     _handleExpand: function (e) {
