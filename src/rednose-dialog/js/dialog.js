@@ -351,7 +351,8 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
      * @protected
      */
     _focusInput: function () {
-        var inputField = this.panel.get('boundingBox').one('.controls').one('input, textarea, select');
+        var inputControlContainer = this.panel.get('boundingBox').one('.controls'),
+            inputField = inputControlContainer ? inputControlContainer.one('input, textarea, select') : null;
 
         if (inputField) {
             var value = inputField.get('value');
