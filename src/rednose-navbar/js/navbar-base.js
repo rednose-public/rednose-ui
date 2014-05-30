@@ -4,14 +4,13 @@
  * Provides a navigation bar.
  *
  * @module rednose-navbar
+ * @submodule rednose-navbar-base
  */
-
-var Navbar;
 
 /**
  * Provides a navigation bar.
  *
- * @class NavBar
+ * @class NavBar.Base
  * @namespace Rednose
  * @constructor
  * @extends View
@@ -28,7 +27,7 @@ var Navbar;
  */
 var EVT_CLICK = 'click';
 
-Navbar = Y.Base.create('navbar', Y.View, [], {
+var NavbarBase = Y.Base.create('navbar', Y.View, [], {
     // -- Public Properties ----------------------------------------------------
 
     /**
@@ -145,38 +144,6 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
         Y.Array.each(menuRight, function (menu) {
             self._renderItem(menu, 'right');
         });
-
-
-        this._keyCodeMap || (this._keyCodeMap = {});
-
-        Y.Array.each(this._dropdownMap, function (dropdown) {
-            Y.Array.each(dropdown.getItems(), function (item) {
-                if (item.keyCode) {
-                    this._keyCodeMap[item.keyCode] = item;
-                }
-            }, this);
-        }, this);
-
-        Y.one('doc').on('keydown', function (e) {
-            var meta = e.metaKey || e.ctrlKey ? 'ctrl' : null;
-
-            var key = String.fromCharCode(e.keyCode).toLowerCase();
-
-            if (meta) {
-                key = meta.concat('+' + key);
-            }
-
-            var item = this._keyCodeMap[key];
-
-            if (item) {
-                e.preventDefault();
-                if (!item.isDisabled()) {
-
-                    e.item = item;
-                    this._afterDropdownClick(e);
-                }
-            }
-        }, this);
 
         return this;
     },
@@ -427,4 +394,13 @@ Navbar = Y.Base.create('navbar', Y.View, [], {
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').Navbar = Navbar;
+Y.namespace('Rednose.Navbar').Base = NavbarBase;
+
+/**
+ * @class Navbar
+ * @constructor
+ * @extends Rednose.Navbar.Base
+ * @uses Rednose.Navbar.Keys
+ * @namespace Rednose
+ */
+Y.Rednose.Navbar = Y.mix(Y.Base.create('navbar', NavbarBase, []), Y.Rednose.Navbar, true);

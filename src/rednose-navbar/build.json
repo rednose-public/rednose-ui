@@ -2,9 +2,15 @@
     "name": "rednose-navbar",
 
     "builds": {
-        "rednose-navbar": {
+        "rednose-navbar-base": {
             "jsfiles": [
-                "js/navbar.js"
+                "js/navbar-base.js"
+            ]
+        },
+
+        "rednose-navbar-keys": {
+            "jsfiles": [
+                "js/extensions/navbar-keys.js"
             ]
         },
 

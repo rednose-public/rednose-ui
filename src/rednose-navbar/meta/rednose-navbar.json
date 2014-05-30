@@ -1,21 +1,35 @@
 {
     "rednose-navbar" : {
-        "requires": [
-            "json",
-            "node-event-simulate",
-            "node-pluginhost",
-            "rednose-dropdown-keys",
-            "rednose-dropdown-plugin",
-            "rednose-util",
-            "view"
-        ]
-    },
+        "use": [
+            "rednose-navbar-keys",
+            "rednose-navbar-recent"
+        ],
 
-    "rednose-navbar-recent" : {
-        "requires": [
-            "cookie",
-            "plugin",
-            "rednose-navbar"
-        ]
+        "submodules": {
+            "rednose-navbar-base" : {
+                "requires": [
+                    "json",
+                    "node-pluginhost",
+                    "rednose-dropdown-plugin",
+                    "view"
+                ]
+            },
+
+            "rednose-navbar-keys" : {
+                "requires": [
+                    "event-custom",
+                    "rednose-dropdown-keys",
+                    "rednose-navbar-base"
+                ]
+            },
+
+            "rednose-navbar-recent" : {
+                "requires": [
+                    "cookie",
+                    "plugin",
+                    "rednose-navbar-base"
+                ]
+            }
+        }
     }
 }
