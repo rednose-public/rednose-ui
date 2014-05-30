@@ -872,10 +872,14 @@ div .btn-toolbar .btn-group.pull-right {
   height: 26px;
   padding-top: 3px;
   padding-bottom: 3px;
+  padding-left: 0;
 }
 
 .rednose-treeview-inner-container .yui3-treeview-indicator {
+  position: relative;
   padding-top: 3px;
+  padding-right: 10px;
+  padding-left: 0;
 }
 
 .rednose-treeview-content .icon-toggle {
@@ -891,8 +895,12 @@ div .btn-toolbar .btn-group.pull-right {
   width: 16px;
 }
 
-.rednose-treeview-inner-container > .yui3-treeview-children {
-  margin: 0 !important;
+.rednose-treeview-spacer {
+  margin-left: 20px;
+}
+
+.rednose-treeview-outer-container .rednose-treeview-inner-container .yui3-treeview-node .yui3-treeview-children {
+  margin: 0;
 }
 
 /* Hide overflow for animating nodes */

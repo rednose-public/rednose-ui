@@ -236,11 +236,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.R
 
             this.after(['open', 'close'], this._handleToggle, this),
 
-            model.after('change', this._handleModelChange, this),
-
-            // CSS Margin correction
-            Y.Do.after(this._afterRender, this, 'render', this),
-            this.after('open', this._handleMarginCorrection, this)
+            model.after('change', this._handleModelChange, this)
         );
     },
 
@@ -284,39 +280,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.R
     _destroyContainer: function () {
         var container = this.get('container');
         container && container.remove(true);
-    },
-
-    _getHTMLNodeDepth: function (htmlNode) {
-        var self = this,
-            ancestorNodes;
-
-        ancestorNodes = htmlNode.ancestors(function (ancestor) {
-            return ancestor.hasClass(self.classNames.node);
-        });
-
-        return ancestorNodes.size();
-    },
-
-    _correctMargin: function (htmlNode) {
-        var depth = this._getHTMLNodeDepth(htmlNode);
-
-        htmlNode.setStyle('margin-left', depth * -20);
-
-        htmlNode.one('.' + this.classNames.indicator).setStyle('margin-left', depth * 20);
-
-        if (htmlNode.one('.' + CSS_TREEVIEW_ICON)) {
-            htmlNode.one('.' + CSS_TREEVIEW_ICON).setStyle('margin-left', depth * 20);
-        }
-
-        this._correctChildrenMargin(htmlNode);
-    },
-
-    _correctChildrenMargin: function (htmlNode) {
-        var depth = this._getHTMLNodeDepth(htmlNode);
-
-        if (htmlNode.one('.' + this.classNames.children)) {
-            htmlNode.one('.' + this.classNames.children).setStyle('margin-left', 20 + depth * 20);
-        }
     },
 
     // -- Protected Event Handlers ---------------------------------------------
@@ -386,28 +349,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.R
 
         if (index !== -1) {
             this._stateMap.splice(index, 1);
-        }
-    },
-
-    _afterRender: function () {
-        var htmlNodes = this.get('container').all('.' + this.classNames.node),
-            self      = this;
-
-        htmlNodes.each(function (htmlNode) {
-            self._correctMargin(htmlNode);
-        });
-    },
-
-    _handleMarginCorrection: function (e) {
-        var treeNode = e.node,
-            self     = this;
-
-        if (this.rendered) {
-            this._correctChildrenMargin(self.getHTMLNode(treeNode));
-
-            Y.Array.each(treeNode.children, function (child) {
-                self._correctMargin(self.getHTMLNode(child));
-            });
         }
     }
 });
