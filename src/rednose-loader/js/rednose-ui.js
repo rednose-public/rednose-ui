@@ -292,6 +292,7 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-navbar-keys": {
         "group": "rednose-ui",
         "requires": [
+            "event-custom",
             "rednose-dropdown-keys",
             "rednose-navbar-base"
         ]
@@ -443,4 +444,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '905545f66a0806a733ba61e53fc43b8d';
+YUI.Env[Y.version].md5 = '8fc6a02c063e47f93434287de8eb299a';

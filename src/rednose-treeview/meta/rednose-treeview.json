@@ -26,21 +26,19 @@
     "rednose-treeview-anim" : {
         "requires": [
             "rednose-anim",
-            "rednose-treeview",
             "transition"
         ]
     },
 
     "rednose-treeview-dd" : {
         "requires": [
-            "rednose-dd",
-            "rednose-treeview"
+            "rednose-dd"
         ]
     },
 
     "rednose-treeview-select" : {
         "requires": [
-            "rednose-treeview"
+            "base"
         ]
     },
 

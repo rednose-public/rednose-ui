@@ -39,9 +39,16 @@ var CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',
  *     @param {String} [config.header] An optional header, needed for global dropping on the root node
  *
  * @constructor
+ * @uses Rednose.TreeView.Anim
+ * @uses Rednose.TreeView.Selectable
+ * @uses Rednose.TreeView.DD
  * @extends TreeView
  */
-var TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.Rednose.TreeView.Selectable], {
+var TreeView = Y.Base.create('treeView', Y.TreeView, [
+    Y.Rednose.TreeView.Anim,
+    Y.Rednose.TreeView.DD,
+    Y.Rednose.TreeView.Selectable
+], {
 
     // -- Public Properties -------------------------------------------------
 

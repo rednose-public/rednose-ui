@@ -2,12 +2,10 @@ YUI.add('rednose-treeview-anim', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
-var Anim;
-
 /**
  * Y.Rednose.TreeView widget extension to provide animations.
  */
-Anim = Y.Base.create('anim', Y.Base, [], {
+var Anim = Y.Base.create('anim', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
@@ -65,7 +63,7 @@ Anim = Y.Base.create('anim', Y.Base, [], {
          * Enable animation for this TreeView instance
          */
         animated: {
-            value : false
+            value: true
         }
     }
 });
@@ -74,4 +72,4 @@ Anim = Y.Base.create('anim', Y.Base, [], {
 Y.namespace('Rednose.TreeView').Anim = Anim;
 
 
-}, '1.5.0-DEV', {"requires": ["rednose-anim", "rednose-treeview", "transition"]});
+}, '1.5.0-DEV', {"requires": ["rednose-anim", "transition"]});
