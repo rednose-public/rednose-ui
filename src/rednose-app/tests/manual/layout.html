@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.App module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<body>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-app', function (Y) {
+        var TestView = Y.Base.create('testView', Y.View, [Y.Rednose.Template.SingleView], {
+            showNavbar: true,
+
+            showToolbar: true,
+
+            render: function () {
+                var container = this.get('viewportContainer');
+
+                var node = Y.Node.create('<div/>');
+                container.append(node);
+
+                for (var i = 0, len = 100; i < len; i++) {
+                    node.append('<p>test!</p>');
+                }
+
+                return this;
+            }
+        });
+
+        var view = new TestView();
+
+        Y.one('body').append(view.render().get('container'));
+    });
+</script>
+</body>
+</html>

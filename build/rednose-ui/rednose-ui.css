@@ -119,21 +119,28 @@ li.disabled [class*=" icon-"] {
   background-image: url("img/glyphicons-halflings.png");
 }
 
-body,
-html,
 .rednose-grid,
-.rednose-unit-container {
-  width: 100%;
-  height: 100%;
-  padding: 0;
-  margin: 0;
-}
-
+.rednose-viewport-container,
+.rednose-unit-main,
 .rednose-unit-container {
   position: absolute;
   top: 0;
+  right: 0;
   bottom: 0;
+  left: 0;
   height: auto;
+}
+
+.rednose-viewport {
+  overflow: hidden;
+}
+
+.rednose-viewport-container {
+  overflow-y: auto;
+}
+
+.rednose-toolbar-unit-main .rednose-viewport-container {
+  top: 51px;
 }
 
 .yui3-widget-bd .rednose-unit-container {
@@ -153,7 +160,7 @@ html,
 
 .rednose-unit-left {
   position: absolute;
-  width: 280px;
+  width: 279px;
   height: 100%;
   border-right: 1px solid #ddd;
 }
