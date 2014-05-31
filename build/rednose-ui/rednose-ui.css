@@ -153,7 +153,6 @@ html,
 
 .rednose-unit-left {
   position: absolute;
-  left: 0;
   width: 280px;
   height: 100%;
   border-right: 1px solid #ddd;
@@ -842,6 +841,10 @@ input.rednose-datatable-input {
 .float-right {
   float: right;
   margin-left: 10px;
+}
+
+.yui3-tabview .nav > li > a {
+  cursor: default;
 }
 
 .rednose-toolbar {
