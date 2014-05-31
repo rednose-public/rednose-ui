@@ -7,8 +7,6 @@ var CSS_SELECTED = 'selected',
     CSS_DATA     = 'data',
     CSS_COLUMNS  = 'columns',
 
-    CSS_BOOTSTRAP_ICON_WHITE = 'icon-white',
-
     DATA_RECORD = 'data-yui3-record',
 
     /**
@@ -153,22 +151,12 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         // Remove all selection CSS on the previous selection
         if (oldNode) {
             oldNode.all('td').removeClass(table.getClassName(CSS_SELECTED));
-
-            // Inverse the icon color if there is one.
-            if (oldNode.one('i') && oldNode.one('i').hasClass(CSS_BOOTSTRAP_ICON_WHITE)) {
-                oldNode.one('i').removeClass(CSS_BOOTSTRAP_ICON_WHITE);
-            }
         }
 
         // Apply the CSS to the new selection and fire an event.
         if (Y.Lang.isNull(node) === false) {
             // After unhighlighting, now highlight the current row.
             node.all('td').addClass(table.getClassName(CSS_SELECTED));
-
-            // Inverse the icon color if there is one.
-            if (node.one('i')) {
-                node.one('i').addClass(CSS_BOOTSTRAP_ICON_WHITE);
-            }
 
             model = this._getModelFromTableRow(node);
         }
