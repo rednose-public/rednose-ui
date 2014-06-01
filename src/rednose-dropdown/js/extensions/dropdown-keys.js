@@ -65,7 +65,7 @@ Y.Rednose.Dropdown.Keys = DropdownKeys;
 Y.Base.mix(Y.Rednose.Dropdown, [DropdownKeys]);
 
 Y.mix(Y.Rednose.Dropdown.ClassNames, {
-    keyCode: 'rednose-menu-item-key-code',
+    keyCode: 'rednose-menu-item-key-code'
 });
 
 Y.mix(Y.Rednose.Dropdown.Templates, {

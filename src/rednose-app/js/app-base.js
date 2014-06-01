@@ -309,4 +309,4 @@ App.setTitle = function (title, dirty) {
 
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').App = App;
+Y.Rednose.App = Y.mix(App, Y.Rednose.App);

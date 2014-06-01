@@ -52,8 +52,6 @@ var Anim = Y.Base.create('anim', Y.Base, [], {
         var treeNode = e.node,
             children = this._getChildrenElement(treeNode);
 
-        // Hide potential scrollbars
-        children.ancestor('.yui3-treeview').setStyle('overflow', 'hidden');
         children.setStyle('display', 'block');
         Y.Rednose.Anim.slideOutY(children);
     }

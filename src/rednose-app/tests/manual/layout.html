@@ -21,7 +21,9 @@
             }
         }
     }).use('rednose-app', function (Y) {
-        var TestView = Y.Base.create('testView', Y.View, [Y.Rednose.Template.SingleView], {
+        var SingleView = Y.Base.create('view', Y.View, [Y.Rednose.Template.Navbar, Y.Rednose.Template.SingleView, Y.Rednose.Template.Toolbar]);
+
+        var TestView = Y.Base.create('testView', SingleView, [], {
             showNavbar: true,
 
             showToolbar: true,

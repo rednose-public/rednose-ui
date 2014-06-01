@@ -311,17 +311,7 @@ App.setTitle = function (title, dirty) {
 
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose').App = App;
+Y.Rednose.App = Y.mix(App, Y.Rednose.App);
 
 
-}, '1.5.0-DEV', {
-    "requires": [
-        "app-base",
-        "event-custom",
-        "rednose-app-templates",
-        "rednose-panel",
-        "rednose-tooltip",
-        "rednose-util",
-        "rednose-app-view"
-    ]
-});
+}, '1.5.0-DEV', {"requires": ["app-base", "rednose-app-view", "rednose-panel", "rednose-util"]});

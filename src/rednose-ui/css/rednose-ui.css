@@ -29,11 +29,6 @@ body {
   background-image: none;
 }
 
-.yui3-widget-bd {
-  overflow-x: auto;
-  overflow-y: auto;
-}
-
 /* -- Custom icons, prefixed by 'rednose-' ---------------------------------- */
 
 [class^="rednose-icon-"],
@@ -130,14 +125,6 @@ li.disabled [class*=" icon-"] {
   left: 0;
 }
 
-.rednose-viewport {
-  overflow: hidden;
-}
-
-.rednose-viewport-container {
-  overflow-y: auto;
-}
-
 .rednose-toolbar-unit-main .rednose-viewport-container {
   top: 51px;
 }
@@ -198,13 +185,7 @@ li.disabled [class*=" icon-"] {
 
 .rednose-two-column-grid .rednose-unit-main .rednose-unit-main-top,
 .rednose-three-column-grid .rednose-unit-main .rednose-unit-main-top {
-  overflow: auto;
   border-bottom: 1px solid #ddd;
-}
-
-.rednose-two-column-grid .rednose-unit-main .rednose-unit-main-bottom,
-.rednose-three-column-grid .rednose-unit-main .rednose-unit-main-bottom {
-  overflow: auto;
 }
 
 .rednose-unit-main {

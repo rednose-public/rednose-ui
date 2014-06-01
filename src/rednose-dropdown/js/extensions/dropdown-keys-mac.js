@@ -44,7 +44,7 @@ DropdownKeysMac.prototype = {
         });
 
         return parts.join('');
-    },
+    }
 };
 
 // -- Namespace ----------------------------------------------------------------

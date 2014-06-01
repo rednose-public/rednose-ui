@@ -1,0 +1,1 @@
+YUI.add("rednose-app-view-template",function(e,t){function n(){}n.prototype={initializer:function(){this.set("viewContainer",this.get("viewportContainer"))}},e.namespace("Rednose.App").ViewTemplate=n},"1.5.0-DEV",{requires:["rednose-app-base"]});

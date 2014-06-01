@@ -22,30 +22,40 @@ Y.mix(YUI.Env[Y.version].modules, {
         "use": [
             "app-transitions",
             "rednose-app-base",
+            "rednose-app-template",
             "rednose-model-undo",
             "rednose-model-spinner",
-            "rednose-view-nav"
+            "rednose-view-nav",
+            "rednose-view-template"
         ]
     },
     "rednose-app-base": {
         "group": "rednose-ui",
         "requires": [
             "app-base",
-            "event-custom",
-            "rednose-app-templates",
+            "rednose-app-view",
             "rednose-panel",
-            "rednose-tooltip",
-            "rednose-util",
-            "rednose-app-view"
+            "rednose-util"
         ]
     },
-    "rednose-app-templates": {
-        "group": "rednose-ui"
+    "rednose-app-template": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-app-base",
+            "rednose-app-view-template",
+            "rednose-view-templates"
+        ]
     },
     "rednose-app-view": {
         "group": "rednose-ui",
         "requires": [
             "view"
+        ]
+    },
+    "rednose-app-view-template": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-app-base"
         ]
     },
     "rednose-breadcrumb": {
@@ -258,8 +268,8 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-model-spinner": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-app-base",
-            "model"
+            "model",
+            "rednose-app-base"
         ]
     },
     "rednose-model-tree": {
@@ -390,21 +400,19 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "rednose-anim",
-            "rednose-treeview",
             "transition"
         ]
     },
     "rednose-treeview-dd": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-dd",
-            "rednose-treeview"
+            "rednose-dd"
         ]
     },
     "rednose-treeview-select": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-treeview"
+            "base"
         ]
     },
     "rednose-treeview-templates": {
@@ -437,6 +445,19 @@ Y.mix(YUI.Env[Y.version].modules, {
             "view"
         ]
     },
+    "rednose-view-template": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-view-templates",
+            "view"
+        ]
+    },
+    "rednose-view-templates": {
+        "group": "rednose-ui",
+        "requires": [
+            "view"
+        ]
+    },
     "rednose-widget-nav-container": {
         "group": "rednose-ui",
         "requires": [
@@ -446,7 +467,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '8fc6a02c063e47f93434287de8eb299a';
+YUI.Env[Y.version].md5 = 'b6c926e513ddcbe3fffee0a133679dbf';
 
 
 }, '1.5.0-DEV');
