@@ -5,7 +5,7 @@ Version 1.5 is compatible with YUI 3.16.0.
 ## rednose-app
 
  * Loading app within iFrames is no longer supported in its current form.
- * Module `Rednose.Templates` was removed and has been replaced by App/View base classes that need to be extended.
+ * Module `Rednose.Templates` was removed and has been replaced by App/View base classes that can be extended.
  * Support for dialog instances has been dropped, apps should only render views and dialogs should not be rendered by apps.
  * Scrolling of subviews is no longer handled by the templates themselves.
  * Module `rednose-model-undo` was removed in favor of `rednose-undo-manager`.

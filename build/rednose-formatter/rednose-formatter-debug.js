@@ -1,18 +1,18 @@
 YUI.add('rednose-formatter', function (Y, NAME) {
 
 /**
-Several formatter class methods to be used throughout the rednose-ui framework.
-
-@module rednose-formatter
-**/
+ * Several formatter class methods to be used throughout the rednose-ui framework.
+ *
+ * @module rednose-formatter
+ */
 
 /**
-Several formatter class methods to be used throughout the rednose-ui framework.
-
-@class Formatter
-@namespace Rednose
-@constructor
-**/
+ * Several formatter class methods to be used throughout the rednose-ui framework.
+ *
+ * @class Formatter
+ * @namespace Rednose
+ * @constructor
+ */
 function Formatter() {
     Formatter.superclass.constructor.apply(this);
 }
@@ -20,13 +20,13 @@ function Formatter() {
 // -- Static methods ------------------------------------------------------------
 
 /**
-Formats a size string from bytes.
-
-@method size
-@param {Mixed} size The size to format
-@return {String} The formatted string
-@static
-**/
+ * Formats a size string from bytes.
+ *
+ * @method size
+ * @param {Mixed} size The size to format
+ * @return {String} The formatted string
+ * @static
+ */
 Formatter.size = function (size) {
     size = parseFloat(size);
 

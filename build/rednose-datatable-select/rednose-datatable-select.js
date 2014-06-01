@@ -12,17 +12,17 @@ var CSS_SELECTED = 'selected',
     DATA_RECORD = 'data-yui3-record',
 
     /**
-     Fired when a row is selected.
-
-     @event select
-     **/
+     * Fired when a row is selected.
+     *
+     * @event select
+     */
     EVT_SELECT = 'select',
 
     /**
-     Fired when a row is 'openened'.
-
-     @event open
-     **/
+     * Fired when a row is 'openened'.
+     *
+     * @event open
+     */
     EVT_OPEN = 'open';
 
 function DataTableSelectPlugin () {

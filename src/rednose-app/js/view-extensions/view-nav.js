@@ -204,47 +204,6 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         }
     },
 
-    // -- Public Methods -------------------------------------------------------
-
-    /**
-     * Called by Rednose.App when the view dimensions change.
-     *
-     * @param {Node} parent
-     */
-    sizeView: function (parent) {
-        return;
-        var bodyHeight = parseInt(parent.get('offsetHeight'), 10);
-
-        if (isNaN(bodyHeight)) {
-            return;
-        }
-
-        if (this.title) {
-            bodyHeight -= 46;
-        }
-
-        if (this.footer) {
-            bodyHeight -= 56;
-        }
-
-        this._body.set('offsetHeight', bodyHeight);
-
-        // Check for Y.Rednose.App templates.
-        if (this._body.one('.rednose-unit-left')) {
-            this._body.one('.rednose-unit-left').setStyle('height', bodyHeight);
-        }
-
-        if (this._body.one('.rednose-unit-right')) {
-            this._body.one('.rednose-unit-right').setStyle('height', bodyHeight);
-        }
-
-        if (this._body.one('.rednose-unit-right')) {
-            this._body.one('.rednose-unit-right').setStyle('top', 46);
-        }
-
-        this.fire(EVT_LOAD);
-    },
-
     // -- Protected Methods ----------------------------------------------------
 
     /**
@@ -354,10 +313,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
             container.one('.yui3-widget-ft') && container.one('.yui3-widget-ft').hide();
         }
 
-        // Adjust position.
-        var parent = container.get('parentNode');
-
-        parent && this.sizeView(parent);
+        this.fire(EVT_LOAD);
     }
 }, {
     /**

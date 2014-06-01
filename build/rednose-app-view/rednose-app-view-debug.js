@@ -54,15 +54,6 @@ var AppView = Y.Base.create('appView', Y.View, [], {
         this.app.render();
 
         return this;
-    },
-
-    /**
-     * @see Rednose.App.Base
-     */
-    sizeView: function (parent) {
-        if (this.app && typeof this.app.sizeView === 'function') {
-            this.app.sizeView(parent);
-        }
     }
 });
 

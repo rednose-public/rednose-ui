@@ -20,13 +20,13 @@ var Micro = Y.Template.Micro,
 ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose.View.Nav ], {
 
     /**
-    Property inherited from Y.Rednose.View.Nav
-    **/
+     * Property inherited from Y.Rednose.View.Nav
+     */
     title: TXT_OBJECT_ATTRIBUTES,
 
     /**
-    Property inherited from Y.Rednose.View.Nav
-    **/
+     * Property inherited from Y.Rednose.View.Nav
+     */
     footer: false,
 
     formTemplate: Micro.compile(

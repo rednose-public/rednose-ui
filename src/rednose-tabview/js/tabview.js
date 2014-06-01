@@ -1,20 +1,20 @@
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
-Provides a generic tabview.
-
-@module rednose-tabview
-**/
+ * Provides a generic tabview.
+ *
+ * @module rednose-tabview
+ */
 var TabView;
 
 /**
-Provides a generic tabview.
-
-@class TabView
-@namespace Rednose
-@constructor
-@extends TabView
-**/
+ * Provides a generic tabview.
+ *
+ * @class TabView
+ * @namespace Rednose
+ * @constructor
+ * @extends TabView
+ */
 TabView = Y.Base.create('tabView', Y.Widget, [], {
     // -- Public Properties ----------------------------------------------------
 

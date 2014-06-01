@@ -1,12 +1,12 @@
 /*jshint expr:true, onevar:false */
 
 /**
-Provides a generic panel.
-
-By default this class provides a modal, centered panel.
-
-@module renodse-panel
-**/
+ * Provides a generic panel.
+ *
+ * By default this class provides a modal, centered panel.
+ *
+ * @module renodse-panel
+ */
 var Panel,
 
     STYLE_DIALOG_WIDTH = 500,
@@ -19,13 +19,13 @@ var Panel,
     CSS_WIDGET_HD    = 'yui3-widget-hd';
 
 /**
-Provides a generic panel.
-
-@class Panel
-@namespace Rednose
-@constructor
-@extends Panel
-**/
+ * Provides a generic panel.
+ *
+ * @class Panel
+ * @namespace Rednose
+ * @constructor
+ * @extends Panel
+ */
 Panel = Y.Base.create('panel', Y.Panel, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
@@ -44,11 +44,11 @@ Panel = Y.Base.create('panel', Y.Panel, [], {
     // -- Protected Event Handlers ----------------------------------------------
 
     /**
-    Sets the correct panel position and patches the default close button.
-
-    @method _afterRender
-    @protected
-    **/
+     * Sets the correct panel position and patches the default close button.
+     *
+     * @method _afterRender
+     * @protected
+     */
     _afterRender: function () {
         var container   = this.get('boundingBox'),
             closeButton = container.one('.' + CSS_BUTTON_CLOSE);

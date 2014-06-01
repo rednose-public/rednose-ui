@@ -218,13 +218,13 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     /**
-    Shows a modal view where the items for this collection can be configured
-    dynamically, by specifying a mapping to data source attributes.
-
-    @method _handleConfigureDynamicItems
-    @param {EventFacade} e Event containing the control model.
-    @protected
-    **/
+     * Shows a modal view where the items for this collection can be configured
+     * dynamically, by specifying a mapping to data source attributes.
+     *
+     * @method _handleConfigureDynamicItems
+     * @param {EventFacade} e Event containing the control model.
+     * @protected
+     */
     _handleConfigureDynamicItems: function (e) {
         var model = e.model;
 
@@ -267,11 +267,11 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     /**
-    Saves the current form.
-
-    @method _handleSave
-    @protected
-    **/
+     * Saves the current form.
+     *
+     * @method _handleSave
+     * @protected
+     */
     _handleSave: function () {
         var form = this.get('model');
 
@@ -279,11 +279,11 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
     },
 
     /**
-    Shows a preview of the current (saved) form.
-
-    @method _handlePreview
-    @protected
-    **/
+     * Shows a preview of the current (saved) form.
+     *
+     * @method _handlePreview
+     * @protected
+     */
     _handlePreview: function () {
         var form = this.get('model');
 
@@ -380,8 +380,6 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
         }
     }
 });
-
-
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose.FormDesigner').FormDesigner = FormDesigner;

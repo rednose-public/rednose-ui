@@ -3,10 +3,10 @@ YUI.add('rednose-breadcrumb', function (Y, NAME) {
 /*jshint expr:true, onevar:false */
 
 /**
-Provides an interactive breadcrumb based on a path.
-
-@module renodse-breadcrumb
-**/
+ * Provides an interactive breadcrumb based on a path.
+ *
+ * @module renodse-breadcrumb
+ */
 var CSS_BOOTSTRAP_BREADCRUMB = 'breadcrumb',
     CSS_BOOTSTRAP_DIVIDER    = 'divider',
     CSS_BOOTSTRAP_ACTIVE     = 'active',
@@ -17,52 +17,55 @@ var CSS_BOOTSTRAP_BREADCRUMB = 'breadcrumb',
     TEXT_HOME = 'Home',
 
     /**
-    @event navigate
-    **/
+     * @event navigate
+     */
     EVT_NAVIGATE = 'navigate';
 
 /**
-Provides an interactive breadcrumb based on a path.
-
-@class Breadcrumb
-@namespace Rednose
-@constructor
-@extends View
-**/
+ * Provides an interactive breadcrumb based on a path.
+ *
+ * @class Breadcrumb
+ * @namespace Rednose
+ * @constructor
+ * @extends View
+ */
 var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
     // -- Protected Properties ---------------------------------------------
 
     /**
-    Template for the breadcrumb <ul/>
-    @property
-    @type {String}
-    @protected
-    **/
+     * Template for the breadcrumb <ul/>
+     *
+     * @property
+     * @type {String}
+     * @protected
+     */
     _UL_TEMPLATE: '<ul class="{className}"></ul>',
 
     /**
-    Template for the breadcrumb <li/> items
-    @property
-    @type {String}
-    @protected
-    **/
+     * Template for the breadcrumb <li/> items
+     *
+     * @property
+     * @type {String}
+     * @protected
+     */
     _LI_ITEM_TEMPLATE: '<li><a href="#">{itemLabel}</a> <span class="{dividerClass}">/</span></li>',
 
     /**
-    Template for the breadcrumb trailing <li/> item
-    @property
-    @type {String}
-    @protected
-    **/
+     * Template for the breadcrumb trailing <li/> item
+     *
+     * @property
+     * @type {String}
+     * @protected
+     */
     _LI_ITEM_TRAILING_TEMPLATE: '<li class="{activeClass}"><span>{itemLabel}</span></li>',
 
     /**
-    UI delegation events
-
-    @property events
-    @type {Object}
-    @protected
-    **/
+     * UI delegation events
+     *
+     * @property events
+     * @type {Object}
+     * @protected
+     */
     events: {
         'a': {
             click: '_handleClick'
@@ -70,18 +73,18 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
     },
 
     /**
-    @property _breadcrumbs
-    @type {Array}
-    @protected
-    **/
+     * @property _breadcrumbs
+     * @type {Array}
+     * @protected
+     */
     _breadcrumbs: [],
 
     // -- Lifecycle Methods ------------------------------------------------
 
     /**
-    @method initializer
-    @protected
-    **/
+     * @method initializer
+     * @protected
+     */
     initializer: function () {
         var container = this.get('container');
 
@@ -93,9 +96,9 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
     },
 
     /**
-    @method destructor
-    @protected
-    **/
+     * @method destructor
+     * @protected
+     */
     destructor: function () {
         this._breadcrumbs = null;
     },
@@ -103,10 +106,10 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
     // -- Public Methods ---------------------------------------------------
 
     /**
-    @method render
-    @public
-    @chainable
-    **/
+     * @method render
+     * @public
+     * @chainable
+     */
     render: function () {
         var container = this.get('container'),
             items     = this._breadcrumbs,
@@ -144,10 +147,10 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
     // -- Protected Event Handlers -----------------------------------------
 
     /**
-    @method _handleClick
-    @param {EventFacade} e The event
-    @protected
-    **/
+     * @method _handleClick
+     * @param {EventFacade} e The event
+     * @protected
+     */
     _handleClick: function (e) {
         e.preventDefault();
 
@@ -160,12 +163,12 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
     },
 
     /**
-    Setter, update the breadcrumbs after parsing the path string.
-
-    @method _setPath
-    @param {String} path Path
-    @protected
-    **/
+     * Setter, update the breadcrumbs after parsing the path string.
+     *
+     * @method _setPath
+     * @param {String} path Path
+     * @protected
+     */
     _setPath: function (path) {
         var parts      = path === '/' ? [ TEXT_HOME ] : path.split('/'),
             pathBuffer = '/';
@@ -189,11 +192,11 @@ var Breadcrumb = Y.Base.create('breadcrumb', Y.View, [], {
 }, {
     ATTRS: {
         /**
-        Set the path for the breadcrumbs.
-
-        @attribute path
-        @type {String}
-        **/
+         * Set the path for the breadcrumbs.
+         *
+         * @attribute path
+         * @type {String}
+         */
         path: {
             // Call the setter instantly when initializing the object.
             lazyAdd: false,

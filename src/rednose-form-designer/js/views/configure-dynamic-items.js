@@ -1,9 +1,9 @@
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
-Shows a modal view where the items for this collection can be configured
-dynamically, by specifying a mapping to data source attributes.
-**/
+ * Shows a modal view where the items for this collection can be configured
+ * dynamically, by specifying a mapping to data source attributes.
+ */
 
 var FormModel      = Y.Rednose.Form.FormModel,
     DataSourceList = Y.Rednose.DataSource.DataSourceList,
@@ -28,24 +28,24 @@ var FormModel      = Y.Rednose.Form.FormModel,
     EVT_OK = 'ok';
 
 /**
-Shows a modal view where the items for this collection can be configured
-dynamically, by specifying a mapping to data source attributes.
-**/
+ * Shows a modal view where the items for this collection can be configured
+ * dynamically, by specifying a mapping to data source attributes.
+ */
 var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.View, [ Y.Rednose.View.Nav ], {
 
     /**
-    Property inherited from Rednose.View.Nav
-    **/
+     * Property inherited from Rednose.View.Nav
+     */
     close: true,
 
     /**
-    Property inherited from Rednose.View.Nav
-    **/
+     * Property inherited from Rednose.View.Nav
+     */
     title: TXT_DYNAMIC_ITEMS_TITLE,
 
     /**
-    Property inherited from Rednose.View.Nav
-    **/
+     * Property inherited from Rednose.View.Nav
+     */
     buttons: {
         ok: {
             value:    TXT_BUTTON_OK,
@@ -60,8 +60,8 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
     },
 
     /**
-    View event handlers
-    **/
+     * View event handlers
+     */
     events: {
         '#dataSource': {
             change: '_handleDataSourceSelectChange'
@@ -71,8 +71,8 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
     OPTION_TEMPLATE: '<option value="{value}">{label}</option>',
 
     /**
-    Base Template.
-    **/
+     * Base Template.
+     */
     template:
         '<form class="form-horizontal">' +
             '<fieldset>' +
@@ -111,47 +111,47 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
         '</form>',
 
     /**
-    @property _dataSourceSelect
-    @type Node
-    @protected
-    **/
+     * @property _dataSourceSelect
+     * @type Node
+     * @protected
+     */
     _dataSourceSelect: null,
 
     /**
-    @property _titleSelect
-    @type Node
-    @protected
-    **/
+     * @property _titleSelect
+     * @type Node
+     * @protected
+     */
     _titleSelect: null,
 
     /**
-    @property _subtitleSelect
-    @type Node
-    @protected
-    **/
+     * @property _subtitleSelect
+     * @type Node
+     * @protected
+     */
     _subtitleSelect: null,
 
     /**
-    @property _imageSelect
-    @type Node
-    @protected
-    **/
+     * @property _imageSelect
+     * @type Node
+     * @protected
+     */
     _imageSelect: null,
 
     /**
-    @property _valueSelect
-    @type Node
-    @protected
-    **/
+     * @property _valueSelect
+     * @type Node
+     * @protected
+     */
     _valueSelect: null,
 
     /**
-    Stores references to data sources to retrieve them by identifier (foreign ID)
-
-    @property _identifierMap
-    @type Object
-    @protected
-    **/
+     * Stores references to data sources to retrieve them by identifier (foreign ID)
+     *
+     * @property _identifierMap
+     * @type Object
+     * @protected
+     */
     _identifierMap: {},
 
     initializer: function () {
@@ -206,11 +206,11 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
     },
 
     /**
-    Binds the view data to the model.
-
-    @method _bindView
-    @protected
-    **/
+     * Binds the view data to the model.
+     *
+     * @method _bindView
+     * @protected
+     */
     _bindView: function () {
         // Perform all changes on a clone of the properties object, so we don't trigger model changes for every update.
         var model      = this.get('model'),
@@ -238,11 +238,11 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
     },
 
     /**
-    @method _updateSelectNode
-    @param {Node} node Select node
-    @param {Array} data Option data
-    @protected
-    **/
+     * @method _updateSelectNode
+     * @param {Node} node Select node
+     * @param {Array} data Option data
+     * @protected
+     */
     _updateSelectNode: function (node, data) {
         data || (data = []);
 
@@ -264,9 +264,9 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
     },
 
     /**
-    @method _handleDataSourceSelectChange
-    @protected
-    **/
+     * @method _handleDataSourceSelectChange
+     * @protected
+     */
     _handleDataSourceSelectChange: function () {
         var value       = this._dataSourceSelect.get('value'),
             optionData  = [];
@@ -307,17 +307,17 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
     },
 
     /**
-    @method _handleButtonClose
-    @protected
-    **/
+     * @method _handleButtonClose
+     * @protected
+     */
     _handleButtonClose: function () {
         this.fire(EVT_CLOSE);
     },
 
     /**
-    @method _handleButtonOk
-    @protected
-    **/
+     * @method _handleButtonOk
+     * @protected
+     */
     _handleButtonOk: function () {
         var model = this.get('model');
 

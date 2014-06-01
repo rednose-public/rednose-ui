@@ -1,18 +1,18 @@
 /*jshint expr:true, onevar:false */
 
 /**
-Provides a tooltip manager.
-
-@module rednose-tooltip
-**/
+ * Provides a tooltip manager.
+ *
+ * @module rednose-tooltip
+ */
 
 /**
-Provides a tooltip manager.
-
-@class Tooltip
-@namespace Rednose
-@constructor
-**/
+ * Provides a tooltip manager.
+ *
+ * @class Tooltip
+ * @namespace Rednose
+ * @constructor
+ */
 var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
 
     // -- Public properties ----------------------------------------------------
@@ -26,9 +26,9 @@ var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
     /**
-    @method initializer
-    @protected
-    **/
+     * @method initializer
+     * @protected
+     */
     initializer: function () {
         var context = this.get('selectorContainer');
 
@@ -155,33 +155,33 @@ var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
 }, {
     ATTRS: {
         /**
-        The container context to use as the selectors scope.
-        If none is set, use the entire document.
-
-        @attribute selectorContainer
-        @default null
-        @type node | null
-        **/
+         * The container context to use as the selectors scope.
+         * If none is set, use the entire document.
+         *
+         * @attribute selectorContainer
+         * @default null
+         * @type node | null
+         */
         selectorContainer  : { value : null },
 
         /**
-        Selector to listen to. Defaults to false, and attaches no
-        delegation events. Set to a valid selector and any event will
-        fire it.
-
-        @attribute selector
-        @default false
-        @type String | boolean
-        **/
+         * Selector to listen to. Defaults to false, and attaches no
+         * delegation events. Set to a valid selector and any event will
+         * fire it.
+         *
+         * @attribute selector
+         * @default false
+         * @type String | boolean
+         */
         selector  : { value : false },
 
         /**
-        Where to place the tooltip. Valid values are top, bottom, left or right.
-
-        @attribute placement
-        @default top
-        @type String
-        **/
+         * Where to place the tooltip. Valid values are top, bottom, left or right.
+         *
+         * @attribute placement
+         * @default top
+         * @type String
+         */
         placement : { value : 'top' }
     }
 });

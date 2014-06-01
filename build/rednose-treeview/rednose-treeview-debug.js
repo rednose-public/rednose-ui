@@ -55,10 +55,10 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     // -- Public Properties -------------------------------------------------
 
     /**
-    Overwrite the default templates used to render this TreeView.
-
-    @property {Object} templates
-    **/
+     * Overwrite the default templates used to render this TreeView.
+     *
+     * @property {Object} templates
+     */
     templates: Y.TreeView.Templates,
 
     // -- Protected Properties -------------------------------------------------

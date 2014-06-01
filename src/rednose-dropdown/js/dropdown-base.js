@@ -77,7 +77,7 @@ var EVT_DEACTIVATE = 'deactivate';
  * @param {Rednose.Dropdown.Item}
  * @param {Array} items Array of new dropdown config objects
  * @preventable _defResetFn
- **/
+ */
 var EVT_RESET = 'reset';
 
 /**

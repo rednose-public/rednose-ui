@@ -1,10 +1,10 @@
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
-Provides a navigation bar plugin to show a list of recent entries.
-
-@module rednose-navbar-recent
-**/
+ * Provides a navigation bar plugin to show a list of recent entries.
+ *
+ * @module rednose-navbar-recent
+ */
 var TXT_CLEAR_ITEMS = 'Clear Items',
     COOKIE_NAME     = 'recent',
     MAX_MENU_SIZE   = 5;
@@ -19,14 +19,14 @@ var TXT_CLEAR_ITEMS = 'Clear Items',
 var EVT_CLICK_RECENT = 'clickRecent';
 
 /**
-Provides a navigation bar plugin to show a list of recent entries.
-
-@class NavbarRecent
-@namespace Rednose.Plugin
-@constructor
-@extends Plugin.Base
-@extensionfor Rednose.NavBar
-**/
+ * Provides a navigation bar plugin to show a list of recent entries.
+ *
+ * @class NavbarRecent
+ * @namespace Rednose.Plugin
+ * @constructor
+ * @extends Plugin.Base
+ * @extensionfor Rednose.NavBar
+ */
 var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
     /**
      * The node identifier for this recent items set.
