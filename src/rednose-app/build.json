@@ -8,21 +8,9 @@
             ]
         },
 
-        "rednose-app-template": {
-            "jsfiles": [
-                "js/app-template.js"
-            ]
-        },
-
         "rednose-app-view": {
             "jsfiles": [
                 "js/app-view.js"
-            ]
-        },
-
-        "rednose-app-view-template": {
-            "jsfiles": [
-                "js/app-extensions/app-view-template.js"
             ]
         },
 
@@ -47,12 +35,6 @@
         "rednose-view-nav": {
             "jsfiles": [
                 "js/view-extensions/view-nav.js"
-            ]
-        },
-
-        "rednose-view-template": {
-            "jsfiles": [
-                "js/view-template.js"
             ]
         }
     }

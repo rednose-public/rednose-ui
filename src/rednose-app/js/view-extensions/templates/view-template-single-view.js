@@ -14,17 +14,7 @@ ViewTemplateSingleView.prototype = {
             '</div>');
 
         container.one('.rednose-unit-main').append('<div class="rednose-viewport-container"><div class="rednose-viewport"></div></div>');
-        this.set('viewportContainer', container.one('.rednose-viewport'));
-    }
-};
-
-ViewTemplateSingleView.ATTRS = {
-    /**
-     * @attribute viewportContainer
-     * @type Node
-     */
-    viewportContainer: {
-        value: null
+        this.set('viewContainer', container.one('.rednose-viewport'));
     }
 };
 

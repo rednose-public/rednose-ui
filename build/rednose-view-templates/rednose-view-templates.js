@@ -21,7 +21,7 @@ ViewTemplateMasterDetail.prototype = {
 
         // Add extra container so CSS transitions don't jump.
         container.one('.rednose-unit-main').append('<div class="rednose-viewport-container"><div class="rednose-viewport"></div></div>');
-        this.set('viewportContainer', container.one('.rednose-viewport'));
+        this.set('viewContainer', container.one('.rednose-viewport'));
     }
 };
 
@@ -31,14 +31,6 @@ ViewTemplateMasterDetail.ATTRS = {
      * @type Node
      */
     rightContainer: {
-        value: null
-    },
-
-    /**
-     * @attribute viewportContainer
-     * @type Node
-     */
-    viewportContainer: {
         value: null
     }
 };
@@ -50,22 +42,13 @@ Y.namespace('Rednose.View.Template').MasterDetail = ViewTemplateMasterDetail;
 function ViewTemplateNavbar() {}
 
 ViewTemplateNavbar.prototype = {
-    /**
-     * @property showNavbar
-     * @type Boolean
-     * @default false
-     */
-    showNavbar: false,
-
     initializer: function () {
         var container = this.get('container');
 
-        if (this.showNavbar) {
-            container.addClass('rednose-navbar-grid');
-            container.prepend('<div class="rednose-navbar"></div>');
+        container.addClass('rednose-navbar-grid');
+        container.prepend('<div class="rednose-navbar"></div>');
 
-            this.set('navbarContainer', container.one('.rednose-navbar'));
-        }
+        this.set('navbarContainer', container.one('.rednose-navbar'));
     }
 };
 
@@ -97,17 +80,7 @@ ViewTemplateSingleView.prototype = {
             '</div>');
 
         container.one('.rednose-unit-main').append('<div class="rednose-viewport-container"><div class="rednose-viewport"></div></div>');
-        this.set('viewportContainer', container.one('.rednose-viewport'));
-    }
-};
-
-ViewTemplateSingleView.ATTRS = {
-    /**
-     * @attribute viewportContainer
-     * @type Node
-     */
-    viewportContainer: {
-        value: null
+        this.set('viewContainer', container.one('.rednose-viewport'));
     }
 };
 
@@ -118,13 +91,6 @@ Y.namespace('Rednose.View.Template').SingleView = ViewTemplateSingleView;
 function ViewTemplateSplitView() {}
 
 ViewTemplateSplitView.prototype = {
-    /**
-     * @property splitView
-     * @type Boolean
-     * @default false
-     */
-    splitView: false,
-
     /**
      * @property splitViewTemplate
      * @type String
@@ -138,12 +104,10 @@ ViewTemplateSplitView.prototype = {
     initializer: function () {
         var container = this.get('container');
 
-        if (this.splitView) {
-            this.get('viewportContainer').append(this.splitViewTemplate);
+        this.get('viewContainer').append(this.splitViewTemplate);
 
-            this.set('topContainer', container.one('.rednose-unit-main-top'));
-            this.set('bottomContainer', container.one('.rednose-unit-main-bottom'));
-        }
+        this.set('topContainer', container.one('.rednose-unit-main-top'));
+        this.set('bottomContainer', container.one('.rednose-unit-main-bottom'));
     }
 };
 
@@ -189,7 +153,7 @@ ViewTemplateThreeColumn.prototype = {
         this.set('rightContainer', container.one('.rednose-unit-right'));
 
         container.one('.rednose-unit-main').append('<div class="rednose-viewport-container"><div class="rednose-viewport"></div></div>');
-        this.set('viewportContainer', container.one('.rednose-viewport'));
+        this.set('viewContainer', container.one('.rednose-viewport'));
     }
 };
 
@@ -208,14 +172,6 @@ ViewTemplateThreeColumn.ATTRS = {
      */
     rightContainer: {
         value: null
-    },
-
-    /**
-     * @attribute viewportContainer
-     * @type Node
-     */
-    viewportContainer: {
-        value: null
     }
 };
 
@@ -226,22 +182,13 @@ Y.namespace('Rednose.View.Template').ThreeColumn = ViewTemplateThreeColumn;
 function ViewTemplateToolbar() {}
 
 ViewTemplateToolbar.prototype = {
-    /**
-     * @property showToolbar
-     * @type Boolean
-     * @default false
-     */
-    showToolbar: false,
-
     initializer: function () {
         var container = this.get('container');
 
-        if (this.showToolbar) {
-            container.one('.rednose-unit-main').addClass('rednose-toolbar-unit-main');
-            container.one('.rednose-unit-main').append('<div class="rednose-toolbar"></div>');
+        container.one('.rednose-unit-main').addClass('rednose-toolbar-unit-main');
+        container.one('.rednose-unit-main').append('<div class="rednose-toolbar"></div>');
 
-            this.set('toolbarContainer', container.one('.rednose-toolbar'));
-        }
+        this.set('toolbarContainer', container.one('.rednose-toolbar'));
     }
 };
 
@@ -278,7 +225,7 @@ ViewTemplateTwoColumn.prototype = {
 
         // Add extra container so CSS transitions don't jump.
         container.one('.rednose-unit-main').append('<div class="rednose-viewport-container"><div class="rednose-viewport"></div></div>');
-        this.set('viewportContainer', container.one('.rednose-viewport'));
+        this.set('viewContainer', container.one('.rednose-viewport'));
     }
 };
 
@@ -288,14 +235,6 @@ ViewTemplateTwoColumn.ATTRS = {
      * @type Node
      */
     leftContainer: {
-        value: null
-    },
-
-    /**
-     * @attribute viewportContainer
-     * @type Node
-     */
-    viewportContainer: {
         value: null
     }
 };

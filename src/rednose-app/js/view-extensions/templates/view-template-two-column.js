@@ -19,7 +19,7 @@ ViewTemplateTwoColumn.prototype = {
 
         // Add extra container so CSS transitions don't jump.
         container.one('.rednose-unit-main').append('<div class="rednose-viewport-container"><div class="rednose-viewport"></div></div>');
-        this.set('viewportContainer', container.one('.rednose-viewport'));
+        this.set('viewContainer', container.one('.rednose-viewport'));
     }
 };
 
@@ -29,14 +29,6 @@ ViewTemplateTwoColumn.ATTRS = {
      * @type Node
      */
     leftContainer: {
-        value: null
-    },
-
-    /**
-     * @attribute viewportContainer
-     * @type Node
-     */
-    viewportContainer: {
         value: null
     }
 };

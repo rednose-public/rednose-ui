@@ -3,10 +3,9 @@
         "use": [
             "app-transitions",
             "rednose-app-base",
-            "rednose-app-template",
             "rednose-model-spinner",
             "rednose-view-nav",
-            "rednose-view-template"
+            "rednose-view-templates"
         ],
 
         "submodules": {
@@ -19,23 +18,9 @@
                 ]
             },
 
-            "rednose-app-template" : {
-                "requires": [
-                    "rednose-app-base",
-                    "rednose-app-view-template",
-                    "rednose-view-templates"
-                ]
-            },
-
             "rednose-app-view" : {
                 "requires": [
                     "view"
-                ]
-            },
-
-            "rednose-app-view-template" : {
-                "requires": [
-                    "rednose-app-base"
                 ]
             },
 
@@ -60,13 +45,6 @@
                     "rednose-util",
                     "rednose-widget-nav-container",
                     "template-micro",
-                    "view"
-                ]
-            },
-
-            "rednose-view-template" : {
-                "requires": [
-                    "rednose-view-templates",
                     "view"
                 ]
             }

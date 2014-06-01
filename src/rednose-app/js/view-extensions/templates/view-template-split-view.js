@@ -4,13 +4,6 @@ function ViewTemplateSplitView() {}
 
 ViewTemplateSplitView.prototype = {
     /**
-     * @property splitView
-     * @type Boolean
-     * @default false
-     */
-    splitView: false,
-
-    /**
      * @property splitViewTemplate
      * @type String
      */
@@ -23,12 +16,10 @@ ViewTemplateSplitView.prototype = {
     initializer: function () {
         var container = this.get('container');
 
-        if (this.splitView) {
-            this.get('viewportContainer').append(this.splitViewTemplate);
+        this.get('viewContainer').append(this.splitViewTemplate);
 
-            this.set('topContainer', container.one('.rednose-unit-main-top'));
-            this.set('bottomContainer', container.one('.rednose-unit-main-bottom'));
-        }
+        this.set('topContainer', container.one('.rednose-unit-main-top'));
+        this.set('bottomContainer', container.one('.rednose-unit-main-bottom'));
     }
 };
 

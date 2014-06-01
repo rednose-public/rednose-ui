@@ -20,7 +20,7 @@ ViewTemplateThreeColumn.prototype = {
         this.set('rightContainer', container.one('.rednose-unit-right'));
 
         container.one('.rednose-unit-main').append('<div class="rednose-viewport-container"><div class="rednose-viewport"></div></div>');
-        this.set('viewportContainer', container.one('.rednose-viewport'));
+        this.set('viewContainer', container.one('.rednose-viewport'));
     }
 };
 
@@ -38,14 +38,6 @@ ViewTemplateThreeColumn.ATTRS = {
      * @type Node
      */
     rightContainer: {
-        value: null
-    },
-
-    /**
-     * @attribute viewportContainer
-     * @type Node
-     */
-    viewportContainer: {
         value: null
     }
 };

@@ -3,22 +3,13 @@
 function ViewTemplateToolbar() {}
 
 ViewTemplateToolbar.prototype = {
-    /**
-     * @property showToolbar
-     * @type Boolean
-     * @default false
-     */
-    showToolbar: false,
-
     initializer: function () {
         var container = this.get('container');
 
-        if (this.showToolbar) {
-            container.one('.rednose-unit-main').addClass('rednose-toolbar-unit-main');
-            container.one('.rednose-unit-main').append('<div class="rednose-toolbar"></div>');
+        container.one('.rednose-unit-main').addClass('rednose-toolbar-unit-main');
+        container.one('.rednose-unit-main').append('<div class="rednose-toolbar"></div>');
 
-            this.set('toolbarContainer', container.one('.rednose-toolbar'));
-        }
+        this.set('toolbarContainer', container.one('.rednose-toolbar'));
     }
 };
 

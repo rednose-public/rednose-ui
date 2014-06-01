@@ -3,22 +3,13 @@
 function ViewTemplateNavbar() {}
 
 ViewTemplateNavbar.prototype = {
-    /**
-     * @property showNavbar
-     * @type Boolean
-     * @default false
-     */
-    showNavbar: false,
-
     initializer: function () {
         var container = this.get('container');
 
-        if (this.showNavbar) {
-            container.addClass('rednose-navbar-grid');
-            container.prepend('<div class="rednose-navbar"></div>');
+        container.addClass('rednose-navbar-grid');
+        container.prepend('<div class="rednose-navbar"></div>');
 
-            this.set('navbarContainer', container.one('.rednose-navbar'));
-        }
+        this.set('navbarContainer', container.one('.rednose-navbar'));
     }
 };
 

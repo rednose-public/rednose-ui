@@ -22,10 +22,9 @@ Y.mix(YUI.Env[Y.version].modules, {
         "use": [
             "app-transitions",
             "rednose-app-base",
-            "rednose-app-template",
             "rednose-model-spinner",
             "rednose-view-nav",
-            "rednose-view-template"
+            "rednose-view-templates"
         ]
     },
     "rednose-app-base": {
@@ -37,24 +36,10 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-util"
         ]
     },
-    "rednose-app-template": {
-        "group": "rednose-ui",
-        "requires": [
-            "rednose-app-base",
-            "rednose-app-view-template",
-            "rednose-view-templates"
-        ]
-    },
     "rednose-app-view": {
         "group": "rednose-ui",
         "requires": [
             "view"
-        ]
-    },
-    "rednose-app-view-template": {
-        "group": "rednose-ui",
-        "requires": [
-            "rednose-app-base"
         ]
     },
     "rednose-breadcrumb": {
@@ -438,13 +423,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "view"
         ]
     },
-    "rednose-view-template": {
-        "group": "rednose-ui",
-        "requires": [
-            "rednose-view-templates",
-            "view"
-        ]
-    },
     "rednose-view-templates": {
         "group": "rednose-ui",
         "requires": [
@@ -460,7 +438,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '0a80461618d241c94a3e00ea216520d1';
+YUI.Env[Y.version].md5 = '8cad2f634c07b0a91e661370e6af535f';
 
 
 }, '1.5.0-DEV');
