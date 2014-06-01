@@ -35,6 +35,7 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Method `addButtons` was removed. Use the `toolbar` property instead.
  * Attribute `panel` was moved to a property.
  * Callbacks must now explicitly return `false` to stop a dialog from closing.
+ * The HTML config property within Dialog.prompt is no longer messed around with internally, the content is now simply appended to the dialog body.
 
 ## rednose-dropdown
 

@@ -254,16 +254,10 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
         });
 
         if (options.html) {
-            if (typeof(options.html) === 'string') {
-                input = Y.Node.create(options.html);
-            } else {
-                input = options.html;
-            }
-
-            node = Y.Node.create('<form class="form-horizontal"></form>');
-            node.append(input);
+            node = (typeof options.html  === 'string') ?
+                           Y.Node.create(options.html) : options.html;
         } else {
-            input = Y.Node.create('<input type="text" value="' + options.value + '" data-path="' + options.dataPath + '" id="dialog-input">');
+            var input = Y.Node.create('<input type="text" value="' + options.value + '" data-path="' + options.dataPath + '" id="dialog-input">');
 
             node = Y.Node.create(
                 '<form class="form-horizontal">' +

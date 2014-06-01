@@ -10,6 +10,12 @@
 </head>
 <body>
 
+<style>
+    .rednose-viewport-container {
+        overflow-y: auto;
+    }
+</style>
+
 <script>
     YUI.Env.core.push('rednose-loader');
 
@@ -21,9 +27,7 @@
             }
         }
     }).use('rednose-app', function (Y) {
-        var SingleView = Y.Base.create('view', Y.View, [Y.Rednose.Template.Navbar, Y.Rednose.Template.SingleView, Y.Rednose.Template.Toolbar]);
-
-        var TestView = Y.Base.create('testView', SingleView, [], {
+        var TestView = Y.Base.create('testView', Y.Rednose.View.SingleView, [], {
             showNavbar: true,
 
             showToolbar: true,
