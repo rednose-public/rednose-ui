@@ -7,6 +7,8 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Loading app within iFrames is no longer supported in its current form.
  * Module `Rednose.Templates` was removed and has been replaced by App/View base classes that need to be extended.
  * Support for dialog instances has been dropped, apps should only render views and dialogs should not be rendered by apps.
+ * Scrolling of subviews is no longer handled by the templates themselves.
+ * Module `rednose-model-undo` was removed in favor of `rednose-undo-manager`.
 
 ## rednose-contextmenu
 
@@ -65,4 +67,4 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Event `buttonClose` was renamed to `close`.
  * Method `getButton` was removed. Use  `getButtonById` on the `toolbar` property.
  * The `buttons` **attribute** was removed. Use `reset` on the toolbar property to reset the buttons.
- * The `buttons` **property** was removed. Use the `buttonGroups` properties, it accepts an array of button-group configurations.
+ * The `buttons` **property** was removed. Use the `buttonGroups` property, it accepts an array of button-group configurations.

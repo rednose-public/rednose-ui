@@ -18,7 +18,7 @@ Overrides al the model sync methods through a Decorator pattern.
 @constructor
 @extensionfor Model
 **/
-Spinner = Y.Base.create('undo', Y.Model, [], {
+Spinner = Y.Base.create('spinner', Y.Model, [], {
     // -- Public Methods -------------------------------------------------------
 
     /**

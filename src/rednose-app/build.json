@@ -26,12 +26,6 @@
             ]
         },
 
-        "rednose-model-undo": {
-            "jsfiles": [
-                "js/model-extensions/model-undo.js"
-            ]
-        },
-
         "rednose-model-spinner": {
             "jsfiles": [
                 "js/model-extensions/model-spinner.js"

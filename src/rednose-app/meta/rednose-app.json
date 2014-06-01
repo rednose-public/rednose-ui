@@ -4,7 +4,6 @@
             "app-transitions",
             "rednose-app-base",
             "rednose-app-template",
-            "rednose-model-undo",
             "rednose-model-spinner",
             "rednose-view-nav",
             "rednose-view-template"
@@ -37,12 +36,6 @@
             "rednose-app-view-template" : {
                 "requires": [
                     "rednose-app-base"
-                ]
-            },
-
-            "rednose-model-undo" : {
-                "requires": [
-                    "model"
                 ]
             },
 
