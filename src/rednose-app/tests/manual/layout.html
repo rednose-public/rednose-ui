@@ -27,19 +27,16 @@
             }
         }
     }).use('rednose-app', function (Y) {
-        var TestView = Y.Base.create('testView', Y.Rednose.View.SingleView, [], {
-            showNavbar: true,
-
-            showToolbar: true,
-
+        var TestView = Y.Base.create('testView', Y.View, [
+            Y.Rednose.View.Template.Navbar,
+            Y.Rednose.View.Template.SingleView,
+            Y.Rednose.View.Template.Toolbar
+        ], {
             render: function () {
-                var container = this.get('viewportContainer');
-
-                var node = Y.Node.create('<div/>');
-                container.append(node);
+                var container = this.get('viewContainer');
 
                 for (var i = 0, len = 100; i < len; i++) {
-                    node.append('<p>test!</p>');
+                    container.append('<p>test!</p>');
                 }
 
                 return this;
