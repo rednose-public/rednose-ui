@@ -116,8 +116,10 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
      * @property {Object} baseClassNames
      */
     baseClassNames: {
-        nav  : 'rednose-view-nav',
-        close: 'close'
+        nav   : 'rednose-view-nav',
+        close : 'close',
+        header: 'rednose-nav-header',
+        footer: 'rednose-nav-footer'
     },
 
     // -- Protected Properties -------------------------------------------------
@@ -210,6 +212,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
      * @param {Node} parent
      */
     sizeView: function (parent) {
+        return;
         var bodyHeight = parseInt(parent.get('offsetHeight'), 10);
 
         if (isNaN(bodyHeight)) {
@@ -302,6 +305,14 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
             close      = this.close;
 
         container.addClass(classNames.nav);
+
+        if (this.title) {
+            container.addClass(classNames.header);
+        }
+
+        if (this.footer) {
+            container.addClass(classNames.footer);
+        }
 
         // Transfer the child nodes from the view container to the new body container.
         container.get('children').each(function (c) {
