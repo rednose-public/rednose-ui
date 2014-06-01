@@ -123,6 +123,11 @@ li.disabled [class*=" icon-"] {
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
+}
+
+.rednose-viewport {
+  overflow: hidden;
 }
 
 .rednose-toolbar-unit-main .rednose-viewport-container {
@@ -144,6 +149,7 @@ li.disabled [class*=" icon-"] {
   position: absolute;
   top: 0;
   bottom: 0;
+  overflow: hidden;
 }
 
 .rednose-unit-left {
@@ -164,6 +170,7 @@ li.disabled [class*=" icon-"] {
   right: 460px;
   bottom: 0;
   left: 0;
+  overflow: hidden;
 }
 
 .rednose-master-detail-grid .rednose-unit-right {
@@ -171,6 +178,7 @@ li.disabled [class*=" icon-"] {
   top: 0;
   right: 0;
   width: 460px;
+  overflow: hidden;
   border-left: 1px solid #ddd;
 }
 
@@ -200,6 +208,7 @@ li.disabled [class*=" icon-"] {
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
 }
 
 .rednose-nav-footer .yui3-widget-ft {
@@ -207,6 +216,7 @@ li.disabled [class*=" icon-"] {
   right: 0;
   bottom: 0;
   left: 0;
+  overflow: hidden;
 }
 
 .rednose-nav-header .yui3-widget-bd {

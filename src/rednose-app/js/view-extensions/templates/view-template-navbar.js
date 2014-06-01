@@ -6,9 +6,9 @@ ViewTemplateNavbar.prototype = {
     /**
      * @property showNavbar
      * @type Boolean
-     * @default true
+     * @default false
      */
-    showNavbar: true,
+    showNavbar: false,
 
     initializer: function () {
         var container = this.get('container');

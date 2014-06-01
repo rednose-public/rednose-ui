@@ -6,9 +6,9 @@ ViewTemplateToolbar.prototype = {
     /**
      * @property showToolbar
      * @type Boolean
-     * @default true
+     * @default false
      */
-    showToolbar: true,
+    showToolbar: false,
 
     initializer: function () {
         var container = this.get('container');

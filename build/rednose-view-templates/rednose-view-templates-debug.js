@@ -53,9 +53,9 @@ ViewTemplateNavbar.prototype = {
     /**
      * @property showNavbar
      * @type Boolean
-     * @default true
+     * @default false
      */
-    showNavbar: true,
+    showNavbar: false,
 
     initializer: function () {
         var container = this.get('container');
@@ -229,9 +229,9 @@ ViewTemplateToolbar.prototype = {
     /**
      * @property showToolbar
      * @type Boolean
-     * @default true
+     * @default false
      */
-    showToolbar: true,
+    showToolbar: false,
 
     initializer: function () {
         var container = this.get('container');
