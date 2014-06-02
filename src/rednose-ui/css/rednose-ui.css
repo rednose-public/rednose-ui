@@ -156,6 +156,7 @@ li.disabled [class*=" icon-"] {
 }
 
 .rednose-unit-right {
+  right: 0;
   width: 279px;
   border-left: 1px solid #ddd;
 }
