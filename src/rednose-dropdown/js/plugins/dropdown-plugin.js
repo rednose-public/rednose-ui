@@ -61,6 +61,9 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
     _positionContainer: function (x, y) {
         var container = this.get('container');
 
+        this.pageX = x;
+        this.pageY = y;
+
         container.setStyles({
             position: 'absolute',
             left    : x,

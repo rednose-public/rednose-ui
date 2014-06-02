@@ -59,6 +59,7 @@ var Delegate = Y.Base.create('dropdown', Y.Base, [], {
 
         // Prevent default context menu.
         e.preventDefault();
+        e.stopPropagation();
 
         var node  = e.currentTarget,
             pageX = e.pageX,

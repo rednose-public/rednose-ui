@@ -248,6 +248,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
 
         this.fire(itemEvent, {
             originEvent: e,
+            dropdown   : this,
             item       : item,
             node       : this.get('host')
         });
@@ -372,6 +373,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
     _defItemClickFn: function (e) {
         this.fire(EVT_CLICK, {
             originEvent: e.originEvent,
+            dropdown   : this,
             item       : e.item,
             node       : this.get('host')
         });
