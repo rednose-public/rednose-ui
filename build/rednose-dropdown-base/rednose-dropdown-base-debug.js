@@ -101,8 +101,7 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
      */
     _open: false,
 
-    /**
-     * Root items for this dropdown.
+    /** Root items for this dropdown.
      *
      * @property {Array} _rootItems
      * @protected
@@ -118,6 +117,7 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function (config) {
+        this._id        = Y.stamp(this);
         this._published = {};
 
         if (config.items) {
@@ -126,6 +126,10 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
     },
 
     destructor: function () {
+        if (DropdownBase.instance === this) {
+            delete DropdownBase.instance;
+        }
+
         this._rootItems = null;
         this._itemMap   = null;
         this._published = null;
@@ -415,6 +419,12 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
      * @private
      */
     _defOpenFn: function () {
+        // Keep a reference to the last open node so we can close it when a new one opens.
+        // We can't use event propagation to block parent listeners, because the contextmenu listener on the body
+        // won't be reached.
+        DropdownBase.instance && DropdownBase.instance.close();
+        DropdownBase.instance = this;
+
         this._open = true;
     },
 

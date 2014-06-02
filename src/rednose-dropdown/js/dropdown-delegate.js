@@ -57,7 +57,6 @@ var Delegate = Y.Base.create('dropdown', Y.Base, [], {
 
         // Prevent default context menu.
         e.preventDefault();
-        e.stopPropagation();
 
         var node  = e.currentTarget,
             pageX = e.pageX,
@@ -67,6 +66,8 @@ var Delegate = Y.Base.create('dropdown', Y.Base, [], {
             return;
         }
 
+        console.log(node.getData('rednose-record'));
+        e.stopPropagation();
         node.plug(Y.Rednose.Plugin.Dropdown, {
             showOnContext: true
         });
@@ -74,7 +75,7 @@ var Delegate = Y.Base.create('dropdown', Y.Base, [], {
         this._instances.push(node.dropdown);
 
         node.dropdown.addTarget(this);
-        node.dropdown._positionContainer(pageX, pageY);
+        node.dropdown.positionContainer(pageX, pageY);
         node.dropdown.open();
     }
 }, {

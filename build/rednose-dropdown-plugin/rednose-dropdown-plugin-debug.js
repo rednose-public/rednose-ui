@@ -21,6 +21,16 @@ var Micro = Y.Template.Micro;
  */
 Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown, [Y.Plugin.Base], {
 
+    /**
+     * @property {Number} pageX
+     * @readOnly
+     */
+
+    /**
+     * @property {Number} pageY
+     * @readOnly
+     */
+
     // -- Life Cycle Methods ---------------------------------------------------
 
     initializer: function (config) {
@@ -53,14 +63,14 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         this._host.on('click', this._onAnchorClick, this);
     },
 
-    // -- Protected Methods ----------------------------------------------------
+    // -- Public Methods -------------------------------------------------------
 
     /**
      * @param {Number} x
      * @param {Number} y
      * @private
      */
-    _positionContainer: function (x, y) {
+    positionContainer: function (x, y) {
         var container = this.get('container');
 
         this.pageX = x;
@@ -85,8 +95,9 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         }
 
         e.preventDefault();
+        e.stopPropagation();
 
-        this._positionContainer(e.pageX, e.pageY);
+        this.positionContainer(e.pageX, e.pageY);
 
         this.open();
     },
