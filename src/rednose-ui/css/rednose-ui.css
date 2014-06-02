@@ -222,6 +222,16 @@ li.disabled [class*=" icon-"] {
   bottom: 56px;
 }
 
+/* Modal master-detail view */
+
+.rednose-master-detail-grid .yui3-widget-bd .rednose-unit-main {
+  right: 280px;
+}
+
+.rednose-master-detail-grid .yui3-widget-bd .rednose-unit-right {
+  width: 280px;
+}
+
 .rednose-grid-message-container {
   position: absolute;
   top: 400px;

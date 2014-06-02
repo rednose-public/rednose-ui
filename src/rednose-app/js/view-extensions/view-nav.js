@@ -19,13 +19,6 @@ var Micro = Y.Template.Micro;
 var EVT_CLOSE = 'close';
 
 /**
- * Fired when all parts of the composed view are rendered.
- *
- * @event load
- */
-var EVT_LOAD = 'load';
-
-/**
  * View extension, adds a title section to an instance of View, and a footer section with a
  * configuration of buttons.
  *
@@ -312,8 +305,6 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         } else {
             container.one('.yui3-widget-ft') && container.one('.yui3-widget-ft').hide();
         }
-
-        this.fire(EVT_LOAD);
     }
 }, {
     /**
