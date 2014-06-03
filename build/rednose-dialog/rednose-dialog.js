@@ -62,12 +62,6 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
 
         // Bind the error attribute change event.
         this.after('errorChange', this._setError, this);
-
-        Y.on('keydown', function (e) {
-            if (e.keyCode === 27) {
-                self._evt(EVT_CANCEL, dialog);
-            }
-        });
     },
 
     destructor : function() {
@@ -129,6 +123,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             buttons      : null
         }).render();
 
+        this.panel.get('boundingBox').on('keydown', this._onPanelKeydown, this);
         this.panel.get('boundingBox').addClass(this.classNames.dialog);
         this.panel.set('zIndex', this._getHighzIndex());
 
@@ -211,6 +206,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             buttons      : null
         }).render();
 
+        this.panel.get('boundingBox').on('keydown', this._onPanelKeydown, this);
         this.panel.get('boundingBox').addClass(this.classNames.dialog);
         this.panel.set('zIndex', this._getHighzIndex());
 
@@ -334,6 +330,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             }
         });
 
+        this.panel.get('boundingBox').on('keydown', this._onPanelKeydown, this);
         this.panel.get('boundingBox').addClass(this.classNames.dialog);
         this.panel.set('zIndex', this._getHighzIndex());
 
@@ -460,6 +457,15 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
         });
 
         bb.one('.error').focus();
+    },
+
+    _onPanelKeydown: function (e) {
+        var dialog = this;
+
+        if (e.keyCode === 27) {
+            e.stopPropagation();
+            this._evt(EVT_CANCEL, dialog);
+        }
     },
 
     // -- Default Event Handlers -----------------------------------------------

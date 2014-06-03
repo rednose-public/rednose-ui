@@ -164,8 +164,9 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         this.footer && this._buildFooter();
 
         if (this.close) {
-            Y.on('keydown', function (e) {
+            Y.one('doc').on('keydown', function (e) {
                 if (e.keyCode === 27) {
+                    e.stopPropagation();
                     self.fire(EVT_CLOSE);
                 }
             });
