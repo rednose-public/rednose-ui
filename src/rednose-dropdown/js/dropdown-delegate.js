@@ -66,8 +66,6 @@ var Delegate = Y.Base.create('dropdown', Y.Base, [], {
             return;
         }
 
-        console.log(node.getData('rednose-record'));
-        e.stopPropagation();
         node.plug(Y.Rednose.Plugin.Dropdown, {
             showOnContext: true
         });

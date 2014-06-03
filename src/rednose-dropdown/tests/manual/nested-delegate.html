@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.Dropdown module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<body>
+
+<div id="test-container" class="container">
+    <div class="row">
+        <div class="span12">
+            <section>
+                <div id="outer" style="background-color: blue; width: 450px; height: 450px; padding-top: 50px; padding-left: 50px;">
+                    <div id="middle" style="background-color: yellow; width: 350px; height: 350px; padding-top: 50px; padding-left: 50px;">
+                        <div id="inner" style="background-color: red; width: 300px; height: 300px;"/>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-dropdown-delegate', function (Y) {
+
+        var delegate = new Y.Rednose.Dropdown.Delegate({
+            container: Y.one('.container'),
+            nodes    : '#inner, #middle, #outer'
+        });
+
+        delegate.on('dropdown:open', function (e) {
+            var dropdown = e.dropdown;
+
+            dropdown.reset([{ id: 'testItem', title: 'Test Item Inner' }]);
+        });
+
+        delegate.on('dropdown:click', function (e) {
+            var node = e.dropdown.get('host');
+
+            console.log(node.get('id'));
+        });
+    });
+</script>
+</body>
+</html>
