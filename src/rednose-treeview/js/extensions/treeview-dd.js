@@ -54,13 +54,16 @@ var DD = Y.Base.create('dd', Y.Base, [], {
     // -- Protected Methods ----------------------------------------------------
 
     _handleBind: function (parent) {
-        var nodes = parent.one('.' + this.classNames.children).all('[data-rednose-type]:not(.rednose-treeview-drag)'),
-            self  = this;
+        var self   = this,
+            nodes  = parent.one('.' + this.classNames.children).all('[data-rednose-type]:not(.rednose-treeview-drag)'),
+            ddTest = this.get('ddTest');
 
         nodes.each(function (node) {
-            var model = self.getNodeById(node.getData('node-id')).data;
+            var data = self.getNodeById(node.getData('node-id')).data;
 
-            self._createDd(node, model);
+            if (ddTest === null || (typeof ddTest === 'function' && ddTest(data) === true)) {
+                self._createDd(node, data);
+            }
 
 //            // FIXME: Use a more generic way to specify droppable models.
 //            if (model instanceof Y.TB.Category) {
@@ -217,12 +220,31 @@ var DD = Y.Base.create('dd', Y.Base, [], {
     }
 }, {
     ATTRS: {
+        /**
+         * @attribute dragdrop
+         * @type {Boolean}
+         * @default false
+         */
         dragdrop: {
-            value : false
+            value: false
         },
 
+        /**
+         * @attribute ddTest
+         * @type {Function}
+         * @default null
+         */
+        ddTest: {
+            value: null
+        },
+
+        /**
+         * @attribute groups
+         * @type {Array}
+         * @default ['rednose-treeview']
+         */
         groups: {
-            value : ['rednose-treeview']
+            value: ['rednose-treeview']
         }
     }
 });
