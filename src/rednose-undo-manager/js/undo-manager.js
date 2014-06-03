@@ -18,6 +18,7 @@
  *
  * @event mutate
  * @param {Rednose.UndoManager} manager
+ * @param {String} src
  */
 var EVT_MUTATE = 'mutate';
 
@@ -93,7 +94,8 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         if (!options.silent) {
             this.fire(EVT_MUTATE, {
-                manager: this
+                manager: this,
+                src    : options.src || 'execute'
             });
         }
 
@@ -118,7 +120,8 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         if (!options.silent) {
             this.fire(EVT_MUTATE, {
-                manager: this
+                manager: this,
+                src    : options.src || 'undo'
             });
         }
     },
@@ -144,7 +147,8 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         if (!options.silent) {
             this.fire(EVT_MUTATE, {
-                manager: this
+                manager: this,
+                src    : options.src || 'redo'
             });
         }
     },
@@ -162,7 +166,8 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         if (!options.silent) {
             this.fire(EVT_MUTATE, {
-                manager: this
+                manager: this,
+                src    : options.src || 'save'
             });
         }
     },
@@ -190,7 +195,8 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         if (!options.silent) {
             this.fire(EVT_MUTATE, {
-                manager: this
+                manager: this,
+                src    : options.src || 'clear'
             });
         }
     },
