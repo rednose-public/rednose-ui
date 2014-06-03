@@ -73,10 +73,14 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
     /**
      * Executes an action and pushes it onto the stack.
      *
-     * @param {Object} action
+     * @param {Object} [options]
+     * @param {Number} [options.index]
+     *     @param {Boolean} [options.silent=false]
      * @chainable
      */
-    execute: function (action) {
+    execute: function (action, options) {
+        options || (options = {});
+
         if (this._index < this._actions.length) {
             this._actions.splice(this._index, this._actions.length - this._index);
         }
@@ -87,36 +91,50 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         action.execute();
 
-        this.fire(EVT_MUTATE, {
-            manager: this
-        });
+        if (!options.silent) {
+            this.fire(EVT_MUTATE, {
+                manager: this
+            });
+        }
 
         return this;
     },
 
     /**
      * Executes the previous action.
+     *
+     * @param {Number} [options.index]
+     *     @param {Boolean} [options.silent=false]
      */
-    undo: function () {
+    undo: function (options) {
         if (!this.canUndo()) {
             return;
         }
 
+        options || (options = {});
+
         this._index--;
         this._actions[this._index].undo();
 
-        this.fire(EVT_MUTATE, {
-            manager: this
-        });
+        if (!options.silent) {
+            this.fire(EVT_MUTATE, {
+                manager: this
+            });
+        }
     },
 
     /**
      * Executes the next action.
+     *
+     * @param {Number} [options.index]
+     *     @param {Boolean} [options.silent=false]
      */
-    redo: function () {
+    redo: function (options) {
         if (!this.canRedo()) {
             return;
         }
+
+        options || (options = {});
 
         this._index++;
 
@@ -124,9 +142,66 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 
         action[typeof action.redo === 'function' ? 'redo' : 'execute']();
 
-        this.fire(EVT_MUTATE, {
-            manager: this
-        });
+        if (!options.silent) {
+            this.fire(EVT_MUTATE, {
+                manager: this
+            });
+        }
+    },
+
+    /**
+     * Mark the current stack position as saved.
+     *
+     * @param {Number} [options.index]
+     *     @param {Boolean} [options.silent=false]
+     */
+    save: function (options) {
+        options || (options = {});
+
+        this._savedIndex = this._index;
+
+        if (!options.silent) {
+            this.fire(EVT_MUTATE, {
+                manager: this
+            });
+        }
+    },
+
+    /**
+     * Clears all actions and resets the index pointers.
+     *
+     * @param {Number} [options.index]
+     *     @param {Boolean} [options.silent=false]
+     */
+    clear: function (options) {
+        options || (options = {});
+
+        for (var i = 0, len = this._actions.length; i < len; i++) {
+            var action = this._actions[i];
+
+            if (typeof action.destroy === 'function') {
+                action.destroy();
+            }
+        }
+
+        this._actions    = [];
+        this._index      = 0;
+        this._savedIndex = 0;
+
+        if (!options.silent) {
+            this.fire(EVT_MUTATE, {
+                manager: this
+            });
+        }
+    },
+
+    /**
+     * Returns whether the object in it's current state is modified or not.
+     *
+     * @return {Boolean}
+     */
+    isDirty: function () {
+        return this._savedIndex !== this._index;
     },
 
     /**
@@ -145,26 +220,6 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
      */
     canRedo: function () {
         return (this._actions[this._index] !== null) && this._index < this._actions.length;
-    },
-
-    /**
-     * Mark the current stack position as saved.
-     */
-    save: function () {
-        this._savedIndex = this._index;
-
-        this.fire(EVT_MUTATE, {
-            manager: this
-        });
-    },
-
-    /**
-     * Returns whether the object in it's current state is modified or not.
-     *
-     * @return {Boolean}
-     */
-    isDirty: function () {
-        return this._savedIndex !== this._index;
     }
 });
 
