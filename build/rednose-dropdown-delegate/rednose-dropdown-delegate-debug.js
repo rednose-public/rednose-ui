@@ -59,26 +59,21 @@ var Delegate = Y.Base.create('dropdown', Y.Base, [], {
 
         // Prevent default context menu.
         e.preventDefault();
+        e.stopPropagation();
 
-        var node  = e.currentTarget,
-            pageX = e.pageX,
-            pageY = e.pageY;
+        var node = e.currentTarget;
 
-        if (node.dropdown) {
-            return;
+        if (!node.dropdown) {
+            node.plug(Y.Rednose.Plugin.Dropdown, {
+                showOnContext: true,
+                propagate    : false
+            });
+
+            this._instances.push(node.dropdown);
+            node.dropdown.addTarget(this);
         }
 
-        console.log(node.getData('rednose-record'));
-        e.stopPropagation();
-        node.plug(Y.Rednose.Plugin.Dropdown, {
-            showOnContext: true
-        });
-
-        this._instances.push(node.dropdown);
-
-        node.dropdown.addTarget(this);
-        node.dropdown.positionContainer(pageX, pageY);
-        node.dropdown.open();
+        node.dropdown._onAnchorContextMenu.apply(node.dropdown, arguments);
     }
 }, {
     NS: 'dropdown',

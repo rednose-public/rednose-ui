@@ -93,7 +93,10 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
         }
 
         e.preventDefault();
-        e.stopPropagation();
+
+        if (this.get('propagate')) {
+            e.stopPropagation();
+        }
 
         this.positionContainer(e.pageX, e.pageY);
 
@@ -147,6 +150,17 @@ Y.namespace('Rednose.Plugin').Dropdown = Y.Base.create('dropdown', Y.Rednose.Dro
          */
         dropup: {
             value: false,
+            writeOnce: 'initOnly'
+        },
+
+        /**
+         * Whether the contextmenu event should propagate or not.
+         * @type {Boolean}
+         * @default false
+         * @initOnly
+         */
+        propagate: {
+            value: true,
             writeOnce: 'initOnly'
         },
 

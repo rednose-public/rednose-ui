@@ -101,7 +101,8 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
      */
     _open: false,
 
-    /** Root items for this dropdown.
+    /**
+     * Root items for this dropdown.
      *
      * @property {Array} _rootItems
      * @protected

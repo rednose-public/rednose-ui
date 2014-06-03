@@ -26,8 +26,8 @@ var Micro = Y.Template.Micro;
  * You can subscribe to specific menu item through the following event: "click#id".
  *
  * @event click
- * @param {Rednose.Dropdown} dropdown The dropdown instance.
  * @param {Rednose.Dropdown.Item} item The item that was clicked.
+ * @param {Node} node The node the dropdown is bound to.
  * @param {EventFacade} originEvent Original click event.
  * @preventable _defClickFn
  */
@@ -249,7 +249,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         this.fire(itemEvent, {
             originEvent: e,
             dropdown   : this,
-            item       : item
+            item       : item,
+            node       : this.get('host')
         });
     },
 
@@ -373,7 +374,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Rednose.Dropdown.Base, [Y.View], {
         this.fire(EVT_CLICK, {
             originEvent: e.originEvent,
             dropdown   : this,
-            item       : e.item
+            item       : e.item,
+            node       : this.get('host')
         });
     }
 });

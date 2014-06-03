@@ -42,9 +42,20 @@
         });
 
         delegate.on('dropdown:open', function (e) {
-            var dropdown = e.dropdown;
+            var dropdown = e.dropdown,
+                node     = dropdown.get('host');
 
-            dropdown.reset([{ id: 'testItem', title: 'Test Item Inner' }]);
+            switch (node.get('id')) {
+                case 'inner':
+                    dropdown.reset([{ id: 'testItem', title: 'Test Item Inner' }]);
+                    break;
+                case 'middle':
+                    dropdown.reset([{ id: 'testItem', title: 'Test Item Middle' }]);
+                    break;
+                case 'outer':
+                    dropdown.reset([{ id: 'testItem', title: 'Test Item Outer' }]);
+                    break;
+            }
         });
 
         delegate.on('dropdown:click', function (e) {
