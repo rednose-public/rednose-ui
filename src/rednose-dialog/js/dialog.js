@@ -52,8 +52,6 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-        var self = this, dialog = this;
-
         this.publish(EVT_CANCEL,      {emitFacade: false});
         this.publish(EVT_CONFIRM,     {emitFacade: false});
         this.publish(EVT_ALTERNATIVE, {emitFacade: false});

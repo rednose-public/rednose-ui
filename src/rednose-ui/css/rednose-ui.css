@@ -329,6 +329,10 @@ input.rednose-datatable-input {
   margin-left: 8px;
 }
 
+.rednose-dialog .btn:first-child {
+  margin-left: 0;
+}
+
 .rednose-dialog .yui3-widget-bd,
 .rednose-dialog .form-horizontal {
   max-height: 400px;
@@ -539,19 +543,6 @@ input.rednose-datatable-input {
 
 .input-append.input-block-level > input {
   width: 375px;
-}
-
-/* Uploader */
-
-.uploader-container {
-  float: right;
-  margin-left: -1px;
-}
-
-.yui3-uploader .btn {
-  -webkit-border-radius: 0 4px 4px 0;
-     -moz-border-radius: 0 4px 4px 0;
-          border-radius: 0 4px 4px 0;
 }
 
 .rednose-form-designer .rednose-unit-main {
