@@ -346,15 +346,9 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             inputField = inputControlContainer ? inputControlContainer.one('input, textarea, select') : null;
 
         if (inputField) {
-            var value = inputField.get('value');
-
+            // Select the input value so it can instantly be overtyped.
             inputField.focus();
-
-            // Re-set the value to move the cursor to the end of the input field.
-            if (inputField.get('type') === 'text' || inputField.get('type') === 'textarea') {
-                inputField.set('value', '');
-                inputField.set('value', value);
-            }
+            inputField.select();
         }
     },
 
