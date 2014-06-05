@@ -195,6 +195,10 @@ var DD = Y.Base.create('dd', Y.Base, [], {
     },
 
     _handleDdOpen: function (e) {
+        if (!this.rendered) {
+            return;
+        }
+
         var treeNode = e.node,
             htmlNode = this.getHTMLNode(treeNode);
 
