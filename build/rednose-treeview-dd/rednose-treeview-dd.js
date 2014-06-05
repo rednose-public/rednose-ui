@@ -9,17 +9,25 @@ var DD = Y.Base.create('dd', Y.Base, [], {
 
     // -- Protected Properties -------------------------------------------------
 
-    _callbacks: {},
+    /**
+     * @property _callbacks
+     * @type {Object}
+     * @protected
+     */
 
     /**
      * DD references store
+     *
+     * @property _ddMap
+     * @type {Array}
+     * @protected
      */
-    _ddMap: [],
 
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-        this._ddMap = [];
+        this._callbacks = {};
+        this._ddMap     = [];
 
         this.get('dragdrop') && this._attachDdEvents();
     },

@@ -9,11 +9,17 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     // -- Protected Properties -------------------------------------------------
 
-    _selectMap: [],
+    /**
+     * @property _selectMap
+     * @type {Array}
+     * @protected
+     */
 
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
+        this._selectMap = [];
+
         this.on('select', this._handleSelectState, this);
         this.on('unselect', this._handleUnSelectState, this);
 

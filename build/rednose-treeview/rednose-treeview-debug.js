@@ -69,7 +69,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
      * @property {Array} _stateMap
      * @protected
      */
-    _stateMap: [],
 
     // -- Lifecycle Methods ----------------------------------------------------
 
