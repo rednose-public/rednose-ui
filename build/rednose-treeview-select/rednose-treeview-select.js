@@ -82,7 +82,6 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
     },
 
     _handleSelectState: function (e) {
-        console.log(e);
         var id         = this.generateRednoseRecordId(e.node.data),
             index      = this._selectMap.indexOf(id),
             selectable = this.get('selectable');
