@@ -420,8 +420,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
      */
     _setError: function (e) {
         var errors = e.newVal,
-            bb     = this.panel.get('boundingBox'),
-            input;
+            bb     = this.panel.get('boundingBox');
 
         // Remove any previous error message
         bb.all('.control-group').each(function (node) {
@@ -438,7 +437,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
 
         Y.each(errors, function(error) {
             // Append the message node at the given path (defaults to 'input')
-            input = bb.one('[data-path=' + (error.path || 'input') + ']');
+            var input = bb.one('[data-path=' + (error.path || 'input') + ']');
             input.ancestor('.control-group').addClass('error');
 
             if (error.message) {
@@ -446,7 +445,12 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             }
         });
 
-        bb.one('.error').focus();
+        var control = bb.one('.error').one('input, textarea, select');
+
+        if (control) {
+            control.focus();
+            control.select();
+        }
     },
 
     _onPanelKeydown: function (e) {
