@@ -365,7 +365,6 @@ Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
         "gallery-sm-treeview",
         "rednose-model-tree",
         "rednose-tree",
-        "rednose-treeview-comparable",
         "rednose-treeview-anim",
         "rednose-treeview-dd",
         "rednose-treeview-templates",
