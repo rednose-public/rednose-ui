@@ -20,7 +20,8 @@ Y.namespace('TreeView').Templates = {
 
     node: Micro.compile(
         '<li id="<%= data.node.id %>" class="<%= data.nodeClassNames.join(" ") %>" title="<%= data.node.label %>" role="treeitem" aria-labelled-by="<%= data.node.id %>-label">' +
-            '<div class="<%= data.classNames.row %>" data-node-id="<%= data.node.id %>" data-rednose-type="<%= data.node.data.name %>" data-rednose-id="<%= data.node.data.get(\'id\')%>">' +
+            // '<div class="<%= data.classNames.row %>" data-node-id="<%= data.node.id %>" data-rednose-type="<%= data.node.data.name %>" data-rednose-id="<%= data.node.data.get(\'id\')%>">' +
+            '<div class="<%= data.classNames.row %>" data-node-id="<%= data.node.id %>" data-rednose-type="<%= data.node.data.name %>" data-rednose-id="<%= data.node.data.id %>">' +
 
                 '<% for (var i = 0, len = data.node.depth() - 1; i < len; i++) { %>' +
                     '<span class="rednose-treeview-spacer"></span>' +

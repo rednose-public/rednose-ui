@@ -359,11 +359,25 @@ Y.mix(YUI.Env[Y.version].modules, {
             "anim"
         ]
     },
+    "rednose-tree": {
+        "group": "rednose-ui",
+        "use": [
+            "rednose-tree-comparable"
+        ]
+    },
+    "rednose-tree-comparable": {
+        "group": "rednose-ui",
+        "requires": [
+            "tree"
+        ]
+    },
     "rednose-treeview": {
         "group": "rednose-ui",
         "requires": [
             "gallery-sm-treeview",
             "rednose-model-tree",
+            "rednose-tree",
+            "rednose-treeview-comparable",
             "rednose-treeview-anim",
             "rednose-treeview-dd",
             "rednose-treeview-templates",
@@ -446,7 +460,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '502ce793bb2734d27264ffa95671403a';
+YUI.Env[Y.version].md5 = '60bceac1e6b34bdf479791090361bd22';
 
 
 }, '1.5.0-DEV');

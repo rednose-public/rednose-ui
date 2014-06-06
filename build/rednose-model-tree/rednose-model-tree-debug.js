@@ -48,87 +48,87 @@ ModelTree = Y.Base.create('modelTree', Y.Model, [], {
         return false;
     },
 
-    /**
-     * Get the index path of a given model
-     *
-     * @param model
-     * @param path
-     *
-     * @returns {String}
-     */
-    getIndexPath: function (model, path) {
-        path = path || [];
+    // /**
+    //  * Get the index path of a given model
+    //  *
+    //  * @param model
+    //  * @param path
+    //  *
+    //  * @returns {String}
+    //  */
+    // getIndexPath: function (model, path) {
+    //     path = path || [];
 
-        var node   = this._treeFind(model.get('clientId'), this._items),
-            parent = this._getParentNode(node),
-            root;
+    //     var node   = this._treeFind(model.get('clientId'), this._items),
+    //         parent = this._getParentNode(node),
+    //         root;
 
-        root = parent ? parent.children : this._items;
+    //     root = parent ? parent.children : this._items;
 
-        if (!node) {
-            return null;
-        }
+    //     if (!node) {
+    //         return null;
+    //     }
 
-        path.unshift(root.indexOf(node));
+    //     path.unshift(root.indexOf(node));
 
-        if (parent) {
-            return this.getIndexPath(parent.data, path);
-        }
+    //     if (parent) {
+    //         return this.getIndexPath(parent.data, path);
+    //     }
 
-        return String(path.join('/'));
-    },
+    //     return String(path.join('/'));
+    // },
 
-    /**
-     * Compares the index paths for two given models.
-     *
-     * a > b = 1
-     * a < b = -1
-     * a === b = 0
-     *
-     * @param a
-     * @param b
-     *
-     * return {integer}
-     */
-    compareIndexPath: function (a, b) {
-        if (!a || !b) {
-            return !a && !b ? 0 : (!a ? -1 : 1);
-        }
+    // /**
+    //  * Compares the index paths for two given models.
+    //  *
+    //  * a > b = 1
+    //  * a < b = -1
+    //  * a === b = 0
+    //  *
+    //  * @param a
+    //  * @param b
+    //  *
+    //  * return {integer}
+    //  */
+    // compareIndexPath: function (a, b) {
+    //     if (!a || !b) {
+    //         return !a && !b ? 0 : (!a ? -1 : 1);
+    //     }
 
-        var indexPathA = this.getIndexPath(a),
-            indexPathB = this.getIndexPath(b);
+    //     var indexPathA = this.getIndexPath(a),
+    //         indexPathB = this.getIndexPath(b);
 
-        if (indexPathA === indexPathB) {
-            return 0;
-        }
+    //     if (indexPathA === indexPathB) {
+    //         return 0;
+    //     }
 
-        var partsA = indexPathA.split('/'),
-            partsB = indexPathB.split('/');
+    //     var partsA = indexPathA.split('/'),
+    //         partsB = indexPathB.split('/');
 
-        // Normalize arrays.
-        var length = Math.min(partsA.length, partsB.length);
+    //     // Normalize arrays.
+    //     var length = Math.min(partsA.length, partsB.length);
 
-        partsA = partsA.splice(0, length + 1);
-        partsB = partsB.splice(0, length + 1);
+    //     partsA = partsA.splice(0, length + 1);
+    //     partsB = partsB.splice(0, length + 1);
 
-        partsA[length] === undefined && (partsA[length] = -1);
-        partsB[length] === undefined && (partsB[length] = -1);
+    //     partsA[length] === undefined && (partsA[length] = -1);
+    //     partsB[length] === undefined && (partsB[length] = -1);
 
-        partsA.reverse();
-        partsB.reverse();
+    //     partsA.reverse();
+    //     partsB.reverse();
 
-        var result = 0;
+    //     var result = 0;
 
-        for (var i = 0; i <= length; i++) {
-            if (partsA[i] === partsB[i]) {
-                continue;
-            }
+    //     for (var i = 0; i <= length; i++) {
+    //         if (partsA[i] === partsB[i]) {
+    //             continue;
+    //         }
 
-            result = partsA[i] > partsB[i] ? 1 : -1;
-        }
+    //         result = partsA[i] > partsB[i] ? 1 : -1;
+    //     }
 
-        return result;
-    },
+    //     return result;
+    // },
 
     /**
      * Return all children with a given type for a given parent.

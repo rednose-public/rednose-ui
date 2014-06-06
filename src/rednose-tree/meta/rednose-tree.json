@@ -1,0 +1,15 @@
+{
+    "rednose-tree": {
+        "use": [
+            "rednose-tree-comparable"
+        ],
+
+        "submodules": {
+            "rednose-tree-comparable": {
+                "requires": [
+                    "tree"
+                ]
+            }
+        }
+    }
+}

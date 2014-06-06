@@ -2,6 +2,50 @@ YUI.add('rednose-treeview', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
+function NodeComparable() {}
+
+NodeComparable.prototype = {
+    /**
+     * @param {Tree.Node} node
+     * @return {Number}
+     */
+    compare: function (node) {
+        if (!node || node === this || node.tree !== this.tree) {
+            return 0;
+        }
+
+        if (this.depth() === node.depth()) {
+            return node.index() < this.index() ? 1 : -1;
+        }
+
+        if (node.depth() > this.depth()) {
+            if (node.parent === this) {
+                return -1;
+            }
+
+            return this.compare(node.parent);
+        }
+
+        if (node === this.parent) {
+            return 1;
+        }
+
+        return this.parent.compare(node);
+    }
+};
+
+Y.namespace('Rednose.Tree.Node').Comparable = NodeComparable;
+
+function Comparable() {}
+
+Comparable.prototype = {
+    initializer: function () {
+        this.nodeExtensions = this.nodeExtensions.concat(Y.Rednose.Tree.Node.Comparable);
+    }
+};
+
+Y.namespace('Rednose.Tree').Comparable = Comparable;
+
 /**
  * Provides the `Y.Rednose.TreeView` widget.
  *
@@ -47,6 +91,7 @@ var CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',
  * @extends TreeView
  */
 var TreeView = Y.Base.create('treeView', Y.TreeView, [
+    Y.Rednose.Tree.Comparable,
     Y.Rednose.TreeView.Anim,
     Y.Rednose.TreeView.DD,
     Y.Rednose.TreeView.Selectable
@@ -75,10 +120,12 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     initializer: function (config) {
         config || (config = {});
 
-        var model = config.model || new Y.Rednose.ModelTree();
-
         // Hook into the initializer chain to set the nodes.
-        config.nodes = model.get('items');
+        if (config.model) {
+            config.nodes = config.model.get('items');
+
+            this.set('model', config.model);
+        }
 
         if (config.header) {
             this.header = config.header;
@@ -86,8 +133,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
 
         // Initialize the state map so it doesn't contain any garbage from previous instances.
         this._stateMap = [];
-
-        this.set('model', model);
 
         this._attachEventHandles();
     },
@@ -149,29 +194,29 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
      */
     icon: function (node) {
         var model     = node.data,
-            icons     = this.get('model').get('icons'),
+            // icons     = this.get('model').get('icons'),
             className = CSS_TREEVIEW_ICON;
 
         // Check the model icon definitions.
-        if (icons && model instanceof Y.Model && icons[model.name] &&
-            Y.Lang.isString(node.icon) === false
-            && Y.Lang.isString(model.get('icon')) === false) {
+        // if (icons && model instanceof Y.Model && icons[model.name] &&
+        //     Y.Lang.isString(node.icon) === false
+        //     && Y.Lang.isString(model.get('icon')) === false) {
 
-            var icon = icons[model.name];
+        //     var icon = icons[model.name];
 
-            if (Y.Lang.isString(icon)) {
-                return className + ' ' + icon;
-            }
+        //     if (Y.Lang.isString(icon)) {
+        //         return className + ' ' + icon;
+        //     }
 
-            if (Y.Lang.isArray(icon)) {
-                return className + ' ' + (node.isOpen() ? icon[0] : icon[1]);
-            }
-        }
+        //     if (Y.Lang.isArray(icon)) {
+        //         return className + ' ' + (node.isOpen() ? icon[0] : icon[1]);
+        //     }
+        // }
 
-        // Check the icon property on the model.
-        if (Y.Lang.isString(model.get('icon'))) {
-            return className + ' ' + model.get('icon');
-        }
+        // // Check the icon property on the model.
+        // if (Y.Lang.isString(model.get('icon'))) {
+        //     return className + ' ' + model.get('icon');
+        // }
 
         // Check the icon property on the node.
         if (Y.Lang.isString(node.icon)) {
@@ -231,15 +276,15 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     _attachEventHandles: function () {
         this._eventHandles || (this._eventHandles = []);
 
-        var model = this.get('model');
+        // var model = this.get('model');
 
         this._eventHandles.push(
             this.on('open', this._handleExpand, this),
             this.on('close', this._handleCollapse, this),
 
-            this.after(['open', 'close'], this._handleToggle, this),
+            this.after(['open', 'close'], this._handleToggle, this)
 
-            model.after('change', this._handleModelChange, this)
+            // model.after('change', this._handleModelChange, this)
         );
     },
 
@@ -359,6 +404,8 @@ Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
     "requires": [
         "gallery-sm-treeview",
         "rednose-model-tree",
+        "rednose-tree",
+        "rednose-treeview-comparable",
         "rednose-treeview-anim",
         "rednose-treeview-dd",
         "rednose-treeview-templates",

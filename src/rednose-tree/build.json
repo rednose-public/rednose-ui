@@ -1,0 +1,12 @@
+{
+    "name": "rednose-tree",
+
+    "builds": {
+        "rednose-tree-comparable": {
+            "jsfiles": [
+                "js/extensions/tree-comparable.js",
+                "js/extensions/tree-node-comparable.js"
+            ]
+        }
+    }
+}
