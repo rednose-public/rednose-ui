@@ -388,6 +388,12 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-dd"
         ]
     },
+    "rednose-treeview-multi": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-treeview"
+        ]
+    },
     "rednose-treeview-select": {
         "group": "rednose-ui",
         "requires": [
@@ -440,7 +446,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '56d4c6e3275541dc6be9471c62fc9d1d';
+YUI.Env[Y.version].md5 = '502ce793bb2734d27264ffa95671403a';
 
 
 }, '1.5.0-DEV');

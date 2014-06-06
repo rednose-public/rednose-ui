@@ -36,6 +36,12 @@
             "jsfiles": [
                 "model-tree.js"
             ]
+        },
+
+        "rednose-treeview-multi": {
+            "jsfiles": [
+                "js/treeview-multi.js"
+            ]
         }
     }
 }
