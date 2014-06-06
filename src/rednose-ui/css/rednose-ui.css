@@ -895,12 +895,14 @@ div .btn-toolbar .btn-group.pull-right {
 
 /* Chevron selection color */
 
-.rednose-treeview-inner-container .yui3-treeview-selected .yui3-treeview-indicator s {
+.rednose-treeview-inner-container .yui3-treeview-selected > .yui3-treeview-row > .yui3-treeview-indicator s {
+  border-top-color: transparent;
   border-left-color: #fff;
 }
 
 .rednose-treeview-inner-container .yui3-treeview-open.yui3-treeview-selected > .yui3-treeview-row > .yui3-treeview-indicator s {
   border-top-color: #fff;
+  border-left-color: transparent;
 }
 
 /* Selected icon inversion */
