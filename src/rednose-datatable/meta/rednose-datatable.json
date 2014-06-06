@@ -13,6 +13,7 @@
     },
     "rednose-datatable-select" : {
         "requires": [
+            "event-outside",
             "rednose-datatable",
             "plugin"
         ]

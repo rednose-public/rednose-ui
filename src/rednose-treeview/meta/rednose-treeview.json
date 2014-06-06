@@ -38,7 +38,8 @@
 
     "rednose-treeview-select" : {
         "requires": [
-            "base"
+            "base",
+            "event-outside"
         ]
     },
 

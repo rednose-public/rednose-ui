@@ -18,6 +18,8 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
     initializer: function () {
         this._selectMap = [];
 
+        var container = this.get('container');
+
         this.on('select', this._handleSelectState, this);
         this.on('unselect', this._handleUnSelectState, this);
 
@@ -25,6 +27,8 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
 
         // Select needs to be restored after the tree is rendered.
         Y.Do.after(this._restoreSelectState, this, 'render');
+
+        container.on('clickoutside', this._onClickOutside, this);
     },
 
     destructor: function () {
@@ -68,7 +72,15 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     // -- Protected Event Handlers ---------------------------------------------
 
+    _onClickOutside: function (e) {
+        // Clear the selection, only if the click outside target is an ancestor of the current target.
+        if (e.currentTarget.get('parentNode') === e.target) {
+            this.unselect();
+        }
+    },
+
     _handleSelectState: function (e) {
+        console.log(e);
         var id         = this.generateRednoseRecordId(e.node.data),
             index      = this._selectMap.indexOf(id),
             selectable = this.get('selectable');
@@ -95,6 +107,23 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     _afterChange: function () {
         this.unselect();
+    },
+
+    /**
+     * @see TreeView._onRowClick()
+     */
+    _onRowClick: function (e) {
+        if (e.button > 1) {
+            return;
+        }
+
+        var node = this.getNodeById(e.currentTarget.getData('node-id'));
+
+        if (e.shiftKey) {
+            node[node.isSelected() ? 'unselect' : 'select']();
+        } else {
+            node.select();
+        }
     }
 }, {
     ATTRS: {
