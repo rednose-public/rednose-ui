@@ -2,7 +2,7 @@
 
 /**
  * @module rednose-tree
- * @submodule tree-comparable
+ * @submodule rednose-tree-comparable
  */
 
 function NodeComparable() {}

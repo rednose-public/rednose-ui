@@ -147,9 +147,10 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
      * @return {String} A composed CSS string.
      */
     icon: function (node) {
-        var model     = node.data,
+        var className = CSS_TREEVIEW_ICON;
+        // var model     = node.data,
             // icons     = this.get('model').get('icons'),
-            className = CSS_TREEVIEW_ICON;
+            // className = CSS_TREEVIEW_ICON;
 
         // Check the model icon definitions.
         // if (icons && model instanceof Y.Model && icons[model.name] &&
@@ -172,8 +173,11 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         //     return className + ' ' + model.get('icon');
         // }
 
-        // Check the icon property on the node.
-        if (Y.Lang.isString(node.icon)) {
+        if (node.icon) {
+            if (Y.Lang.isArray(node.icon)) {
+                return className + ' ' + (node.isOpen() ? node.icon[0] : node.icon[1]);
+            }
+
             return className + ' ' + node.icon;
         }
 

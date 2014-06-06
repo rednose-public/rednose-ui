@@ -15,21 +15,14 @@ var MultiTreeView = Y.Base.create('multTreeView', Y.View, [], {
         Y.Object.each(trees, function (nodes, type) {
             var subContainer = Y.Node.create('<div class="rednose-treeview"></div>');
 
-            subContainer.setAttribute('data-type', type);
             container.append(subContainer);
 
-            // // TODO: Cleanup instances.
+            // TODO: Cleanup instances.
             var treeView = new Y.Rednose.TreeView({
                 container : subContainer,
                 nodes     : nodes,
                 selectable: true,
-                dragdrop  : true,
-                groups    : ['docgenamin-assetlibrary'],
-                header    : type,
-
-                ddTest: function (data) {
-                    return (data.name !== 'category');
-                }
+                header    : type
             });
 
             self._treeViews.push(treeView);
