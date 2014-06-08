@@ -700,6 +700,12 @@ input.rednose-datatable-input {
   margin-left: 0;
 }
 
+.rednose-brand .caret {
+  margin-top: 8px;
+  border-top-color: #999999;
+  border-bottom-color: #999999;
+}
+
 .rednose-dropdown-large .dropdown-menu .icon {
   position: absolute;
   left: 4px;
