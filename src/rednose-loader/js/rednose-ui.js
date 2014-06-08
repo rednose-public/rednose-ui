@@ -360,10 +360,17 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-tree": {
         "group": "rednose-ui",
         "use": [
-            "rednose-tree-comparable"
+            "rednose-tree-comparable",
+            "rednose-tree-icon"
         ]
     },
     "rednose-tree-comparable": {
+        "group": "rednose-ui",
+        "requires": [
+            "tree"
+        ]
+    },
+    "rednose-tree-icon": {
         "group": "rednose-ui",
         "requires": [
             "tree"
@@ -457,4 +464,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '258a6f3e3d7e42633da5d0b4479857a1';
+YUI.Env[Y.version].md5 = 'ab92004d78836d5b8eab8cad2cde3c00';

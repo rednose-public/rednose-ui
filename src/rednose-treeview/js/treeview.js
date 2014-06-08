@@ -5,11 +5,6 @@
  *
  * @module rednose-treeview
  */
-var CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',
-    CSS_INNER_CONTAINER = 'rednose-treeview-inner-container',
-    CSS_TREEVIEW_ICON   = 'rednose-treeview-icon',
-
-    CSS_BOOTSTRAP_NAV_HEADER = 'nav-header';
 
 /**
  * A TreeView widget, implementing Y.View.
@@ -46,6 +41,7 @@ var CSS_OUTER_CONTAINER = 'rednose-treeview-outer-container',
  */
 var TreeView = Y.Base.create('treeView', Y.TreeView, [
     Y.Rednose.Tree.Comparable,
+    Y.Rednose.Tree.Icon,
     Y.Rednose.TreeView.Anim,
     Y.Rednose.TreeView.DD,
     Y.Rednose.TreeView.Selectable
@@ -58,7 +54,14 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
      *
      * @property {Object} templates
      */
-    templates: Y.TreeView.Templates,
+    templates: Y.Rednose.TreeView.Templates,
+
+    rednoseClassNames: {
+        'outer' : 'rednose-treeview-outer-container',
+        'inner' : 'rednose-treeview-inner-container',
+        'icon'  : 'rednose-treeview-icon',
+        'header': 'nav-header'
+    },
 
     // -- Protected Properties -------------------------------------------------
 
@@ -73,6 +76,8 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
 
     initializer: function (config) {
         config || (config = {});
+
+        Y.mix(this.classNames, this.rednoseClassNames, true);
 
         // Hook into the initializer chain to set the nodes.
         if (config.model) {
@@ -92,8 +97,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     },
 
     destructor: function () {
-        this._detachEventHandles();
-
         // Free the reference so the property is eligible for garbage collection.
         this._stateMap = null;
 
@@ -115,17 +118,17 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         var container     = this.get('container'),
             isTouchDevice = 'ontouchstart' in Y.config.win,
             header        = this.header,
-            subContainer  = Y.Node.create('<div class="' + CSS_INNER_CONTAINER + '"></div>');
+            subContainer  = Y.Node.create('<div class="' + this.classNames.inner + '"></div>');
 
         container.addClass(this.classNames.treeview);
         container.addClass(this.classNames[isTouchDevice ? 'touch' : 'noTouch']);
 
         // Append a subcontainer to render the tree.
-        container.addClass(CSS_OUTER_CONTAINER);
+        container.addClass(this.classNames.outer);
         container.append(subContainer);
 
         if (header) {
-            subContainer.append('<div class="' + CSS_BOOTSTRAP_NAV_HEADER + '">' + header + '</div>');
+            subContainer.append('<div class="' + this.classNames.header + '">' + header + '</div>');
         }
 
         this._childrenNode = this.renderChildren(this.rootNode, {
@@ -139,56 +142,10 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     },
 
     /**
-     * Return a CSS class string, modified by the given tree node and it's associated model.
-     * If no icon is found on the model, the `icon` property of the node will be checked.
-     *
-     * @method icon
-     * @param  {Tree.Node} node Tee Node.
-     * @return {String} A composed CSS string.
-     */
-    icon: function (node) {
-        var className = CSS_TREEVIEW_ICON;
-        // var model     = node.data,
-            // icons     = this.get('model').get('icons'),
-            // className = CSS_TREEVIEW_ICON;
-
-        // Check the model icon definitions.
-        // if (icons && model instanceof Y.Model && icons[model.name] &&
-        //     Y.Lang.isString(node.icon) === false
-        //     && Y.Lang.isString(model.get('icon')) === false) {
-
-        //     var icon = icons[model.name];
-
-        //     if (Y.Lang.isString(icon)) {
-        //         return className + ' ' + icon;
-        //     }
-
-        //     if (Y.Lang.isArray(icon)) {
-        //         return className + ' ' + (node.isOpen() ? icon[0] : icon[1]);
-        //     }
-        // }
-
-        // // Check the icon property on the model.
-        // if (Y.Lang.isString(model.get('icon'))) {
-        //     return className + ' ' + model.get('icon');
-        // }
-
-        if (node.icon) {
-            if (Y.Lang.isArray(node.icon)) {
-                return className + ' ' + (node.isOpen() ? node.icon[0] : node.icon[1]);
-            }
-
-            return className + ' ' + node.icon;
-        }
-
-        return className;
-    },
-
-    /**
      * Renames a treenode
      *
      * @method renameNode
-     * @param  {Tree.Node} node Tree node.
+     * @param {Tree.Node} node Tree node.
      * @param {String} label The new value.
      *
      * @return void
@@ -232,24 +189,21 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     // -- Protected Methods ----------------------------------------------------
 
     _attachEventHandles: function () {
-        this._eventHandles || (this._eventHandles = []);
+        this._treeViewEvents || (this._treeViewEvents = []);
 
         // var model = this.get('model');
 
-        this._eventHandles.push(
-            this.on('open', this._handleExpand, this),
-            this.on('close', this._handleCollapse, this),
+        this._treeViewEvents.push(
+            this.on('open', this._onExpand, this),
+            this.on('close', this._onCollapse, this),
 
-            this.after(['open', 'close'], this._handleToggle, this)
+            this.after(['open', 'close'], this._afterToggle, this)
 
             // model.after('change', this._handleModelChange, this)
         );
     },
 
-    _detachEventHandles: function () {
-        (new Y.EventHandle(this._eventHandles)).detach();
-    },
-
+    // State
     _restoreTreeOpenState: function () {
         var self     = this,
             rootNode = this.rootNode;
@@ -290,6 +244,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
 
     // -- Protected Event Handlers ---------------------------------------------
 
+    // Model
     _handleModelChange: function () {
         var nodes = this.get('model').get('items');
 
@@ -324,7 +279,8 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         this.rendered && this.render();
     },
 
-    _handleToggle: function (e) {
+    // Icon
+    _afterToggle: function (e) {
         if (this.rendered === false) {
             return;
         }
@@ -332,10 +288,15 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         var node     = e.node,
             htmlNode = this.getHTMLNode(e.node);
 
-        htmlNode.one('.' + CSS_TREEVIEW_ICON).set('className', this.icon(node));
+        if (node.icon) {
+            htmlNode.one('.' + this.classNames.icon).set('className',
+                this.classNames.icon + ' ' + node.getIcon()
+            );
+        }
     },
 
-    _handleExpand: function (e) {
+    // State
+    _onExpand: function (e) {
          var id    = this.generateRednoseRecordId(e.node.data),
              index = this._stateMap.indexOf(id);
 
@@ -344,7 +305,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         }
     },
 
-    _handleCollapse: function (e) {
+    _onCollapse: function (e) {
         var id    = this.generateRednoseRecordId(e.node.data),
             index = this._stateMap.indexOf(id);
 

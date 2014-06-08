@@ -7,6 +7,13 @@
                 "js/extensions/tree-comparable.js",
                 "js/extensions/tree-node-comparable.js"
             ]
+        },
+
+        "rednose-tree-icon": {
+            "jsfiles": [
+                "js/extensions/tree-icon.js",
+                "js/extensions/tree-node-icon.js"
+            ]
         }
     }
 }

@@ -1,11 +1,18 @@
 {
     "rednose-tree": {
         "use": [
-            "rednose-tree-comparable"
+            "rednose-tree-comparable",
+            "rednose-tree-icon"
         ],
 
         "submodules": {
             "rednose-tree-comparable": {
+                "requires": [
+                    "tree"
+                ]
+            },
+
+            "rednose-tree-icon": {
                 "requires": [
                     "tree"
                 ]
