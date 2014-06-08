@@ -379,7 +379,7 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-treeview": {
         "group": "rednose-ui",
         "requires": [
-            "gallery-sm-treeview",
+            "gallery-sm-treeview-sortable",
             "rednose-model-tree",
             "rednose-tree",
             "rednose-treeview-anim",
@@ -464,4 +464,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'ab92004d78836d5b8eab8cad2cde3c00';
+YUI.Env[Y.version].md5 = '597b323734fffeb0ab0f1938e9673341';

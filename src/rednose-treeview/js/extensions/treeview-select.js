@@ -38,15 +38,15 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     // -- Public Methods -------------------------------------------------------
 
-    getSelection: function () {
-        var selection = [];
+    // getSelection: function () {
+    //     var selection = [];
 
-        Y.Array.each(this.getSelectedNodes(), function (node) {
-            selection.push(node.data);
-        });
+    //     Y.Array.each(this.getSelectedNodes(), function (node) {
+    //         selection.push(node.data);
+    //     });
 
-        return selection;
-    },
+    //     return selection;
+    // },
 
     // -- Protected Methods ----------------------------------------------------
 

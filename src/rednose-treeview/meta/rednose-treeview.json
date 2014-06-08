@@ -1,7 +1,7 @@
 {
     "rednose-treeview": {
         "requires": [
-            "gallery-sm-treeview",
+            "gallery-sm-treeview-sortable",
             "rednose-model-tree",
             "rednose-tree",
             "rednose-treeview-anim",

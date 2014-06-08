@@ -42,6 +42,7 @@ YUI.add('rednose-treeview', function (Y, NAME) {
  * @extends TreeView
  */
 var TreeView = Y.Base.create('treeView', Y.TreeView, [
+    Y.TreeView.Sortable,
     Y.Rednose.Tree.Comparable,
     Y.Rednose.Tree.Icon,
     Y.Rednose.TreeView.Anim,
@@ -80,6 +81,10 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         config || (config = {});
 
         Y.mix(this.classNames, this.rednoseClassNames, true);
+
+        config.sortComparator || (config.sortComparator = function (node) {
+            return node.label;
+        });
 
         // Hook into the initializer chain to set the nodes.
         if (config.model) {
@@ -144,20 +149,18 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     },
 
     /**
-     * Renames a treenode
+     * Renames a treenode.
      *
      * @method renameNode
      * @param {Tree.Node} node Tree node.
      * @param {String} label The new value.
-     *
-     * @return void
      */
     renameNode: function (node, label) {
-        var labelNode;
-
         node.label = label;
 
-        if (labelNode = node._htmlNode.one('.yui3-treeview-label')) {
+        var labelNode;
+
+        if (labelNode = node._htmlNode.one('.' + this.classNames.label)) {
             labelNode.set('text', node.label);
         }
     },
@@ -323,7 +326,7 @@ Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
 
 }, '1.5.0-DEV', {
     "requires": [
-        "gallery-sm-treeview",
+        "gallery-sm-treeview-sortable",
         "rednose-model-tree",
         "rednose-tree",
         "rednose-treeview-anim",
