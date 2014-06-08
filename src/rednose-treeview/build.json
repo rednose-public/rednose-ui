@@ -20,6 +20,12 @@
             ]
         },
 
+        "rednose-treeview-datasource": {
+            "jsfiles": [
+                "js/extensions/treeview-datasource.js"
+            ]
+        },
+
         "rednose-treeview-dd": {
             "jsfiles": [
                 "js/extensions/treeview-dd.js"

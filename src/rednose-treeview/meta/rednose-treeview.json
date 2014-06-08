@@ -5,6 +5,7 @@
             "rednose-model-tree",
             "rednose-tree",
             "rednose-treeview-anim",
+            "rednose-treeview-datasource",
             "rednose-treeview-dd",
             "rednose-treeview-templates",
             "rednose-treeview-select",
@@ -28,6 +29,12 @@
         "requires": [
             "rednose-anim",
             "transition"
+        ]
+    },
+
+    "rednose-treeview-datasource": {
+        "requires": [
+            "plugin"
         ]
     },
 

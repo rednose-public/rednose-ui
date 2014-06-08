@@ -13,7 +13,7 @@ YUI.add('rednose-treeview', function (Y, NAME) {
  * Quick Example:<br/>
  *
  * <pre><code>var instance = new Y.Rednose.TreeView({
- *    model     : model,
+ *    nodes     : nodes,
  *    dragdrop  : true,
  *    selectable: true,
  *    groups    : ['rednose-treeview'],
@@ -29,8 +29,7 @@ YUI.add('rednose-treeview', function (Y, NAME) {
  *     @param {Boolean} [config.dragdrop] Enable standalone drag and drop for this instance.
  *     @param {Boolean} [config.selectable] Enables selection of tree nodes. Only single selection
  *         is supported for now
- *     @param {Rednose.ModelTree} [config.model] A RedNose Tree model. Change events are bound to update
- *         the view when the model changes.
+ *     @param {Array} [config.nodes] The tree nodes.
  *     @param {Array} [config.groups] The DD groups that can interact with this
  *         TreeView instance.
  *     @param {String} [config.header] An optional header, needed for global dropping on the root node
@@ -46,6 +45,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     Y.Rednose.Tree.Comparable,
     Y.Rednose.Tree.Icon,
     Y.Rednose.TreeView.Anim,
+    Y.Rednose.TreeView.DataSource,
     Y.Rednose.TreeView.DD,
     Y.Rednose.TreeView.Selectable
 ], {
@@ -86,13 +86,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
             return node.label;
         });
 
-        // Hook into the initializer chain to set the nodes.
-        if (config.model) {
-            config.nodes = config.model.get('items');
-
-            this.set('model', config.model);
-        }
-
         if (config.header) {
             this.header = config.header;
         }
@@ -101,6 +94,15 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         this._stateMap = [];
 
         this._attachEventHandles();
+
+        this.onceAfter('initializedChange', function () {
+            // Let the setter handle the node initialization.
+            if (config.nodes) {
+                this.set('nodes', config.nodes);
+
+                delete config.nodes;
+            }
+        });
     },
 
     destructor: function () {
@@ -196,15 +198,11 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     _attachEventHandles: function () {
         this._treeViewEvents || (this._treeViewEvents = []);
 
-        // var model = this.get('model');
-
         this._treeViewEvents.push(
             this.on('open', this._onExpand, this),
             this.on('close', this._onCollapse, this),
 
             this.after(['open', 'close'], this._afterToggle, this)
-
-            // model.after('change', this._handleModelChange, this)
         );
     },
 
@@ -247,42 +245,25 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         container && container.remove(true);
     },
 
-    // -- Protected Event Handlers ---------------------------------------------
+    /**
+     * @param {Array} value
+     */
+    _setNodes: function (value) {
+        this.clear(null, {silent: false});
 
-    // Model
-    _handleModelChange: function () {
-        var nodes = this.get('model').get('items');
-
-        // This is a full tree refresh, so handle the tree methods silently, we don't propagate the
-        // events to our animation listeners etc.
-        this.clear(false, {silent: true});
-
-        // Clean up, normally this would be handled by the original Treeview's handler, but we are clearing
-        // the tree silently.
-       if (this.rendered) {
-            var childNodes = this.get('container').get('childNodes');
-
-            delete this._childrenNode;
-
-            childNodes.remove();
-
-            // Fix for DD. YUI creates the shims on a 100 ms timer after DD init, so if we destroy
-            // the node within 100 ms after initialization, the internal node property points to NULL and
-            // we get an error.
-            Y.later(150, Y, function () {
-                childNodes.destroy(true);
-            });
+        if (value) {
+            this.insertNode(this.rootNode, value, {silent: false});
         }
-
-        // Build a new tree silently, and trigger a new render if needed.
-        if (nodes) {
-            // Returns an array of references to the created tree nodes.
-            treeNodes = this.insertNode(this.rootNode, nodes, {silent: true});
-            this._restoreTreeOpenState();
-        }
-
-        this.rendered && this.render();
     },
+
+    /**
+     * @return {Array}
+     */
+    _getNodes: function () {
+        return this.rootNode.toJSON().children || [];
+    },
+
+    // -- Protected Event Handlers ---------------------------------------------
 
     // Icon
     _afterToggle: function (e) {
@@ -318,6 +299,17 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
             this._stateMap.splice(index, 1);
         }
     }
+}, {
+    ATTRS: {
+        /**
+         * @attribute {Array} nodes
+         */
+        nodes: {
+            value : [],
+            setter: '_setNodes',
+            getter: '_getNodes'
+        }
+    }
 });
 
 // -- Namespace ----------------------------------------------------------------
@@ -330,6 +322,7 @@ Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
         "rednose-model-tree",
         "rednose-tree",
         "rednose-treeview-anim",
+        "rednose-treeview-datasource",
         "rednose-treeview-dd",
         "rednose-treeview-templates",
         "rednose-treeview-select",
