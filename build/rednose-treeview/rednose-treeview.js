@@ -45,7 +45,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     Y.Rednose.Tree.Comparable,
     Y.Rednose.Tree.Icon,
     Y.Rednose.TreeView.Anim,
-    Y.Rednose.TreeView.DataSource,
     Y.Rednose.TreeView.DD,
     Y.Rednose.TreeView.Selectable
 ], {
@@ -167,32 +166,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         }
     },
 
-    /**
-     * Generate a unique RedNose record ID, composed of the class type and the model ID.
-     *
-     * @method generateRednoseRecordID
-     * @param  {Model} model A model instance.
-     * @return {String} A unique ID.
-     */
-    generateRednoseRecordId: function (model) {
-        if (model instanceof Y.Model) {
-            return model.name + '_' + model.get('id');
-        }
-
-        return null;
-    },
-
-    /**
-     * Parse a unique RedNose model id.
-     *
-     * @method parseRednoseRecordID
-     * @param  {String} id A RedNose record ID.
-     * @return {Array} An array containing type and ID.
-     */
-    parseRednoseRecordId: function (id) {
-        return id.split('_');
-    },
-
     // -- Protected Methods ----------------------------------------------------
 
     _attachEventHandles: function () {
@@ -219,7 +192,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     },
 
     _restoreNodeOpenState: function (node) {
-         var id    = this.generateRednoseRecordId(node.data),
+         var id    = node.id,
              index = this._stateMap.indexOf(id);
 
          if (index !== -1) {
@@ -283,7 +256,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
 
     // State
     _onExpand: function (e) {
-         var id    = this.generateRednoseRecordId(e.node.data),
+         var id    = e.node.id,
              index = this._stateMap.indexOf(id);
 
         if (index === -1) {
@@ -292,7 +265,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     },
 
     _onCollapse: function (e) {
-        var id    = this.generateRednoseRecordId(e.node.data),
+        var id    = e.node.id,
             index = this._stateMap.indexOf(id);
 
         if (index !== -1) {

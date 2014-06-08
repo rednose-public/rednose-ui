@@ -60,14 +60,13 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
             Y.Array.each(this._selectMap, function (id) {
                 // TODO: if the selected node is not visible yet, bind an event on 'open' and unbind it
                 // after another selection is made.
-                var record = self.parseRednoseRecordId(id);
+                // var record = self.parseRednoseRecordId(id);
 
-                container.all('[data-rednose-type=' + record[0] + ']').each(function (node) {
-
-                    if (node.getData('rednose-id') === record[1]) {
-                        self.getNodeById(node.getData('node-id')).select();
-                    }
-                });
+                // container.all('[data-rednose-type=' + record[0] + ']').each(function (node) {
+                //     if (node.getData('rednose-id') === record[1]) {
+                //         self.getNodeById(node.getData('node-id')).select();
+                //     }
+                // });
             });
         }
     },
@@ -82,7 +81,7 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
     },
 
     _handleSelectState: function (e) {
-        var id         = this.generateRednoseRecordId(e.node.data),
+        var id         = e.node.id,
             index      = this._selectMap.indexOf(id),
             selectable = this.get('selectable');
 
@@ -98,7 +97,7 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
     },
 
     _handleUnSelectState: function (e) {
-        var id    = this.generateRednoseRecordId(e.node.data),
+        var id    = e.node.id,
             index = this._selectMap.indexOf(id);
 
         if (index !== -1) {

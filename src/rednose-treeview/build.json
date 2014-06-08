@@ -22,7 +22,7 @@
 
         "rednose-treeview-datasource": {
             "jsfiles": [
-                "js/extensions/treeview-datasource.js"
+                "js/plugins/treeview-datasource.js"
             ]
         },
 

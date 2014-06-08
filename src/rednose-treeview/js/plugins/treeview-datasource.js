@@ -1,5 +1,3 @@
-YUI.add('rednose-treeview-datasource', function (Y, NAME) {
-
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
@@ -68,6 +66,3 @@ Y.extend(TreeViewDataSource, Y.Plugin.Base, {
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose.Plugin').TreeViewDataSource = TreeViewDataSource;
-
-
-}, '1.5.0-DEV', {"requires": ["plugin"]});
