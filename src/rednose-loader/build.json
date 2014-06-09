@@ -3,7 +3,7 @@
     "builds": {
         "rednose-loader": {
             "exec": [
-                "yogi loader --group rednose-ui --json false --tests false  -js js/rednose-ui.js --yes --mix --start ../"
+                "yogi loader --group rednose-ui --json false --tests false -js js/rednose-ui.js --yes --mix --start ../"
             ],
             "jsfiles": [
                 "rednose-ui.js"
