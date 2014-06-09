@@ -65,15 +65,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         'header': 'nav-header'
     },
 
-    // -- Protected Properties -------------------------------------------------
-
-    /**
-     * Stores the state of the opened tree nodes.
-     *
-     * @property {Array} _stateMap
-     * @protected
-     */
-
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function (config) {
@@ -89,9 +80,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
             this.header = config.header;
         }
 
-        // Initialize the state map so it doesn't contain any garbage from previous instances.
-        this._stateMap = [];
-
         this._attachEventHandles();
 
         this.onceAfter('initializedChange', function () {
@@ -105,9 +93,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     },
 
     destructor: function () {
-        // Free the reference so the property is eligible for garbage collection.
-        this._stateMap = null;
-
         // Remove the container from the DOM and destroy it.
         this._destroyContainer();
     },
@@ -172,39 +157,8 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         this._treeViewEvents || (this._treeViewEvents = []);
 
         this._treeViewEvents.push(
-            this.on('open', this._onExpand, this),
-            this.on('close', this._onCollapse, this),
-
             this.after(['open', 'close'], this._afterToggle, this)
         );
-    },
-
-    // State
-    _restoreTreeOpenState: function () {
-        var self     = this,
-            rootNode = this.rootNode;
-
-        if (rootNode.hasChildren() && this._stateMap && this._stateMap.length > 0) {
-            Y.Array.each(rootNode.children, function (node) {
-                self._restoreNodeOpenState(node);
-            });
-        }
-    },
-
-    _restoreNodeOpenState: function (node) {
-         var id    = node.id,
-             index = this._stateMap.indexOf(id);
-
-         if (index !== -1) {
-            node.open({silent: true});
-         }
-
-         // Look for child nodes to open, even if their parent is closed.
-        if (node.hasChildren()) {
-            Y.Array.each(node.children, function (child) {
-                this._restoreNodeOpenState(child);
-            }, this);
-        }
     },
 
     /**
@@ -238,7 +192,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
 
     // -- Protected Event Handlers ---------------------------------------------
 
-    // Icon
     _afterToggle: function (e) {
         if (this.rendered === false) {
             return;
@@ -253,25 +206,6 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
             );
         }
     },
-
-    // State
-    _onExpand: function (e) {
-         var id    = e.node.id,
-             index = this._stateMap.indexOf(id);
-
-        if (index === -1) {
-            this._stateMap.push(id);
-        }
-    },
-
-    _onCollapse: function (e) {
-        var id    = e.node.id,
-            index = this._stateMap.indexOf(id);
-
-        if (index !== -1) {
-            this._stateMap.splice(index, 1);
-        }
-    }
 }, {
     ATTRS: {
         /**
@@ -292,7 +226,6 @@ Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
 }, '1.5.0-DEV', {
     "requires": [
         "gallery-sm-treeview-sortable",
-        "rednose-model-tree",
         "rednose-tree",
         "rednose-treeview-anim",
         "rednose-treeview-datasource",

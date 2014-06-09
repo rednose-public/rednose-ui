@@ -3,7 +3,6 @@
         "requires": [
             "handlebars",
             "model-list",
-            "rednose-contextmenu",
             "rednose-grid-select",
             "rednose-util",
             "view"

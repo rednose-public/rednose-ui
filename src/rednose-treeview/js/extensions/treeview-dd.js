@@ -8,12 +8,6 @@ var DD = Y.Base.create('dd', Y.Base, [], {
     // -- Protected Properties -------------------------------------------------
 
     /**
-     * @property _callbacks
-     * @type {Object}
-     * @protected
-     */
-
-    /**
      * DD references store
      *
      * @property _ddMap
@@ -24,8 +18,7 @@ var DD = Y.Base.create('dd', Y.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-        this._callbacks = {};
-        this._ddMap     = [];
+        this._ddMap = [];
 
         this.get('dragdrop') && this._attachDdEvents();
     },
@@ -34,18 +27,10 @@ var DD = Y.Base.create('dd', Y.Base, [], {
         this._destroyDd();
         this._detachDdEvents();
 
-        this._callbacks = null;
-        this._ddMap     = null;
+        this._ddMap = null;
     },
 
     // -- Public Methods -------------------------------------------------------
-
-    addCallback: function(group, callback, context) {
-        this._callbacks[group] = {
-            callback: callback,
-            context: context
-        };
-    },
 
     /**
      * Update all the the DD shims
@@ -62,15 +47,15 @@ var DD = Y.Base.create('dd', Y.Base, [], {
     // -- Protected Methods ----------------------------------------------------
 
     _handleBind: function (parent) {
-        var self   = this,
-            nodes  = parent.one('.' + this.classNames.children).all('[data-rednose-type]:not(.rednose-treeview-drag)'),
-            ddTest = this.get('ddTest');
+        var self      = this,
+            htmlNodes = parent.one('.' + this.classNames.children).all('[data-rednose-type]:not(.rednose-treeview-drag)'),
+            ddTest    = this.get('ddTest');
 
-        nodes.each(function (node) {
-            var data = self.getNodeById(node.getData('node-id')).data;
+        htmlNodes.each(function (htmlNode) {
+            var node = self.getNodeById(htmlNode.getData('node-id'));
 
-            if (ddTest === null || (typeof ddTest === 'function' && ddTest(data) === true)) {
-                self._createDd(node, data);
+            if (ddTest === null || (typeof ddTest === 'function' && ddTest(node) === true)) {
+                self._createDd(htmlNode, node);
             }
 
 //            // FIXME: Use a more generic way to specify droppable models.

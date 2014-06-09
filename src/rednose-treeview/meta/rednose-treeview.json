@@ -2,7 +2,6 @@
     "rednose-treeview": {
         "requires": [
             "gallery-sm-treeview-sortable",
-            "rednose-model-tree",
             "rednose-tree",
             "rednose-treeview-anim",
             "rednose-treeview-datasource",
@@ -48,13 +47,6 @@
         "requires": [
             "base",
             "event-outside"
-        ]
-    },
-
-    "rednose-model-tree": {
-        "requires": [
-            "model",
-            "io"
         ]
     },
 

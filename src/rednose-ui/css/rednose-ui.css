@@ -126,11 +126,13 @@ li.disabled [class*=" icon-"] {
 }
 
 .rednose-viewport {
-  overflow: hidden;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .rednose-toolbar-unit-main .rednose-viewport-container {
   top: 51px;
+  overflow: hidden !important;
 }
 
 .yui3-widget-bd .rednose-unit-main {

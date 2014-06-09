@@ -25,10 +25,6 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '</div>'
     ),
 
-    destructor: function () {
-        console.log('destruct!');
-    },
-
     // Render this view in our <li> container, and fill it with the
     // data in our Model.
     render: function () {
@@ -90,36 +86,67 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     }
 }, {
     ATTRS: {
+        /**
+         * @attribute {Model} model
+         */
         model: {
-            value: []
-        },
-
-        contextMenu: {
-            value: false
+            value: null
         }
     }
 });
 
-Grid = Y.Base.create('grid', Y.View, [ Y.Rednose.Grid.Selectable ], {
+Grid = Y.Base.create('grid', Y.View, [Y.Rednose.Grid.Selectable], {
+    initializer: function () {
+        var container = this.get('container');
+
+        if (this.get('openOnClick')) {
+            container.on('click', this._onContainerClick, this);
+        }
+    },
+
     render: function () {
-        var container   = this.get('container'),
-            contextMenu = this.get('contextMenu'),
-            list        = this.get('data');
+        var container = this.get('container'),
+            list      = this.get('data');
 
         container.addClass('rednose-grid-view');
 
         Y.each(list, function (model) {
-            var view = new GridView({ model: model, contextMenu: contextMenu });
+            var view = new GridView({ model: model });
 
             view.addTarget(this);
 
             container.append(view.render().get('container'));
         });
+    },
+
+    _onContainerClick: function (e) {
+        if (!e.target.hasClass('model-grid-icon')) {
+            return;
+        }
+
+        e.stopImmediatePropagation();
+
+        var node  = e.target.ancestor('.model-grid-icon-container'),
+            model = this._getModelFromGridItem(node);
+
+        this.fire('open', {model: model});
     }
 }, {
     ATTRS: {
         /**
+         * @attribute {Boolean}
+         * @default false
+         * @initOnly
+         */
+        openOnClick: {
+            value: false,
+            writeOnce: 'initOnly'
+        },
+
+        /**
          * The ModelList containing the models to be rendered
+         *
+         * @attribute {ModelList} data
          */
         data: {
             value: []

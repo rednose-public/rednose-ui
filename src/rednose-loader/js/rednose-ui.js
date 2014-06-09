@@ -236,7 +236,6 @@ Y.mix(YUI.Env[Y.version].modules, {
         "requires": [
             "handlebars",
             "model-list",
-            "rednose-contextmenu",
             "rednose-grid-select",
             "rednose-util",
             "view"
@@ -253,13 +252,6 @@ Y.mix(YUI.Env[Y.version].modules, {
         "requires": [
             "model",
             "rednose-app-base"
-        ]
-    },
-    "rednose-model-tree": {
-        "group": "rednose-ui",
-        "requires": [
-            "model",
-            "io"
         ]
     },
     "rednose-navbar": {
@@ -380,7 +372,6 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "gallery-sm-treeview-sortable",
-            "rednose-model-tree",
             "rednose-tree",
             "rednose-treeview-anim",
             "rednose-treeview-datasource",
@@ -471,4 +462,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '904ae3403ab5335aa1cf4fb877ba589e';
+YUI.Env[Y.version].md5 = '0f8e9e8f1411d0c3be32d8746d045bca';

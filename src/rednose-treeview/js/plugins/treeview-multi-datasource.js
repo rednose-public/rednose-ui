@@ -3,18 +3,17 @@
 /**
  * @module rednose-treeview
  * @submodule rednose-treeview-datasource
- * @main rednose-treeview-datasource
  */
 
 /**
- * @class Plugin.TreeViewDataSource
+ * @class Plugin.MultiTreeViewDataSource
  * @extends Plugin.Base
  */
-function TreeViewDataSource() {
-    TreeViewDataSource.superclass.constructor.apply(this, arguments);
+function MultiTreeViewDataSource() {
+    MultiTreeViewDataSource.superclass.constructor.apply(this, arguments);
 }
 
-Y.mix(TreeViewDataSource, {
+Y.mix(MultiTreeViewDataSource, {
     /**
      * @type {String}
      */
@@ -23,7 +22,7 @@ Y.mix(TreeViewDataSource, {
     /**
      * @type {String}
      */
-    NAME: 'treeViewDataSource',
+    NAME: 'multiTreeViewDataSource',
 
     ATTRS: {
         /**
@@ -35,7 +34,7 @@ Y.mix(TreeViewDataSource, {
     }
 });
 
-Y.extend(TreeViewDataSource, Y.Plugin.Base, {
+Y.extend(MultiTreeViewDataSource, Y.Plugin.Base, {
     // -- Publid Methods -------------------------------------------------------
 
     /**
@@ -60,9 +59,9 @@ Y.extend(TreeViewDataSource, Y.Plugin.Base, {
     // -- Protected Event Handlers ---------------------------------------------
 
     _onRequestSuccess: function (callback, e) {
-        var nodes = (e.response && e.response.results) || [];
+        var trees = (e.response && e.response.results) || [];
 
-        this.get('host').set('nodes', nodes);
+        this.get('host').set('trees', trees);
 
         if (callback) {
             callback.call(this);
@@ -77,4 +76,4 @@ Y.extend(TreeViewDataSource, Y.Plugin.Base, {
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose.Plugin').TreeViewDataSource = TreeViewDataSource;
+Y.namespace('Rednose.Plugin').MultiTreeViewDataSource = MultiTreeViewDataSource;

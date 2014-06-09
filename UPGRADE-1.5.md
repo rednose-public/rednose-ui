@@ -59,6 +59,10 @@ Version 1.5 is compatible with YUI 3.16.0.
  * Class `Rednose.Toolbar` was refactored and now uses instances of `rednose-button-group`.
  * Config property `evtPrefix` for backwards compatibility was removed in this version.
 
+## rednose-treeview
+
+ * TreeView was refactored to a more performant model and now uses DataSources. As a result, module `rednose-model-tree` was removed.
+
 ## rednose-ui
 
 * **All CSS** except vendor CSS is now handled by `LESS` templates within the `rednose-ui` module.

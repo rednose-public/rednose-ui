@@ -22,7 +22,8 @@
 
         "rednose-treeview-datasource": {
             "jsfiles": [
-                "js/plugins/treeview-datasource.js"
+                "js/plugins/treeview-datasource.js",
+                "js/plugins/treeview-multi-datasource.js"
             ]
         },
 
@@ -35,12 +36,6 @@
         "rednose-treeview-select": {
             "jsfiles": [
                 "js/extensions/treeview-select.js"
-            ]
-        },
-
-        "rednose-model-tree": {
-            "jsfiles": [
-                "model-tree.js"
             ]
         },
 
