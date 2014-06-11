@@ -5,7 +5,11 @@
  *
  * @module rednose-tabview
  */
-var TabView;
+
+/**
+ * @event click
+ */
+var EVT_CLICK = 'click';
 
 /**
  * Provides a generic tabview.
@@ -15,7 +19,7 @@ var TabView;
  * @constructor
  * @extends TabView
  */
-TabView = Y.Base.create('tabView', Y.Widget, [], {
+var TabView = Y.Base.create('tabView', Y.Widget, [], {
     // -- Public Properties ----------------------------------------------------
 
     template:
@@ -100,7 +104,10 @@ TabView = Y.Base.create('tabView', Y.Widget, [], {
         a.get('parentNode').addClass('active');
         container.one('div#' + id).addClass('active');
 
-        this.fire('click', { tabNode: a.get('parentNode') });
+        this.fire(EVT_CLICK, {
+            id     : id,
+            tabNode: a.get('parentNode')
+        });
     },
 
     /**
