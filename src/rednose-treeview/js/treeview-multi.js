@@ -67,6 +67,19 @@ var MultiTreeView = Y.Base.create('multiTreeView', Y.View, [], {
         return null;
     },
 
+    /**
+     * @return {Tree.Node[]}
+     */
+    getSelectedNodes: function () {
+        var nodes = [];
+
+        Y.Array.each(this._treeViews, function (treeView) {
+            nodes = nodes.concat(treeView.getSelectedNodes());
+        });
+
+        return nodes;
+    },
+
     _afterTreeViewSelect: function (e) {
         Y.Array.each(this._treeViews, function (treeView) {
             if (e.target !== treeView) {
