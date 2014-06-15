@@ -29,6 +29,12 @@ body {
   background-image: none;
 }
 
+/* Dialog content overlap fix */
+
+.rednose-view-nav.yui3-panel-content {
+  border: 0;
+}
+
 /* -- Custom icons, prefixed by 'rednose-' ---------------------------------- */
 
 [class^="rednose-icon-"],
@@ -132,7 +138,7 @@ li.disabled [class*=" icon-"] {
 
 .rednose-toolbar-unit-main .rednose-viewport-container {
   top: 51px;
-  overflow: hidden !important;
+  overflow: hidden;
 }
 
 .yui3-widget-bd .rednose-unit-main {
@@ -325,6 +331,16 @@ input.rednose-datatable-input {
 .rednose-datatable .rednose-datatable-selected [class^="rednose-icon-"],
 .rednose-datatable .rednose-datatable-selected [class*=" rednose-icon-"] {
   background-image: url("img/content-icons-white.png");
+}
+
+/* Header */
+
+.rednose-table-no-header thead {
+  display: none;
+}
+
+.rednose-table-no-header tr:first-child td {
+  border-top: 0;
 }
 
 .rednose-dialog .btn {
