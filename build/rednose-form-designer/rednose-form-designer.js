@@ -1274,7 +1274,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.Rednose.App, [
         this.after('objectAttributesView:configureItems', this._handleConfigureItems, this);
         this.after('objectAttributesView:configureDynamicItems', this._handleConfigureDynamicItems, this);
 
-        this._initNavbar();
+        this.onceAfter('initializedChange', function () {
+            this._initNavbar();
+        });
 
         this.on('navbar:preview', this._handlePreview, this);
         this.on('navbar:save', this._handleSave, this);
@@ -1317,7 +1319,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.Rednose.App, [
 
         this.get('container').addClass('rednose-form-designer');
 
-        this._navbar.render(this.get('container'));
+        this._navbar.render();
 
         this._objectLibrary.render(this._navbar, 'insert');
 
@@ -1334,7 +1336,10 @@ FormDesigner = Y.Base.create('formDesigner', Y.Rednose.App, [
     },
 
     _initNavbar: function () {
+        var container = this.get('navbarContainer');
+
         this._navbar = new Y.Rednose.Navbar({
+            container    : container,
             title        : TXT_NAVBAR_CAPTION,
             columnLayout : true,
             menu         : [
