@@ -8,7 +8,9 @@
 
     "rednose-datasource" : {
         "requires": [
-            "rednose-treeview"
+            "io",
+            "model",
+            "model-list"
         ]
     }
 }

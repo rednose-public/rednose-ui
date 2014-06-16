@@ -1,9 +1,6 @@
-/*jshint boss:true, expr:true,  es5:true, onevar:false */
+/*jshint boss:true, expr:true, onevar:false */
 
-var TreeModel = Y.Rednose.ModelTree,
-    ControlModel;
-
-ControlModel = Y.Base.create('controlModel', Y.Model, [], {
+var ControlModel = Y.Base.create('controlModel', Y.Model, [], {
     view: {},
 
     _setProperty: function(value) {
@@ -46,20 +43,21 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
             children: []
         };
 
+        return null;
         // XXX
-        if (!this.get('id') && !this.get('caption')) {
-            return new TreeModel();
-        }
+        // if (!this.get('id') && !this.get('caption')) {
+        //     return new TreeModel();
+        // }
 
-        this.get('controls').each(function (model) {
-            items.children.push({
-                label   : model.get('caption'),
-                data    : model,
-                icon    : 'icon-minus'
-            });
-        });
+        // this.get('controls').each(function (model) {
+        //     items.children.push({
+        //         label   : model.get('caption'),
+        //         data    : model,
+        //         icon    : 'icon-minus'
+        //     });
+        // });
 
-        return new TreeModel({ items: items });
+        // return new TreeModel({ items: items });
     },
 
     sync: function (action, options, callback) {

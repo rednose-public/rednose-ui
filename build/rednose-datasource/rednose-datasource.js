@@ -2,8 +2,7 @@ YUI.add('rednose-datasource', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
-var TreeModel = Y.Rednose.ModelTree,
-    DataSource,
+var DataSource,
     PdoSource,
     XmlSource,
     DataSourceList;
@@ -155,16 +154,17 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
             items.push(node);
         });
 
-        return new TreeModel({
-            items: items,
-            icons: {
-                'datagenSource'                : 'icon-list-alt',
-                'pdoSource'                    : 'icon-align-justify',
-                'xmlSource'                    : 'icon-file',
-                'dataSourceAttribute'          : 'icon-minus',
-                'dataSourceAttributeCollection': 'icon-th-list'
-            }
-        });
+        return null;
+        // return new TreeModel({
+        //     items: items,
+        //     icons: {
+        //         'datagenSource'                : 'icon-list-alt',
+        //         'pdoSource'                    : 'icon-align-justify',
+        //         'xmlSource'                    : 'icon-file',
+        //         'dataSourceAttribute'          : 'icon-minus',
+        //         'dataSourceAttributeCollection': 'icon-th-list'
+        //     }
+        // });
     },
 
     parse: function (response) {
@@ -212,4 +212,4 @@ Y.namespace('Rednose.DataSource').XmlSource           = XmlSource;
 Y.namespace('Rednose.DataSource').DataSourceList      = DataSourceList;
 
 
-}, '1.5.0-DEV', {"requires": ["rednose-treeview"]});
+}, '1.5.0-DEV', {"requires": ["io", "model", "model-list"]});

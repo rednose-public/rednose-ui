@@ -6,23 +6,23 @@ var ObjectLibrary,
 ObjectLibrary = Y.Base.create('objectLibrary', Y.Widget, [], {
 
     render: function (navBar, parentId) {
-        var self = this,
-            items = this.get('items'),
-            parentNode = navBar.getNode(parentId).get('parentNode');
+        // var self = this,
+        //     items = this.get('items'),
+        //     parentNode = navBar.getNode(parentId).get('parentNode');
 
-        navBar.createDropdown(parentNode, items);
+        // navBar.createDropdown(parentNode, items);
 
-        Y.Array.each(items, function (item) {
-            navBar.on(item.id, function (e) {
-                var type = e.type.split(':')[1];
+        // Y.Array.each(items, function (item) {
+        //     navBar.on(item.id, function (e) {
+        //         var type = e.type.split(':')[1];
 
-                Y.Array.each(items, function (item) {
-                    if (item.id === type) {
-                        self.fire('objectAdd', { item: item });
-                    }
-                });
-            });
-        });
+        //         Y.Array.each(items, function (item) {
+        //             if (item.id === type) {
+        //                 self.fire('objectAdd', { item: item });
+        //             }
+        //         });
+        //     });
+        // });
 
         return this;
     }

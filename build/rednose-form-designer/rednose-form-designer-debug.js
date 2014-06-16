@@ -446,23 +446,23 @@ var ObjectLibrary,
 ObjectLibrary = Y.Base.create('objectLibrary', Y.Widget, [], {
 
     render: function (navBar, parentId) {
-        var self = this,
-            items = this.get('items'),
-            parentNode = navBar.getNode(parentId).get('parentNode');
+        // var self = this,
+        //     items = this.get('items'),
+        //     parentNode = navBar.getNode(parentId).get('parentNode');
 
-        navBar.createDropdown(parentNode, items);
+        // navBar.createDropdown(parentNode, items);
 
-        Y.Array.each(items, function (item) {
-            navBar.on(item.id, function (e) {
-                var type = e.type.split(':')[1];
+        // Y.Array.each(items, function (item) {
+        //     navBar.on(item.id, function (e) {
+        //         var type = e.type.split(':')[1];
 
-                Y.Array.each(items, function (item) {
-                    if (item.id === type) {
-                        self.fire('objectAdd', { item: item });
-                    }
-                });
-            });
-        });
+        //         Y.Array.each(items, function (item) {
+        //             if (item.id === type) {
+        //                 self.fire('objectAdd', { item: item });
+        //             }
+        //         });
+        //     });
+        // });
 
         return this;
     }
@@ -1238,7 +1238,10 @@ var ConfigureDynamicItems = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
     Panel                 = Y.Rednose.Panel,
     FormDesigner;
 
-FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeColumn ], {
+FormDesigner = Y.Base.create('formDesigner', Y.Rednose.App, [
+    Y.Rednose.View.Template.Navbar,
+    Y.Rednose.View.Template.ThreeColumn
+], {
     views: {
         form: {
             type: Y.Rednose.FormDesigner.FormView
@@ -1318,9 +1321,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this._objectLibrary.render(this._navbar, 'insert');
 
-        this.get('gridLeft').append(this._hierarchyView.render().get('container'));
-        this.get('gridLeft').append(this._dataSourcesView.render().get('container'));
-        this.get('gridRight').append(this._objectAttributesView.render().get('container'));
+        this.get('leftContainer').append(this._hierarchyView.render().get('container'));
+        this.get('leftContainer').append(this._dataSourcesView.render().get('container'));
+        this.get('rightContainer').append(this._objectAttributesView.render().get('container'));
 
         // If the model contains controls render the form view
         if (this.get('model').get('controls').size() > 0) {

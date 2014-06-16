@@ -7,7 +7,10 @@ var ConfigureDynamicItems = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
     Panel                 = Y.Rednose.Panel,
     FormDesigner;
 
-FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeColumn ], {
+FormDesigner = Y.Base.create('formDesigner', Y.Rednose.App, [
+    Y.Rednose.View.Template.Navbar,
+    Y.Rednose.View.Template.ThreeColumn
+], {
     views: {
         form: {
             type: Y.Rednose.FormDesigner.FormView
@@ -87,9 +90,9 @@ FormDesigner = Y.Base.create('formDesigner', Y.App, [ Y.Rednose.Template.ThreeCo
 
         this._objectLibrary.render(this._navbar, 'insert');
 
-        this.get('gridLeft').append(this._hierarchyView.render().get('container'));
-        this.get('gridLeft').append(this._dataSourcesView.render().get('container'));
-        this.get('gridRight').append(this._objectAttributesView.render().get('container'));
+        this.get('leftContainer').append(this._hierarchyView.render().get('container'));
+        this.get('leftContainer').append(this._dataSourcesView.render().get('container'));
+        this.get('rightContainer').append(this._objectAttributesView.render().get('container'));
 
         // If the model contains controls render the form view
         if (this.get('model').get('controls').size() > 0) {
