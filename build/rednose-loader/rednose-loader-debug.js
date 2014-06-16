@@ -217,6 +217,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "rednose-app",
+            "rednose-button-dropdown",
             "rednose-datatable-select",
             "rednose-datasource-manager",
             "rednose-dialog",
@@ -462,7 +463,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'a178b48f1f4361d302cb5894ff0d3c49';
+YUI.Env[Y.version].md5 = 'a7fa488c6eeaebe483137e22344b2c0c';
 
 
 }, '1.5.0-DEV');

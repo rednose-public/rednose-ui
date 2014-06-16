@@ -12,7 +12,7 @@ var TXT_CONTROL_TYPES = {
     'file'        : 'File'
 };
 
-var TXT_OBJECT_ATTRIBUTES = 'Object Attributes';
+// var TXT_OBJECT_ATTRIBUTES = 'Object Attributes';
 
 var Micro = Y.Template.Micro,
     ObjectAttributesView;
@@ -22,7 +22,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     /**
      * Property inherited from Y.Rednose.View.Nav
      */
-    title: TXT_OBJECT_ATTRIBUTES,
+    // title: TXT_OBJECT_ATTRIBUTES,
 
     /**
      * Property inherited from Y.Rednose.View.Nav

@@ -222,7 +222,7 @@ li.disabled [class*=" icon-"] {
   left: 0;
 }
 
-.rednose-nav-header .yui3-widget-bd {
+.rednose-nav-header > div > div > .yui3-widget-bd {
   top: 46px;
 }
 

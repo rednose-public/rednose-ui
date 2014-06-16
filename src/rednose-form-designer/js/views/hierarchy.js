@@ -43,7 +43,7 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
         this._treeView = new Y.Rednose.TreeView({
             container : container.one('.rednose-treeview'),
-            model     : model.getTree(),
+            // model     : model.getTree(),
             selectable: true,
             header    : TXT_HIERARCHY
         });

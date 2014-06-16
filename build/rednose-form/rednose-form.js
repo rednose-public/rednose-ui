@@ -902,7 +902,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
                     // self._evalutateExpressions();
                 });
 
-                // XXX: Expresions.
+                // XXX: Expressions.
                 var expressions = control.get('properties').expressions;
 
                 if (expressions) {
@@ -968,10 +968,17 @@ FormView = Y.Base.create('formView', Y.View, [], {
     }
 }, {
     ATTRS: {
+        /**
+         * @type {Boolean}
+         * @default true
+         */
         horizontal: {
             value: true
         },
 
+        /**
+         * @type {Rednose.Form.FormModel}
+         */
         model: {
             value: new Y.Rednose.Form.FormModel()
         }
