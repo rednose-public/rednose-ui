@@ -12,15 +12,8 @@
             "rednose-app-base" : {
                 "requires": [
                     "app-base",
-                    "rednose-app-view",
                     "rednose-panel",
                     "rednose-util"
-                ]
-            },
-
-            "rednose-app-view" : {
-                "requires": [
-                    "view"
                 ]
             },
 

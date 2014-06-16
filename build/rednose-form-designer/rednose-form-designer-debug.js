@@ -1621,7 +1621,7 @@ FormDesigner = Y.Base.create('formDesigner', Y.Rednose.App, [
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.namespace('Rednose.FormDesigner').FormDesigner = FormDesigner;
+Y.namespace('Rednose').FormDesigner = Y.mix(FormDesigner, Y.Rednose.FormDesigner);
 
 
 }, '1.5.0-DEV', {

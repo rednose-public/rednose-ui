@@ -31,15 +31,8 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "app-base",
-            "rednose-app-view",
             "rednose-panel",
             "rednose-util"
-        ]
-    },
-    "rednose-app-view": {
-        "group": "rednose-ui",
-        "requires": [
-            "view"
         ]
     },
     "rednose-breadcrumb": {
@@ -469,7 +462,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'f15e4e1b2cf98038cbd846fc4442be1f';
+YUI.Env[Y.version].md5 = '67609d1568e423cfbdfe6ea9e708cef6';
 
 
 }, '1.5.0-DEV');

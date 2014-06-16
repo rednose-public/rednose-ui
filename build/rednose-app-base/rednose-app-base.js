@@ -94,20 +94,21 @@ var App = Y.Base.create('app', Y.App, [], {
      * @see App.createView()
      */
     createView: function (name, config) {
+        config || (config = {});
+
         var viewInfo = this.getViewInfo(name),
             type     = (viewInfo && viewInfo.type) || Y.View,
             ViewConstructor, view;
+
+        // Allow app views.
+        config.container   = Y.Node.create('<div></div>');
+        config.transitions = this.get('transitions');
 
         // Looks for a namespaced constructor function on `Y`.
         ViewConstructor = Y.Lang.isString(type) ?
             Y.Object.getValue(Y, type.split('.')) : type;
 
-        if (ViewConstructor.superclass.constructor.NAME === 'app' || viewInfo.app === true) {
-            view = new Y.Rednose.AppView(Y.merge(config, { appConstructor: ViewConstructor }));
-        } else {
-            view = new ViewConstructor(config);
-        }
-
+        view = new ViewConstructor(config);
         this._viewInfoMap[Y.stamp(view, true)] = viewInfo;
 
         return view;
@@ -313,4 +314,4 @@ App.setTitle = function (title, dirty) {
 Y.Rednose.App = Y.mix(App, Y.Rednose.App);
 
 
-}, '1.5.0-DEV', {"requires": ["app-base", "rednose-app-view", "rednose-panel", "rednose-util"]});
+}, '1.5.0-DEV', {"requires": ["app-base", "rednose-panel", "rednose-util"]});
