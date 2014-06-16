@@ -61,39 +61,39 @@ var DD = Y.Base.create('dd', Y.Base, [], {
 //            // FIXME: Use a more generic way to specify droppable models.
 //            if (model instanceof Y.TB.Category) {
 //                // This is a category model. Categories allow dropping.
-//                var catDD = new Y.DD.Drop({
-//                    node         : node,
-//                    groups       : self.get('groups'),
-//                    bubbleTargets: self
-//                });
+               var catDD = new Y.DD.Drop({
+                   node         : htmlNode,
+                   groups       : self.get('groups'),
+                   bubbleTargets: self
+               });
 //
-//                node.addClass('rednose-treeview-drop');
-//                node.addClass('rednose-dd-drop');
-//                self._ddMap.push(catDD);
+               htmlNode.addClass('rednose-treeview-drop');
+               htmlNode.addClass('rednose-dd-drop');
+               self._ddMap.push(catDD);
 //            }
         });
 
-//        this.header && this._bindHeader();
+       this.header && this._bindHeader();
     },
 
-//    _bindHeader: function () {
-//        var container  = this.get('container'),
-//            dd;
-//
-//        dd = new Y.DD.Drop({
-//            node         : container.one('.nav-header'),
-//            // Only allow categories to drop here.
-//            groups       : [ Y.stamp(this) ],
-//            bubbleTargets: this
-//        });
-//
-//        this._attachHeaderEvents(dd);
-//        this._ddMap.push(dd);
-//    },
+   _bindHeader: function () {
+       var container  = this.get('container'),
+           dd;
+
+       dd = new Y.DD.Drop({
+           node         : container.one('.nav-header'),
+           // Only allow categories to drop here.
+           // groups       : [ Y.stamp(this) ],
+           groups       : this.get('groups'),
+           bubbleTargets: this
+       });
+
+       this._attachHeaderEvents(dd);
+       this._ddMap.push(dd);
+   },
 
     _createDd: function (node, data) {
         var groups = this.get('groups'),
-            self   = this,
             dd;
 
         if (data instanceof Y.TB.Category) {
@@ -105,7 +105,7 @@ var DD = Y.Base.create('dd', Y.Base, [], {
             node         : node,
             data         : data,
             groups       : groups,
-            bubbleTargets: self
+            bubbleTargets: this
         });
 
         dd.plug(Y.Plugin.DDProxy, {
