@@ -37,9 +37,7 @@ var MultiTreeView = Y.Base.create('multiTreeView', Y.View, [], {
 
             self._treeViews.push(treeView);
 
-            Y.Array.each(treeView.children, function (node) {
-                node.open();
-            });
+            treeView.open();
 
             treeView.addTarget(self);
             treeView.render();
@@ -80,6 +78,23 @@ var MultiTreeView = Y.Base.create('multiTreeView', Y.View, [], {
         });
 
         return nodes;
+    },
+
+    /**
+     * @param {String} id
+     *
+     * @return {Tree.Node[]}
+     */
+    getNodeById: function (id) {
+        for (var i = 0, len = this._treeViews.length; i < len; i++) {
+            var node = this._treeViews[i].getNodeById(id);
+
+            if (node) {
+                return node;
+            }
+        }
+
+        return null;
     },
 
     _afterTreeViewSelect: function (e) {

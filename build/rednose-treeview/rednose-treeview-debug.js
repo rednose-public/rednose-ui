@@ -135,6 +135,23 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     },
 
     /**
+     * Open all tree nodes.
+     *
+     * @param {Tree.Node} parent
+     */
+    open: function (parent) {
+        parent || (parent = this.rootNode);
+
+        if (parent.hasChildren()) {
+            parent.open();
+
+            for (var i = 0, len = parent.children.length; i < len; i++) {
+                this.open(parent.children[i]);
+            }
+        }
+    },
+
+    /**
      * Renames a treenode.
      *
      * @method renameNode
