@@ -73,7 +73,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         Y.mix(this.classNames, this.rednoseClassNames, true);
 
         config.sortComparator || (config.sortComparator = function (node) {
-            return node.label;
+            return node.label.toLowerCase();
         });
 
         if (config.header) {

@@ -37,13 +37,19 @@ var MultiTreeView = Y.Base.create('multiTreeView', Y.View, [], {
 
             self._treeViews.push(treeView);
 
-            treeView.open();
-
             treeView.addTarget(self);
             treeView.render();
         });
 
         return this;
+    },
+
+    open: function () {
+        Y.Array.each(this._treeViews, function (treeView) {
+            treeView.set('animated', false);
+            treeView.open();
+            treeView.set('animated', true);
+        });
     },
 
     /**
