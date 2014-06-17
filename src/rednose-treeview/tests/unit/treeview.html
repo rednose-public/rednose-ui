@@ -15,7 +15,6 @@
         <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
 
         <script src="./assets/treeview-test.js"></script>
-        <script src="./assets/treeview-select-test.js"></script>
         <script src="./assets/treeview-dd-test.js"></script>
         <script>
             YUI.Env.core.push('rednose-loader');
@@ -23,7 +22,6 @@
             YUI({
                 coverage: [
                     'rednose-treeview',
-                    'rednose-treeview-select',
                     'rednose-treeview-dd'
                 ],
                 filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
@@ -32,7 +30,7 @@
                         base: "../../../../build/"
                     }
                 }
-            }).use('treeview-test', 'treeview-select-test', 'treeview-dd-test', 'test-console', function (Y) {
+            }).use('treeview-test', 'treeview-dd-test', 'test-console', function (Y) {
                 new Y.Test.Console().render('#log');
 
                 Y.Test.Runner.setName('Treeview');

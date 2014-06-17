@@ -14,12 +14,11 @@ suite.add(new Y.Test.Case({
         treeView.destroy();
 
         Assert.isNull(treeView._ddMap);
-        Assert.isNull(treeView._callbacks);
     }
 }));
 
 Y.Test.Runner.add(suite);
 
 }, '@VERSION@', {
-    requires: ['rednose-dd', 'test', 'node-event-simulate']
+    requires: ['dd', 'test', 'node-event-simulate']
 });

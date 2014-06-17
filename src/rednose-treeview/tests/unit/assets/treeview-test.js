@@ -12,7 +12,7 @@ suite.add(new Y.Test.Case({
         Y.one('#container').append('<div id="treeview"></div>');
     },
 
-    'constructor should work without a treemodel': function () {
+    'constructor should work without nodes': function () {
         var treeView = new Y.Rednose.TreeView();
 
         Assert.isInstanceOf(Y.Rednose.TreeView, treeView);
@@ -29,14 +29,6 @@ suite.add(new Y.Test.Case({
         treeView.destroy();
 
         Assert.isUndefined(treeView.get('#treeview'));
-    },
-
-    'destructor should free references to allow garbage collection': function () {
-        var treeView = new Y.Rednose.TreeView();
-
-        treeView.destroy();
-
-        Assert.isNull(treeView._stateMap);
     }
 }));
 
@@ -46,56 +38,45 @@ suite.add(new Y.Test.Case({
     setUp: function () {
         Y.one('#container').append('<div id="treeview"></div>');
 
-        var FIXTURES = {
-            label   : "Home",
-            data    : new Y.Model(),
+        this.nodes = [{
+            label: 'Home',
             children: [
                 {
-                    label   : "Folder 1",
-                    data    : new Y.Model(),
+                    label: 'Folder 1',
                     children: [
                         {
-                            label   : "Subfolder 1",
-                            data    : new Y.Model()
+                            label: 'Subfolder 1'
                         },
                         {
-                            label   : "Subfolder 2",
-                            data    : new Y.Model()
+                            label: 'Subfolder 2'
                         }
                     ]
                 },
                 {
-                    label   : "Folder 2",
-                    data    : new Y.Model()
+                    label: 'Folder 2'
                 },
                 {
-                    label   : "Folder 3",
-                    data    : new Y.Model()
+                    label: 'Folder 3'
                 },
                 {
-                    label   : "Folder 4",
-                    data    : new Y.Model()
+                    label: 'Folder 4'
                 }
             ]
-        };
-
-        this.model = new Y.Rednose.ModelTree({
-            items: FIXTURES
-        });
+        }];
     },
 
     tearDown: function () {
-        this.model = null;
-
         Y.one('#treeview').remove(true);
+        this.nodes = null;
     },
 
     'nodes can be opened silently before the treeview is rendered': function () {
         var treeView = new Y.Rednose.TreeView({
             container: Y.one('#treeview'),
-            model: this.model
+            nodes: this.nodes
         });
 
+        console.log(this.nodes);
         var node = treeView.rootNode.children[0];
         node.open({ silent: true });
 
@@ -107,7 +88,7 @@ suite.add(new Y.Test.Case({
     'nodes can be opened non-silently before the treeview is rendered': function () {
         var treeView = new Y.Rednose.TreeView({
             container: Y.one('#treeview'),
-            model: this.model
+            nodes: this.nodes
         });
 
         var node = treeView.rootNode.children[0];
