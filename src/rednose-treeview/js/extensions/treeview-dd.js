@@ -61,19 +61,17 @@ var DD = Y.Base.create('dd', Y.Base, [], {
 //            // FIXME: Use a more generic way to specify droppable models.
 //            if (model instanceof Y.TB.Category) {
 //                // This is a category model. Categories allow dropping.
-               var catDD = new Y.DD.Drop({
-                   node         : htmlNode,
-                   groups       : self.get('groups'),
-                   bubbleTargets: self
-               });
+               // var catDD = new Y.DD.Drop({
+               //     node         : htmlNode,
+               //     groups       : self.get('groups'),
+               //     bubbleTargets: self
+               // });
 //
-               htmlNode.addClass('rednose-treeview-drop');
-               htmlNode.addClass('rednose-dd-drop');
-               self._ddMap.push(catDD);
+               // htmlNode.addClass('rednose-treeview-drop');
+               // htmlNode.addClass('rednose-dd-drop');
+               // self._ddMap.push(catDD);
 //            }
         });
-
-       this.header && this._bindHeader();
     },
 
    _bindHeader: function () {
@@ -163,6 +161,9 @@ var DD = Y.Base.create('dd', Y.Base, [], {
     _afterRender: function () {
         this._destroyDd();
         this._handleBind(this.get('container'));
+
+        // FIXME: Doesn't work when quickly rerendering the tree and opening all nodes.
+        // this.header && this._bindHeader();
     },
 
     _handleHeaderEnter: function (e) {
