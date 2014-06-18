@@ -27,6 +27,12 @@ GridView = Y.Base.create('gridView', Y.View, [], {
         '</div>'
     ),
 
+    initializer: function () {
+        var model = this.get('model');
+
+        model.after('change', this.render, this);
+    },
+
     // Render this view in our <li> container, and fill it with the
     // data in our Model.
     render: function () {
