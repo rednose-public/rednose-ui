@@ -19,7 +19,7 @@ GridView = Y.Base.create('gridView', Y.View, [], {
                 '<div class="model-grid-footer">' +
                     '<div class="model-grid-name">{{ label }}</div>' +
                     '<input class="edit" type="text" value="{{ name }}" style="visibility: hidden;"/>' +
-                    '<div class="model-grid-date">{{ dateModified }}</div>' +
+                    '<div class="model-grid-date">{{ footer }}</div>' +
                 '</div>' +
             '</div>' +
         '</div>'
@@ -29,17 +29,34 @@ GridView = Y.Base.create('gridView', Y.View, [], {
     // data in our Model.
     render: function () {
         var container = this.get('container'),
-            model     = this.get('model');
+            model     = this.get('model'),
+            config    = this.get('config') || {},
+            o         = {};
+
+        o.data = model.toJSON();
 
         container.setStyle('float', 'left');
 
-        container.setHTML(this.template({
-            clientId    : model.get('clientId'),
-            label       : Y.Rednose.Util.formatLabel(model.get('name')),
-            name        : model.get('name'),
-            thumbnail   : model.get('thumbnail'),
-            dateModified: model.get('date_modified')
-        }));
+        var attrs = {
+            clientId: model.get('clientId')
+        };
+
+        if (typeof config.thumbnail === 'function') {
+            attrs.thumbnail = config.thumbnail(o);
+        }
+
+        if (typeof config.label === 'function') {
+            var label = config.label(o);
+
+            attrs.label = label && Y.Rednose.Util.formatLabel(label),
+            attrs.name  = label;
+        }
+
+        if (typeof config.footer === 'function') {
+            attrs.footer = config.footer(o);
+        }
+
+        container.setHTML(this.template(attrs));
 
         this.set('inputNode', container.one('.edit'));
         this.set('footerNode', container.one('.model-grid-footer'));
@@ -91,11 +108,37 @@ GridView = Y.Base.create('gridView', Y.View, [], {
          */
         model: {
             value: null
+        },
+
+        /**
+         * Rendering config.
+         *
+         * @attribute {Object} config
+         */
+        config: {
+            value: null
         }
     }
 });
 
 Grid = Y.Base.create('grid', Y.View, [Y.Rednose.Grid.Selectable], {
+    /**
+     * Default rendering config.
+     *
+     * @property {Object}
+     */
+    defaultConfig: {
+        thumbnail: function (o) {
+            return o.data.thumbnail;
+        },
+        label: function (o) {
+            return o.data.name;
+        },
+        footer: function (o) {
+            return o.data.date_modified;
+        }
+    },
+
     initializer: function () {
         var container = this.get('container');
 
@@ -108,10 +151,12 @@ Grid = Y.Base.create('grid', Y.View, [Y.Rednose.Grid.Selectable], {
         var container = this.get('container'),
             list      = this.get('data');
 
+        var config = this.get('config') || this.defaultConfig;
+
         container.addClass('rednose-grid-view');
 
         Y.each(list, function (model) {
-            var view = new GridView({ model: model });
+            var view = new GridView({ model: model, config: config });
 
             view.addTarget(this);
 
@@ -150,6 +195,15 @@ Grid = Y.Base.create('grid', Y.View, [Y.Rednose.Grid.Selectable], {
          */
         data: {
             value: []
+        },
+
+        /**
+         * Rendering config.
+         *
+         * @attribute {Object} config
+         */
+        config: {
+            value: null
         }
     }
 });
