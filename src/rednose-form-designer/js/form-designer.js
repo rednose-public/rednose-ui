@@ -31,11 +31,11 @@ var FormDesignerBase = Y.Base.create('formDesigner', Y.Rednose.App, [], {
     //     this.on('contextMenu:dataSourceDelete', this._handleDataSourceDelete, this);
     // },
 
-    destructor: function () {
-        if (this.get('activeView')) {
-            this.get('activeView').destroy();
-        }
-    },
+    // destructor: function () {
+    //     if (this.get('activeView')) {
+    //         this.get('activeView').destroy();
+    //     }
+    // },
 
     handleForm: function (req, res, next) {
         var id   = req.params.form,
