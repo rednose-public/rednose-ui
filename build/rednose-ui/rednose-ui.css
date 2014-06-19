@@ -174,7 +174,7 @@ li.disabled [class*=" icon-"] {
 .rednose-master-detail-grid .rednose-unit-main {
   position: absolute;
   top: 0;
-  right: 460px;
+  right: 279px;
   bottom: 0;
   left: 0;
 }
@@ -183,7 +183,7 @@ li.disabled [class*=" icon-"] {
   position: absolute;
   top: 0;
   right: 0;
-  width: 460px;
+  width: 279px;
   border-left: 1px solid #ddd;
 }
 
@@ -228,16 +228,6 @@ li.disabled [class*=" icon-"] {
 
 .rednose-nav-footer .yui3-widget-bd {
   bottom: 56px;
-}
-
-/* Modal master-detail view */
-
-.rednose-master-detail-grid .yui3-widget-bd .rednose-unit-main {
-  right: 280px;
-}
-
-.rednose-master-detail-grid .yui3-widget-bd .rednose-unit-right {
-  width: 280px;
 }
 
 .rednose-grid-message-container {
