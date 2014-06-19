@@ -815,10 +815,12 @@ Y.namespace('Rednose.Form').ControlViewFactory = ControlViewFactory;
 
 }, '1.3.0', {
     "requires": [
+        "rednose-treeview",
         "rednose-controlform",
         "rednose-dataprovider",
         "rednose-form-css",
         "template-micro",
+        "model-list",
         "uploader"
     ]
 });

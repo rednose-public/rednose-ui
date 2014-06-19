@@ -44,7 +44,8 @@ var TreeView,
  * @constructor
  * @extends TreeView
  */
-TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.Anim, Y.Rednose.TreeView.DD, Y.Rednose.TreeView.Selectable], {
+
+TreeView = Y.Base.create('treeView', Y.TreeView, [Y.Rednose.TreeView.DD, Y.Rednose.TreeView.Selectable], {
     // -- Protected Properties -------------------------------------------------
 
     /**

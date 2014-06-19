@@ -79,7 +79,8 @@ Y.mix(YUI.Env[Y.version].modules, {
             "model-list",
             "node",
             "rednose-contextmenu",
-            "rednose-dialog"
+            "rednose-dialog",
+            "template-micro"
         ]
     },
     "rednose-dataprovider": {
@@ -163,10 +164,12 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-form": {
         "group": "rednose-ui",
         "requires": [
+            "rednose-treeview",
             "rednose-controlform",
             "rednose-dataprovider",
             "rednose-form-css",
             "template-micro",
+            "model-list",
             "uploader"
         ]
     },
@@ -359,7 +362,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'ccc4f54f03d64ac0390163b1a77d1462';
+YUI.Env[Y.version].md5 = '17a0f34f2436308aa7cae537b7109d32';
 
 
 }, '1.3.0');
