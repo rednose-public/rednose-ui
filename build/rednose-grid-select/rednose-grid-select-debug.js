@@ -129,4 +129,4 @@ Selectable.prototype = {
 Y.namespace('Rednose.Grid').Selectable = Selectable;
 
 
-}, '1.1.0-DEV');
+}, '1.3.0');

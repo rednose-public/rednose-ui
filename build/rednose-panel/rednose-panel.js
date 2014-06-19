@@ -69,4 +69,4 @@ Panel = Y.Base.create('panel', Y.Panel, [], {
 Y.namespace('Rednose').Panel = Panel;
 
 
-}, '1.1.0-DEV', {"requires": ["panel", "rednose-panel-css"], "supersedes": ["skin-sam-widget-base", "skin-sam-panel"]});
+}, '1.3.0', {"requires": ["panel", "rednose-panel-css"], "supersedes": ["skin-sam-widget-base", "skin-sam-panel"]});

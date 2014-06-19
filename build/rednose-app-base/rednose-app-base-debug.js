@@ -244,7 +244,7 @@ App.hideSpinner = function () {
 Y.namespace('Rednose').App = App;
 
 
-}, '1.1.0-DEV', {
+}, '1.3.0', {
     "requires": [
         "app-base",
         "cssgrids",

@@ -14,11 +14,18 @@ var CSS_SELECTED = 'selected',
     DATA_RECORD = 'data-yui3-record',
 
     /**
-    Fired when a row is selected.
+     Fired when a row is selected.
 
-    @event select
-    **/
-    EVT_SELECT = 'select';
+     @event select
+     **/
+    EVT_SELECT = 'select',
+
+    /**
+     Fired when a row is doubleclicked.
+
+     @event dblclick
+     **/
+    EVT_DBLCLICK = 'dblclick';
 
 function DataTableSelectPlugin () {
     DataTableSelectPlugin.superclass.constructor.apply(this, arguments);
@@ -61,6 +68,7 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         this.after('selectedRowChange', this._afterSelectedRowChange, this);
 
         contentBox.on('click', this._handleClick, this);
+        contentBox.on('dblclick', this._handleDblClick, this);
         contentBox.on('clickoutside', this._handleClickOutside, this);
     },
 
@@ -110,6 +118,13 @@ Y.extend(DataTableSelectPlugin, Y.Plugin.Base, {
         }
 
         return true;
+    },
+
+    _handleDblClick: function(e) {
+        var table = this.get('host');
+
+        // Fires the double click event from the host
+        table.fire(EVT_DBLCLICK);
     },
 
     /**
@@ -288,4 +303,4 @@ Y.extend(DataTableEditRowPlugin, Y.Plugin.Base, {
 Y.namespace('Rednose').DataTableEditRowPlugin = DataTableEditRowPlugin;
 
 
-}, '1.1.0-DEV', {"requires": ["rednose-datatable", "plugin"]});
+}, '1.3.0', {"requires": ["rednose-datatable", "plugin"]});

@@ -31,7 +31,7 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     /**
-    Stores a references to the top level <li> node for this item.
+    Stores a reference to the top level <li> node for this item.
 
     @property {Node} _itemNode
     @protected
@@ -199,4 +199,4 @@ var Recent = Y.Base.create('recentNavbarPlugin', Y.Plugin.Base, [], {
 Y.namespace('Rednose.Navbar').Recent = Recent;
 
 
-}, '1.1.0-DEV', {"requires": ["cookie", "plugin", "rednose-navbar"]});
+}, '1.3.0', {"requires": ["cookie", "plugin", "rednose-navbar"]});

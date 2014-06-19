@@ -301,4 +301,4 @@ DD = Y.Base.create('dd', Y.Base, [], {
 Y.namespace('Rednose.TreeView').DD = DD;
 
 
-}, '1.1.0-DEV', {"requires": ["rednose-dd", "rednose-treeview"]});
+}, '1.3.0', {"requires": ["rednose-dd", "rednose-treeview"]});

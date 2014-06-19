@@ -410,7 +410,7 @@ Navbar = Y.Base.create('navbar', Y.Widget, [], {
 Y.namespace('Rednose').Navbar = Navbar;
 
 
-}, '1.1.0-DEV', {
+}, '1.3.0', {
     "requires": [
         "base",
         "gallery-bootstrap-dropdown",
