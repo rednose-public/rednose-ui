@@ -1,8 +1,9 @@
 {
     "rednose-colorpicker" : {
         "requires": [
-            "node",
             "base",
+            "event",
+            "node",
             "widget"
         ]
     }

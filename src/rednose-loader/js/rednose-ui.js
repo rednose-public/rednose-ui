@@ -76,8 +76,9 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-colorpicker": {
         "group": "rednose-ui",
         "requires": [
-            "node",
             "base",
+            "event",
+            "node",
             "widget"
         ]
     },
@@ -469,4 +470,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'b11ccebfa45c53005f2f03428931cf61';
+YUI.Env[Y.version].md5 = '3b118412ab2f75a6af8a4b16c7ac088a';

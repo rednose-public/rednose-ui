@@ -8,7 +8,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
     template:
         '<div class="input-append">' +
-            '<input type="text" id="table-background-color" value="FFFFFF" readonly="true" class="rednose-properties-control" />' +
+            '<input type="text" id="color" value="#FFFFFF" readonly="true" />' +
             '<button title="Configure table" type="button" class="btn">' +
                 '<i class="icon-adjust"></i>' +
             '</button>' +
@@ -63,9 +63,20 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     // -- Protected methods ----------------------------------------------------
 
     _handleColorChange: function () {
-        var color = this.get('color');
+        var color    = this.get('color'),
+            hexColor = this.get('hex').toUpperCase(),
+            input    = this.get('contentBox').one('#color');
 
-        console.log(this.get('hex'));
+        input.set('value', hexColor);
+        input.setStyle('backgroundColor', hexColor);
+
+        contrast = 1 - ( 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+console.log(contrast);
+        if (contrast < 0.5) {
+            input.setStyle('color', 'black');
+        } else {
+            input.setStyle('color', 'white');
+        }
     },
 
     _handleColorClicked: function (e) {
@@ -76,9 +87,17 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
         this._renderCanvas();
 
         overlay.append(this._canvas);
+
         overlay.setStyle('display', 'block');
-        overlay.setStyle('left', button.getX());
-        overlay.setStyle('top', button.getY());
+        overlay.setStyle('left', container.getX());
+        overlay.setStyle('top', button.getY() + parseInt(button.getComputedStyle('height')));
+
+        overlay.on('clickoutside', function (e) {
+            // Prevent close on open
+            if (e.target !== button) {
+                overlay.remove();
+            }
+        });
 
         container.append(overlay);
     },
@@ -185,4 +204,4 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 Y.namespace('Rednose').Colorpicker = Colorpicker;
 
 
-}, '1.5.0-DEV', {"requires": ["node", "base", "widget"]});
+}, '1.5.0-DEV', {"requires": ["base", "event", "node", "widget"]});
