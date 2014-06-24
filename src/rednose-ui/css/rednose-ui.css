@@ -279,6 +279,16 @@ li.disabled [class*=" icon-"] {
   background-image: url('img/spinner.gif');
 }
 
+.rednose-colorpicker canvas {
+  width: 256px;
+  height: 256px;
+}
+
+.rednose-colorpicker canvas.buffer {
+  display: none;
+  background-image: url("img/color-picker.png");
+}
+
 .yui3-datatable-col-hidden {
   display: none;
 }

@@ -1,0 +1,9 @@
+{
+    "rednose-colorpicker" : {
+        "requires": [
+            "node",
+            "base",
+            "widget"
+        ]
+    }
+}
