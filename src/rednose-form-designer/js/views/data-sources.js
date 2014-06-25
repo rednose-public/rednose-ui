@@ -49,6 +49,7 @@ DataSourcesView = Y.Base.create('dataSourcesView', Y.View, [], {
                 header    : TXT_DATA_SOURCES
             });
 
+            self._treeView.open();
             self._treeView.render();
         });
 

@@ -48,9 +48,9 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 // The form control identification.
                 '<hr/>' +
                 '<div class="control-group">' +
-                    '<label class="control-label" for="id">Identifier</label>' +
+                    '<label class="control-label" for="id">Name</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="id" type="text" readonly value="<%= data.foreignId %>"/>' +
+                        '<input class="input-block-level" id="name" type="text" value="<%= data.foreign_id %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
@@ -97,13 +97,9 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                     '</div>' +
                 '</div>' +
 
-                // Add a spacer if this section has specific attributes.
-                '<% if (data.type == \'dropdown\' || data.type == \'radio\' || data.type == \'autocomplete\') { %>' +
-                    '<hr/>' +
-                '<% } %>' +
-
                 // Attributes that are specific to this control type.
                 '<% if (data.type == \'dropdown\' || data.type == \'radio\' || data.type == \'autocomplete\') { %>' +
+                    '<hr/>' +
                     '<div class="control-group">' +
                         '<label class="control-label" for="configureItems">Items</label>' +
                         '<div class="controls">' +
@@ -119,8 +115,16 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                     '</div>' +
                 '<% } %>' +
 
-                // TODO: Data binding options.
-                // TODO: Form connections.
+                // Data binding options.
+                '<hr/>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="binding">Binding</label>' +
+                    '<div class="controls">' +
+                        '<input class="input-block-level" id="binding" type="text" value="<%= data.binding %>"/>' +
+                    '</div>' +
+                '</div>' +
+
+                // TODO: Expressions.
             '<fieldset>' +
         '</form>'
     ),

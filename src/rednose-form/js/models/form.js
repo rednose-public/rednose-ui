@@ -25,7 +25,20 @@ var ControlModel = Y.Base.create('controlModel', Y.Model, [], {
         readonly  : { value: false },
         sort_order: { value: 0 },
         help      : { value: null },
-        value     : { value: null }
+
+        /**
+         * @type {String}
+         */
+        value: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        binding: {
+            value: null
+        }
     }
 });
 
