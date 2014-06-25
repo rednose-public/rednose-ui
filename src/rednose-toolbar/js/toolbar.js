@@ -97,8 +97,7 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
 
         this._toolbarEvents.push(
             this.after({
-                open : this._afterAdd,
-                close: this._afterRemove,
+                reset: this._afterReset,
 
                 'button:click': this._afterButtonClick
             })
@@ -118,30 +117,6 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
      * @param {EventFacade} e
      * @private
      */
-    _afterAdd: function (e) {
-        if (!this.rendered) {
-            return;
-        }
-
-        console.log(e.group);
-    },
-
-    /**
-     * @param {EventFacade} e
-     * @private
-     */
-    _afterRemove: function (e) {
-        if (!this.rendered) {
-            return;
-        }
-
-        console.log(e.index);
-    },
-
-    /**
-     * @param {EventFacade} e
-     * @private
-     */
     _afterButtonClick: function (e) {
         var button = e.button,
             event  = EVT_CLICK + '#' + button.id;
@@ -156,6 +131,16 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
             originEvent: e,
             button     : button
         });
+    },
+
+    _afterReset: function () {
+        if (!this.rendered) {
+            return;
+        }
+
+        this.get('container').empty();
+
+        this.render();
     },
 
     // -- Default Event Handlers -----------------------------------------------

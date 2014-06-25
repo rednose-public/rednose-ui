@@ -4,6 +4,14 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
     Y.Rednose.View.Template.Navbar,
     Y.Rednose.View.Template.ThreeColumn
 ], {
+    appViews: {
+        dataSource: {
+            type: 'Rednose.DataSourceManager',
+            modal: true,
+            width: 640
+        }
+    },
+
     /**
      * @property {Rednose.Navbar} navbar
      */
@@ -16,6 +24,8 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
+        Y.mix(this.views, this.appViews);
+
         this._objectLibrary        = new Y.Rednose.FormDesigner.ObjectLibrary();
         this._hierarchyView        = new Y.Rednose.FormDesigner.HierarchyView();
         this._dataSourcesView      = new Y.Rednose.FormDesigner.DataSourcesView();
@@ -27,9 +37,9 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         this._objectAttributesView.addTarget(this);
 
         this.after({
-            'navbar:preview'      : this._handlePreview,
-            'navbar:save'         : this._handleSave,
-            'navbar:newDataSource': this._handleNewDataSource,
+            'navbar:click#preview'      : this._handlePreview,
+            'navbar:click#save'         : this._handleSave,
+            'navbar:click#newDataSource': this._handleNewDataSource,
 
             'hierarchyView:select'   : this._handleControlSelect,
             'objectLibrary:objectAdd': this._handleObjectAdd,
@@ -80,16 +90,7 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
             container    : this.get('navbarContainer'),
             title        : 'Form Designer',
             columnLayout : true,
-            menu         : [
-                { title: 'File', large: true, items: [
-                    { id: 'newDataSource', title: 'New Data Source...' },
-                    { type: 'divider' },
-                    { id: 'preview', title: 'Preview' },
-                    { id: 'save', title: 'Save' }
-                ]}, {
-                    title: 'Insert', items: Y.Rednose.FormDesigner.ControlItems
-                }
-            ],
+            menu         : Y.Rednose.FormDesigner.NavbarItems,
             menuSecondary: [
                 { title: YUI.Env.user.name, icon: 'icon-user', items: [
                     {url  : Routing.generate('_security_logout'), title: 'Sign out'}
@@ -126,36 +127,36 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         console.log(Y.JSON.stringify(form.toJSON()));
     },
 
-    // XXX
     _handleNewDataSource: function () {
-        var dataSourceManagerView = new DataSourceManager(),
-            self                  = this;
+        this.showView('dataSource');
+        // var dataSourceManagerView = new DataSourceManager(),
+        //     self                  = this;
 
-        dataSourceManagerView.render();
-        dataSourceManagerView.showChoicePage();
+        // dataSourceManagerView.render();
+        // dataSourceManagerView.showChoicePage();
 
-        var dataSourceManagerPanel = new Y.Rednose.Panel({
-            srcNode: dataSourceManagerView.get('container'),
-            width  : 640
-        });
+        // var dataSourceManagerPanel = new Y.Rednose.Panel({
+        //     srcNode: dataSourceManagerView.get('container'),
+        //     width  : 640
+        // });
 
-        dataSourceManagerPanel.render();
+        // dataSourceManagerPanel.render();
 
-        dataSourceManagerView.on('close', function () {
-            dataSourceManagerView.destroy();
-            dataSourceManagerPanel.destroy();
-        });
+        // dataSourceManagerView.on('close', function () {
+        //     dataSourceManagerView.destroy();
+        //     dataSourceManagerPanel.destroy();
+        // });
 
-        dataSourceManagerView.on('create', function (e) {
-            var model = e.model;
+        // dataSourceManagerView.on('create', function (e) {
+        //     var model = e.model;
 
-            model.save(function () {
-                dataSourceManagerView.destroy();
-                dataSourceManagerPanel.destroy();
+        //     model.save(function () {
+        //         dataSourceManagerView.destroy();
+        //         dataSourceManagerPanel.destroy();
 
-                self._dataSourcesView.render();
-            });
-        });
+        //         self._dataSourcesView.render();
+        //     });
+        // });
     },
 
     _handleControlSelect: function (e) {
@@ -185,10 +186,47 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         dialog.render();
     },
 
+    _handleDataSourceEdit: function (e) {
+        var model = e.data;
+
+        var dataSourceManagerView = new DataSourceManager({ model: model }),
+            self                  = this;
+
+        dataSourceManagerView.render();
+        dataSourceManagerView.showChoicePage();
+
+        var dataSourceManagerPanel = new Y.Rednose.Panel({
+            srcNode: dataSourceManagerView.get('container'),
+            width  : 640
+        });
+
+        dataSourceManagerPanel.render();
+
+        dataSourceManagerView.on('close', function () {
+            dataSourceManagerView.destroy();
+            dataSourceManagerPanel.destroy();
+        });
+
+        dataSourceManagerView.on('create', function (e) {
+            var model = e.model;
+
+            model.save(function () {
+                dataSourceManagerView.destroy();
+                dataSourceManagerPanel.destroy();
+
+                self._dataSourcesView.render();
+            });
+        });
+    },
+
+    _handleDataSourceDelete: function (e) {
+        console.log(e);
+    },
+
     // -- Route Handlers -------------------------------------------------------
 
     handleForm: function (req, res, next) {
-        var id   = req.params.form,
+        var id   = req.params.id,
             form = this.get('model'),
             self = this;
 
@@ -232,7 +270,7 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
     ATTRS: {
         routes: {
             value: [{
-                path: '/:form/edit', callbacks: [
+                path: '/:id/edit', callbacks: [
                     'handleForm',
                     'showForm'
                 ]}
@@ -242,3 +280,14 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
 });
 
 Y.namespace('Rednose.FormDesigner').App = FormDesignerApp;
+
+Y.Rednose.FormDesigner.NavbarItems = [
+    { title: 'File', large: true, items: [
+        { id: 'newDataSource', title: 'New Data Source...', keyCode: 'ctrl+d' },
+        { type: 'divider' },
+        { id: 'preview', title: 'Preview' },
+        { id: 'save', title: 'Save' }
+    ]}, {
+        title: 'Insert', items: Y.Rednose.FormDesigner.ControlItems
+    }
+];

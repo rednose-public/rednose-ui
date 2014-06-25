@@ -222,7 +222,7 @@ var ControlModel = Y.Base.create('controlModel', Y.Model, [], {
 }, {
     ATTRS: {
         caption   : { value: null },
-        identifier: { value: null },
+        foreign_id: { value: null },
         type      : { value: null },
         properties: {
             value : {},
@@ -245,28 +245,24 @@ var FormModel;
 
 FormModel = Y.Base.create('formModel', Y.Model, [], {
     getTree: function () {
-        var items = {
-            label   : this.get('caption'),
-            data    : new Y.Model(),
+        if (!this.get('id') && !this.get('caption')) {
+            return null;
+        }
+
+        var root = {
+            label   : this.get('foreign_id'),
             icon    : 'icon-list-alt',
             children: []
         };
 
-        return null;
-        // XXX
-        // if (!this.get('id') && !this.get('caption')) {
-        //     return new TreeModel();
-        // }
+        this.get('controls').each(function (model) {
+            root.children.push({
+                label: model.get('foreign_id'),
+                icon : 'icon-minus'
+            });
+        });
 
-        // this.get('controls').each(function (model) {
-        //     items.children.push({
-        //         label   : model.get('caption'),
-        //         data    : model,
-        //         icon    : 'icon-minus'
-        //     });
-        // });
-
-        // return new TreeModel({ items: items });
+        return [root];
     },
 
     sync: function (action, options, callback) {
@@ -302,9 +298,31 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
     }
 }, {
     ATTRS: {
-        caption   : { value: null },
-        foreignId : { value: null },
-        controls  : {
+        /**
+         * @type {String}
+         */
+        foreign_id: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        name: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        caption: {
+            value: null
+        },
+
+        /**
+         * @type {ModelList}
+         */
+        controls: {
             value : new Y.ModelList(),
             setter: '_setControls'
         }

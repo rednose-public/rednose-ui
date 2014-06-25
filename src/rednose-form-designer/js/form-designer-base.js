@@ -1,7 +1,6 @@
 /*jshint boss:true, expr:true, onevar:false */
 
 var ConfigureDynamicItems = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
-    DataSourceManager     = Y.Rednose.DataSourceManager.DataSourceManager,
     Panel                 = Y.Rednose.Panel;
 
 var FormDesignerBase = Y.Base.create('formDesigner', Y.Rednose.App, [], {
@@ -93,47 +92,8 @@ var FormDesignerBase = Y.Base.create('formDesigner', Y.Rednose.App, [], {
         });
     },
 
-    // XXX
-    _handleDataSourceEdit: function (e) {
-        var model = e.data;
-
-        var dataSourceManagerView = new DataSourceManager({ model: model }),
-            self                  = this;
-
-        dataSourceManagerView.render();
-        dataSourceManagerView.showChoicePage();
-
-        var dataSourceManagerPanel = new Y.Rednose.Panel({
-            srcNode: dataSourceManagerView.get('container'),
-            width  : 640
-        });
-
-        dataSourceManagerPanel.render();
-
-        dataSourceManagerView.on('close', function () {
-            dataSourceManagerView.destroy();
-            dataSourceManagerPanel.destroy();
-        });
-
-        dataSourceManagerView.on('create', function (e) {
-            var model = e.model;
-
-            model.save(function () {
-                dataSourceManagerView.destroy();
-                dataSourceManagerPanel.destroy();
-
-                self._dataSourcesView.render();
-            });
-        });
-    },
-
     _handleClose: function() {
         this.destroy();
-    },
-
-    // XXX
-    _handleDataSourceDelete: function (e) {
-        console.log(e);
     }
 }, {
     ATTRS: {
