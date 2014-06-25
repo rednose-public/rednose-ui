@@ -10,7 +10,9 @@
                 "views/data-sources.js",
                 "views/object-attributes.js",
                 "views/form.js",
-                "form-designer.js"
+                "form-designer-base.js",
+                "form-designer.js",
+                "form-designer-app.js"
             ]
         }
     }

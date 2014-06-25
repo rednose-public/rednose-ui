@@ -1,6 +1,15 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var App = Y.Base.create('app', Y.App, [], {
+var TXT_NEW_DATA_SOURCE = 'New Data Source',
+    TXT_NEXT            = 'Next',
+    TXT_BACK            = 'Back',
+    TXT_CANCEL          = 'Cancel',
+    TXT_CREATE          = 'Create';
+
+var DataSourceManager = Y.Base.create('dataSourceManager', Y.Rednose.App, [Y.Rednose.View.Nav], {
+    /**
+     * @see App.views
+     */
     views: {
         choicePage: {
             type    : ChoicePageView,
@@ -36,46 +45,48 @@ var App = Y.Base.create('app', Y.App, [], {
             parent  : 'choicePage',
             preserve: false
         }
-    }
-});
-
-var TXT_NEW_DATA_SOURCE = 'New Data Source',
-    TXT_NEXT            = 'Next',
-    TXT_BACK            = 'Back',
-    TXT_CANCEL          = 'Cancel',
-    TXT_CREATE          = 'Create';
-
-var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.View.Nav ], {
-    _app: null,
-
-    title: TXT_NEW_DATA_SOURCE,
-
-    close: true,
-
-    initializer: function () {
-        this.on('dataSourceManager:buttonChoice', this.showChoicePage, this);
-        this.on('dataSourceManager:buttonChoose', this._handleButtonChoose, this);
-        this.on('dataSourceManager:buttonPdoGeneric', this.showPdoGenericPage, this);
-        this.on('dataSourceManager:buttonPdoSource', this.showPdoSourcePage, this);
-        this.on('dataSourceManager:buttonDataGenGeneric', this.showDataGenGenericPage, this);
-        this.on('dataSourceManager:buttonDataGenSource', this.showDataGenSourcePage, this);
-        this.on('dataSourceManager:buttonClose', this._handleButtonClose, this);
-        this.on('dataSourceManager:buttonCreate', this._handleButtonCreate, this);
     },
 
-    render: function () {
-        var container = this.get('container');
+    /**
+     * @see Rednose.View.Nav.title
+     */
+    title: TXT_NEW_DATA_SOURCE,
 
-        this._app = new App({
-            container  : container,
-            transitions: true
-        }).render();
+    /**
+     * @see Rednose.View.Nav.fixedd
+     */
+    fixed: false,
 
-        return this;
+    /**
+     * @see Rednose.View.Nav.close
+     */
+    close: true,
+
+    /**
+     * @see Rednose.View.Nav.padding
+     */
+    padding: true,
+
+    /**
+     * @see Rednose.View.Nav.buttonGroups
+     */
+    buttonGroups: [],
+
+    initializer: function () {
+        this.after({
+            'toolbar:click#close' : this._handleButtonClose,
+            'toolbar:click#back'  : this._handleButtonBack,
+            'toolbar:click#next'  : this._handleButtonNext,
+            'toolbar:click#create': this._handleButtonCreate
+        });
+
+        this.once('ready', function () {
+            this.showChoicePage();
+        });
     },
 
     showChoicePage: function () {
-        var view    = this._app.get('activeView'),
+        var view    = this.get('activeView'),
             options = view ? {} : { transition: false },
             model;
 
@@ -83,209 +94,150 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
 
         model = this.get('model');
 
-        this._app.showView('choicePage', { model: model }, options);
+        this.showView('choicePage', { model: model }, options);
 
-        this._updateButtons({
-            choose: {
-                value:    TXT_NEXT,
-                position: 'right',
-                primary:   true
-            },
-
-            close: {
-                value:    TXT_CANCEL,
-                position: 'left'
-            }
-        });
+        this.toolbar.reset([
+            Y.Rednose.DataSourceManager.Buttons.close,
+            Y.Rednose.DataSourceManager.Buttons.next
+        ]);
     },
 
     showPdoGenericPage: function () {
-        var model = this._app.get('activeView').get('model');
+        var model = this.get('activeView').get('model');
 
         this.set('model', model);
 
-        this._app.showView('pdoGenericPage', {
+        this.showView('pdoGenericPage', {
             model: model
         });
 
-        this._updateButtons({
-            pdoSource: {
-                value:    TXT_NEXT,
-                position: 'right',
-                primary:   true
-            },
-
-            choice: {
-                value:    TXT_BACK,
-                position: 'right'
-            },
-
-            close: {
-                value:    TXT_CANCEL,
-                position: 'left'
-            }
-        });
+        this.toolbar.reset([
+            Y.Rednose.DataSourceManager.Buttons.close,
+            Y.Rednose.DataSourceManager.Buttons.next,
+            Y.Rednose.DataSourceManager.Buttons.back
+        ]);
     },
 
     showPdoSourcePage: function () {
-        var model = this._app.get('activeView').get('model');
+        var model = this.get('activeView').get('model');
 
         this.set('model', model);
 
-        this._app.showView('pdoSourcePage', {
+        this.showView('pdoSourcePage', {
             model: model
         });
 
-        this._updateButtons({
-            create: {
-                value:    TXT_CREATE,
-                position: 'right',
-                primary:   true
-            },
-
-            pdoGeneric: {
-                value:    TXT_BACK,
-                position: 'right'
-            },
-
-            close: {
-                value:    TXT_CANCEL,
-                position: 'left'
-            }
-        });
+        this.toolbar.reset([
+            Y.Rednose.DataSourceManager.Buttons.close,
+            Y.Rednose.DataSourceManager.Buttons.create,
+            Y.Rednose.DataSourceManager.Buttons.back
+        ]);
     },
 
     showDataGenGenericPage: function () {
-        var model = this._app.get('activeView').get('model');
+        var model = this.get('activeView').get('model');
 
         this.set('model', model);
 
-        this._app.showView('dataGenGenericPage', {
+        this.showView('dataGenGenericPage', {
             model: model
         });
 
-        this._updateButtons({
-            dataGenSource: {
-                value:    TXT_NEXT,
-                position: 'right',
-                primary:   true
-            },
-
-            choice: {
-                value:    TXT_BACK,
-                position: 'right'
-            },
-
-            close: {
-                value:    TXT_CANCEL,
-                position: 'left'
-            }
-        });
+        this.toolbar.reset([
+            Y.Rednose.DataSourceManager.Buttons.close,
+            Y.Rednose.DataSourceManager.Buttons.next,
+            Y.Rednose.DataSourceManager.Buttons.back
+        ]);
     },
 
     showDataGenSourcePage: function () {
-        var model = this._app.get('activeView').get('model');
+        var model = this.get('activeView').get('model');
 
         this.set('model', model);
 
-        this._app.showView('dataGenSourcePage', {
+        this.showView('dataGenSourcePage', {
             model: model
         });
 
-        this._updateButtons({
-            create: {
-                value:    TXT_CREATE,
-                position: 'right',
-                primary:   true
-            },
-
-            dataGenGeneric: {
-                value:    TXT_BACK,
-                position: 'right'
-            },
-
-            close: {
-                value:    TXT_CANCEL,
-                position: 'left'
-            }
-        });
+        this.toolbar.reset([
+            Y.Rednose.DataSourceManager.Buttons.close,
+            Y.Rednose.DataSourceManager.Buttons.create,
+            Y.Rednose.DataSourceManager.Buttons.back
+        ]);
     },
 
     showXMLPage: function () {
-        var model = this._app.get('activeView').get('model');
+        var model = this.get('activeView').get('model');
 
         this.set('model', model);
 
-        this._app.showView('xmlPage', {
+        this.showView('xmlPage', {
             model: model
         });
 
-        this._updateButtons({
-            create: {
-                value:    TXT_CREATE,
-                position: 'right',
-                primary:   true
-            },
+        this.toolbar.reset([
+            Y.Rednose.DataSourceManager.Buttons.close,
+            Y.Rednose.DataSourceManager.Buttons.create,
+            Y.Rednose.DataSourceManager.Buttons.back
+        ]);
+    },
 
-            choice: {
-                value:    TXT_BACK,
-                position: 'right'
-            },
+    _handleButtonNext: function () {
+        var viewInfo = this.getViewInfo(this.get('activeView')),
+            name     = viewInfo.type.NAME,
+            model    = this.get('model');
 
-            close: {
-                value:    TXT_CANCEL,
-                position: 'left'
+        if (name === 'dataGenGenericPageView') {
+            this.showDataGenSourcePage();
+            return;
+        }
+
+        if (name === 'pdoGenericPageView') {
+            this.showPdoSourcePage();
+            return;
+        }
+
+        if (name === 'choicePageView') {
+            switch (model.get('type')) {
+                case 'dataGen':
+                    this.showDataGenGenericPage();
+                    break;
+
+                case 'pdo':
+                    this.showPdoGenericPage();
+                    break;
+
+                case 'xml':
+                    this.showXMLPage();
+                    break;
             }
-        });
-    },
-
-    _updateButtons: function (buttons) {
-        this.buttons = {};
-
-        this.set('buttons', buttons);
-    },
-
-    _handleButtonChoose: function () {
-        var choiceView = this._app.get('activeView'),
-            model      = choiceView.get('model'),
-            baseAttrs  = ['id', 'identifier', 'name', 'type'];
-
-        switch (model.get('type')) {
-            case 'dataGen':
-                model instanceof Y.Rednose.DataSource.DatagenSource ||
-                    (model = new Y.Rednose.DataSource.DatagenSource(model.getAttrs(baseAttrs)));
-
-                choiceView.set('model', model);
-
-                this.showDataGenGenericPage();
-                break;
-            case 'pdo':
-                model instanceof Y.Rednose.DataSource.PdoSource ||
-                    (model = new Y.Rednose.DataSource.PdoSource(model.getAttrs(baseAttrs)));
-
-                choiceView.set('model', model);
-
-                this.showPdoGenericPage();
-                break;
-            case 'xml':
-                model instanceof Y.Rednose.DataSource.XmlSource ||
-                    (model = new Y.Rednose.DataSource.XmlSource(model.getAttrs(baseAttrs)));
-
-                choiceView.set('model', model);
-
-                this.showXMLPage();
-                break;
         }
     },
 
-    // XXX
+    _handleButtonBack: function () {
+        var viewInfo = this.getViewInfo(this.get('activeView')),
+            name     = viewInfo.type.NAME;
+
+        switch (name) {
+            case 'dataGenSourcePageView':
+                this.showDataGenGenericPage();
+                break;
+
+            case 'pdoSourcePageView':
+                this.showPdoGenericPage();
+                break;
+
+            default:
+                this.showChoicePage();
+        }
+    },
+
     _handleButtonClose: function () {
         this.fire('close');
     },
 
-    // XXX
     _handleButtonCreate: function () {
-        var model = this._app.get('activeView').get('model');
+        var model = this.get('activeView').get('model');
 
         this.fire('create', { model: model });
     }
@@ -295,4 +247,11 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.View, [ Y.Rednose.V
     }
 });
 
-Y.namespace('Rednose.DataSourceManager').DataSourceManager = DataSourceManager;
+Y.namespace('Rednose').DataSourceManager = Y.mix(DataSourceManager, Y.Rednose.DataSourceManager);
+
+Y.Rednose.DataSourceManager.Buttons = {
+    close : {position: 'left',  buttons: [{id: 'close',  value: TXT_CANCEL}]},
+    create: {position: 'right', buttons: [{id: 'create', value: TXT_CREATE, type: 'primary'}]},
+    next  : {position: 'right', buttons: [{id: 'next',   value: TXT_NEXT,   type: 'primary'}]},
+    back  : {position: 'right', buttons: [{id: 'back',   value: TXT_BACK}]}
+};

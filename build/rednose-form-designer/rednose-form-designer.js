@@ -606,14 +606,15 @@ Y.namespace('Rednose.FormDesigner').ObjectLibrary = ObjectLibrary;
 Y.namespace('Rednose.FormDesigner').ObjectLibraryView = ObjectLibraryView;
 /*jshint boss:true, expr:true, onevar:false */
 
-var TXT_HIERARCHY = 'Hierarchy',
+var TXT_HIERARCHY      = 'Hierarchy',
     TXT_REMOVE_CONTROL = 'Remove';
 
-var HierarchyView;
-
+/**
+ * @event select
+ */
 var EVT_SELECT = 'select';
 
-HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
+var HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
     template: '<div class="rednose-hierarchy></div>',
 
@@ -649,16 +650,13 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
         this._treeView = new Y.Rednose.TreeView({
             container : container.one('.rednose-treeview'),
-            // model     : model.getTree(),
+            nodes     : model.getTree(),
             selectable: true,
             header    : TXT_HIERARCHY
         });
 
         // Open all nodes by default since this is our main navigation tool.
-        Y.Array.each(self._treeView.rootNode.children, function (node) {
-            node.open();
-        });
-
+        this._treeView.open();
         this._treeView.render();
 
         this._treeView.after('select', function (e) {
@@ -1232,22 +1230,7 @@ Y.namespace('Rednose.FormDesigner').FormView = FormView;
 /*jshint boss:true, expr:true, onevar:false */
 
 var ConfigureDynamicItems = Y.Rednose.FormDesigner.ConfigureDynamicItemsView,
-    DataSourceManager     = Y.Rednose.DataSourceManager.DataSourceManager,
     Panel                 = Y.Rednose.Panel;
-
-var formControlItems = [
-    {id: 'text',         title: 'Text',           icon: 'rednose-icon-text'},
-    {id: 'textarea',     title: 'Text Area',      icon: 'rednose-icon-textarea'},
-    {id: 'richtext',     title: 'Rich Text',      icon: 'rednose-icon-textarea'},
-    {type: 'divider'},
-    {id: 'dropdown',     title: 'Drop-down List', icon: 'rednose-icon-dropdown'},
-    {id: 'radio',        title: 'Radio Button',   icon: 'rednose-icon-radio'},
-    {id: 'checkbox',     title: 'Checkbox',       icon: 'rednose-icon-checkbox'},
-    {type: 'divider'},
-    {id: 'date',         title: 'Date',           icon: 'rednose-icon-date'},
-    {id: 'autocomplete', title: 'Autocomplete',   icon: 'rednose-icon-dropdown'},
-    {id: 'file',         title: 'File',           icon: 'rednose-icon-dropdown'}
-];
 
 var FormDesignerBase = Y.Base.create('formDesigner', Y.Rednose.App, [], {
     views: {
@@ -1267,48 +1250,6 @@ var FormDesignerBase = Y.Base.create('formDesigner', Y.Rednose.App, [], {
     //         this.get('activeView').destroy();
     //     }
     // },
-
-    handleForm: function (req, res, next) {
-        var id   = req.params.form,
-            form = this.get('model'),
-            self = this;
-
-        if (id === form.get('id') && !form.isNew()) {
-            req.form = form;
-            next();
-        } else {
-            form = new Y.Rednose.Form.FormModel({id: id});
-
-            form.load(function () {
-                self.set('model', form);
-                req.form = form;
-                next();
-            });
-        }
-    },
-
-    showForm: function (req, res) {
-        if (this.get('activeView')) {
-            this.get('activeView').destroy();
-        }
-
-        if (!req) {
-            req = { form: this.get('model') };
-            res = { transition: false };
-        }
-
-        this.showView('form', {
-            model: req.form
-        }, {
-            // Overrides the default transition with the preferred one, if set.
-            transition: res.transition
-        });
-
-        if (this._hierarchyView) {
-            this._hierarchyView.set('model', req.form);
-            this._hierarchyView.render();
-        }
-    },
 
     _handleRemoveControl: function(e) {
         var self = this,
@@ -1380,47 +1321,8 @@ var FormDesignerBase = Y.Base.create('formDesigner', Y.Rednose.App, [], {
         });
     },
 
-    // XXX
-    _handleDataSourceEdit: function (e) {
-        var model = e.data;
-
-        var dataSourceManagerView = new DataSourceManager({ model: model }),
-            self                  = this;
-
-        dataSourceManagerView.render();
-        dataSourceManagerView.showChoicePage();
-
-        var dataSourceManagerPanel = new Y.Rednose.Panel({
-            srcNode: dataSourceManagerView.get('container'),
-            width  : 640
-        });
-
-        dataSourceManagerPanel.render();
-
-        dataSourceManagerView.on('close', function () {
-            dataSourceManagerView.destroy();
-            dataSourceManagerPanel.destroy();
-        });
-
-        dataSourceManagerView.on('create', function (e) {
-            var model = e.model;
-
-            model.save(function () {
-                dataSourceManagerView.destroy();
-                dataSourceManagerPanel.destroy();
-
-                self._dataSourcesView.render();
-            });
-        });
-    },
-
     _handleClose: function() {
         this.destroy();
-    },
-
-    // XXX
-    _handleDataSourceDelete: function (e) {
-        console.log(e);
     }
 }, {
     ATTRS: {
@@ -1429,15 +1331,6 @@ var FormDesignerBase = Y.Base.create('formDesigner', Y.Rednose.App, [], {
          */
         model: {
             value: new Y.Rednose.Form.FormModel()
-        },
-
-        routes: {
-            value: [{
-                path: '/:form/edit', callbacks: [
-                    'handleForm',
-                    'showForm'
-                ]}
-            ]
         }
     }
 });
@@ -1445,7 +1338,22 @@ var FormDesignerBase = Y.Base.create('formDesigner', Y.Rednose.App, [], {
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose.FormDesigner').Base = FormDesignerBase;
 
-var FormDesigner = Y.Base.create('formDesigner', FormDesignerBase, [
+Y.Rednose.FormDesigner.ControlItems = [
+    {id: 'text',         title: 'Text',           icon: 'rednose-icon-text'},
+    {id: 'textarea',     title: 'Text Area',      icon: 'rednose-icon-textarea'},
+    {id: 'richtext',     title: 'Rich Text',      icon: 'rednose-icon-textarea'},
+    {type: 'divider'},
+    {id: 'dropdown',     title: 'Drop-down List', icon: 'rednose-icon-dropdown'},
+    {id: 'radio',        title: 'Radio Button',   icon: 'rednose-icon-radio'},
+    {id: 'checkbox',     title: 'Checkbox',       icon: 'rednose-icon-checkbox'},
+    {type: 'divider'},
+    {id: 'date',         title: 'Date',           icon: 'rednose-icon-date'},
+    {id: 'autocomplete', title: 'Autocomplete',   icon: 'rednose-icon-dropdown'},
+    {id: 'file',         title: 'File',           icon: 'rednose-icon-dropdown'}
+];
+/*jshint boss:true, expr:true, onevar:false */
+
+var FormDesigner = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base, [
     Y.Rednose.View.Template.SingleView,
     Y.Rednose.View.Template.Toolbar,
     Y.Rednose.View.Nav
@@ -1518,7 +1426,7 @@ var FormDesigner = Y.Base.create('formDesigner', FormDesignerBase, [
         });
 
         this.toolbar.getButtonById('insert').plug(Y.Rednose.Plugin.ButtonDropdown, {
-            items: formControlItems
+            items: Y.Rednose.FormDesigner.ControlItems
         });
 
         this.toolbar.addTarget(this);
@@ -1526,11 +1434,20 @@ var FormDesigner = Y.Base.create('formDesigner', FormDesignerBase, [
 });
 
 Y.namespace('Rednose').FormDesigner = Y.mix(FormDesigner, Y.Rednose.FormDesigner);
+/*jshint boss:true, expr:true, onevar:false */
 
-var FormDesignerApp = Y.Base.create('formDesigner', FormDesignerBase, [
+var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base, [
     Y.Rednose.View.Template.Navbar,
     Y.Rednose.View.Template.ThreeColumn
 ], {
+    appViews: {
+        dataSource: {
+            type: 'Rednose.DataSourceManager',
+            modal: true,
+            width: 640
+        }
+    },
+
     /**
      * @property {Rednose.Navbar} navbar
      */
@@ -1543,6 +1460,8 @@ var FormDesignerApp = Y.Base.create('formDesigner', FormDesignerBase, [
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
+        Y.mix(this.views, this.appViews);
+
         this._objectLibrary        = new Y.Rednose.FormDesigner.ObjectLibrary();
         this._hierarchyView        = new Y.Rednose.FormDesigner.HierarchyView();
         this._dataSourcesView      = new Y.Rednose.FormDesigner.DataSourcesView();
@@ -1554,9 +1473,9 @@ var FormDesignerApp = Y.Base.create('formDesigner', FormDesignerBase, [
         this._objectAttributesView.addTarget(this);
 
         this.after({
-            'navbar:preview'      : this._handlePreview,
-            'navbar:save'         : this._handleSave,
-            'navbar:newDataSource': this._handleNewDataSource,
+            'navbar:click#preview'      : this._handlePreview,
+            'navbar:click#save'         : this._handleSave,
+            'navbar:click#newDataSource': this._handleNewDataSource,
 
             'hierarchyView:select'   : this._handleControlSelect,
             'objectLibrary:objectAdd': this._handleObjectAdd,
@@ -1607,16 +1526,7 @@ var FormDesignerApp = Y.Base.create('formDesigner', FormDesignerBase, [
             container    : this.get('navbarContainer'),
             title        : 'Form Designer',
             columnLayout : true,
-            menu         : [
-                { title: 'File', large: true, items: [
-                    { id: 'newDataSource', title: 'New Data Source...' },
-                    { type: 'divider' },
-                    { id: 'preview', title: 'Preview' },
-                    { id: 'save', title: 'Save' }
-                ]}, {
-                    title: 'Insert', items: formControlItems
-                }
-            ],
+            menu         : Y.Rednose.FormDesigner.NavbarItems,
             menuSecondary: [
                 { title: YUI.Env.user.name, icon: 'icon-user', items: [
                     {url  : Routing.generate('_security_logout'), title: 'Sign out'}
@@ -1653,9 +1563,69 @@ var FormDesignerApp = Y.Base.create('formDesigner', FormDesignerBase, [
         console.log(Y.JSON.stringify(form.toJSON()));
     },
 
-    // XXX
     _handleNewDataSource: function () {
-        var dataSourceManagerView = new DataSourceManager(),
+        this.showView('dataSource');
+        // var dataSourceManagerView = new DataSourceManager(),
+        //     self                  = this;
+
+        // dataSourceManagerView.render();
+        // dataSourceManagerView.showChoicePage();
+
+        // var dataSourceManagerPanel = new Y.Rednose.Panel({
+        //     srcNode: dataSourceManagerView.get('container'),
+        //     width  : 640
+        // });
+
+        // dataSourceManagerPanel.render();
+
+        // dataSourceManagerView.on('close', function () {
+        //     dataSourceManagerView.destroy();
+        //     dataSourceManagerPanel.destroy();
+        // });
+
+        // dataSourceManagerView.on('create', function (e) {
+        //     var model = e.model;
+
+        //     model.save(function () {
+        //         dataSourceManagerView.destroy();
+        //         dataSourceManagerPanel.destroy();
+
+        //         self._dataSourcesView.render();
+        //     });
+        // });
+    },
+
+    _handleControlSelect: function (e) {
+        var model  = e.model;
+
+        if (model && model instanceof Y.Rednose.Form.ControlModel) {
+            if (model.view instanceof Y.Rednose.Form.BaseControlView) {
+                model.view.focus();
+            }
+        }
+
+        this._objectAttributesView.set('model', model);
+        this._objectAttributesView.render();
+    },
+
+    _handleObjectAdd: function (e) {
+        var self = this;
+        var dialog = new Y.Rednose.FormDesigner.ObjectLibraryView({
+            model: this.get('model'),
+            item: e.item
+        });
+
+        dialog.on('destroy', function() {
+            self.showForm();
+        });
+
+        dialog.render();
+    },
+
+    _handleDataSourceEdit: function (e) {
+        var model = e.data;
+
+        var dataSourceManagerView = new DataSourceManager({ model: model }),
             self                  = this;
 
         dataSourceManagerView.render();
@@ -1685,35 +1655,78 @@ var FormDesignerApp = Y.Base.create('formDesigner', FormDesignerBase, [
         });
     },
 
-    _handleControlSelect: function (e) {
-        var model  = e.model;
-
-        if (model && model instanceof Y.Rednose.Form.ControlModel) {
-            if (model.view instanceof Y.Rednose.Form.BaseControlView) {
-                model.view.focus();
-            }
-        }
-
-        this._objectAttributesView.set('model', model);
-        this._objectAttributesView.render();
+    _handleDataSourceDelete: function (e) {
+        console.log(e);
     },
 
-    _handleObjectAdd: function (e) {
-        var self = this;
-        var dialog = new Y.Rednose.FormDesigner.ObjectLibraryView({
-            model: this.get('model'),
-            item: e.item
+    // -- Route Handlers -------------------------------------------------------
+
+    handleForm: function (req, res, next) {
+        var id   = req.params.id,
+            form = this.get('model'),
+            self = this;
+
+        if (id === form.get('id') && !form.isNew()) {
+            req.form = form;
+            next();
+        } else {
+            form = new Y.Rednose.Form.FormModel({id: id});
+
+            form.load(function () {
+                self.set('model', form);
+                req.form = form;
+                next();
+            });
+        }
+    },
+
+    showForm: function (req, res) {
+        if (this.get('activeView')) {
+            this.get('activeView').destroy();
+        }
+
+        if (!req) {
+            req = { form: this.get('model') };
+            res = { transition: false };
+        }
+
+        this.showView('form', {
+            model: req.form
+        }, {
+            // Overrides the default transition with the preferred one, if set.
+            transition: res.transition
         });
 
-        dialog.on('destroy', function() {
-            self.showForm();
-        });
-
-        dialog.render();
+        if (this._hierarchyView) {
+            this._hierarchyView.set('model', req.form);
+            this._hierarchyView.render();
+        }
+    }
+}, {
+    ATTRS: {
+        routes: {
+            value: [{
+                path: '/:id/edit', callbacks: [
+                    'handleForm',
+                    'showForm'
+                ]}
+            ]
+        }
     }
 });
 
 Y.namespace('Rednose.FormDesigner').App = FormDesignerApp;
+
+Y.Rednose.FormDesigner.NavbarItems = [
+    { title: 'File', large: true, items: [
+        { id: 'newDataSource', title: 'New Data Source...', keyCode: 'ctrl+d' },
+        { type: 'divider' },
+        { id: 'preview', title: 'Preview' },
+        { id: 'save', title: 'Save' }
+    ]}, {
+        title: 'Insert', items: Y.Rednose.FormDesigner.ControlItems
+    }
+];
 
 
 }, '1.5.0-DEV', {

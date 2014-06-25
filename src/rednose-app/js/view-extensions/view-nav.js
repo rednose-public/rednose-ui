@@ -57,6 +57,14 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     toolbar: null,
 
     /**
+     * Whether the sections will have a fixed size or not.
+     *
+     * @property {Boolean} fixed
+     * @default true
+     */
+    fixed: true,
+
+    /**
      * Whether the footer section will be rendered or not.
      *
      * @property {Boolean} footer
@@ -112,7 +120,8 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
         nav   : 'rednose-view-nav',
         close : 'close',
         header: 'rednose-nav-header',
-        footer: 'rednose-nav-footer'
+        footer: 'rednose-nav-footer',
+        fixed : 'rednose-view-fixed'
     },
 
     // -- Protected Properties -------------------------------------------------
@@ -254,10 +263,14 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
             title      = this.title,
             body       = Y.Node.create('<div></div>'),
             footer     = this._footer,
-            config     = { bodyContent: body },
+            config     = {bodyContent: body},
             close      = this.close;
 
         container.addClass(classNames.nav);
+
+        if (this.fixed) {
+            container.addClass(classNames.fixed);
+        }
 
         if (this.title) {
             container.addClass(classNames.header);
