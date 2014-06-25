@@ -669,7 +669,8 @@ var DataSourceManager = Y.Base.create('dataSourceManager', Y.Rednose.App, [Y.Red
     },
 
     _handleButtonNext: function () {
-        var viewInfo = this.getViewInfo(this.get('activeView')),
+        var view     = this.get('activeView'),
+            viewInfo = this.getViewInfo(view),
             name     = viewInfo.type.NAME,
             model    = this.get('model');
 

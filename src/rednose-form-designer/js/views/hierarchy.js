@@ -54,13 +54,7 @@ var HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
         this._treeView.render();
 
         this._treeView.after('select', function (e) {
-            var model = e.node.data;
-
-            if (model && model instanceof Y.Rednose.Form.ControlModel) {
-                self.fire(EVT_SELECT, { model: model });
-            } else {
-                self.fire(EVT_SELECT, { model: null });
-            }
+            self.fire(EVT_SELECT, {node: e.node});
         });
 
         return this;

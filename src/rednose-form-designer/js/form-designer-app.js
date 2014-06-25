@@ -160,15 +160,10 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
     },
 
     _handleControlSelect: function (e) {
-        var model  = e.model;
+        var node = e.node,
+            form = this.get('model');
 
-        if (model && model instanceof Y.Rednose.Form.ControlModel) {
-            if (model.view instanceof Y.Rednose.Form.BaseControlView) {
-                model.view.focus();
-            }
-        }
-
-        this._objectAttributesView.set('model', model);
+        this._objectAttributesView.set('model', form.getControl(node.label));
         this._objectAttributesView.render();
     },
 
