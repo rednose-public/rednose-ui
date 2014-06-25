@@ -1,5 +1,20 @@
 /*jshint boss:true, expr:true, onevar:false */
 
+/**
+ * Fired when the overlay is closed
+ *
+ * @event close
+ * @param {EventFacade} originEvent Original click event.
+ */
+var EVT_CLOSE = 'close';
+
+/**
+ * Colorpicker in form-control style
+ *
+ * @class Colorpicker
+ * @namespace Rednose
+ * @constructor
+ */
 var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
     // -- Public Properties ----------------------------------------------------
@@ -94,7 +109,8 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     },
 
     _handleColorClicked: function (e) {
-        var container = this.get('contentBox'),
+        var self      = this,
+            container = this.get('contentBox'),
             button    = e.currentTarget,
             overlay   = new Y.Node.create('<div class="dropdown-menu"></div>');
 
@@ -111,6 +127,8 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             // Prevent close on open
             if (e.target !== button) {
                 overlay.remove();
+
+                self.fire(EVT_CLOSE);
             }
         });
 
