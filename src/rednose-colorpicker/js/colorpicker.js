@@ -29,8 +29,8 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     initializer: function () {
         var self = this;
 
-        this._canvas = Y.Node.create('<canvas height="256" width="256"></canvas>').getDOMNode();
-        this._picker = Y.Node.create('<i class="picker"><i>');
+        this._canvas = Y.Node.create('<canvas class="rednose-colorpicker-canvas" height="256" width="256"></canvas>').getDOMNode();
+        this._picker = Y.Node.create('<i class="rednose-colorpicker-pointer"><i>');
 
         this._canvas.addEventListener('mousemove', function (e) {
             self._mouseOver(e);
@@ -84,7 +84,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
         input.set('value', hexColor);
         input.setStyle('backgroundColor', hexColor);
 
-        contrast = 1 - ( 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+        contrast = 1 - (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
 
         if (contrast < 0.5) {
             input.setStyle('color', 'black');
@@ -114,7 +114,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             }
         });
 
-        container.append(overlay);
+        Y.one('body').append(overlay);
     },
 
     _handleColorInputChanged: function (e) {
@@ -153,9 +153,9 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             blue  = data[((imgObj.width * y) + x) * 4 + 2];
 
         return {
-            red: red,
-            green: green,
-            blue: blue
+            red   : red,
+            green : green,
+            blue  : blue
         }
     },
 
@@ -166,7 +166,10 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             context      = this._canvas.getContext('2d'),
             image        = new Image();
 
-        container.append(bufferCanvas);
+        if (container.one('canvas.buffer') === null) {
+            container.append(bufferCanvas);
+        }
+
         container.append(this._canvas);
 
         var imageUrl =
