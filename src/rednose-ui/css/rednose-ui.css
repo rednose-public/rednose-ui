@@ -279,13 +279,24 @@ li.disabled [class*=" icon-"] {
   background-image: url('img/spinner.gif');
 }
 
+.rednose-colorpicker i.picker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 5px;
+  height: 5px;
+  margin: -4px 0 0 -4px;
+  cursor: crosshair;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
 .rednose-colorpicker canvas {
-  width: 256px;
-  height: 256px;
+  cursor: crosshair;
 }
 
 .rednose-colorpicker canvas.buffer {
-  display: none;
   background-image: url("img/color-picker.png");
 }
 
