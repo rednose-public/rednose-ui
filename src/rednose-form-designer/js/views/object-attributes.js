@@ -25,9 +25,14 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     // title: TXT_OBJECT_ATTRIBUTES,
 
     /**
-     * Property inherited from Y.Rednose.View.Nav
+     * @see Rednose.View.Nav.footer
      */
     footer: false,
+
+    /**
+     * @see Rednose.View.Nav.padding
+     */
+    padding: true,
 
     formTemplate: Micro.compile(
         '<form class="form-vertical">'+
@@ -129,8 +134,8 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     initializer: function () {
-        this.on('dropdown:configureItems', this._handleConfigureItems, this);
-        this.on('dropdown:configureDynamicItems', this._handleConfigureDynamicItems, this);
+        this.on('dropdown:click#configureItems', this._handleConfigureItems, this);
+        this.on('dropdown:click#configureDynamicItems', this._handleConfigureDynamicItems, this);
     },
 
     render: function () {
@@ -151,8 +156,9 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
             var configureItemsListButton = container.one('#configureItemsList');
 
             if (configureItemsListButton) {
-                configureItemsListButton.plug(Y.Rednose.Dropdown, {
-                    content: [
+                configureItemsListButton.plug(Y.Rednose.Plugin.Dropdown, {
+                    showCaret: false,
+                    items: [
                         { id: 'configureItems', title: 'Items', icon: 'icon-align-justify' },
                         { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' }
                     ]

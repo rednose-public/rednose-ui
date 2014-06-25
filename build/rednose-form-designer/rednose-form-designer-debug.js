@@ -130,33 +130,35 @@ var FormModel      = Y.Rednose.Form.FormModel,
  * Shows a modal view where the items for this collection can be configured
  * dynamically, by specifying a mapping to data source attributes.
  */
-var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.View, [ Y.Rednose.View.Nav ], {
+var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.View, [Y.Rednose.View.Nav], {
 
     /**
-     * Property inherited from Rednose.View.Nav
+     * @see Rednose.View.Nav.fixed
+     */
+    fixed: false,
+
+    /**
+     * @see Rednose.View.Nav.close
      */
     close: true,
 
     /**
-     * Property inherited from Rednose.View.Nav
+     * @see Rednose.View.Nav.padding
+     */
+    padding: true,
+
+    /**
+     * @see Rednose.View.Nav.title
      */
     title: TXT_DYNAMIC_ITEMS_TITLE,
 
     /**
-     * Property inherited from Rednose.View.Nav
+     * @see Rednose.View.Nav.buttonGroups
      */
-    buttons: {
-        ok: {
-            value:    TXT_BUTTON_OK,
-            position: 'right',
-            primary:   true
-        },
-
-        close: {
-            value:    TXT_BUTTON_CANCEL,
-            position: 'right'
-        }
-    },
+    buttonGroups: [
+        {position: 'right', buttons: [{id: 'ok', value: TXT_BUTTON_OK, type: 'primary'}]},
+        {position: 'right', buttons: [{id: 'close', value: TXT_BUTTON_CANCEL}]}
+    ],
 
     /**
      * View event handlers
@@ -265,8 +267,8 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
         this._imageSelect      = container.one('#image');
         this._valueSelect      = container.one('#value');
 
-        this.on('configureDynamicItemsView:buttonClose', this._handleButtonClose, this);
-        this.on('configureDynamicItemsView:buttonOk', this._handleButtonOk, this);
+        this.after('toolbar:click#close', this._handleButtonClose, this);
+        this.after('toolbar:click#ok', this._handleButtonOk, this);
     },
 
     destructor: function () {
@@ -372,12 +374,12 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
 
         if (value !== '0') {
             var dataSource = this._identifierMap[value],
-                attributes = dataSource.get('attributes');
+                attributes = dataSource.getAttributeList();
 
             optionData = Y.Array.map(attributes, function (attribute) {
                 return {
-                    value: attribute.get('name'),
-                    label: attribute.get('name')
+                    value: attribute,
+                    label: attribute
                 };
             });
         }
@@ -660,13 +662,7 @@ var HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
         this._treeView.render();
 
         this._treeView.after('select', function (e) {
-            var model = e.node.data;
-
-            if (model && model instanceof Y.Rednose.Form.ControlModel) {
-                self.fire(EVT_SELECT, { model: model });
-            } else {
-                self.fire(EVT_SELECT, { model: null });
-            }
+            self.fire(EVT_SELECT, {node: e.node});
         });
 
         return this;
@@ -762,7 +758,7 @@ DataSourcesView = Y.Base.create('dataSourcesView', Y.View, [], {
         list.load(function () {
             self._treeView = new Y.Rednose.TreeView({
                 container : container.one('.rednose-treeview'),
-                // model     : list.getTree(),
+                nodes     : list.getTree(),
                 selectable: false,
                 header    : TXT_DATA_SOURCES
             });
@@ -834,9 +830,14 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     // title: TXT_OBJECT_ATTRIBUTES,
 
     /**
-     * Property inherited from Y.Rednose.View.Nav
+     * @see Rednose.View.Nav.footer
      */
     footer: false,
+
+    /**
+     * @see Rednose.View.Nav.padding
+     */
+    padding: true,
 
     formTemplate: Micro.compile(
         '<form class="form-vertical">'+
@@ -938,8 +939,8 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     initializer: function () {
-        this.on('dropdown:configureItems', this._handleConfigureItems, this);
-        this.on('dropdown:configureDynamicItems', this._handleConfigureDynamicItems, this);
+        this.on('dropdown:click#configureItems', this._handleConfigureItems, this);
+        this.on('dropdown:click#configureDynamicItems', this._handleConfigureDynamicItems, this);
     },
 
     render: function () {
@@ -960,8 +961,9 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
             var configureItemsListButton = container.one('#configureItemsList');
 
             if (configureItemsListButton) {
-                configureItemsListButton.plug(Y.Rednose.Dropdown, {
-                    content: [
+                configureItemsListButton.plug(Y.Rednose.Plugin.Dropdown, {
+                    showCaret: false,
+                    items: [
                         { id: 'configureItems', title: 'Items', icon: 'icon-align-justify' },
                         { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' }
                     ]
@@ -1596,15 +1598,10 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
     },
 
     _handleControlSelect: function (e) {
-        var model  = e.model;
+        var node = e.node,
+            form = this.get('model');
 
-        if (model && model instanceof Y.Rednose.Form.ControlModel) {
-            if (model.view instanceof Y.Rednose.Form.BaseControlView) {
-                model.view.focus();
-            }
-        }
-
-        this._objectAttributesView.set('model', model);
+        this._objectAttributesView.set('model', form.getControl(node.label));
         this._objectAttributesView.render();
     },
 

@@ -23,6 +23,27 @@ DataSourceAttributeCollection = Y.Base.create('dataSourceAttributeCollection', Y
 });
 
 DataSource = Y.Base.create('dataSource', Y.Model, [], {
+    // XXX
+    getAttributeList: function () {
+        var list = [];
+
+        Y.Array.each(this.get('attributes'), function (attr) {
+            if (attr.type !== 'collection') {
+                list.push(attr.name);
+            }
+
+            if (attr.children) {
+                Y.Array.each(attr.children, function (attr) {
+                    if (attr.type !== 'collection') {
+                        list.push(attr.name);
+                    }
+                });
+            }
+        });
+
+        return list;
+    },
+
     sync: function (action, options, callback) {
         if (action === 'create') {
             Y.io(Routing.generate('rednose_dataprovider_post_data_sources'), {
@@ -38,48 +59,36 @@ DataSource = Y.Base.create('dataSource', Y.Model, [], {
                 }
             });
         }
-    },
-
-    _setAttributes: function (attributes) {
-        var self   = this,
-            parsed = [];
-
-        if (Y.Lang.isArray(attributes)) {
-            Y.Array.each(attributes, function (attribute) {
-                parsed.push(new DataSourceAttribute({
-                    source: self,
-                    name  : attribute
-                }));
-            });
-        } else {
-            Y.Object.each(attributes, function (subAttributes, key) {
-                var collection = [];
-
-                Y.Array.each(subAttributes, function (attribute) {
-                    collection.push(new DataSourceAttribute({
-                        source: self,
-                        name  : attribute
-                    }));
-                });
-
-                parsed.push(new DataSourceAttributeCollection({
-                    source    : self,
-                    name      : key,
-                    attributes: collection
-                }));
-
-                parsed.push(collection);
-            });
-        }
-
-        return parsed;
     }
 }, {
     ATTRS: {
-        name      : { value: null },
-        identifier: { value: null },
-        type      : { value: 'pdo' },
-        attributes: { value: [], setter: '_setAttributes', lazyAdd: false }
+        /**
+         * @type {String}
+         */
+        name: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        identifier: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        type: {
+            value: 'pdo'
+        },
+
+        /**
+         * @type {Object}
+         */
+        attributes: {
+            value: {}
+        }
     }
 });
 
@@ -115,73 +124,45 @@ XmlSource = Y.Base.create('xmlSource', DataSource, [], {}, {
 DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
     model: DataSource,
 
+    icons: {
+        'dataGen': 'icon-list-alt',
+        'pdo'    : 'icon-align-justify',
+        'xml'    : 'icon-file'
+    },
+
+    _getNodes: function (attributes) {
+        var nodes = [];
+
+        for (var i = 0, len = attributes.length; i < len; i++) {
+            var attribute = attributes[i], node;
+
+            node = {
+                label: attribute.name,
+                icon : attribute.type === 'collection' ? 'icon-th-list' : 'icon-minus'
+            };
+
+            if (attribute.children) {
+                node.children = this._getNodes(attribute.children);
+            }
+
+            nodes.push(node);
+        }
+
+        return nodes;
+    },
+
     getTree: function () {
-        var items = [];
+        var self  = this,
+            items = [];
 
         this.each(function (model) {
             var node = {
-                label   : model.get('name'),
-                data    : model,
-                children: []
+                label   : model.get('identifier'),
+                icon    : self.icons[model.get('type')],
+                children: self._getNodes(model.get('attributes'))
             };
 
-            Y.Array.each(model.get('attributes'), function (attribute) {
-                if (attribute instanceof DataSourceAttribute) {
-                    node.children.push({
-                        label: attribute.get('name'),
-                        data : attribute
-                    });
-                } else if (attribute instanceof DataSourceAttributeCollection) {
-                    var collection = {
-                        label   : attribute.get('name'),
-                        data    : attribute,
-                        children: []
-                    };
-
-                    Y.Array.each(attribute.get('attributes'), function (subAttribute) {
-                        if (subAttribute instanceof DataSourceAttribute) {
-                            collection.children.push({
-                                label: subAttribute.get('name'),
-                                data : subAttribute
-                            });
-                        }
-                    });
-
-                    node.children.push(collection);
-                }
-            });
-
             items.push(node);
-        });
-
-        return null;
-        // return new TreeModel({
-        //     items: items,
-        //     icons: {
-        //         'datagenSource'                : 'icon-list-alt',
-        //         'pdoSource'                    : 'icon-align-justify',
-        //         'xmlSource'                    : 'icon-file',
-        //         'dataSourceAttribute'          : 'icon-minus',
-        //         'dataSourceAttributeCollection': 'icon-th-list'
-        //     }
-        // });
-    },
-
-    parse: function (response) {
-        var items = [];
-
-        Y.Array.each(Y.JSON.parse(response), function (item) {
-            switch (item.type) {
-                case 'dataGen':
-                    items.push(new DatagenSource(item));
-                    break;
-                case 'pdo':
-                    items.push(new PdoSource(item));
-                    break;
-                case 'xml':
-                    items.push(new XmlSource(item));
-                    break;
-            }
         });
 
         return items;

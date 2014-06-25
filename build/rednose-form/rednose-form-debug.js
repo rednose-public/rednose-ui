@@ -281,6 +281,18 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
         }
     },
 
+    getControl: function (foreignId) {
+        var controls = this.get('controls');
+
+        for (var i = 0, len = controls.size(); i < len; i++) {
+            if (controls.item(i).get('foreign_id') === foreignId) {
+                return controls.item(i);
+            }
+        }
+
+        return null;
+    },
+
     _setControls: function (value) {
         var list = new Y.ModelList();
 
