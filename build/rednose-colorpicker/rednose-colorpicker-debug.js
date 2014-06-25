@@ -8,7 +8,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
     template:
         '<div class="input-append">' +
-            '<input type="text" id="color" value="#FFFFFF" readonly="true" />' +
+            '<input type="text" id="color" value="#FFFFFF" />' +
             '<button title="Configure table" type="button" class="btn">' +
                 '<i class="icon-adjust"></i>' +
             '</button>' +
@@ -24,12 +24,15 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
     _mouseActive: false,
 
+    _picker: null,
+
     // -- Lifecycle methods ----------------------------------------------------
 
     initializer: function () {
         var self = this;
 
-        this._canvas = Y.Node.create('<canvas></canvas>').getDOMNode();
+        this._canvas = Y.Node.create('<canvas height="256" width="256"></canvas>').getDOMNode();
+        this._picker = Y.Node.create('<i class="picker"><i>');
 
         this._canvas.addEventListener('mousemove', function (e) {
             self._mouseOver(e);
@@ -39,7 +42,15 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             self._mouseActive = true;
         });
 
+        this._picker.getDOMNode().addEventListener('mousedown', function () {
+            self._mouseActive = true;
+        });
+
         this._canvas.addEventListener('mouseup', function () {
+            self._mouseActive = false;
+        });
+
+        this._picker.getDOMNode().addEventListener('mouseup', function () {
             self._mouseActive = false;
         });
 
@@ -47,6 +58,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     },
 
     destructor: function () {
+        this._picker.getDOMNode().removeEventListener('mousemove');
         this._canvas.removeEventListener('mousemove');
     },
 
@@ -57,6 +69,10 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
         container.addClass('rednose-colorpicker')
         container.append(this.template);
+
+        // Bind widget events
+        container.one('input#color').on(['change', 'keyup'], this._handleColorInputChanged, this);
+        container.one('input#color').on('blur', this._handleColorChange, this);
         container.one('button').on('click', this._handleColorClicked, this);
     },
 
@@ -71,7 +87,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
         input.setStyle('backgroundColor', hexColor);
 
         contrast = 1 - ( 0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
-console.log(contrast);
+
         if (contrast < 0.5) {
             input.setStyle('color', 'black');
         } else {
@@ -87,6 +103,7 @@ console.log(contrast);
         this._renderCanvas();
 
         overlay.append(this._canvas);
+        overlay.append(this._picker);
 
         overlay.setStyle('display', 'block');
         overlay.setStyle('left', container.getX());
@@ -102,12 +119,21 @@ console.log(contrast);
         container.append(overlay);
     },
 
+    _handleColorInputChanged: function (e) {
+        var hexValue = e.currentTarget.get('value');
+
+        if (hexValue.match(/^#([0-9a-f]{6})$/i)) {
+            this.set('hex', hexValue.toUpperCase());
+        }
+    },
+
     _mouseOver: function (e) {
         if (this._mouseActive === true) {
             var rect = this._canvas.getBoundingClientRect(),
-                x    = e.clientX - rect.left,
-                y    = e.clientY - rect.top;
+                x    = Math.round(e.clientX - rect.left),
+                y    = Math.round(e.clientY - rect.top);
 
+            this._setPicker(e.clientX - 3, e.clientY - 3);
             this.set('color', this._getColor(x, y));
         }
     },
@@ -136,8 +162,9 @@ console.log(contrast);
     },
 
     _renderCanvas: function() {
-        var container    = this.get('contentBox'),
-            bufferCanvas = Y.Node.create('<canvas class="buffer" />'),
+        var self         = this,
+            container    = this.get('contentBox'),
+            bufferCanvas = Y.Node.create('<canvas height="0" width="0" class="buffer" />'),
             context      = this._canvas.getContext('2d'),
             image        = new Image();
 
@@ -150,14 +177,36 @@ console.log(contrast);
 
         image.onload = function () {
             context.drawImage(image, 0, 0);
+
+            self._imageObj = image;
         }
 
         image.src = imageUrl;
-
-        this._imageObj = image;
     },
 
-    _getHex: function() {
+    _setPicker: function (x, y) {
+        this._picker.setStyle('display', 'block');
+        this._picker.setX(x);
+        this._picker.setY(y);
+    },
+
+    _setHex: function (hex) {
+        var hexParts = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+
+        if (hexParts !== null) {
+            this.set('color', {
+                red   : parseInt(hexParts[1], 16),
+                green : parseInt(hexParts[2], 16),
+                blue  : parseInt(hexParts[3], 16)
+            });
+
+            this._picker.setStyle('display', 'none');
+        }
+
+        return null;
+    },
+
+    _getHex: function () {
         var color = this.get('color');
 
         rgb = [
@@ -183,9 +232,9 @@ console.log(contrast);
          */
         color: {
             value: {
-                green: 0,
-                red  : 0,
-                blue : 0
+                green: 255,
+                red  : 255,
+                blue : 255
             }
         },
 
@@ -196,7 +245,8 @@ console.log(contrast);
          */
         hex: {
             value: null,
-            getter: '_getHex'
+            getter: '_getHex',
+            setter: '_setHex'
         }
     }
 });
