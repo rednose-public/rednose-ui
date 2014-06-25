@@ -3,12 +3,12 @@ YUI.add('rednose-colorpicker', function (Y, NAME) {
 /*jshint boss:true, expr:true, onevar:false */
 
 /**
- * Fired when the overlay is closed
+ * Fired when the color value is updated
  *
  * @event close
  * @param {EventFacade} originEvent Original click event.
  */
-var EVT_CLOSE = 'close';
+var EVT_UPDATE = 'update';
 
 /**
  * Colorpicker in form-control style
@@ -129,8 +129,9 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             // Prevent close on open
             if (e.target !== button) {
                 overlay.remove();
+                overlay.destroy();
 
-                self.fire(EVT_CLOSE);
+                self.fire(EVT_UPDATE);
             }
         });
 
@@ -142,6 +143,8 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
         if (hexValue.match(/^#([0-9a-f]{6})$/i)) {
             this.set('hex', hexValue.toUpperCase());
+
+            this.fire(EVT_UPDATE);
         }
     },
 
