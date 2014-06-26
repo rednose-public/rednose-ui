@@ -216,6 +216,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         "requires": [
             "autocomplete",
             "highlight",
+            "io",
             "model",
             "model-list",
             "template-micro",
@@ -495,7 +496,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '4554d384fb0164a3cee446dab732f4ee';
+YUI.Env[Y.version].md5 = 'e475d6d022a9e03c0e18ebcf5a55ed0f';
 
 
 }, '1.5.0-DEV');
