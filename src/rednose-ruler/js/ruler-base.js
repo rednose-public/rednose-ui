@@ -49,7 +49,7 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
             type      = this.get('vertical') ? 'rednose-vertical-ruler' : 'rednose-horizontal-ruler';
 
         container.addClass(type);
-        container.setStyle(this.sizeType, this.get('size'));
+        container.setStyle(this.sizeType, this.get('maxWidth') + 'mm');
 
         this._renderRuler();
 
@@ -69,7 +69,7 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
 
         container.setHTML(innerRuler);   
 
-        var rulerSize      = this.get('size'),
+        var rulerSize      = this.get('maxWidth'),
             tickerPosition = 0,
             tickerLabel;
 
@@ -137,10 +137,10 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
         },
 
         /**
-         * @attribute size
-         * @type {int}
+         * @attribute maxWidth
+         * @type {int} mm
          */
-        size: {
+        maxWidth: {
             value: null
         }
     }

@@ -22,6 +22,8 @@ RulerDD.prototype = {
      */
     _resizeMap: [],
 
+    _size: null,
+
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
@@ -31,6 +33,11 @@ RulerDD.prototype = {
                 'drag:drag': this._setRulerStyles,
                 'drag:mouseDown': this._showSizes,
                 'drag:end': this._showSizes
+            }, this),
+            this.after({
+                'leftSizeChange': this._initializeRulerStyles,
+                'rightSizeChange': this._initializeRulerStyles,
+                'maxWidthChange': this._initializeRulerStyles
             }, this)
         ];
 
@@ -46,7 +53,8 @@ RulerDD.prototype = {
 
         this._resizeMap = {};
 
-        this._rulerDDEvents   = null;
+        this._size         = null;
+        this._rulerDDEvents = null;
     },
 
     // -- Protected Methods ----------------------------------------------------
@@ -70,24 +78,12 @@ RulerDD.prototype = {
         container.prepend(this._marginLeft);
         container.append(this._marginRight);
 
-        this._setRulerStyles();
+        this._initializeRulerStyles();
     },
 
     _createHandles: function () {
         this._marginLeft  = Y.Node.create('<div class="margin-left"><span style="display: none;">10mm</span></div>');
         this._marginRight = Y.Node.create('<div class="margin-right"><span style="display: none;">10mm</span></div>');
-
-        if (this.get('leftSize')) {
-            this._marginLeft.setStyle(this.sizeType, this.get('leftSize'));
-        } else {
-            this._marginLeft.setStyle(this.sizeType, this.get('defaultOffset'));
-        }
-
-        if (this.get('rightSize')) {
-            this._marginRight.setStyle(this.sizeType, this.get('rightSize'));
-        } else {
-            this._marginRight.setStyle(this.sizeType, this.get('defaultOffset'));
-        }
         
         if (this.get('vertical')) {
             this._createResize(this._marginLeft, 'b');
@@ -109,18 +105,39 @@ RulerDD.prototype = {
         this._resizeMap.push(resize);
     },
 
+    _initializeRulerStyles: function () {
+        var ruler     = this.get('container').one('.inner-ruler'),
+            leftSize  = this.get('leftSize') ? this.get('leftSize') : this.get('defaultOffset'),
+            rightSize = this.get('rightSize') ? this.get('rightSize') : this.get('defaultOffset'),
+            rulerSize = this.get('maxWidth') - leftSize - rightSize;
+
+        this._marginLeft.setStyle(this.sizeType, leftSize + 'mm');
+        this._marginRight.setStyle(this.sizeType, rightSize + 'mm');
+
+        if (this.get('vertical')) {
+            ruler.setStyles({
+                'marginTop': leftSize + 'mm',
+                'height': rulerSize + 'mm'
+            });
+        } else {
+            ruler.setStyles({
+                'marginLeft': leftSize + 'mm',
+                'width': rulerSize + 'mm'
+            });
+        }
+
+        this._size = parseFloat(ruler.getComputedStyle('width')) +
+                     parseFloat(this._marginLeft.getComputedStyle('width')) + 
+                     parseFloat(this._marginRight.getComputedStyle('width'));
+    },
+
     _setRulerStyles: function (e) {
         var container       = this.get('container'),
             sizeType        = this.sizeType,
             ruler           = container.one('.inner-ruler'),
             marginLeftSize  = parseFloat(this._marginLeft.getComputedStyle(sizeType)),
             marginRightSize = parseFloat(this._marginRight.getComputedStyle(sizeType)),
-            newRulerSize    = this.get('size') - marginLeftSize - marginRightSize;
-
-        if (isNaN(newRulerSize)) {
-            newRulerSize = this.get('size') - (this.get('defaultOffset') * 2);
-            marginLeftSize = this.get('defaultOffset');
-        }
+            newRulerSize    = this._size - marginLeftSize - marginRightSize;
 
         container.one('.margin-left span').setHTML(this._getMMSize(marginLeftSize));
         container.one('.margin-right span').setHTML(this._getMMSize(marginRightSize));
@@ -163,16 +180,24 @@ RulerDD.prototype = {
 RulerDD.ATTRS = {
     /**
     * @attribute defaultOffset
-    * @type {int}
+    * @type {float} mm
     */
     defaultOffset: {
-        value: 100
+        value: 10
     },
 
+    /**
+    * @attribute leftSize
+    * @type {float} mm
+    */
     leftSize: {
         value: null
     },
 
+    /**
+    * @attribute rightSize
+    * @type {float} mm
+    */
     rightSize: {
         value: null
     }

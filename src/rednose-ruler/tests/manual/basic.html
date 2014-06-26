@@ -28,7 +28,9 @@
     }).use('rednose-ruler', function (Y) {
         var ruler = new Y.Rednose.Ruler({
             container: Y.one('.rednose-ruler div'),
-            size: 1920
+            maxWidth: 210,
+            leftSize: 20,
+            rightSize: 30
         });
 
         ruler.render();
@@ -36,7 +38,7 @@
         var ruler2 = new Y.Rednose.Ruler({
             container: Y.one('#ruler2 div'),
             vertical: true,
-            size: 500
+            maxWidth: 297
         });
 
         ruler2.render();
