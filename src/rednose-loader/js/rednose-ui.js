@@ -213,6 +213,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "autocomplete",
+            "highlight",
             "model",
             "model-list",
             "template-micro",
@@ -492,4 +493,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '62dbcfb6e2508ef33c0e2ba437471513';
+YUI.Env[Y.version].md5 = '4554d384fb0164a3cee446dab732f4ee';
