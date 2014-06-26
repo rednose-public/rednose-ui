@@ -30,8 +30,9 @@ RulerDD.prototype = {
 
     initializer: function () {
         this._rulerDDEvents = [
-            Y.Do.after(this._afterRender, this, 'render', this),
+            Y.Do.after(this._afterRender, this, '_renderRuler', this),
             this.on({
+                'resize:start': this._resizeStart,
                 'drag:drag': this._setRulerStyles,
                 'drag:mouseDown': this._showSizes,
                 'drag:end': this._showSizes
@@ -133,6 +134,10 @@ RulerDD.prototype = {
                 'width': rulerSize + 'mm'
             });
         }
+    },
+
+    _resizeStart: function (e) {
+        var ruler  = this.get('container').one('.inner-ruler');
 
         this._size = parseFloat(ruler.getComputedStyle('width')) +
                      parseFloat(this._marginLeft.getComputedStyle('width')) + 
