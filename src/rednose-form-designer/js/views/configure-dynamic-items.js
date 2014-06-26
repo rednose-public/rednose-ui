@@ -31,33 +31,35 @@ var FormModel      = Y.Rednose.Form.FormModel,
  * Shows a modal view where the items for this collection can be configured
  * dynamically, by specifying a mapping to data source attributes.
  */
-var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.View, [ Y.Rednose.View.Nav ], {
+var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.View, [Y.Rednose.View.Nav], {
 
     /**
-     * Property inherited from Rednose.View.Nav
+     * @see Rednose.View.Nav.fixed
+     */
+    fixed: false,
+
+    /**
+     * @see Rednose.View.Nav.close
      */
     close: true,
 
     /**
-     * Property inherited from Rednose.View.Nav
+     * @see Rednose.View.Nav.padding
+     */
+    padding: true,
+
+    /**
+     * @see Rednose.View.Nav.title
      */
     title: TXT_DYNAMIC_ITEMS_TITLE,
 
     /**
-     * Property inherited from Rednose.View.Nav
+     * @see Rednose.View.Nav.buttonGroups
      */
-    buttons: {
-        ok: {
-            value:    TXT_BUTTON_OK,
-            position: 'right',
-            primary:   true
-        },
-
-        close: {
-            value:    TXT_BUTTON_CANCEL,
-            position: 'right'
-        }
-    },
+    buttonGroups: [
+        {position: 'right', buttons: [{id: 'ok', value: TXT_BUTTON_OK, type: 'primary'}]},
+        {position: 'right', buttons: [{id: 'close', value: TXT_BUTTON_CANCEL}]}
+    ],
 
     /**
      * View event handlers
@@ -166,8 +168,8 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
         this._imageSelect      = container.one('#image');
         this._valueSelect      = container.one('#value');
 
-        this.on('configureDynamicItemsView:buttonClose', this._handleButtonClose, this);
-        this.on('configureDynamicItemsView:buttonOk', this._handleButtonOk, this);
+        this.after('toolbar:click#close', this._handleButtonClose, this);
+        this.after('toolbar:click#ok', this._handleButtonOk, this);
     },
 
     destructor: function () {
@@ -273,12 +275,12 @@ var ConfigureDynamicItemsView = Y.Base.create('configureDynamicItemsView', Y.Vie
 
         if (value !== '0') {
             var dataSource = this._identifierMap[value],
-                attributes = dataSource.get('attributes');
+                attributes = dataSource.getAttributeList();
 
             optionData = Y.Array.map(attributes, function (attribute) {
                 return {
-                    value: attribute.get('name'),
-                    label: attribute.get('name')
+                    value: attribute,
+                    label: attribute
                 };
             });
         }

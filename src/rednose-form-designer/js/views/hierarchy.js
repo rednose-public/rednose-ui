@@ -1,13 +1,14 @@
 /*jshint boss:true, expr:true, onevar:false */
 
-var TXT_HIERARCHY = 'Hierarchy',
+var TXT_HIERARCHY      = 'Hierarchy',
     TXT_REMOVE_CONTROL = 'Remove';
 
-var HierarchyView;
-
+/**
+ * @event select
+ */
 var EVT_SELECT = 'select';
 
-HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
+var HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
     template: '<div class="rednose-hierarchy></div>',
 
@@ -43,26 +44,17 @@ HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 
         this._treeView = new Y.Rednose.TreeView({
             container : container.one('.rednose-treeview'),
-            model     : model.getTree(),
+            nodes     : model.getTree(),
             selectable: true,
             header    : TXT_HIERARCHY
         });
 
         // Open all nodes by default since this is our main navigation tool.
-        Y.Array.each(self._treeView.rootNode.children, function (node) {
-            node.open();
-        });
-
+        this._treeView.open();
         this._treeView.render();
 
         this._treeView.after('select', function (e) {
-            var model = e.node.data;
-
-            if (model && model instanceof Y.Rednose.Form.ControlModel) {
-                self.fire(EVT_SELECT, { model: model });
-            } else {
-                self.fire(EVT_SELECT, { model: null });
-            }
+            self.fire(EVT_SELECT, {node: e.node});
         });
 
         return this;

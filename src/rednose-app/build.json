@@ -8,12 +8,6 @@
             ]
         },
 
-        "rednose-app-view": {
-            "jsfiles": [
-                "js/app-view.js"
-            ]
-        },
-
         "rednose-model-spinner": {
             "jsfiles": [
                 "js/model-extensions/model-spinner.js"

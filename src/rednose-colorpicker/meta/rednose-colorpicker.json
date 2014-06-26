@@ -1,0 +1,10 @@
+{
+    "rednose-colorpicker" : {
+        "requires": [
+            "base",
+            "event",
+            "node",
+            "widget"
+        ]
+    }
+}

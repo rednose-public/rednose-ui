@@ -358,7 +358,17 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
      * @private
      */
     _defResetFn: function (e) {
-        console.log(e.groups);
+        var groups = e.groups, i, len;
+
+        for (i = 0, len = this._buttonGroupMap.length; i < len; i++) {
+            this._buttonGroupMap[i].destroy();
+        }
+
+        this._buttonGroupMap = [];
+
+        for (i = 0, len = groups.length; i < len; i++) {
+            this.add(groups[i]);
+        }
     }
 });
 

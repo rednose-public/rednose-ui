@@ -44,11 +44,12 @@ DataSourcesView = Y.Base.create('dataSourcesView', Y.View, [], {
         list.load(function () {
             self._treeView = new Y.Rednose.TreeView({
                 container : container.one('.rednose-treeview'),
-                model     : list.getTree(),
+                nodes     : list.getTree(),
                 selectable: false,
                 header    : TXT_DATA_SOURCES
             });
 
+            self._treeView.open();
             self._treeView.render();
         });
 

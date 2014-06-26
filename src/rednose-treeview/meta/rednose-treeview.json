@@ -39,7 +39,7 @@
 
     "rednose-treeview-dd": {
         "requires": [
-            "rednose-dd"
+            "dd"
         ]
     },
 

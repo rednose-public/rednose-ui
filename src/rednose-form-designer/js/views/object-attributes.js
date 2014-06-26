@@ -12,7 +12,7 @@ var TXT_CONTROL_TYPES = {
     'file'        : 'File'
 };
 
-var TXT_OBJECT_ATTRIBUTES = 'Object Attributes';
+// var TXT_OBJECT_ATTRIBUTES = 'Object Attributes';
 
 var Micro = Y.Template.Micro,
     ObjectAttributesView;
@@ -22,12 +22,17 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     /**
      * Property inherited from Y.Rednose.View.Nav
      */
-    title: TXT_OBJECT_ATTRIBUTES,
+    // title: TXT_OBJECT_ATTRIBUTES,
 
     /**
-     * Property inherited from Y.Rednose.View.Nav
+     * @see Rednose.View.Nav.footer
      */
     footer: false,
+
+    /**
+     * @see Rednose.View.Nav.padding
+     */
+    padding: true,
 
     formTemplate: Micro.compile(
         '<form class="form-vertical">'+
@@ -43,9 +48,9 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 // The form control identification.
                 '<hr/>' +
                 '<div class="control-group">' +
-                    '<label class="control-label" for="id">Identifier</label>' +
+                    '<label class="control-label" for="id">Name</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="id" type="text" readonly value="<%= data.foreignId %>"/>' +
+                        '<input class="input-block-level" id="name" type="text" value="<%= data.foreign_id %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
@@ -92,13 +97,9 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                     '</div>' +
                 '</div>' +
 
-                // Add a spacer if this section has specific attributes.
-                '<% if (data.type == \'dropdown\' || data.type == \'radio\' || data.type == \'autocomplete\') { %>' +
-                    '<hr/>' +
-                '<% } %>' +
-
                 // Attributes that are specific to this control type.
                 '<% if (data.type == \'dropdown\' || data.type == \'radio\' || data.type == \'autocomplete\') { %>' +
+                    '<hr/>' +
                     '<div class="control-group">' +
                         '<label class="control-label" for="configureItems">Items</label>' +
                         '<div class="controls">' +
@@ -114,8 +115,16 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                     '</div>' +
                 '<% } %>' +
 
-                // TODO: Data binding options.
-                // TODO: Form connections.
+                // Data binding options.
+                '<hr/>' +
+                '<div class="control-group">' +
+                    '<label class="control-label" for="binding">Binding</label>' +
+                    '<div class="controls">' +
+                        '<input class="input-block-level" id="binding" type="text" value="<%= data.binding %>"/>' +
+                    '</div>' +
+                '</div>' +
+
+                // TODO: Expressions.
             '<fieldset>' +
         '</form>'
     ),
@@ -129,8 +138,8 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     initializer: function () {
-        this.on('dropdown:configureItems', this._handleConfigureItems, this);
-        this.on('dropdown:configureDynamicItems', this._handleConfigureDynamicItems, this);
+        this.on('dropdown:click#configureItems', this._handleConfigureItems, this);
+        this.on('dropdown:click#configureDynamicItems', this._handleConfigureDynamicItems, this);
     },
 
     render: function () {
@@ -151,8 +160,9 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
             var configureItemsListButton = container.one('#configureItemsList');
 
             if (configureItemsListButton) {
-                configureItemsListButton.plug(Y.Rednose.Dropdown, {
-                    content: [
+                configureItemsListButton.plug(Y.Rednose.Plugin.Dropdown, {
+                    showCaret: false,
+                    items: [
                         { id: 'configureItems', title: 'Items', icon: 'icon-align-justify' },
                         { id: 'configureDynamicItems', title: 'Dynamic items', icon: 'icon-random' }
                     ]

@@ -29,15 +29,8 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "app-base",
-            "rednose-app-view",
             "rednose-panel",
             "rednose-util"
-        ]
-    },
-    "rednose-app-view": {
-        "group": "rednose-ui",
-        "requires": [
-            "view"
         ]
     },
     "rednose-breadcrumb": {
@@ -80,10 +73,21 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-button"
         ]
     },
+    "rednose-colorpicker": {
+        "group": "rednose-ui",
+        "requires": [
+            "base",
+            "event",
+            "node",
+            "widget"
+        ]
+    },
     "rednose-datasource": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-treeview"
+            "io",
+            "model",
+            "model-list"
         ]
     },
     "rednose-datasource-manager": {
@@ -208,15 +212,19 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-form": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-dataprovider",
+            "autocomplete",
+            "model",
+            "model-list",
             "template-micro",
-            "uploader"
+            "uploader",
+            "view"
         ]
     },
     "rednose-form-designer": {
         "group": "rednose-ui",
         "requires": [
             "rednose-app",
+            "rednose-button-dropdown",
             "rednose-datatable-select",
             "rednose-datasource-manager",
             "rednose-dialog",
@@ -423,7 +431,7 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-treeview-dd": {
         "group": "rednose-ui",
         "requires": [
-            "rednose-dd"
+            "dd"
         ]
     },
     "rednose-treeview-multi": {
@@ -484,4 +492,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '7552133254f7fe915a9990608e23a254';
+YUI.Env[Y.version].md5 = '62dbcfb6e2508ef33c0e2ba437471513';

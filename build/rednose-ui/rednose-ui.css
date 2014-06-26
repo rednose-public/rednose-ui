@@ -174,7 +174,7 @@ li.disabled [class*=" icon-"] {
 .rednose-master-detail-grid .rednose-unit-main {
   position: absolute;
   top: 0;
-  right: 460px;
+  right: 279px;
   bottom: 0;
   left: 0;
 }
@@ -183,7 +183,7 @@ li.disabled [class*=" icon-"] {
   position: absolute;
   top: 0;
   right: 0;
-  width: 460px;
+  width: 279px;
   border-left: 1px solid #ddd;
 }
 
@@ -207,7 +207,7 @@ li.disabled [class*=" icon-"] {
 
 /* View Nav */
 
-.rednose-view-nav .yui3-widget-bd {
+.rednose-view-fixed.rednose-view-nav .yui3-widget-bd {
   position: absolute;
   top: 0;
   right: 0;
@@ -215,29 +215,23 @@ li.disabled [class*=" icon-"] {
   left: 0;
 }
 
-.rednose-nav-footer .yui3-widget-ft {
+.rednose-view-fixed.rednose-nav-footer .yui3-widget-ft {
   position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
 }
 
-.rednose-nav-header .yui3-widget-bd {
+.rednose-view-fixed.yui3-widget-stdmod {
+  height: 100%;
+}
+
+.rednose-view-fixed.rednose-nav-header > div > div > .yui3-widget-bd {
   top: 46px;
 }
 
-.rednose-nav-footer .yui3-widget-bd {
+.rednose-view-fixed.rednose-nav-footer .yui3-widget-bd {
   bottom: 56px;
-}
-
-/* Modal master-detail view */
-
-.rednose-master-detail-grid .yui3-widget-bd .rednose-unit-main {
-  right: 280px;
-}
-
-.rednose-master-detail-grid .yui3-widget-bd .rednose-unit-right {
-  width: 280px;
 }
 
 .rednose-grid-message-container {
@@ -287,6 +281,27 @@ li.disabled [class*=" icon-"] {
   margin-left: -16px;
   text-align: center;
   background-image: url('img/spinner.gif');
+}
+
+i.rednose-colorpicker-pointer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: 5px;
+  height: 5px;
+  margin: -4px 0 0 -4px;
+  cursor: crosshair;
+  border: 1px solid #000;
+  border-radius: 5px;
+}
+
+.rednose-colorpicker-canvas {
+  cursor: crosshair;
+}
+
+.rednose-colorpicker canvas.buffer {
+  background-image: url("img/color-picker.png");
 }
 
 .yui3-datatable-col-hidden {
@@ -843,12 +858,6 @@ input.rednose-datatable-input {
 
 .yui3-panel {
   outline: none;
-}
-
-/* FIXME: Applies to nav panel in the main view, not the grid. */
-
-.yui3-widget-stdmod {
-  height: 100%;
 }
 
 /* FIXME: Helper classes for the buttons, should prolly move up to a higer level within the framework. */

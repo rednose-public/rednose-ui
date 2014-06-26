@@ -1,9 +1,6 @@
-/*jshint boss:true, expr:true,  es5:true, onevar:false */
+/*jshint boss:true, expr:true, onevar:false */
 
-var TreeModel = Y.Rednose.ModelTree,
-    ControlModel;
-
-ControlModel = Y.Base.create('controlModel', Y.Model, [], {
+var ControlModel = Y.Base.create('controlModel', Y.Model, [], {
     view: {},
 
     _setProperty: function(value) {
@@ -16,7 +13,7 @@ ControlModel = Y.Base.create('controlModel', Y.Model, [], {
 }, {
     ATTRS: {
         caption   : { value: null },
-        identifier: { value: null },
+        foreign_id: { value: null },
         type      : { value: null },
         properties: {
             value : {},
@@ -28,7 +25,20 @@ ControlModel = Y.Base.create('controlModel', Y.Model, [], {
         readonly  : { value: false },
         sort_order: { value: 0 },
         help      : { value: null },
-        value     : { value: null }
+
+        /**
+         * @type {String}
+         */
+        value: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        binding: {
+            value: null
+        }
     }
 });
 
@@ -39,27 +49,24 @@ var FormModel;
 
 FormModel = Y.Base.create('formModel', Y.Model, [], {
     getTree: function () {
-        var items = {
-            label   : this.get('caption'),
-            data    : new Y.Model(),
+        if (!this.get('id') && !this.get('caption')) {
+            return null;
+        }
+
+        var root = {
+            label   : this.get('foreign_id'),
             icon    : 'icon-list-alt',
             children: []
         };
 
-        // XXX
-        if (!this.get('id') && !this.get('caption')) {
-            return new TreeModel();
-        }
-
         this.get('controls').each(function (model) {
-            items.children.push({
-                label   : model.get('caption'),
-                data    : model,
-                icon    : 'icon-minus'
+            root.children.push({
+                label: model.get('foreign_id'),
+                icon : 'icon-minus'
             });
         });
 
-        return new TreeModel({ items: items });
+        return [root];
     },
 
     sync: function (action, options, callback) {
@@ -76,6 +83,18 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
                 }
             });
         }
+    },
+
+    getControl: function (foreignId) {
+        var controls = this.get('controls');
+
+        for (var i = 0, len = controls.size(); i < len; i++) {
+            if (controls.item(i).get('foreign_id') === foreignId) {
+                return controls.item(i);
+            }
+        }
+
+        return null;
     },
 
     _setControls: function (value) {
@@ -95,9 +114,31 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
     }
 }, {
     ATTRS: {
-        caption   : { value: null },
-        foreignId : { value: null },
-        controls  : {
+        /**
+         * @type {String}
+         */
+        foreign_id: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        name: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        caption: {
+            value: null
+        },
+
+        /**
+         * @type {ModelList}
+         */
+        controls: {
             value : new Y.ModelList(),
             setter: '_setControls'
         }

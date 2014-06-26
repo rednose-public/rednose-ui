@@ -21,7 +21,7 @@ var Anim = Y.Base.create('anim', Y.Base, [], {
     _getChildrenElement: function (node) {
         var domNode = this.getHTMLNode(node);
 
-        return Y.Node('#' + domNode.getAttribute('id')).one('ul');
+        return domNode.one('ul');
     },
 
     // -- Protected Event Handlers ---------------------------------------------

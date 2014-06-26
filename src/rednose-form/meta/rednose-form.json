@@ -1,9 +1,12 @@
 {
     "rednose-form": {
         "requires": [
-            "rednose-dataprovider",
+            "autocomplete",
+            "model",
+            "model-list",
             "template-micro",
-            "uploader"
+            "uploader",
+            "view"
         ]
     }
 }

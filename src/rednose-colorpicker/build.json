@@ -1,0 +1,11 @@
+{
+    "name": "rednose-colorpicker",
+
+    "builds": {
+        "rednose-colorpicker": {
+            "jsfiles": [
+                "js/colorpicker.js"
+            ]
+        }
+    }
+}
