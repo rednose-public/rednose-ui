@@ -1,0 +1,16 @@
+{
+    "name": "rednose-ruler",
+
+    "builds": {
+        "rednose-ruler-base": {
+            "jsfiles": [
+                "js/ruler-base.js"
+            ]
+        },
+        "rednose-ruler-dd": {
+        	"jsfiles": [
+                "js/extensions/ruler-dd.js"
+        	]
+        }
+    }
+}

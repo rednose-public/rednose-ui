@@ -1030,3 +1030,223 @@ div .btn-toolbar .btn-group.pull-right {
 .rednose-treeview-outer-container.rednose-treeview-drop-over-global {
   border: 2px solid #80C4E6 !important;
 }
+
+.rednose-ruler {
+  top: 0;
+  left: 0;
+  z-index: 9;
+  font-size: 10px;
+  color: #464646;
+}
+
+.rednose-ruler .tickLabel {
+  position: absolute;
+  text-indent: 2px;
+}
+
+.rednose-ruler .tickMinor {
+  position: absolute;
+}
+
+.rednose-ruler .tickMajor {
+  position: absolute;
+}
+
+.rednose-horizontal-ruler {
+  margin: auto;
+}
+
+.rednose-horizontal-ruler .margin-left {
+  float: left;
+  width: 0;
+  height: 20px;
+  text-align: center;
+  background: #f5f5f5;
+  border-bottom: 1px solid #969696;
+}
+
+.rednose-horizontal-ruler .margin-left span {
+  position: absolute;
+}
+
+.rednose-horizontal-ruler .inner-ruler {
+  position: fixed;
+  width: 100%;
+  height: 20px;
+  overflow: hidden;
+  background: #ffffff;
+  border-bottom: 1px solid #969696;
+}
+
+.rednose-horizontal-ruler .inner-ruler div {
+  background: #969696;
+}
+
+.rednose-horizontal-ruler .inner-ruler .tickLabel {
+  top: 0;
+  width: 1px;
+  height: 100%;
+  line-height: 15px;
+}
+
+.rednose-horizontal-ruler .inner-ruler .tickMinor {
+  bottom: 0;
+  width: 1px;
+  height: 4px;
+}
+
+.rednose-horizontal-ruler .inner-ruler .tickMajor {
+  bottom: 0;
+  width: 1px;
+  height: 6px;
+}
+
+.rednose-horizontal-ruler .margin-right {
+  float: right;
+  width: 0;
+  height: 20px;
+  text-align: center;
+  background: #f5f5f5;
+  border-bottom: 1px solid #969696;
+}
+
+.rednose-horizontal-ruler .margin-right span {
+  position: absolute;
+}
+
+.rednose-horizontal-ruler .yui3-resize-handles-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.rednose-vertical-ruler .margin-left {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  width: 18px;
+  height: 0;
+  background: #f5f5f5;
+  border-right: 1px solid #969696;
+}
+
+.rednose-vertical-ruler .margin-left span {
+  position: absolute;
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  -webkit-transform: rotate(-90deg);
+     -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+       -o-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+.rednose-vertical-ruler .inner-ruler {
+  position: absolute;
+  width: 18px;
+  min-height: 100%;
+  border-right: 1px solid #969696;
+}
+
+.rednose-vertical-ruler .inner-ruler div {
+  background: #969696;
+}
+
+.rednose-vertical-ruler .inner-ruler .tickLabel {
+  right: 0;
+  width: 100%;
+  height: 1px;
+}
+
+.rednose-vertical-ruler .inner-ruler .tickLabel span {
+  position: absolute;
+  top: 1px;
+  right: 0;
+  display: block;
+  margin-right: 18px;
+  -webkit-transform: rotate(-90deg);
+     -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+       -o-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+  -webkit-transform-origin: top right;
+     -moz-transform-origin: top right;
+      -ms-transform-origin: top right;
+       -o-transform-origin: top right;
+          transform-origin: top right;
+}
+
+.rednose-vertical-ruler .inner-ruler .tickMinor {
+  right: 0;
+  width: 4px;
+  height: 1px;
+}
+
+.rednose-vertical-ruler .inner-ruler .tickMajor {
+  right: 0;
+  width: 6px;
+  height: 1px;
+}
+
+.rednose-vertical-ruler .margin-right {
+  position: absolute;
+  bottom: 0;
+  width: 18px;
+  height: 0;
+  background: #f5f5f5;
+  border-top: 1px solid #969696;
+  border-right: 1px solid #969696;
+}
+
+.rednose-vertical-ruler .margin-right span {
+  position: absolute;
+  top: 20px;
+  width: 50px;
+  height: 50px;
+  margin: auto;
+  -webkit-transform: rotate(-90deg);
+     -moz-transform: rotate(-90deg);
+      -ms-transform: rotate(-90deg);
+       -o-transform: rotate(-90deg);
+          transform: rotate(-90deg);
+}
+
+/*.rednose-horizontal-ruler-container {
+	height: 15px;
+    border-bottom: 1px solid #ddd;
+    background: #f5f5f5;
+
+	.rednose-horizontal-ruler {
+	    position: relative;
+	    z-index: 2;
+	    height: 15px;
+	    margin: auto;
+	    width: 500px;
+
+	    .rulerBackgroundInner {
+		    background-color: #fff;
+		    height: 14px;
+		    position: absolute;
+		}
+
+		.rulerFace {
+		    position: absolute;
+		    overflow: hidden;
+		    height: 13px;
+		}
+		.rulerMarginLeft {
+		    float:left;
+		}
+
+		.rulerMarginRight {
+		    float:right;
+		}
+	}
+}
+
+.rulerBackground {
+    background-color: transparent;
+    border: 0;
+}*/

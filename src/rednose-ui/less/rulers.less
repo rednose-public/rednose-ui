@@ -1,0 +1,213 @@
+@line-colors: #969696;
+@text-color:  #464646;
+@ruler-border: 1px solid @line-colors;
+@outside-background: #f5f5f5;
+@ruler-background: #FFF;
+@ruler-height: 20px;
+@ruler-width: 18px;
+
+.rotate(@degree: -90deg) {
+  -webkit-transform: rotate(@degree);
+  	 -moz-transform: rotate(@degree);
+	  -ms-transform: rotate(@degree);
+	   -o-transform: rotate(@degree);
+		  transform: rotate(@degree);
+}
+
+
+.rednose-ruler {
+	top: 0;
+	left: 0;
+	z-index: 9;
+	font-size: 10px;
+	color: @text-color;
+
+	.tickLabel {
+		position: absolute;
+		text-indent: 2px;
+	}
+	.tickMinor {
+		position: absolute;
+	}
+	.tickMajor {
+		position: absolute;
+	}
+}
+
+.rednose-horizontal-ruler {
+	margin: auto;
+
+	.margin-left {
+		height: @ruler-height;
+		width: 0px;
+		border-bottom: @ruler-border;
+		background: @outside-background;
+		float: left;
+		text-align: center;
+
+		span {
+			position: absolute;
+		}
+	}
+	.inner-ruler {
+		position: fixed;
+		width: 100%;
+		height: @ruler-height;
+		border-bottom: @ruler-border;
+		overflow: hidden;
+		background: @ruler-background;
+		
+		div {
+			background: @line-colors;
+		}
+		.tickLabel {
+			top: 0px;
+			width: 1px;
+			height: 100%;
+			line-height: 15px;
+		}
+		.tickMinor {
+			bottom: 0px;
+			width: 1px;
+			height: 4px;
+		}
+		.tickMajor {
+			bottom: 0px;
+			width: 1px;
+			height: 6px;
+		}
+	}
+	.margin-right {
+		height: @ruler-height;
+		width: 0px;
+		border-bottom: @ruler-border;
+		background: @outside-background;
+		float: right;
+		text-align: center;
+
+		span {
+			position: absolute;
+		}
+	}
+
+	.yui3-resize-handles-wrapper {
+		position: relative;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.rednose-vertical-ruler { 
+	.margin-left {
+		position: absolute;
+		top: 0;
+		z-index: 2;
+		height: 0px;
+		width: @ruler-width;
+		border-right: @ruler-border;
+		background: @outside-background;
+
+		span {
+			position: absolute;
+			.rotate();
+			margin: auto;
+			bottom: 20px;
+			height: 50px;
+			width: 50px;
+		}
+	}
+	.inner-ruler {
+		position: absolute;
+		min-height: 100%;
+		width: @ruler-width;
+		border-right: @ruler-border;
+
+		div {
+			background: @line-colors;
+		}
+		.tickLabel {
+			right: 0px;
+			height: 1px;
+			width: 100%;
+			span {
+				display: block;
+				position: absolute;
+				top: 1px;
+				right: 0px;
+				margin-right: @ruler-width;
+				.rotate();
+				-webkit-transform-origin: top right;
+				-moz-transform-origin: top right;
+				-ms-transform-origin: top right;
+				-o-transform-origin: top right;
+				transform-origin: top right;
+			}
+		}
+		.tickMinor {
+			right: 0px;
+			height: 1px;
+			width: 4px;
+		}
+		.tickMajor {
+			right: 0px;
+			height: 1px;
+			width: 6px;
+		}
+	}
+	.margin-right {
+		position: absolute;
+		width: @ruler-width;
+		height: 0px;
+		background: @outside-background;
+		border-right: @ruler-border;
+		border-top: @ruler-border;
+		bottom: 0;
+
+		span {
+			position: absolute;
+			.rotate();
+			margin: auto;
+			top: 20px;
+			height: 50px;
+			width: 50px;
+		}
+	}
+}
+
+/*.rednose-horizontal-ruler-container {
+	height: 15px;
+    border-bottom: 1px solid #ddd;
+    background: #f5f5f5;
+
+	.rednose-horizontal-ruler {
+	    position: relative;
+	    z-index: 2;
+	    height: 15px;
+	    margin: auto;
+	    width: 500px;
+
+	    .rulerBackgroundInner {
+		    background-color: #fff;
+		    height: 14px;
+		    position: absolute;
+		}
+
+		.rulerFace {
+		    position: absolute;
+		    overflow: hidden;
+		    height: 13px;
+		}
+		.rulerMarginLeft {
+		    float:left;
+		}
+
+		.rulerMarginRight {
+		    float:right;
+		}
+	}
+}
+
+.rulerBackground {
+    background-color: transparent;
+    border: 0;
+}*/

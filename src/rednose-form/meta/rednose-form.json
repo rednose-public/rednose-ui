@@ -2,6 +2,7 @@
     "rednose-form": {
         "requires": [
             "autocomplete",
+            "highlight",
             "model",
             "model-list",
             "template-micro",

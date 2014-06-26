@@ -18,6 +18,7 @@
             "jsfiles": [
                 "js/view-extensions/templates/view-template-master-detail.js",
                 "js/view-extensions/templates/view-template-navbar.js",
+                "js/view-extensions/templates/view-template-ruler.js",
                 "js/view-extensions/templates/view-template-single-view.js",
                 "js/view-extensions/templates/view-template-split-view.js",
                 "js/view-extensions/templates/view-template-three-column.js",

@@ -1,0 +1,24 @@
+{
+    "rednose-ruler" : {
+        "use": [
+            "rednose-ruler-dd"
+        ],
+
+        "submodules": {
+            "rednose-ruler-base" : {
+                "requires": [
+                    "node",
+                    "event-resize",
+                    "view"
+                ]
+            },
+            "rednose-ruler-dd" : {
+                "requires": [
+                    "rednose-ruler-base",
+                    "resize",
+                    "datatype-number"
+                ]
+            }
+        }
+    }
+}
