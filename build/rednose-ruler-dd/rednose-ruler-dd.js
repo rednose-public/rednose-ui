@@ -101,6 +101,18 @@ RulerDD.prototype = {
         this._resizeMap.push(resize);
     },
 
+    getSizes: function () {
+        var sizeType        = this.sizeType,
+            marginLeftSize  = parseFloat(this._marginLeft.getComputedStyle(sizeType)),
+            marginRightSize = parseFloat(this._marginRight.getComputedStyle(sizeType)),
+            newRulerSize    = this._size - marginLeftSize - marginRightSize;
+
+        return {
+            'position': this._pixelMillimeter(marginLeftSize),
+            'size': this._pixelMillimeter(newRulerSize)
+        };
+    },
+
     _initializeRulerStyles: function () {
         var ruler     = this.get('container').one('.inner-ruler'),
             leftSize  = this.get('leftSize') ? this.get('leftSize') : this.get('defaultOffset'),
@@ -135,8 +147,8 @@ RulerDD.prototype = {
             marginRightSize = parseFloat(this._marginRight.getComputedStyle(sizeType)),
             newRulerSize    = this._size - marginLeftSize - marginRightSize;
 
-        container.one('.margin-left span').setHTML(this._getMMSize(marginLeftSize));
-        container.one('.margin-right span').setHTML(this._getMMSize(marginRightSize));
+        container.one('.margin-left span').setHTML(this._getMMSize(marginLeftSize) + "MM");
+        container.one('.margin-right span').setHTML(this._getMMSize(marginRightSize) + "MM");
 
         if (this.get('vertical')) {
             ruler.setStyles({
@@ -155,8 +167,7 @@ RulerDD.prototype = {
         var number = Y.Number.format(this._pixelMillimeter(px),{
             thousandsSeparator: ".",
             decimalSeparator: ",",
-            decimalPlaces: 2,
-            suffix: " MM"
+            decimalPlaces: 2
         });
 
         return  number;
