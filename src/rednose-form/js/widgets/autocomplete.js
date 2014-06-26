@@ -120,6 +120,9 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
             value: null
         },
 
+        /**
+         * @type {Object}
+         */
         datasource: {
             value: null
         }

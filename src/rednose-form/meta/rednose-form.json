@@ -3,6 +3,7 @@
         "requires": [
             "autocomplete",
             "highlight",
+            "io",
             "model",
             "model-list",
             "template-micro",

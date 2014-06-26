@@ -4,6 +4,7 @@
         "rednose-form": {
             "jsfiles": [
                 "widgets/autocomplete.js",
+                "widgets/dropdown.js",
                 "widgets/rich-text-editor.js",
                 "models/form.js",
                 "views/control.js",
