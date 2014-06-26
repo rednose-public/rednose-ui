@@ -213,6 +213,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         "group": "rednose-ui",
         "requires": [
             "autocomplete",
+            "highlight",
             "model",
             "model-list",
             "template-micro",
@@ -322,28 +323,6 @@ Y.mix(YUI.Env[Y.version].modules, {
         "supersedes": [
             "skin-sam-widget-base",
             "skin-sam-panel"
-        ]
-    },
-    "rednose-ruler": {
-        "group": "rednose-ui",
-        "use": [
-            "rednose-ruler-dd"
-        ]
-    },
-    "rednose-ruler-base": {
-        "group": "rednose-ui",
-        "requires": [
-            "node",
-            "event-resize",
-            "view"
-        ]
-    },
-    "rednose-ruler-dd": {
-        "group": "rednose-ui",
-        "requires": [
-            "rednose-ruler-base",
-            "resize",
-            "datatype-number"
         ]
     },
     "rednose-tabview": {
@@ -492,4 +471,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '62dbcfb6e2508ef33c0e2ba437471513';
+YUI.Env[Y.version].md5 = '07d02ac7a9c3d807ce96e6a33d084681';

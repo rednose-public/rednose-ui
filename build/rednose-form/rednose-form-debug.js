@@ -37,7 +37,7 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
                 });
             });
             this.set('resultTextLocator', function (result) {
-                return datasource.map && datasource.map.value ? result[datasource.map.value] : result.value;
+                return datasource.map && datasource.map.value ? self._getArrayValueByKey(result, datasource.map.value) : result.value;
             });
             this.set('source', this._getDataProviderRoute(datasource.id, datasource.map && datasource.map.title ? datasource.map.title : 'title'));
         } else if (choices) {
@@ -74,11 +74,33 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
         map || (map = {});
 
         return {
-            title   : map.title    ? data[map.title]    : data.title,
-            subtitle: map.subtitle ? data[map.subtitle] : data.subtitle,
-            image   : map.image    ? data[map.image]    : data.image,
-            value   : map.value    ? data[map.value]    : data.value
+            title   : map.title    ? this._getArrayValueByKey(data, map.title)    : data.title,
+            subtitle: map.subtitle ? this._getArrayValueByKey(data, map.subtitle) : data.subtitle,
+            image   : map.image    ? this._getArrayValueByKey(data, map.image)    : data.image,
+            value   : map.value    ? this._getArrayValueByKey(data, map.value)    : data.value
         };
+    },
+
+    _getArrayValueByKey:function (array, search) {
+        for (var key in array) {
+            if (array.hasOwnProperty(key)) {
+                var value = array[key];
+
+                if (key === search) {
+                    return value;
+                }
+
+                if (Y.Lang.isObject(value)) {
+                    var v = this._getArrayValueByKey(value, search);
+
+                    if (v) {
+                        return v;
+                    }
+                }
+            }
+        }
+
+        return null;
     }
 }, {
     CSS_PREFIX: 'rednose-autocomplete',
@@ -1078,4 +1100,4 @@ ControlViewFactory.create = function (model) {
 Y.namespace('Rednose.Form').ControlViewFactory = ControlViewFactory;
 
 
-}, '1.5.0-DEV', {"requires": ["autocomplete", "model", "model-list", "template-micro", "uploader", "view"]});
+}, '1.5.0-DEV', {"requires": ["autocomplete", "highlight", "model", "model-list", "template-micro", "uploader", "view"]});
