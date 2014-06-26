@@ -33,11 +33,6 @@ RulerDD.prototype = {
                 'drag:drag': this._setRulerStyles,
                 'drag:mouseDown': this._showSizes,
                 'drag:end': this._showSizes
-            }, this),
-            this.after({
-                'leftSizeChange': this._initializeRulerStyles,
-                'rightSizeChange': this._initializeRulerStyles,
-                'maxWidthChange': this._initializeRulerStyles
             }, this)
         ];
 
@@ -51,10 +46,9 @@ RulerDD.prototype = {
             resize.destroy({ remove:true });
         });
 
-        this._resizeMap = {};
-
-        this._size         = null;
+        this._size          = null;
         this._rulerDDEvents = null;
+        this._resizeMap     = {};
     },
 
     // -- Protected Methods ----------------------------------------------------
