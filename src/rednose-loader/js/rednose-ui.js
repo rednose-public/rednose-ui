@@ -325,6 +325,28 @@ Y.mix(YUI.Env[Y.version].modules, {
             "skin-sam-panel"
         ]
     },
+    "rednose-ruler": {
+        "group": "rednose-ui",
+        "use": [
+            "rednose-ruler-dd"
+        ]
+    },
+    "rednose-ruler-base": {
+        "group": "rednose-ui",
+        "requires": [
+            "node",
+            "event-resize",
+            "view"
+        ]
+    },
+    "rednose-ruler-dd": {
+        "group": "rednose-ui",
+        "requires": [
+            "rednose-ruler-base",
+            "resize",
+            "datatype-number"
+        ]
+    },
     "rednose-tabview": {
         "group": "rednose-ui",
         "requires": [
@@ -471,4 +493,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '07d02ac7a9c3d807ce96e6a33d084681';
+YUI.Env[Y.version].md5 = '4554d384fb0164a3cee446dab732f4ee';
