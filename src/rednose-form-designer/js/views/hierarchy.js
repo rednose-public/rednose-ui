@@ -95,6 +95,9 @@ var HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
     }
 }, {
     ATTRS: {
+        /**
+         * @attribute {Rednose.Form.FormModel} model
+         */
         model: {
             value : new Y.Rednose.Form.FormModel(),
             setter: '_setModel'

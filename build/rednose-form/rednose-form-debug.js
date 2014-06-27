@@ -393,7 +393,7 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
         }
 
         var root = {
-            label   : this.get('foreign_id'),
+            label   : this.get('name'),
             icon    : 'icon-list-alt',
             children: []
         };
@@ -456,13 +456,6 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
         /**
          * @type {String}
          */
-        foreign_id: {
-            value: null
-        },
-
-        /**
-         * @type {String}
-         */
         name: {
             value: null
         },
@@ -471,6 +464,13 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
          * @type {String}
          */
         caption: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        identity: {
             value: null
         },
 

@@ -225,6 +225,7 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-form-designer": {
         "group": "rednose-ui",
         "requires": [
+            "docgenadmin-core",
             "rednose-app",
             "rednose-button-dropdown",
             "rednose-datatable-select",
@@ -494,4 +495,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'e475d6d022a9e03c0e18ebcf5a55ed0f';
+YUI.Env[Y.version].md5 = 'de6c48fa4dacc841c7a6e698b1972043';
