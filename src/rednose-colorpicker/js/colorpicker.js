@@ -21,15 +21,27 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
     template:
         '<div class="input-append">' +
-            '<input type="text" id="color" value="#FFFFFF" />' +
+            '<input type="text" placeholder="Transparant" id="color" value="#FFFFFF" />' +
             '<button title="Configure table" type="button" class="btn">' +
                 '<i class="icon-adjust"></i>' +
             '</button>' +
         '</div>',
 
+    overlayTemplate:
+        '<div class="dropdown-menu">' +
+            '<div id="canvas"></div>' +
+            '<div class="color-values">' +
+                'R: <input id="r" />, ' +
+                'G: <input id="g" />, ' +
+                'B: <input id="b" />' +
+            '</div>' +
+        '</div>',
+
     // -- Proteced Properties --------------------------------------------------
 
     _canvas: null,
+
+    _overlay: null,
 
     _imageObj: null,
 
@@ -51,12 +63,14 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             self._mouseOver(e);
         });
 
-        this._canvas.addEventListener('mousedown', function () {
+        this._canvas.addEventListener('mousedown', function (e) {
             self._mouseActive = true;
+            self._mouseOver(e);
         });
 
         this._picker.getDOMNode().addEventListener('mousedown', function () {
             self._mouseActive = true;
+
         });
 
         this._canvas.addEventListener('mouseup', function () {
@@ -73,6 +87,9 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     destructor: function () {
         this._picker.getDOMNode().removeEventListener('mousemove');
         this._canvas.removeEventListener('mousemove');
+
+        this._overlay.destroy();
+        this._overlay.remove();
     },
 
     renderUI: function () {
@@ -96,15 +113,33 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             hexColor = this.get('hex').toUpperCase(),
             input    = this.get('contentBox').one('#color');
 
+        if (color === null) {
+            input.set('value', '');
+            input.setStyle('backgroundColor', '#FFFFFF');
+            input.setStyle('color', 'black');
+
+            return;
+        }
+
         input.set('value', hexColor);
         input.setStyle('backgroundColor', hexColor);
 
-        contrast = 1 - (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
+        var contrast = 1 - (0.299 * color.red + 0.587 * color.green + 0.114 * color.blue) / 255;
 
         if (contrast < 0.5) {
             input.setStyle('color', 'black');
         } else {
             input.setStyle('color', 'white');
+        }
+
+        if (this._overlay) {
+            var rValue   = this._overlay.one('.color-values > input#r'),
+                gValue   = this._overlay.one('.color-values > input#g'),
+                bValue   = this._overlay.one('.color-values > input#b');
+
+            rValue.set('value', color.red);
+            gValue.set('value', color.green);
+            bValue.set('value', color.blue);
         }
     },
 
@@ -112,38 +147,69 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
         var self      = this,
             container = this.get('contentBox'),
             button    = e.currentTarget,
-            overlay   = new Y.Node.create('<div class="dropdown-menu"></div>');
+            overlay   = null;
 
-        this._renderCanvas();
+        if (this._overlay === null)  {
+            overlay = new Y.Node.create(this.overlayTemplate);
 
-        overlay.append(this._canvas);
-        overlay.append(this._picker);
+            this._renderCanvas();
+
+            overlay.one('div#canvas').append(this._canvas);
+            overlay.one('div#canvas').append(this._picker);
+
+            overlay.on('clickoutside', function (e) {
+                // Prevent close on open
+                if (e.target !== button) {
+                    overlay.hide();
+
+                    self.fire(EVT_UPDATE);
+                }
+            });
+
+            overlay.all('input').on(['keyup', 'change'], self._onColorValueChange, self);
+
+            Y.one('body').append(overlay);
+
+            this._overlay = overlay;
+        } else {
+            overlay = this._overlay;
+        }
 
         overlay.setStyle('display', 'block');
         overlay.setStyle('left', container.getX());
         overlay.setStyle('top', button.getY() + parseInt(button.getComputedStyle('height')));
-
-        overlay.on('clickoutside', function (e) {
-            // Prevent close on open
-            if (e.target !== button) {
-                overlay.remove();
-                overlay.destroy();
-
-                self.fire(EVT_UPDATE);
-            }
-        });
-
-        Y.one('body').append(overlay);
     },
 
     _handleColorInputChanged: function (e) {
         var hexValue = e.currentTarget.get('value');
+
+        if (hexValue === '') {
+            this.set('color', null);
+
+            this.fire(EVT_UPDATE);
+        }
 
         if (hexValue.match(/^#([0-9a-f]{6})$/i)) {
             this.set('hex', hexValue.toUpperCase());
 
             this.fire(EVT_UPDATE);
         }
+    },
+
+    _onColorValueChange: function (e) {
+        var rValue   = this._overlay.one('.color-values > input#r'),
+            gValue   = this._overlay.one('.color-values > input#g'),
+            bValue   = this._overlay.one('.color-values > input#b');
+
+        var color = {};
+
+        color.red = parseInt(rValue.get('value')) || 0;
+        color.green = parseInt(gValue.get('value')) || 0;
+        color.blue = parseInt(bValue.get('value')) || 0;
+
+        this._picker.setStyle('display', 'none');
+
+        this.set('color', color);
     },
 
     _mouseOver: function (e) {
@@ -230,6 +296,10 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
     _getHex: function () {
         var color = this.get('color');
+
+        if (color === null) {
+            return '';
+        }
 
         rgb = [
             color.red.toString(),

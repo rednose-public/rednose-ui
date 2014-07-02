@@ -283,6 +283,14 @@ li.disabled [class*=" icon-"] {
   background-image: url('img/spinner.gif');
 }
 
+div.color-values {
+  padding: 5px;
+}
+
+div.color-values > input {
+  width: 50px;
+}
+
 i.rednose-colorpicker-pointer {
   position: absolute;
   top: 0;
