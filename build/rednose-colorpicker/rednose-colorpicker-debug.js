@@ -161,7 +161,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
             overlay.on('clickoutside', function (e) {
                 // Prevent close on open
-                if (e.target !== button) {
+                if (e.target !== button && overlay.getStyle('display') === 'block') {
                     overlay.hide();
 
                     self.fire(EVT_UPDATE);
