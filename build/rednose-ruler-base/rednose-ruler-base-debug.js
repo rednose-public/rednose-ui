@@ -77,6 +77,8 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
 
         innerRuler.setHTML('');
 
+        console.log(rulerSize);
+
         while (tickerPosition <= rulerSize) {
             if (( tickerPosition %10 ) === 0 ) {
                 tickerLabel = Y.Node.create('<div class="tickLabel"><span>' + ( this.get('centimeter') ? tickerPosition / 10 : tickerPosition ) + '</span></div>');

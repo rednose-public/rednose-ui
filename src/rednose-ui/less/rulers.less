@@ -104,6 +104,7 @@
 		z-index: 2;
 		height: 0px;
 		width: @ruler-width;
+		border-top: @ruler-border;
 		border-right: @ruler-border;
 		background: @outside-background;
 
@@ -118,9 +119,10 @@
 	}
 	.inner-ruler {
 		position: absolute;
-		min-height: 100%;
+		overflow: hidden;
 		width: @ruler-width;
 		border-right: @ruler-border;
+		background: @ruler-background;
 
 		div {
 			background: @line-colors;
@@ -161,6 +163,7 @@
 		background: @outside-background;
 		border-right: @ruler-border;
 		border-top: @ruler-border;
+		border-bottom: @ruler-border;
 		bottom: 0;
 
 		span {

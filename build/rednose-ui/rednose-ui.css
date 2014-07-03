@@ -1135,6 +1135,7 @@ div .btn-toolbar .btn-group.pull-right {
   width: 18px;
   height: 0;
   background: #f5f5f5;
+  border-top: 1px solid #969696;
   border-right: 1px solid #969696;
 }
 
@@ -1154,7 +1155,8 @@ div .btn-toolbar .btn-group.pull-right {
 .rednose-vertical-ruler .inner-ruler {
   position: absolute;
   width: 18px;
-  min-height: 100%;
+  overflow: hidden;
+  background: #ffffff;
   border-right: 1px solid #969696;
 }
 
@@ -1206,6 +1208,7 @@ div .btn-toolbar .btn-group.pull-right {
   background: #f5f5f5;
   border-top: 1px solid #969696;
   border-right: 1px solid #969696;
+  border-bottom: 1px solid #969696;
 }
 
 .rednose-vertical-ruler .margin-right span {
