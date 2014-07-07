@@ -20,13 +20,14 @@ RulerDD.prototype = {
      * @property {Object} _resizeMap
      * @protected
      */
-    _resizeMap: [],
 
     _size: null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
+        this._resizeMap = [];
+
         this._rulerDDEvents = [
             Y.Do.after(this._afterRender, this, '_renderRuler', this),
             this.on({
@@ -135,11 +136,12 @@ RulerDD.prototype = {
     },
 
     _resizeStart: function (e) {
-        var ruler  = this.get('container').one('.inner-ruler');
+        var ruler    = this.get('container').one('.inner-ruler'),
+            sizeType = this.sizeType;
 
-        this._size = parseFloat(ruler.getComputedStyle('width')) +
-                     parseFloat(this._marginLeft.getComputedStyle('width')) + 
-                     parseFloat(this._marginRight.getComputedStyle('width'));
+        this._size = parseFloat(ruler.getComputedStyle(sizeType)) +
+                     parseFloat(this._marginLeft.getComputedStyle(sizeType)) + 
+                     parseFloat(this._marginRight.getComputedStyle(sizeType));
     },
 
     _setRulerStyles: function (e) {

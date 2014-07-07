@@ -37,9 +37,6 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
         this._pixelMillimeter();
     },
 
-    destructor: function () {
-    },
-
     // -- Public Methods -------------------------------------------------------
 
     /**
@@ -76,8 +73,6 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
             tickerLabel;
 
         innerRuler.setHTML('');
-
-        console.log(rulerSize);
 
         while (tickerPosition <= rulerSize) {
             if (( tickerPosition %10 ) === 0 ) {
