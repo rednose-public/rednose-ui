@@ -4,20 +4,20 @@ function Template() {}
 
 Template.prototype = {
 
-	// -- Public Properties ----------------------------------------------------
-	
-	baseTemplate: 
+    // -- Public Properties ----------------------------------------------------
+    
+    baseTemplate: 
         '<form class="form-horizontal">' + 
         '</form',
 
     tabTemplate: Micro.compile(
-   			'<fieldset>' + 
+            '<fieldset>' + 
                 '<div id="<%= data.id %>">' +
                 '</div>' +
             '</fieldset>'
-	),	
+    ),  
 
-	inputTemplate: Micro.compile(
+    inputTemplate: Micro.compile(
         '<div class="control-group">' +
             '<label>' +
                 '<span class="control-label"><%= data.title %> <small><%= data.sub_title %></small></span>' +
@@ -54,53 +54,55 @@ Template.prototype = {
         '</div>'
     ),
 
-	// -- Lifecycle Methods ----------------------------------------------------
+    // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-    	this._TemplateEvents = [
-			Y.Do.before(this._afterFocusInput, this, '_focusInput', this)
-		];
+        this._TemplateEvents = [
+            Y.Do.before(this._beforeFocusInput, this, '_focusInput', this)
+        ];
 
-		this.template = Y.Node.create(this.baseTemplate);
+        this.template = Y.Node.create(this.baseTemplate);
     },
 
     destructor: function () {
-    	(new Y.EventHandle(this._TemplateEvents)).detach();
+        (new Y.EventHandle(this._TemplateEvents)).detach();
     },
 
-    _afterFocusInput: function () {
-    	var tabs 	   = Y.Object.isEmpty(this.get('tabs')),
-			properties = this.get('properties');
+    _beforeFocusInput: function () {
+        var tabs       = Y.Object.isEmpty(this.get('tabs')),
+            properties = Y.Object.isEmpty(this.get('properties'));
 
-    	if (tabs === false) {
-    		this._createTabs();
-    	}
+        if (tabs === false) {
+            this._createTabs();
+        }
 
-    	if (Y.Object.isEmpty(properties) === false) {
-    		this._createTemplate();
-    	}
+        if (properties === false) {
+            this._createTemplate();
+        }
 
-    	if (tabs === false) {
-    		this._renderTabs();
-    	}
+        if (tabs === false) {
+            this._renderTabs();
+        }
 
-		this.panel.set('bodyContent', this.template);
+        if (tabs === false || properties === false) {
+            this.panel.set('bodyContent', this.template);
+        }
     },
 
     _createTabs: function () {
-    	var self = this,
-    		tabs = this.get('tabs');
+        var self = this,
+            tabs = this.get('tabs');
 
-    	Y.Object.each(tabs, function (tab) {
-    		self.template.append(self.tabTemplate(tab));
+        Y.Object.each(tabs, function (tab) {
+            self.template.append(self.tabTemplate(tab));
         });
     },
 
-	_createTemplate: function () {
-		var self	   = this,
-			properties = this.get('properties'),
-			tabs 	   = Y.Object.isEmpty(this.get('tabs')),
-			template;
+    _createTemplate: function () {
+        var self       = this,
+            properties = this.get('properties'),
+            tabs       = Y.Object.isEmpty(this.get('tabs')),
+            template;
 
         Y.Object.each(properties, function (property) {
             switch (property.type) {
@@ -111,32 +113,32 @@ Template.prototype = {
                     template = self.selectTemplate;
                     break;
                 case 'textarea':
-                	template = self.textareaTemplate;
-                	break;
+                    template = self.textareaTemplate;
+                    break;
                 default:
-                	template = function(){ console.error('Type "%s" in property "%s" is not supported.', property.type, property.title); };
-                	break;
+                    template = function(){ console.error('Type "%s" in property "%s" is not supported.', property.type, property.title); };
+                    break;
             }
 
             if (property.tab && tabs === false) {
-            	self.template.one('#' + property.tab).append(template(property));
+                self.template.one('#' + property.tab).append(template(property));
             } else {
-            	self.template.append(template(property));
+                self.template.append(template(property));
             }
         });
     },
 
     _renderTabs: function () {
-    	var container = this.template,
-    		tabs      = this.get('tabs');
+        var container = this.template,
+            tabs      = this.get('tabs');
 
-    	Y.Object.each(tabs, function (tab, i) {
-    		if (i === '0') {
-    			tab.active = true;
-    		}
+        Y.Object.each(tabs, function (tab, i) {
+            if (i === '0') {
+                tab.active = true;
+            }
 
-    		tab.container = container.one('div#' + tab.id);
-    	});
+            tab.container = container.one('div#' + tab.id);
+        });
 
         this.tabView = new Y.Rednose.TabView({
                 tabs: tabs
@@ -147,7 +149,7 @@ Template.prototype = {
 };
 
 Template.ATTRS = {
-	/**
+    /**
      * @attribute tabs
      * @type Object [tabs]
      *   @param {Array} 
@@ -158,7 +160,7 @@ Template.ATTRS = {
         value: []
     },
 
-	/**
+    /**
      * @attribute properties
      * @type {Object} [properties] The following options can be specified:
      *   @param {Array} 
@@ -173,7 +175,7 @@ Template.ATTRS = {
      *       @param {String} [properties.options.selected] True if selected.
      */
     properties: {
-		value: []
+        value: []
     }
 };
 
