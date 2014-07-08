@@ -5,17 +5,17 @@ function Template() {}
 Template.prototype = {
 
     // -- Public Properties ----------------------------------------------------
-    
-    baseTemplate: 
-        '<form class="form-horizontal">' + 
+
+    baseTemplate:
+        '<form class="form-horizontal">' +
         '</form',
 
     tabTemplate: Micro.compile(
-            '<fieldset>' + 
-                '<div id="<%= data.id %>">' +
-                '</div>' +
-            '</fieldset>'
-    ),  
+        '<fieldset>' +
+            '<div id="<%= data.id %>">' +
+            '</div>' +
+        '</fieldset>'
+    ),
 
     inputTemplate: Micro.compile(
         '<div class="control-group">' +
@@ -141,8 +141,8 @@ Template.prototype = {
         });
 
         this.tabView = new Y.Rednose.TabView({
-                tabs: tabs
-            });
+            tabs: tabs
+        });
 
         this.tabView.render(container);
     }
@@ -152,7 +152,7 @@ Template.ATTRS = {
     /**
      * @attribute tabs
      * @type Object [tabs]
-     *   @param {Array} 
+     *   @param {Array}
      *     @param {String} [tabs.id] The element id.
      *     @param {String} [tabs.title] The element title.
      */
@@ -163,7 +163,7 @@ Template.ATTRS = {
     /**
      * @attribute properties
      * @type {Object} [properties] The following options can be specified:
-     *   @param {Array} 
+     *   @param {Array}
      *     @param {String} [properties.type] The element type. input|select|textarea
      *     @param {String} [properties.id] The element id.
      *     @param {String} [properties.title] The element title.
