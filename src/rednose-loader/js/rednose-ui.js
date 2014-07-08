@@ -146,6 +146,13 @@ Y.mix(YUI.Env[Y.version].modules, {
     },
     "rednose-dialog": {
         "group": "rednose-ui",
+        "use": [
+            "rednose-dialog-base",
+            "rednose-dialog-template"
+        ]
+    },
+    "rednose-dialog-base": {
+        "group": "rednose-ui",
         "lang": [
             "en",
             "nl"
@@ -154,6 +161,13 @@ Y.mix(YUI.Env[Y.version].modules, {
             "base",
             "rednose-panel",
             "rednose-toolbar"
+        ]
+    },
+    "rednose-dialog-template": {
+        "group": "rednose-ui",
+        "requires": [
+            "template-micro",
+            "rednose-tabview"
         ]
     },
     "rednose-dropdown": {
@@ -495,4 +509,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'de6c48fa4dacc841c7a6e698b1972043';
+YUI.Env[Y.version].md5 = 'bbed0f4d812a324c18a203696a74a92a';

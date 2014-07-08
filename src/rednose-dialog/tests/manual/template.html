@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Y.Rednose.Dialog.Template module test</title>
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+
+    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
+    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+</head>
+<body>
+
+<div id="test-container" class="container">
+    <div class="row">
+        <div class="span12">
+            <section>
+                <h1>Dialog</h1>
+                <button id="prompt" class="btn">Prompt</button>
+                <button id="tabs" class="btn">Prompt with tabs</button>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script>
+    YUI.Env.core.push('rednose-loader');
+
+    YUI({
+        filter: 'raw',
+        "groups": {
+            "rednose-ui": {
+                base: "../../../../build/"
+            }
+        }
+    }).use('rednose-dialog', function (Y) {
+        var tabs = [
+            {
+                id    : 'properties',
+                title : 'Properties'
+            },
+            {
+                id    : 'dimensions',
+                title : 'Dimensions'
+            }
+        ];
+
+        var properties = [
+            { 
+                type        : 'input',
+                id          : 'name',
+                title       : 'Name',
+                tab         : 'properties',
+                value       : 'Test name'
+            },
+            { 
+                type        : 'select',
+                id          : 'type',
+                title       : 'Type',
+                sub_title   : '(fruit)',
+                tab         : 'properties',
+                options     : [
+                    {
+                        value: 'none',
+                        title: 'None'
+                    },
+                    {
+                        value: 'apple',
+                        title: 'Apple'
+                    },
+                    {
+                        value: 'strawberry',
+                        title: 'Strawberry',
+                        selected: true
+                    }
+                ]
+            },
+            { 
+                type        : 'textarea',
+                id          : 'content',
+                title       : 'Content',
+                tab         : 'properties'
+            },
+            { 
+                type        : 'input',
+                id          : 'height',
+                title       : 'Height',
+                sub_title   : '(mm)',
+                tab         : 'dimensions'
+            },
+            { 
+                type        : 'input',
+                id          : 'width',
+                title       : 'Width',
+                sub_title   : '(mm)',
+                tab         : 'dimensions'
+            }
+        ];
+
+
+        Y.one('#prompt').on('click', function () {
+            var Dialog = new Y.Rednose.Dialog({
+                properties  : properties
+            });
+
+            Dialog.prompt({
+                title: 'Test inputs',
+                properties: ['alternative'],
+                alternative: 'Alternative',
+                on: {
+                    alternative: function () {
+                        console.log(arguments);
+                    },
+                    cancel: function () {
+                    },
+                    confirm: function () {
+                        console.log(arguments);
+                    }
+                }
+            }, function () {
+                console.log(arguments[1].getAttrs());
+            });
+        });
+
+        Y.one('#tabs').on('click', function () {
+            var Dialog = new Y.Rednose.Dialog({
+                tabs        : tabs,
+                properties  : properties
+            });
+
+            Dialog.prompt({
+                title: 'Test inputs',
+                properties: ['alternative'],
+                alternative: 'Alternative',
+                on: {
+                    alternative: function () {
+                        console.log(arguments);
+                    },
+                    cancel: function () {
+                    },
+                    confirm: function () {
+                        console.log(arguments);
+                    }
+                }
+            }, function () {
+                console.log(arguments[1].getAttrs());
+            });
+        });
+    });
+</script>
+</body>
+</html>

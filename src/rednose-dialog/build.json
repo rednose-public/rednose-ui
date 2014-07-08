@@ -1,9 +1,16 @@
 {
     "name": "rednose-dialog",
+
     "builds": {
-        "rednose-dialog": {
+        "rednose-dialog-base": {
             "jsfiles": [
-                "dialog.js"
+                "js/dialog.js"
+            ]
+        },
+
+        "rednose-dialog-template": {
+            "jsfiles": [
+                "js/extensions/dialog-template.js"
             ]
         }
     }

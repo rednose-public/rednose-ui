@@ -1,3 +1,5 @@
+YUI.add('rednose-dialog-base', function (Y, NAME) {
+
 /*jshint expr:true, onevar:false */
 
 /**
@@ -587,3 +589,6 @@ Dialog.prompt = function (options, callback) {
 
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose').Dialog = Dialog;
+
+
+}, '1.5.0-DEV', {"requires": ["base", "rednose-panel", "rednose-toolbar"], "lang": ["en", "nl"]});

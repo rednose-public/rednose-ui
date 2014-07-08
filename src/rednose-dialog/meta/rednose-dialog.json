@@ -1,13 +1,29 @@
 {
     "rednose-dialog" : {
-        "requires": [
-            "base",
-            "rednose-panel",
-            "rednose-toolbar"
+        "use": [
+            "rednose-dialog-base",
+            "rednose-dialog-template"
         ],
-        "lang": [
-            "en",
-            "nl"
-        ]
+
+        "submodules": {
+            "rednose-dialog-base" : {
+                "requires": [
+                    "base",
+                    "rednose-panel",
+                    "rednose-toolbar"
+                ],
+                "lang": [
+                    "en",
+                    "nl"
+                ]
+            },
+
+            "rednose-dialog-template" : {
+                "requires": [
+                    "template-micro",
+                    "rednose-tabview"
+                ]
+            }
+        }
     }
 }
