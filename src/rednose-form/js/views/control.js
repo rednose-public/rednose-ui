@@ -49,7 +49,7 @@ TextControlView = Y.Base.create('textControlView', Y.Rednose.Form.BaseControlVie
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
                   '<div class="controls">' +
-                      '<input class="input-block-level" id="{id}" type="text"/>' +
+                      '<input id="{id}" type="text"/>' +
                   '</div>' +
               '</div>',
 
@@ -68,6 +68,12 @@ TextControlView = Y.Base.create('textControlView', Y.Rednose.Form.BaseControlVie
             id   : model.get('id'),
             label: model.get('caption')
         }));
+
+        var properties = model.get('properties');
+
+        if (properties && properties.size) {
+            container.one('input').addClass('input-' + properties.size);
+        }
 
         this._inputNode = container.one('input');
 

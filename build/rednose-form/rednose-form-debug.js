@@ -537,7 +537,7 @@ TextControlView = Y.Base.create('textControlView', Y.Rednose.Form.BaseControlVie
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
                   '<div class="controls">' +
-                      '<input class="input-block-level" id="{id}" type="text"/>' +
+                      '<input id="{id}" type="text"/>' +
                   '</div>' +
               '</div>',
 
@@ -556,6 +556,12 @@ TextControlView = Y.Base.create('textControlView', Y.Rednose.Form.BaseControlVie
             id   : model.get('id'),
             label: model.get('caption')
         }));
+
+        var properties = model.get('properties');
+
+        if (properties && properties.size) {
+            container.one('input').addClass('input-' + properties.size);
+        }
 
         this._inputNode = container.one('input');
 
@@ -940,7 +946,7 @@ TextAreaControlView = Y.Base.create('textAreaControlView', Y.Rednose.Form.BaseCo
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
                   '<div class="controls">' +
-                      '<textarea rows="3" class="input-block-level" id="{id}"></textarea>' +
+                      '<textarea id="{id}"></textarea>' +
                   '</div>' +
               '</div>',
 
@@ -953,6 +959,16 @@ TextAreaControlView = Y.Base.create('textAreaControlView', Y.Rednose.Form.BaseCo
             id   : model.get('id'),
             label: model.get('caption')
         }));
+
+        var properties = model.get('properties');
+
+        if (properties && properties.size) {
+            container.one('textarea').addClass('input-' + properties.size);
+        }
+
+        if (properties && properties.rows) {
+            container.one('textarea').setAttribute('rows', properties.rows);
+        }
 
         return this;
     }

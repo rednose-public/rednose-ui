@@ -591,8 +591,11 @@ input.rednose-datatable-input {
 }
 
 .rednose-form-designer .rednose-form-view {
-  margin-right: 20px;
-  margin-left: 20px;
+  width: 725px;
+  padding: 9px 15px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: #ffffff;
 }
 
 /* Fix for input block-level with combo button */

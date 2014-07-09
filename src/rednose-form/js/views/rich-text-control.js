@@ -7,7 +7,7 @@ TextAreaControlView = Y.Base.create('textAreaControlView', Y.Rednose.Form.BaseCo
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
                   '<div class="controls">' +
-                      '<textarea rows="3" class="input-block-level" id="{id}"></textarea>' +
+                      '<textarea id="{id}"></textarea>' +
                   '</div>' +
               '</div>',
 
@@ -20,6 +20,16 @@ TextAreaControlView = Y.Base.create('textAreaControlView', Y.Rednose.Form.BaseCo
             id   : model.get('id'),
             label: model.get('caption')
         }));
+
+        var properties = model.get('properties');
+
+        if (properties && properties.size) {
+            container.one('textarea').addClass('input-' + properties.size);
+        }
+
+        if (properties && properties.rows) {
+            container.one('textarea').setAttribute('rows', properties.rows);
+        }
 
         return this;
     }
