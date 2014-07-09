@@ -28,13 +28,13 @@ DataSource = Y.Base.create('dataSource', Y.Model, [], {
         var list = [];
 
         Y.Array.each(this.get('attributes'), function (attr) {
-            if (attr.type !== 'collection') {
+            if (attr.type !== 'composite') {
                 list.push(attr.name);
             }
 
             if (attr.children) {
                 Y.Array.each(attr.children, function (attr) {
-                    if (attr.type !== 'collection') {
+                    if (attr.type !== 'composite') {
                         list.push(attr.name);
                     }
                 });
@@ -138,7 +138,7 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
 
             node = {
                 label: attribute.name,
-                icon : attribute.type === 'collection' ? 'icon-th-list' : 'icon-minus'
+                icon : attribute.type === 'composite' ? 'icon-th-list' : 'icon-minus'
             };
 
             if (attribute.children) {
