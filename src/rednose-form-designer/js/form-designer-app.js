@@ -20,7 +20,7 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
     _hierarchyView       : null,
     _dataSourcesView     : null,
     _objectAttributesView: null,
-    _dataControlsView    : null,
+    // _dataControlsView    : null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
@@ -31,13 +31,13 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         this._hierarchyView        = new Y.Rednose.FormDesigner.HierarchyView();
         this._dataSourcesView      = new Y.Rednose.FormDesigner.DataSourcesView();
         this._objectAttributesView = new Y.Rednose.FormDesigner.ObjectAttributesView();
-        this._dataControlsView     = new Y.Rednose.FormDesigner.DataControlsView();
+        // this._dataControlsView     = new Y.Rednose.FormDesigner.DataControlsView();
 
         this._objectLibrary.addTarget(this);
         this._hierarchyView.addTarget(this);
         this._dataSourcesView.addTarget(this);
         this._objectAttributesView.addTarget(this);
-        this._dataControlsView.addTarget(this);
+        // this._dataControlsView.addTarget(this);
 
         this.after({
             'navbar:click#preview'      : this._handlePreview,
@@ -59,7 +59,7 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         this.once('ready', function () {
             this.get('leftContainer').append(this._hierarchyView.render().get('container'));
             this.get('leftContainer').append(this._dataSourcesView.render().get('container'));
-            this.get('leftContainer').append(this._dataControlsView.render().get('container'));
+            // this.get('leftContainer').append(this._dataControlsView.render().get('container'));
             this.get('rightContainer').append(this._objectAttributesView.render().get('container'));
 
             if (this.hasRoute(this.getPath())) {
@@ -81,8 +81,8 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         this._objectAttributesView.destroy();
         this._objectAttributesView = null;
 
-        this._dataControlsView.destroy();
-        this._dataControlsView = null;
+        // this._dataControlsView.destroy();
+        // this._dataControlsView = null;
 
         this.navbar.destroy();
         this.navbar = null;
@@ -268,10 +268,10 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
             this._hierarchyView.render();
         }
 
-        if (this._dataControlsView) {
-            this._dataControlsView.set('identity', req.form.get('identity'));
-            this._dataControlsView.render();
-        }
+        // if (this._dataControlsView) {
+        //     this._dataControlsView.set('identity', req.form.get('identity'));
+        //     this._dataControlsView.render();
+        // }
     }
 }, {
     ATTRS: {

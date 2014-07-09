@@ -87,24 +87,24 @@ FormView = Y.Base.create('formView', Y.View, [], {
             // }
 
 
-            var dd = new Y.DD.Drag({
-                node: controlContainer,
-                group: ['rednose-form-designer-form']
-            }).plug(Y.Plugin.DDProxy, {
-                moveOnEnd: false
-            });
+            // var dd = new Y.DD.Drag({
+            //     node: controlContainer,
+            //     group: ['rednose-form-designer-form']
+            // }).plug(Y.Plugin.DDProxy, {
+            //     moveOnEnd: false
+            // });
 
-            dd.on('drag:start', function(e) {
-                e.target.get('dragNode').setHTML('');
-            });
-            dd.on('drag:drag', function(e) {
-                self._dragging(e, container.one('fieldset'), controlContainer);
-            });
-            dd.on('drag:end', function() {
-                self._setSortOrder(container.one('fieldset'));
-            });
+            // dd.on('drag:start', function(e) {
+            //     e.target.get('dragNode').setHTML('');
+            // });
+            // dd.on('drag:drag', function(e) {
+            //     self._dragging(e, container.one('fieldset'), controlContainer);
+            // });
+            // dd.on('drag:end', function() {
+            //     self._setSortOrder(container.one('fieldset'));
+            // });
 
-            controlContainer.setData('model', control);
+            // controlContainer.setData('model', control);
 
             container.one('fieldset').append(controlContainer);
 

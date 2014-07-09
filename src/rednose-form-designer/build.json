@@ -5,7 +5,6 @@
             "jsfiles": [
                 "views/configure-items.js",
                 "views/configure-dynamic-items.js",
-                "views/data-controls.js",
                 "views/object-library.js",
                 "views/hierarchy.js",
                 "views/data-sources.js",
