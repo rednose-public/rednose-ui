@@ -19,7 +19,7 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
     template: '<div class="control-group">' +
                   '<label class="control-label" for="{id}">{label}</label>' +
                   '<div class="controls">' +
-                      '<input type="text" class="input-block-level" id="{id}" placeholder="{placeholder}"/>' +
+                      '<input type="text" id="{id}" placeholder="{placeholder}"/>' +
                   '</div>' +
               '</div>',
 
@@ -51,6 +51,12 @@ AutocompleteControlView = Y.Base.create('autoCompleteControlView', Y.Rednose.For
             label      : model.get('caption'),
             placeholder: TXT_TYPE_TO_SEARCH
         }));
+
+        var properties = model.get('properties');
+
+        if (properties && properties.size) {
+            container.one('input').addClass('input-' + properties.size);
+        }
 
         this._inputNode = container.one('input');
 
