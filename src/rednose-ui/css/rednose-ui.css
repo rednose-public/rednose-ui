@@ -586,6 +586,10 @@ input.rednose-datatable-input {
   width: 375px;
 }
 
+.rednose-form-view {
+  position: relative;
+}
+
 .rednose-form-designer .rednose-unit-main {
   overflow: auto;
 }

@@ -1152,10 +1152,11 @@ FormView = Y.Base.create('formView', Y.View, [], {
     _renderControl: function (control) {
         var container        = this.get('container'),
             controlView      = Y.Rednose.Form.ControlViewFactory.create(control),
-            controlContainer = controlView.render().get('container'),
             self             = this;
 
         if (controlView) {
+            var controlContainer = controlView.render().get('container');
+
             self._controlViewMap[control.get('id')] = controlView;
             // XXX
             control.view = controlView;
@@ -1201,6 +1202,25 @@ FormView = Y.Base.create('formView', Y.View, [], {
             container.one('fieldset').append(controlContainer);
 
             this._controlMap.push(controlView);
+        }
+
+        if (control.get('type') === 'image') {
+            var imageNode  = Y.Node.create('<img src="http://www.tweedekamer.nl/images/7885_tcm181-114584.jpg"></img>'),
+                properties = control.get('properties');
+
+            if (properties && properties.frame) {
+                var frame = properties.frame;
+
+                imageNode.setStyles({
+                    position: 'absolute',
+                    left    : frame.x + 'px',
+                    top     : frame.y + 'px',
+                    width   : frame.width + 'px',
+                    height  : frame.height + 'px'
+                });
+            }
+
+            container.one('.rednose-form-view').append(imageNode);
         }
     },
 
