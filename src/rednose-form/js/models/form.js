@@ -3,7 +3,7 @@
 var ControlModel = Y.Base.create('controlModel', Y.Model, [], {
     view: {},
 
-    _setProperty: function(value) {
+    _setProperties: function (value) {
         if (Array.isArray(value)) {
             return {};
         } else {
@@ -17,7 +17,7 @@ var ControlModel = Y.Base.create('controlModel', Y.Model, [], {
         type      : { value: null },
         properties: {
             value : {},
-            setter: '_setProperty'
+            setter: '_setProperties'
         },
         required  : { value: false },
         visible   : { value: true },
@@ -45,46 +45,7 @@ var ControlModel = Y.Base.create('controlModel', Y.Model, [], {
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose.Form').ControlModel = ControlModel;
 
-var FormModel;
-
-FormModel = Y.Base.create('formModel', Y.Model, [], {
-    getTree: function () {
-        if (!this.get('id') && !this.get('caption')) {
-            return null;
-        }
-
-        var root = {
-            label   : this.get('name'),
-            icon    : 'icon-list-alt',
-            children: []
-        };
-
-        this.get('controls').each(function (model) {
-            root.children.push({
-                label: model.get('foreign_id'),
-                icon : 'icon-minus'
-            });
-        });
-
-        return [root];
-    },
-
-    sync: function (action, options, callback) {
-        if (action === 'read') {
-            Y.io(Routing.generate('rednose_framework_forms_read', {'id': this.get('id')}), {
-                method: 'GET',
-                on : {
-                    success : function (tx, r) {
-                        callback(null, Y.JSON.parse(r.responseText));
-                    },
-                    failure : function (tx, r) {
-                        callback(Y.JSON.parse(r.responseText));
-                    }
-                }
-            });
-        }
-    },
-
+var SectionModel = Y.Base.create('controlModel', Y.Model, [], {
     getControl: function (foreignId) {
         var controls = this.get('controls');
 
@@ -129,6 +90,91 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
         },
 
         /**
+         * @type {ModelList}
+         */
+        controls: {
+            value : new Y.ModelList(),
+            setter: '_setControls'
+        }
+    }
+});
+
+// -- Namespace ----------------------------------------------------------------
+Y.namespace('Rednose.Form').SectionModel = SectionModel;
+
+var FormModel;
+
+FormModel = Y.Base.create('formModel', Y.Model, [], {
+    getTree: function () {
+        if (!this.get('id') && !this.get('caption')) {
+            return null;
+        }
+
+        var rootNode = {
+            label   : this.get('name'),
+            icon    : 'icon-list-alt',
+            children: []
+        };
+
+        this.get('sections').each(function (section) {
+            var sectionNode = {
+                label   : section.get('name'),
+                icon    : 'icon-align-left',
+                children: []
+            };
+
+            section.get('controls').each(function (control) {
+                sectionNode.children.push({
+                    label: control.get('name'),
+                    icon : 'icon-minus'
+                });
+            });
+
+            rootNode.children.push(sectionNode);
+        });
+
+        return [rootNode];
+    },
+
+    sync: function (action, options, callback) {
+        if (action === 'read') {
+            Y.io(Routing.generate('rednose_framework_forms_read', {'id': this.get('id')}), {
+                method: 'GET',
+                on : {
+                    success : function (tx, r) {
+                        callback(null, Y.JSON.parse(r.responseText));
+                    },
+                    failure : function (tx, r) {
+                        callback(Y.JSON.parse(r.responseText));
+                    }
+                }
+            });
+        }
+    },
+
+    _setSections: function (value) {
+        var list = new Y.ModelList({model: SectionModel});
+
+        return list.reset(value);
+    }
+
+}, {
+    ATTRS: {
+        /**
+         * @type {String}
+         */
+        name: {
+            value: null
+        },
+
+        /**
+         * @type {String}
+         */
+        caption: {
+            value: null
+        },
+
+        /**
          * @type {String}
          */
         identity: {
@@ -138,9 +184,9 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
         /**
          * @type {ModelList}
          */
-        controls: {
+        sections: {
             value : new Y.ModelList(),
-            setter: '_setControls'
+            setter: '_setSections'
         }
     }
 });

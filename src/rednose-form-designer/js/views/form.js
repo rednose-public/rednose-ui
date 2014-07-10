@@ -19,10 +19,10 @@ FormView = Y.Base.create('formView', Y.View, [], {
     _controlMap: [],
 
     initializer: function () {
-        var formModel   = this.get('model'),
-            controlList = formModel.get('controls');
+        // var formModel   = this.get('model'),
+        //     controlList = formModel.get('controls');
 
-        controlList.after('add', this._handleAddControl, this);
+        // controlList.after('add', this._handleAddControl, this);
     },
 
     destructor: function () {
@@ -47,8 +47,8 @@ FormView = Y.Base.create('formView', Y.View, [], {
             caption: model.get('caption')
         }));
 
-        model.get('controls').each(function (control) {
-            self._renderControl(control);
+        model.get('sections').each(function (section) {
+            self._renderSection(section);
         });
 
         // this._evalutateExpressions();
@@ -56,10 +56,18 @@ FormView = Y.Base.create('formView', Y.View, [], {
         return this;
     },
 
+    _renderSection: function (section) {
+        var self = this;
+
+        section.get('controls').each(function (control) {
+            self._renderControl(control);
+        });
+    },
+
     _renderControl: function (control) {
-        var container        = this.get('container'),
-            controlView      = Y.Rednose.Form.ControlViewFactory.create(control),
-            self             = this;
+        var container   = this.get('container'),
+            controlView = Y.Rednose.Form.ControlViewFactory.create(control),
+            self        = this;
 
         if (controlView) {
             var controlContainer = controlView.render().get('container');

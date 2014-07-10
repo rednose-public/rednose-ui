@@ -170,8 +170,9 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         var node = e.node,
             form = this.get('model');
 
-        this._objectAttributesView.set('model', form.getControl(node.label));
-        this._objectAttributesView.render();
+        console.log(node);
+        // this._objectAttributesView.set('model', form.getControl(node.label));
+        // this._objectAttributesView.render();
     },
 
     _handleObjectAdd: function (e) {

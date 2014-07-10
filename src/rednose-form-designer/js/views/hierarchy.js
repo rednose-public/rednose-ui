@@ -99,8 +99,8 @@ var HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
          * @attribute {Rednose.Form.FormModel} model
          */
         model: {
-            value : new Y.Rednose.Form.FormModel(),
-            setter: '_setModel'
+            value : new Y.Rednose.Form.FormModel()
+            // setter: '_setModel'
         }
     }
 });
