@@ -8,7 +8,7 @@ Template.prototype = {
 
     baseTemplate:
         '<form class="form-horizontal">' +
-        '</form',
+        '</form>',
 
     tabTemplate: Micro.compile(
         '<fieldset>' +
