@@ -441,6 +441,11 @@ input.rednose-datatable-input {
   text-align: left;
 }
 
+.rednose-form-inline {
+  display: inline-block;
+  vertical-align: top;
+}
+
 .rednose-autocomplete-aria {
   position: absolute;
   left: -9999px;

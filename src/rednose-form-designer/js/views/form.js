@@ -6,9 +6,9 @@ FormView = Y.Base.create('formView', Y.View, [], {
 
     template: '<div class="rednose-form-view">' +
                   '<form class="rednose-form form-horizontal">' +
-                      '<fieldset>' +
-                          '<legend>{caption}</legend>' +
-                      '</fieldset>' +
+                      // '<fieldset>' +
+                      //     '<legend>{caption}</legend>' +
+                      // '</fieldset>' +
                   '</form>' +
               '</div>',
 
@@ -48,7 +48,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
         }));
 
         model.get('sections').each(function (section) {
-            self._renderSection(section);
+            container.one('form').append(self._renderSection(section));
         });
 
         // this._evalutateExpressions();
@@ -57,20 +57,27 @@ FormView = Y.Base.create('formView', Y.View, [], {
     },
 
     _renderSection: function (section) {
-        var self = this;
+        var self = this,
+            node = Y.Node.create('<div class="section"></div>');
+
+        if (section.get('inline')) {
+            node.addClass('rednose-form-inline');
+        }
 
         section.get('controls').each(function (control) {
-            self._renderControl(control);
+            node.append(self._renderControl(control));
         });
+
+        return node;
     },
 
     _renderControl: function (control) {
-        var container   = this.get('container'),
-            controlView = Y.Rednose.Form.ControlViewFactory.create(control),
-            self        = this;
+        var controlView = Y.Rednose.Form.ControlViewFactory.create(control),
+            self        = this,
+            node;
 
         if (controlView) {
-            var controlContainer = controlView.render().get('container');
+            node = controlView.render().get('container');
 
             self._controlViewMap[control.get('id')] = controlView;
             // XXX
@@ -114,7 +121,7 @@ FormView = Y.Base.create('formView', Y.View, [], {
 
             // controlContainer.setData('model', control);
 
-            container.one('fieldset').append(controlContainer);
+            // container.one('fieldset').append(controlContainer);
 
             this._controlMap.push(controlView);
         }
@@ -123,20 +130,24 @@ FormView = Y.Base.create('formView', Y.View, [], {
             var imageNode  = Y.Node.create('<img src="http://www.tweedekamer.nl/images/7885_tcm181-114584.jpg"></img>'),
                 properties = control.get('properties');
 
-            if (properties && properties.frame) {
-                var frame = properties.frame;
+            // if (properties && properties.frame) {
+            //     var frame = properties.frame;
 
-                imageNode.setStyles({
-                    position: 'absolute',
-                    left    : frame.x + 'px',
-                    top     : frame.y + 'px',
-                    width   : frame.width + 'px',
-                    height  : frame.height + 'px'
-                });
-            }
+            //    imageNode.setStyles({
+            //         position: 'absolute',
+            //         left    : frame.x + 'px',
+            //         top     : frame.y + 'px',
+            //         width   : frame.width + 'px',
+            //         height  : frame.height + 'px'
+            //     });
+            // }
 
-            container.one('.rednose-form-view').append(imageNode);
+            node = Y.Node.create('<div></di>');
+
+            node.append(imageNode);
         }
+
+        return node;
     },
 
     _dragging: function(e, container, sender) {

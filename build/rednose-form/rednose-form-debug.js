@@ -429,6 +429,13 @@ var SectionModel = Y.Base.create('controlModel', Y.Model, [], {
         },
 
         /**
+         * @type {Boolean}
+         */
+        inline: {
+            value: false
+        },
+
+        /**
          * @type {ModelList}
          */
         controls: {
