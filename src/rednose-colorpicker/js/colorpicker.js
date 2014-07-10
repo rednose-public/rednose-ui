@@ -93,11 +93,9 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     },
 
     renderUI: function () {
-        var self       = this,
-            container  = this.get('contentBox'),
-            colorImage = new Image();
+        var container  = this.get('contentBox');
 
-        container.addClass('rednose-colorpicker')
+        container.addClass('rednose-colorpicker');
         container.append(this.template);
 
         // Bind widget events
@@ -177,7 +175,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 
         overlay.setStyle('display', 'block');
         overlay.setStyle('left', container.getX());
-        overlay.setStyle('top', button.getY() + parseInt(button.getComputedStyle('height')));
+        overlay.setStyle('top', button.getY() + parseInt(button.getComputedStyle('height'), 10));
     },
 
     _handleColorInputChanged: function (e) {
@@ -196,16 +194,16 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
         }
     },
 
-    _onColorValueChange: function (e) {
+    _onColorValueChange: function () {
         var rValue   = this._overlay.one('.color-values > input#r'),
             gValue   = this._overlay.one('.color-values > input#g'),
             bValue   = this._overlay.one('.color-values > input#b');
 
         var color = {};
 
-        color.red = parseInt(rValue.get('value')) || 0;
-        color.green = parseInt(gValue.get('value')) || 0;
-        color.blue = parseInt(bValue.get('value')) || 0;
+        color.red = parseInt(rValue.get('value'), 10) || 0;
+        color.green = parseInt(gValue.get('value'), 10) || 0;
+        color.blue = parseInt(bValue.get('value'), 10) || 0;
 
         this._picker.setStyle('display', 'none');
 
@@ -224,7 +222,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     },
 
     _getColor: function (x, y) {
-        var context = this._canvas.getContext('2d');
+        var context = this._canvas.getContext('2d'),
             imgObj  = this._imageObj;
 
         if (this._imageData === null) {
@@ -243,7 +241,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             red   : red,
             green : green,
             blue  : blue
-        }
+        };
     },
 
     _renderCanvas: function() {
@@ -267,7 +265,7 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
             context.drawImage(image, 0, 0);
 
             self._imageObj = image;
-        }
+        };
 
         image.src = imageUrl;
     },
@@ -295,7 +293,8 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     },
 
     _getHex: function () {
-        var color = this.get('color');
+        var color = this.get('color'),
+            rgb   = [];
 
         if (color === null) {
             return '';
