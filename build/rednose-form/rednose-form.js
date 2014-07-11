@@ -37,9 +37,9 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
                 });
             });
             this.set('resultTextLocator', function (result) {
-                return self._mapDataProviderData(result, datasource.map).title;
+                return self._mapDataProviderData(result, datasource.map).value;
             });
-            this.set('source', this._getDataProviderRoute(datasource.id, datasource.map && datasource.map.title ? datasource.map.title : 'title'));
+            this.set('source', this._getDataProviderRoute(datasource.id));
         } else if (choices) {
             this.set('resultFormatter', function (query, raw) {
                 return Y.Array.map(raw, function (result) {
@@ -66,8 +66,8 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
         });
     },
 
-    _getDataProviderRoute: function (id, key) {
-        return Routing.generate('rednose_dataprovider_data_list') + '?id=' + id + '&q={query}&key=' + key + '&callback={callback}';
+    _getDataProviderRoute: function (id) {
+        return Routing.generate('rednose_dataprovider_data_list') + '?id=' + id + '&q={query}&callback={callback}';
     },
 
     _mapDataProviderData: function (data, map) {
