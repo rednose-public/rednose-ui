@@ -24,7 +24,7 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
         this.get('inputNode').setAttribute('autocomplete', 'off');
 
         if (datasource) {
-            this.set('resultListLocator', 'results');
+            // this.set('resultListLocator', 'results');
             this.set('resultFormatter', function (query, raw) {
                 return Y.Array.map(raw, function (result) {
                     var mapped = self._mapDataProviderData(result.raw, datasource.map);
@@ -34,18 +34,18 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
                     return template(mapped);
                 });
             });
-            this.set('resultTextLocator', function (result) {
-                return datasource.map && datasource.map.value ? self._getArrayValueByKey(result, datasource.map.value) : result.value;
-            });
+            // this.set('resultTextLocator', function (result) {
+            //     return datasource.map && datasource.map.value ? self._getArrayValueByKey(result, datasource.map.value) : result.value;
+            // });
             this.set('source', this._getDataProviderRoute(datasource.id, datasource.map && datasource.map.title ? datasource.map.title : 'title'));
-        } else if (choices) {
-            this.set('resultFormatter', function (query, raw) {
-                return Y.Array.map(raw, function (result) {
-                    return template(result.raw);
-                });
-            });
-            this.set('resultTextLocator', 'value');
-            this.set('source', choices);
+        // } else if (choices) {
+        //     this.set('resultFormatter', function (query, raw) {
+        //         return Y.Array.map(raw, function (result) {
+        //             return template(result.raw);
+        //         });
+        //     });
+        //     this.set('resultTextLocator', 'value');
+        //     this.set('source', choices);
         }
 
         // Prevent default node change handler.
@@ -71,34 +71,35 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
     _mapDataProviderData: function (data, map) {
         map || (map = {});
 
-        return {
-            title   : map.title    ? this._getArrayValueByKey(data, map.title)    : data.title,
-            subtitle: map.subtitle ? this._getArrayValueByKey(data, map.subtitle) : data.subtitle,
-            image   : map.image    ? this._getArrayValueByKey(data, map.image)    : data.image,
-            value   : map.value    ? this._getArrayValueByKey(data, map.value)    : data.value
-        };
-    },
+        var result = {};
 
-    _getArrayValueByKey:function (array, search) {
-        for (var key in array) {
-            if (array.hasOwnProperty(key)) {
-                var value = array[key];
-
-                if (key === search) {
-                    return value;
-                }
-
-                if (Y.Lang.isObject(value)) {
-                    var v = this._getArrayValueByKey(value, search);
-
-                    if (v) {
-                        return v;
-                    }
-                }
+        for (var property in map) {
+            if (map.hasOwnProperty(property)) {
+                result[property] = this._parseTemplate(data, map[property]);
             }
         }
 
-        return null;
+        return result;
+    },
+
+    _parseTemplate: function (data, template) {
+        return this._getJSONValue(data, template.replace(/[${}]/g, ''));
+    },
+
+    _getJSONValue: function (data, location) {
+        var tokens = location.split('.'),
+            buffer = data,
+            property;
+
+        while (property = tokens.shift()) {
+            if (!buffer.hasOwnProperty(property)) {
+                return null;
+            }
+
+            buffer = buffer[property];
+        }
+
+        return buffer;
     }
 }, {
     CSS_PREFIX: 'rednose-autocomplete',
