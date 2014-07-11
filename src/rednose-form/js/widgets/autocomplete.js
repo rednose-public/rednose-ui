@@ -34,18 +34,18 @@ AutoComplete = Y.Base.create('autoComplete', Y.AutoCompleteList, [], {
                     return template(mapped);
                 });
             });
-            // this.set('resultTextLocator', function (result) {
-            //     return datasource.map && datasource.map.value ? self._getArrayValueByKey(result, datasource.map.value) : result.value;
-            // });
+            this.set('resultTextLocator', function (result) {
+                return self._mapDataProviderData(result, datasource.map).title;
+            });
             this.set('source', this._getDataProviderRoute(datasource.id, datasource.map && datasource.map.title ? datasource.map.title : 'title'));
-        // } else if (choices) {
-        //     this.set('resultFormatter', function (query, raw) {
-        //         return Y.Array.map(raw, function (result) {
-        //             return template(result.raw);
-        //         });
-        //     });
-        //     this.set('resultTextLocator', 'value');
-        //     this.set('source', choices);
+        } else if (choices) {
+            this.set('resultFormatter', function (query, raw) {
+                return Y.Array.map(raw, function (result) {
+                    return template(result.raw);
+                });
+            });
+            this.set('resultTextLocator', 'value');
+            this.set('source', choices);
         }
 
         // Prevent default node change handler.
