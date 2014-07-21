@@ -380,7 +380,7 @@ input.rednose-datatable-input {
   min-height: 48px;
 }
 
-.rednose-dialog .form-horizontal {
+.rednose-dialog .yui3-widget-bd {
   overflow-y: auto;
 }
 

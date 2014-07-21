@@ -12,12 +12,10 @@ var TXT_CONTROL_TYPES = {
     'file'        : 'File'
 };
 
-// var TXT_OBJECT_ATTRIBUTES = 'Object Attributes';
-
 var Micro = Y.Template.Micro,
     ObjectAttributesView;
 
-ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose.View.Nav ], {
+ObjectAttributesView = Y.Base.create('objectAttributesView', Y.Rednose.Dialog, [], {
 
     /**
      * Property inherited from Y.Rednose.View.Nav
@@ -35,7 +33,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     padding: true,
 
     formTemplate: Micro.compile(
-        '<form class="form-vertical">'+
+        '<form class="form-horizontal">'+
             '<fieldset>' +
                 // The form control type.
                 '<div class="control-group">' +
@@ -50,7 +48,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 '<div class="control-group">' +
                     '<label class="control-label" for="id">Name</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="name" type="text" value="<%= data.foreign_id %>"/>' +
+                        '<input class="input-block-level" id="name" type="text" value="<%= data.name %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
@@ -69,31 +67,27 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
+                    '<label class="control-label">Required</label>' +
                     '<div class="controls">' +
-                        '<label class="checkbox">' +
-                            '<input type="checkbox" id="required" <% if (data.required) { %>checked<% } %>> Required' +
-                        '</label>' +
+                        '<input type="checkbox" id="required" <% if (data.required) { %>checked<% } %>></input>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
+                    '<label class="control-label">Visible</label>' +
                     '<div class="controls">' +
-                        '<label class="checkbox">' +
-                            '<input type="checkbox" id="visible" <% if (data.visible) { %>checked<% } %>> Visible' +
-                        '</label>' +
+                        '<input type="checkbox" id="visible" <% if (data.visible) { %>checked<% } %>></input>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
+                    '<label class="control-label">Protected</label>' +
                     '<div class="controls">' +
-                        '<label class="checkbox">' +
-                            '<input type="checkbox" id="protected" <% if (data.protected) { %>checked<% } %>> Protected' +
-                        '</label>' +
+                        '<input type="checkbox" id="protected" <% if (data.protected) { %>checked<% } %>></input>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
+                    '<label class="control-label">Readonly</label>' +
                     '<div class="controls">' +
-                        '<label class="checkbox">' +
-                            '<input type="checkbox" id="readonly" <% if (data.readonly) { %>checked<% } %>> Readonly' +
-                        '</label>' +
+                        '<input type="checkbox" id="readonly" <% if (data.readonly) { %>checked<% } %>></input>' +
                     '</div>' +
                 '</div>' +
 
@@ -143,16 +137,23 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     render: function () {
+        var model = this.get('model');
+
+        this.node = Y.Node.create(this.formTemplate(model.getAttrs()));
+
         this._renderForm();
+
+        this.prompt({
+            title: 'Control properties',
+            html : this.node
+        });
 
         return this;
     },
 
     _renderForm: function () {
         var model     = this.get('model'),
-            container = this.get('container');
-
-        container.empty();
+            container = this.node;
 
         if (model) {
             container.append(this.formTemplate(model.getAttrs()));
@@ -178,7 +179,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
     _renderTypeOptions: function () {
         var model       = this.get('model'),
-            selectNode  = this.get('container').one('#type');
+            selectNode  = this.node.one('#type');
 
         Y.Object.each(TXT_CONTROL_TYPES, function (label, type) {
             var optionNode = Y.Node.create(Y.Lang.sub('<option value="{value}">{label}</option>', {

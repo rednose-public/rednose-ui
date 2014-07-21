@@ -390,7 +390,7 @@ var SectionModel = Y.Base.create('controlModel', Y.Model, [], {
         var controls = this.get('controls');
 
         for (var i = 0, len = controls.size(); i < len; i++) {
-            if (controls.item(i).get('foreign_id') === foreignId) {
+            if (controls.item(i).get('name') === foreignId) {
                 return controls.item(i);
             }
         }
@@ -497,6 +497,18 @@ FormModel = Y.Base.create('formModel', Y.Model, [], {
                 }
             });
         }
+    },
+
+    getControl: function (foreignId) {
+        var sections = this.get('sections');
+
+        for (var i = 0, len = sections.size(); i < len; i++) {
+            if (sections.item(i).getControl(foreignId)) {
+                return sections.item(i).getControl(foreignId);
+            }
+        }
+
+        return null;
     },
 
     _setSections: function (value) {
@@ -651,10 +663,9 @@ var CheckboxControlView;
 CheckboxControlView = Y.Base.create('checkboxControlView', Y.Rednose.Form.BaseControlView, [], {
 
     template: '<div class="control-group">' +
+                  '<label for="{id}" class="control-label">{label}</label>' +
                   '<div class="controls">' +
-                      '<label class="checkbox">' +
-                          '<input type="checkbox" id="{id}"> {label}' +
-                      '</label>' +
+                      '<input type="checkbox" id="{id}"></input>' +
                   '</div>' +
               '</div>',
 

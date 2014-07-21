@@ -341,7 +341,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
      */
     _focusInput: function () {
         var inputControlContainer = this.panel.get('boundingBox').one('.controls'),
-            inputField = inputControlContainer ? inputControlContainer.one('input, textarea, select') : null;
+            inputField = inputControlContainer ? inputControlContainer.one('input, textarea') : null;
 
         if (inputField) {
             // Select the input value so it can instantly be overtyped.

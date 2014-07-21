@@ -717,6 +717,64 @@ var HierarchyView = Y.Base.create('hierarchyView', Y.View, [], {
 Y.namespace('Rednose.FormDesigner').HierarchyView = HierarchyView;
 /*jshint boss:true, expr:true, onevar:false */
 
+var DataControlsView = Y.Base.create('dataControlsView', Y.View, [], {
+
+    destructor: function () {
+        this._treeView && this._treeView.destroy();
+        this._treeView = null;
+    },
+
+    /**
+     * @chainable
+     */
+    render: function () {
+        var container = this.get('container'),
+            identity  = this.get('identity'),
+            self      = this;
+
+        if (!identity) {
+            return this;
+        }
+
+        container.setStyle('height', '100%');
+        container.setStyle('overflow', 'auto');
+
+        container.append('<div class="rednose-treeview"></div>');
+
+        this._treeView = new Y.Rednose.TreeView({
+            container : container.one('.rednose-treeview'),
+            selectable: false,
+            header    : 'Data controls'
+        });
+
+        this._treeView.plug(Y.Rednose.Plugin.TreeViewDataSource, {
+            datasource: new Y.Docgen.DataSource({
+                source: Routing.generate('rednose_docgen_get_identities')
+            })
+        });
+
+        this._treeView.render();
+
+        this._treeView.datasource.load('/' + identity + '/controls', function () {
+            self._treeView.set('animated', false);
+            self._treeView.open();
+            self._treeView.set('animated', true);
+        });
+    }
+}, {
+    ATTRS: {
+        /**
+         * @type {String}
+         */
+        identity: {
+            value: null
+        }
+    }
+});
+
+Y.namespace('Rednose.FormDesigner').DataControlsView = DataControlsView;
+/*jshint boss:true, expr:true, onevar:false */
+
 var TXT_DATA_SOURCES       = 'Data Sources',
     TXT_DATA_SOURCE_EDIT   = 'Edit Data Source',
     TXT_DATA_SOURCE_DELETE = 'Delete Data Source';
@@ -820,12 +878,10 @@ var TXT_CONTROL_TYPES = {
     'file'        : 'File'
 };
 
-// var TXT_OBJECT_ATTRIBUTES = 'Object Attributes';
-
 var Micro = Y.Template.Micro,
     ObjectAttributesView;
 
-ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose.View.Nav ], {
+ObjectAttributesView = Y.Base.create('objectAttributesView', Y.Rednose.Dialog, [], {
 
     /**
      * Property inherited from Y.Rednose.View.Nav
@@ -843,7 +899,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     padding: true,
 
     formTemplate: Micro.compile(
-        '<form class="form-vertical">'+
+        '<form class="form-horizontal">'+
             '<fieldset>' +
                 // The form control type.
                 '<div class="control-group">' +
@@ -858,7 +914,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                 '<div class="control-group">' +
                     '<label class="control-label" for="id">Name</label>' +
                     '<div class="controls">' +
-                        '<input class="input-block-level" id="name" type="text" value="<%= data.foreign_id %>"/>' +
+                        '<input class="input-block-level" id="name" type="text" value="<%= data.name %>"/>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
@@ -877,31 +933,27 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
+                    '<label class="control-label">Required</label>' +
                     '<div class="controls">' +
-                        '<label class="checkbox">' +
-                            '<input type="checkbox" id="required" <% if (data.required) { %>checked<% } %>> Required' +
-                        '</label>' +
+                        '<input type="checkbox" id="required" <% if (data.required) { %>checked<% } %>></input>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
+                    '<label class="control-label">Visible</label>' +
                     '<div class="controls">' +
-                        '<label class="checkbox">' +
-                            '<input type="checkbox" id="visible" <% if (data.visible) { %>checked<% } %>> Visible' +
-                        '</label>' +
+                        '<input type="checkbox" id="visible" <% if (data.visible) { %>checked<% } %>></input>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
+                    '<label class="control-label">Protected</label>' +
                     '<div class="controls">' +
-                        '<label class="checkbox">' +
-                            '<input type="checkbox" id="protected" <% if (data.protected) { %>checked<% } %>> Protected' +
-                        '</label>' +
+                        '<input type="checkbox" id="protected" <% if (data.protected) { %>checked<% } %>></input>' +
                     '</div>' +
                 '</div>' +
                 '<div class="control-group">' +
+                    '<label class="control-label">Readonly</label>' +
                     '<div class="controls">' +
-                        '<label class="checkbox">' +
-                            '<input type="checkbox" id="readonly" <% if (data.readonly) { %>checked<% } %>> Readonly' +
-                        '</label>' +
+                        '<input type="checkbox" id="readonly" <% if (data.readonly) { %>checked<% } %>></input>' +
                     '</div>' +
                 '</div>' +
 
@@ -951,16 +1003,23 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
     },
 
     render: function () {
+        var model = this.get('model');
+
+        this.node = Y.Node.create(this.formTemplate(model.getAttrs()));
+
         this._renderForm();
+
+        this.prompt({
+            title: 'Control properties',
+            html : this.node
+        });
 
         return this;
     },
 
     _renderForm: function () {
         var model     = this.get('model'),
-            container = this.get('container');
-
-        container.empty();
+            container = this.node;
 
         if (model) {
             container.append(this.formTemplate(model.getAttrs()));
@@ -986,7 +1045,7 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 
     _renderTypeOptions: function () {
         var model       = this.get('model'),
-            selectNode  = this.get('container').one('#type');
+            selectNode  = this.node.one('#type');
 
         Y.Object.each(TXT_CONTROL_TYPES, function (label, type) {
             var optionNode = Y.Node.create(Y.Lang.sub('<option value="{value}">{label}</option>', {
@@ -1035,65 +1094,55 @@ ObjectAttributesView = Y.Base.create('objectAttributesView', Y.View, [ Y.Rednose
 Y.namespace('Rednose.FormDesigner').ObjectAttributesView = ObjectAttributesView;
 /*jshint boss:true, expr:true, evil:true, onevar:false */
 
-var FormView;
+var Micro = Y.Template.Micro;
 
-FormView = Y.Base.create('formView', Y.View, [], {
+var FormView = Y.Base.create('formView', Y.View, [], {
 
-    template: '<div class="rednose-form-view">' +
-                  '<form class="rednose-form form-horizontal">' +
-                      // '<fieldset>' +
-                      //     '<legend>{caption}</legend>' +
-                      // '</fieldset>' +
-                  '</form>' +
-              '</div>',
+    templates: {
+        form: Micro.compile(
+            '<div class="rednose-form-view"><form class="rednose-form form-horizontal"/></div>'
+        ),
+
+        section: Micro.compile(
+            '<fieldset class="section">' +
+                '<% if (data.caption) { %>' +
+                    '<legend><%= data.caption %></legend>' +
+                '<% } %>' +
+            '</fieldset>'
+        )
+    },
 
     _controlViewMap: {},
 
-    _expressionMap: [],
-
     _controlMap: [],
-
-    initializer: function () {
-        // var formModel   = this.get('model'),
-        //     controlList = formModel.get('controls');
-
-        // controlList.after('add', this._handleAddControl, this);
-    },
 
     destructor: function () {
         Y.Array.each(this._controlMap, function(control) {
             control.destroy();
             control = null;
         });
-
-        this._expressionMap = null;
     },
 
     render: function () {
         var self      = this,
             container = this.get('container'),
             model     = this.get('model'),
-            template  = this.template;
+            templates = this.templates;
 
         this._controlViewMap = [];
-        this._expressionMap  = [];
 
-        container.setHTML(Y.Lang.sub(template, {
-            caption: model.get('caption')
-        }));
+        container.setHTML(templates.form());
 
         model.get('sections').each(function (section) {
             container.one('form').append(self._renderSection(section));
         });
-
-        // this._evalutateExpressions();
 
         return this;
     },
 
     _renderSection: function (section) {
         var self = this,
-            node = Y.Node.create('<div class="section"></div>');
+            node = Y.Node.create(this.templates.section(section.getAttrs()));
 
         if (section.get('inline')) {
             node.addClass('rednose-form-inline');
@@ -1115,27 +1164,10 @@ FormView = Y.Base.create('formView', Y.View, [], {
             node = controlView.render().get('container');
 
             self._controlViewMap[control.get('id')] = controlView;
-            // XXX
             control.view = controlView;
 
             // Add bubble target.
             controlView.addTarget(self);
-
-            // XXX: Binding.
-            controlView.after('*:change', function () {
-                // TODO: Propagate to this.change event.
-                // self._evalutateExpressions();
-            });
-
-            // XXX: Expresions.
-            // var expressions = control.get('properties').expressions;
-
-            // if (expressions) {
-            //     Y.Object.each(expressions, function (expression) {
-            //         self._expressionMap.push(expression);
-            //     });
-            // }
-
 
             // var dd = new Y.DD.Drag({
             //     node: controlContainer,
@@ -1221,47 +1253,6 @@ FormView = Y.Base.create('formView', Y.View, [], {
         });
 
         this.get('model').set('controls', controls);
-    },
-
-    _evalutateExpressions: function () {
-        var self = this;
-
-        var objectDefinitions = [];
-
-        Y.Object.each(this._controlViewMap, function (view) {
-            var id    = view.get('model').get('foreignId'),
-                attrs = Y.JSON.stringify(view.get('model').toJSON());
-
-            objectDefinitions.push(id + ' = ' + attrs);
-        });
-
-        var lines = [];
-
-        lines.push('var ' + objectDefinitions.join(', ') + ';');
-        lines.push(this._expressionMap.join(' '));
-
-        var objectMappings = [];
-
-        Y.Object.each(this._controlViewMap, function (view) {
-            var id    = view.get('model').get('id');
-
-            objectMappings.push('"' + id + '": ' + id);
-        });
-
-        lines.push('var objects = {' + objectMappings.join(', ') + '};');
-
-        var objects;
-
-        eval(lines.join(' '));
-
-        Y.Object.each(objects, function (attrs, id) {
-            var model = self._controlViewMap[id].get('model');
-
-            model.setAttrs(attrs);
-
-            // TODO: Only render changed views
-            self._controlViewMap[id].render();
-        });
     },
 
     _handleAddControl: function (e) {
@@ -1503,8 +1494,8 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
     _objectLibrary       : null,
     _hierarchyView       : null,
     _dataSourcesView     : null,
-    _objectAttributesView: null,
-    // _dataControlsView    : null,
+    // _objectAttributesView: null,
+    _dataControlsView    : null,
 
     // -- Lifecycle Methods ----------------------------------------------------
 
@@ -1514,14 +1505,14 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         this._objectLibrary        = new Y.Rednose.FormDesigner.ObjectLibrary();
         this._hierarchyView        = new Y.Rednose.FormDesigner.HierarchyView();
         this._dataSourcesView      = new Y.Rednose.FormDesigner.DataSourcesView();
-        this._objectAttributesView = new Y.Rednose.FormDesigner.ObjectAttributesView();
-        // this._dataControlsView     = new Y.Rednose.FormDesigner.DataControlsView();
+        // this._objectAttributesView = new Y.Rednose.FormDesigner.ObjectAttributesView();
+        this._dataControlsView     = new Y.Rednose.FormDesigner.DataControlsView();
 
         this._objectLibrary.addTarget(this);
         this._hierarchyView.addTarget(this);
         this._dataSourcesView.addTarget(this);
-        this._objectAttributesView.addTarget(this);
-        // this._dataControlsView.addTarget(this);
+        // this._objectAttributesView.addTarget(this);
+        this._dataControlsView.addTarget(this);
 
         this.after({
             'navbar:click#preview'      : this._handlePreview,
@@ -1543,8 +1534,8 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         this.once('ready', function () {
             this.get('leftContainer').append(this._hierarchyView.render().get('container'));
             this.get('leftContainer').append(this._dataSourcesView.render().get('container'));
-            // this.get('leftContainer').append(this._dataControlsView.render().get('container'));
-            this.get('rightContainer').append(this._objectAttributesView.render().get('container'));
+            this.get('rightContainer').append(this._dataControlsView.render().get('container'));
+            // this.get('rightContainer').append(this._objectAttributesView.render().get('container'));
 
             if (this.hasRoute(this.getPath())) {
                 this.dispatch();
@@ -1562,11 +1553,11 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         this._dataSourcesView.destroy();
         this._dataSourcesView = null;
 
-        this._objectAttributesView.destroy();
-        this._objectAttributesView = null;
+        // this._objectAttributesView.destroy();
+        // this._objectAttributesView = null;
 
-        // this._dataControlsView.destroy();
-        // this._dataControlsView = null;
+        this._dataControlsView.destroy();
+        this._dataControlsView = null;
 
         this.navbar.destroy();
         this.navbar = null;
@@ -1654,7 +1645,14 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
         var node = e.node,
             form = this.get('model');
 
-        console.log(node);
+        var dialog = new Y.Rednose.FormDesigner.ObjectAttributesView({
+            model: form.getControl(node.label)
+        });
+
+        dialog.render();
+
+        // console.log(node.label);
+        // console.log(form.getControl(node.label));
         // this._objectAttributesView.set('model', form.getControl(node.label));
         // this._objectAttributesView.render();
     },
@@ -1753,10 +1751,10 @@ var FormDesignerApp = Y.Base.create('formDesigner', Y.Rednose.FormDesigner.Base,
             this._hierarchyView.render();
         }
 
-        // if (this._dataControlsView) {
-        //     this._dataControlsView.set('identity', req.form.get('identity'));
-        //     this._dataControlsView.render();
-        // }
+        if (this._dataControlsView) {
+            this._dataControlsView.set('identity', req.form.get('identity'));
+            this._dataControlsView.render();
+        }
     }
 }, {
     ATTRS: {

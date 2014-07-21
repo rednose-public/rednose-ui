@@ -109,10 +109,9 @@ var CheckboxControlView;
 CheckboxControlView = Y.Base.create('checkboxControlView', Y.Rednose.Form.BaseControlView, [], {
 
     template: '<div class="control-group">' +
+                  '<label for="{id}" class="control-label">{label}</label>' +
                   '<div class="controls">' +
-                      '<label class="checkbox">' +
-                          '<input type="checkbox" id="{id}"> {label}' +
-                      '</label>' +
+                      '<input type="checkbox" id="{id}"></input>' +
                   '</div>' +
               '</div>',
 

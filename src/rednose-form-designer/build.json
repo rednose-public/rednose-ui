@@ -7,6 +7,7 @@
                 "views/configure-dynamic-items.js",
                 "views/object-library.js",
                 "views/hierarchy.js",
+                "views/data-controls.js",
                 "views/data-sources.js",
                 "views/object-attributes.js",
                 "views/form.js",
