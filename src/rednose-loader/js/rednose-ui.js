@@ -470,6 +470,17 @@ Y.mix(YUI.Env[Y.version].modules, {
             "template-micro"
         ]
     },
+    "rednose-trim": {
+        "group": "rednose-ui",
+        "requires": [
+            "base",
+            "io",
+            "json",
+            "promise",
+            "view",
+            "xml"
+        ]
+    },
     "rednose-undo-manager": {
         "group": "rednose-ui",
         "requires": [
@@ -509,4 +520,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'bbed0f4d812a324c18a203696a74a92a';
+YUI.Env[Y.version].md5 = 'dea5c496c3d314157482dde710f49e5d';

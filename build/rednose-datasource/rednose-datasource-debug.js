@@ -5,6 +5,7 @@ YUI.add('rednose-datasource', function (Y, NAME) {
 var DataSource,
     PdoSource,
     XmlSource,
+    TrimSource,
     DataSourceList;
 
 DataSourceAttribute = Y.Base.create('dataSourceAttribute', Y.Model, [], {}, {
@@ -112,6 +113,13 @@ PdoSource = Y.Base.create('pdoSource', DataSource, [], {}, {
     }
 });
 
+TrimSource = Y.Base.create('trimSource', DataSource, [], {}, {
+    ATTRS: {
+        url  : { value: null },
+        query: { value: null },
+    }
+});
+
 XmlSource = Y.Base.create('xmlSource', DataSource, [], {}, {
     ATTRS: {
         xsd : { value: null },
@@ -127,18 +135,31 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
     icons: {
         'dataGen': 'icon-list-alt',
         'pdo'    : 'icon-align-justify',
-        'xml'    : 'icon-file'
+        'xml'    : 'icon-file',
+        'trim'   : 'icon-briefcase'
     },
 
     _getNodes: function (attributes) {
         var nodes = [];
 
         for (var i = 0, len = attributes.length; i < len; i++) {
-            var attribute = attributes[i], node;
+            var attribute = attributes[i], node, icon;
+
+            switch (attribute.type) {
+                case 'composite':
+                    icon = 'icon-th-list';
+                    break;
+                case 'button':
+                    icon = 'icon-repeat';
+                    break;
+                default:
+                    icon = 'icon-minus';
+                    break;
+            }
 
             node = {
                 label: attribute.name,
-                icon : attribute.type === 'composite' ? 'icon-th-list' : 'icon-minus'
+                icon : icon
             };
 
             if (attribute.children) {
@@ -156,10 +177,12 @@ DataSourceList = Y.Base.create('dataSourceList', Y.ModelList, [], {
             items = [];
 
         this.each(function (model) {
-            var node = {
+            var children = self._getNodes(model.get('attributes')), node;
+
+            node = {
                 label   : model.get('identifier'),
                 icon    : self.icons[model.get('type')],
-                children: self._getNodes(model.get('attributes'))
+                children: children
             };
 
             items.push(node);
@@ -190,6 +213,7 @@ Y.namespace('Rednose.DataSource').DataSourceAttribute = DataSourceAttribute;
 Y.namespace('Rednose.DataSource').DatagenSource       = DatagenSource;
 Y.namespace('Rednose.DataSource').PdoSource           = PdoSource;
 Y.namespace('Rednose.DataSource').XmlSource           = XmlSource;
+Y.namespace('Rednose.DataSource').TrimSource          = TrimSource;
 Y.namespace('Rednose.DataSource').DataSourceList      = DataSourceList;
 
 
