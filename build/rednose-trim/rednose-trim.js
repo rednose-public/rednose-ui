@@ -135,13 +135,13 @@ var Form = Y.Base.create('form', Y.View, [], {
         form.after('change', this._afterFormChange, this);
 
         this.datasource = new Y.Rednose.Trim({
-            url: 'http://trim-dummy.dev/app_dev.php/trimws/trim.asmx'
+            url: 'http://trim-dummy.dev/trimws/trim.asmx'
         });
 
         this.updateModel();
 
         this.datagen = new Y.Rednose.Datagen({
-            url: 'http://admin:adminpasswd@datagen-standard.dev/app_dev.php',
+            url: 'http://admin:adminpasswd@datagen-standard.dev',
             section: 'Demo section'
         });
 
