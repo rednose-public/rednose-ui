@@ -138,11 +138,7 @@ var Form = Y.Base.create('form', Y.View, [], {
             url: 'http://trim-dummy.dev/app_dev.php/trimws/trim.asmx'
         });
 
-        // container.all('[data-type=dropdown]').each(function (node) {
-        //     console.log(node);
-        // });
-
-        var model = this.model;
+        this.updateForm();
 
         this.datagen = new Y.Rednose.Datagen({
             url: 'http://admin:adminpasswd@datagen-standard.dev/app_dev.php',
@@ -184,29 +180,47 @@ var Form = Y.Base.create('form', Y.View, [], {
         });
     },
 
+    updateForm: function () {
+        var container = this.get('container'),
+            self      = this;
+
+        container.all('[data-path]').each(function (node) {
+            var path = node.getData('path');
+
+            self._setValueByPath(self.model.data, path, self.getNodeValue(node));
+        });
+
+        console.log(this.model);
+    },
+
+    getNodeValue: function (node) {
+        var value = node.get('type') === 'checkbox' ? node.get('checked').toString() : node.get('value');
+
+        if (value === '') {
+            return null;
+        }
+
+        return value;
+    },
+
     _afterFormChange: function (e) {
         var node  = e.target,
-            model = this.model,
-            type  = node.getData('type'),
-            value = node.get('type') === 'checkbox' ? node.get('checked').toString() : node.get('value');
-
-        var source = Y.JSON.parse(node.getData('datasource'));
+            model = this.model;
 
         // Update the record entry for this datasource.
-        if (source) {
+        if (node.getData('datasource')) {
+            var source = Y.JSON.parse(node.getData('datasource'));
+
             if (type === 'dropdown') {
                 var selected = node.get('options').item(node.get('selectedIndex')),
                     record   = model.sources[source.id].records[selected.getData('record')];
 
                 // Reset the record entry.
                 model.data[source.id] = record;
-
-                // TODO: Update bound controls.
-                console.log(model.data);
             }
         }
 
-        console.log(value);
+        this.updateForm();
     },
 
     _updateSelectNode: function (node, data, map) {
@@ -242,9 +256,19 @@ var Form = Y.Base.create('form', Y.View, [], {
     },
 
     _setValueByPath: function (object, path, value) {
-    }
-}, {
-    ATTRS: {
+        var parts = path.split('.');
+
+        for (var i = 0, len = parts.length; i < len; i++) {
+            if (i === len - 1) {
+                object[parts[i]] = value;
+
+                break;
+            }
+
+            object[parts[i]] || (object[parts[i]] = {});
+
+            object = object[parts[i]];
+        }
     }
 });
 
