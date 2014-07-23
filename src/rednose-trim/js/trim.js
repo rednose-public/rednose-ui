@@ -131,7 +131,6 @@ var Form = Y.Base.create('form', Y.View, [], {
         };
 
         form.after('change', this._afterFormChange, this);
-        // form.delegate('click', this._onButtonClick, 'button', this);
 
         this.datasource = new Y.Rednose.Trim({
             url: 'http://trim-dummy.dev/app_dev.php/trimws/trim.asmx'
@@ -148,28 +147,32 @@ var Form = Y.Base.create('form', Y.View, [], {
             section: 'Demo section'
         });
 
+        // Bind buttons.
         container.one('#rednose_form_GegevensGeadresseerde_Sender_Address_Button').on('click', function () {
             self.datagen.query('test').then(function (data) {
-                model.sources.Demo.records = data;
-
-                self.updateSource('Demo');
+                self.updateSource('Demo', data);
             });
         });
 
         container.one('#rednose_form_TRIM_Trim_Button').on('click', function () {
             self.datasource.query('test').then(function (data) {
-                model.sources.Trim.records = data;
-
-                self.updateSource('Trim');
+                self.updateSource('Trim', data);
             });
         });
     },
 
-    updateSource: function (name) {
+    updateSource: function (name, data) {
         var container = this.get('container'),
             model     = this.model,
             self      = this;
 
+        model.sources[name].records = {};
+
+        Y.Array.each(data, function (record) {
+            model.sources[name].records[Y.stamp(record)] = record;
+        });
+
+        // Update controls for this datasource.
         container.all('[data-datasource]').each(function (node) {
             var source = Y.JSON.parse(node.getData('datasource'));
 
@@ -179,51 +182,29 @@ var Form = Y.Base.create('form', Y.View, [], {
         });
     },
 
-    _onButtonClick: function (e) {
-        var node     = e.target,
-            bindings = node.getData('bindings'),
-            self     = this;
+    _afterFormChange: function (e) {
+        var node  = e.target,
+            model = this.model,
+            type  = node.getData('type'),
+            value = node.get('type') === 'checkbox' ? node.get('checked').toString() : node.get('value');
 
-        if (!bindings) {
-            return;
+        var source = Y.JSON.parse(node.getData('datasource'));
+
+        // Update the record entry for this datasource.
+        if (source) {
+            if (type === 'dropdown') {
+                var selected = node.get('options').item(node.get('selectedIndex')),
+                    record   = model.sources[source.id].records[selected.getData('record')];
+
+                // Reset the record entry.
+                model.data[source.id] = record;
+
+                // TODO: Update bound controls.
+                console.log(model.data);
+            }
         }
 
-        Y.Array.each(Y.JSON.parse(bindings), function (binding) {
-            self.datasource.recordSearch('test').then(function (objects) {
-                // Update controls with dynamic items.
-                var container = self.get('container');
-
-                container.all('[data-datasource]').each(function (control) {
-                    var source = Y.JSON.parse(control.getData('datasource'));
-
-                    if (source.id === 'Trim') {
-                        control.empty();
-
-                        Y.Array.each(objects, function (object) {
-                            var id    = object[self._parseTemplate(source.map.id)],
-                                value = object[self._parseTemplate(source.map.value)];
-
-                            control.append(Y.Node.create('<option id="' + id + '">' + value + '</option>'));
-                        });
-                    }
-                });
-            });
-
-            console.log(binding);
-        });
-    },
-
-    _afterFormChange: function (e) {
-        var node     = e.target,
-            type     = node.getData('type'),
-            // location = getNodeXpathLocation(node),
-            value    = node.get('type') === 'checkbox' ? node.get('checked').toString() : node.get('value');
-
-
-        // Update controls with bindings after selecting a new entry.
-        // console.log(objects);
-
-        console.log('change!');
+        console.log(value);
     },
 
     _updateSelectNode: function (node, data, map) {
@@ -231,13 +212,14 @@ var Form = Y.Base.create('form', Y.View, [], {
 
         node.empty();
 
-        Y.Array.each(data, function (record) {
+        Y.Object.each(data, function (record) {
             var value = self._getValueByPath(record, map.value),
                 text  = self._getValueByPath(record, map.text);
 
-            node.append(Y.Lang.sub('<option value="{value}">{text}</option>', {
-                value: value,
-                text : text
+            node.append(Y.Lang.sub('<option value="{value}" data-record="{record}">{text}</option>', {
+                value : value,
+                text  : text,
+                record: Y.stamp(record),
             }));
         });
     },
