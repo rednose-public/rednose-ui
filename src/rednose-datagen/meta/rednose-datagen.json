@@ -1,0 +1,13 @@
+{
+    "rednose-datagen": {
+        "requires": [
+            "base",
+            "io",
+            "jsonp",
+            "jsonp-url",
+            "promise",
+            "view",
+            "xml"
+        ]
+    }
+}

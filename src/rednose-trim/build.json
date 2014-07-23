@@ -1,0 +1,10 @@
+{
+    "name": "rednose-trim",
+    "builds": {
+        "rednose-trim": {
+            "jsfiles": [
+                "js/trim.js"
+            ]
+        }
+    }
+}

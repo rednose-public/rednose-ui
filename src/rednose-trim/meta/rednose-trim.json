@@ -1,0 +1,13 @@
+{
+    "rednose-trim": {
+        "requires": [
+            "base",
+            "io",
+            "json",
+            "model",
+            "promise",
+            "view",
+            "xml"
+        ]
+    }
+}

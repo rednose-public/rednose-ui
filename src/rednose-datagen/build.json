@@ -1,0 +1,10 @@
+{
+    "name": "rednose-datagen",
+    "builds": {
+        "rednose-datagen": {
+            "jsfiles": [
+                "js/datagen.js"
+            ]
+        }
+    }
+}
