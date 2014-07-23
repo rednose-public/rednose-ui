@@ -136,7 +136,7 @@ var Form = Y.Base.create('form', Y.View, [], {
             url: 'http://trim-dummy.dev/app_dev.php/trimws/trim.asmx'
         });
 
-        this.updateForm();
+        this.updateModel();
 
         this.datagen = new Y.Rednose.Datagen({
             url: 'http://admin:adminpasswd@datagen-standard.dev/app_dev.php',
@@ -178,7 +178,7 @@ var Form = Y.Base.create('form', Y.View, [], {
         });
     },
 
-    updateForm: function () {
+    updateModel: function () {
         var container = this.get('container'),
             self      = this;
 
@@ -186,9 +186,31 @@ var Form = Y.Base.create('form', Y.View, [], {
             var path = node.getData('path');
 
             self._setValueByPath(self.model.data, path, self.getNodeValue(node));
+
+            if (node.getData('bindings')) {
+                var bindings = Y.JSON.parse(node.getData('bindings'));
+
+                Y.Array.each(bindings, function (binding) {
+                    self._setValueByPath(self.model.data, binding, self.getNodeValue(node));
+                });
+            }
         });
 
         console.log(this.model);
+    },
+
+    updateForm: function () {
+        var container = this.get('container'),
+            model     = this.model,
+            self      = this;
+
+        container.all('[data-bindings]').each(function (node) {
+            var bindings = Y.JSON.parse(node.getData('bindings'));
+
+            Y.Array.each(bindings, function (binding) {
+                self.setNodeValue(node, self._getValueByPath(model.data, binding));
+            });
+        });
     },
 
     getNodeValue: function (node) {
@@ -201,9 +223,26 @@ var Form = Y.Base.create('form', Y.View, [], {
         return value;
     },
 
+    setNodeValue: function (node, value) {
+        value === '' && (value = null);
+
+        if (value === this.getNodeValue(node)) {
+            return;
+        }
+
+        if (value === null || value === undefined) {
+            value = '';
+        }
+
+        node.set('value', value);
+    },
+
     _afterFormChange: function (e) {
         var node  = e.target,
+            type  = node.getData('type'),
             model = this.model;
+
+        this.updateModel();
 
         // Update the record entry for this datasource.
         if (node.getData('datasource')) {
@@ -214,17 +253,23 @@ var Form = Y.Base.create('form', Y.View, [], {
                     record   = model.sources[source.id].records[selected.getData('record')];
 
                 // Reset the record entry.
-                model.data[source.id] = record;
+                model.data[source.id] = record ? Y.clone(record) : null;
             }
         }
 
         this.updateForm();
+        this.updateModel();
     },
 
     _updateSelectNode: function (node, data, map) {
         var self = this;
 
         node.empty();
+
+        node.append(Y.Lang.sub('<option value="{value}">{text}</option>', {
+            value : '',
+            text  : '...'
+        }));
 
         Y.Object.each(data, function (record) {
             var value = self._getValueByPath(record, map.value),
@@ -242,7 +287,7 @@ var Form = Y.Base.create('form', Y.View, [], {
         var parts = path.split('.');
 
         for (var i = 0, len = parts.length; i < len; i++) {
-            if (typeof object === 'object' && parts[i] in object) {
+            if (Y.Lang.isObject(object) && parts[i] in object) {
                 object = object[parts[i]];
             } else {
                 object = undefined;
