@@ -1,6 +1,7 @@
 {
     "rednose-trim": {
         "requires": [
+            "autocomplete",
             "base",
             "io",
             "json",

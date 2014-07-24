@@ -143,18 +143,36 @@ var Form = Y.Base.create('form', Y.View, [], {
             section: 'Demo section'
         });
 
-        // Bind buttons.
-        container.one('#rednose_form_GegevensGeadresseerde_Sender_Address_Button').on('click', function () {
-            self.datagen.query('test').then(function (data) {
-                self.updateSource('Demo', data);
+        // Init form.
+        container.all('[data-type=autocomplete]').each(function (node) {
+            node.plug(Y.Plugin.AutoComplete, {
+                resultHighlighter: 'phraseMatch',
+                source: 'http://admin:adminpasswd@datagen-standard.dev/api/datagen/sections/Kamerleden/records?query={query}&callback={callback}',
+            });
+
+            node.ac.after('select', function (e) {
+                var record = e.result.raw;
+
+                // Reset the record entry.
+                self.model.data.Kamerleden = Y.clone(record);
+
+                self.updateForm();
+                self.updateModel();
             });
         });
 
-        container.one('#rednose_form_TRIM_Trim_Button').on('click', function () {
-            self.datasource.query('test').then(function (data) {
-                self.updateSource('Trim', data);
-            });
-        });
+        // Bind buttons.
+        // container.one('#rednose_form_GegevensGeadresseerde_Sender_Address_Button').on('click', function () {
+        //     self.datagen.query('test').then(function (data) {
+        //         self.updateSource('Demo', data);
+        //     });
+        // });
+
+        // container.one('#rednose_form_TRIM_Trim_Button').on('click', function () {
+        //     self.datasource.query('test').then(function (data) {
+        //         self.updateSource('Trim', data);
+        //     });
+        // });
     },
 
     updateSource: function (name, data) {
@@ -214,7 +232,13 @@ var Form = Y.Base.create('form', Y.View, [], {
     },
 
     getNodeValue: function (node) {
-        var value = node.get('type') === 'checkbox' ? node.get('checked').toString() : node.get('value');
+        var type = node.getData('type');
+
+        if (type === 'image') {
+            return node.getAttribute('src');
+        }
+
+        var value = (type === 'checkbox') ? node.get('checked').toString() : node.get('value');
 
         if (value === '') {
             return null;
@@ -225,6 +249,13 @@ var Form = Y.Base.create('form', Y.View, [], {
 
     setNodeValue: function (node, value) {
         value === '' && (value = null);
+
+        var type = node.getData('type');
+
+        if (type === 'image') {
+            node.setAttribute('src', value);
+            return;
+        }
 
         if (value === this.getNodeValue(node)) {
             return;

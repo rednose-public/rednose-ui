@@ -487,8 +487,8 @@ Y.mix(YUI.Env[Y.version].modules, {
     "rednose-trim": {
         "group": "rednose-ui",
         "requires": [
+            "autocomplete",
             "base",
-            "dataschema-json",
             "io",
             "json",
             "model",
@@ -536,7 +536,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'b3c4d8f14719ef9c0ba54e6f3f191fdb';
+YUI.Env[Y.version].md5 = '7d0ae978168dbfe11b4e4853540caee5';
 
 
 }, '1.5.0-DEV');
