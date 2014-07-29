@@ -35,7 +35,7 @@ FormXML.prototype = {
     },
 
     _buildXML: function () {
-        this.xml = Y.XML.parse('<form/>');
+        this.xml = Y.XML.parse('<Rijkshuisstijl/>');
 
         var form = this.form,
             xml  = this.xml,
