@@ -245,7 +245,8 @@ Y.mix(YUI.Env[Y.version].modules, {
             "model-list",
             "template-micro",
             "uploader",
-            "view"
+            "view",
+            "datatype-xml"
         ]
     },
     "rednose-form-designer": {
@@ -534,4 +535,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '7d0ae978168dbfe11b4e4853540caee5';
+YUI.Env[Y.version].md5 = '23fe4bb6280eaeafda28bbb699f0a9d7';

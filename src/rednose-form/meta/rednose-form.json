@@ -8,7 +8,8 @@
             "model-list",
             "template-micro",
             "uploader",
-            "view"
+            "view",
+            "datatype-xml"
         ]
     }
 }

@@ -12,7 +12,8 @@
                 "views/date-time-control.js",
                 "views/rich-text-control.js",
                 "form.js",
-                "control-view-factory.js"
+                "control-view-factory.js",
+                "plugins/form.js"
             ]
         }
     }
