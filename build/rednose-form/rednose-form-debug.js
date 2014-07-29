@@ -1307,6 +1307,28 @@ FormXML.prototype = {
         form.after('change', self._afterXMLFormChange, this);
     },
 
+    getXpathValue: function (query) {
+        var result = this.xml.evaluate(query, this.xml, null, XPathResult.ANY_TYPE, null);
+
+        if (result.resultType === 2) {
+            return result.stringValue;
+        }
+
+        if (result.resultType === 4) {
+            return result.iterateNext().textContent;
+        }
+
+        return null;
+    },
+
+    setXpathValue: function (query, value) {
+        var result = this.xml.evaluate(query, this.xml, null, XPathResult.ANY_TYPE, null);
+
+        if (result.resultType === 4) {
+            result.iterateNext().textContent = value;
+        }
+    },
+
     _buildXML: function () {
         this.xml = Y.XML.parse('<form/>');
 
@@ -1371,8 +1393,6 @@ FormJSON.prototype = {
 
     _afterJSONFormChange: function () {
         this._buildJSON();
-
-        console.log(this.json);
     }
 };
 
@@ -1398,9 +1418,22 @@ FormConditions.prototype = {
         if (config.hasOwnProperty('visible')) {
             var condition = config.visible,
                 node      = this.form.one('#' + id);
+                value     = this._compare(this.getXpathValue(condition.a), this.getXpathValue(condition.b), condition.operator);
 
-            node.toggleView();
+            this.setNodeVisible(node, value);
         }
+    },
+
+    _compare: function (a, b, operator) {
+        switch (operator) {
+            case '==':
+                return (a === b);
+
+            case '!=':
+                return (a !== b);
+        }
+
+        return null;
     },
 
     _afterConditionsFormChange: function () {
@@ -1422,6 +1455,14 @@ Y.namespace('Rednose.Plugin').Form = Y.Base.create('form', Y.Base, [FormXML, For
         this.form = this.host.one('form');
 
         this.form.after('change', this._afterFormChange, this);
+    },
+
+    getNodeVisible: function (node) {
+        return !node.ancestor('.control-group').getAttribute('hidden');
+    },
+
+    setNodeVisible: function (node, value) {
+        node.ancestor('.control-group')[value ? 'show' : 'hide']();
     },
 
     getNodeValue: function (node) {
