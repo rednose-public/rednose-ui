@@ -167,6 +167,7 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
 
                     config = {
                         map     : datasource.map,
+                        parent  : datasource.parent,
                         required: node.getData('required')
                     };
 

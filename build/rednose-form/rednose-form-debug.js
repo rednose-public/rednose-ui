@@ -1308,23 +1308,32 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
         this.required    = config.required;
         this.map         = config.map;
 
-        var self = this;
-
         if (config.load === true) {
-            var parameters = null;
-
-            this.datasource.query(parameters).then(function (data) {
-                self._renderOptions(data);
-            });
+            this._queryDatasource(null);
         }
 
         this.host.after('change', this._afterHostChange, this);
+
+        if (this.parent) {
+            var parentNode = Y.one('[data-name=' + this.parent.id + ']');
+
+            parentNode.after('change', this._afterParentChange, this);
+
+            // FIXME: Set value in the case of prefilled forms.
+            this._processParent();
+        }
     },
 
-    _renderOptions: function (data) {
-        var self     = this,
-            node     = this.host,
-            map      = this.map,
+    _queryDatasource: function (parameters) {
+        var self = this;
+
+        this.datasource.query(parameters).then(function (data) {
+            self._renderOptions(data);
+        });
+    },
+
+    _emptyNode: function () {
+        var node     = this.host,
             required = this.required;
 
         node.empty();
@@ -1332,6 +1341,15 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
         if (!required) {
             node.append(Y.Node.create(this.EMPTY_TEMPLATE));
         }
+    },
+
+    _renderOptions: function (data) {
+        var self = this,
+            node = this.host,
+            map  = this.map;
+
+        node.set('disabled', false);
+        this._emptyNode();
 
         Y.Array.each(data, function (record) {
             node.append(Y.Lang.sub(self.OPTION_TEMPLATE, {
@@ -1341,10 +1359,33 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
         });
     },
 
+    _processParent: function () {
+        var node       = this.host,
+            config     = this.parent,
+            parentNode = Y.one('[data-name=' + config.id + ']'),
+            value      = parentNode.get('value'),
+            parameters = {};
+
+        node.set('disabled', true);
+
+        if (value === '') {
+            return;
+        }
+
+        parameters[config.field] = value;
+
+        this._queryDatasource(parameters);
+    },
+
     _afterHostChange: function (e) {
         var value = e.target.get('value');
 
         console.log(value);
+    },
+
+    _afterParentChange: function () {
+        this._emptyNode();
+        this._processParent();
     }
 }, {
     NS: 'dropdown'
@@ -1520,6 +1561,7 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
 
                     config = {
                         map     : datasource.map,
+                        parent  : datasource.parent,
                         required: node.getData('required')
                     };
 
