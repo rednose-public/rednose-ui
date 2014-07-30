@@ -154,12 +154,48 @@ FormConditions.prototype = {
     }
 };
 
-Y.namespace('Rednose.Plugin').Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
+var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
     initializer: function (config) {
         this.host = config.host;
         this.form = this.host.one('form');
 
         this.form.after('change', this._afterFormChange, this);
+
+        this.form.all('[data-type=dropdown]').each(function (node) {
+            if (node.getData('datasource')) {
+                var datasource = Y.JSON.parse(node.getData('datasource')),
+                    config     = {map: datasource.map};
+
+                if (datasource.id === 'Afdelingen') {
+                    // node.parameters = null;
+
+                    config.load = true;
+
+                    config.datasource = new Y.Rednose.Datagen({
+                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
+                        section: 'Afdelingen'
+                    });
+                }
+
+                if (datasource.id === 'Ondertekeningen') {
+                    // node.parameters = {
+                    //     afdeling: 'DE BEHEERDER VAN HET NEDERLANDS LUCHTVAARTUIGREGISTER'
+                    // };
+
+                    config.datasource = new Y.Rednose.Datagen({
+                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
+                        section: 'Ondertekeningen',
+
+                        fields: [
+                            'name',
+                            'content'
+                        ]
+                    });
+                }
+
+                node.plug(Y.Rednose.Plugin.Form.Dropdown, config);
+            }
+        });
     },
 
     getNodeVisible: function (node) {
@@ -203,3 +239,5 @@ Y.namespace('Rednose.Plugin').Form = Y.Base.create('form', Y.Base, [FormXML, For
 }, {
     NS: 'form'
 });
+
+Y.namespace('Rednose.Plugin').Form = Y.mix(Form, Y.Rednose.Plugin.Form);

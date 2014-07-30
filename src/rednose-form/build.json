@@ -13,6 +13,7 @@
                 "views/rich-text-control.js",
                 "form.js",
                 "control-view-factory.js",
+                "plugins/dropdown.js",
                 "plugins/form.js"
             ]
         }

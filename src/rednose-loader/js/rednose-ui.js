@@ -243,6 +243,7 @@ Y.mix(YUI.Env[Y.version].modules, {
             "io",
             "model",
             "model-list",
+            "rednose-datagen",
             "template-micro",
             "uploader",
             "view",
@@ -535,4 +536,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '23fe4bb6280eaeafda28bbb699f0a9d7';
+YUI.Env[Y.version].md5 = '5df6740f016e2b2dc825be1db81c805d';

@@ -6,6 +6,7 @@
             "io",
             "model",
             "model-list",
+            "rednose-datagen",
             "template-micro",
             "uploader",
             "view",
