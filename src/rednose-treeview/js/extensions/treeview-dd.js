@@ -60,7 +60,7 @@ var DD = Y.Base.create('dd', Y.Base, [], {
         });
     },
 
-   _bindHeader: function () {0
+   _bindHeader: function () {
        var container  = this.get('container'),
            dd;
 
