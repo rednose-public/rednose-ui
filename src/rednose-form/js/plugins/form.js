@@ -164,7 +164,11 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
         this.form.all('[data-type=dropdown]').each(function (node) {
             if (node.getData('datasource')) {
                 var datasource = Y.JSON.parse(node.getData('datasource')),
-                    config     = {map: datasource.map};
+
+                    config = {
+                        map     : datasource.map,
+                        required: node.getData('required')
+                    };
 
                 if (datasource.id === 'Afdelingen') {
                     // node.parameters = null;
@@ -173,7 +177,11 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
 
                     config.datasource = new Y.Rednose.Datagen({
                         url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Afdelingen'
+                        section: 'Afdelingen',
+
+                        sort: {
+                            naam: 'asc'
+                        }
                     });
                 }
 

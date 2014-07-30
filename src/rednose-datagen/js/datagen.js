@@ -9,12 +9,25 @@ var Datagen = Y.Base.create('datagen', Y.Base, [], {
     initializer: function () {
         var section = this.get('section'),
             fields  = this.get('fields'),
+            sort    = this.get('sort'),
             url     = this.get('url') + '/api/datagen/sections/{section}/records?callback={callback}';
 
         this.url = Y.Lang.sub(url, {section: section});
 
         if (fields) {
             this.url = this.url + '&fields=' + fields.join(',');
+        }
+
+        if (sort) {
+            var sortParameters = [];
+
+            for (var property in sort) {
+                if (sort.hasOwnProperty(property)) {
+                    sortParameters.push(sort[property] + '.' + property);
+                }
+            }
+
+            this.url = this.url + '&sort=' + sortParameters.join(',');
         }
     },
 
@@ -59,6 +72,13 @@ var Datagen = Y.Base.create('datagen', Y.Base, [], {
          * @type {Array}
          */
         fields: {
+            value: null
+        },
+
+        /**
+         * @type {Object}
+         */
+        sort: {
             value: null
         }
     }
