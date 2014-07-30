@@ -35,7 +35,14 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
             return;
         }
 
+
         var node = this.getNodeById(e.currentTarget.getData('node-id'));
+
+        if (typeof(this.get('selectableTest')) === 'function') {
+            if (this.get('selectableTest')(node) === false) {
+                return;
+            }
+        }
 
         if (e.shiftKey) {
             node[node.isSelected() ? 'unselect' : 'select']();

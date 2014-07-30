@@ -27,6 +27,9 @@
  *     @param {Boolean} [config.dragdrop] Enable standalone drag and drop for this instance.
  *     @param {Boolean} [config.selectable] Enables selection of tree nodes. Only single selection
  *         is supported for now
+ *     @param {function} [config.selectableTest] Optional callback function to cancel a selection.
+ *     @param {function} [config.ddTest] Optional callback function used to determain which
+ *         nodes should have drag and drop applied. (Default is all).
  *     @param {Array} [config.nodes] The tree nodes.
  *     @param {Array} [config.groups] The DD groups that can interact with this
  *         TreeView instance.

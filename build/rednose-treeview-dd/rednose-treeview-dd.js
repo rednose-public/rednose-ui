@@ -59,24 +59,10 @@ var DD = Y.Base.create('dd', Y.Base, [], {
             if (ddTest === null || (typeof ddTest === 'function' && ddTest(node) === true)) {
                 self._createDd(htmlNode, node);
             }
-
-//            // FIXME: Use a more generic way to specify droppable models.
-//            if (model instanceof Y.TB.Category) {
-//                // This is a category model. Categories allow dropping.
-               // var catDD = new Y.DD.Drop({
-               //     node         : htmlNode,
-               //     groups       : self.get('groups'),
-               //     bubbleTargets: self
-               // });
-//
-               // htmlNode.addClass('rednose-treeview-drop');
-               // htmlNode.addClass('rednose-dd-drop');
-               // self._ddMap.push(catDD);
-//            }
         });
     },
 
-   _bindHeader: function () {
+   _bindHeader: function () {0
        var container  = this.get('container'),
            dd;
 
