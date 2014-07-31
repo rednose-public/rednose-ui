@@ -56,9 +56,11 @@ var Trim = Y.Base.create('trim', Y.Base, [], {
             '</Execute>'
     },
 
-    query: function (arg) {
+    query: function (parameters) {
+        parameters || (parameters = {});
+
         var templates = this.templates,
-            body      = Y.Lang.sub(templates.recordSearch, {arg: arg}),
+            body      = Y.Lang.sub(templates.recordSearch, {arg: parameters.query || null}),
             payload   = Y.Lang.sub(templates.payload, {body: body}),
             self      = this;
 

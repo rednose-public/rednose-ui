@@ -172,8 +172,6 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                     };
 
                 if (datasource.id === 'Afdelingen') {
-                    // node.parameters = null;
-
                     config.load = true;
 
                     config.datasource = new Y.Rednose.Datagen({
@@ -187,10 +185,6 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                 }
 
                 if (datasource.id === 'Ondertekeningen') {
-                    // node.parameters = {
-                    //     afdeling: 'DE BEHEERDER VAN HET NEDERLANDS LUCHTVAARTUIGREGISTER'
-                    // };
-
                     config.datasource = new Y.Rednose.Datagen({
                         url    : 'http://admin:adminpasswd@datagen-standard.dev',
                         section: 'Ondertekeningen',
@@ -198,11 +192,89 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                         fields: [
                             'name',
                             'content'
-                        ]
+                        ],
+
+                        sort: {
+                            name: 'asc'
+                        }
+                    });
+                }
+
+                if (datasource.id === 'Diensten') {
+                    config.load = true;
+
+                    config.datasource = new Y.Rednose.Datagen({
+                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
+                        section: 'Diensten',
+
+                        sort: {
+                            DisplayName: 'asc'
+                        }
                     });
                 }
 
                 node.plug(Y.Rednose.Plugin.Form.Dropdown, config);
+            }
+        });
+
+        this.form.all('[data-type=autocomplete]').each(function (node) {
+            if (node.getData('datasource')) {
+                var config = Y.JSON.parse(node.getData('datasource')),
+                    map    = config.map;
+
+                var datasource;
+
+                if (config.id === 'Trim') {
+                     datasource = new Y.Rednose.Trim({url: 'http://trim-dummy.dev/trimws/trim.asmx'});
+                }
+
+                if (config.id === 'Diensten') {
+                    datasource = new Y.Rednose.Datagen({
+                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
+                        section: 'Diensten',
+
+                        sort: {
+                            Executive: 'asc'
+                        }
+                    });
+                }
+
+                var template = Y.Template.Micro.compile(
+                    '<a role="menuitem">' +
+                        '<% if (data.image) { %>' +
+                            '<img class="avatar size32" src="<%= data.image %>">' +
+                        '<% } %>' +
+                        '<span class="title-block">' +
+                            '<span class="title"><%== data.title %></span>' +
+                        '</span>' +
+                        '<span class="subtitle"><%= data.subtitle %></span>' +
+                    '</a>'
+                );
+
+                if (datasource) {
+                    node.plug(Y.Plugin.AutoComplete, {
+                        resultTextLocator: function (result) {
+                            return result[map.value];
+                        },
+
+                        resultFormatter: function (query, results) {
+                            return Y.Array.map(results, function (result) {
+                                return template({
+                                    title   : Y.Highlight.all(result.raw[map.title], query),
+                                    subtitle: result.raw[map.subtitle],
+                                    image   : result.raw[map.image]
+                                });
+                            });
+                        },
+
+                        source: function (query, callback) {
+                            console.log(query);
+                            datasource.query({query: query}).then(function (data) {
+                                callback(data);
+                            });
+                        }
+                    });
+                }
             }
         });
     },
