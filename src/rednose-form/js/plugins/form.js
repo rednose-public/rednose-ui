@@ -201,7 +201,7 @@ FormDataSources.prototype = {
             var bindings = Y.JSON.parse(node.getData('bindings'));
 
             Y.Array.each(bindings, function (binding) {
-                self.setNodeValue(node, self._getValueByPath(self.scope, binding));
+                self.setNodeValue(node, self._getValueByPath(self.scope, binding) || null);
             });
         });
     }
