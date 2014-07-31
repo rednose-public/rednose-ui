@@ -190,8 +190,10 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                         section: 'Ondertekeningen',
 
                         fields: [
+                            'id',
                             'name',
-                            'content'
+                            'signatory',
+                            'title'
                         ],
 
                         sort: {
@@ -234,7 +236,7 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                         section: 'Diensten',
 
                         sort: {
-                            Executive: 'asc'
+                            DisplayName: 'asc'
                         }
                     });
                 }
@@ -252,6 +254,8 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                 );
 
                 if (datasource) {
+                    Y.Plugin.AutoComplete.CSS_PREFIX = 'rednose-autocomplete';
+
                     node.plug(Y.Plugin.AutoComplete, {
                         resultTextLocator: function (result) {
                             return result[map.value];
