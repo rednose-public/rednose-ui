@@ -3,9 +3,12 @@
 var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
     EMPTY_TEMPLATE: '<option value>...</option>',
 
-    OPTION_TEMPLATE: '<option value="{value}">{text}</option>',
+    OPTION_TEMPLATE: '<option data-record="{guid}" value="{value}">{text}</option>',
 
     initializer: function (config) {
+        this._recordMap || (this._recordMap = {});
+        this.record = null;
+
         this.host        = config.host;
         this.datasource  = config.datasource;
         this.parent      = config.parent;
@@ -53,13 +56,20 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
             node = this.host,
             map  = this.map;
 
+        this._recordMap = {};
+
         node.set('disabled', false);
         this._emptyNode();
 
         Y.Array.each(data, function (record) {
+            var guid = Y.stamp(record);
+
+            self._recordMap[guid] = record;
+
             node.append(Y.Lang.sub(self.OPTION_TEMPLATE, {
                 value: record[map.value],
-                text : record[map.text]
+                text : record[map.text],
+                guid : guid
             }));
         });
     },
@@ -83,9 +93,14 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
     },
 
     _afterHostChange: function (e) {
-        var value = e.target.get('value');
+        var selected = e.target.get('options').item(e.target.get('selectedIndex')),
+            record   = this._recordMap[selected.getData('record')],
+            value    = e.target.get('value');
 
-        console.log(value);
+        this.fire('select', {
+            value: value,
+            raw  : record ? Y.clone(record) : null
+        });
     },
 
     _afterParentChange: function () {

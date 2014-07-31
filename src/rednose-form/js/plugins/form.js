@@ -96,6 +96,37 @@ FormJSON.prototype = {
         });
     },
 
+    _getValueByPath: function (object, path) {
+        var parts = path.split('.');
+
+        for (var i = 0, len = parts.length; i < len; i++) {
+            if (Y.Lang.isObject(object) && parts[i] in object) {
+                object = object[parts[i]];
+            } else {
+                object = undefined;
+                break;
+            }
+        }
+
+        return object;
+    },
+
+    _setValueByPath: function (object, path, value) {
+        var parts = path.split('.');
+
+        for (var i = 0, len = parts.length; i < len; i++) {
+            if (i === len - 1) {
+                object[parts[i]] = value;
+
+                break;
+            }
+
+            object[parts[i]] || (object[parts[i]] = {});
+
+            object = object[parts[i]];
+        }
+    },
+
     _afterJSONFormChange: function () {
         this._buildJSON();
     }
@@ -154,8 +185,32 @@ FormConditions.prototype = {
     }
 };
 
-var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
+function FormDataSources () {}
+
+FormDataSources.prototype = {
+    initializer: function () {
+        this.scope || (this.scope = {});
+    },
+
+    _setRecord: function (name, object) {
+        var self = this;
+
+        this.scope[name] = object;
+
+        this.form.all('[data-bindings]').each(function (node) {
+            var bindings = Y.JSON.parse(node.getData('bindings'));
+
+            Y.Array.each(bindings, function (binding) {
+                self.setNodeValue(node, self._getValueByPath(self.scope, binding));
+            });
+        });
+    }
+};
+
+var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, FormDataSources], {
     initializer: function (config) {
+        var self = this;
+
         this.host = config.host;
         this.form = this.host.one('form');
 
@@ -171,7 +226,33 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                         required: node.getData('required')
                     };
 
-                if (datasource.id === 'Afdelingen') {
+                if (datasource.id === 'Signatory_Sender') {
+                    config.load = true;
+
+                    config.datasource = new Y.Rednose.Datagen({
+                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
+                        section: 'Diensten',
+
+                        sort: {
+                            Department: 'asc'
+                        }
+                    });
+                }
+
+                if (datasource.id === 'Signatory_Sender') {
+                    config.load = true;
+
+                    config.datasource = new Y.Rednose.Datagen({
+                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
+                        section: 'Diensten',
+
+                        sort: {
+                            DisplayName: 'asc'
+                        }
+                    });
+                }
+
+                if (datasource.id === 'Signatory_Category') {
                     config.load = true;
 
                     config.datasource = new Y.Rednose.Datagen({
@@ -184,7 +265,7 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                     });
                 }
 
-                if (datasource.id === 'Ondertekeningen') {
+                if (datasource.id === 'Signatory_List') {
                     config.datasource = new Y.Rednose.Datagen({
                         url    : 'http://admin:adminpasswd@datagen-standard.dev',
                         section: 'Ondertekeningen',
@@ -202,20 +283,42 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                     });
                 }
 
-                if (datasource.id === 'Diensten') {
+                if (datasource.id === 'Signatory_On_Behalf_Category') {
                     config.load = true;
 
                     config.datasource = new Y.Rednose.Datagen({
                         url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Diensten',
+                        section: 'Afdelingen',
 
                         sort: {
-                            DisplayName: 'asc'
+                            naam: 'asc'
+                        }
+                    });
+                }
+
+                if (datasource.id === 'Signatory_On_Behalf_List') {
+                    config.datasource = new Y.Rednose.Datagen({
+                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
+                        section: 'Ondertekeningen',
+
+                        fields: [
+                            'id',
+                            'name',
+                            'signatory',
+                            'title'
+                        ],
+
+                        sort: {
+                            name: 'asc'
                         }
                     });
                 }
 
                 node.plug(Y.Rednose.Plugin.Form.Dropdown, config);
+
+                node.dropdown.after('select', function (e) {
+                    self._setRecord(datasource.id, e.raw);
+                });
             }
         });
 
@@ -226,11 +329,11 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
 
                 var datasource;
 
-                if (config.id === 'Trim') {
+                if (config.id === 'Trim_Key') {
                      datasource = new Y.Rednose.Trim({url: 'http://trim-dummy.dev/trimws/trim.asmx'});
                 }
 
-                if (config.id === 'Diensten') {
+                if (config.id === 'IDM_Sender') {
                     datasource = new Y.Rednose.Datagen({
                         url    : 'http://admin:adminpasswd@datagen-standard.dev',
                         section: 'Diensten',
@@ -272,11 +375,14 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions], {
                         },
 
                         source: function (query, callback) {
-                            console.log(query);
                             datasource.query({query: query}).then(function (data) {
                                 callback(data);
                             });
                         }
+                    });
+
+                    node.ac.after('select', function (e) {
+                        self._setRecord(config.id, e.result.raw);
                     });
                 }
             }
