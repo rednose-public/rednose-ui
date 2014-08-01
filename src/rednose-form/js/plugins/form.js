@@ -96,6 +96,10 @@ FormJSON.prototype = {
         });
     },
 
+    _getRootByPath: function (object, path) {
+        return path.split('.')[0];
+    },
+
     _getValueByPath: function (object, path) {
         var parts = path.split('.');
 
@@ -203,14 +207,20 @@ FormDataSources.prototype = {
     _setRecord: function (name, object) {
         var self = this;
 
+        // Update the current record.
         this.scope[name] = object;
 
         this.form.all('[data-bindings]').each(function (node) {
             var bindings = Y.JSON.parse(node.getData('bindings'));
 
+            // Update all controls bound to this record.
             Y.Array.each(bindings, function (binding) {
-                self.setNodeValue(node, self._getValueByPath(self.scope, binding) || null);
+                if (self._getRootByPath(self.scope, binding) === name) {
+                    self.setNodeValue(node, self._getValueByPath(self.scope, binding) || null);
+                }
             });
+
+            // TODO: Sync form back to model.
         });
     },
 
