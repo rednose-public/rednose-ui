@@ -190,6 +190,14 @@ function FormDataSources () {}
 FormDataSources.prototype = {
     initializer: function () {
         this.scope || (this.scope = {});
+        this.dataSources = {};
+
+        var self = this;
+
+        this._loadDataSources().then(function (sources) {
+            self._initDataSources(sources);
+            self._bindDataSources();
+        });
     },
 
     _setRecord: function (name, object) {
@@ -204,144 +212,65 @@ FormDataSources.prototype = {
                 self.setNodeValue(node, self._getValueByPath(self.scope, binding) || null);
             });
         });
-    }
-};
+    },
 
-var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, FormDataSources], {
-    initializer: function (config) {
+    _loadDataSources: function () {
+        return Y.Promise(function (resolve) {
+            Y.io(Routing.generate('rednose_dataprovider_data_sources'), {
+                method: 'GET',
+                on: {
+                    success: function (tx, r) {
+                        resolve(Y.JSON.parse(r.responseText));
+                    }
+                }
+            });
+        });
+    },
+
+    _initDataSources: function (sources) {
         var self = this;
 
-        this.form = config.host;
+        Y.Array.each(sources, function (source) {
+            switch (source.type) {
+                case 'dataGen':
+                    self.dataSources[source.name] = new Y.Rednose.Datagen(source);
+                    break;
+                case 'trim':
+                    self.dataSources[source.name] = new Y.Rednose.Trim(source);
+                    break;
+            }
+        });
+    },
 
-        this.form.after('change', this._afterFormChange, this);
+    _bindDataSources: function () {
+        var sources = this.dataSources,
+            self    = this;
 
         this.form.all('[data-type=dropdown]').each(function (node) {
             if (node.getData('datasource')) {
-                var datasource = Y.JSON.parse(node.getData('datasource')),
+                var config     = Y.JSON.parse(node.getData('datasource')),
+                    datasource = sources[config.id];
 
-                    config = {
-                        map     : datasource.map,
-                        parent  : datasource.parent,
-                        required: node.getData('required')
-                    };
+                if (datasource) {
+                    node.plug(Y.Rednose.Plugin.Form.Dropdown, {
+                        datasource: datasource,
+                        map       : config.map,
+                        parent    : config.parent,
+                        required  : node.getData('required')
+                    });
 
-                if (datasource.id === 'Signatory_Sender') {
-                    config.load = true;
-
-                    config.datasource = new Y.Rednose.Datagen({
-                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Diensten',
-
-                        sort: {
-                            Department: 'asc'
-                        }
+                    node.dropdown.after('select', function (e) {
+                        self._setRecord(config.id, e.raw);
                     });
                 }
-
-                if (datasource.id === 'Signatory_Sender') {
-                    config.load = true;
-
-                    config.datasource = new Y.Rednose.Datagen({
-                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Diensten',
-
-                        sort: {
-                            DisplayName: 'asc'
-                        }
-                    });
-                }
-
-                if (datasource.id === 'Signatory_Category') {
-                    config.load = true;
-
-                    config.datasource = new Y.Rednose.Datagen({
-                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Afdelingen',
-
-                        sort: {
-                            naam: 'asc'
-                        }
-                    });
-                }
-
-                if (datasource.id === 'Signatory_List') {
-                    config.datasource = new Y.Rednose.Datagen({
-                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Ondertekeningen',
-
-                        fields: [
-                            'id',
-                            'name',
-                            'signatory',
-                            'title'
-                        ],
-
-                        sort: {
-                            name: 'asc'
-                        }
-                    });
-                }
-
-                if (datasource.id === 'Signatory_On_Behalf_Category') {
-                    config.load = true;
-
-                    config.datasource = new Y.Rednose.Datagen({
-                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Afdelingen',
-
-                        sort: {
-                            naam: 'asc'
-                        }
-                    });
-                }
-
-                if (datasource.id === 'Signatory_On_Behalf_List') {
-                    config.datasource = new Y.Rednose.Datagen({
-                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Ondertekeningen',
-
-                        fields: [
-                            'id',
-                            'name',
-                            'signatory',
-                            'title'
-                        ],
-
-                        sort: {
-                            name: 'asc'
-                        }
-                    });
-                }
-
-                node.plug(Y.Rednose.Plugin.Form.Dropdown, config);
-
-                node.dropdown.after('select', function (e) {
-                    self._setRecord(datasource.id, e.raw);
-                });
             }
         });
 
         this.form.all('[data-type=autocomplete]').each(function (node) {
             if (node.getData('datasource')) {
-                var config = Y.JSON.parse(node.getData('datasource')),
-                    map    = config.map;
-
-                var datasource;
-
-                if (config.id === 'Trim_Key') {
-                     datasource = new Y.Rednose.Trim({url: 'http://trim-dummy.dev/trimws/trim.asmx'});
-                }
-
-                if (config.id === 'IDM_Sender') {
-                    datasource = new Y.Rednose.Datagen({
-                        url    : 'http://admin:adminpasswd@datagen-standard.dev',
-                        section: 'Diensten',
-
-                        sort: {
-                            DisplayName: 'asc'
-                        }
-                    });
-                }
+                var config     = Y.JSON.parse(node.getData('datasource')),
+                    map        = config.map,
+                    datasource = sources[config.id];
 
                 var template = Y.Template.Micro.compile(
                     '<a role="menuitem">' +
@@ -386,6 +315,14 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, For
                 }
             }
         });
+    }
+};
+
+var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, FormDataSources], {
+    initializer: function (config) {
+        this.form = config.host;
+
+        this.form.after('change', this._afterFormChange, this);
     },
 
     getNodeVisible: function (node) {

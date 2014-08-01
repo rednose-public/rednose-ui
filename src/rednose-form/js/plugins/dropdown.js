@@ -16,7 +16,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
         this.required    = config.required;
         this.map         = config.map;
 
-        if (config.load === true) {
+        if (!config.parent) {
             this._queryDatasource(null);
         }
 
