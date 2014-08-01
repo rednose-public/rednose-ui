@@ -211,8 +211,7 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, For
     initializer: function (config) {
         var self = this;
 
-        this.host = config.host;
-        this.form = this.host.one('form');
+        this.form = config.host;
 
         this.form.after('change', this._afterFormChange, this);
 
