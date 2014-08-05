@@ -1311,10 +1311,6 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
         this.required    = config.required;
         this.map         = config.map;
 
-        if (!config.parent && !config.serverSide) {
-            this._queryDatasource(null);
-        }
-
         this.host.after('change', this._afterHostChange, this);
 
         if (this.parent) {
@@ -1675,7 +1671,6 @@ FormDataSources.prototype = {
                         datasource: datasource,
                         map       : config.map,
                         parent    : config.parent,
-                        serverSide: config.serverSide,
                         required  : node.getData('required')
                     });
 
