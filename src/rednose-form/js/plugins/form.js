@@ -266,6 +266,7 @@ FormDataSources.prototype = {
                         datasource: datasource,
                         map       : config.map,
                         parent    : config.parent,
+                        serverSide: config.serverSide,
                         required  : node.getData('required')
                     });
 
