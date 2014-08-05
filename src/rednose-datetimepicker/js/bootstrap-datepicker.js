@@ -1,5 +1,3 @@
-YUI.add('rednose-datetimepicker-base', function (Y, NAME) {
-
 /* =========================================================
  * bootstrap-datepicker.js 
  * http://www.eyecon.ro/bootstrap-datepicker
@@ -474,5 +472,3 @@ YUI.add('rednose-datetimepicker-base', function (Y, NAME) {
 						'</div>';
 
 }( window.jQuery );
-
-}, '1.5.0-DEV', {"requires": ["base", "node", "plugin", "rednose-datetimepicker-base-css", "rednose-jquery"]});

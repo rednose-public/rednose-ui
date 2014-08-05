@@ -22,17 +22,16 @@ Y.namespace('Rednose.Plugin').Datepicker = Y.Base.create('datepicker', Y.Base, [
         var lang = Y.config.lang || null;
         var element = $(this._host.getDOMNode());
 
-        element.datetimepicker({
-            pickTime: false,
+        element.datepicker({
             language: lang
         });
 
-        this._element = element.data('datetimepicker');
+        // this._element = element.data('datepicker');
 
         // Force a refresh
-        this._element.setDate(
-            this._element.getDate()
-        );
+        // this._element.setDate(
+        //     this._element.getDate()
+        // );
     },
 
     _getDate: function () {

@@ -333,6 +333,11 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, For
         this.form = config.host;
 
         this.form.after('change', this._afterFormChange, this);
+
+        // Initialize widgets.
+        this.form.all('[data-type=datetime]').each(function (node) {
+            node.one('input').plug(Y.Rednose.Plugin.Datepicker);
+        });
     },
 
     getNodeVisible: function (node) {
