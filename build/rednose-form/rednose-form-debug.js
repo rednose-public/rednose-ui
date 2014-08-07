@@ -1756,10 +1756,6 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, For
     getNodeValue: function (node) {
         var type = node.getData('type');
 
-        if (type === 'image') {
-            return node.getAttribute('src');
-        }
-
         var value = (type === 'checkbox') ? node.get('checked').toString() : node.get('value');
 
         return value;
@@ -1769,8 +1765,7 @@ var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, For
         var type = node.getData('type');
 
         if (type === 'image') {
-            node.setAttribute('src', value);
-            return;
+            node.get('parentNode').one('img').setAttribute('src', value);
         }
 
         if (value === this.getNodeValue(node)) {
