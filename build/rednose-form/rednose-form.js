@@ -1735,7 +1735,8 @@ FormDataSources.prototype = {
 
 var Form = Y.Base.create('form', Y.Base, [FormXML, FormJSON, FormConditions, FormDataSources], {
     initializer: function (config) {
-        this.form = config.host;
+        this.form  = config.host;
+        this.model = config.model;
 
         this.form.after('change', this._afterFormChange, this);
 
@@ -1793,6 +1794,8 @@ Y.namespace('Rednose.Plugin').Form = Y.mix(Form, Y.Rednose.Plugin.Form);
         "model",
         "model-list",
         "rednose-datagen",
+        "rednose-datetimepicker",
+        "rednose-trim",
         "template-micro",
         "uploader",
         "view",
