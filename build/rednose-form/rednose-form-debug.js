@@ -1418,7 +1418,6 @@ FormXML.prototype = {
     },
 
     getXpathValue: function (query) {
-            Y.log('test', 'info');
         var result = this.xml.evaluate(query, this.xml, null, XPathResult.ANY_TYPE, null);
 
         if (result.resultType === 2) {
