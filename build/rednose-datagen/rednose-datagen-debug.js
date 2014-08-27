@@ -12,10 +12,9 @@ var Datagen = Y.Base.create('datagen', Y.Base, [], {
         var section    = this.get('section'),
             fields     = this.get('fields'),
             properties = this.get('properties'),
-            sort       = this.get('sort'),
-            url        = this.get('url') + '/api/datagen/sections/{section}/records?callback={callback}';
+            sort       = this.get('sort');
 
-        this.url = Y.Lang.sub(url, {section: section});
+        this.url = Routing.generate('rednose_datagen_get_section_records', {name: section}) + '?callback={callback}';
 
         if (fields) {
             this.url = this.url + '&fields=' + fields.join(',');

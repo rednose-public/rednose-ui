@@ -256,74 +256,70 @@ FormDataSources.prototype = {
         var sources = this.dataSources,
             self    = this;
 
-        this.form.all('[data-type=dropdown]').each(function (node) {
-            if (node.getData('datasource')) {
-                var config     = Y.JSON.parse(node.getData('datasource')),
-                    datasource = sources[config.id];
+        // this.form.all('[data-type=dropdown]').each(function (node) {
+        //     if (node.getData('datasource')) {
+        //         var config     = Y.JSON.parse(node.getData('datasource')),
+        //             datasource = sources[config.id];
 
-                if (datasource) {
-                    node.plug(Y.Rednose.Plugin.Form.Dropdown, {
-                        datasource: datasource,
-                        map       : config.map,
-                        parent    : config.parent,
-                        required  : node.getData('required')
-                    });
+        //         if (datasource) {
+        //             node.plug(Y.Rednose.Plugin.Form.Dropdown, {
+        //                 datasource: datasource,
+        //                 map       : config.map,
+        //                 parent    : config.parent,
+        //                 required  : node.getData('required')
+        //             });
 
-                    node.dropdown.after('select', function (e) {
-                        self._setRecord(config.id, e.raw);
-                    });
-                }
-            }
-        });
+        //             node.dropdown.after('select', function (e) {
+        //                 self._setRecord(config.id, e.raw);
+        //             });
+        //         }
+        //     }
+        // });
 
         this.form.all('[data-type=autocomplete]').each(function (node) {
-            if (node.getData('datasource')) {
-                var config     = Y.JSON.parse(node.getData('datasource')),
-                    map        = config.map,
-                    datasource = sources[config.id];
+            var id         = node.getData('source'),
+                map        = Y.JSON.parse(node.getData('map')),
+                datasource = sources[id];
 
-                var template = Y.Template.Micro.compile(
-                    '<a role="menuitem">' +
-                        '<% if (data.image) { %>' +
-                            '<img class="avatar size32" src="<%= data.image %>">' +
-                        '<% } %>' +
-                        '<span class="title-block">' +
-                            '<span class="title"><%== data.title %></span>' +
-                        '</span>' +
-                        '<span class="subtitle"><%= data.subtitle %></span>' +
-                    '</a>'
-                );
+            var template = Y.Template.Micro.compile(
+                '<a role="menuitem">' +
+                    '<% if (data.image) { %>' +
+                        '<img class="avatar size32" src="<%= data.image %>">' +
+                    '<% } %>' +
+                    '<span class="title-block">' +
+                        '<span class="title"><%== data.title %></span>' +
+                    '</span>' +
+                    '<span class="subtitle"><%= data.subtitle %></span>' +
+                '</a>'
+            );
 
-                if (datasource) {
-                    Y.Plugin.AutoComplete.CSS_PREFIX = 'rednose-autocomplete';
+            Y.Plugin.AutoComplete.CSS_PREFIX = 'rednose-autocomplete';
 
-                    node.plug(Y.Plugin.AutoComplete, {
-                        resultTextLocator: function (result) {
-                            return result[map.value];
-                        },
+            node.plug(Y.Plugin.AutoComplete, {
+                resultTextLocator: function (result) {
+                    return result[map.value];
+                },
 
-                        resultFormatter: function (query, results) {
-                            return Y.Array.map(results, function (result) {
-                                return template({
-                                    title   : Y.Highlight.all(result.raw[map.title], query),
-                                    subtitle: result.raw[map.subtitle],
-                                    image   : result.raw[map.image]
-                                });
-                            });
-                        },
-
-                        source: function (query, callback) {
-                            datasource.query({query: query}).then(function (data) {
-                                callback(data);
-                            });
-                        }
+                resultFormatter: function (query, results) {
+                    return Y.Array.map(results, function (result) {
+                        return template({
+                            title   : Y.Highlight.all(result.raw[map.title], query),
+                            subtitle: result.raw[map.subtitle],
+                            image   : result.raw[map.image]
+                        });
                     });
+                },
 
-                    node.ac.after('select', function (e) {
-                        self._setRecord(config.id, e.result.raw);
+                source: function (query, callback) {
+                    datasource.query({query: query}).then(function (data) {
+                        callback(data);
                     });
                 }
-            }
+            });
+
+            node.ac.after('select', function (e) {
+                self._setRecord(config.id, e.result.raw);
+            });
         });
     }
 };
