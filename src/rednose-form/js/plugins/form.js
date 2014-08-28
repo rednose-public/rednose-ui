@@ -318,7 +318,7 @@ FormDataSources.prototype = {
             });
 
             node.ac.after('select', function (e) {
-                self._setRecord(config.id, e.result.raw);
+                self._setRecord(id, e.result.raw);
             });
         });
     }
