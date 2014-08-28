@@ -3,30 +3,27 @@
 var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
     EMPTY_TEMPLATE: '<option value>...</option>',
 
-    OPTION_TEMPLATE: '<option data-record="{guid}" value="{value}">{text}</option>',
+    OPTION_TEMPLATE: '<option value="{value}">{text}</option>',
 
     initializer: function (config) {
-        this._recordMap || (this._recordMap = {});
         this.record = null;
 
         this.host        = config.host;
         this.datasource  = config.datasource;
         this.parent      = config.parent;
-        this.parentField = config.parentField;
         this.required    = config.required;
         this.map         = config.map;
 
-        console.log(this);
-        // this.host.after('change', this._afterHostChange, this);
+        this.host.after('change', this._afterHostChange, this);
 
-        // if (this.parent) {
-        //     var parentNode = Y.one('[data-name=' + this.parent.id + ']');
+        if (this.parent && this.parent.id && this.parent.field) {
+            var parentNode = Y.one('[data-name=' + this.parent.id + ']');
 
-        //     parentNode.after('change', this._afterParentChange, this);
+            parentNode.after('change', this._afterParentChange, this);
 
-        //     // FIXME: Set value in the case of prefilled forms.
-        //     this._processParent();
-        // }
+            // FIXME: Set value in the case of prefilled forms.
+            this._processParent();
+        }
     },
 
     _queryDatasource: function (parameters) {
@@ -53,21 +50,18 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
             node = this.host,
             map  = this.map;
 
-        this._recordMap = {};
-
         node.set('disabled', false);
         this._emptyNode();
 
         Y.Array.each(data, function (record) {
-            var guid = Y.stamp(record);
-
-            self._recordMap[guid] = record;
-
-            node.append(Y.Lang.sub(self.OPTION_TEMPLATE, {
+            var option = Y.Node.create(Y.Lang.sub(self.OPTION_TEMPLATE, {
                 value: record[map.value],
                 text : record[map.text],
-                guid : guid
             }));
+
+            option.setAttribute('data-record', Y.JSON.stringify(record));
+
+            node.append(option);
         });
     },
 
@@ -91,12 +85,12 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
 
     _afterHostChange: function (e) {
         var selected = e.target.get('options').item(e.target.get('selectedIndex')),
-            record   = this._recordMap[selected.getData('record')],
+            record   = Y.JSON.parse(selected.getData('record')),
             value    = e.target.get('value');
 
         this.fire('select', {
             value: value,
-            raw  : record ? Y.clone(record) : null
+            raw  : record
         });
     },
 
