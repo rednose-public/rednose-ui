@@ -1367,9 +1367,8 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
             value      = parentNode.get('value'),
             parameters = {};
 
-        node.set('disabled', true);
-
         if (value === '') {
+            node.set('disabled', true);
             return;
         }
 
@@ -1380,7 +1379,7 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
 
     _afterHostChange: function (e) {
         var selected = e.target.get('options').item(e.target.get('selectedIndex')),
-            record   = Y.JSON.parse(selected.getData('record')),
+            record   = selected.getData('record') ? Y.JSON.parse(selected.getData('record')) : null,
             value    = e.target.get('value');
 
         this.fire('select', {
