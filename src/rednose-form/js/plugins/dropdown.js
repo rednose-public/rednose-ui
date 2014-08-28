@@ -16,16 +16,17 @@ var Dropdown = Y.Base.create('dropdown', Y.Base, [], {
         this.required    = config.required;
         this.map         = config.map;
 
-        this.host.after('change', this._afterHostChange, this);
+        console.log(this);
+        // this.host.after('change', this._afterHostChange, this);
 
-        if (this.parent) {
-            var parentNode = Y.one('[data-name=' + this.parent.id + ']');
+        // if (this.parent) {
+        //     var parentNode = Y.one('[data-name=' + this.parent.id + ']');
 
-            parentNode.after('change', this._afterParentChange, this);
+        //     parentNode.after('change', this._afterParentChange, this);
 
-            // FIXME: Set value in the case of prefilled forms.
-            this._processParent();
-        }
+        //     // FIXME: Set value in the case of prefilled forms.
+        //     this._processParent();
+        // }
     },
 
     _queryDatasource: function (parameters) {

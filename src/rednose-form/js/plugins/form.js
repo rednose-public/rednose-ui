@@ -256,25 +256,28 @@ FormDataSources.prototype = {
         var sources = this.dataSources,
             self    = this;
 
-        // this.form.all('[data-type=dropdown]').each(function (node) {
-        //     if (node.getData('datasource')) {
-        //         var config     = Y.JSON.parse(node.getData('datasource')),
-        //             datasource = sources[config.id];
+        this.form.all('[data-type=dropdown]').each(function (node) {
+            if (node.getData('source')) {
+                var id           = node.getData('source'),
+                    parentSource = node.getData('parent-source'),
+                    parentField  = node.getData('parent-field'),
+                    map          = Y.JSON.parse(node.getData('map')),
+                    datasource   = sources[id];
 
-        //         if (datasource) {
-        //             node.plug(Y.Rednose.Plugin.Form.Dropdown, {
-        //                 datasource: datasource,
-        //                 map       : config.map,
-        //                 parent    : config.parent,
-        //                 required  : node.getData('required')
-        //             });
+                if (datasource) {
+                    node.plug(Y.Rednose.Plugin.Form.Dropdown, {
+                        datasource: datasource,
+                        map       : map,
+                        required  : node.getData('required'),
+                        parent    : {id: parentSource, field: parentField}
+                    });
 
-        //             node.dropdown.after('select', function (e) {
-        //                 self._setRecord(config.id, e.raw);
-        //             });
-        //         }
-        //     }
-        // });
+                    node.dropdown.after('select', function (e) {
+                        self._setRecord(id, e.raw);
+                    });
+                }
+            }
+        });
 
         this.form.all('[data-type=autocomplete]').each(function (node) {
             var id         = node.getData('source'),
