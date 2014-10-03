@@ -222,4 +222,4 @@ Y.Rednose.Ruler.DD = RulerDD;
 Y.Base.mix(Y.Rednose.Ruler, [RulerDD]);
 
 
-}, '1.5.0-DEV', {"requires": ["rednose-ruler-base", "resize", "datatype-number"]});
+}, '1.6.0-dev', {"requires": ["rednose-ruler-base", "resize", "datatype-number"]});

@@ -186,4 +186,4 @@ Y.Rednose.Dialog.Template = Template;
 Y.Base.mix(Y.Rednose.Dialog, [Template]);
 
 
-}, '1.5.0-DEV', {"requires": ["template-micro", "rednose-tabview"]});
+}, '1.6.0-dev', {"requires": ["template-micro", "rednose-tabview"]});

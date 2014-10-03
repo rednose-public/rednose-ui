@@ -128,4 +128,4 @@ var ButtonGroupBase = Y.Base.create('buttonGroupBase', Y.Base, [], {
 Y.namespace('Rednose.ButtonGroup').Base = ButtonGroupBase;
 
 
-}, '1.5.0-DEV', {"requires": ["rednose-button"]});
+}, '1.6.0-dev', {"requires": ["rednose-button"]});

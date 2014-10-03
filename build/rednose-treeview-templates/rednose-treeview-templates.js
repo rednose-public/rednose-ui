@@ -41,4 +41,4 @@ Y.namespace('Rednose.TreeView').Templates = {
 };
 
 
-}, '1.5.0-DEV', {"requires": ["template-micro"]});
+}, '1.6.0-dev', {"requires": ["template-micro"]});

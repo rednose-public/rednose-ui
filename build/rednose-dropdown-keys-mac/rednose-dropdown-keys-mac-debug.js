@@ -54,4 +54,4 @@ Y.Rednose.Dropdown.KeysMac = DropdownKeysMac;
 Y.Base.mix(Y.Rednose.Dropdown, [DropdownKeysMac]);
 
 
-}, '1.5.0-DEV');
+}, '1.6.0-dev');

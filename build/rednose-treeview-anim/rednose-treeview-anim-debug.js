@@ -70,4 +70,4 @@ var Anim = Y.Base.create('anim', Y.Base, [], {
 Y.namespace('Rednose.TreeView').Anim = Anim;
 
 
-}, '1.5.0-DEV', {"requires": ["rednose-anim", "transition"]});
+}, '1.6.0-dev', {"requires": ["rednose-anim", "transition"]});

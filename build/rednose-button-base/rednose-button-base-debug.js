@@ -324,4 +324,4 @@ var ButtonBase = Y.Base.create('buttonBase', Y.Base, [], {
 Y.namespace('Rednose.Button').Base = ButtonBase;
 
 
-}, '1.5.0-DEV', {"requires": ["base"]});
+}, '1.6.0-dev', {"requires": ["base"]});

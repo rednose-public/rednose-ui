@@ -22,10 +22,13 @@
     "node >=0.8"
   ],
   "devDependencies": {
-    "yui": "^3.18.0",
-    "yogi": "0.1.12",
+    "grunt": "^0.4.5",
+    "grunt-contrib-copy": "^0.6.0",
+    "grunt-shell": "^1.1.1",
+    "phantomjs": "~1.9.7",
     "recess": "1.1.9",
-    "phantomjs": "~1.9.7"
+    "yogi": "0.1.12",
+    "yui": "^3.18.0"
   },
   "scripts": {
     "test": "cd src && yogi test"

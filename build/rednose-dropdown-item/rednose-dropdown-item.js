@@ -261,4 +261,4 @@ DropdownItem.prototype = {
 Y.namespace('Rednose.Dropdown').Item = DropdownItem;
 
 
-}, '1.5.0-DEV', {"requires": ["base"]});
+}, '1.6.0-dev', {"requires": ["base"]});

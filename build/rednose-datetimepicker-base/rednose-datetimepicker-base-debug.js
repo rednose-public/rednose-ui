@@ -475,4 +475,4 @@ YUI.add('rednose-datetimepicker-base', function (Y, NAME) {
 
 }( window.jQuery );
 
-}, '1.5.0-DEV', {"requires": ["base", "node", "plugin", "rednose-datetimepicker-base-css", "rednose-jquery"]});
+}, '1.6.0-dev', {"requires": ["base", "node", "plugin", "rednose-datetimepicker-base-css", "rednose-jquery"]});

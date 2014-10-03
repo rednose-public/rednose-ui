@@ -36,7 +36,7 @@ DataTable.CSS_PREFIX = CSS_PREFIX_MODULE;
 Y.namespace('Rednose').DataTable = DataTable;
 
 
-}, '1.5.0-DEV', {
+}, '1.6.0-dev', {
     "requires": [
         "datatable-base",
         "datatable-scroll",
