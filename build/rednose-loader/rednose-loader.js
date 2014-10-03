@@ -84,33 +84,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "widget"
         ]
     },
-    "rednose-datagen": {
-        "group": "rednose-ui",
-        "requires": [
-            "base",
-            "io",
-            "jsonp",
-            "jsonp-url",
-            "promise",
-            "view",
-            "xml"
-        ]
-    },
-    "rednose-datasource": {
-        "group": "rednose-ui",
-        "requires": [
-            "io",
-            "model",
-            "model-list"
-        ]
-    },
-    "rednose-datasource-manager": {
-        "group": "rednose-ui",
-        "requires": [
-            "rednose-app",
-            "rednose-datasource"
-        ]
-    },
     "rednose-datatable": {
         "group": "rednose-ui",
         "requires": [
@@ -235,40 +208,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "rednose-dropdown",
             "node-pluginhost",
             "plugin"
-        ]
-    },
-    "rednose-form": {
-        "group": "rednose-ui",
-        "requires": [
-            "autocomplete",
-            "highlight",
-            "io",
-            "model",
-            "model-list",
-            "rednose-datagen",
-            "rednose-datetimepicker",
-            "rednose-trim",
-            "template-micro",
-            "uploader",
-            "view",
-            "datatype-xml"
-        ]
-    },
-    "rednose-form-designer": {
-        "group": "rednose-ui",
-        "requires": [
-            "docgenadmin-core",
-            "rednose-app",
-            "rednose-button-dropdown",
-            "rednose-datatable-select",
-            "rednose-datasource-manager",
-            "rednose-dialog",
-            "rednose-dropdown",
-            "rednose-form",
-            "rednose-form-designer-css",
-            "rednose-navbar",
-            "rednose-nodescroll",
-            "rednose-treeview"
         ]
     },
     "rednose-formatter": {
@@ -488,19 +427,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "template-micro"
         ]
     },
-    "rednose-trim": {
-        "group": "rednose-ui",
-        "requires": [
-            "autocomplete",
-            "base",
-            "io",
-            "json",
-            "model",
-            "promise",
-            "view",
-            "xml"
-        ]
-    },
     "rednose-undo-manager": {
         "group": "rednose-ui",
         "requires": [
@@ -540,7 +466,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '60a9c0696b5d62618d2cedd9fd27fc97';
+YUI.Env[Y.version].md5 = '1ea9ce6e9bcf952f82a5ddf2793f8a85';
 
 
 }, '1.5.0-DEV');

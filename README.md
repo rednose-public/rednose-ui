@@ -2,17 +2,17 @@
 
 RedNoseUI is a JavaScript framework, providing core features used across several RedNose products. RedNoseUI is provided under the MIT license.
 
-## Usage 
+## Usage
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="path/to/rednose-ui/build/rednose-bootstrap/rednose-bootstrap-min.css" rel="stylesheet"/>
     <link href="path/to/rednose-ui/build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
-    
-    <script src="http://yui.yahooapis.com/3.11.0/build/yui/yui.js"></script>
+
+    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
     <script src="path/to/rednose-ui/build/rednose-loader/rednose-loader.js"></script>
-    
+
     <script>
     	YUI.Env.core.push('rednose-loader');
-    	
+
     	YUI({
         	"groups": {
             	"rednose-ui": {
@@ -31,7 +31,7 @@ RedNoseUI is a JavaScript framework, providing core features used across several
 1. Install [NodeJS](http://nodejs.org), if you don't have it yet.
 
 2. Install global dependencies:
- 
+
         [sudo] npm install -g yogi recess
 
 ### Building

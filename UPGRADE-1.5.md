@@ -2,6 +2,8 @@
 
 Version 1.5 is compatible with YUI 3.16.0.
 
+All form and data-provider modules were removed in this release.
+
 ## rednose-app
 
  * Loading app within iFrames is no longer supported in its current form.
@@ -13,14 +15,6 @@ Version 1.5 is compatible with YUI 3.16.0.
 ## rednose-contextmenu
 
  * Module `Rednose.ContextMenu` was removed in favor of `Rednose.Dropdown`.
-
-## rednose-controlform
-
-* Module `Rednose.ControlForm` was removed and was replaced by the `rednose-form` module.
-
-## rednose-dataprovider
-
-* Module `Rednose.DataProvider` was removed and was replaced by the `rednose-datasource-manager` module.
 
 ## rednose-datatable
 
