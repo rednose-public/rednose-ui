@@ -7,7 +7,7 @@
     "web"
   ],
   "homepage": "http://www.rednose.nl",
-  "version": "1.5.0-DEV",
+  "version": "1.6.0-dev",
   "author": {
     "name": "Marc Bontje",
     "email": "marc@rednose.nl",
@@ -22,12 +22,13 @@
     "node >=0.8"
   ],
   "devDependencies": {
-     "yogi": "0.1.12",
-     "recess": "1.1.9",
-     "phantomjs": "~1.9.7"
+    "yui": "^3.18.0",
+    "yogi": "0.1.12",
+    "recess": "1.1.9",
+    "phantomjs": "~1.9.7"
   },
   "scripts": {
-      "test": "cd src && yogi test"
-   },
+    "test": "cd src && yogi test"
+  },
   "private": true
 }
