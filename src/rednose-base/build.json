@@ -1,0 +1,23 @@
+{
+    "name": "rednose-base",
+    "shifter": {
+        "lint": false
+    },
+    "builds": {
+        "rednose-base": {
+            "exec": [
+                "yogi loader --json false --tests false -js js/rednose-loader.js --yes --mix --start ../",
+                "recess --compile ./less/rednose-base.less > ./css/rednose-base.css"
+            ],
+            "jsfiles": [
+                "rednose-loader.js"
+            ],
+            "cssfiles": [
+                "rednose-base.css"
+            ],
+            "copy" : [
+                [ "./img", "./img"]
+            ]
+        }
+    }
+}

@@ -47,7 +47,7 @@
     "shasum": "c38119b9c89c86540addae3007a5c80354dd3745",
     "tarball": "http://registry.npmjs.org/yui/-/yui-3.18.0.tgz"
   },
-  "_from": "yui@",
+  "_from": "yui@^3.18.0",
   "_npmVersion": "1.4.3",
   "_npmUser": {
     "name": "tripp",
