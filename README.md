@@ -38,7 +38,7 @@ RedNoseUI is a JavaScript framework, providing core features used across several
 
         grunt build
 
- * To build a single module, run a the module dir:
+ * To build a single module, run from a module dir:
 
         yogi build
 
