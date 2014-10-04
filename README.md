@@ -4,51 +4,53 @@ RedNoseUI is a JavaScript framework, providing core features used across several
 
 ## Usage
 
-    <link href="path/to/rednose-ui/build/rednose-bootstrap/rednose-bootstrap-min.css" rel="stylesheet"/>
-    <link href="path/to/rednose-ui/build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
-
-    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
-    <script src="path/to/rednose-ui/build/rednose-loader/rednose-loader.js"></script>
-
-    <script>
-    	YUI.Env.core.push('rednose-loader');
-
-    	YUI({
-        	"groups": {
-            	"rednose-ui": {
-    	            base: "path/to/rednose-ui/build/"
-        	    }
-    	    }
-    	}).use('rednose-app', function (Y) {
-    		Y.log('Hello world');
-    	});
-    </script>
+    <html>
+        <head>
+            <link href="build/rednose/rednose-min.css" rel="stylesheet"/>
+            <script src="build/rednose/rednose-min.js"></script>
+        </head>
+        <body class="yui3-skin-sam">
+            <script>
+                YUI().use('rednose-dialog', function (Y) {
+                    Y.Rednose.Dialog.alert({title: 'RedNoseUI', text: 'Hello world'});
+                });
+            </script>
+        </body>
+    </html>
 
 ## Development
 
-### Global dependencies
+### Dependencies
 
 1. Install [NodeJS](http://nodejs.org), if you don't have it yet.
 
 2. Install global dependencies:
 
-        [sudo] npm install -g yogi recess
+        [sudo] npm install -g grunt-cli yogi recess
+
+3. Install local dependencies:
+
+        npm install
 
 ### Building
 
-Run from `src/` to build the entire library, or from a module folder:
+ * To build the entire library, CSS and seed file:
 
-    yogi build
+        grunt build
+
+ * To build a single module, run a the module dir:
+
+        yogi build
 
 After adding new modules or updating existing module meta data, the `rednose-loader` module needs to be rebuilt.
 
 ### Testing
 
-1.  To run the test suites you'll need PhantomJS:
+ * To test the entire library, CSS and seed file:
 
-        [sudo] npm install -g phantomjs
+        grunt test
 
-2. Run from `src/` or a module folder:
+ * To test a single module, run from a module dir:
 
         yogi test
 
