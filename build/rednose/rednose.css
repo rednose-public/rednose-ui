@@ -3,7 +3,8 @@
  * Copyright 2012-2014 RedNose IT B.V.
  * Licensed under MIT (https://github.com/rednose-public/rednose-ui/blob/master/LICENSE)
  */
-,/*!
+
+/*!
  * Bootstrap v2.3.2
  *
  * Copyright 2013 Twitter, Inc
@@ -6173,7 +6174,8 @@ a.badge:focus {
 
 /* YUI CSS Detection Stamp */
 #yui3-css-stamp.rednose-bootstrap { display: none; }
-,/* Disable window bouncing when scrolling */
+
+/* Disable window bouncing when scrolling */
 
 html {
   width: 100%;

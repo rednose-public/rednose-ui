@@ -12432,6 +12432,6 @@ Y.mix(YUI.Env[Y.version].modules, {
 YUI.Env[Y.version].md5 = 'acf8181ee8c39ff51befaed73fcd6496';
 
 
-}, '@VERSION@');
+}, '1.6.0-dev');
 
 YUI.Env.core.push("rednose-base");
