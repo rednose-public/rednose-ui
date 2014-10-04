@@ -55,5 +55,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-shell');
 
     grunt.registerTask('test', 'shell:test');
-    grunt.registerTask('build', ['copy', 'shell:build']);
+    grunt.registerTask('build', ['copy', 'shell:build', 'seed', 'css']);
 };
