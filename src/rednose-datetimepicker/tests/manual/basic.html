@@ -2,11 +2,8 @@
 <html>
 <head>
     <title>Y.Rednose.Datepicker module test</title>
-    <link href="../../../../build/rednose-bootstrap/rednose-bootstrap.css" rel="stylesheet"/>
-    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
-
-    <script src="../../../../../yui3/build/yui/yui.js"></script>
-    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+    <link href="../../../../build/rednose/rednose.css" rel="stylesheet"/>
+    <script src="../../../../build/rednose/rednose.js"></script>
 </head>
 <body>
 
@@ -36,15 +33,8 @@
 </div>
 
 <script>
-    YUI.Env.core.push('rednose-loader');
-
     YUI({
-        filter: 'raw',
-        "groups": {
-            "rednose-ui": {
-                base: "../../../../build/"
-            }
-        },
+        filter: 'raw'
         lang: 'nl'
     }).use('rednose-datetimepicker', 'intl', function (Y) {
         var datepicker = Y.one('#datepicker').plug(Y.Rednose.Plugin.Datepicker);

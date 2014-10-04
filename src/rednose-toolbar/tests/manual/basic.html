@@ -2,11 +2,8 @@
 <html>
 <head>
     <title>Y.Rednose.Button module test</title>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/2.3.2/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
-
-    <script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
-    <script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+    <link href="../../../../build/rednose/rednose.css" rel="stylesheet"/>
+    <script src="../../../../build/rednose/rednose.js"></script>
 </head>
 <body>
 
@@ -22,15 +19,8 @@
 </div>
 
 <script>
-    YUI.Env.core.push('rednose-loader');
-
     YUI({
-        filter: 'raw',
-        "groups": {
-            "rednose-ui": {
-                base: "../../../../build/"
-            }
-        }
+        filter: 'raw'
     }).use('rednose-toolbar', function (Y) {
         var toolbar = new Y.Rednose.Toolbar({
             groups: [
