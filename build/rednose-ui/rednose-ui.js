@@ -396,7 +396,7 @@ proto = {
                 // \/\2              then comes a / followed by the yui-* string in \2
                 // (?:-(min|debug))? optionally followed by "-min" or "-debug"
                 // .js               and ending in ".js"
-                _BASE_RE: /(?:\?(?:[^&]*&)*([^&]*))?\b(rednose(?:-\w+)?)\/\2(?:-(min|debug))?\.js/,
+                _BASE_RE: /(?:\?(?:[^&]*&)*([^&]*))?\b(rednose-ui(?:-\w+)?)\/\2(?:-(min|debug))?\.js/,
                 parseBasePath: function(src, pattern) {
                     var match = src.match(pattern),
                         path, filter;

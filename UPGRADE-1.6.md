@@ -6,8 +6,8 @@ The library is now distributed as stand-alone framework with all YUI, gallery an
 
 ## Initial file loading
 
- * All initial JavaScript, including the YUI seed and the rednose-ui loader metadata can now be included with a single file, 'build/rednose/rednose.js' or 'build/rednose/rednose-min.js'
- * All initial CSS, including Bootstrap can now be included with a single file, 'build/rednose/rednose.csss' or 'build/rednose/rednose-min.css'
+ * All initial JavaScript, including the YUI seed and the rednose-ui loader metadata can now be included with a single file, 'build/rednose-ui/rednose-ui.js' or 'build/rednose-ui/rednose-ui-min.js'
+ * All initial CSS, including Bootstrap can now be included with a single file, 'build/rednose-ui/rednose-ui.css' or 'build/rednose-ui/rednose-ui-min.css'
 
 ## Combo loading
 

@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             grunt.file.read(buildDir + '/rednose-base/rednose-base-min.css')
         ];
 
-        grunt.file.write(buildDir + '/rednose/rednose.css', parts.join('\n'));
-        grunt.file.write(buildDir + '/rednose/rednose-min.css', minified.join('\n'));
+        grunt.file.write(buildDir + '/rednose-ui/rednose-ui.css', parts.join('\n'));
+        grunt.file.write(buildDir + '/rednose-ui/rednose-ui-min.css', minified.join('\n'));
     });
 };

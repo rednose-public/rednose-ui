@@ -2,21 +2,14 @@
 <html>
 <head>
     <title>Y.Rednose.Navbar module test</title>
-    <link href="../../../../build/rednose/rednose.css" rel="stylesheet"/>
-    <script src="../../../../build/rednose/rednose.js"></script>
+    <link href="../../../../build/rednose-ui/rednose-ui.css" rel="stylesheet"/>
+    <script src="../../../../build/rednose-ui/rednose-ui.js"></script>
 </head>
 <body>
 <div class="rednose-navbar"></div>
 <script>
-    YUI.Env.core.push('rednose-loader');
-
     YUI({
-        filter: 'raw',
-        "groups": {
-            "rednose-ui": {
-                base: "../../../../build/"
-            }
-        }
+        filter: 'raw'
     }).use('rednose-navbar-recent', function (Y) {
         var navbar = new Y.Rednose.Navbar({
             title: 'Test',

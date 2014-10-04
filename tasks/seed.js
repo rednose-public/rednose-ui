@@ -9,19 +9,19 @@ module.exports = function(grunt) {
 
         var parts = [
             grunt.config.get('banner'),
-            grunt.file.read(buildDir + '/yui/yui.js').replace(/\(yui\(/g, '(rednose('),
+            grunt.file.read(buildDir + '/yui/yui.js').replace(/\(yui\(/g, '(rednose-ui('),
             grunt.file.read(buildDir + '/rednose-base/rednose-base.js'),
             append
         ];
 
         var minified = [
             grunt.config.get('banner'),
-            grunt.file.read(buildDir + '/yui/yui-min.js').replace(/\(yui\(/g, '(rednose('),
+            grunt.file.read(buildDir + '/yui/yui-min.js').replace(/\(yui\(/g, '(rednose-ui('),
             grunt.file.read(buildDir + '/rednose-base/rednose-base-min.js'),
             append
         ];
 
-        grunt.file.write(buildDir + '/rednose/rednose.js', parts.join('\n'));
-        grunt.file.write(buildDir + '/rednose/rednose-min.js', minified.join('\n'));
+        grunt.file.write(buildDir + '/rednose-ui/rednose-ui.js', parts.join('\n'));
+        grunt.file.write(buildDir + '/rednose-ui/rednose-ui-min.js', minified.join('\n'));
     });
 };

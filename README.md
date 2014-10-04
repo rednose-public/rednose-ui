@@ -6,8 +6,8 @@ RedNoseUI is a JavaScript framework, providing core features used across several
 
     <html>
         <head>
-            <link href="build/rednose/rednose-min.css" rel="stylesheet"/>
-            <script src="build/rednose/rednose-min.js"></script>
+            <link href="build/rednose-ui/rednose-ui-min.css" rel="stylesheet"/>
+            <script src="build/rednose-ui/rednose-ui-min.js"></script>
         </head>
         <body class="yui3-skin-sam">
             <script>
