@@ -20,7 +20,7 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
 
     _onClickOutside: function (e) {
         // Clear the selection, only if the click outside target is an ancestor of the current target.
-        if (e.currentTarget.get('parentNode') === e.target) {
+        if (e.currentTarget.get('parentNode') === e.target && this.get('unselectable')) {
             this.unselect();
         }
     },
@@ -46,7 +46,7 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
             }
         }
 
-        if (e.shiftKey) {
+        if (e.shiftKey && this.get('unselectable')) {
             node[node.isSelected() ? 'unselect' : 'select']();
         } else {
             node.select();
@@ -61,6 +61,15 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
          */
         selectable: {
             value: false
+        },
+
+        /**
+         * Enable the ability to unselect items for this TreeView instance
+         *
+         * @type {Boolean}
+         */
+        unselectable: {
+            value: true
         }
     }
 });
