@@ -187,4 +187,4 @@ var NodeScroll = Y.Base.create('nodescroll', Y.Base, [], {
 Y.namespace('Rednose').NodeScroll = NodeScroll;
 
 
-}, '1.5.0-DEV', {"requires": ["node", "event", "dd", "anim"]});
+}, '@VERSION@', {"requires": ["node", "event", "dd", "anim"]});

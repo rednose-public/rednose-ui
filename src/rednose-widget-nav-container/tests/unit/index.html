@@ -9,12 +9,9 @@
 <div id="log"></div>
 <div id="test"></div>
 
-<script src="http://yui.yahooapis.com/3.16.0/build/yui/yui.js"></script>
-<script src="../../../../build/rednose-loader/rednose-loader.js"></script>
+<script src="../../../../build/rednose-ui/rednose-ui.js"></script>
 
 <script>
-    YUI.Env.core.push('rednose-loader');
-
     YUI({
         coverage: ['rednose-widget-nav-container'],
         filter: (window.location.search.match(/[?&]filter=([^&]+)/) || [])[1] || 'raw',
@@ -22,11 +19,6 @@
             'widget-nav-container-test': {
                 fullpath: './assets/widget-nav-container-test.js',
                 requires: ['rednose-widget-nav-container', 'test']
-            }
-        },
-        "groups": {
-            "rednose-ui": {
-                base: "../../../../build/"
             }
         },
         useBrowserConsole: false

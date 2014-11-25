@@ -2281,4 +2281,4 @@ YUI.add('rednose-bootstrap', function (Y, NAME) {
 
 }(window.jQuery);
 
-}, '1.5.0-DEV');
+}, '@VERSION@');

@@ -223,4 +223,4 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
 Y.Rednose.Button = Y.mix(Button, Y.Rednose.Button);
 
 
-}, '1.5.0-DEV', {"requires": ["rednose-button-base", "template", "view"]});
+}, '@VERSION@', {"requires": ["rednose-button-base", "template", "view"]});

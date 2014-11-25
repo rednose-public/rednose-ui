@@ -6,7 +6,7 @@ All form and data-provider modules were removed in this release.
 
 ## rednose-app
 
- * Loading app within iFrames is no longer supported in its current form.
+ * Loading apps within iFrames is no longer supported in its current form.
  * Module `Rednose.Templates` was removed and has been replaced by App/View template extensions.
  * Support for dialog instances has been dropped, apps should only render views and dialogs should not be rendered by apps.
  * Scrolling of subviews is no longer handled by the templates themselves.
@@ -59,7 +59,7 @@ All form and data-provider modules were removed in this release.
 
 ## rednose-ui
 
-* **All CSS** except vendor CSS is now handled by `LESS` templates within the `rednose-ui` module.
+* **All CSS** except vendor CSS is now compiled from `LESS` templates within the `rednose-ui` module.
 
 ## rednose-view-nav
 

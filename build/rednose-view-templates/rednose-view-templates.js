@@ -270,4 +270,4 @@ ViewTemplateTwoColumn.ATTRS = {
 Y.namespace('Rednose.View.Template').TwoColumn = ViewTemplateTwoColumn;
 
 
-}, '1.5.0-DEV', {"requires": ["view"]});
+}, '@VERSION@', {"requires": ["view"]});

@@ -333,7 +333,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
 Y.namespace('Rednose.View').Nav = ViewNav;
 
 
-}, '1.5.0-DEV', {
+}, '@VERSION@', {
     "requires": [
         "event-custom",
         "rednose-toolbar",

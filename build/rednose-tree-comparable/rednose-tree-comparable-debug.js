@@ -59,4 +59,4 @@ NodeComparable.prototype = {
 Y.namespace('Rednose.Tree.Node').Comparable = NodeComparable;
 
 
-}, '1.5.0-DEV', {"requires": ["tree"]});
+}, '@VERSION@', {"requires": ["tree"]});

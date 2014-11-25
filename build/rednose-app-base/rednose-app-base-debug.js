@@ -314,4 +314,4 @@ App.setTitle = function (title, dirty) {
 Y.Rednose.App = Y.mix(App, Y.Rednose.App);
 
 
-}, '1.5.0-DEV', {"requires": ["app-base", "rednose-panel", "rednose-util"]});
+}, '@VERSION@', {"requires": ["app-base", "rednose-panel", "rednose-util"]});

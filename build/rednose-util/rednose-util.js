@@ -72,4 +72,4 @@ Util.camelCaseToDash = function (string) {
 Y.namespace('Rednose').Util = Util;
 
 
-}, '1.5.0-DEV', {"requires": ["datatype-date"]});
+}, '@VERSION@', {"requires": ["datatype-date"]});
