@@ -9791,4 +9791,4 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 })( window );
 
 
-}, '@VERSION@');
+}, '1.6.0');

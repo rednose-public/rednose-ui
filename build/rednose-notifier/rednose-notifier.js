@@ -944,4 +944,4 @@ N.notify = function (notification) {
 };
 
 
-}, '@VERSION@', {"requires": ["rednose-jquery", "rednose-notifier-css"]});
+}, '1.6.0', {"requires": ["rednose-jquery", "rednose-notifier-css"]});

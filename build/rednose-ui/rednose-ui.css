@@ -1,7 +1,5 @@
-<<<<<<< HEAD
-=======
 /*!
- * RedNoseUI v1.6.0-dev (http://www.rednose.nl)
+ * RedNoseUI v1.6.0 (http://www.rednose.nl)
  * Copyright 2012-2014 RedNose IT B.V.
  * Licensed under MIT (https://github.com/rednose-public/rednose-ui/blob/master/LICENSE)
  */
@@ -6177,7 +6175,6 @@ a.badge:focus {
 /* YUI CSS Detection Stamp */
 #yui3-css-stamp.rednose-bootstrap { display: none; }
 
->>>>>>> d4a32930266a4be01a160bdf955c892101bb7e4e
 /* Disable window bouncing when scrolling */
 
 html {
@@ -6215,15 +6212,12 @@ body {
   border: 0;
 }
 
-<<<<<<< HEAD
 /* Override form labels to align left */
 
 .form-horizontal .control-group .control-label {
   text-align: left;
 }
 
-=======
->>>>>>> d4a32930266a4be01a160bdf955c892101bb7e4e
 /* -- Custom icons, prefixed by 'rednose-' ---------------------------------- */
 
 [class^="rednose-icon-"],
@@ -6804,7 +6798,6 @@ input.rednose-datatable-input {
 
 .yui3-widget-stdmod .yui3-widget-hd div {
   overflow: hidden;
-<<<<<<< HEAD
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -6881,243 +6874,6 @@ input.rednose-datatable-input {
 .float-right {
   float: right;
   margin-left: 10px;
-=======
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.yui3-widget-stdmod .yui3-widget-hd {
-  padding: 9px 15px;
-  margin: 0;
-  font-family: inherit;
-  font-size: 18px;
-  font-weight: bold;
-  line-height: 27px;
-  color: inherit;
-  text-rendering: optimizelegibility;
-  background-color: transparent;
-  background-image: none;
-  border-bottom: 1px solid #eee;
-}
-
-/* Panel footer styling. */
-
-.yui3-widget-stdmod .yui3-widget-ft {
-  height: 26px;
-  padding: 14px 15px 15px;
-  margin-bottom: 0;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  -webkit-border-radius: 0 0 6px 6px;
-     -moz-border-radius: 0 0 6px 6px;
-          border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: inset 0 1px 0 #ffffff;
-     -moz-box-shadow: inset 0 1px 0 #ffffff;
-          box-shadow: inset 0 1px 0 #ffffff;
-}
-
-/* Outer panel styling. */
-
-.yui3-panel-content {
-  background-color: #ffffff;
-  border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  *border: 1px solid #999;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-  outline: none;
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-  -webkit-background-clip: padding-box;
-     -moz-background-clip: padding-box;
-          background-clip: padding-box;
-}
-
-/* Mask opacity */
-
-.yui3-widget-mask {
-  opacity: 0.8 !important;
-  filter: alpha(opacity=80) !important;
-}
-
-/* FIXME: Don't focus the panel to begin with. */
-
-.yui3-panel {
-  outline: none;
-}
-
-/* FIXME: Helper classes for the buttons, should prolly move up to a higer level within the framework. */
-
-.float-left {
-  float: left;
-  margin-right: 10px;
-}
-
-.float-right {
-  float: right;
-  margin-left: 10px;
-}
-
-.yui3-tabview .nav > li > a {
-  cursor: default;
-}
-
-.rednose-toolbar {
-  height: 41px;
-  padding-top: 9px;
-  padding-left: 15px;
-  background-color: #f5f5f5;
-  border-bottom: 1px solid #ddd;
-}
-
-.rednose-toolbar .hidden {
-  display: none;
-}
-
-.rednose-toolbar .btn.first {
-  border-bottom-left-radius: 4px;
-  border-top-left-radius: 4px;
-}
-
-.rednose-toolbar .btn.last {
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
-.rednose-toolbar .btn {
-  outline: none;
-}
-
-div .btn-toolbar {
-  margin: 0;
-}
-
-div .btn-toolbar .btn-group.pull-right {
-  margin-left: 5px;
-}
-
-/* Set row height to match with Bootstrap's nav-list */
-
-.rednose-treeview-inner-container .yui3-treeview-row {
-  height: 26px;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 0;
-}
-
-.rednose-treeview-inner-container .yui3-treeview-indicator {
-  position: relative;
-  padding-top: 3px;
-  padding-right: 10px;
-  padding-left: 0;
-}
-
-/* Chevron selection color */
-
-.rednose-treeview-inner-container .yui3-treeview-selected > .yui3-treeview-row > .yui3-treeview-indicator s {
-  border-top-color: transparent;
-  border-left-color: #fff;
-}
-
-.rednose-treeview-inner-container .yui3-treeview-open.yui3-treeview-selected > .yui3-treeview-row > .yui3-treeview-indicator s {
-  border-top-color: #fff;
-  border-left-color: transparent;
-}
-
-/* Selected icon inversion */
-
-.rednose-treeview-inner-container .yui3-treeview-selected > .yui3-treeview-row [class^="icon-"],
-.rednose-treeview-inner-container .yui3-treeview-selected > .yui3-treeview-row [class*=" icon-"] {
-  background-image: url("img/glyphicons-halflings-white.png");
-}
-
-.rednose-treeview-inner-container .yui3-treeview-selected > .yui3-treeview-row [class^="rednose-icon-"],
-.rednose-treeview-inner-container .yui3-treeview-selected > .yui3-treeview-row [class*=" rednose-icon-"] {
-  background-image: url("img/content-icons-white.png");
-}
-
-.rednose-treeview-content .label-container {
-  white-space: nowrap;
-}
-
-.rednose-treeview-icon {
-  width: 16px;
-}
-
-.rednose-treeview-spacer {
-  margin-left: 20px;
-}
-
-.rednose-treeview-outer-container .rednose-treeview-inner-container .yui3-treeview-node .yui3-treeview-children {
-  margin: 0;
-}
-
-/* Hide overflow for animating nodes */
-
-.yui3-treeview-has-children {
-  overflow: hidden;
-}
-
-/* Reserve the pointer for hyperlinks */
-
-.yui3-treeview-row {
-  cursor: default;
-}
-
-/* Basic item styling */
-
-.yui3-skin-sam .yui3-treeview-row {
-  color: #0088cc !important;
-  text-decoration: none !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
-  background-image: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-}
-
-/* Basic hover */
-
-.yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-row:hover {
-  color: #005580 !important;
-  background-color: #eeeeee !important;
-}
-
-/* Selected items and selected item hover. */
-
-.yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row,
-.yui3-skin-sam .yui3-treeview-selected:focus > .yui3-treeview-row,
-.yui3-skin-sam .yui3-treeview-children[aria-multiselectable="true"] .yui3-treeview-selected > .yui3-treeview-row,
-.yui3-skin-sam .yui3-treeview-selected > .yui3-treeview-row:hover,
-.yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-selected > .yui3-treeview-row:hover {
-  color: #ffffff !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
-  background-color: #0088cc !important;
-}
-
-/* Drag over highlight */
-
-.yui3-skin-sam .yui3-treeview .rednose-treeview-drop.yui3-dd-drop-over {
-  color: #ffffff !important;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
-  background-color: #80C4E6 !important;
-  -webkit-border-radius: 5px !important;
-     -moz-border-radius: 5px !important;
-          border-radius: 5px !important;
-}
-
-/* Helper class for the inner container, so the border on the outer's container doesn't squeeze the view. */
-
-.rednose-treeview-drop-over-global .rednose-treeview-inner-container {
-  margin: -2px !important;
-}
-
-/* Drop over for the outer container */
-
-.rednose-treeview-outer-container.rednose-treeview-drop-over-global {
-  border: 2px solid #80C4E6 !important;
->>>>>>> d4a32930266a4be01a160bdf955c892101bb7e4e
 }
 
 .rednose-ruler {
@@ -7342,7 +7098,6 @@ div .btn-toolbar .btn-group.pull-right {
     background-color: transparent;
     border: 0;
 }*/
-<<<<<<< HEAD
 .yui3-tabview .nav > li > a {
   cursor: default;
 }
@@ -7501,8 +7256,6 @@ div .btn-toolbar .btn-group.pull-right {
 .rednose-treeview-outer-container.rednose-treeview-drop-over-global {
   border: 2px solid #80C4E6 !important;
 }
-=======
->>>>>>> d4a32930266a4be01a160bdf955c892101bb7e4e
 
 /* YUI CSS Detection Stamp */
 #yui3-css-stamp.rednose-base { display: none; }
