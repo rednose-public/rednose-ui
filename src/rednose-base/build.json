@@ -16,7 +16,8 @@
                 "rednose-base.css"
             ],
             "copy" : [
-                [ "./img", "./img"]
+                [ "./img", "./img"],
+                [ "./img", "./../rednose-ui/img"]
             ]
         }
     }
