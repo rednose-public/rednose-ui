@@ -6,7 +6,7 @@
     "builds": {
         "rednose-base": {
             "exec": [
-                "yogi loader --json false --tests false -js js/rednose-loader.js --yes --mix --start ../",
+                "yogi loader --json js/rednose-loader.json --tests false -js js/rednose-loader.js --yes --mix --start ../",
                 "recess --compile ./less/rednose-base.less > ./css/rednose-base.css"
             ],
             "jsfiles": [
