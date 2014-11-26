@@ -55,20 +55,7 @@ RulerDD.prototype = {
         this._resizeMap     = {};
     },
 
-    // -- Protected Methods ----------------------------------------------------
-
-    /**
-    * @param {Item} Rednose.Dropdown.Item
-    * @param {EventFacade} originEvent
-    */
-    _handleItemEvent: function () {
-    },
-
     // -- Protected Event Handlers ---------------------------------------------
-
-    _onKeydown: function (e) {
-
-    },
 
     _afterRender: function () {
         var container   = this.get('container');
@@ -82,7 +69,7 @@ RulerDD.prototype = {
     _createHandles: function () {
         this._marginLeft  = Y.Node.create('<div class="margin-left"><span style="display: none;">10mm</span></div>');
         this._marginRight = Y.Node.create('<div class="margin-right"><span style="display: none;">10mm</span></div>');
-        
+
         if (this.get('vertical')) {
             this._createResize(this._marginLeft, 'b');
             this._createResize(this._marginRight, 't');
@@ -96,7 +83,7 @@ RulerDD.prototype = {
         var resize = new Y.Resize({
             node: node,
             handles: handle
-        }); 
+        });
 
         resize.addTarget(this);
 
@@ -137,16 +124,16 @@ RulerDD.prototype = {
         }
     },
 
-    _resizeStart: function (e) {
+    _resizeStart: function () {
         var ruler    = this.get('container').one('.inner-ruler'),
             sizeType = this.sizeType;
 
         this._size = parseFloat(ruler.getComputedStyle(sizeType)) +
-                     parseFloat(this._marginLeft.getComputedStyle(sizeType)) + 
+                     parseFloat(this._marginLeft.getComputedStyle(sizeType)) +
                      parseFloat(this._marginRight.getComputedStyle(sizeType));
     },
 
-    _setRulerStyles: function (e) {
+    _setRulerStyles: function () {
         var container       = this.get('container'),
             sizeType        = this.sizeType,
             ruler           = container.one('.inner-ruler'),
@@ -222,4 +209,4 @@ Y.Rednose.Ruler.DD = RulerDD;
 Y.Base.mix(Y.Rednose.Ruler, [RulerDD]);
 
 
-}, '1.6.0', {"requires": ["rednose-ruler-base", "resize", "datatype-number"]});
+}, '@VERSION@', {"requires": ["rednose-ruler-base", "resize", "datatype-number"]});

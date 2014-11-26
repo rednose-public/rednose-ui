@@ -24,8 +24,7 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function () {
-        var self      = this,
-            container = this.get('container');
+        var self = this;
 
         this.sizeType = this.get('vertical') ? 'height' : 'width';
         this.styleType = this.get('vertical') ? 'top' : 'left';
@@ -66,7 +65,7 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
         var container      = this.get('container'),
             innerRuler     = Y.Node.create('<div class="inner-ruler" />');
 
-        container.setHTML(innerRuler);   
+        container.setHTML(innerRuler);
 
         var rulerSize      = this.get('maxWidth'),
             tickerPosition = 0,
@@ -76,7 +75,9 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
 
         while (tickerPosition <= rulerSize) {
             if (( tickerPosition %10 ) === 0 ) {
-                tickerLabel = Y.Node.create('<div class="tickLabel"><span>' + ( this.get('centimeter') ? tickerPosition / 10 : tickerPosition ) + '</span></div>');
+                tickerLabel = Y.Node.create(
+                    '<div class="tickLabel"><span>' + ( this.get('centimeter') ? tickerPosition / 10 : tickerPosition ) + '</span></div>'
+                );
 
                 tickerLabel.setStyle(this.styleType, tickerPosition + 'mm');
                 innerRuler.append(tickerLabel);
@@ -104,8 +105,7 @@ var RulerBase = Y.Base.create('ruler', Y.View, [], {
     _pixelMillimeter: function (px) {
         if (!this._ratio) {
             var container = this.get('container'),
-                node      = Y.Node.create('<div style="width: 1mm;" />'),
-                output;
+                node      = Y.Node.create('<div style="width: 1mm;" />');
 
             container.append(node);
 
@@ -158,4 +158,4 @@ Y.namespace('Rednose.Ruler').Base = RulerBase;
 Y.Rednose.Ruler = Y.mix(Y.Base.create('ruler', RulerBase, []), Y.Rednose.Ruler, true);
 
 
-}, '1.6.0', {"requires": ["node", "event-resize", "view"]});
+}, '@VERSION@', {"requires": ["node", "event-resize", "view"]});
