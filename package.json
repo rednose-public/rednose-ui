@@ -20,6 +20,7 @@
   "engines": [
     "node >=0.8"
   ],
+  "main": "./build/index.js",
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-contrib-copy": "^0.6.0",
