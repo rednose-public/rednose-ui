@@ -49,6 +49,8 @@ var App = Y.Base.create('app', Y.App, [], {
      * @protected
      */
     initializer: function (config) {
+        config || (config = {});
+
         var container = this.get('container');
 
         // Slow down transitions so we see what's happening
@@ -306,6 +308,10 @@ App.createMessage = function (title, subtitle) {
 App.setTitle = function (title, dirty) {
     dirty && (title = title.concat(' *'));
 
+    if (!Y.one('title')) {
+        Y.one('head').append(Y.Node.create('<title/>'));
+    }
+
     Y.one('title').setHTML(title);
 };
 
@@ -314,4 +320,4 @@ App.setTitle = function (title, dirty) {
 Y.Rednose.App = Y.mix(App, Y.Rednose.App);
 
 
-}, '1.6.0', {"requires": ["app-base", "rednose-panel", "rednose-util"]});
+}, '@VERSION@', {"requires": ["app-base", "rednose-panel", "rednose-util"]});
