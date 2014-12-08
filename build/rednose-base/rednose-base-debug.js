@@ -402,6 +402,16 @@ Y.mix(YUI.Env[Y.version].modules, {
     }
 });
 YUI.Env[Y.version].md5 = 'acf8181ee8c39ff51befaed73fcd6496';
+YUI.Env[Y.version].groups = YUI.Env[Y.version].groups || {};
+YUI.Env[Y.version].groups.gallery = {
+    base: Y.config.base,
+
+    patterns: {
+        'gallery-': {},
+        'lang/gallery-': {},
+        'gallerycss-': { type: 'css' }
+    }
+};
 
 
 }, '@VERSION@');

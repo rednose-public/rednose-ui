@@ -10,7 +10,8 @@
                 "recess --compile ./less/rednose-base.less > ./css/rednose-base.css"
             ],
             "jsfiles": [
-                "rednose-loader.js"
+                "rednose-loader.js",
+                "gallery.js"
             ],
             "cssfiles": [
                 "rednose-base.css"
