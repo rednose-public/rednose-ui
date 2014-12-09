@@ -11,7 +11,7 @@
             ],
             "jsfiles": [
                 "rednose-loader.js",
-                "gallery.js"
+                "rednose-gallery.js"
             ],
             "cssfiles": [
                 "rednose-base.css"

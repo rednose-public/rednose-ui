@@ -5,20 +5,23 @@ module.exports = function(grunt) {
 
     grunt.registerTask('seed', 'Builds the rednose-ui seed files', function() {
         var buildDir = path.resolve('build'),
-            append = 'YUI.Env.core.push("rednose-base");';
+            srcDir   = path.resolve('src'),
+            core     = 'YUI.Env.core.push("rednose-base");';
 
         var parts = [
             grunt.config.get('banner'),
             grunt.file.read(buildDir + '/yui/yui.js').replace(/\(yui\(/g, '(rednose-ui('),
             grunt.file.read(buildDir + '/rednose-base/rednose-base.js'),
-            append
+            grunt.file.read(srcDir + '/rednose-base/js/bootstrap.js'),
+            core
         ];
 
         var minified = [
             grunt.config.get('banner'),
             grunt.file.read(buildDir + '/yui/yui-min.js').replace(/\(yui\(/g, '(rednose-ui('),
             grunt.file.read(buildDir + '/rednose-base/rednose-base-min.js'),
-            append
+            grunt.file.read(srcDir + '/rednose-base/js/bootstrap.js'),
+            core
         ];
 
         grunt.file.write(buildDir + '/rednose-ui/rednose-ui.js', parts.join('\n'));

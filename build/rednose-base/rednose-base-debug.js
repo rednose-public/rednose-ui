@@ -402,8 +402,13 @@ Y.mix(YUI.Env[Y.version].modules, {
     }
 });
 YUI.Env[Y.version].md5 = 'acf8181ee8c39ff51befaed73fcd6496';
+/**
+ * Includes the metadata for the bundled gallery modules.
+ */
 YUI.Env[Y.version].groups = YUI.Env[Y.version].groups || {};
+
 YUI.Env[Y.version].groups.gallery = {
+    // Load gallery modules from the same directory as the main files.
     base: Y.config.base,
 
     patterns: {
