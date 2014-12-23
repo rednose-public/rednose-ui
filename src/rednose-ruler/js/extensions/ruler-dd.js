@@ -91,8 +91,13 @@ RulerDD.prototype = {
     getSizes: function () {
         var sizeType        = this.sizeType,
             marginLeftSize  = parseFloat(this._marginLeft.getComputedStyle(sizeType)),
-            marginRightSize = parseFloat(this._marginRight.getComputedStyle(sizeType)),
-            newRulerSize    = this._size - marginLeftSize - marginRightSize;
+            marginRightSize = parseFloat(this._marginRight.getComputedStyle(sizeType));
+
+        if (this._size === null) {
+            this._resizeStart();
+        }
+
+        var newRulerSize = this._size - marginLeftSize - marginRightSize;
 
         return {
             'position': this._pixelMillimeter(marginLeftSize),
