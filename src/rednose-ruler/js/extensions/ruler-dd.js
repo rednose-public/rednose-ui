@@ -83,6 +83,8 @@ RulerDD.prototype = {
             handles: handle
         });
 
+        resize.plug(Y.Plugin.ResizeConstrained);
+
         resize.addTarget(this);
 
         this._resizeMap.push(resize);
@@ -127,9 +129,43 @@ RulerDD.prototype = {
         }
     },
 
-    _resizeStart: function () {
+    _resizeStart: function (e) {
         var ruler    = this.get('container').one('.inner-ruler'),
-            sizeType = this.sizeType;
+            sizeType = this.sizeType,
+            node     = e.target.get('node');
+
+        // Apply rules to the resizeConstrained plugin
+        // e.target     = Y.Resize
+        // e.target.con = Y.Resize.ResizeConstrained
+        if (this.get('vertical') === false) {
+            var maxWidth = 0;
+
+            if (node.hasClass('margin-left')) {
+                var rightNode = node.get('parentNode').one('.margin-right');
+
+                maxWidth = (-(node.getX() - rightNode.getX())) - 2;
+            } else {
+                var innerNode = node.get('parentNode').one('.inner-ruler');
+
+                maxWidth = parseFloat(innerNode.get('clientWidth')) + parseFloat(node.get('clientWidth')) - 2;
+            }
+
+            e.target.con.set('maxWidth', maxWidth);
+        } else {
+            var maxHeight = 0;
+
+            if (node.hasClass('margin-left')) {
+                var rightNode = node.get('parentNode').one('.margin-right');
+
+                maxHeight = (-(node.getY() - rightNode.getY())) - 2;
+            } else {
+                var innerNode = node.get('parentNode').one('.inner-ruler');
+
+                maxHeight = parseFloat(innerNode.get('clientHeight')) + parseFloat(node.get('clientHeight')) - 2;
+            }
+
+            e.target.con.set('maxHeight', maxHeight);
+        }
 
         this._size = parseFloat(ruler.getComputedStyle(sizeType)) +
                      parseFloat(this._marginLeft.getComputedStyle(sizeType)) +
