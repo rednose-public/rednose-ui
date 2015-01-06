@@ -1,6 +1,6 @@
 /*!
  * RedNoseUI v1.6.0 (http://www.rednose.nl)
- * Copyright 2012-2014 RedNose IT B.V.
+ * Copyright 2012-2015 RedNose IT B.V.
  * Licensed under MIT (https://github.com/rednose-public/rednose-ui/blob/master/LICENSE)
  */
 
@@ -6328,7 +6328,7 @@ li.disabled [class*=" icon-"] {
   background-color: #fff;
 }
 
-.rednose-navbar-grid .rednose-unit-container {
+.rednose-navbar-grid > .rednose-unit-container {
   top: 41px;
 }
 
