@@ -134,44 +134,48 @@ RulerDD.prototype = {
     _resizeStart: function (e) {
         var ruler    = this.get('container').one('.inner-ruler'),
             sizeType = this.sizeType,
-            node     = e.target.get('node');
+            node     = null;
 
-        // Apply rules to the resizeConstrained plugin
-        // e.target     = Y.Resize
-        // e.target.con = Y.Resize.ResizeConstrained
-        if (this.get('vertical') === false) {
-            var maxWidth = 0;
+        if (e) {
+            node = e.target.get('node');
 
-            if (node.hasClass('margin-left')) {
-                var rightNode = node.get('parentNode').one('.margin-right');
+            // Apply rules to the resizeConstrained plugin
+            // e.target     = Y.Resize
+            // e.target.con = Y.Resize.ResizeConstrained
+            if (this.get('vertical') === false) {
+                var maxWidth = 0;
 
-                maxWidth = (-(node.getX() - rightNode.getX())) - 2;
+                if (node.hasClass('margin-left')) {
+                    var rightNode = node.get('parentNode').one('.margin-right');
+
+                    maxWidth = (-(node.getX() - rightNode.getX())) - 2;
+                } else {
+                    var innerNode = node.get('parentNode').one('.inner-ruler');
+
+                    maxWidth = parseFloat(innerNode.get('clientWidth')) + parseFloat(node.get('clientWidth')) - 2;
+                }
+
+                e.target.con.set('maxWidth', maxWidth);
             } else {
-                var innerNode = node.get('parentNode').one('.inner-ruler');
+                var maxHeight = 0;
 
-                maxWidth = parseFloat(innerNode.get('clientWidth')) + parseFloat(node.get('clientWidth')) - 2;
+                if (node.hasClass('margin-left')) {
+                    var rightNode = node.get('parentNode').one('.margin-right');
+
+                    maxHeight = (-(node.getY() - rightNode.getY())) - 2;
+                } else {
+                    var innerNode = node.get('parentNode').one('.inner-ruler');
+
+                    maxHeight = parseFloat(innerNode.get('clientHeight')) + parseFloat(node.get('clientHeight')) - 2;
+                }
+
+                e.target.con.set('maxHeight', maxHeight);
             }
-
-            e.target.con.set('maxWidth', maxWidth);
-        } else {
-            var maxHeight = 0;
-
-            if (node.hasClass('margin-left')) {
-                var rightNode = node.get('parentNode').one('.margin-right');
-
-                maxHeight = (-(node.getY() - rightNode.getY())) - 2;
-            } else {
-                var innerNode = node.get('parentNode').one('.inner-ruler');
-
-                maxHeight = parseFloat(innerNode.get('clientHeight')) + parseFloat(node.get('clientHeight')) - 2;
-            }
-
-            e.target.con.set('maxHeight', maxHeight);
         }
 
         this._size = parseFloat(ruler.getComputedStyle(sizeType)) +
-                     parseFloat(this._marginLeft.getComputedStyle(sizeType)) +
-                     parseFloat(this._marginRight.getComputedStyle(sizeType));
+        parseFloat(this._marginLeft.getComputedStyle(sizeType)) +
+        parseFloat(this._marginRight.getComputedStyle(sizeType));
     },
 
     _setRulerStyles: function () {
@@ -221,25 +225,25 @@ RulerDD.prototype = {
 
 RulerDD.ATTRS = {
     /**
-    * @attribute defaultOffset
-    * @type {float} mm
-    */
+     * @attribute defaultOffset
+     * @type {float} mm
+     */
     defaultOffset: {
         value: 10
     },
 
     /**
-    * @attribute leftSize
-    * @type {float} mm
-    */
+     * @attribute leftSize
+     * @type {float} mm
+     */
     leftSize: {
         value: null
     },
 
     /**
-    * @attribute rightSize
-    * @type {float} mm
-    */
+     * @attribute rightSize
+     * @type {float} mm
+     */
     rightSize: {
         value: null
     }
