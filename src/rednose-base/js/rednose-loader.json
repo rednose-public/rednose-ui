@@ -263,7 +263,8 @@
     },
     "rednose-tabview": {
         "requires": [
-            "node"
+            "node",
+            "node-event-simulate"
         ]
     },
     "rednose-timepicker-plugin": {

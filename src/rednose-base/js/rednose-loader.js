@@ -275,7 +275,8 @@ Y.mix(YUI.Env[Y.version].modules, {
     },
     "rednose-tabview": {
         "requires": [
-            "node"
+            "node",
+            "node-event-simulate"
         ]
     },
     "rednose-timepicker-plugin": {
@@ -399,4 +400,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'acf8181ee8c39ff51befaed73fcd6496';
+YUI.Env[Y.version].md5 = '3b48fdd1fc618e841a9ca307b82d43bb';

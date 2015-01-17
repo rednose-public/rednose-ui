@@ -117,12 +117,19 @@ var TabView = Y.Base.create('tabView', Y.Widget, [], {
      */
     _setError: function (e) {
         var errors = e.newVal,
-            container = this.get('contentBox');
+            container = this.get('contentBox'),
+            clicked = false;
 
         container.all('.text-error').removeClass('text-error');
 
         Y.each(errors, function(error) {
             container.one('a#' + error).addClass('text-error');
+
+            if (clicked === false) {
+                container.one('a#' + error).simulate('click');
+
+                clicked = true;
+            }
         });
     }
 }, {
