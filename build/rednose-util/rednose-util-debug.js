@@ -68,8 +68,39 @@ Util.camelCaseToDash = function (string) {
     });
 };
 
+/**
+ * Rounds a number to a given number of digits.
+ *
+ * Trailing zeros will be removed.
+ *
+ * @param {Number} value The number to round
+ * @returns {Number} exp The number of digits
+ * @static
+ */
+Util.round = function (value, exp) {
+    if (typeof exp === 'undefined' || +exp === 0) {
+        return Math.round(value);
+    }
+
+    value = +value;
+    exp  = +exp;
+
+    if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+        return NaN;
+    }
+
+    // Shift
+    value = value.toString().split('e');
+    value = Math.round(+(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp)));
+
+    // Shift back
+    value = value.toString().split('e');
+
+    return +(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp));
+};
+
 // -- Namespace ----------------------------------------------------------------
 Y.namespace('Rednose').Util = Util;
 
 
-}, '1.6.0', {"requires": ["datatype-date"]});
+}, '@VERSION@', {"requires": ["datatype-date"]});
