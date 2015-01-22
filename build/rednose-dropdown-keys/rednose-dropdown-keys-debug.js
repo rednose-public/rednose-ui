@@ -77,4 +77,4 @@ Y.mix(Y.Rednose.Dropdown.Templates, {
 });
 
 
-}, '1.6.0', {"requires": ["rednose-dropdown", "rednose-util"]});
+}, '@VERSION@', {"requires": ["rednose-dropdown", "rednose-util"]});

@@ -174,4 +174,4 @@ var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
 Y.namespace('Rednose.Plugin').NavbarRecent = Recent;
 
 
-}, '1.6.0', {"requires": ["cookie", "plugin", "rednose-navbar-base"]});
+}, '@VERSION@', {"requires": ["cookie", "plugin", "rednose-navbar-base"]});

@@ -69,8 +69,8 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
      * @type String
      * @public
      */
-    itemTemplate: '<li class="dropdown">' +
-                      '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{icon}{title} <b class="caret"></a>' +
+    itemTemplate: '<li class="dropdown" id="{id}">' +
+                      '<a href="#" class="dropdown-toggle" data-toggle="dropdown">{icon}<span>{title}</span> <b class="caret"></a>' +
                   '</li>',
 
     /**
@@ -135,8 +135,8 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
             self      = this;
 
         this.get('container').setHTML(Y.Lang.sub(template, {
-            title: title,
-            url  : url
+            title : title,
+            url   : url
         }));
 
         Y.Array.each(menuLeft, function (menu) {
@@ -244,7 +244,11 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
         var item = this.getItemById(id);
 
         if (item) {
-            item.rename(value);
+            if (item.rename) {
+                item.rename(value);
+            } else {
+                item.one('a > span').set('text', value);
+            }
         }
     },
 
@@ -264,8 +268,9 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
             parent    = container.one(position === 'left' ? '.rednose-menu-primary' : '.rednose-menu-secondary');
 
         var item = Y.Node.create(Y.Lang.sub(this.itemTemplate, {
-            title: config.title,
-            icon : config.icon ? '<i class="icon icon-white ' + config.icon + '"></i> ' : ''
+            id    : config.id ? config.id  : Y.guid(),
+            title : config.title,
+            icon  : config.icon ? '<i class="icon icon-white ' + config.icon + '"></i> ' : ''
         }));
 
         if (config.large) {
@@ -293,6 +298,12 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
      * @return {Rednose.Dropdown.Item}
      */
     getItemById: function (id) {
+        var container = this.get('container');
+
+        if (item = container.one('[id=' + id + ']')) {
+            return item;
+        }
+
         for (var i = 0, len = this._dropdownMap.length; i < len; i++) {
             var dropdown = this._dropdownMap[i],
                 item     = dropdown.getItemById(id);
@@ -408,4 +419,4 @@ Y.namespace('Rednose.Navbar').Base = NavbarBase;
 Y.Rednose.Navbar = Y.mix(Y.Base.create('navbar', NavbarBase, []), Y.Rednose.Navbar, true);
 
 
-}, '1.6.0', {"requires": ["json", "node-pluginhost", "rednose-dropdown-plugin", "view"]});
+}, '@VERSION@', {"requires": ["json", "node-pluginhost", "rednose-dropdown-plugin", "view"]});
