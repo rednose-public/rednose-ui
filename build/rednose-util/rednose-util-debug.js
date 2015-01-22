@@ -103,4 +103,4 @@ Util.round = function (value, exp) {
 Y.namespace('Rednose').Util = Util;
 
 
-}, '@VERSION@', {"requires": ["datatype-date"]});
+}, '1.6.0', {"requires": ["datatype-date"]});

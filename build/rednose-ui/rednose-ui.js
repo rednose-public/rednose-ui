@@ -1,6 +1,6 @@
 /*!
  * RedNoseUI v1.6.0 (http://www.rednose.nl)
- * Copyright 2012-2014 RedNose IT B.V.
+ * Copyright 2012-2015 RedNose IT B.V.
  * Licensed under MIT (https://github.com/rednose-public/rednose-ui/blob/master/LICENSE)
  */
 
@@ -12306,7 +12306,8 @@ Y.mix(YUI.Env[Y.version].modules, {
     },
     "rednose-tabview": {
         "requires": [
-            "node"
+            "node",
+            "node-event-simulate"
         ]
     },
     "rednose-timepicker-plugin": {
@@ -12430,7 +12431,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = 'acf8181ee8c39ff51befaed73fcd6496';
+YUI.Env[Y.version].md5 = '3b48fdd1fc618e841a9ca307b82d43bb';
 /**
  * Includes the metadata for the bundled gallery modules.
  */
@@ -12448,7 +12449,7 @@ YUI.Env[Y.version].groups.gallery = {
 };
 
 
-}, '@VERSION@');
+}, '1.6.0');
 
 /**
  * Boostrap's a module that contains an Y.App definition.
