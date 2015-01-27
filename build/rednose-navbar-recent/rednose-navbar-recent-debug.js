@@ -44,11 +44,19 @@ var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
      * @protected
      */
 
+    /**
+     * The scope event handler reference
+     *
+     * @property {Event} _scopeEvent
+     * @protected
+     */
+
     // -- Lifecycle Methods ----------------------------------------------------
 
     initializer: function (config) {
-        this._scope   = config.scope;
-        this._node    = config.node;
+        this._scope      = this.get('scope');
+        this._scopeEvent = this.after('scopeChange', this._scopeChanged, this);
+        this._node       = config.node;
 
         var host = this.get('host');
 
@@ -64,6 +72,9 @@ var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
         var host = this.get('host');
 
         this.removeTarget(host);
+
+        this._scopeEvent.detach();
+        this._scopeEvent = null;
 
         this._scope = null;
         this._node  = null;
@@ -122,13 +133,26 @@ var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
     // -- Protected Methods ----------------------------------------------------
 
     /**
+     * @method _scopeChanged
+     * @private
+     */
+    _scopeChanged: function () {
+        this._scope = this.get('scope');
+
+        if (this.get('host').rendered) {
+            this._renderMenu();
+        }
+    },
+
+    /**
      * @method _renderMenu
      * @protected
      */
     _renderMenu: function () {
         var host       = this.get('host'),
             item       = host.getItemById(this._node);
-            cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope)) || [];
+
+        cookieData = Y.JSON.parse(Y.Cookie.getSub(COOKIE_NAME, this._scope)) || [];
 
         if (cookieData.length > 0) {
             cookieData.push({ type: 'divider' });
@@ -167,6 +191,15 @@ var Recent = Y.Base.create('navbar', Y.Plugin.Base, [], {
         this.clear();
     }
 }, {
+    ATTRS: {
+        /**
+         * @type {String}
+         */
+        scope: {
+            value: 'recent'
+        }
+    },
+
     NS: 'recent'
 });
 

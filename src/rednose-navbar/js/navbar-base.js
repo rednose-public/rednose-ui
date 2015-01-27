@@ -72,6 +72,12 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
                   '</li>',
 
     /**
+     * @property {Boolean} rendered
+     * @public
+     */
+    rendered: false,
+
+    /**
      * Hash of navbar events.
      *
      * @property {Object} _navbarEvents
@@ -144,6 +150,8 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
         Y.Array.each(menuRight, function (menu) {
             self._renderItem(menu, 'right');
         });
+
+        this.rendered = true;
 
         return this;
     },
