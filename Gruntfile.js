@@ -27,7 +27,7 @@ module.exports = function(grunt) {
 
             fonts: {
                 files: [
-                    {expand: true, cwd: 'bower_components/bootstrap/dist/fonts', src: '**/*', dest: '<%= buildDir %>/rednose-ui/fonts'}
+                    {expand: true, cwd: 'bower_components/bootstrap/dist/fonts', src: '**/*', dest: '<%= buildDir %>/fonts'}
                 ]
             }
         },

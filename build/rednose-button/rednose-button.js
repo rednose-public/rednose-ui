@@ -36,7 +36,8 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
 
     classNames: {
         btn     : 'btn',
-        icon    : 'icon',
+        sm      : 'btn-sm',
+        icon    : 'glyphicon',
         disabled: 'disabled',
         hidden  : 'hidden',
         active  : 'active'
@@ -66,6 +67,7 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
         container.set('id', this.id);
         container.setAttribute('type', 'button');
         container.addClass(this.classNames.btn);
+        container.addClass(this.classNames.sm);
 
         if (this.title) {
             container.setAttribute('title', this.title);

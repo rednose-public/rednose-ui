@@ -37,15 +37,18 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
      * @type String
      * @public
       */
-    templateContainer: '<div class="navbar navbar-inverse navbar-fixed-top">' +
-                           '<div class="navbar-inner">' +
-                               '<div class="container">' +
-                                   '<a class="brand brand-navbar" href="{url}">{title}</a>' +
-                                   '<ul class="nav rednose-menu-primary"></ul>' +
-                                   '<ul class="nav pull-right rednose-menu-secondary"></ui>' +
-                               '</div>' +
-                           '</div>' +
-                       '</div>',
+    templateContainer:
+        '<div class="navbar navbar-inverse navbar-fixed-top">' +
+            '<div class="container-fluid">' +
+                '<div class="navbar-header">' +
+                    '<a class="navbar-brand">{title}</a>' +
+                '</div>' +
+                '<div class="collapse navbar-collapse">' +
+                    '<ul class="nav navbar-nav rednose-menu-primary"></ul>' +
+                    '<ul class="nav navbar-nav navbar-right rednose-menu-secondary"></ul>' +
+                '</div>' +
+            '</div>' +
+        '</div>',
 
     /**
      * Column template, used when attribute `columnLayout` is true.
@@ -54,13 +57,18 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
      * @type String
      * @public
      */
-    templateColumn: '<div class="navbar navbar-inverse navbar-fixed-top rednose-navbar-column">' +
-                        '<div class="navbar-inner">' +
-                            '<a class="brand brand-navbar rednose-brand" data-url="{url}" href="#">{title}</a>' +
-                            '<ul class="nav rednose-menu-primary"></ul>' +
-                            '<ul class="nav pull-right rednose-menu-secondary"></ui>' +
-                        '</div>' +
-                    '</div>',
+    templateColumn:
+        '<div class="navbar navbar-inverse navbar-fixed-top">' +
+            '<div class="container-fluid">' +
+                '<div class="navbar-header">' +
+                    '<a class="navbar-brand">{title}</a>' +
+                '</div>' +
+                '<div class="collapse navbar-collapse">' +
+                    '<ul class="nav navbar-nav rednose-menu-primary"></ul>' +
+                    '<ul class="nav navbar-nav navbar-right rednose-menu-secondary"></ul>' +
+                '</div>' +
+            '</div>' +
+        '</div>',
 
     /**
      * @property itemTemplate
@@ -276,7 +284,7 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
         var item = Y.Node.create(Y.Lang.sub(this.itemTemplate, {
             id    : config.id ? config.id  : Y.guid(),
             title : config.title,
-            icon  : config.icon ? '<i class="icon icon-white ' + config.icon + '"></i> ' : ''
+            icon  : config.icon ? '<i class="glyphicon white ' + config.icon + '"></i> ' : ''
         }));
 
         if (config.large) {
