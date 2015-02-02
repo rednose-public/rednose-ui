@@ -71,7 +71,7 @@ NavbarKeys.prototype = {
 // -- Protected Methods ----------------------------------------------------
 
 /**
- * @param {Item} Rednose.Dropdown.Item
+ * @param {Rednose.Dropdown.Item} item
  * @param {EventFacade} originEvent
  */
 _handleItemEvent: function (item, originEvent) {
