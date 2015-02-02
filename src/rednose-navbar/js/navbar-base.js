@@ -58,10 +58,10 @@ var NavbarBase = Y.Base.create('navbar', Y.View, [], {
      * @public
      */
     templateColumn:
-        '<div class="navbar navbar-inverse navbar-fixed-top">' +
+        '<div class="navbar navbar-inverse navbar-fixed-top rednose-navbar-column">' +
             '<div class="container-fluid">' +
                 '<div class="navbar-header">' +
-                    '<a class="navbar-brand">{title}</a>' +
+                    '<a class="navbar-brand rednose-brand">{title}</a>' +
                 '</div>' +
                 '<div class="collapse navbar-collapse">' +
                     '<ul class="nav navbar-nav rednose-menu-primary"></ul>' +

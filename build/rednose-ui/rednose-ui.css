@@ -7111,19 +7111,13 @@ input.rednose-datatable-input {
   text-align: center;
 }
 
-.brand-navbar {
-  min-width: 186px;
-  font-weight: bold;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.125);
-  -webkit-transition: all .2s linear;
-     -moz-transition: all .2s linear;
-       -o-transition: all .2s linear;
-          transition: all .2s linear;
+.navbar-brand {
+  cursor: pointer;
 }
 
-.rednose-navbar-column .navbar-inner .rednose-brand {
-  width: 250px;
-  max-width: 250px;
+.rednose-navbar-column .rednose-brand {
+  width: 280px;
+  max-width: 280px;
   padding-right: 15px;
   padding-left: 15px;
   margin-left: 0;
