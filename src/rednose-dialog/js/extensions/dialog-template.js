@@ -18,22 +18,22 @@ Template.prototype = {
     ),
 
     inputTemplate: Micro.compile(
-        '<div class="control-group">' +
+        '<div class="form-group">' +
             '<label>' +
-                '<span class="control-label"><%= data.title %> <small><%= data.sub_title %></small></span>' +
-                '<div class="controls">' +
-                    '<input type="text" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>" placeholder="<%= data.title %>" value="<%= data.value %>">' +
+                '<span class="col-md-2 control-label"><%= data.title %> <small><%= data.sub_title %></small></span>' +
+                '<div class="col-md-10">' +
+                    '<input class="form-control" type="text" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>" placeholder="<%= data.title %>" value="<%= data.value %>">' +
                 '</div>' +
             '</label>' +
         '</div>'
     ),
 
     selectTemplate: Micro.compile(
-        '<div class="control-group">' +
-            '<label class="control-label">' +
+        '<div class="form-group">' +
+            '<label class="col-md-2 control-label">' +
                 '<span class="control-label"><%= data.title %> <small><%= data.sub_title %></small></span>' +
-                '<div class="controls">' +
-                    '<select data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>">' +
+                '<div class="col-md-10">' +
+                    '<select class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>">' +
                         '<% Y.Object.each(data.options, function (option, i) { %>' +
                             '<option <%= option.selected ? \'selected="selected"\' : \'\' %> value="<%= option.value %>"><%= option.title %></option>' +
                         '<% }); %>' +
@@ -44,11 +44,11 @@ Template.prototype = {
     ),
 
     textareaTemplate: Micro.compile(
-        '<div class="control-group">' +
-            '<label class="control-label">' +
+        '<div class="form-group">' +
+            '<label class="col-md-2 control-label">' +
                 '<span class="control-label"><%= data.title %> <small><%= data.sub_title %></small></span>' +
-                '<div class="controls">' +
-                    '<textarea data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>" placeholder="<%= data.title %>"><%= data.value %></textarea>' +
+                '<div class="col-md-10">' +
+                    '<textarea class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>" placeholder="<%= data.title %>"><%= data.value %></textarea>' +
                 '</div>' +
             '</label>' +
         '</div>'

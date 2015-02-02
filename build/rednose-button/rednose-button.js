@@ -79,9 +79,7 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
             container.addClass(classNames.active);
         }
 
-        if (this.type !== 'default') {
-            container.addClass(classNames.btn + '-' + this.type);
-        }
+        container.addClass(classNames.btn + '-' + this.type);
 
         if (this.hidden) {
             this.hide();
@@ -223,4 +221,4 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
 Y.Rednose.Button = Y.mix(Button, Y.Rednose.Button);
 
 
-}, '1.6.0', {"requires": ["rednose-button-base", "template", "view"]});
+}, '@VERSION@', {"requires": ["rednose-button-base", "template", "view"]});

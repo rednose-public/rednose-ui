@@ -8,13 +8,13 @@ module.exports = function(grunt) {
 
         var parts = [
             grunt.config.get('banner'),
-            grunt.file.read(buildDir + '/rednose-bootstrap/rednose-bootstrap.css'),
+            grunt.file.read(buildDir + '/../bower_components/bootstrap/dist/css/bootstrap.css'),
             grunt.file.read(buildDir + '/rednose-base/rednose-base.css')
         ];
 
         var minified = [
             grunt.config.get('banner'),
-            grunt.file.read(buildDir + '/rednose-bootstrap/rednose-bootstrap-min.css'),
+            grunt.file.read(buildDir + '/../bower_components/bootstrap/dist/css/bootstrap.min.css'),
             grunt.file.read(buildDir + '/rednose-base/rednose-base-min.css')
         ];
 

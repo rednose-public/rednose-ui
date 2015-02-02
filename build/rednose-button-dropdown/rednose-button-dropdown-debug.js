@@ -11,4 +11,4 @@ Y.namespace('Rednose.Plugin').ButtonDropdown = Y.Base.create('dropdown', Y.Redno
 });
 
 
-}, '1.6.0', {"requires": ["rednose-button", "rednose-dropdown-plugin"]});
+}, '@VERSION@', {"requires": ["rednose-button", "rednose-dropdown-plugin"]});

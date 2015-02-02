@@ -77,9 +77,7 @@ var Button = Y.Base.create('button', Y.Rednose.Button.Base, [Y.View], {
             container.addClass(classNames.active);
         }
 
-        if (this.type !== 'default') {
-            container.addClass(classNames.btn + '-' + this.type);
-        }
+        container.addClass(classNames.btn + '-' + this.type);
 
         if (this.hidden) {
             this.hide();
