@@ -21,38 +21,32 @@ Template.prototype = {
 
     inputTemplate: Micro.compile(
         '<div class="form-group">' +
-            '<label>' +
-                '<span class="col-md-2 control-label"><%= data.title %> <small><%= data.sub_title %></small></span>' +
-                '<div class="col-md-10">' +
-                    '<input class="form-control" type="text" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>" placeholder="<%= data.title %>" value="<%= data.value %>">' +
-                '</div>' +
-            '</label>' +
+            '<label class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
+            '<div class="col-md-8">' +
+                '<input class="form-control" type="text" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>" value="<%= data.value %>">' +
+            '</div>' +
         '</div>'
     ),
 
     selectTemplate: Micro.compile(
         '<div class="form-group">' +
-            '<label class="col-md-2 control-label">' +
-                '<span class="control-label"><%= data.title %> <small><%= data.sub_title %></small></span>' +
-                '<div class="col-md-10">' +
-                    '<select class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>">' +
-                        '<% Y.Object.each(data.options, function (option, i) { %>' +
-                            '<option <%= option.selected ? \'selected="selected"\' : \'\' %> value="<%= option.value %>"><%= option.title %></option>' +
-                        '<% }); %>' +
-                    '</select>' +
-                '</div>' +
-            '</label>' +
+            '<label class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
+            '<div class="col-md-8">' +
+                '<select class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>">' +
+                    '<% Y.Object.each(data.options, function (option, i) { %>' +
+                        '<option <%= option.selected ? \'selected="selected"\' : \'\' %> value="<%= option.value %>"><%= option.title %></option>' +
+                    '<% }); %>' +
+                '</select>' +
+            '</div>' +
         '</div>'
     ),
 
     textareaTemplate: Micro.compile(
         '<div class="form-group">' +
-            '<label class="col-md-2 control-label">' +
-                '<span class="control-label"><%= data.title %> <small><%= data.sub_title %></small></span>' +
-                '<div class="col-md-10">' +
-                    '<textarea class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>" placeholder="<%= data.title %>"><%= data.value %></textarea>' +
-                '</div>' +
-            '</label>' +
+        '<label class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
+            '<div class="col-md-8">' +
+                '<textarea class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>"><%= data.value %></textarea>' +
+            '</div>' +
         '</div>'
     ),
 
