@@ -63,7 +63,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         'outer' : 'rednose-treeview-outer-container',
         'inner' : 'rednose-treeview-inner-container',
         'icon'  : 'rednose-treeview-icon',
-        'header': 'nav-header'
+        'header': 'dropdown-header'
     },
 
     // -- Lifecycle Methods ----------------------------------------------------

@@ -65,7 +65,7 @@ var DD = Y.Base.create('dd', Y.Base, [], {
            dd;
 
        dd = new Y.DD.Drop({
-           node         : container.one('.nav-header'),
+           node         : container.one('.dropdown-header'),
            // Only allow categories to drop here.
            // groups       : [ Y.stamp(this) ],
            groups       : this.get('groups'),
