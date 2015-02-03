@@ -67,7 +67,7 @@ var DD = Y.Base.create('dd', Y.Base, [], {
            dd;
 
        dd = new Y.DD.Drop({
-           node         : container.one('.nav-header'),
+           node         : container.one('.dropdown-header'),
            // Only allow categories to drop here.
            // groups       : [ Y.stamp(this) ],
            groups       : this.get('groups'),
@@ -239,4 +239,4 @@ var DD = Y.Base.create('dd', Y.Base, [], {
 Y.namespace('Rednose.TreeView').DD = DD;
 
 
-}, '1.6.0', {"requires": ["dd"]});
+}, '@VERSION@', {"requires": ["dd"]});

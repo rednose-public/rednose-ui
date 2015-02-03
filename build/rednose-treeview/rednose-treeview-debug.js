@@ -65,7 +65,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
         'outer' : 'rednose-treeview-outer-container',
         'inner' : 'rednose-treeview-inner-container',
         'icon'  : 'rednose-treeview-icon',
-        'header': 'nav-header'
+        'header': 'dropdown-header'
     },
 
     // -- Lifecycle Methods ----------------------------------------------------
@@ -243,7 +243,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
 Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
 
 
-}, '1.6.0', {
+}, '@VERSION@', {
     "requires": [
         "gallery-sm-treeview-sortable",
         "rednose-tree",

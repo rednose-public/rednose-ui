@@ -397,9 +397,9 @@ Y.Rednose.Dropdown.ClassNames = {
     open      : 'open',
     divider   : 'divider',
     dropdown  : 'dropdown',
-    icon      : 'icon',
+    icon      : 'glyphicon',
     submenu   : 'dropdown-submenu',
-    iconToggle: 'icon-ok',
+    iconToggle: 'glyphicon-ok',
     item      : 'rednose-menu-item'
 };
 

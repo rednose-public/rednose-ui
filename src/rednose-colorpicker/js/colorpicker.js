@@ -20,11 +20,13 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
     // -- Public Properties ----------------------------------------------------
 
     template:
-        '<div class="input-append">' +
-            '<input type="text" placeholder="Transparant" id="color" value="#FFFFFF" />' +
-            '<button title="Configure table" type="button" class="btn">' +
-                '<i class="icon-adjust"></i>' +
-            '</button>' +
+        '<div class="input-group">' +
+            '<input class="form-control" type="text" placeholder="Transparant" id="color" value="#FFFFFF" />' +
+            '<div class="input-group-btn">' +
+                '<button title="Configure table" type="button" class="btn btn-default">' +
+                    '<i class="glyphicon glyphicon-adjust"></i>' +
+                '</button>' +
+            '</div>' +
         '</div>',
 
     overlayTemplate:

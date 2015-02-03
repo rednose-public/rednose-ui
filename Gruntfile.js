@@ -52,6 +52,13 @@ module.exports = function(grunt) {
                     }
                 }
             }
+        },
+
+        watch: {
+            css: {
+                files: 'src/rednose-base/css/**/*',
+                tasks: 'css'
+            }
         }
     });
 
@@ -59,6 +66,7 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-shell');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('test', 'shell:test');
     grunt.registerTask('build', ['copy', 'shell:build', 'seed', 'css']);

@@ -6610,8 +6610,12 @@ body {
 
 /* Override form labels to align left */
 
-.form-horizontal .control-group .control-label {
+.form-horizontal .form-group .control-label {
   text-align: left;
+}
+
+form textarea {
+  resize: none;
 }
 
 /* -- Custom icons, prefixed by 'rednose-' ---------------------------------- */
@@ -6805,7 +6809,7 @@ li.disabled [class*=" icon-"] {
   height: 100%;
 }
 
-.rednose-view-fixed.rednose-nav-header > div > div > .yui3-widget-bd {
+.rednose-view-fixed.rednose-dropdown-header > div > div > .yui3-widget-bd {
   top: 46px;
 }
 
@@ -7014,6 +7018,59 @@ input.rednose-datatable-input {
   margin: 47px 2px 57px 1px;
 }
 
+.tabbable .nav-tabs {
+  margin-bottom: 15px;
+}
+
+li.dropdown-submenu:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-submenu {
+  position: relative;
+}
+
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  -webkit-border-radius: 0 6px 6px 6px;
+     -moz-border-radius: 0 6px 6px 6px;
+          border-radius: 0 6px 6px 6px;
+}
+
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu > a:after,
+.dropdown-submenu:hover > a:after {
+  display: block;
+  float: right;
+  width: 0;
+  height: 0;
+  margin-top: 5px;
+  margin-right: -10px;
+  border-color: transparent;
+  border-left-color: #cccccc;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  content: " ";
+}
+
+.dropdown-submenu.pull-left {
+  float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  -webkit-border-radius: 6px 0 6px 6px;
+     -moz-border-radius: 6px 0 6px 6px;
+          border-radius: 6px 0 6px 6px;
+}
+
 .rednose-grid-view {
   cursor: default;
 }
@@ -7177,7 +7234,7 @@ input.rednose-datatable-input {
 /* Panel body styling. */
 
 .yui3-widget-stdmod .yui3-widget-bd {
-  padding: 9px 15px;
+  padding: 15px;
 }
 
 /* Panel header styling. */
@@ -7189,77 +7246,52 @@ input.rednose-datatable-input {
 }
 
 .yui3-widget-stdmod .yui3-widget-hd {
-  padding: 9px 15px;
+  min-height: 16.43px;
+  padding: 15px;
   margin: 0;
   font-family: inherit;
   font-size: 18px;
-  font-weight: bold;
-  line-height: 27px;
+  line-height: 1.42857143;
   color: inherit;
   text-rendering: optimizelegibility;
   background-color: transparent;
   background-image: none;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 /* Panel footer styling. */
 
 .yui3-widget-stdmod .yui3-widget-ft {
-  height: 26px;
-  padding: 14px 15px 15px;
-  margin-bottom: 0;
-  background-color: #f5f5f5;
-  border-top: 1px solid #ddd;
-  -webkit-border-radius: 0 0 6px 6px;
-     -moz-border-radius: 0 0 6px 6px;
-          border-radius: 0 0 6px 6px;
-  -webkit-box-shadow: inset 0 1px 0 #ffffff;
-     -moz-box-shadow: inset 0 1px 0 #ffffff;
-          box-shadow: inset 0 1px 0 #ffffff;
+  padding: 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
 }
 
 /* Outer panel styling. */
 
 .yui3-panel-content {
-  background-color: #ffffff;
+  position: relative;
+  background-color: #fff;
   border: 1px solid #999;
-  border: 1px solid rgba(0, 0, 0, 0.3);
-  *border: 1px solid #999;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-  outline: none;
-  -webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-     -moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  outline: 0;
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
   -webkit-background-clip: padding-box;
-     -moz-background-clip: padding-box;
           background-clip: padding-box;
 }
 
 /* Mask opacity */
 
 .yui3-widget-mask {
-  opacity: 0.8 !important;
-  filter: alpha(opacity=80) !important;
+  background-color: #000;
+  opacity: 0.5 !important;
+  filter: alpha(opacity=50) !important;
 }
-
-/* FIXME: Don't focus the panel to begin with. */
 
 .yui3-panel {
   outline: none;
-}
-
-/* FIXME: Helper classes for the buttons, should prolly move up to a higer level within the framework. */
-
-.float-left {
-  float: left;
-  margin-right: 10px;
-}
-
-.float-right {
-  float: right;
-  margin-left: 10px;
 }
 
 .rednose-ruler {

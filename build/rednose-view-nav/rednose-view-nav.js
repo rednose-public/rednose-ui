@@ -121,7 +121,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
     baseClassNames: {
         nav   : 'rednose-view-nav',
         close : 'close',
-        header: 'rednose-nav-header',
+        header: 'rednose-dropdown-header',
         footer: 'rednose-nav-footer',
         fixed : 'rednose-view-fixed'
     },
@@ -333,7 +333,7 @@ var ViewNav = Y.Base.create('viewNav', Y.View, [], {
 Y.namespace('Rednose.View').Nav = ViewNav;
 
 
-}, '1.6.0', {
+}, '@VERSION@', {
     "requires": [
         "event-custom",
         "rednose-toolbar",

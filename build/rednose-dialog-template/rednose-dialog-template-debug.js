@@ -21,7 +21,7 @@ Template.prototype = {
 
     inputTemplate: Micro.compile(
         '<div class="form-group">' +
-            '<label class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
+            '<label for="<%= data.id %>" class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
             '<div class="col-md-8">' +
                 '<input class="form-control" type="text" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>" value="<%= data.value %>">' +
             '</div>' +
@@ -30,7 +30,7 @@ Template.prototype = {
 
     selectTemplate: Micro.compile(
         '<div class="form-group">' +
-            '<label class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
+            '<label for="<%= data.id %>" class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
             '<div class="col-md-8">' +
                 '<select class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>">' +
                     '<% Y.Object.each(data.options, function (option, i) { %>' +
@@ -43,9 +43,9 @@ Template.prototype = {
 
     textareaTemplate: Micro.compile(
         '<div class="form-group">' +
-        '<label class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
+        '<label for="<%= data.id %>" class="col-md-4 control-label"><%= data.title %> <small><%= data.sub_title %></small></label>' +
             '<div class="col-md-8">' +
-                '<textarea class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>"><%= data.value %></textarea>' +
+                '<textarea rows="3" class="form-control" data-path="<%= data.id %>" id="<%= data.id %>" name="<%= data.id %>"><%= data.value %></textarea>' +
             '</div>' +
         '</div>'
     ),
@@ -180,4 +180,4 @@ Y.Rednose.Dialog.Template = Template;
 Y.Base.mix(Y.Rednose.Dialog, [Template]);
 
 
-}, '1.6.0', {"requires": ["template-micro", "rednose-tabview"]});
+}, '@VERSION@', {"requires": ["template-micro", "rednose-tabview"]});
