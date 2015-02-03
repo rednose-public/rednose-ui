@@ -249,18 +249,20 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             node = (typeof options.html  === 'string') ?
                            Y.Node.create(options.html) : options.html;
         } else {
-            var input = Y.Node.create('<input type="text" value="' + options.value + '" data-path="' + options.dataPath + '" id="dialog-input">');
+            var input = Y.Node.create(
+                '<input class="form-control" type="text" value="' + options.value + '" data-path="' + options.dataPath + '" id="dialog-input">'
+            );
 
             node = Y.Node.create(
                 '<form class="form-horizontal">' +
-                '   <div class="control-group">' +
-                '       <label for="input" class="control-label">' + options.text +  '</label>' +
-                '       <div class="controls"></div>' +
+                '   <div class="form-group">' +
+                '       <label for="dialog-input" class="col-sm-2 control-label">' + options.text +  '</label>' +
+                '       <div class="col-sm-10"></div>' +
                 '   </div>' +
                 '</form>'
             );
 
-            node.one('.controls').append(input);
+            node.one('.col-sm-10').append(input);
         }
 
         options.on && this.on(options.on);
@@ -340,7 +342,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
      * @protected
      */
     _focusInput: function () {
-        var inputControlContainer = this.panel.get('boundingBox').one('.controls'),
+        var inputControlContainer = this.panel.get('boundingBox').one('.col-sm-10'),
             inputField = inputControlContainer ? inputControlContainer.one('input, textarea') : null;
 
         if (inputField) {
