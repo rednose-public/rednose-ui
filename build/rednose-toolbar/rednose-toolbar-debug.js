@@ -162,4 +162,4 @@ var Toolbar = Y.Base.create('toolbar', Y.Rednose.Toolbar.Base, [Y.View], {
 Y.Rednose.Toolbar = Y.mix(Toolbar, Y.Rednose.Toolbar);
 
 
-}, '1.6.0', {"requires": ["rednose-toolbar-base"]});
+}, '@VERSION@', {"requires": ["rednose-toolbar-base"]});

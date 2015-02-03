@@ -237,11 +237,11 @@ li.disabled [class*=" icon-"] {
 }
 
 .rednose-view-fixed.rednose-dropdown-header > div > div > .yui3-widget-bd {
-  top: 46px;
+  top: 56px;
 }
 
 .rednose-view-fixed.rednose-nav-footer .yui3-widget-bd {
-  bottom: 56px;
+  bottom: 64px;
 }
 
 .rednose-grid-message-container {
@@ -347,7 +347,7 @@ i.rednose-colorpicker-pointer {
 .yui3-datatable tr > td.rednose-datatable-selected,
 .yui3-datatable tr > td.rednose-datatable-selected:hover {
   color: white;
-  background-color: #0088cc;
+  background-color: #337ab7;
 }
 
 input.rednose-datatable-input {
@@ -1025,8 +1025,14 @@ div .btn-toolbar .btn-group.pull-right {
   white-space: nowrap;
 }
 
-.rednose-treeview-icon {
+.rednose-treeview-inner-container .glyphicon {
   width: 16px;
+  color: #000;
+}
+
+.rednose-treeview-inner-container .yui3-treeview-selected > .yui3-treeview-row > .glyphicon,
+.rednose-treeview-inner-container .yui3-treeview-open.yui3-treeview-selected > .yui3-treeview-row > .glyphicon {
+  color: #fff;
 }
 
 .rednose-treeview-spacer {
@@ -1052,7 +1058,7 @@ div .btn-toolbar .btn-group.pull-right {
 /* Basic item styling */
 
 .yui3-skin-sam .yui3-treeview-row {
-  color: #0088cc !important;
+  color: #337ab7 !important;
   text-decoration: none !important;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
   background-image: none !important;
@@ -1076,7 +1082,7 @@ div .btn-toolbar .btn-group.pull-right {
 .yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-selected > .yui3-treeview-row:hover {
   color: #ffffff !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
-  background-color: #0088cc !important;
+  background-color: #337ab7 !important;
 }
 
 /* Drag over highlight */

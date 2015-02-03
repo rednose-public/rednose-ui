@@ -97,4 +97,4 @@ Spinner = Y.Base.create('spinner', Y.Model, [], {
 Y.namespace('Rednose.Model').Spinner = Spinner;
 
 
-}, '1.6.0', {"requires": ["model", "rednose-app-base"]});
+}, '@VERSION@', {"requires": ["model", "rednose-app-base"]});

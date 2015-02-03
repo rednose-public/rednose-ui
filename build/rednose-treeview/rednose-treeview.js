@@ -43,7 +43,7 @@ YUI.add('rednose-treeview', function (Y, NAME) {
  * @uses Rednose.TreeView.DD
  * @extends TreeView
  */
-var TreeView = Y.Base.create('treeView', Y.TreeView, [
+var RednoseTreeView = Y.Base.create('treeView', Y.TreeView, [
     Y.TreeView.Sortable,
     Y.Rednose.Tree.Comparable,
     Y.Rednose.Tree.Icon,
@@ -64,7 +64,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
     rednoseClassNames: {
         'outer' : 'rednose-treeview-outer-container',
         'inner' : 'rednose-treeview-inner-container',
-        'icon'  : 'rednose-treeview-icon',
+        'icon'  : 'glyphicon',
         'header': 'dropdown-header'
     },
 
@@ -225,7 +225,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
                 this.classNames.icon + ' ' + node.getIcon()
             );
         }
-    },
+    }
 }, {
     ATTRS: {
         /**
@@ -240,7 +240,7 @@ var TreeView = Y.Base.create('treeView', Y.TreeView, [
 });
 
 // -- Namespace ----------------------------------------------------------------
-Y.Rednose.TreeView = Y.mix(TreeView, Y.Rednose.TreeView);
+Y.Rednose.TreeView = Y.mix(RednoseTreeView, Y.Rednose.TreeView);
 
 
 }, '@VERSION@', {

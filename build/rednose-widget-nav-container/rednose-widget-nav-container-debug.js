@@ -23,4 +23,4 @@ NavContainer = Y.Base.create('nav', Y.Widget, [Y.WidgetStdMod, Y.WidgetButtons])
 Y.namespace('Rednose').NavContainer = NavContainer;
 
 
-}, '1.6.0', {"requires": ["widget", "widget-buttons", "widget-stdmod"]});
+}, '@VERSION@', {"requires": ["widget", "widget-buttons", "widget-stdmod"]});

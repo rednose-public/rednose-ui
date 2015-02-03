@@ -53,4 +53,4 @@ NodeIcon.prototype = {
 Y.namespace('Rednose.Tree.Node').Icon = NodeIcon;
 
 
-}, '1.6.0', {"requires": ["tree"]});
+}, '@VERSION@', {"requires": ["tree"]});

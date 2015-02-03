@@ -399,9 +399,9 @@ Y.Rednose.Dropdown.ClassNames = {
     open      : 'open',
     divider   : 'divider',
     dropdown  : 'dropdown',
-    icon      : 'icon',
+    icon      : 'glyphicon',
     submenu   : 'dropdown-submenu',
-    iconToggle: 'icon-ok',
+    iconToggle: 'glyphicon-ok',
     item      : 'rednose-menu-item'
 };
 
@@ -449,4 +449,4 @@ Y.Rednose.Dropdown.Templates = {
 };
 
 
-}, '1.6.0', {"requires": ["event-outside", "node", "rednose-dropdown-base", "template-micro", "view"]});
+}, '@VERSION@', {"requires": ["event-outside", "node", "rednose-dropdown-base", "template-micro", "view"]});

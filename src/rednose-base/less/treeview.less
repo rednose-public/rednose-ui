@@ -40,8 +40,14 @@
   white-space: nowrap;
 }
 
-.rednose-treeview-icon {
+.rednose-treeview-inner-container .glyphicon {
   width: 16px;
+  color: #000;
+}
+
+.rednose-treeview-inner-container .yui3-treeview-selected > .yui3-treeview-row > .glyphicon,
+.rednose-treeview-inner-container .yui3-treeview-open.yui3-treeview-selected > .yui3-treeview-row > .glyphicon {
+  color: #fff;
 }
 
 .rednose-treeview-spacer {
@@ -64,7 +70,7 @@
 
 /* Basic item styling */
 .yui3-skin-sam .yui3-treeview-row {
-  color: #0088cc !important;
+  color: #337ab7 !important;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
   text-decoration: none !important;
   border: none !important;
@@ -86,7 +92,7 @@
 .yui3-skin-sam .yui3-treeview-notouch .yui3-treeview-selected > .yui3-treeview-row:hover {
   color: #ffffff !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2) !important;
-  background-color: #0088cc !important;
+  background-color: #337ab7 !important;
 }
 
 /* Drag over highlight */

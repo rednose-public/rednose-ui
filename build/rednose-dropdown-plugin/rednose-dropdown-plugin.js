@@ -198,4 +198,4 @@ Y.mix(Y.Rednose.Dropdown.Templates, {
 });
 
 
-}, '1.6.0', {"requires": ["rednose-dropdown", "node-pluginhost", "plugin"]});
+}, '@VERSION@', {"requires": ["rednose-dropdown", "node-pluginhost", "plugin"]});
