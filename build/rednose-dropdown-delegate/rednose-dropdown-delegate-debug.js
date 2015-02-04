@@ -105,4 +105,4 @@ var Delegate = Y.Base.create('dropdown', Y.Base, [], {
 Y.namespace('Rednose.Dropdown').Delegate = Delegate;
 
 
-}, '@VERSION@', {"requires": ["rednose-dropdown-plugin"]});
+}, '1.7.0', {"requires": ["rednose-dropdown-plugin"]});

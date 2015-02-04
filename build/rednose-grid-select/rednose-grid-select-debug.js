@@ -147,4 +147,4 @@ Selectable.ATTRS = {
 Y.namespace('Rednose.Grid').Selectable = Selectable;
 
 
-}, '@VERSION@');
+}, '1.7.0');

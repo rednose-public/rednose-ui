@@ -64,4 +64,4 @@ Formatter.size = function (size) {
 Y.namespace('Rednose').Formatter = Formatter;
 
 
-}, '@VERSION@');
+}, '1.7.0');

@@ -420,4 +420,4 @@ YUI.Env[Y.version].groups.gallery = {
 };
 
 
-}, '@VERSION@');
+}, '1.7.0');

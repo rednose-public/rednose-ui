@@ -54,4 +54,4 @@ Y.Rednose.Dropdown.KeysMac = DropdownKeysMac;
 Y.Base.mix(Y.Rednose.Dropdown, [DropdownKeysMac]);
 
 
-}, '@VERSION@');
+}, '1.7.0');

@@ -1,5 +1,5 @@
 /*!
- * RedNoseUI v1.6.0 (http://www.rednose.nl)
+ * RedNoseUI v1.7.0 (http://www.rednose.nl)
  * Copyright 2012-2015 RedNose IT B.V.
  * Licensed under MIT (https://github.com/rednose-public/rednose-ui/blob/master/LICENSE)
  */
@@ -12448,7 +12448,7 @@ YUI.Env[Y.version].groups.gallery = {
 };
 
 
-}, '1.6.0');
+}, '1.7.0');
 
 /**
  * Boostrap's a module that contains an Y.App definition.

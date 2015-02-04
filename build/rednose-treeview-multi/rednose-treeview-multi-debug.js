@@ -145,4 +145,4 @@ var MultiTreeView = Y.Base.create('multiTreeView', Y.View, [], {
 Y.namespace('Rednose.TreeView').Multi = MultiTreeView;
 
 
-}, '@VERSION@', {"requires": ["rednose-treeview"]});
+}, '1.7.0', {"requires": ["rednose-treeview"]});

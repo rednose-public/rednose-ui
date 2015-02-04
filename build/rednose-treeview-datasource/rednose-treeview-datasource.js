@@ -161,4 +161,4 @@ Y.extend(MultiTreeViewDataSource, Y.Plugin.Base, {
 Y.namespace('Rednose.Plugin').MultiTreeViewDataSource = MultiTreeViewDataSource;
 
 
-}, '@VERSION@', {"requires": ["plugin"]});
+}, '1.7.0', {"requires": ["plugin"]});
