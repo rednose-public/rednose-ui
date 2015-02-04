@@ -427,7 +427,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
             bb     = this.panel.get('boundingBox');
 
         // Remove any previous error message
-        bb.all('.control-group').each(function (node) {
+        bb.all('.form-group').each(function (node) {
             if (node.hasClass('error')) {
                 node.removeClass('error');
             }
@@ -442,7 +442,7 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
         Y.each(errors, function(error) {
             // Append the message node at the given path (defaults to 'input')
             var input = bb.one('[data-path=' + (error.path || 'input') + ']');
-            input.ancestor('.control-group').addClass('error');
+            input.ancestor('.form-group').addClass('error');
 
             if (error.message) {
                 input.get('parentNode').append('<span class="help-block">' + error.message + '</span>');
