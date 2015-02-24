@@ -1,4 +1,5 @@
-# RedNoseUI
+RedNoseUI [![Build status...](https://secure.travis-ci.org/rednose-public/rednose-ui.png?branch=master)](http://travis-ci.org/rednose-public/rednose-ui)
+=========
 
 RedNoseUI is a JavaScript framework, providing core features used across several RedNose products. RedNoseUI is provided under the MIT license.
 
