@@ -6,6 +6,13 @@ ViewTemplateThreeColumn.prototype = {
     initializer: function () {
         var container = this.get('container');
 
+        if (container.get('tagName').toLowerCase() === 'body') {
+            var node = Y.Node.create('<div>');
+
+            container.append(node);
+            container = node;
+        }
+
         container.addClass('rednose-grid');
         container.addClass('rednose-three-column-grid');
 
