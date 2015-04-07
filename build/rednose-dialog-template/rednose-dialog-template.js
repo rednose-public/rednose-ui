@@ -180,4 +180,4 @@ Y.Rednose.Dialog.Template = Template;
 Y.Base.mix(Y.Rednose.Dialog, [Template]);
 
 
-}, '1.7.0', {"requires": ["template-micro", "rednose-tabview"]});
+}, '1.8.0', {"requires": ["template-micro", "rednose-tabview"]});

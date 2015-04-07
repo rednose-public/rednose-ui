@@ -235,4 +235,4 @@ var UndoManager = Y.Base.create('undoManager', Y.Base, [], {
 Y.namespace('Rednose').UndoManager = UndoManager;
 
 
-}, '1.7.0', {"requires": ["base"]});
+}, '1.8.0', {"requires": ["base"]});

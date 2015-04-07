@@ -171,4 +171,4 @@ Y.Rednose.Navbar.Keys = NavbarKeys;
 Y.Base.mix(Y.Rednose.Navbar, [NavbarKeys]);
 
 
-}, '1.7.0', {"requires": ["event-custom", "rednose-dropdown-keys", "rednose-navbar-base"]});
+}, '1.8.0', {"requires": ["event-custom", "rednose-dropdown-keys", "rednose-navbar-base"]});

@@ -349,4 +349,4 @@ var Colorpicker = Y.Base.create('colorpicker', Y.Widget, [], {
 Y.namespace('Rednose').Colorpicker = Colorpicker;
 
 
-}, '1.7.0', {"requires": ["base", "event", "node", "widget"]});
+}, '1.8.0', {"requires": ["base", "event", "node", "widget"]});

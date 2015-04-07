@@ -158,4 +158,4 @@ Y.namespace('Rednose.Ruler').Base = RulerBase;
 Y.Rednose.Ruler = Y.mix(Y.Base.create('ruler', RulerBase, []), Y.Rednose.Ruler, true);
 
 
-}, '1.7.0', {"requires": ["node", "event-resize", "view"]});
+}, '1.8.0', {"requires": ["node", "event-resize", "view"]});

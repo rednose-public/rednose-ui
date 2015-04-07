@@ -78,4 +78,4 @@ var Selectable = Y.Base.create('selectable', Y.Base, [], {
 Y.namespace('Rednose.TreeView').Selectable = Selectable;
 
 
-}, '1.7.0', {"requires": ["base", "event-outside"]});
+}, '1.8.0', {"requires": ["base", "event-outside"]});

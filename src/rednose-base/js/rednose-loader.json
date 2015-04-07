@@ -80,29 +80,6 @@
             "plugin"
         ]
     },
-    "rednose-datepicker-plugin": {
-        "requires": [
-            "rednose-datetimepicker-base"
-        ]
-    },
-    "rednose-datetimepicker": {
-        "use": [
-            "rednose-datepicker-plugin",
-            "rednose-timepicker-plugin"
-        ]
-    },
-    "rednose-datetimepicker-base": {
-        "requires": [
-            "base",
-            "node",
-            "plugin",
-            "rednose-datetimepicker-base-css",
-            "rednose-jquery"
-        ]
-    },
-    "rednose-datetimepicker-base-css": {
-        "type": "css"
-    },
     "rednose-dialog": {
         "use": [
             "rednose-dialog-base",
@@ -181,7 +158,6 @@
         ]
     },
     "rednose-grid-select": {},
-    "rednose-jquery": {},
     "rednose-model-spinner": {
         "requires": [
             "model",
@@ -224,15 +200,6 @@
             "anim"
         ]
     },
-    "rednose-notifier": {
-        "requires": [
-            "rednose-jquery",
-            "rednose-notifier-css"
-        ]
-    },
-    "rednose-notifier-css": {
-        "type": "css"
-    },
     "rednose-panel": {
         "requires": [
             "panel"
@@ -265,11 +232,6 @@
         "requires": [
             "node",
             "node-event-simulate"
-        ]
-    },
-    "rednose-timepicker-plugin": {
-        "requires": [
-            "rednose-datetimepicker-base"
         ]
     },
     "rednose-toolbar": {

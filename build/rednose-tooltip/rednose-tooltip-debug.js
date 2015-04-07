@@ -192,4 +192,4 @@ var Tooltip = Y.Base.create('tooltip', Y.Base, [], {
 Y.namespace('Rednose').Tooltip = Tooltip;
 
 
-}, '1.7.0', {"requires": ["base", "node", "anim"]});
+}, '1.8.0', {"requires": ["base", "node", "anim"]});

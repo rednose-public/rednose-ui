@@ -92,29 +92,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "plugin"
         ]
     },
-    "rednose-datepicker-plugin": {
-        "requires": [
-            "rednose-datetimepicker-base"
-        ]
-    },
-    "rednose-datetimepicker": {
-        "use": [
-            "rednose-datepicker-plugin",
-            "rednose-timepicker-plugin"
-        ]
-    },
-    "rednose-datetimepicker-base": {
-        "requires": [
-            "base",
-            "node",
-            "plugin",
-            "rednose-datetimepicker-base-css",
-            "rednose-jquery"
-        ]
-    },
-    "rednose-datetimepicker-base-css": {
-        "type": "css"
-    },
     "rednose-dialog": {
         "use": [
             "rednose-dialog-base",
@@ -195,7 +172,6 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     },
     "rednose-grid-select": {},
-    "rednose-jquery": {},
     "rednose-model-spinner": {
         "requires": [
             "model",
@@ -238,15 +214,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "anim"
         ]
     },
-    "rednose-notifier": {
-        "requires": [
-            "rednose-jquery",
-            "rednose-notifier-css"
-        ]
-    },
-    "rednose-notifier-css": {
-        "type": "css"
-    },
     "rednose-panel": {
         "requires": [
             "panel"
@@ -279,11 +246,6 @@ Y.mix(YUI.Env[Y.version].modules, {
         "requires": [
             "node",
             "node-event-simulate"
-        ]
-    },
-    "rednose-timepicker-plugin": {
-        "requires": [
-            "rednose-datetimepicker-base"
         ]
     },
     "rednose-toolbar": {
@@ -402,7 +364,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '3b48fdd1fc618e841a9ca307b82d43bb';
+YUI.Env[Y.version].md5 = '8f93ac6a56f58eeed020bf2322d3b144';
 /**
  * Includes the metadata for the bundled gallery modules.
  */
@@ -420,4 +382,4 @@ YUI.Env[Y.version].groups.gallery = {
 };
 
 
-}, '1.7.0');
+}, '1.8.0');

@@ -435,4 +435,4 @@ Y.namespace('Rednose.Navbar').Base = NavbarBase;
 Y.Rednose.Navbar = Y.mix(Y.Base.create('navbar', NavbarBase, []), Y.Rednose.Navbar, true);
 
 
-}, '1.7.0', {"requires": ["json", "node-pluginhost", "rednose-dropdown-plugin", "view"]});
+}, '1.8.0', {"requires": ["json", "node-pluginhost", "rednose-dropdown-plugin", "view"]});

@@ -378,4 +378,4 @@ var ToolbarBase = Y.Base.create('toolbarBase', Y.Base, [], {
 Y.namespace('Rednose.Toolbar').Base = ToolbarBase;
 
 
-}, '1.7.0', {"requires": ["rednose-button-group", "base"]});
+}, '1.8.0', {"requires": ["rednose-button-group", "base"]});

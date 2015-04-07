@@ -593,4 +593,4 @@ Dialog.prompt = function (options, callback) {
 Y.namespace('Rednose').Dialog = Dialog;
 
 
-}, '1.7.0', {"requires": ["base", "rednose-panel", "rednose-toolbar"], "lang": ["en", "nl"]});
+}, '1.8.0', {"requires": ["base", "rednose-panel", "rednose-toolbar"], "lang": ["en", "nl"]});

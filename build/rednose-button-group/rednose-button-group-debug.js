@@ -238,4 +238,4 @@ var ButtonGroup = Y.Base.create('buttonGroup', Y.Rednose.ButtonGroup.Base, [Y.Vi
 Y.Rednose.ButtonGroup = Y.mix(ButtonGroup, Y.Rednose.ButtonGroup);
 
 
-}, '1.7.0', {"requires": ["rednose-button-group-base"]});
+}, '1.8.0', {"requires": ["rednose-button-group-base"]});

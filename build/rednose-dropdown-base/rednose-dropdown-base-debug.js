@@ -471,4 +471,4 @@ var DropdownBase = Y.Base.create('dropdownBase', Y.Base, [], {
 Y.namespace('Rednose.Dropdown').Base = DropdownBase;
 
 
-}, '1.7.0', {"requires": ["rednose-dropdown-item"]});
+}, '1.8.0', {"requires": ["rednose-dropdown-item"]});

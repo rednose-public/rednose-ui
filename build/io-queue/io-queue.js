@@ -35,7 +35,7 @@ Y.mix(Y.IO.prototype, {
     _qState: 1,
 
    /**
-    * Method Process the first transaction from the
+    * Method Service the first transaction from the
     * queue in FIFO order.
     *
     * @method _qShift

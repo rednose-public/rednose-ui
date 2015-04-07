@@ -449,4 +449,4 @@ Y.Rednose.Dropdown.Templates = {
 };
 
 
-}, '1.7.0', {"requires": ["event-outside", "node", "rednose-dropdown-base", "template-micro", "view"]});
+}, '1.8.0', {"requires": ["event-outside", "node", "rednose-dropdown-base", "template-micro", "view"]});

@@ -66,7 +66,7 @@ var LANG = Y.Lang,
         instead of objects (see example below).
 
         @example
-            // Process array of arrays
+            // Service array of arrays
             var schema = { resultFields: [ 'fruit', 'color' ] },
                 data = [
                     [ 'Banana', 'yellow' ],
@@ -79,7 +79,7 @@ var LANG = Y.Lang,
             // response.results[0] is { fruit: "Banana", color: "yellow" }
 
 
-            // Process array of objects
+            // Service array of objects
             data = [
                 { fruit: 'Banana', color: 'yellow', price: '1.96' },
                 { fruit: 'Orange', color: 'orange', price: '2.04' },

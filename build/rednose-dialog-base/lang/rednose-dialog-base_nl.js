@@ -1,1 +1,1 @@
-YUI.add("lang/rednose-dialog-base_nl",function(e){e.Intl.add("rednose-dialog-base","nl",{confirm:"OK",cancel:"Annuleren"})},"1.7.0");
+YUI.add("lang/rednose-dialog-base_nl",function(e){e.Intl.add("rednose-dialog-base","nl",{confirm:"OK",cancel:"Annuleren"})},"1.8.0");

@@ -1285,7 +1285,7 @@ if (config.injected || YUI.Env.windowLoaded) {
     add(win, "load", onLoad);
 }
 
-// Process onAvailable/onContentReady items when when the DOM is ready in IE
+// Service onAvailable/onContentReady items when when the DOM is ready in IE
 if (Y.UA.ie) {
     Y.on(EVENT_READY, Event._poll);
 

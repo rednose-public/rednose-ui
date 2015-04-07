@@ -147,7 +147,7 @@ SchemaJSON = {
 
 
     @example
-        // Process array of arrays
+        // Service array of arrays
         var schema = {
                 resultListLocator: 'produce.fruit',
                 resultFields: [ 'name', 'color' ]
@@ -167,7 +167,7 @@ SchemaJSON = {
         // response.results[0] is { name: "Banana", color: "yellow" }
 
 
-        // Process array of objects + some metadata
+        // Service array of objects + some metadata
         schema.metaFields = [ 'lastInventory' ];
 
         data = {
