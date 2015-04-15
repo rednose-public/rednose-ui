@@ -59,7 +59,7 @@ var Anim = Y.Base.create('anim', Y.Base, [], {
          * Enable animation for this TreeView instance
          */
         animated: {
-            value: true
+            value: false
         }
     }
 });
