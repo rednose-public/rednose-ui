@@ -239,4 +239,4 @@ var DD = Y.Base.create('dd', Y.Base, [], {
 Y.namespace('Rednose.TreeView').DD = DD;
 
 
-}, '1.8.0', {"requires": ["dd"]});
+}, '@VERSION@', {"requires": ["dd"]});

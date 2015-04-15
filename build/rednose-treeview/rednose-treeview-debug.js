@@ -243,7 +243,7 @@ var RednoseTreeView = Y.Base.create('treeView', Y.TreeView, [
 Y.Rednose.TreeView = Y.mix(RednoseTreeView, Y.Rednose.TreeView);
 
 
-}, '1.8.0', {
+}, '@VERSION@', {
     "requires": [
         "gallery-sm-treeview-sortable",
         "rednose-tree",

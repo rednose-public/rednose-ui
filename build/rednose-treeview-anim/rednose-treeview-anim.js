@@ -61,7 +61,7 @@ var Anim = Y.Base.create('anim', Y.Base, [], {
          * Enable animation for this TreeView instance
          */
         animated: {
-            value: true
+            value: false
         }
     }
 });
@@ -70,4 +70,4 @@ var Anim = Y.Base.create('anim', Y.Base, [], {
 Y.namespace('Rednose.TreeView').Anim = Anim;
 
 
-}, '1.8.0', {"requires": ["rednose-anim", "transition"]});
+}, '@VERSION@', {"requires": ["rednose-anim", "transition"]});
