@@ -225,6 +225,12 @@ var RednoseTreeView = Y.Base.create('treeView', Y.TreeView, [
                 this.classNames.icon + ' ' + node.getIcon()
             );
         }
+    },
+
+    // -- Overrides ------------------------------------------------------------
+
+    _onRowDoubleClick: function () {
+        // NOOP
     }
 }, {
     ATTRS: {

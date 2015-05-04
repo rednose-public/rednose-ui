@@ -2,6 +2,8 @@ YUI.add('rednose-treeview-datasource', function (Y, NAME) {
 
 /*jshint boss:true, expr:true, onevar:false */
 
+'use strict';
+
 /**
  * @module rednose-treeview
  * @submodule rednose-treeview-datasource
@@ -38,7 +40,7 @@ Y.mix(TreeViewDataSource, {
 });
 
 Y.extend(TreeViewDataSource, Y.Plugin.Base, {
-    // -- Publid Methods -------------------------------------------------------
+    // -- Public Methods -------------------------------------------------------
 
     /**
      * @param {String} request
@@ -62,9 +64,17 @@ Y.extend(TreeViewDataSource, Y.Plugin.Base, {
     // -- Protected Event Handlers ---------------------------------------------
 
     _onRequestSuccess: function (callback, e) {
-        var nodes = (e.response && e.response.results) || [];
+        var data = (e.response && e.response.results) || [];
 
-        this.get('host').set('nodes', nodes);
+        this.get('host').set('nodes', data.map(function(datum) {
+            return {
+                id: datum.id,
+                label: datum.name,
+                icon: datum.icon,
+                canHaveChildren: datum.has_children,
+                data: datum
+            };
+        }));
 
         if (callback) {
             callback.call(this);
