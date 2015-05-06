@@ -48,11 +48,5 @@
             "base",
             "event-outside"
         ]
-    },
-
-    "rednose-treeview-multi": {
-        "requires": [
-            "rednose-treeview"
-        ]
     }
 }
