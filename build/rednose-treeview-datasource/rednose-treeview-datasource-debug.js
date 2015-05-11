@@ -92,4 +92,4 @@ Y.extend(TreeViewDataSource, Y.Plugin.Base, {
 Y.namespace('Rednose.Plugin').TreeViewDataSource = TreeViewDataSource;
 
 
-}, '@VERSION@', {"requires": ["plugin"]});
+}, '1.8.0', {"requires": ["plugin"]});

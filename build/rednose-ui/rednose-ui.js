@@ -12343,11 +12343,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "dd"
         ]
     },
-    "rednose-treeview-multi": {
-        "requires": [
-            "rednose-treeview"
-        ]
-    },
     "rednose-treeview-select": {
         "requires": [
             "base",
@@ -12393,7 +12388,7 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '8f93ac6a56f58eeed020bf2322d3b144';
+YUI.Env[Y.version].md5 = 'fb8634375caf73372b30fb49dfa83c20';
 /**
  * Includes the metadata for the bundled gallery modules.
  */
@@ -12419,9 +12414,6 @@ YUI.Env[Y.version].groups.gallery = {
  * The module and its dependencies are loaded, a new instance is created and the render method
  * will be called.
  *
- * This method creates a global Y singleton instance. Modules should be loaded from this single instance to allow lazyloading
- * of new modules.
- *
  * @param {string} constructor App constuctor
  * @param {string} module      Module name
  * @param {string} config      Optional config to pass to the app constructor
@@ -12431,9 +12423,7 @@ YUI.Env[Y.version].groups.gallery = {
 YUI.bootstrap = function (constructor, module, config) {
     config || (config = {});
 
-    window.Y || (window.Y = YUI());
-
-    Y.use(module, function () {
+    YUI().use(module, function (Y) {
         // Looks for a namespaced constructor function on `Y`.
         var AppConstructor = Y.Object.getValue(Y, constructor.split('.'));
 

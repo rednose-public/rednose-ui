@@ -23,6 +23,7 @@ contents of tree nodes the first time they're opened.
 
         tree.plug(Y.Plugin.Tree.Lazy, {
 
+
             // Custom function that Plugin.Tree.Lazy will call when it needs to
             // load the children for a node.
             load: function (node, callback) {

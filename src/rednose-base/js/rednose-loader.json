@@ -300,11 +300,6 @@
             "dd"
         ]
     },
-    "rednose-treeview-multi": {
-        "requires": [
-            "rednose-treeview"
-        ]
-    },
     "rednose-treeview-select": {
         "requires": [
             "base",

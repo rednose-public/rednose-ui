@@ -312,11 +312,6 @@ Y.mix(YUI.Env[Y.version].modules, {
             "dd"
         ]
     },
-    "rednose-treeview-multi": {
-        "requires": [
-            "rednose-treeview"
-        ]
-    },
     "rednose-treeview-select": {
         "requires": [
             "base",
@@ -362,4 +357,4 @@ Y.mix(YUI.Env[Y.version].modules, {
         ]
     }
 });
-YUI.Env[Y.version].md5 = '8f93ac6a56f58eeed020bf2322d3b144';
+YUI.Env[Y.version].md5 = 'fb8634375caf73372b30fb49dfa83c20';
