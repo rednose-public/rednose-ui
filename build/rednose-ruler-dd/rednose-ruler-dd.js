@@ -134,7 +134,9 @@ RulerDD.prototype = {
     _resizeStart: function (e) {
         var ruler    = this.get('container').one('.inner-ruler'),
             sizeType = this.sizeType,
-            node     = null;
+            node     = null,
+            rightNode,
+            innerNode;
 
         if (e) {
             node = e.target.get('node');
@@ -146,11 +148,11 @@ RulerDD.prototype = {
                 var maxWidth = 0;
 
                 if (node.hasClass('margin-left')) {
-                    var rightNode = node.get('parentNode').one('.margin-right');
+                    rightNode = node.get('parentNode').one('.margin-right');
 
                     maxWidth = (-(node.getX() - rightNode.getX())) - 2;
                 } else {
-                    var innerNode = node.get('parentNode').one('.inner-ruler');
+                    innerNode = node.get('parentNode').one('.inner-ruler');
 
                     maxWidth = parseFloat(innerNode.get('clientWidth')) + parseFloat(node.get('clientWidth')) - 2;
                 }
@@ -160,11 +162,11 @@ RulerDD.prototype = {
                 var maxHeight = 0;
 
                 if (node.hasClass('margin-left')) {
-                    var rightNode = node.get('parentNode').one('.margin-right');
+                    rightNode = node.get('parentNode').one('.margin-right');
 
                     maxHeight = (-(node.getY() - rightNode.getY())) - 2;
                 } else {
-                    var innerNode = node.get('parentNode').one('.inner-ruler');
+                    innerNode = node.get('parentNode').one('.inner-ruler');
 
                     maxHeight = parseFloat(innerNode.get('clientHeight')) + parseFloat(node.get('clientHeight')) - 2;
                 }
@@ -173,9 +175,7 @@ RulerDD.prototype = {
             }
         }
 
-        this._size = parseFloat(ruler.getComputedStyle(sizeType)) +
-        parseFloat(this._marginLeft.getComputedStyle(sizeType)) +
-        parseFloat(this._marginRight.getComputedStyle(sizeType));
+        this._size = parseFloat(ruler.getComputedStyle(sizeType)) + parseFloat(this._marginLeft.getComputedStyle(sizeType)) + parseFloat(this._marginRight.getComputedStyle(sizeType));
     },
 
     _setRulerStyles: function () {
@@ -191,25 +191,23 @@ RulerDD.prototype = {
 
         if (this.get('vertical')) {
             ruler.setStyles({
-                'marginTop': marginLeftSize,
-                'height': newRulerSize
+                marginTop: marginLeftSize,
+                height: newRulerSize
             });
         } else {
             ruler.setStyles({
-                'marginLeft': marginLeftSize,
-                'width': newRulerSize
+                marginLeft: marginLeftSize,
+                width: newRulerSize
             });
         }
     },
 
     _getMMSize: function (px) {
-        var number = Y.Number.format(this._pixelMillimeter(px),{
+        return Y.Number.format(this._pixelMillimeter(px), {
             thousandsSeparator: ".",
             decimalSeparator: ",",
             decimalPlaces: 2
         });
-
-        return  number;
     },
 
     _showSizes: function (e) {
@@ -251,6 +249,7 @@ RulerDD.ATTRS = {
 
 // -- Namespace ----------------------------------------------------------------
 Y.Rednose.Ruler.DD = RulerDD;
+
 Y.Base.mix(Y.Rednose.Ruler, [RulerDD]);
 
 
