@@ -316,13 +316,13 @@ var Dialog = Y.Base.create('dialog', Y.Base, [], {
         }).render();
 
         // Prevent default on keydown and keyup due to browser differences.
-        node.all('input, textarea, select').on('keydown', function (e) {
+        node.all('input, select').on('keydown', function (e) {
             if (e.button === 13) {
                 e.preventDefault();
             }
         });
 
-        node.all('input, textarea, select').on('keyup', function (e) {
+        node.all('input, select').on('keyup', function (e) {
             if (e.button === 13) {
                 e.preventDefault();
 

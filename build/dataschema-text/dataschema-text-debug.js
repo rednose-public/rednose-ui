@@ -61,7 +61,7 @@ var Lang = Y.Lang,
         below).
 
         @example
-            // Service simple csv
+            // Process simple csv
             var schema = {
                     resultDelimiter: "\n",
                     fieldDelimiter: ",",
