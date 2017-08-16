@@ -17,6 +17,6 @@
   ],
   "devDependencies": {
     "bootstrap": "~3.3.2",
-    "fontawesome": "~4.3.0"
+    "fontawesome": "~4.7.0"
   }
 }

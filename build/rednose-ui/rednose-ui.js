@@ -1,6 +1,6 @@
 /*!
  * RedNoseUI v1.8.0 (http://www.rednose.nl)
- * Copyright 2012-2015 RedNose IT B.V.
+ * Copyright 2012-2017 RedNose IT B.V.
  * Licensed under MIT (https://github.com/rednose-public/rednose-ui/blob/master/LICENSE)
  */
 

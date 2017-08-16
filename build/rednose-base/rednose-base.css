@@ -167,6 +167,7 @@ li.disabled [class*=" icon-"] {
   position: absolute;
   top: 0;
   bottom: 0;
+  overflow-x: hidden;
 }
 
 .rednose-unit-left {
