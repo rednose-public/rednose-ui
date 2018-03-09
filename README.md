@@ -4,19 +4,21 @@ RedNoseUI is a JavaScript framework, providing core features used across several
 
 ## Usage
 
-    <html>
-        <head>
-            <link href="build/rednose-ui/rednose-ui-min.css" rel="stylesheet"/>
-            <script src="build/rednose-ui/rednose-ui-min.js"></script>
-        </head>
-        <body class="yui3-skin-sam">
-            <script>
-                YUI().use('rednose-dialog', function (Y) {
-                    Y.Rednose.Dialog.alert({title: 'RedNoseUI', text: 'Hello world'});
-                });
-            </script>
-        </body>
-    </html>
+```html
+<html>
+    <head>
+        <link href="build/rednose-ui/rednose-ui-min.css" rel="stylesheet"/>
+        <script src="build/rednose-ui/rednose-ui-min.js"></script>
+    </head>
+    <body class="yui3-skin-sam">
+        <script>
+            YUI().use('rednose-dialog', function (Y) {
+                Y.Rednose.Dialog.alert({title: 'RedNoseUI', text: 'Hello world'});
+            });
+        </script>
+    </body>
+</html>
+```
 
 ## Development
 
